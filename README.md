@@ -1,7 +1,81 @@
 # Datencafe
 Simple Data Processing and Visualisation Tool
 
-## Infos
+## App
+### Infos
+
+
+### Instructions
+
+
+
+### Map
+
+
+
+### DataFlow
+
+
+#### Node Types
+
+  * Data Access
+    * Load from Server
+    * Load local
+    * Start download via Iframe
+    * Save local
+
+  * Single Item Operations
+    * Statistics (Describe)
+    * Select Columns
+      * Rename option
+    * Filter Rows
+      * By Feature(s)
+      * By Group
+    * Reindex
+    * To Timeseries
+    * Resample
+    * Simple Math Operations
+      * Scale
+      * Offset
+      * Fill-NA (Impute)
+
+  * Dual Item Operations
+    * Join on Index
+    * Join on Feature
+    * Math Operations
+      * Add/Sub
+      * Multiply
+      * Divide (Ratio)
+
+  * Geo Ops
+    * Extract properties from features
+    * Create properties from features
+
+  * Utilities
+    * Load flow
+    * Save flow
+    * Export flow (png, pdf)
+
+  * Visualizations
+    * Preview table
+    * Table
+    * Line chart
+    * Bar chart
+    * GeoMap
+      * Points
+      * Choropleth
+
+
+
+#### Edge Types
+
+  * Results
+  * Copy (only on single input nodes)
+
+
+
+### Viz
+
 
 
 ## Development
@@ -56,4 +130,7 @@ or
 
 Latter scales to w and h
 
+Add border to icons like so
+
+> for i in *.png; do convert \$i -bordercolor transparent -compose over  -border 16 ../icons-bordered/$i; done
 
