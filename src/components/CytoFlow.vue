@@ -39,17 +39,17 @@ const flowLoaded = ref(false)
 const elements: ElementDefinition[] = [ // list of graph elements to start with
   { // node a
     group: 'nodes', 
-    data: { id: 'a' },  
+    data: { id: 'a', type:{"name":"t1","shp":"square","bd":"#f00", "img":"url('/assets/icon/icon.png')"} },  
     position: {x:10, y:10},
   },
   { // node b
     group: 'nodes', 
-    data: { id: 'b'}, 
+    data: { id: 'b' }, 
     position: {x:250, y:100},
   },
   { // node c
     group: 'nodes', 
-    data: { id: 'c'},
+    data: { id: 'c', type:{"name":"t2","shp":"roundrectangle","bd":"#0f0", "img":"url('/assets/icon/icon.png')"}  },
     position: {x:130, y:150},
   },
   { // edge ab
@@ -69,16 +69,29 @@ const elements: ElementDefinition[] = [ // list of graph elements to start with
 // see https://stackoverflow.com/questions/58136352/cytoscape-js-position-label-text-on-top-of-edge
 
 const style: Stylesheet[] = [ // the stylesheet for the graph
-  {
+{
     selector: 'node',
     style: {
-      'background-color': '#666',
       'label': 'data(id)',
       "text-valign": "center",
       "text-halign": "center",    
+        'background-fit': 'cover',
+        'background-color': '#fff',
+        'shape': 'circle',
+        'width': '30px',
+        'height': '30px',
+        'border-width': '2px',
+        'border-color': '#000'
+      }    
+  },
+  {
+    selector: 'node[type]',
+    style: {
+      "shape":"data(type.shp)",
+      'border-color': 'data(type.bd)',
+      'background-image': 'data(type.img)',
     }
   },
-
   {
     selector: 'edge',
     style: {
@@ -383,26 +396,47 @@ async function flowInit  ()  {
     flowLoaded.value = true
   })
   
-
+const ctlClick = () => {
+  console.log("clk")
+}
 
 </script>
 
 <template>
 
-  <div ref="flowWrap">
-  <div class="flow" ref="theFlow"></div>
+  <div ref="flowWrap" class="wrap">
+    <div ref="ctl" class="ctl">
+      <ion-button @click='ctlClick'>Clk</ion-button>
+    </div>
+    <div class="flow" ref="theFlow"></div>
   </div>
 
 </template>
 
 <style scoped>
+.wrap {
+  position:relative;
+}
+.ctl {
+  position:absolute;
+  top:0;
+  left:300px;
+  z-index: 100;
+  width:50px;
+  height:50px;
+  background:#cc0;
+  display: flex;
+  align-items:center;
+  justify-content: center;
+
+
+}
 .flow {
   width:100%;
   min-width: 400px;
   height: 100%;
   min-height:300px;
   display: block;
-  position:relative;
 }
 .node {
   color: #f00;
@@ -410,9 +444,16 @@ async function flowInit  ()  {
 .edge {
   color: #00f;
 }
+
+.t1 {
+  display:none;
+}
 </style>
 
 <style>
+.t1 {
+  display:none;
+}
 .flow canvas {
   left:0;
 }

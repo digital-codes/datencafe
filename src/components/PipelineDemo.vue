@@ -64,7 +64,7 @@
     //let df = dataFrame.value.groupby(["Stadtteil","Jahr"]).getGroup([selectedDist.value,selectedYear.value])
     const df = dataFrame.value.groupby(["Jahr"]).getGroup([selectedYear.value]).setIndex({ column: "Stadtteil" })
     console.log("Year df:",df)
-    df.print()
+    df.print(5)
     //plot.value.update({ data: [df] });
     //df.loc({ columns: config.columns }).plot({target:plotRef.value}).line({ layout, config })
     const cfg = structuredClone(config)
@@ -94,7 +94,7 @@
     //let df = dataFrame.value.groupby(["Stadtteil","Jahr"]).getGroup([selectedDist.value,selectedYear.value])
     const df = dataFrame.value.groupby(["Stadtteil"]).getGroup([selectedDist.value]).setIndex({ column: "Jahr" })
     console.log("Dist df:",df)
-    df.print()
+    df.print(5)
     //plot.value.update({ data: [df] });
     //df.loc({ columns: config.columns }).plot({target:plotRef.value}).line({ layout, config })
     const cfg = structuredClone(config)
@@ -137,10 +137,44 @@ const  mkRatio = (x) => {
   return r
 }
 
+  const testFetch = async function(url) {
+  console.log("test fetch")
+  const options = {
+    method: "GET", // *GET, POST, PUT, DELETE, etc.
+    mode: "cors", // no-cors, *cors, same-origin
+    cache: "no-cache", // *default, no-cache, reload, force-cache, only-if-cached
+    //credentials: "same-origin", // include, *same-origin, omit
+    /*
+    headers: {
+      "Content-Type": "application/json",
+      // 'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    */
+    redirect: "follow", // manual, *follow, error
+  }
+  try {
+    const r = await fetch(url,options)
+    console.log("Status:",r.status)
+    return r.status == 200? true:false
+  } catch (e) {
+    console.log("Failed:",e)
+    return false
+  }
+}
+
 
   const loadCsv = async (url) => {
-    console.log("loading")
+    console.log("Try to load:",url)
     if (url.startsWith("http")) {
+      if (await testFetch(url)) {
+        console.log("CORS OK, continue")
+      } else {
+        console.log("CORS failed. use local file")
+        const u = url.split("/")
+        url = "/data/" + u[u.length-1]
+        //return dfd.dataFrame()
+      }
+    } else {
       const u = url.split("/")
       url = "/data/" + u[u.length-1]
     }
@@ -209,12 +243,12 @@ const  mkRatio = (x) => {
       // groupby examples
       // group names
       const gs = Object.keys(altDf.groupby(["Stadtteil"]).groups)
-      console.log("Stadtteile:",gs)
+      //console.log("Stadtteile:",gs)
       const gy = Object.keys(altDf.groupby(["Jahr"]).groups)
-      console.log("Jahre:",gy)
+      //console.log("Jahre:",gy)
       // group item
       const gs1 = altDf.groupby(["Stadtteil"]).getGroup(["Oststadt"])
-      gs1.print()
+      gs1.print(5)
       // groupby operations
       altDf.groupby(["Stadtteil"]).col(["Personen","Ratio"]).mean().print()
       altDf.groupby(["Stadtteil"]).col(["Personen","Ratio"]).min().print()
