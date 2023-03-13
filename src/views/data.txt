@@ -1,0 +1,10 @@
+import PipelineDemo from "./components/PipelineDemo.vue";
+
+import DropFile from "./components/DropFile.vue";
+import DataLoader from "./components/DataLoader.vue";
+//import GoFlow from "./components/GoFlow.vue";
+import ShowPlot from "./components/ShowPlot4.vue";
+import ShowTable from "./components/ShowTable2.vue";
+import ShowGeo from "./components/OpenGeo.vue";
+
+import SelectTable from "./components/SelectTable.vue";

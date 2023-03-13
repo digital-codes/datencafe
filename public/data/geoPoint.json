@@ -1,0 +1,335 @@
+{
+    "type": "FeatureCollection",
+    "features": [
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    8.4870362805961488,
+                    49.001341982931024
+                ]
+            },
+            "properties": {
+                "NAME": "Bergfriedhof Durlach",
+                "GRUPPENNAME_DE": "Friedhöfe",
+                "UPDATED": 1415059200000
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    8.3619324932830832,
+                    49.033134613791923
+                ]
+            },
+            "properties": {
+                "NAME": "Friedhof Nordwest",
+                "GRUPPENNAME_DE": "Friedhöfe",
+                "UPDATED": 1415059200000
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    8.4317600773351273,
+                    49.016369611099776
+                ]
+            },
+            "properties": {
+                "NAME": "Hauptfriedhof",
+                "GRUPPENNAME_DE": "Friedhöfe",
+                "UPDATED": 1415059200000
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    8.3869793281197378,
+                    49.058196331567324
+                ]
+            },
+            "properties": {
+                "NAME": "Nordfriedhof Neureut",
+                "GRUPPENNAME_DE": "Friedhöfe",
+                "UPDATED": 1415059200000
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    8.4718674176417057,
+                    48.957230162430719
+                ]
+            },
+            "properties": {
+                "NAME": "Stadtteilfriedhof  Grünwettersbach",
+                "GRUPPENNAME_DE": "Friedhöfe",
+                "UPDATED": 1415059200000
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    8.4725012239904132,
+                    48.964462748232371
+                ]
+            },
+            "properties": {
+                "NAME": "Stadtteilfriedhof  Hohenwettersbach",
+                "GRUPPENNAME_DE": "Friedhöfe",
+                "UPDATED": 1415059200000
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    8.4799202760729759,
+                    48.948373501073462
+                ]
+            },
+            "properties": {
+                "NAME": "Stadtteilfriedhof  Palmbach",
+                "GRUPPENNAME_DE": "Friedhöfe",
+                "UPDATED": 1415059200000
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    8.5099881875963597,
+                    48.950636275699125
+                ]
+            },
+            "properties": {
+                "NAME": "Stadtteilfriedhof  Stupferich",
+                "GRUPPENNAME_DE": "Friedhöfe",
+                "UPDATED": 1415059200000
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    8.4550372966390874,
+                    48.986727022238384
+                ]
+            },
+            "properties": {
+                "NAME": "Stadtteilfriedhof Aue",
+                "GRUPPENNAME_DE": "Friedhöfe",
+                "UPDATED": 1415059200000
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    8.3864079430051746,
+                    48.994529355096809
+                ]
+            },
+            "properties": {
+                "NAME": "Stadtteilfriedhof Beiertheim",
+                "GRUPPENNAME_DE": "Friedhöfe",
+                "UPDATED": 1415059200000
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    8.373900238468627,
+                    48.983950369170593
+                ]
+            },
+            "properties": {
+                "NAME": "Stadtteilfriedhof Bulach",
+                "GRUPPENNAME_DE": "Friedhöfe",
+                "UPDATED": 1415059200000
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    8.3381430321462275,
+                    49.006878573984949
+                ]
+            },
+            "properties": {
+                "NAME": "Stadtteilfriedhof Daxlanden",
+                "GRUPPENNAME_DE": "Friedhöfe",
+                "UPDATED": 1415059200000
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    8.5108004424796491,
+                    49.003009795724374
+                ]
+            },
+            "properties": {
+                "NAME": "Stadtteilfriedhof Grötzingen",
+                "GRUPPENNAME_DE": "Friedhöfe",
+                "UPDATED": 1415059200000
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    8.354158756681942,
+                    49.006115067369443
+                ]
+            },
+            "properties": {
+                "NAME": "Stadtteilfriedhof Grünwinkel",
+                "GRUPPENNAME_DE": "Friedhöfe",
+                "UPDATED": 1415059200000
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    8.4613790027946632,
+                    49.027095305374459
+                ]
+            },
+            "properties": {
+                "NAME": "Stadtteilfriedhof Hagsfeld",
+                "GRUPPENNAME_DE": "Friedhöfe",
+                "UPDATED": 1415059200000
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    8.3392105558938852,
+                    49.035695396088016
+                ]
+            },
+            "properties": {
+                "NAME": "Stadtteilfriedhof Knielingen",
+                "GRUPPENNAME_DE": "Friedhöfe",
+                "UPDATED": 1415059200000
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    8.3559566969938501,
+                    49.015081263398429
+                ]
+            },
+            "properties": {
+                "NAME": "Stadtteilfriedhof Mühlburg",
+                "GRUPPENNAME_DE": "Friedhöfe",
+                "UPDATED": 1415059200000
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    8.3681900147201027,
+                    48.988226476113681
+                ]
+            },
+            "properties": {
+                "NAME": "Stadtteilfriedhof Oberreut",
+                "GRUPPENNAME_DE": "Friedhöfe",
+                "UPDATED": 1415059200000
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    8.44645571588274,
+                    49.016441029490636
+                ]
+            },
+            "properties": {
+                "NAME": "Stadtteilfriedhof Rintheim",
+                "GRUPPENNAME_DE": "Friedhöfe",
+                "UPDATED": 1415059200000
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    8.3986555376562286,
+                    48.970378017015207
+                ]
+            },
+            "properties": {
+                "NAME": "Stadtteilfriedhof Rüppurr",
+                "GRUPPENNAME_DE": "Friedhöfe",
+                "UPDATED": 1415059200000
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    8.4488712524440643,
+                    48.973461331931311
+                ]
+            },
+            "properties": {
+                "NAME": "Stadtteilfriedhof Wolfartsweier",
+                "GRUPPENNAME_DE": "Friedhöfe",
+                "UPDATED": 1415059200000
+            }
+        },
+        {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [
+                    8.3719985966403225,
+                    49.04611142331121
+                ]
+            },
+            "properties": {
+                "NAME": "Südfriedhof Neureut",
+                "GRUPPENNAME_DE": "Friedhöfe",
+                "UPDATED": 1415059200000
+            }
+        }
+    ]
+}
