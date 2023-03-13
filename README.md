@@ -5,6 +5,29 @@ Simple Data Processing and Visualisation Tool
 
 
 ## Development
+### Get started
+
+ 1. Download repo
+ 2. Install
+ > npm i
+ 3. Run dev server
+ > npm run serve
+ 4. Open Browser at http://localhost:8080/ 
+
+
+ 
+
+### Framework and Libraries
+ * Web
+   * [Ionic](https://ionicframework.com/docs) 
+   * [Vue3](https://vuejs.org/)
+   * [cytoscape]()
+ * Tooling
+   * [danfojs]()
+   * [axios]
+ * ... and others ...
+
+
 ### Icons
 
 Potenitially useful fontawesome icons
