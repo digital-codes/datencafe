@@ -48,17 +48,17 @@ const popover = ref({})
 const elements: ElementDefinition[] = [ // list of graph elements to start with
   { // node a
     group: 'nodes', 
-    data: { id: 'a', type:{"name":"t1","shp":"square","bd":"#f00", "img":"url('/img/icons/cloud-arrow-down.png')"} },  
+    data: { id: 'a', type:{"name":"t1","shp":"square","bd":"#f00", "img":"url('/img/icons-bordered/cloud-arrow-down.png')"} },  
     position: {x:10, y:10},
   },
   { // node b
     group: 'nodes', 
-    data: { id: 'b', type:{"name":"t3","shp":"roundrectangle","bd":"#f00", "img":"url('/img/icons/chart-line.png')"} }, 
+    data: { id: 'b', type:{"name":"t3","shp":"roundrectangle","bd":"#f00", "img":"url('/img/icons-bordered/chart-line.png')"} }, 
     position: {x:250, y:100},
   },
   { // node c
     group: 'nodes', 
-    data: { id: 'c', type:{"name":"t2","shp":"roundrectangle","bd":"#0f0", "img":"url('/img/icons/database.png')"}  },
+    data: { id: 'c', type:{"name":"t2","shp":"roundrectangle","bd":"#0f0", "img":"url('/img/icons-bordered/database.png')"}  },
     position: {x:130, y:150},
   },
   { // edge ab
