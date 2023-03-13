@@ -36,6 +36,10 @@ const wh = ref(400)
 const flowWrap = ref()
 const flowLoaded = ref(false)
 
+const ctl = ref()
+const popBtn = ref()
+
+
 const elements: ElementDefinition[] = [ // list of graph elements to start with
   { // node a
     group: 'nodes', 
@@ -377,6 +381,7 @@ async function flowInit  ()  {
     cy.value.on('dblclick', function(event: EventObject) {
       const pos = event.position || event.cyPosition;
       console.log('dblclick at ',pos);
+      popBtn.value.click()
     });
 
         
@@ -398,7 +403,49 @@ async function flowInit  ()  {
   
 const ctlClick = () => {
   console.log("clk")
+  createEvent()
 }
+
+
+import { popoverController } from '@ionic/vue';
+import Popover from './PopOver.vue';
+
+const roleMsg = ref("")
+
+const openPopover = async (ev: Event) => {
+    const popover = await popoverController.create({
+      component: Popover,
+      event: ev,
+      size: "auto",
+      side:"right",
+      alignment:"start",
+      showBackdrop: false,
+      backdropDismiss: true,
+      dismissOnSelect: true,
+      reference: "trigger" // event or trigger
+    });
+    await popover.present();
+
+    const { role } = await popover.onDidDismiss();
+    roleMsg.value = `Popover dismissed with role: ${role}`;
+  }
+
+const createEvent = () => {
+  console.log("Create event")
+  /* we can create an event with position, which will be used
+  ** when reference = event
+  */
+  /*
+  const event = new MouseEvent("click", {
+    clientX: 500,
+    clientY: 500
+  });
+  openPopover(event)
+  */
+  // or we just use the default from the popover button with reference = trigger
+  popBtn.value.click()
+}
+
 
 </script>
 
@@ -407,6 +454,8 @@ const ctlClick = () => {
   <div ref="flowWrap" class="wrap">
     <div ref="ctl" class="ctl">
       <ion-button @click='ctlClick'>Clk</ion-button>
+      <ion-button ref="popBtn" @click="openPopover">Click Me</ion-button>
+      <p>{{ roleMsg }}</p>
     </div>
     <div class="flow" ref="theFlow"></div>
   </div>
