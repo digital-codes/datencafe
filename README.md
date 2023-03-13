@@ -45,3 +45,15 @@ Potenitially useful fontawesome icons
  * 
 
 Individual SVGs and SVG-SPrites from [here](https://fontawesome.com/download)
+
+If PNG icons needs, convert SVG like so:
+
+> for i in *.svg; do inkscape -w 256 $i -o `basename $i .svg`.png ; done
+
+or 
+
+> for i in *.svg; do inkscape -w 256 -h 256 $i -o `basename $i .svg`.png ; done
+
+Latter scales to w and h
+
+

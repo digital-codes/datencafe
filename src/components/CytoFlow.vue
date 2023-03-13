@@ -48,17 +48,17 @@ const popover = ref({})
 const elements: ElementDefinition[] = [ // list of graph elements to start with
   { // node a
     group: 'nodes', 
-    data: { id: 'a', type:{"name":"t1","shp":"square","bd":"#f00", "img":"url('/assets/icon/icon.png')"} },  
+    data: { id: 'a', type:{"name":"t1","shp":"square","bd":"#f00", "img":"url('/img/icons/cloud-arrow-down.png')"} },  
     position: {x:10, y:10},
   },
   { // node b
     group: 'nodes', 
-    data: { id: 'b' }, 
+    data: { id: 'b', type:{"name":"t3","shp":"roundrectangle","bd":"#f00", "img":"url('/img/icons/chart-line.png')"} }, 
     position: {x:250, y:100},
   },
   { // node c
     group: 'nodes', 
-    data: { id: 'c', type:{"name":"t2","shp":"roundrectangle","bd":"#0f0", "img":"url('/assets/icon/icon.png')"}  },
+    data: { id: 'c', type:{"name":"t2","shp":"roundrectangle","bd":"#0f0", "img":"url('/img/icons/database.png')"}  },
     position: {x:130, y:150},
   },
   { // edge ab
@@ -82,9 +82,9 @@ const style: Stylesheet[] = [ // the stylesheet for the graph
     selector: 'node',
     style: {
       'label': 'data(id)',
-      "text-valign": "center",
+      "text-valign": "bottom",
       "text-halign": "center",    
-        'background-fit': 'cover',
+        'background-fit': 'contain',
         'background-color': '#fff',
         'shape': 'circle',
         'width': '30px',
@@ -99,6 +99,11 @@ const style: Stylesheet[] = [ // the stylesheet for the graph
       "shape":"data(type.shp)",
       'border-color': 'data(type.bd)',
       'background-image': 'data(type.img)',
+      //"background-position-x": "2px",
+      //"background-position-y": "2px",
+      //"padding":"5px",
+      //"background-origin": "padding-box",
+      //"background-size": "20px",
     }
   },
   {
