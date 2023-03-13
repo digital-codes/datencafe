@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted, watch, nextTick } from 'vue'
+
 import cytoscape from "cytoscape"
 
 /*
@@ -20,6 +21,8 @@ import type { NodeSingular, EdgeSingular } from 'cytoscape';
 
 import type { MenuOptions } from 'cytoscape-context-menus';
 
+import { IonButton } from '@ionic/vue';
+
 // register extensions
 cytoscape.use(contextMenus);
 cytoscape.use( edgehandles );
@@ -38,6 +41,8 @@ const flowLoaded = ref(false)
 
 const ctl = ref()
 const popBtn = ref()
+
+const popover = ref({})
 
 
 const elements: ElementDefinition[] = [ // list of graph elements to start with
@@ -381,10 +386,9 @@ async function flowInit  ()  {
     cy.value.on('dblclick', function(event: EventObject) {
       const pos = event.position || event.cyPosition;
       console.log('dblclick at ',pos);
-      popBtn.value.click()
+      popBtn.value.$el.click()
     });
-
-        
+      
 
     }
   }
@@ -399,6 +403,16 @@ async function flowInit  ()  {
     flowWrap.value.style.width = String(ww.value) + "px"
     flowWrap.value.style.height = String(wh.value * .6) + "px"
     flowLoaded.value = true
+    //flowWrap.value.addEventListener("sel",()=>{console.log("sel")})
+    addEventListener("sel",flowWrap.value,(e)=>{console.log("sel",e)})
+    eventBus.on('selected', (data) => {
+      console.log("on selected",data)
+      if (popover.value.open) {
+        popover.value.dismiss(data,"123")
+      }
+    });
+
+
   })
   
 const ctlClick = () => {
@@ -412,8 +426,10 @@ import Popover from './PopOver.vue';
 
 const roleMsg = ref("")
 
+import eventBus from '../services/eventBus';
+
 const openPopover = async (ev: Event) => {
-    const popover = await popoverController.create({
+  popover.value = await popoverController.create({
       component: Popover,
       event: ev,
       size: "auto",
@@ -421,13 +437,14 @@ const openPopover = async (ev: Event) => {
       alignment:"start",
       showBackdrop: false,
       backdropDismiss: true,
-      dismissOnSelect: true,
+      dismissOnSelect: false,
       reference: "trigger" // event or trigger
     });
-    await popover.present();
 
-    const { role } = await popover.onDidDismiss();
-    roleMsg.value = `Popover dismissed with role: ${role}`;
+    await popover.value.present();
+    popover.value.open = true
+    await popover.value.onDidDismiss();
+    popover.value.open = false
   }
 
 const createEvent = () => {
@@ -443,7 +460,8 @@ const createEvent = () => {
   openPopover(event)
   */
   // or we just use the default from the popover button with reference = trigger
-  popBtn.value.click()
+  console.log("btn",popBtn.value)
+  popBtn.value.$el.click()
 }
 
 
