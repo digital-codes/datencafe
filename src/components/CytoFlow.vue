@@ -338,8 +338,14 @@ async function flowInit  ()  {
       // initial viewport state:
       zoom: 1,
       pan: { x: 0, y: 0 },
-      }
-    )
+      /*
+      panningEnabled: {
+        // set the panning step to 100 pixels
+        step: 10
+      },
+      */
+      wheelSensitivity: 0.2,
+    })
     if (!cy.value) {
       console.log("cy falied")
     } else {
@@ -420,8 +426,10 @@ async function flowInit  ()  {
 
   })
   
-const ctlClick = () => {
+const ctlClick = async () => {
   console.log("clk")
+  const j = await cy.value.json()
+  console.log("JSON:",JSON.stringify(j))
   createEvent()
 }
 
@@ -443,7 +451,11 @@ const openPopover = async (ev: Event) => {
       showBackdrop: false,
       backdropDismiss: true,
       dismissOnSelect: false,
-      reference: "trigger" // event or trigger
+      reference: "trigger", // event or trigger
+      componentProps: { // Popover props
+          msg:"Pop Msg",
+          dt: [1,2,3],
+        }
     });
 
     await popover.value.present();

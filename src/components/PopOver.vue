@@ -1,5 +1,11 @@
 <template>
   <ion-content class="ion-padding ion-popover">
+    <p>
+      {{ props.msg }}
+      <ul>
+        <li v-for="(item,idx) in props.dt" :key="idx" >{{item}}</li>
+      </ul>
+    </p>
     <p>Select Segment</p>
         <ion-segment value="default" v-model="seg1" @ionChange="newSeg1">
             <ion-segment-button value="default">
@@ -59,27 +65,22 @@ import { IonContent } from '@ionic/vue';
 import { defineComponent } from 'vue';
 import { IonLabel, IonSegment, IonSegmentButton } from '@ionic/vue';
 
-import { ref,defineEmits, defineProps } from "vue"
+import { ref,defineProps } from "vue"
 
 import eventBus from '../services/eventBus';
-/*
-type Events = {
-  selected: string;
-  close?: string;
-};
-*/
-/*
-const emitter = mitt<Events>(); // inferred as Emitter<Events>
-
-emitter.on('foo', (e) => {}); // 'e' has inferred type 'string'
-
-emitter.emit('foo', 42); // Error: Argument of type 'number' is not assignable to parameter of type 'string'. (2345)
-*/
-
 
 const emit = defineEmits(['sel']);
-
 const seg1 = ref("default")
+
+const props = defineProps({
+  msg:String,
+  dt: {
+    type: [Number, Array], // as PropType<number | number[]>,
+    required: true,
+  },
+  // dt: number | number[]
+})
+
 
 const newSeg1 = async (e) => {
     console.log("seg1:",e.detail.value, seg1.value)
