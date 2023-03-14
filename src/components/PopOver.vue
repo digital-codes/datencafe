@@ -1,62 +1,11 @@
 <template>
   <ion-content class="ion-padding ion-popover">
-    <p>
-      {{ props.msg }}
-      <ul>
-        <li v-for="(item,idx) in props.dt" :key="idx" >{{item}}</li>
-      </ul>
-    </p>
-    <p>Select Segment</p>
-        <ion-segment value="default" v-model="seg1" @ionChange="newSeg1">
-            <ion-segment-button value="default">
-            <ion-label>Default</ion-label>
-            </ion-segment-button>
-            <ion-segment-button value="segment1">
-            <ion-label>Segment1</ion-label>
-            </ion-segment-button>
-            <ion-segment-button value="segment2">
-            <ion-label>Segment2</ion-label>
-            </ion-segment-button>
-            <ion-segment-button value="segment3">
-            <ion-label>Segment3</ion-label>
-            </ion-segment-button>
-            <ion-segment-button value="segment4">
-            <ion-label>Segment4</ion-label>
-            </ion-segment-button>
-            <ion-segment-button value="segment5">
-            <ion-label>Segment5</ion-label>
-            </ion-segment-button>
-        </ion-segment>    
-        <p>Select Segment</p>
-        <ion-segment value="default">
-            <ion-segment-button value="default">
-            <ion-label>Default</ion-label>
-            </ion-segment-button>
-            <ion-segment-button value="segment1">
-            <ion-label>Segment1</ion-label>
-            </ion-segment-button>
-            <ion-segment-button value="segment2">
-            <ion-label>Segment2</ion-label>
-            </ion-segment-button>
-            <ion-segment-button value="segment3">
-            <ion-label>Segment3</ion-label>
-            </ion-segment-button>
-        </ion-segment>    
-        <p>Select Segment</p>
-        <ion-segment value="default">
-            <ion-segment-button value="default">
-            <ion-label>Default</ion-label>
-            </ion-segment-button>
-            <ion-segment-button value="segment1">
-            <ion-label>Segment1</ion-label>
-            </ion-segment-button>
-            <ion-segment-button value="segment2">
-            <ion-label>Segment2</ion-label>
-            </ion-segment-button>
-            <ion-segment-button value="segment3">
-            <ion-label>Segment3</ion-label>
-            </ion-segment-button>
-        </ion-segment>    
+    <p>{{ props.msg }}</p>
+    <ion-segment :value="props.dt[0]" v-model="seg1" @ionChange="newSeg1">
+        <ion-segment-button v-for="(item,idx) in props.dt" :key="idx" :value="item">
+        <ion-label>{{ item }}</ion-label>
+        </ion-segment-button>
+    </ion-segment>    
   </ion-content>
 </template>
 
@@ -76,7 +25,7 @@ const props = defineProps({
   msg:String,
   dt: {
     type: [Number, Array], // as PropType<number | number[]>,
-    required: true,
+    required: false,
   },
   // dt: number | number[]
 })

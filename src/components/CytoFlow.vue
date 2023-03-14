@@ -14,6 +14,10 @@ https://github.com/cytoscape/cytoscape.js-cxtmenu
 import contextMenus from 'cytoscape-context-menus';
 import 'cytoscape-context-menus/cytoscape-context-menus.css';
 import edgehandles from 'cytoscape-edgehandles';
+// register extensions
+cytoscape.use(contextMenus);
+cytoscape.use( edgehandles );
+
 
 import type { ElementDefinition, Stylesheet } from 'cytoscape';
 import type { Core, EventObject } from 'cytoscape';
@@ -23,9 +27,13 @@ import type { MenuOptions } from 'cytoscape-context-menus';
 
 import { IonButton } from '@ionic/vue';
 
-// register extensions
-cytoscape.use(contextMenus);
-cytoscape.use( edgehandles );
+
+// popover
+import { popoverController } from '@ionic/vue';
+import Popover from './PopOver.vue';
+import eventBus from '../services/eventBus';
+
+
 
 
 defineProps<{ msg: string }>()
@@ -415,15 +423,19 @@ async function flowInit  ()  {
     flowWrap.value.style.height = String(wh.value * .6) + "px"
     flowLoaded.value = true
     //flowWrap.value.addEventListener("sel",()=>{console.log("sel")})
-    addEventListener("sel",flowWrap.value,(e)=>{console.log("sel",e)})
+    //addEventListener("sel",flowWrap.value,(e)=>{console.log("sel",e)})
     eventBus.on('selected', (data) => {
-      console.log("on selected",data)
+      console.log("on selected:",data)
+      // test if we can do something else while popover is active ..
+      const clrs = ["#f00","#f0f","#ff0","#00f"]
+      ctl.value.style.background = clrs[Math.floor(Math.random()*clrs.length)];
+      // works. background changes
+      // allow to close on specific return value. only if open
       if (popover.value.open) {
-        popover.value.dismiss(data,"123")
+        if (data == "default")
+          popover.value.dismiss(data,"123")
       }
     });
-
-
   })
   
 const ctlClick = async () => {
@@ -433,13 +445,6 @@ const ctlClick = async () => {
   createEvent()
 }
 
-
-import { popoverController } from '@ionic/vue';
-import Popover from './PopOver.vue';
-
-const roleMsg = ref("")
-
-import eventBus from '../services/eventBus';
 
 const openPopover = async (ev: Event) => {
   popover.value = await popoverController.create({
@@ -453,8 +458,8 @@ const openPopover = async (ev: Event) => {
       dismissOnSelect: false,
       reference: "trigger", // event or trigger
       componentProps: { // Popover props
-          msg:"Pop Msg",
-          dt: [1,2,3],
+          msg:"Select Option",
+          dt: ["default","one","two","three"],
         }
     });
 
@@ -490,7 +495,6 @@ const createEvent = () => {
     <div ref="ctl" class="ctl">
       <ion-button @click='ctlClick'>Clk</ion-button>
       <ion-button ref="popBtn" @click="openPopover">Click Me</ion-button>
-      <p>{{ roleMsg }}</p>
     </div>
     <div class="flow" ref="theFlow"></div>
   </div>
