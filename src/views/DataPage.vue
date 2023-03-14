@@ -27,6 +27,57 @@
 import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
 import CytoFlow from '../components/CytoFlow.vue'
 
+// ----------------------------------------------------------------
+// text search test
+import * as dfd from 'danfojs/dist/danfojs-browser/src';
+import stringSimilarity from 'string-similarity';
+
+try {
+  const data = {
+  "title": ["The Hitchhiker's Guide to the Galaxy", "The Lord of the Rings", "Harry Potter and the Sorcerer's Stone", "To Kill a Mockingbird"],
+  "author": ["Douglas Adams", "J.R.R. Tolkien", "J.K. Rowling", "Harper Lee"],
+  "year": [1979, 1954, 1997, 1960]
+};
+
+const df = new dfd.DataFrame(data);
+
+// Find best match for "Lord of the Rings" in the "title" column
+const matches = stringSimilarity.findBestMatch("Lord of the Rings", df.title.values);
+console.log(matches);
+console.log(matches.bestMatch);
+console.log(matches);
+
+} catch (e) {
+  console.log("Failed:",e)
+}
+
+
+
+console.log(stringSimilarity.compareTwoStrings("healed", "sealed"))
+// → 0.8
+
+console.log(stringSimilarity.compareTwoStrings(
+  "Olive-green table for sale, in extremely good condition.",
+  "For sale: table in very good  condition, olive green in colour."
+))
+// → 0.6060606060606061
+
+console.log(stringSimilarity.compareTwoStrings(
+  "Olive-green table for sale, in extremely good condition.",
+  "For sale: green Subaru Impreza, 210,000 miles"
+))
+// → 0.2558139534883721
+
+console.log(stringSimilarity.compareTwoStrings(
+  "Olive-green table for sale, in extremely good condition.",
+  "Wanted: mountain bike with at least 21 gears."
+))
+// → 0.1411764705882353
+
+
+//////////////
+
+
 </script>
 
 <style scoped>
