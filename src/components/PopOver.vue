@@ -18,7 +18,6 @@ import { ref,defineProps } from "vue"
 
 import eventBus from '../services/eventBus';
 
-const emit = defineEmits(['sel']);
 const seg1 = ref("default")
 
 const props = defineProps({
@@ -33,7 +32,6 @@ const props = defineProps({
 
 const newSeg1 = async (e) => {
     console.log("seg1:",e.detail.value, seg1.value)
-    emit("sel",seg1.value)
     await eventBus.emit('selected', seg1.value);
 
 }

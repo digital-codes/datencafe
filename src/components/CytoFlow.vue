@@ -473,7 +473,7 @@ async function flowInit  ()  {
       // works. background changes
       // allow to close on specific return value. only if open
       if (popover.value.open) {
-        if (data == "default")
+        if (data.checked.length == 0)
           popover.value.dismiss(data,"123")
       }
     });
@@ -490,12 +490,17 @@ const ctlClick = async () => {
 const openPopover = async (ev: Event) => {
   // create dummy dataframe for test
   const df = await new dfd.DataFrame({
-        "x": [1, 2, 3, 4, 5],
-        "y": [1, 4, 2, 3, 5],
-        "z": ["asa","dw","ddddW","y",""]
+    "x1": [1, 2, 3, 4, 5],
+    "y1": [1, 4, 2, 3, 5],
+    "z1": ["asa","dw","ddddW","y",""],
+    /*
+    "x2": [1, 2, 3, 4, 5],
+    "y2": [1, 4, 2, 3, 5],
+    "z2": ["asa","dw","ddddW","y",""]
+    */
       }
     )
-    df.print()
+    /* */
     popover.value = await popoverController.create({
       component: ImportPopover,
       event: ev,
@@ -503,7 +508,7 @@ const openPopover = async (ev: Event) => {
       side:"right",
       alignment:"start",
       showBackdrop: false,
-      backdropDismiss: true,
+      backdropDismiss: false,
       dismissOnSelect: false,
       reference: "trigger", // event or trigger
       componentProps: { // Popover props
@@ -511,7 +516,8 @@ const openPopover = async (ev: Event) => {
           dt: df,
         }
     });
-    /*
+    /* */
+    /* 
   popover.value = await popoverController.create({
       component: Popover,
       event: ev,
@@ -527,7 +533,7 @@ const openPopover = async (ev: Event) => {
           dt: ["default","one","two","three"],
         }
     });
-    */
+     */
     await popover.value.present();
     popover.value.open = true
     await popover.value.onDidDismiss();
