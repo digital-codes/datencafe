@@ -27,10 +27,13 @@ import type { MenuOptions } from 'cytoscape-context-menus';
 
 import { IonButton } from '@ionic/vue';
 
+import * as dfd from 'danfojs/dist/danfojs-browser/src';
+
 
 // popover
 import { popoverController } from '@ionic/vue';
-import Popover from './PopOver.vue';
+import Popover from './PopOver.vue'; // test
+import ImportPopover from './ImportPopover.vue';
 import eventBus from '../services/eventBus';
 
 
@@ -52,21 +55,24 @@ const popBtn = ref()
 
 const popover = ref({})
 
+// next node/edge continuosly increase
+const nextNode = ref(1)
+const nextEdge = ref(1)
 
 const elements: ElementDefinition[] = [ // list of graph elements to start with
   { // node a
     group: 'nodes', 
-    data: { id: 'a', type:{"name":"t1","shp":"square","bd":"#f00", "img":"url('/img/icons-bordered/cloud-arrow-down.png')"} },  
+    data: { id: 'a', name:"a", type:{"name":"t1","shp":"square","bd":"#f00", "img":"url('/img/icons-bordered/cloud-arrow-down.png')"} },  
     position: {x:10, y:10},
   },
   { // node b
     group: 'nodes', 
-    data: { id: 'b', type:{"name":"t3","shp":"roundrectangle","bd":"#f00", "img":"url('/img/icons-bordered/chart-line.png')"} }, 
+    data: { id: 'b', name:"b", type:{"name":"t3","shp":"roundrectangle","bd":"#f00", "img":"url('/img/icons-bordered/chart-line.png')"} }, 
     position: {x:250, y:100},
   },
   { // node c
     group: 'nodes', 
-    data: { id: 'c', type:{"name":"t2","shp":"roundrectangle","bd":"#0f0", "img":"url('/img/icons-bordered/database.png')"}  },
+    data: { id: 'c', name:"c", type:{"name":"t2","shp":"roundrectangle","bd":"#0f0", "img":"url('/img/icons-bordered/database.png')"}  },
     position: {x:130, y:150},
   },
   { // edge ab
@@ -75,11 +81,11 @@ const elements: ElementDefinition[] = [ // list of graph elements to start with
   },
   { // edge ac
     group: 'edges', 
-    data: { id: 'ac', source: 'a', target: 'c', name: "src1-ac" }
+    data: { id: 'ac', source: 'a', target: 'c', type: "e1" }
   },
   { // edge bc
     group: 'edges', 
-    data: { id: 'bc', source: 'b', target: 'c', name: "src2-bc" }
+    data: { id: 'bc', source: 'b', target: 'c', type: "e2" }
   }
 ]
 
@@ -87,9 +93,9 @@ const elements: ElementDefinition[] = [ // list of graph elements to start with
 
 const style: Stylesheet[] = [ // the stylesheet for the graph
 {
-    selector: 'node',
+    selector: 'node[name]',
     style: {
-      'label': 'data(id)',
+      'label': 'data(name)',
       "text-valign": "bottom",
       "text-halign": "center",    
         'background-fit': 'contain',
@@ -101,17 +107,32 @@ const style: Stylesheet[] = [ // the stylesheet for the graph
         'border-color': '#000'
       }    
   },
+  /* warnung during new edges
   {
     selector: 'node[type]',
     style: {
       "shape":"data(type.shp)",
       'border-color': 'data(type.bd)',
       'background-image': 'data(type.img)',
-      //"background-position-x": "2px",
-      //"background-position-y": "2px",
-      //"padding":"5px",
-      //"background-origin": "padding-box",
-      //"background-size": "20px",
+    }
+  },
+  */
+  {
+    selector: 'node[type.shp]',
+    style: {
+      "shape":"data(type.shp)",
+    }
+  },
+  {
+    selector: 'node[type.bd]',
+    style: {
+      'border-color': 'data(type.bd)',
+    }
+  },
+  {
+    selector: 'node[type.img]',
+    style: {
+      'background-image': 'data(type.img)',
     }
   },
   {
@@ -125,10 +146,10 @@ const style: Stylesheet[] = [ // the stylesheet for the graph
     }
   },
   {
-    // special selector if object has data attribute "name"
-    selector: 'edge[name]',
+    // special selector if object has data attribute "type"
+    selector: 'edge[type]',
     style: {
-      'label': 'data(name)',
+      'label': 'data(type)',
       "font-size":"10px",
       "text-rotation": "autorotate",
         "text-margin-x": "0px",
@@ -211,12 +232,12 @@ const ctxOptions = {
       content: 'Edge1',
       tooltipText: 'Start edge 1',
       selector: 'node',
-      onClickFunction: (event: EventObject) => {
+      onClickFunction: async (event: EventObject) => {
         const { target } = event;
         //console.log("Start edge on:",target, target._private.data.id)
         cy.value.edgehandles('enable').disableDrawMode();
-        const nd = cy.value.getElementById(target.data("id"))
-        nd.data("srcType","scr1") // set a source type
+        const nd = await cy.value.getElementById(target.data("id"))
+        nd.data("edge","e1") // set a source type
         //console.log("Node:",nd)
         cy.value.edgehandles().start(nd)
       },
@@ -227,12 +248,12 @@ const ctxOptions = {
       content: 'Edge2',
       tooltipText: 'Start edge 2',
       selector: 'node',
-      onClickFunction: (event: EventObject) => {
+      onClickFunction: async (event: EventObject) => {
         const { target } = event;
         //console.log("Start edge on:",target, target._private.data.id)
         cy.value.edgehandles('enable').disableDrawMode();
-        const nd = cy.value.getElementById(target.data("id"))
-        nd.data("srcType","scr2") // set a source type
+        const nd = await cy.value.getElementById(target.data("id"))
+        nd.data("edge","e2") // set a source type
         //console.log("Node:",nd)
         cy.value.edgehandles().start(nd)
       },
@@ -259,19 +280,26 @@ const ctxOptions = {
       selector: "node,edge",
       //image: {src: "assets/add.svg", width: 12, height: 12, x: 6, y: 4},
       coreAsWell: true,
-      onClickFunction: function (event: EventObject) {
+      onClickFunction: async function (event: EventObject) {
         console.log("Add node")
         const pos = event.position || event.cyPosition;
+        const newId = "N" + String(nextNode.value++)
         const data = {
-          group: 'nodes'
+          //group: 'nodes',
+          id:newId,
         };
-        cy.value.add({
+        const newNode = await cy.value.add({
           data: data,
           position: {
-            x: pos.x,
-            y: pos.y
+            x: pos.x + 20,
+            y: pos.y + 5
           }
-        });
+        })
+        // set data
+        const nodeData = {"name":"new","type":{"name":"t0",
+          "shp":"circle","bd":"#f00", "img":"url('/img/icons-bordered/question.png')"}}
+        newNode.data(nodeData)
+        //console.log("After add node:",JSON.stringify(cy.value.json()))
       }
     },
     /* */    
@@ -385,10 +413,11 @@ async function flowInit  ()  {
     // When an edge is successfully created, log the event to the console
     cy.value.on('ehcomplete', async (event: EventObject, sourceNode: NodeSingular, targetNode: NodeSingular, addedEdge: EdgeSingular) => {
       console.log(`Edge created from ${sourceNode.id()} to ${targetNode.id()}`);
+      // we have stored the edge type in the source node. copy to edge type
       const e = await cy.value.getElementById(addedEdge.data("id"))
       const s = await cy.value.getElementById(sourceNode.data("id"))
-      e.data("name",s.data("srcType") + "-123")
-      await s.removeData( "srcType" )
+      await e.data("type",s.data("edge"))
+      await s.removeData("edge")      
       //console.log("Elems:",elements.length)
       //console.log("json len:",cy.value.json().elements.edges.length)
     });
@@ -436,6 +465,18 @@ async function flowInit  ()  {
           popover.value.dismiss(data,"123")
       }
     });
+    eventBus.on('importSelection', (data) => {
+      console.log("on importSelection:",data)
+      // test if we can do something else while popover is active ..
+      const clrs = ["#f00","#f0f","#ff0","#00f"]
+      ctl.value.style.background = clrs[Math.floor(Math.random()*clrs.length)];
+      // works. background changes
+      // allow to close on specific return value. only if open
+      if (popover.value.open) {
+        if (data == "default")
+          popover.value.dismiss(data,"123")
+      }
+    });
   })
   
 const ctlClick = async () => {
@@ -447,6 +488,30 @@ const ctlClick = async () => {
 
 
 const openPopover = async (ev: Event) => {
+  // create dummy dataframe for test
+  const df = await new dfd.DataFrame({
+        "x": [1, 2, 3, 4, 5],
+        "y": [1, 4, 2, 3, 5],
+        "z": ["asa","dw","ddddW","y",""]
+      }
+    )
+    df.print()
+    popover.value = await popoverController.create({
+      component: ImportPopover,
+      event: ev,
+      size: "auto",
+      side:"right",
+      alignment:"start",
+      showBackdrop: false,
+      backdropDismiss: true,
+      dismissOnSelect: false,
+      reference: "trigger", // event or trigger
+      componentProps: { // Popover props
+          msg:"Select Option",
+          dt: df,
+        }
+    });
+    /*
   popover.value = await popoverController.create({
       component: Popover,
       event: ev,
@@ -462,7 +527,7 @@ const openPopover = async (ev: Event) => {
           dt: ["default","one","two","three"],
         }
     });
-
+    */
     await popover.value.present();
     popover.value.open = true
     await popover.value.onDidDismiss();
