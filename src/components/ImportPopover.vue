@@ -25,14 +25,18 @@
         </div>
     </ion-buttons>
     </ion-toolbar>    
-    <div class="container">
+
+    <div class="container" v-if="showPreview">
     <table>
+      <thead>
+        <th v-for="(name,nidx) in preview.columns" :key="nidx" class="popfield">
+            {{ name }}
+          </th>
+        </thead>
       <tbody>
-        <tr v-for="(row, index) in rows" :key="index">
-          <td v-for="(cell, jndex) in row" :key="jndex" 
-              :class="{ selected: isSelected(index, jndex) }"
-              @click="selectCell(index, jndex)">
-            {{ cell }}
+        <tr v-for="(row, rindex) in preview.values" :key="rindex">
+          <td v-for="(col, cndex) in row" :key="cndex"  class="popfield">
+            {{ col }}
           </td>
         </tr>
       </tbody>
@@ -66,41 +70,39 @@ const props = defineProps({
 const cols = ref([])
 const newCols = ref([])
 const colsCheck = ref([])
+const rows = ref([])
+
+const preview = ref()
+const showPreview = ref(false)
 
 const chg = async () => {
   console.log('x',colsCheck.value)
   await eventBus.emit('importSelection', {"close":false,"cols":newCols,"checked":colsCheck});
+  // update preview table
+  const activeCols = []
+  colsCheck.value.forEach((e,idx) => {if (e) activeCols.push(cols.value[idx])})
+  //console.log("active:",activeCols) 
+  preview.value  = props.dt.loc({columns: activeCols})
+  //preview.value.print(2)
+  //console.log(preview.value.columns,preview.value.values)
 }
 
-/*
-function updatePreview() {
-    const cells = []
-    selected.value.forEach((item) => {
-      cells.push(item.name)
-    })
-    const df = props.data.head(5).plot(tbl.value).table({
-      config : {
-        columns:cols
-      }
-    })
-  }
-*/
 
 onMounted(() => {
+  preview.value = props.dt
   cols.value = props.dt.columns // copy cols
   newCols.value = JSON.parse(JSON.stringify(props.dt.columns)) // copy to new as well
   props.dt.columns.forEach((i,idx) => {colsCheck.value[idx] = true}) 
   console.log("Cols:",cols.value,colsCheck.value)
+  showPreview.value = true
 })
 
 const done = async () => {
   await eventBus.emit('importSelection', {"close":true,"cols":newCols,"checked":colsCheck});
-
 }
 
 const  cancel = async () => {
   await eventBus.emit('importSelection', {"close":true,"cols":[],"checked":[]});
-
 }
 
 
@@ -140,6 +142,13 @@ ion-popover ion-content {
   border: solid 1px #000;
 }
   
+th.popfield {
+  background: #ccf;
+  width:5rem;
+}
+td.popfield {
+  width:5rem;
+}
 
 ion-input.popfield {
     --background: #ccc;
