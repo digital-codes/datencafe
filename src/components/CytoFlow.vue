@@ -473,7 +473,7 @@ async function flowInit  ()  {
       // works. background changes
       // allow to close on specific return value. only if open
       if (popover.value.open) {
-        if (data.checked.length == 0)
+        if (data.close == true)
           popover.value.dismiss(data,"123")
       }
     });
@@ -493,11 +493,9 @@ const openPopover = async (ev: Event) => {
     "x1": [1, 2, 3, 4, 5],
     "y1": [1, 4, 2, 3, 5],
     "z1": ["asa","dw","ddddW","y",""],
-    /*
     "x2": [1, 2, 3, 4, 5],
     "y2": [1, 4, 2, 3, 5],
     "z2": ["asa","dw","ddddW","y",""]
-    */
       }
     )
     /* */
