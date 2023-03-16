@@ -11,31 +11,44 @@
     <p>{{ props.msg }}</p>
     <ion-button @click="done">OK</ion-button>
     <ion-button @click="cancel">Cancel</ion-button>
+    <!-- 
+
     <ion-toolbar>
       <ion-buttons>
         <div  v-for="(item,idx) in cols" :key="idx" class="popwrap">
           <div class="popfield popcheck">
             <ion-checkbox v-model="colsCheck[idx]" @ionChange="chg"></ion-checkbox>
           </div>
-          <!-- 
-          <ion-label class="popfield" position="stacked" >{{ item }}</ion-label>
-          -->
           <ion-input class="popfield popinput" type="text" fill="outline" v-model="newCols[idx]" @ionChange="chg">
           </ion-input>
         </div>
     </ion-buttons>
     </ion-toolbar>    
+    -->
 
     <div class="container" v-if="showPreview">
     <table>
+      <thead class="pophead">
+        <th  v-for="(item,idx) in cols" :key="idx" class="popwrap">
+          <div class="popfield popcheck">
+            <ion-checkbox v-model="colsCheck[idx]" @ionChange="chg"></ion-checkbox>
+          </div>
+          <ion-input class="popfield popinput" type="text" fill="outline" v-model="newCols[idx]" @ionChange="chg">
+          </ion-input>
+        </th>
+
+      </thead>
+      <!-- 
+        using active/disabled classes we don't neccessarily need the simple header ...
       <thead>
         <th v-for="(name,nidx) in preview.columns" :key="nidx" class="popfield">
             {{ name }}
           </th>
         </thead>
-      <tbody>
+      -->
+      <tbody class="popbody">
         <tr v-for="(row, rindex) in preview.values" :key="rindex">
-          <td v-for="(col, cndex) in row" :key="cndex"  class="popfield">
+          <td v-for="(col, cindex) in row" :key="cindex"  :class="isActive(cindex)">
             {{ col }}
           </td>
         </tr>
@@ -82,7 +95,9 @@ const chg = async () => {
   const activeCols = []
   colsCheck.value.forEach((e,idx) => {if (e) activeCols.push(cols.value[idx])})
   //console.log("active:",activeCols) 
-  preview.value  = props.dt.loc({columns: activeCols})
+  // we could use .loc to just display selected columns or
+  // or use a class to show status 
+  preview.value  = props.dt //.loc({columns: activeCols})
   //preview.value.print(2)
   //console.log(preview.value.columns,preview.value.values)
 }
@@ -105,6 +120,9 @@ const  cancel = async () => {
   await eventBus.emit('importSelection', {"close":true,"cols":[],"checked":[]});
 }
 
+const isActive = (i) => { 
+  return colsCheck.value[i] ? "popfield activeCol" : "popfield disabledCol"
+}
 
 </script>
 
@@ -112,7 +130,9 @@ const  cancel = async () => {
 <style>
 
 ion-buttons {
+  /*
   overflow:scroll;
+  */
 }
 
 ion-popover {
@@ -130,33 +150,64 @@ ion-popover {
 }
 
 ion-popover ion-content {
-  max-height: calc(100vh - 100px);
+  max-height: calc(80vh - 100px);
   max-width: calc(100vw - 200px);
+  overflow: clip;
 }
 
 .popcheck {
     text-align:center;
   }
   
-.popwrap {
+th.popwrap {
   border: solid 1px #000;
-}
-  
-th.popfield {
-  background: #ccf;
-  width:5rem;
-}
-td.popfield {
   width:5rem;
 }
 
+thead.pophead {
+  box-sizing: border-box;
+  display:block;
+  margin-right:10px;
+}
+
+tbody.popbody {
+  box-sizing: border-box;
+  display:block;
+  overflow:scroll;
+  max-height: calc(20vh);
+}
+
+
+th.popfield {
+  box-sizing: border-box;
+  background: #ccf;
+  border:solid 2px #000;
+}
+td.popfield {
+  box-sizing: border-box;
+  width:5rem;
+  border:solid 1px #000;
+  --padding-bottom: 5px;
+  --padding-end: 5px;
+  --padding-start: 5px;
+  --padding-top: 5px;
+}
+
+td.popfield.activeCol {
+  background-color:#fff;
+}
+td.popfield.disabledCol {
+  background-color:#ccc;
+}
+
+
 ion-input.popfield {
-    --background: #ccc;
+  box-sizing: border-box;
+    --background: #ccf;
     --padding-bottom: 5px;
     --padding-end: 5px;
     --padding-start: 5px;
     --padding-top: 5px;
-    width:5rem;
   }
   
   

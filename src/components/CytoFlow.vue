@@ -448,8 +448,8 @@ async function flowInit  ()  {
     wh.value = window.innerHeight
     console.log("ww,wh",ww.value,wh.value)
     if (!flowWrap.value.style) flowWrap.value.style = {}
-    flowWrap.value.style.width = String(ww.value) + "px"
-    flowWrap.value.style.height = String(wh.value * .6) + "px"
+    flowWrap.value.style.width = "100%" //String(ww.value) + "px"
+    flowWrap.value.style.height = String(wh.value * .7) + "px"
     flowLoaded.value = true
     //flowWrap.value.addEventListener("sel",()=>{console.log("sel")})
     //addEventListener("sel",flowWrap.value,(e)=>{console.log("sel",e)})
@@ -490,12 +490,12 @@ const ctlClick = async () => {
 const openPopover = async (ev: Event) => {
   // create dummy dataframe for test
   const df = await new dfd.DataFrame({
-    "x1": [1, 2, 3, 4, 5],
-    "y1": [1, 4, 2, 3, 5],
-    "z1": ["asa","dw","ddddW","y",""],
-    "x2": [1, 2, 3, 4, 5],
-    "y2": [1, 4, 2, 3, 5],
-    "z2": ["asa","dw","ddddW","y",""]
+    "x1": [1, 2, 3, 4, 5, 1, 2, 3, 4, 5,1, 2, 3, 4, 5],
+    "y1": [1, 2, 3, 4, 5, 1, 2, 3, 4, 5,1, 2, 3, 4, 5],
+    "z1": ["asa","dw","ddddW","y","","asa","dw","ddddW","y","","asa","dw","ddddW","y",""],
+    "x2": [1, 2, 3, 4, 5, 1, 2, 3, 4, 5,1, 2, 3, 4, 5],
+    "y2": [1, 2, 3, 4, 5, 1, 2, 3, 4, 5,1, 2, 3, 4, 5],
+    "z2": ["asa","dw","ddddW","y","","asa","dw","ddddW","y","","asa","dw","ddddW","y",""]
       }
     )
     /* */
@@ -590,7 +590,7 @@ const createEvent = () => {
 }
 .flow {
   width:100%;
-  min-width: 400px;
+  min-width: 300px;
   height: 100%;
   min-height:300px;
   display: block;

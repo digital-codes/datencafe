@@ -17,7 +17,18 @@
       </ion-header>
 
       <div id="container">
-        <CytoFlow msg="Flow demo" />
+        <ion-grid fixed="true">
+          <ion-row>
+            <ion-col size="7">
+              Flow
+              <CytoFlow msg="Flow demo" />
+            </ion-col>
+            <ion-col size="5" sytle="overflow-y:scroll;">
+              Viz
+              <VizPage />
+            </ion-col>
+          </ion-row>
+          </ion-grid>
       </div>
     </ion-content>
   </ion-page>
@@ -25,7 +36,10 @@
 
 <script setup lang="ts">
 import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
+import { IonCol, IonGrid, IonRow } from '@ionic/vue';
 import CytoFlow from '../components/CytoFlow.vue'
+
+import VizPage from './VizPage.vue'
 
 // ----------------------------------------------------------------
 // text search test
@@ -105,4 +119,11 @@ console.log(stringSimilarity.compareTwoStrings(
 #container a {
   text-decoration: none;
 }
+
+ion-grid {
+    --ion-grid-width: 100%;
+  }
+
 </style>
+
+
