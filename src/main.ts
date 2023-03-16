@@ -43,6 +43,15 @@ import { faArrowDown } from '@fortawesome/free-solid-svg-icons/faArrowDown'
 library.add(faUserSecret, faTwitter, faMugHot, faCoffee)
 library.add(faArrowUp,faArrowDown,faArrowLeft,faArrowRight)
 
+// ----------------
+// pinia
+import { createPinia } from 'pinia'
+const pinia = createPinia()
+// persist
+import piniaPersist from 'pinia-plugin-persist'
+pinia.use(piniaPersist)
+// ----------------
+
 
 const app = createApp(App)
 
@@ -50,6 +59,11 @@ app.component('font-awesome-icon', FontAwesomeIcon)
 
 app.use(IonicVue)
 app.use(router);
+
+// Use Pinia store in the app
+app.use(pinia)
+
+
 
 router.isReady().then(() => {
   app.mount('#app');

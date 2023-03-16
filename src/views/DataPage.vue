@@ -102,6 +102,7 @@ console.log(stringSimilarity.compareTwoStrings(
   right: 0;
   top: 50%;
   transform: translateY(-50%);
+  min-height:50%;
 }
 
 #container strong {

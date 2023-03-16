@@ -32,8 +32,11 @@
     "danfojs": "^1.1.2",
     "ionicons": "^6.0.3",
     "leaflet": "^1.9.3",
+    "localforage": "^1.10.0",
     "mitt": "^3.0.0",
     "moment-timezone": "^0.5.41",
+    "pinia": "^2.0.33",
+    "pinia-plugin-persist": "^1.0.0",
     "string-similarity": "^4.0.4",
     "vue": "^3.2.21",
     "vue-router": "^4.0.12"

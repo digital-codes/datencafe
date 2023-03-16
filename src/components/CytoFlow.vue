@@ -36,6 +36,12 @@ import Popover from './PopOver.vue'; // test
 import ImportPopover from './ImportPopover.vue';
 import eventBus from '../services/eventBus';
 
+// ----------------------
+import { userStore } from '../services/store'
+const store = userStore()
+
+
+// --------------------
 
 
 
@@ -477,6 +483,7 @@ async function flowInit  ()  {
           popover.value.dismiss(data,"123")
       }
     });
+    testStore()
   })
   
 const ctlClick = async () => {
@@ -555,6 +562,25 @@ const createEvent = () => {
   popBtn.value.$el.click()
 }
 
+const testStore = async () => {
+
+  const newUser = {
+    id: '1234',
+      name: 'John Doe',
+      email: 'john@example.com',
+      address: {
+        street: '123 Main St',
+        city: 'Anytown',
+        state: 'CA',
+        zip: '12345'
+      },
+      phone: '555-555-1212'
+  }
+  await store.addUser(newUser)
+  const u = await store.getUserById(newUser.id)
+  console.log("User:",u)
+
+}
 
 </script>
 
