@@ -54,6 +54,10 @@ const pinia = createPinia()
 import piniaPersist from 'pinia-plugin-persist'
 pinia.use(piniaPersist)
 // ----------------
+// axios
+import UserService from './services/axios';
+
+const userService = new UserService();
 
 // ----------------
 // localisation
@@ -88,6 +92,8 @@ app.use(router);
 // Use Pinia store in the app
 app.use(pinia)
 
+// axios
+//app.use(userService)
 
 
 
