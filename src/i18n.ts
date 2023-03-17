@@ -3,8 +3,8 @@ import { createI18n } from 'vue-i18n';
 const i18n = createI18n({
   legacy: false,
   //allowComposition: true,
-  globalInjection: true,
-  useScope: 'global',
+  //globalInjection: true,
+  //useScope: 'global',
   locale: 'de', // set the default locale
   fallbackLocale: 'en', // set the fallback locale
   messages: {

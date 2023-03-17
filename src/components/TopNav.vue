@@ -14,9 +14,13 @@
             <font-awesome-icon :icon="['fab', 'twitter']" size="xl" spin/>
             </div>
             <div>
-              <button @click="changeLanguage('en')">English</button>
-              <button @click="changeLanguage('de')">Deutsch</button>
-              {{ t("welcome") }}
+              <ion-toggle @ionChange="changeMode">Mode</ion-toggle>
+              <ion-label>Dark</ion-label>
+            </div>
+            <div>
+              <ion-button @click="changeLanguage('en')">English</ion-button>
+              <ion-button @click="changeLanguage('de')">Deutsch</ion-button>
+              {{ $t("welcome") }}
             </div>
             <ion-tab-button tab="info" href="/info">
             <font-awesome-icon :icon="['fas', 'coffee']" />
@@ -48,38 +52,35 @@
   </template>
   
   <script lang="ts" setup>
-    import { IonPage, IonTabs, IonRouterOutlet, IonTabBar, IonTabButton, IonLabel, IonIcon } from '@ionic/vue';
+    import { IonPage, IonTabs, IonRouterOutlet, 
+      IonTabBar, IonTabButton, IonLabel, IonIcon, IonToggle, } from '@ionic/vue';
   
     import { playCircle, radio, library, search } from 'ionicons/icons';
 
-
+    import { ref } from "vue"
+  
     import { IonHeader } from '@ionic/vue';
     import { cafeOutline } from 'ionicons/icons';
 
-    //import { inject } from 'vue'
-    //const i18n = inject('i18n')
-    //console.log("i18n:",i18n)    
-    //import { i18n } from '@/i18n';
-    //console.log("i18n:",i18n)    
-    //import { useI18n } from '@vueuse/i18n';
-
-    import { useI18n } from 'vue-i18n'
     // https://lokalise.com/blog/vue-i18n/
-    const { t, locale, availableLocales } = useI18n()
-    // const { t } = useI18n()
-    console.log("t",t)
-    console.log("l",locale)
-    console.log("all",availableLocales)
-    //const { t } = useI18n(); // use the useI18n function to access the i18n instance
+    import { useI18n } from 'vue-i18n'
+    const { locale } = useI18n({ useScope: 'global' })
 
     const changeLanguage = (lang) => {
       console.log("Locale now:",lang)
-      locale.set(lang)
-      //i18n.globale.locale = lang;
-      //locale.set(lang)
-      //$i18n.locale = lang
-      //locale = lang
+      locale.value = lang
+      // maybe store lang to localstorage 
     };    
+
+    const dark = ref(false)
+
+    const changeMode = () => {
+      dark.value = !dark.value
+      console.log("Dark :",dark.value)
+      document.body.classList.toggle('dark', dark.value);
+      // maybe store lang to localstorage 
+    };    
+
 
   </script>
 
