@@ -422,8 +422,16 @@ async function flowInit  ()  {
       // we have stored the edge type in the source node. copy to edge type
       const e = await cy.value.getElementById(addedEdge.data("id"))
       const s = await cy.value.getElementById(sourceNode.data("id"))
+      const t = await cy.value.getElementById(targetNode.data("id"))
+      console.log("from ",s.data("name"), " to ",t.data("name"))
       await e.data("type",s.data("edge"))
-      await s.removeData("edge")      
+      await s.removeData("edge")
+      // we can open a dialog here like so:
+          // popBtn.value.$el.click()
+          // with params edge.type, source.id, target.id
+          // to configure the target node
+          // and the store
+
       //console.log("Elems:",elements.length)
       //console.log("json len:",cy.value.json().elements.edges.length)
     });
