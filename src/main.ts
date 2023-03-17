@@ -52,16 +52,39 @@ import piniaPersist from 'pinia-plugin-persist'
 pinia.use(piniaPersist)
 // ----------------
 
+// ----------------
+// localisation
+import i18n from "./i18n"
+/*
+import { createI18n } from 'vue-i18n';
+
+const i18n = createI18n({
+  locale: 'en',
+  fallbackLocale: 'en',
+  messages: {
+    en: require('./locales/en.json'),
+    de: require('./locales/de.json')
+  }
+});
+*/
+
+// ----------------
 
 const app = createApp(App)
 
 app.component('font-awesome-icon', FontAwesomeIcon)
 
+// use localization
+app.use(i18n)
+
+// 
 app.use(IonicVue)
 app.use(router);
 
+
 // Use Pinia store in the app
 app.use(pinia)
+
 
 
 
