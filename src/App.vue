@@ -66,6 +66,10 @@ import {
 
 // fa: see https://fontawesome.com/docs/web/use-with/vue/add-icons
 
+// do not track ...
+console.log("DNT:",navigator.doNotTrack)
+
+
 </script>
 
 <style scoped>
