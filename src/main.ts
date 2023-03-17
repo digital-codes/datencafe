@@ -38,10 +38,13 @@ import { faArrowRight } from '@fortawesome/free-solid-svg-icons/faArrowRight'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons/faArrowLeft'
 import { faArrowUp } from '@fortawesome/free-solid-svg-icons/faArrowUp'
 import { faArrowDown } from '@fortawesome/free-solid-svg-icons/faArrowDown'
+import { faGlobe } from '@fortawesome/free-solid-svg-icons/faGlobe'
+import { faLanguage } from '@fortawesome/free-solid-svg-icons/faLanguage'
 
 /* add icons to the library */
 library.add(faUserSecret, faTwitter, faMugHot, faCoffee)
 library.add(faArrowUp,faArrowDown,faArrowLeft,faArrowRight)
+library.add(faGlobe, faLanguage)
 
 // ----------------
 // pinia

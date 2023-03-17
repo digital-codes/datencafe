@@ -1,59 +1,7 @@
-<template>
-    <ion-page>
-      <ion-tabs>
-        <ion-header :translucent="true">
-        </ion-header>
-        <ion-router-outlet></ion-router-outlet>
-        <ion-tab-bar slot="top" class="navbar">
-            <div class="title">
-            <font-awesome-icon class="logo" icon="fa-solid fa-mug-hot" size="2x" :style="{ color: 'red' }" />
-            <span class="headline">Datencafe</span>
-            </div>
-            <div>
-            <font-awesome-icon :icon="['fas', 'user-secret']" />
-            <font-awesome-icon :icon="['fab', 'twitter']" size="xl" spin/>
-            </div>
-            <div>
-              <ion-toggle @ionChange="changeMode">Mode</ion-toggle>
-              <ion-label>Dark</ion-label>
-            </div>
-            <div>
-              <ion-button @click="changeLanguage('en')">English</ion-button>
-              <ion-button @click="changeLanguage('de')">Deutsch</ion-button>
-              {{ $t("welcome") }}
-            </div>
-            <ion-tab-button tab="info" href="/info">
-            <font-awesome-icon :icon="['fas', 'coffee']" />
-            <ion-label>About</ion-label>
-          </ion-tab-button>
-  
-          <ion-tab-button tab="instructions" href="/instructions">
-            <ion-icon :icon="search" />
-            <ion-label>Anleitung</ion-label>
-          </ion-tab-button>
-
-          <ion-tab-button tab="map" href="/map">
-            <font-awesome-icon :icon="['fab', 'twitter']" />
-            <ion-label>Karte</ion-label>
-          </ion-tab-button>
-  
-          <ion-tab-button  tab="data" href="/data">
-            <font-awesome-icon :icon="['fas', 'user-secret']" />
-            <ion-label>Daten</ion-label>
-          </ion-tab-button>
-  
-          <ion-tab-button tab="viz" href="/viz">
-            <ion-icon :icon="search" />
-            <ion-label>Anzeige</ion-label>
-          </ion-tab-button>
-        </ion-tab-bar>
-      </ion-tabs>
-    </ion-page>
-  </template>
-  
   <script lang="ts" setup>
     import { IonPage, IonTabs, IonRouterOutlet, 
-      IonTabBar, IonTabButton, IonLabel, IonIcon, IonToggle, } from '@ionic/vue';
+      IonTabBar, IonTabButton, IonLabel, IonIcon, IonToggle,
+      IonSelect, IonSelectOption, } from '@ionic/vue';
   
     import { playCircle, radio, library, search } from 'ionicons/icons';
 
@@ -62,27 +10,128 @@
     import { IonHeader } from '@ionic/vue';
     import { cafeOutline } from 'ionicons/icons';
 
+    // stores
+    import { langStore } from '../services/store'
+    import { Language } from '../services/store'
+    const language = langStore()
+
+    import { themeStore } from '../services/store'
+    import { Modes } from '../services/store'
+    const theme = themeStore()
+
+
+
     // https://lokalise.com/blog/vue-i18n/
     import { useI18n } from 'vue-i18n'
-    const { locale } = useI18n({ useScope: 'global' })
+    const { locale, availableLocales } = useI18n({ useScope: 'global' })
 
+    /*
     const changeLanguage = (lang) => {
-      console.log("Locale now:",lang)
-      locale.value = lang
-      // maybe store lang to localstorage 
+      language.set(lang as Language)
+      locale.value = language.get()
+      //console.log("Lang store:",language.get())
     };    
+    */
+    const langSel = ref(locale.value)
+    const selectLanguage = () => {
+      //console.log("L:",langSel.value)
+      language.set(langSel.value as Language)
+      locale.value = language.get()
 
+    }
+
+    const upper = (s) => s.toUpperCase()
+
+    // theme switch
     const dark = ref(false)
 
     const changeMode = () => {
       dark.value = !dark.value
-      console.log("Dark :",dark.value)
-      document.body.classList.toggle('dark', dark.value);
-      // maybe store lang to localstorage 
+      theme.set((dark.value? Modes.Dark : Modes.Light))
+      if (theme.get() == Modes.Dark) {
+        document.body.classList.add('dark')
+      } else {
+        document.body.classList.remove('dark')
+
+      }
+      // document.body.classList.toggle('dark', (theme.get() == Modes.Dark));
     };    
 
 
   </script>
+
+<template>
+  <ion-page>
+    <ion-tabs>
+      <ion-header :translucent="true">
+      </ion-header>
+      <ion-router-outlet></ion-router-outlet>
+      <ion-tab-bar slot="top" class="navbar">
+          <div class="title">
+          <font-awesome-icon class="logo" icon="fa-solid fa-mug-hot" size="2x" :style="{ color: 'red' }" />
+          <span class="headline">Datencafe</span>
+          </div>
+          <!-- 
+
+          <div>
+          <font-awesome-icon :icon="['fas', 'user-secret']" />
+          <font-awesome-icon :icon="['fab', 'twitter']" size="xl" spin/>
+          </div>
+          -->
+          <div>
+            <ion-item>
+              <ion-label class="modeLbl">Light</ion-label>
+              <ion-toggle @ionChange="changeMode" :checked="false"></ion-toggle>
+              <ion-label class="modeLbl">Dark</ion-label>
+            </ion-item>
+          </div>
+          <div>
+            <font-awesome-icon :icon="['fas', 'globe']" size="xl"/>
+            <!-- 
+            <ion-button @click="changeLanguage('en')">EN</ion-button>
+            <ion-button @click="changeLanguage('de')">DE</ion-button>
+            -->
+          </div>
+          <ion-list>
+            <ion-item>
+              <ion-select placeholder="Lang" interface="popover" @ionChange="selectLanguage" v-model="langSel">
+                <ion-select-option v-for="(l,idx) in availableLocales" :key="idx" :value="l">{{upper(l)}}</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-list>          
+          <div>
+            {{ $t("welcome") }}
+          </div>
+        <ion-tab-button tab="info" href="/info">
+          <font-awesome-icon :icon="['fas', 'coffee']" />
+          <ion-label>About</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button tab="instructions" href="/instructions">
+          <ion-icon :icon="search" />
+          <ion-label>Anleitung</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button tab="map" href="/map">
+          <font-awesome-icon :icon="['fab', 'twitter']" />
+          <ion-label>Karte</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button  tab="data" href="/data">
+          <font-awesome-icon :icon="['fas', 'user-secret']" />
+          <ion-label>Daten</ion-label>
+        </ion-tab-button>
+
+        <ion-tab-button tab="viz" href="/viz">
+          <ion-icon :icon="search" />
+          <ion-label>Anzeige</ion-label>
+        </ion-tab-button>
+      </ion-tab-bar>
+    </ion-tabs>
+  </ion-page>
+</template>
+
+
 
 <style scoped>
 .navbar {
@@ -101,5 +150,9 @@
     padding:10px;
     margin: 10px;
     font-size: 1.5rem;
+}
+
+.modeLbl {
+  width: 3rem;
 }
 </style>
