@@ -8,7 +8,7 @@ export interface Provider {
       id: string,
       type: string
     }]
-    data: Object // dataframe as json
+    data: any // dataframe as json
 }
 
 export const providerStore = defineStore({

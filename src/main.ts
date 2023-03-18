@@ -54,12 +54,13 @@ const pinia = createPinia()
 import piniaPersist from 'pinia-plugin-persist'
 pinia.use(piniaPersist)
 
+/*
 import { providerStore, Provider } from './services/srcStore';
 const providers = providerStore();
 
 import { subscriberStore } from './services/dstStore';
 const subscribers = subscriberStore();
-
+*/
 
 // ----------------
 // axios

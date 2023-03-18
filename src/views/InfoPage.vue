@@ -18,7 +18,7 @@
 
       <div id="container">
         <strong class="capitalize">{{ $route.params.id }}</strong>
-        <p>Info Sample</p>
+        <p>{{ $t("titles.info") }}</p>
       </div>
     </ion-content>
   </ion-page>
@@ -26,6 +26,21 @@
 
 <script setup lang="ts">
 import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
+
+// stores
+/*
+import { langStore } from '../services/store'
+import { Language } from '../services/store'
+const language = langStore()
+console.log("Info lang:",language.lang)
+*/
+
+/*
+import { providerStore, Provider } from '../services/srcStore';
+const providers = providerStore();
+console.log("Prv:",providers.getSrcDataById("a"))
+*/
+
 </script>
 
 <style scoped>

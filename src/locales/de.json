@@ -1,5 +1,9 @@
 {
   "welcome": "Hallo",
-  "greeting": "Hallo, {name}!"
+  "greeting": "Hallo, {name}!",
+  "titles": {
+    "info": "Info DE"
+  }
+
 }
 

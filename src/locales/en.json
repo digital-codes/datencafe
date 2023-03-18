@@ -1,5 +1,8 @@
 {
   "welcome": "Hello",
-  "greeting": "Hello, {name}!"
+  "greeting": "Hello, {name}!",
+  "titles": {
+    "info": "Info EN"
+  }
 }
 
