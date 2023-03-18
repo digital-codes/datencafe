@@ -53,10 +53,17 @@ const pinia = createPinia()
 // persist
 import piniaPersist from 'pinia-plugin-persist'
 pinia.use(piniaPersist)
+
+import { providerStore, Provider } from './services/srcStore';
+const providers = providerStore();
+
+import { subscriberStore } from './services/dstStore';
+const subscribers = subscriberStore();
+
+
 // ----------------
 // axios
 import UserService from './services/axios';
-
 const userService = new UserService();
 
 // ----------------
@@ -91,6 +98,7 @@ app.use(router);
 
 // Use Pinia store in the app
 app.use(pinia)
+//app.use(providers)
 
 // axios
 //app.use(userService)
