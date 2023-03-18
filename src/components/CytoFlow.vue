@@ -513,6 +513,14 @@ const openPopover = async (ev: Event) => {
     "z2": ["asa","dw","ddddW","y","","asa","dw","ddddW","y","","asa","dw","ddddW","y",""]
       }
     )
+    /* ************************************* */
+    // test json to/ftom
+    const dfj = await dfd.toJSON(df)
+    console.log("JSON:",dfj)
+    const df2 = await new dfd.DataFrame(dfj)
+    df2.print(5)
+    /* ************************************* */
+
     /* */
     popover.value = await popoverController.create({
       component: ImportPopover,
