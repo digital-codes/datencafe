@@ -450,10 +450,16 @@ async function flowInit  ()  {
       console.log('dblclick at ',pos);
       popBtn.value.$el.click()
     });
-      
 
-    }
+    // remove handlers. remove edge will be triggered on delete node with edges
+    cy.value.on("remove","node",function(event: EventObject){
+      console.log("Remove node event:",event.target.data())
+    })
+    cy.value.on("remove","edge",function(event: EventObject){
+      console.log("Remove edge event:",event.target.data())
+    })
   }
+}
 
 
 
