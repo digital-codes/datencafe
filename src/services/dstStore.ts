@@ -55,10 +55,15 @@ export const subscriberStore = defineStore({
         throw new Error("DST item not found:" + id + " " + type)
       }
     },
-    disconnect(id: string, type: string, src: string) {
+    disconnect(id: string, src: string, type?: string) {
       console.log("Disconnet dst:", id, type, src)
       // find item
-      const idx = this.items.findIndex(item => ((item.id === id) && (item.type == type) && (item.src == src)))
+      let idx
+      if (type == undefined) {
+        idx = this.items.findIndex(item => ((item.id === id) && (item.src == src)))
+      } else {
+        idx = this.items.findIndex(item => ((item.id === id) && (item.type == type) && (item.src == src)))
+      }
       if (idx !== -1) {
         this.items[idx].src = ""
         console.log("Disconnected from :", src)

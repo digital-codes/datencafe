@@ -46,9 +46,13 @@ export const providerStore = defineStore({
               this.items[sidx].data = data
               // update all dests
               // ..
+              const dsts = [] as string[]
               this.items[sidx].dsts.forEach((d) => {
                 // update all dsts via providerStore.update(id: string, type: string)
+                if (!(d.id in dsts))
+                  dsts.push(d.id)
               })
+              return dsts
               // ..
             } else {
                 throw new Error("Source doesn't exist")
