@@ -163,3 +163,63 @@ console.log(store.items); // Output: ['item1', 'item2']
 
 By exporting the store instance from store.ts and importing it into the main file, you can use the store in the main file as if it was defined there.
 
+vur3 jtest installation
+
+To install Jest in a Vue 3 project, you can follow these steps:
+
+    Install Jest and the necessary packages for testing Vue 3 applications:
+
+    css
+
+npm install --save-dev jest @vue/test-utils vue-jest babel-jest jest-transform-stub
+
+This installs Jest, @vue/test-utils, vue-jest, babel-jest, and jest-transform-stub as development dependencies.
+
+Configure Jest by creating a jest.config.js file in the root of your project and adding the following configuration:
+
+javascript
+
+module.exports = {
+  preset: '@vue/cli-plugin-unit-jest/presets/typescript-and-babel',
+  transform: {
+    '^.+\\.vue$': 'vue-jest',
+    '.+\\.(css|styl|less|sass|scss|png|jpg|ttf|woff|woff2)$': 'jest-transform-stub',
+    '^.+\\.jsx?$': 'babel-jest',
+  },
+};
+
+This configuration sets up Jest to use @vue/cli-plugin-unit-jest as the preset, transform Vue files with vue-jest, and transform other files (such as images and fonts) with jest-transform-stub.
+
+Update the test script in your package.json file to run Jest:
+
+json
+
+"scripts": {
+  "test": "jest"
+},
+
+Create a test file in your tests/unit directory with a test case for your Vue component:
+
+javascript
+
+import { mount } from '@vue/test-utils';
+import MyComponent from '@/components/MyComponent.vue';
+
+describe('MyComponent', () => {
+  it('renders properly', () => {
+    const wrapper = mount(MyComponent);
+    expect(wrapper.html()).toContain('My Component');
+  });
+});
+
+This test case uses @vue/test-utils to mount the MyComponent component and checks that the rendered HTML contains the text "My Component".
+
+Run the tests using the npm test command:
+
+bash
+
+    npm test
+
+    This runs Jest and executes the test cases defined in your test files.
+
+These steps should get you started with testing Vue 3 applications using Jest.
