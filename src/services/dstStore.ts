@@ -15,14 +15,15 @@ export const subscriberStore = defineStore({
     items: [] as Subscriber[]
   }),
   actions: {
-    addDst(id: string, type: string) {
+    add(id: string, type: string) {
       console.log("DST Add:", id, type)
       const item = { id: id, type: type, src: "", update: 0 } as Subscriber
       this.items.push(item)
       console.log("DSTs:", this.items.length)
     },
-    removeDst(id: string, type: string) {
+    remove(id: string, type: string) {
       console.log("Rm dst:", id, type)
+      // maybe disconnect all sources first
       // find item
       const idx = this.items.findIndex(item => ((item.id === id) && (item.type == type)))
       if (idx !== -1) {
@@ -32,7 +33,7 @@ export const subscriberStore = defineStore({
         throw new Error("DST item not found:" + id + " " + type)
       }
     },
-    updateDst(id: string, type: string) {
+    update(id: string, type: string) {
       console.log("Update dst:", id, type)
       // find item
       const idx = this.items.findIndex(item => ((item.id === id) && (item.type == type)))
@@ -43,7 +44,7 @@ export const subscriberStore = defineStore({
         throw new Error("DST item not found:" + id + " " + type)
       }
     },
-    connectDst(id: string, type: string, src: string) {
+    connect(id: string, type: string, src: string) {
       console.log("Connect dst:", id, type, src)
       // find item
       const idx = this.items.findIndex(item => ((item.id === id) && (item.type == type)))
@@ -54,7 +55,7 @@ export const subscriberStore = defineStore({
         throw new Error("DST item not found:" + id + " " + type)
       }
     },
-    disconnectDst(id: string, type: string, src: string) {
+    disconnect(id: string, type: string, src: string) {
       console.log("Disconnet dst:", id, type, src)
       // find item
       const idx = this.items.findIndex(item => ((item.id === id) && (item.type == type) && (item.src == src)))
@@ -65,7 +66,7 @@ export const subscriberStore = defineStore({
         throw new Error("DST item not found:" + id + " " + type)
       }
     },
-    invalidateDst(id: string, type: string) {
+    invalidate(id: string, type: string) {
       console.log("Update dst:", id, type)
       // find item
       const idx = this.items.findIndex(item => ((item.id === id) && (item.type == type)))

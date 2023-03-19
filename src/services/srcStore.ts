@@ -17,20 +17,44 @@ export const providerStore = defineStore({
         items: [] as Provider[]
     }),
     actions: {
-        addSrc(item: Provider) {
-            console.log("Add:",item.id)
-            this.items.push(item)
+        add(id: string) {
+            console.log("Add:",id)
+            const item = {
+                id: id,
+                dsts: [],
+                data:{}
+            } as unknown
+            this.items.push(item as Provider)
             console.log("sources:",this.items.length)
         },
-        removeSrc(id:string) {
+        remove(id:string) {
             console.log("Remove:",id)
+            // maybe disconnect all destinations first ...
             const index = this.items.findIndex(item => item.id === id)
             if (index !== -1) {
                 this.items.splice(index, 1)
                 console.log("Removed")
             }
         },
-        addDst(id:string, dst: {id: string,type: string})  {
+        update(id:string,data:{}) {
+            console.log("Update:",id)
+            // find item
+            const sidx = this.items.findIndex(item => item.id === id)
+            if (sidx !== -1) {
+              console.log("Src found:",this.items[sidx].id)
+              // set data
+              this.items[sidx].data = data
+              // update all dests
+              // ..
+              this.items[sidx].dsts.forEach((d) => {
+                // update all dsts via providerStore.update(id: string, type: string)
+              })
+              // ..
+            } else {
+                throw new Error("Source doesn't exist")
+            }
+        },
+        connect(id:string, dst: {id: string,type: string})  {
             console.log("Add dst:",id,dst.id,dst.type)
             // find item
             const sidx = this.items.findIndex(item => item.id === id)
@@ -46,7 +70,7 @@ export const providerStore = defineStore({
               console.log("Src not found")
             }
         },
-        removeDst(id:string, dst: {id: string,type: string})  {
+        disconnect(id:string, dst: {id: string,type: string})  {
             console.log("Rm dst:",id,dst.id,dst.type)
             // find item
             const sidx = this.items.findIndex(item => item.id === id)
