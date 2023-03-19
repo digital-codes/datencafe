@@ -4,6 +4,7 @@ import { defineStore } from 'pinia'
 
 export interface Subscriber {
     id: string
+    src: string
     type: string
     update: number
 }
@@ -14,8 +15,9 @@ export const subscriberStore = defineStore({
         items: [] as Subscriber[]
     }),
     actions: {
-        addDst(item: Subscriber) {
-            console.log("DST Add:",item.id)
+        addDst(id:string, type: string) {
+            console.log("DST Add:",id,type)
+            const item = {id: id, type:type,src:"",update:0} as Subscriber
             this.items.push(item)
             console.log("DSTs:",this.items.length)
         },
@@ -65,7 +67,19 @@ export const subscriberStore = defineStore({
             } else {
               throw new Error("DST item not found:" + id + " " + type)
             }
-        }
-    }
+        },
+        isConnected: state => (id: string, type:string) => {
+          console.log("IsConnected:",id,type)
+          // find item
+          const idx = state.items.findIndex(item => ((item.id === id) && (item.type == type)))
+          if (idx !== -1) {
+              const connected = state.items[idx].src != ""
+              console.log("valid:",connected)
+              return connected
+          } else {
+            throw new Error("DST item not found:" + id + " " + type)
+          }
+      }
+  }
 })
 
