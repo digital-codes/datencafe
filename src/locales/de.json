@@ -3,7 +3,31 @@
   "greeting": "Hallo, {name}!",
   "titles": {
     "info": "Info DE"
-  }
+  },
+  "stories": [
+    {
+      "title":"Nutzung offener Daten zur Verbesserung des öffentlichen Verkehrs",
+      "icon":"",
+      "body":"Erlernen, wie man öffentliche Verkehrsdatenquellen findet und darauf zugreift. Verstehen, wie man Verkehrsdaten nutzt, um neue Tools und Apps für Pendler zu erstellen. Erforschen, wie offene Daten genutzt werden können, um öffentliche Verkehrssysteme. effizienter und benutzerfreundlicher zu machen",
+      "learn":"123",
+      "links":"123"
+    },
+    {
+      "title":"Wie offene Daten uns geholfen haben, Umweltverschmutzung zu verfolgen",
+      "icon":"",
+      "body":"Identifikation und Zugriff auf relevante Umweltdatenquellen erlernen. Verstehen, wie man Umweltdaten visualisiert und analysiert, um Verschmutzungsquellen zu identifizieren. Erforschen, wie offene Daten genutzt werden können, um Umweltaktivismus und Bewusstsein zu fördern",
+      "learn":"123",
+      "links":"123"
+    },
+    {
+      "title":"Offene Daten und Katastrophenhilfe",
+      "icon":"",
+      "body":"Identifikation und Zugriff auf relevante Katastrophen-bezogene Datenquellen erlernen. Verstehen, wie man Daten nutzt, um Katastrophenhilfe-Planung und -Koordination durchzuführen. Erforschen, wie offene Daten genutzt werden können, um Katastrophen-Vorbereitung und -Hilfe zu verbessern",
+      "learn":"123",
+      "links":"123"
+    }
+  ]
 
 }
+
 

@@ -122,9 +122,9 @@
           <ion-label>Daten</ion-label>
         </ion-tab-button>
 
-        <ion-tab-button tab="viz" href="/viz">
+        <ion-tab-button tab="viz" href="/stories">
           <ion-icon :icon="search" />
-          <ion-label>Anzeige</ion-label>
+          <ion-label>Stories</ion-label>
         </ion-tab-button>
       </ion-tab-bar>
     </ion-tabs>
