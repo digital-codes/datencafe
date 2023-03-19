@@ -17,10 +17,23 @@
       </ion-header>
 
       <div id="container">
-        <div v-for="(s,i) in msgs.stories" :key="i">
-            <h3>{{ $t(titles[i]) }}</h3>
-            <p>{{ $t(bodies[i]) }}</p>
-        </div>
+        <ion-card color="light" v-for="(s,i) in msgs.stories" :key="i">
+          <ion-card-header>
+            <ion-card-title>{{ $t(titles[i]) }}</ion-card-title>
+            <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+          </ion-card-header>
+
+          <ion-card-content>
+            {{ $t(bodies[i]) }}
+          </ion-card-content>
+        </ion-card>
+        <!-- 
+              <div v-for="(s,i) in msgs.stories" :key="i">
+                  <h3>{{ $t(titles[i]) }}</h3>
+                  <p>{{ $t(bodies[i]) }}</p>
+              </div>
+
+        -->
       </div>
     </ion-content>
   </ion-page>
@@ -29,6 +42,7 @@
 <script setup lang="ts">
 import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
 import { IonButton } from '@ionic/vue';
+import { IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent } from '@ionic/vue'
 
 import { ref, onMounted, onBeforeMount } from "vue"
  

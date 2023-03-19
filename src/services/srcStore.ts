@@ -2,7 +2,7 @@
 
 import { defineStore } from 'pinia'
 
-export interface SubscriberType {
+export interface Client {
     id: string
     type: string
 }
@@ -16,7 +16,7 @@ export interface Provider {
       type: string
     }]
     */
-   dsts: [SubscriberType]
+   dsts: [Client]
     data: any // dataframe as json
 }
 
@@ -31,8 +31,8 @@ export const providerStore = defineStore({
             console.log("Add:",id)
             const item = {
                 id: id,
-                dsts: [] as SubscriberType[],
-                data:{}
+                dsts: [] as Client[],
+                data: {}
             } 
             this.items.push(item as Provider)
             console.log("sources:",this.items.length)
@@ -46,8 +46,9 @@ export const providerStore = defineStore({
             }
             this.items.splice(sidx, 1)
             console.log("Removed")
+            console.log("sources:",this.items.length)
         },
-        update(id:string,data:{}) {
+        update(id:string,data:any) {
             console.log("Update:",id)
             // find item
             const sidx = this.items.findIndex((item: Provider) => item.id === id)
@@ -69,7 +70,7 @@ export const providerStore = defineStore({
             return dsts
             // ..
         },
-        connect(id:string, dst: SubscriberType)  {
+        connect(id:string, dst: Client)  {
             console.log("Add dst:",id,dst.id,dst.type)
             // find item
             const sidx = this.items.findIndex((item: Provider) => item.id === id)
@@ -77,14 +78,14 @@ export const providerStore = defineStore({
                 throw new Error("Source doesn't exist")
             }
             console.log("Src found:",this.items[sidx].id)
-            const didx = this.items[sidx].dsts.findIndex((d : SubscriberType) => ((d.id == dst.id) && (d.type == dst.type)) )
+            const didx = this.items[sidx].dsts.findIndex((d : Client) => ((d.id == dst.id) && (d.type == dst.type)) )
             if (didx !== -1) {
                 throw new Error("Destination/Type exists")
             }
             this.items[sidx].dsts.push(dst)
             console.log("dsts:",this.items[sidx].dsts)
         },
-        disconnect(id:string, dst: SubscriberType)  {
+        disconnect(id:string, dst: Client)  {
             console.log("Rm dst:",id,dst.id,dst.type)
             // find item
             const sidx = this.items.findIndex((item: Provider) => item.id === id)
@@ -92,7 +93,7 @@ export const providerStore = defineStore({
                 throw new Error("Source doesn't exist")
             }
             console.log("Src found:",this.items[sidx].id)
-            const didx = this.items[sidx].dsts.findIndex((d : SubscriberType) => ((d.id == dst.id) && (d.type == dst.type)) )
+            const didx = this.items[sidx].dsts.findIndex((d : Client) => ((d.id == dst.id) && (d.type == dst.type)) )
             if (didx === -1) {
                 throw new Error("Destination/Type doesn't exists")
             }
@@ -101,6 +102,7 @@ export const providerStore = defineStore({
         }
     },
     getters: {
+        json: state => () => { return state.items},
         getSrcDataById: state => (id: string) => {
             const s = state.items.find((item: Provider) => item.id === id)
             if (s === undefined) {

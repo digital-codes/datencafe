@@ -32,17 +32,29 @@ export const subscriberStore = defineStore({
       this.items.splice(idx, 1)
       console.log("DSTS:", this.items.length)
     },
-    update(id: string, type: string) {
+    update(id: string, type?: string) {
       console.log("Update dst:", id, type)
-      // find item
+      // find item(s)
+      let items: Subscriber[]
+      if (type !== undefined) {
+        items = this.items.filter((item) =>  ((item.id === id) && (item.type == type)))
+      } else {
+        items = this.items.filter((item) =>  item.id === id)
+      }
+      if (items.length == 0) {
+        throw new Error("DST item not found")
+      }
+      items.forEach()
+      /*
       const idx = this.items.findIndex((item: Subscriber) => ((item.id === id) && (item.type == type)))
       if (idx === -1) {
         throw new Error("DST item not found")
       }
       this.items[idx].update++
       console.log("update:", this.items[idx].update)
+      */
     },
-    connect(id: string, type: string, src: string) {
+    connect(id: string, src: string, type: string) {
       console.log("Connect dst:", id, type, src)
       // find item
       const idx = this.items.findIndex((item: Subscriber) => ((item.id === id) && (item.type == type)))
@@ -79,6 +91,13 @@ export const subscriberStore = defineStore({
     },
   },
   getters: {
+    json: state => () => { return state.items},
+    exists: state => (id: string) {
+      console.log("exists:", id,)
+      // find item
+      const idx = state.items.findIndex((item: Subscriber) => ((item.id === id) && (item.type == type)))
+      return (idx === -1) ? false : true
+    },
     isValid: state => (id: string, type: string) => {
       console.log("IsValid:", id, type)
       // find item

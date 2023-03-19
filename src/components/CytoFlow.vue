@@ -40,6 +40,84 @@ import eventBus from '../services/eventBus';
 import { userStore } from '../services/store'
 const store = userStore()
 
+import { providerStore } from '../services/srcStore'
+import { Client, Provider } from '../services/srcStore'
+const providers = providerStore()
+
+import { subscriberStore } from '../services/dstStore'
+import { Subscriber } from '../services/dstStore'
+const subscribers = subscriberStore()
+
+// test stores
+for (let i=0;i<3;i++) {
+  const p = "P" + String(i)
+  providers.add(p)
+}
+for (let i=0;i<3;i++) {
+  const p = "P" + String(i)
+  providers.remove(p)
+}
+// test
+try {
+  providers.remove("XY")
+} catch (e) {
+  console.log("Faield:", e)
+}
+// ---
+for (let i=0;i<3;i++) {
+  const p = "S" + String(i)
+  subscribers.add(p)
+}
+for (let i=0;i<3;i++) {
+  const p = "S" + String(i)
+  subscribers.remove(p)
+}
+// test
+try {
+  subscribers.remove("XY")
+} catch (e) {
+  console.log("Faield:", e)
+}
+
+// 
+providers.add("P1")
+providers.add("P2")
+subscribers.add("S1")
+subscribers.add("S2")
+// connect
+providers.connect("P1",{id:"S1",type:"T1"})
+providers.connect("P1",{id:"S2",type:"T2"})
+providers.connect("P2",{id:"S2",type:"T1"})
+providers.connect("P1",{id:"S1",type:"T2"})
+
+try {
+  providers.connect("P3",{id:"S1",type:"T1"})
+} catch (e) {
+  console.log("Faield:", e)
+}
+
+// we cannot test this without a reference between the stores
+// handle during connecting
+/*
+try {
+  providers.connect("P1",{id:"S3",type:"T1"})
+} catch (e) {
+  console.log("Faield:", e)
+}
+*/
+
+console.log("P",providers.json())
+console.log("S",subscribers.json())
+
+// 
+const dsts = providers.update("P1",{x:123,y:"wdw"})
+console.log("dsts:",dsts)
+console.log("P",providers.json())
+console.log("S",subscribers.json())
+
+dsts.forEach((id) => {
+  subscribers.update()
+})
 
 // --------------------
 
