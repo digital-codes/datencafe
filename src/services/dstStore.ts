@@ -121,7 +121,7 @@ export const subscriberStore = defineStore({
         throw new Error("DST item not found")
       }
       const connected = state.items[idx].src != ""
-      console.log("valid:", connected)
+      console.log("connected:", connected)
       return connected
     }
   }

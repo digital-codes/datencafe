@@ -67,6 +67,7 @@ try {
 for (let i=0;i<3;i++) {
   const p = "S" + String(i)
   subscribers.add(p)
+  console.log("exists:",subscribers.exists(p))
 }
 for (let i=0;i<3;i++) {
   const p = "S" + String(i)
@@ -74,6 +75,7 @@ for (let i=0;i<3;i++) {
 }
 // test
 try {
+  console.log("exists:",subscribers.exists("XY"))
   subscribers.remove("XY")
 } catch (e) {
   console.log("Faield:", e)
