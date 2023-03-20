@@ -44,7 +44,11 @@ export const subscriberStore = defineStore({
       if (items.length == 0) {
         throw new Error("DST item not found")
       }
-      items.forEach()
+      items.forEach((item) => {
+        console.log("Updating item:",item.id)
+        item.update++
+        }
+      )
       /*
       const idx = this.items.findIndex((item: Subscriber) => ((item.id === id) && (item.type == type)))
       if (idx === -1) {
@@ -92,10 +96,10 @@ export const subscriberStore = defineStore({
   },
   getters: {
     json: state => () => { return state.items},
-    exists: state => (id: string) {
-      console.log("exists:", id,)
-      // find item
-      const idx = state.items.findIndex((item: Subscriber) => ((item.id === id) && (item.type == type)))
+    exists: state => (id: string) => {
+      console.log("exists?:", id)
+      // find destination item 
+      const idx = state.items.findIndex((item: Subscriber) => (item.id === id))
       return (idx === -1) ? false : true
     },
     isValid: state => (id: string, type: string) => {

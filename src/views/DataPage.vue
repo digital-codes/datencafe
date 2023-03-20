@@ -25,7 +25,7 @@
             </ion-col>
             <ion-col size="5" sytle="overflow-y:scroll;">
               Viz
-              <VizPage />
+              <!--VizPage /-->
             </ion-col>
           </ion-row>
           </ion-grid>

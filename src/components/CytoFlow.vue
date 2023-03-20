@@ -109,15 +109,18 @@ try {
 console.log("P",providers.json())
 console.log("S",subscribers.json())
 
-// 
+// update provider returns list of subscriber ids
 const dsts = providers.update("P1",{x:123,y:"wdw"})
-console.log("dsts:",dsts)
+console.log("dsts to update:",dsts)
 console.log("P",providers.json())
 console.log("S",subscribers.json())
 
-dsts.forEach((id) => {
-  subscribers.update()
+dsts.forEach((d) => {
+  console.log("Updating:",d)
+  subscribers.update(d)
 })
+
+console.log("S",subscribers.json())
 
 // --------------------
 
