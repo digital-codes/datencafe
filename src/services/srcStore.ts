@@ -18,6 +18,8 @@ export interface Provider {
     */
     dsts: [Client]
     data: any // dataframe as json
+    root: boolean // root node, e.g. file input
+    loaded: boolean // for root
 }
 
 
@@ -27,12 +29,15 @@ export const providerStore = defineStore({
         items: [] as Provider[]
     }),
     actions: {
-        add(id: string) {
+        add(id: string, data = undefined, root = false) {
             console.log("Add:", id)
+            const dt = (data === undefined)?{}:data
             const item = {
                 id: id,
                 dsts: [] as Client[],
-                data: {}
+                data: dt,
+                root: root,
+                loaded: (data !== undefined)
             }
             this.items.push(item as Provider)
             console.log("sources:", this.items.length)
@@ -58,6 +63,8 @@ export const providerStore = defineStore({
             console.log("Src found:", this.items[sidx].id)
             // set data
             this.items[sidx].data = data
+            // set loaded
+            this.items[sidx].loaded = true
             // return affected destinations
             // ..
             const dsts = [] as string[]
@@ -109,13 +116,17 @@ export const providerStore = defineStore({
             const idx = state.items.findIndex((item: Provider) => (item.id === id))
             return (idx === -1) ? false : true
         },
-        getSrcDataById: state => (id: string) => {
+        getDataById: state => (id: string) => {
             const s = state.items.find((item: Provider) => item.id === id)
             if (s === undefined) {
                 throw new Error("Invalid item id")
             }
             console.log("Getting:", s.id)
             return s.data
+        },
+        getLoadedRoots: state => () => {
+            const rts = state.items.filter((item) => (item.root && item.loaded))
+            return rts
         }
     }
 })

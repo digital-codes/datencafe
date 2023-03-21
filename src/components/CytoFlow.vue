@@ -82,8 +82,9 @@ try {
 }
 
 // 
-providers.add("P1")
+providers.add("P1",true)
 providers.add("P2")
+console.log("Roots:",providers.getLoadedRoots())
 subscribers.add("S1")
 subscribers.add("S2")
 // connect
@@ -114,6 +115,7 @@ console.log("S",subscribers.json())
 // update provider returns list of subscriber ids
 const dsts = providers.update("P1",{x:123,y:"wdw"})
 console.log("dsts to update:",dsts)
+console.log("Roots:",providers.getLoadedRoots())
 console.log("P",providers.json())
 console.log("S",subscribers.json())
 
