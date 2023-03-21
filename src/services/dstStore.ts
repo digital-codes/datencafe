@@ -12,7 +12,8 @@ export interface Subscriber {
 export const subscriberStore = defineStore({
   id: 'subscriber',
   state: () => ({
-    items: [] as Subscriber[]
+    items: [] as Subscriber[],
+    updated: 0
   }),
   actions: {
     add(id: string, type: string) {
@@ -49,6 +50,8 @@ export const subscriberStore = defineStore({
         item.update++
         }
       )
+      // global updated
+      this.updated++
       /*
       const idx = this.items.findIndex((item: Subscriber) => ((item.id === id) && (item.type == type)))
       if (idx === -1) {

@@ -582,3 +582,72 @@ In this example, we use a v-for directive to loop through the todos array and di
 
 I hope this helps! Let me know if you have any further questions.
 
+
+
+In a Pinia store, you can watch for changes to nested items in an array by using a combination of the watch and reactive functions.
+
+Assuming you have an items array in your store, you can watch for changes to any nested item in the array by first defining a reactive getter that returns the array:
+
+javascript
+
+import { defineStore } from 'pinia'
+
+export const useMyStore = defineStore({
+  state: () => ({
+    items: [
+      { id: 1, name: 'item 1', subItems: [] },
+      { id: 2, name: 'item 2', subItems: [] },
+    ],
+  }),
+  getters: {
+    // Define a reactive getter that returns the items array
+    reactiveItems() {
+      return this.$state.items
+    },
+  },
+})
+
+Once you have defined the reactive getter, you can watch for changes to any nested item in the array by calling the watch function and passing in a function that returns the nested item you want to watch:
+
+javascript
+
+import { defineStore, watch } from 'pinia'
+
+export const useMyStore = defineStore({
+  state: () => ({
+    items: [
+      { id: 1, name: 'item 1', subItems: [] },
+      { id: 2, name: 'item 2', subItems: [] },
+    ],
+  }),
+  getters: {
+    reactiveItems() {
+      return this.$state.items
+    },
+  },
+  actions: {
+    watchNestedItem(itemId) {
+      // Call the watch function and pass in a function that returns the nested item you want to watch
+      watch(() => this.reactiveItems.find(item => item.id === itemId), (newValue, oldValue) => {
+        console.log('Nested item changed:', newValue, oldValue)
+      }, { deep: true })
+    },
+  },
+})
+
+In this example, the watchNestedItem action takes an itemId parameter and uses it to find the corresponding item in the reactiveItems array. The watch function is then called and passed a function that returns the nested item to watch, along with a callback function that is called whenever the nested item changes. The { deep: true } option is passed to the watch function to ensure that changes to any properties of the nested item are detected.
+
+You can then call the watchNestedItem action from your components or other actions to start watching for changes to the nested item:
+
+javascript
+
+import { useMyStore } from './my-store'
+
+export default {
+  setup() {
+    const store = useMyStore()
+
+    store.watchNestedItem(1) // Watch for changes to the nested item with ID 1
+  },
+}
+

@@ -136,6 +136,24 @@ dsts.forEach((d) => {
 
 console.log("S",subscribers.json())
 
+const dt = ref([])
+const testData = () => {
+  const d = {"x":dt.value.length,"y":Math.random()*100 }
+  dt.value.push(d)
+  console.log("data",dt.value)
+  setTimeout(testData,5000)
+  dsts = providers.update("P1",new dfd.DataFrame(dt.value))
+  console.log("P1 dsts to update:",dsts)
+  dsts.forEach((d) => {
+    subscribers.update(d)
+  })
+
+}
+
+testData()
+
+
+
 // --------------------
 
 

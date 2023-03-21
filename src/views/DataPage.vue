@@ -26,6 +26,7 @@
             <ion-col size="5" sytle="overflow-y:scroll;">
               Viz
               <!--VizPage /-->
+              <StoreTest />
             </ion-col>
           </ion-row>
           </ion-grid>
@@ -40,6 +41,7 @@ import { IonCol, IonGrid, IonRow } from '@ionic/vue';
 import CytoFlow from '../components/CytoFlow.vue'
 
 import VizPage from './VizPage.vue'
+import StoreTest from './StoretestPage.vue'
 
 // ----------------------------------------------------------------
 // text search test
