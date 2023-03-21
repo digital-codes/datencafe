@@ -29,15 +29,14 @@ export const providerStore = defineStore({
         items: [] as Provider[]
     }),
     actions: {
-        add(id: string, data = undefined, root = false) {
+        add(id: string, root = false) {
             console.log("Add:", id)
-            const dt = (data === undefined)?{}:data
             const item = {
                 id: id,
                 dsts: [] as Client[],
-                data: dt,
+                data: {},
                 root: root,
-                loaded: (data !== undefined)
+                loaded: false
             }
             this.items.push(item as Provider)
             console.log("sources:", this.items.length)
@@ -61,16 +60,24 @@ export const providerStore = defineStore({
                 throw new Error("Source doesn't exist")
             }
             console.log("Src found:", this.items[sidx].id)
-            // set data
-            this.items[sidx].data = data
-            // set loaded
-            this.items[sidx].loaded = true
+            // set data, if provided
+            if (data !== undefined) {
+                this.items[sidx].data = data
+                // also set loaded
+                this.items[sidx].loaded = true
+            } else {
+                // check if data is present by checking loaded
+                if (!this.items[sidx].loaded) {
+                    throw new Error("Update without loaded data")
+                }
+                // reuse exisiting data
+            }
             // return affected destinations
-            // ..
             const dsts = [] as string[]
             this.items[sidx].dsts.forEach((d) => {
-                // update all dsts via providerStore.update(id: string, type: string)
-                if (!(d.id in dsts)) {
+                // return all connected destinations
+                // later update via subscriber.update
+                if (!(dsts.includes(d.id))) {
                     dsts.push(d.id)
                 }
             })

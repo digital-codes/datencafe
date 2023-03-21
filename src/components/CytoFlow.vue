@@ -113,11 +113,21 @@ console.log("P",providers.json())
 console.log("S",subscribers.json())
 
 // update provider returns list of subscriber ids
-const dsts = providers.update("P1",{x:123,y:"wdw"})
-console.log("dsts to update:",dsts)
+let dsts = providers.update("P1",{x:123,y:"wdw"})
+console.log("New data - dsts to update:",dsts)
 console.log("Roots:",providers.getLoadedRoots())
 console.log("P",providers.json())
 console.log("S",subscribers.json())
+
+// update without data
+dsts = providers.update("P1")
+console.log("dsts to update:",dsts)
+try {
+  dsts = providers.update("P2")
+  console.log("Reuse data - dsts to update:",dsts)
+} catch (e) {
+  console.log("Failed:", e)
+}
 
 dsts.forEach((d) => {
   console.log("Updating:",d)
