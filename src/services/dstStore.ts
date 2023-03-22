@@ -126,7 +126,17 @@ export const subscriberStore = defineStore({
       const connected = state.items[idx].src != ""
       console.log("connected:", connected)
       return connected
+    },
+    updateVal: state => (id: string) => {
+      console.log("updateval:", id)
+      // find item
+      const idx = state.items.findIndex((item: Subscriber) => (item.id === id))
+      if (idx === -1) {
+        throw new Error("DST item not found")
+      }
+      return state.items[idx].update
     }
+
   }
 })
 

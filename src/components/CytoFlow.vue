@@ -142,7 +142,7 @@ const testData = () => {
   dt.value.push(d)
   console.log("data",dt.value)
   setTimeout(testData,5000)
-  dsts = providers.update("P1",new dfd.DataFrame(dt.value))
+  const dsts = providers.update("P1",dfd.toJSON(new dfd.DataFrame(dt.value)))
   console.log("P1 dsts to update:",dsts)
   dsts.forEach((d) => {
     subscribers.update(d)
