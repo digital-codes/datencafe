@@ -118,7 +118,7 @@ onMounted(async () => {
   eventBus.on(evnt, () => {
       console.log("update for:",evnt)
       console.log("Sub updated:",sid)
-      if (subscribers.updateVal(sid) != 0) {
+      if (subscribers.isValid(sid)) {
         const dt = providers.getDataById(pid)
         console.log("updated with DT:",dt)
         data.value = new dfd.DataFrame(dt)

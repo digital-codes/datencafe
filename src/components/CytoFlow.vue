@@ -144,9 +144,9 @@ const testData = () => {
   setTimeout(testData,5000)
   const dsts = providers.update("P1",dfd.toJSON(new dfd.DataFrame(dt.value)))
   console.log("P1 dsts to update:",dsts)
-  dsts.forEach((d) => {
+  dsts.forEach(async (d) => {
     subscribers.update(d)
-    eventBus.emit("UPD-" + d)
+    await eventBus.emit("UPD-" + d)
   })
 
 }

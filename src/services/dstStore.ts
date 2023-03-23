@@ -12,8 +12,7 @@ export interface Subscriber {
 export const subscriberStore = defineStore({
   id: 'subscriber',
   state: () => ({
-    items: [] as Subscriber[],
-    updated: 0
+    items: [] as Subscriber[]
   }),
   actions: {
     add(id: string, type: string) {
@@ -50,16 +49,6 @@ export const subscriberStore = defineStore({
         item.update++
         }
       )
-      // global updated
-      this.updated++
-      /*
-      const idx = this.items.findIndex((item: Subscriber) => ((item.id === id) && (item.type == type)))
-      if (idx === -1) {
-        throw new Error("DST item not found")
-      }
-      this.items[idx].update++
-      console.log("update:", this.items[idx].update)
-      */
     },
     connect(id: string, src: string, type: string) {
       console.log("Connect dst:", id, type, src)
@@ -87,7 +76,7 @@ export const subscriberStore = defineStore({
       console.log("Disconnected from :", src)
     },
     invalidate(id: string, type: string) {
-      console.log("Update dst:", id, type)
+      console.log("invalidate dst:", id, type)
       // find item
       const idx = this.items.findIndex((item: Subscriber) => ((item.id === id) && (item.type == type)))
       if (idx === -1) {
@@ -107,7 +96,7 @@ export const subscriberStore = defineStore({
     },
     isValid: state => (id: string, type: string) => {
       console.log("IsValid:", id, type)
-      // find item
+      // find item, need to find all 
       const idx = state.items.findIndex((item: Subscriber) => ((item.id === id) && (item.type == type)))
       if (idx === -1) {
         throw new Error("DST item not found")
@@ -127,15 +116,6 @@ export const subscriberStore = defineStore({
       console.log("connected:", connected)
       return connected
     },
-    updateVal: state => (id: string) => {
-      console.log("updateval:", id)
-      // find item
-      const idx = state.items.findIndex((item: Subscriber) => (item.id === id))
-      if (idx === -1) {
-        throw new Error("DST item not found")
-      }
-      return state.items[idx].update
-    }
 
   }
 })
