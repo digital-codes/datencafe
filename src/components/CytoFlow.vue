@@ -146,6 +146,7 @@ const testData = () => {
   console.log("P1 dsts to update:",dsts)
   dsts.forEach((d) => {
     subscribers.update(d)
+    eventBus.emit("UPD-" + d)
   })
 
 }
