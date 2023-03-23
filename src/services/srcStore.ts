@@ -2,9 +2,11 @@
 
 import { defineStore } from 'pinia'
 
+import { EP } from "./EndPoints"
+
 export interface Client {
     id: string
-    type: string
+    ep: EP
 }
 
 
@@ -85,14 +87,14 @@ export const providerStore = defineStore({
             // ..
         },
         connect(id: string, dst: Client) {
-            console.log("Add dst:", id, dst.id, dst.type)
+            console.log("Add dst:", id, dst.id, dst.ep)
             // find item
             const sidx = this.items.findIndex((item: Provider) => item.id === id)
             if (sidx === -1) {
                 throw new Error("Source doesn't exist")
             }
             console.log("Src found:", this.items[sidx].id)
-            const didx = this.items[sidx].dsts.findIndex((d: Client) => ((d.id == dst.id) && (d.type == dst.type)))
+            const didx = this.items[sidx].dsts.findIndex((d: Client) => ((d.id == dst.id) && (d.ep == dst.ep)))
             if (didx !== -1) {
                 throw new Error("Destination/Type exists")
             }
@@ -100,14 +102,14 @@ export const providerStore = defineStore({
             console.log("dsts:", this.items[sidx].dsts)
         },
         disconnect(id: string, dst: Client) {
-            console.log("Rm dst:", id, dst.id, dst.type)
+            console.log("Rm dst:", id, dst.id, dst.ep)
             // find item
             const sidx = this.items.findIndex((item: Provider) => item.id === id)
             if (sidx === -1) {
                 throw new Error("Source doesn't exist")
             }
             console.log("Src found:", this.items[sidx].id)
-            const didx = this.items[sidx].dsts.findIndex((d: Client) => ((d.id == dst.id) && (d.type == dst.type)))
+            const didx = this.items[sidx].dsts.findIndex((d: Client) => ((d.id == dst.id) && (d.ep == dst.ep)))
             if (didx === -1) {
                 throw new Error("Destination/Type doesn't exists")
             }

@@ -40,6 +40,9 @@ import eventBus from '../services/eventBus';
 import { userStore } from '../services/store'
 const store = userStore()
 
+// provider/subscriber
+import { EP } from "../services/EndPoints"
+
 import { providerStore } from '../services/srcStore'
 import { Client, Provider } from '../services/srcStore'
 const providers = providerStore()
@@ -75,10 +78,10 @@ for (let i=0;i<3;i++) {
 }
 // test
 try {
-  console.log("exists:",subscribers.exists("XY"))
+  console.log("exists for remove:",subscribers.exists("XY"))
   subscribers.remove("XY")
 } catch (e) {
-  console.log("Faield:", e)
+  console.log("Failed:", e)
 }
 
 // 
@@ -88,13 +91,13 @@ console.log("Roots:",providers.getLoadedRoots())
 subscribers.add("S1")
 subscribers.add("S2")
 // connect
-providers.connect("P1",{id:"S1",type:"T1"})
-providers.connect("P1",{id:"S2",type:"T2"})
-providers.connect("P2",{id:"S2",type:"T1"})
-providers.connect("P1",{id:"S1",type:"T2"})
+providers.connect("P1",{id:"S1",ep:EP.DATA})
+providers.connect("P1",{id:"S2",ep:EP.EXTRA})
+providers.connect("P2",{id:"S2",ep:EP.DATA})
+providers.connect("P1",{id:"S1",ep:EP.EXTRA})
 
 try {
-  providers.connect("P3",{id:"S1",type:"T1"})
+  providers.connect("P3",{id:"S1",ep:EP.DATA})
 } catch (e) {
   console.log("Faield:", e)
 }
