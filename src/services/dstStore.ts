@@ -8,7 +8,7 @@ export interface Subscriber {
   id: string
   src: string
   ep: EP
-  update: number
+  valid: boolean
 }
 
 export const subscriberStore = defineStore({
@@ -21,9 +21,9 @@ export const subscriberStore = defineStore({
       console.log("DST Add:", id, ep)
       let item: Subscriber
       if (ep === undefined) {
-        item = { id: id, ep: EP.DATA, src: "", update: 0 } as Subscriber
+        item = { id: id, ep: EP.DATA, src: "", valid: false } as Subscriber
       } else {
-        item = { id: id, ep: ep, src: "", update: 0 } as Subscriber
+        item = { id: id, ep: ep, src: "", valid: false } as Subscriber
       }
       this.items.push(item)
       console.log("DSTs:", this.items.length)
@@ -37,7 +37,7 @@ export const subscriberStore = defineStore({
         throw new Error("DST item not found")
       }
       // remove all selected
-      items.forEach((item) => {
+      items.forEach((item: Subscriber) => {
         const idx = this.items.findIndex((item1: Subscriber) => ((item1.id === item.id) && (item1.ep == item.ep)))
         this.items.splice(idx, 1)
         console.log("DSTS:", this.items.length)
@@ -50,12 +50,13 @@ export const subscriberStore = defineStore({
       if (items.length == 0) {
         throw new Error("DST item not found")
       }
-      items.forEach((item) => {
+      items.forEach((item: Subscriber) => {
         console.log("Updating item:",item.id)
-        item.update++
+        item.valid = true
         }
       )
     },
+    /*
     connect(id: string, src: string, ep: EP) {
       console.log("Connect dst:", id, ep, src)
       // find item
@@ -67,20 +68,24 @@ export const subscriberStore = defineStore({
       console.log("connected to:", src)
     },
     disconnect(id: string, src: string, ep?: EP) {
-      console.log("FIXME! Disconnet dst:", id, ep, src)
+      console.log("Disconnet dst:", id, src, ep)
       // find items
-      let idx: number
-      if (ep === undefined) {
-        idx = this.items.findIndex((item: Subscriber) => ((item.id === id) && (item.src == src)))
-      } else {
-        idx = this.items.findIndex((item: Subscriber) => ((item.id === id) && (item.ep == ep) && (item.src == src)))
-      }
-      if (idx === -1) {
+      const items = this._getById(id, ep).filter((item) => (item.src == src))
+      console.log("Disconnecting:",items)      
+      if (items.length == 0) {
         throw new Error("DST item not found")
       }
-      this.items[idx].src = ""
-      console.log("Disconnected from :", src)
+      // remove all selected
+      items.forEach((item: Subscriber) => {
+        const idx = this.items.findIndex((item1: Subscriber) => ((item1.src === item.src) && (item1.id === item.id) && (item1.ep == item.ep)))
+        if (idx === -1) {
+          throw new Error("DST item not found")
+        }
+        this.items[idx].src = ""
+        console.log("Disconnected from :", src)
+      })
     },
+    */
     invalidate(id: string, ep: EP) {
       console.log("invalidate dst:", id, ep)
       // find item
@@ -88,8 +93,8 @@ export const subscriberStore = defineStore({
       if (idx === -1) {
         throw new Error("DST item not found")
       }
-      this.items[idx].update = 0
-      console.log("update:", this.items[idx].update)
+      this.items[idx].valid = false
+      console.log("invlaidate:", this.items[idx].valid)
     },
   },
   getters: {
@@ -124,7 +129,7 @@ export const subscriberStore = defineStore({
       }
       let valid = true // preset
       items.forEach((item) => {
-        if (item.update == 0) {
+        if (!item.valid) {
           valid = false
         }
       })

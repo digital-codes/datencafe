@@ -114,7 +114,7 @@ export const providerStore = defineStore({
                 throw new Error("Destination/Type doesn't exists")
             }
             this.items[sidx].dsts.splice(didx, 1)
-            console.log("dsts:", this.items[sidx].dsts)
+            console.log("disconnect dsts:", this.items[sidx].dsts)
         }
     },
     getters: {

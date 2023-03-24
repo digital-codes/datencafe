@@ -19,6 +19,9 @@
     import { Modes } from '../services/store'
     const theme = themeStore()
 
+  // globals
+  import { Version } from "../services/GlobalDefs"
+
 
 
     // https://lokalise.com/blog/vue-i18n/
@@ -70,6 +73,7 @@
           <div class="title">
           <font-awesome-icon class="logo" icon="fa-solid fa-mug-hot" size="2x" :style="{ color: 'red' }" />
           <span class="headline">Datencafe</span>
+          <span class="version">{{Version}}</span>
           </div>
           <!-- 
 
@@ -145,13 +149,21 @@
     padding:10px;
     margin: 10px;
     margin-right: auto;
+    display: inline-flex;
+    align-items: baseline;
 }
 .headline {
     padding:10px;
     margin: 10px;
+    margin-right: 0;
+    padding-right: 0;
     font-size: 1.5rem;
 }
-
+.version {
+  padding:5px;
+  margin: 5px;
+  font-size: 1rem;
+}
 .modeLbl {
   width: 3rem;
 }

@@ -29,6 +29,8 @@ import { IonButton } from '@ionic/vue';
 
 import * as dfd from 'danfojs/dist/danfojs-browser/src';
 
+// globals
+import { Signals } from "../services/GlobalDefs"
 
 // popover
 import { popoverController } from '@ionic/vue';
@@ -39,6 +41,7 @@ import eventBus from '../services/eventBus';
 // ----------------------
 import { userStore } from '../services/store'
 const store = userStore()
+
 
 // provider/subscriber
 import { EP } from "../services/EndPoints"
@@ -96,21 +99,56 @@ providers.connect("P1",{id:"S2",ep:EP.EXTRA})
 providers.connect("P2",{id:"S2",ep:EP.DATA})
 providers.connect("P1",{id:"S1",ep:EP.EXTRA})
 
+// disconnect
+try {
+  providers.disconnect("P1",{id:"S1"})
+} catch (e) {
+  console.log("Failed:", e)
+}
+try {
+  providers.disconnect("P1",{id:"S2",ep:EP.EXTRA})
+} catch (e) {
+  console.log("Failed:", e)
+}
+try {
+  providers.disconnect("P2",{id:"S2",ep:EP.DATA})
+} catch (e) {
+  console.log("Failed:", e)
+}
+try {
+  providers.disconnect("P1",{id:"S1",ep:EP.EXTRA})
+} catch (e) {
+  console.log("Failed:", e)
+}
+
+// connect again
+try {
+  providers.connect("P1",{id:"S1",ep:EP.DATA})
+} catch (e) {
+  console.log("Failed:", e)
+}
+try {
+  providers.connect("P1",{id:"S2",ep:EP.EXTRA})
+} catch (e) {
+  console.log("Failed:", e)
+}
+try {
+  providers.connect("P2",{id:"S2",ep:EP.DATA})
+} catch (e) {
+  console.log("Failed:", e)
+}
+try {
+  providers.connect("P1",{id:"S1",ep:EP.EXTRA})
+} catch (e) {
+  console.log("Failed:", e)
+}
+
 try {
   providers.connect("P3",{id:"S1",ep:EP.DATA})
 } catch (e) {
   console.log("Faield:", e)
 }
 
-// we cannot test this without a reference between the stores
-// handle during connecting
-/*
-try {
-  providers.connect("P1",{id:"S3",type:"T1"})
-} catch (e) {
-  console.log("Faield:", e)
-}
-*/
 
 console.log("P",providers.json())
 console.log("S",subscribers.json())
@@ -149,7 +187,7 @@ const testData = () => {
   console.log("P1 dsts to update:",dsts)
   dsts.forEach(async (d) => {
     subscribers.update(d)
-    await eventBus.emit("UPD-" + d)
+    await eventBus.emit(Signals.UPDPREFIX as string + d)
   })
 
 }
@@ -276,7 +314,16 @@ const style: Stylesheet[] = [ // the stylesheet for the graph
       "font-size":"10px",
       "text-rotation": "autorotate",
         "text-margin-x": "0px",
-        "text-margin-y": "0px"    }
+        "text-margin-y": "0px" 
+      }
+  },
+  {
+    //selector: 'edge[type].dark',
+    selector: 'edge[dark]',
+    style: {
+      "color":"#f88",
+      "background-color":"#000",
+      }
   },
   // edge extension
   {

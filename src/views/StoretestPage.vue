@@ -46,6 +46,7 @@ import { subscriberStore } from '../services/dstStore'
 import { Subscriber } from '../services/dstStore'
 const subscribers = subscriberStore()
 
+
 import { watch, computed } from 'vue'
 
 
@@ -87,8 +88,7 @@ watch(upd, (b,a) => {
 
 /* event based */
 import eventBus from '../services/eventBus';
-
-//   await eventBus.emit('importSelection', {"close":false,"cols":newCols,"checked":colsCheck});
+import { Signals } from "../services/GlobalDefs"
 
 
 
@@ -114,7 +114,7 @@ watch(() => subscribers.updated, (b,a) => {
 
  /* works as well with explicit message. maybe easier */
 onMounted(async () => {
-  const evnt = "UPD-" + sid
+  const evnt = Signals.UPDPREFIX as string + sid
   eventBus.on(evnt, () => {
       console.log("update for:",evnt)
       console.log("Sub updated:",sid)
