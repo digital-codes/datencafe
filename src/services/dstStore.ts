@@ -48,7 +48,7 @@ export const subscriberStore = defineStore({
       // find item(s)
       const items = this._getById(id, ep)
       if (items.length == 0) {
-        throw new Error("DST item not found")
+        throw new Error("DST item not found:" + id + "," + ep)
       }
       items.forEach((item: Subscriber) => {
         console.log("Updating item:",item.id)

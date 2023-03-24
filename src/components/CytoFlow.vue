@@ -172,12 +172,20 @@ try {
 
 dsts.forEach((d) => {
   console.log("Updating:",d)
-  subscribers.update(d)
+  try {
+    subscribers.update(d.id,d.ep)
+  } catch (e) {
+    console.log("Failed:", e)
+  }
 })
 
 console.log("S",subscribers.json())
 
 const dt = ref([])
+// disconnect 2 additional endpoints to prevent errors
+providers.disconnect("P1",{id:"S1",ep:EP.EXTRA})
+providers.disconnect("P1",{id:"S2",ep:EP.EXTRA})
+
 const testData = () => {
   const d = {"x":dt.value.length,"y":Math.random()*100 }
   dt.value.push(d)
@@ -186,8 +194,9 @@ const testData = () => {
   const dsts = providers.update("P1",dfd.toJSON(new dfd.DataFrame(dt.value)))
   console.log("P1 dsts to update:",dsts)
   dsts.forEach(async (d) => {
-    subscribers.update(d)
-    await eventBus.emit(Signals.UPDPREFIX as string + d)
+    console.log("UPD:",d.id,d.ep)
+    subscribers.update(d.id,d.ep)
+    await eventBus.emit(Signals.UPDPREFIX as string + d.id)
   })
 
 }

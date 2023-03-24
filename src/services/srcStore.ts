@@ -75,7 +75,9 @@ export const providerStore = defineStore({
                 // reuse exisiting data
             }
             // return affected destinations
-            const dsts = [] as string[]
+            return this.items[sidx].dsts
+            /*
+            const dsts = [] as Client[]
             this.items[sidx].dsts.forEach((d) => {
                 // return all connected destinations
                 // later update via subscriber.update
@@ -84,6 +86,7 @@ export const providerStore = defineStore({
                 }
             })
             return dsts
+            */
             // ..
         },
         connect(id: string, dst: Client) {
