@@ -41,6 +41,27 @@ const providers = providerStore();
 console.log("Prv:",providers.getSrcDataById("a"))
 */
 
+import { DcNode } from "../classes/DcNode"
+const nd = new DcNode("P1")
+nd.setName("XYZ")
+nd.eval()
+nd.eval(1,2)
+
+const ev = (a:string,b:number) => {
+  console.log("string:",a)
+  console.log("number:",b)
+  return 2 * b
+}
+nd.setEval(ev)
+let r
+r = nd.eval("XNKN",5)
+console.log("Result:",r)
+r = nd.eval()
+console.log("Result:",r)
+r = nd.eval(1,2)
+console.log("Result:",r)
+
+
 </script>
 
 <style scoped>

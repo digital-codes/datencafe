@@ -54,7 +54,7 @@ export const providerStore = defineStore({
             console.log("Removed")
             console.log("sources:", this.items.length)
         },
-        update(id: string, data: any) {
+        update(id: string, data?: any) {
             console.log("Update:", id)
             // find item
             const sidx = this.items.findIndex((item: Provider) => item.id === id)
@@ -133,7 +133,7 @@ export const providerStore = defineStore({
             if (s === undefined) {
                 throw new Error("Invalid item id")
             }
-            console.log("Getting:", s.id)
+            console.log("Getting data for:", s.id)
             return s.data
         },
         getLoadedRoots: state => () => {
