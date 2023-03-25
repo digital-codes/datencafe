@@ -2,20 +2,20 @@
 
 export class DcNode {
   // properties
-  name: string;
-  readonly id: string;
+  _name: string;
+  readonly _id: string;
   icon = ""
-  data: any = {}
-  config: any = {}
-  root = false
-  valid = false
-  eval: (...parms: any[]) => any = () => {alert("eval function undefined")} 
+  _data: any = {}
+  _config: any = {}
+  _root = false
+  _valid = false
+  _eval: (...parms: any[]) => any = () => {alert("eval function undefined")} 
   static debug = true // false;
   // constructor
   constructor(id:string) {
-    this.id = id
-    this.name = id // initialize with id as name
-    DcNode.print("Created: " + this.id + " + as " + this.name)
+    this._id = id
+    this._name = id // initialize with id as name
+    DcNode.print("Created: " + this._id + " as " + this._name)
   }
   // static methods
   setDebug(dbg: boolean) {
@@ -30,33 +30,41 @@ export class DcNode {
   }
   // methods
   setName(name:string) {
-    this.name = name
+    this._name = name
+    DcNode.print("Set name: " + this._name)
   }
   setValid(v:boolean) {
-    this.valid = v
+    this._valid = v
+    DcNode.print("Set valid: " + this._valid)
   }
   setRoot(r:boolean) {
-    this.root = r
+    this._root = r
+    DcNode.print("Set root: " + this._root)
   }
   setData(d:any) {
-    this.data = d
+    this._data = d
+    DcNode.print("Set data: " + JSON.stringify(this._data))
   }
   setConfig(c:any) {
-    this.config = c
+    this._config = c
+    DcNode.print("Set config: " + JSON.stringify(this._config))
   }
-  setEval(f:(...parms: any[]) => any) {
-    this.eval = f
+  setFunction(f:(...parms: any[]) => any) {
+    this._eval = f
+    DcNode.print("Set function to: " + this._eval)
   }
-  evaluate(...args:any[]) {
-    return this.eval(...args)
+  run(...args:any[]) {
+    if (args == undefined) console.log("No args")   
+    DcNode.print("Evaluating with parms: " + JSON.stringify(args))
+    return this._eval(...args)
   }
   // getters
-  get(): string {
-    return this.id
-  }
-  getName(): string {
-    return this.name
-  }
+  get id() { return this._id }
+  get name() {return this._name }
+  get data(): any {return this._data}
+  get config(): any {return this._config}
+  get root(): boolean { return this._root }
+  get valid(): boolean { return this._valid }
 } 
 
   

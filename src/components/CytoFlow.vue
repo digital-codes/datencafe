@@ -244,7 +244,7 @@ const elements: ElementDefinition[] = [ // list of graph elements to start with
   },
   { // node c
     group: 'nodes', 
-    data: { id: 'c', name:"c", type:{"name":"t2","shp":"roundrectangle","bd":"#0f0", "img":"url('/img/icons-bordered/database.png')"}  },
+    data: { id: 'c', name:"c", type:{"name":"t2","shp":"roundrectangle","bd":"#0f0", "img":"url('/img/widgets/Save.png')"}  },
     position: {x:130, y:150},
   },
   { // edge ab
