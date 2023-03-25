@@ -229,15 +229,17 @@ const popover = ref({})
 const nextNode = ref(1)
 const nextEdge = ref(1)
 
+
 const elements: ElementDefinition[] = [ // list of graph elements to start with
   { // node a
     group: 'nodes', 
-    data: { id: 'a', name:"a", type:{"name":"t1","shp":"square","bd":"#f00", "img":"url('/img/icons-bordered/cloud-arrow-down.png')"} },  
+    //data: { id: 'a', name:"a", type:{"name":"t1","shp":"square","bd":"#f00", "img":"url('/img/icons-bordered/cloud-arrow-down.png')"} },  
+    data: { id: 'a', name:"a", type:{"name":"t1","shp":"square","bd":"#f00", "img":"url('/img/widgets/CSVFile.png')"} },  
     position: {x:10, y:10},
   },
   { // node b
     group: 'nodes', 
-    data: { id: 'b', name:"b", type:{"name":"t3","shp":"roundrectangle","bd":"#f00", "img":"url('/img/icons-bordered/chart-line.png')"} }, 
+    data: { id: 'b', name:"b", type:{"name":"t3","shp":"roundrectangle","bd":"#f00", "img":"url('/img/widgets/LinePlot.png')"} }, 
     position: {x:250, y:100},
   },
   { // node c
