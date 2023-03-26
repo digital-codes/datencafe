@@ -4,7 +4,7 @@ export class DcNode {
   // properties
   _name: string;
   readonly _id: string;
-  icon = ""
+  icon: string | null = null
   _data: any = {}
   _config: any = {}
   _root = false

@@ -796,6 +796,8 @@ const testStore = async () => {
 <style scoped>
 .wrap {
   position:relative;
+  /* dark mode not working yet, set light BG */
+  background-color: #fff;
 }
 .ctl {
   position:absolute;
