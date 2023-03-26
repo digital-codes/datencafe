@@ -2,7 +2,7 @@
 
 import {DcNode} from "./DcNode"
 
-export class CsvNode extends DcNode {
+export class LineChart extends DcNode {
   // properties
   readonly _type: string
   // constructor
@@ -12,7 +12,7 @@ export class CsvNode extends DcNode {
     // access to super properties in the derived constructor
     // may result in "undefined" ...
     super(id)
-    this._type = "csvnode"
+    this._type = "linechart"
     DcNode.print(this._type + " created") // no access to super._id etc here
   }
   // getters

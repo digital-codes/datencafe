@@ -41,13 +41,13 @@ const providers = providerStore();
 console.log("Prv:",providers.getSrcDataById("a"))
 */
 
-import { CsvNode } from "../classes/CsvNode"
+import { CsvLoader } from "../classes/CsvLoader"
 try {
-  const _nd = new CsvNode() // should fail without id
+  const _nd = new CsvLoader() // should fail without id
 } catch (e) {
   console.log("Intentionally failed: ",e.message)
 }
-const nd = new CsvNode("P1")
+const nd = new CsvLoader("P1")
 nd.name = "XYZ"
 console.log("ID:",nd.id)
 console.log("Name:",nd.name)
@@ -75,6 +75,14 @@ r = nd.run()
 console.log("Result:",r)
 r = nd.run(1,2)
 console.log("Result:",r)
+
+
+import { RandomGen } from "../classes/RandomGen"
+const rg = new RandomGen("P2")
+rg.period = 3
+rg.run()
+
+setTimeout(rg.stop,10000)
 
 
 </script>
