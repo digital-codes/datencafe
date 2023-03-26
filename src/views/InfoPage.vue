@@ -41,11 +41,21 @@ const providers = providerStore();
 console.log("Prv:",providers.getSrcDataById("a"))
 */
 
-import { DcNode } from "../classes/DcNode"
-const nd = new DcNode("P1")
-nd.setName("XYZ")
+import { CsvNode } from "../classes/CsvNode"
+try {
+  const _nd = new CsvNode() // should fail without id
+} catch (e) {
+  console.log("Intentionally failed: ",e.message)
+}
+const nd = new CsvNode("P1")
+nd.name = "XYZ"
 console.log("ID:",nd.id)
 console.log("Name:",nd.name)
+try {
+  nd.id = "17"
+} catch (e) {
+  console.log("Intentionally failed: ",e.message)
+}
 nd.run()
 nd.run(1,2)
 
@@ -56,6 +66,8 @@ const ev = (a:string,b:number) => {
 }
 
 nd.setFunction(ev)
+console.log("Node:", nd.json())
+
 let r
 r = nd.run("XNKN",5)
 console.log("Result:",r)

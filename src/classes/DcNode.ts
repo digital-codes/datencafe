@@ -12,7 +12,10 @@ export class DcNode {
   _eval: (...parms: any[]) => any = () => {alert("eval function undefined")} 
   static debug = true // false;
   // constructor
-  constructor(id:string) {
+  constructor(id?:string) {
+    if (id == undefined) {
+      throw (new Error("Can't vreate instance without id"))
+    }
     this._id = id
     this._name = id // initialize with id as name
     DcNode.print("Created: " + this._id + " as " + this._name)
@@ -29,25 +32,12 @@ export class DcNode {
     }
   }
   // methods
-  setName(name:string) {
-    this._name = name
-    DcNode.print("Set name: " + this._name)
-  }
-  setValid(v:boolean) {
-    this._valid = v
-    DcNode.print("Set valid: " + this._valid)
-  }
-  setRoot(r:boolean) {
-    this._root = r
-    DcNode.print("Set root: " + this._root)
-  }
-  setData(d:any) {
-    this._data = d
-    DcNode.print("Set data: " + JSON.stringify(this._data))
-  }
-  setConfig(c:any) {
-    this._config = c
-    DcNode.print("Set config: " + JSON.stringify(this._config))
+  json() {
+    // stringify class only returns properties,
+    // but not methods
+    const j = JSON.stringify(this)
+    DcNode.print("Object: " + j)
+    return j
   }
   setFunction(f:(...parms: any[]) => any) {
     this._eval = f
@@ -58,13 +48,19 @@ export class DcNode {
     DcNode.print("Evaluating with parms: " + JSON.stringify(args))
     return this._eval(...args)
   }
-  // getters
+  // getters/setters
   get id() { return this._id }
+  // id is readonly
   get name() {return this._name }
+  set name(x) { this._name = x }
   get data(): any {return this._data}
+  set data(x) { this._data = x }
   get config(): any {return this._config}
+  set config(x) { this._config = x }
   get root(): boolean { return this._root }
+  set root(x) { this._root = x }
   get valid(): boolean { return this._valid }
+  set valid(x) { this._valid = x }
 } 
 
   
