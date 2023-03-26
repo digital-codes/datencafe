@@ -82,7 +82,7 @@ const rg = new RandomGen("P2")
 rg.period = 3
 rg.run()
 
-// using an arraow function with settimeout and class instance is important
+// using an arrow function with settimeout and class instance is important
 // to prepare proper "this" context
 setTimeout(()=>{rg.stop()},10000)
 
