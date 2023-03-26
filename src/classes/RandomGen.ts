@@ -13,6 +13,7 @@ export class RandomGen extends DcNode {
   private df = new dfd.DataFrame()
   private active = false
   private tm: any | null = null
+  private genFun: any | null = null
   // constructor
   constructor(id:string) {
     // although we need to call this first,
@@ -42,7 +43,10 @@ export class RandomGen extends DcNode {
     if (this.active == true) {
       // https://stackoverflow.com/questions/5911211/settimeout-inside-javascript-class-using-this
       // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind?retiredLocale=de
-      this.tm = setTimeout(this.generate.bind(this),this._period * 1000)
+      this.genFun = this.generate.bind(this)
+      console.log("genf:",this.genFun)
+      this.tm = setTimeout(this.genFun,this._period * 1000)
+      console.log("tm:",this.tm)
     }
   }
   async run() {
@@ -55,6 +59,11 @@ export class RandomGen extends DcNode {
   stop() {
     // stop generator
     this.active = false
+    if (this.genFun != null) {
+      const r = this.genFun as RandomGen
+      r.active = false
+      this.genFun = null
+    }
     if (this.tm != null) {
       clearTimeout(this.tm.bind(this))
       this.tm = null
