@@ -23,9 +23,11 @@ export class RandomGen extends DcNode {
     super(id)
     this._type = "randomgen"
     DcNode.print(this._type + " created") // no access to super._id etc here
+    //RandomGen.insts.set(id,this)
   }
+  static insts = new Map<string, RandomGen>
   // methods
-  private async generate () {
+  async generate () {
     DcNode.print("Generate") 
     const dt:any = {} // [[]] as number[][] 
     for (let c=0;c<this._cols;c++) {
@@ -41,31 +43,47 @@ export class RandomGen extends DcNode {
     await this.df.print()
 
     if (this.active == true) {
-      // https://stackoverflow.com/questions/5911211/settimeout-inside-javascript-class-using-this
+        // https://stackoverflow.com/questions/5911211/settimeout-inside-javascript-class-using-this
       // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind?retiredLocale=de
+      /*
       this.genFun = this.generate.bind(this)
       console.log("genf:",this.genFun)
       this.tm = setTimeout(this.genFun,this._period * 1000)
       console.log("tm:",this.tm)
+      */
+      this.tm = setTimeout(()=>{this.generate()},this._period*1000)
+      /*
+      const t = RandomGen.insts.get(super.id) as RandomGen
+      console.log("T:",t,RandomGen.insts,super.id)
+      this.tm = setTimeout(()=>{t.generate()},this._period*1000)
+      */
     }
   }
-  async run() {
+  run() {
     if (this.active == true) return
     // start generator
     this.active = true
-    await this.generate()
+    console.log("ID", super.id, super.name)
+    if (!RandomGen.insts.has(super.id)) {
+      RandomGen.insts.set(super.id,this)
+      console.log("MAP",RandomGen.insts,RandomGen.insts.has(super.id))
+    } else {
+      throw ("Invalid inst list")
+    }
+    this.generate()
     DcNode.print("Start generating") 
   }
   stop() {
     // stop generator
     this.active = false
-    if (this.genFun != null) {
-      const r = this.genFun as RandomGen
-      r.active = false
-      this.genFun = null
-    }
+
+    console.log("MAP",RandomGen.insts,RandomGen.insts.has(super.id))
+    const t = RandomGen.insts.get(super.id) as RandomGen
+    console.log("T stop:",t,RandomGen.insts,super.id,super.name)
+    t.active = false
+    
     if (this.tm != null) {
-      clearTimeout(this.tm.bind(this))
+      clearTimeout(this.tm)
       this.tm = null
     }
     DcNode.print("Stop generating") 
