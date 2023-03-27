@@ -10,6 +10,7 @@ export class RandomGen extends DcNode {
   _period = 5 // in seconds
   _cols = 3 // columns
   _rows = 10 // rows 
+  private genCnt = 0
   private df = new dfd.DataFrame()
   private active = false
   private tm: any | null = null
@@ -26,7 +27,8 @@ export class RandomGen extends DcNode {
   }
   // methods
   async generate () {
-    DcNode.print("Generate") 
+    this.genCnt++
+    DcNode.print("Generate " + String(this.genCnt)) 
     const dt:any = {} // [[]] as number[][] 
     for (let c=0;c<this._cols;c++) {
       const cl = [] as number[]
@@ -51,8 +53,8 @@ export class RandomGen extends DcNode {
     if (this.active == true) return
     // start generator
     this.active = true
+    DcNode.print("Start generating @ " + String(this.genCnt)) 
     await this.generate()
-    DcNode.print("Start generating") 
   }
   stop() {
     // stop generator
@@ -61,7 +63,7 @@ export class RandomGen extends DcNode {
       clearTimeout(this.tm)
       this.tm = null
     }
-    DcNode.print("Stop generating") 
+    DcNode.print("Stop generating @ " + String(this.genCnt)) 
   }
   // getters/setters
   get type() { return this._type }
