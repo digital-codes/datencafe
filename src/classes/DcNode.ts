@@ -1,5 +1,15 @@
 // node class
 
+// store and messaging
+import eventBus from '../services/eventBus';
+// globals
+import { Signals } from "../services/GlobalDefs"
+// provider/subscriber
+import { pubStore } from '../services/pubStore'
+
+// dataframe
+import * as dfd from 'danfojs/dist/danfojs-browser/src';
+
 export class DcNode {
   // properties
   _name: string;
@@ -11,6 +21,14 @@ export class DcNode {
   _valid = false
   _eval: (...parms: any[]) => any = () => {alert("eval function undefined")} 
   static debug = true // false;
+  // store/messaging
+  // static part
+  static readonly providers = pubStore()
+  static readonly signals = Signals
+  static readonly dfd = dfd
+  // instance part
+  readonly messaging = eventBus
+  // --------
   // constructor
   constructor(id?:string) {
     if (id == undefined) {

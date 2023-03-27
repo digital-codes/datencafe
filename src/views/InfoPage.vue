@@ -82,9 +82,21 @@ const rg = new RandomGen("P2")
 rg.period = 3
 rg.run()
 
+// globals
+import { Signals } from "../services/GlobalDefs"
+// listener
+import { LinePlot } from "../classes/LinePlot"
+const lp = new LinePlot("S1")
+// tell listener to listen to source
+lp.msgOn(Signals.UPDPREFIX + rg.id)
+
 // using an arrow function with settimeout and class instance is important
 // to prepare proper "this" context
-setTimeout(()=>{rg.stop()},10000)
+setTimeout(()=>{rg.stop()},20000)
+setTimeout(()=>{
+  lp.msgOff(Signals.UPDPREFIX + rg.id)
+},10000)
+//lp.msgOff(Signals.UPDPREFIX + rg.id)
 
 
 </script>

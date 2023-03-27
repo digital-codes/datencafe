@@ -57,7 +57,11 @@ export class RandomGen extends DcNode {
       dt[key] = cl
     }
     this.df = await new dfd.DataFrame(dt)
-    await this.df.print()
+    // this.df.print()
+    await DcNode.providers.update(this.id,dfd.toJSON(this.df))
+    //await subscribers.update(d.id,d.ep)
+    await this.messaging.emit(DcNode.signals.UPDPREFIX as string + this.id)
+ 
 
     if (this.active == true) {
         // https://stackoverflow.com/questions/5911211/settimeout-inside-javascript-class-using-this
@@ -69,6 +73,8 @@ export class RandomGen extends DcNode {
   }
   async run() {
     if (this.active == true) return
+    // add to store
+    DcNode.providers.add(this.id)
     // start generator
     this.active = true
     DcNode.print("Start generating @ " + String(this.genCnt)) 
@@ -77,6 +83,8 @@ export class RandomGen extends DcNode {
   stop() {
     // stop generator
     this.active = false
+    // remove
+    DcNode.providers.remove(this.id)
     if (this.tm != null) {
       clearTimeout(this.tm)
       this.tm = null
