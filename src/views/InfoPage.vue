@@ -27,19 +27,14 @@
 <script setup lang="ts">
 import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
 
-// stores
-/*
-import { langStore } from '../services/store'
-import { Language } from '../services/store'
-const language = langStore()
-console.log("Info lang:",language.lang)
-*/
+// text utils
+import {StringUtils} from "../services/StringUtils"
 
-/*
-import { providerStore, Provider } from '../services/srcStore';
-const providers = providerStore();
-console.log("Prv:",providers.getSrcDataById("a"))
-*/
+StringUtils.bestMatch("abc",["abd","cbc","cbd"])
+StringUtils.compare("abc","cbc")
+
+
+// stores
 
 import { CsvLoader } from "../classes/CsvLoader"
 try {
@@ -86,7 +81,7 @@ rg.run()
 import { Signals } from "../services/GlobalDefs"
 // listener
 import { LinePlot } from "../classes/LinePlot"
-const lp = new LinePlot("S1")
+const lp = new LinePlot("P3")
 // tell listener to listen to source
 lp.msgOn(Signals.UPDPREFIX + rg.id)
 

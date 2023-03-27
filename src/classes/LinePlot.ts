@@ -26,6 +26,9 @@ export class LinePlot extends DcNode {
     DcNode.print(src + " updated " + this.id +": " + String(this.updCnt))
     const dt = DcNode.providers.getDataById(src)
     const df = new DcNode.dfd.DataFrame(dt)
+    const divId = DcNode.signals.PLOTPREFIX + this.id
+    console.log("Target:",divId)
+    df.plot(divId).line()
     /*
     df.describe().print()
     df.print()

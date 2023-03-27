@@ -11,7 +11,7 @@ export interface DataSrc {
 }
 
 
-export const pubStore = defineStore({
+export const PubStore = defineStore({
     id: 'pubstore',
     state: () => ({
         items: [] as DataSrc[]

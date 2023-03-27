@@ -21,12 +21,16 @@
           <ion-row>
             <ion-col size="7">
               Flow
+              <!--
               <CytoFlow msg="Flow demo" />
+
+              -->
             </ion-col>
             <ion-col size="5" sytle="overflow-y:scroll;">
               Viz
               <!--VizPage /-->
-              <StoreTest />
+              <!--StoreTest /-->
+              <DanfoPlot :propItems="items"/>
             </ion-col>
           </ion-row>
           </ion-grid>
@@ -39,56 +43,44 @@
 import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
 import { IonCol, IonGrid, IonRow } from '@ionic/vue';
 import CytoFlow from '../components/CytoFlow.vue'
+import DanfoPlot from '../components/DanfoPlot.vue'
+import { ref } from "vue"
 
-import VizPage from './VizPage.vue'
-import StoreTest from './StoretestPage.vue'
+// items
+const items = ref([
+{id:"P1","name":"sskdmk",type:"chart"},
+{id:"P2","name":"cwe",type:"table"}
+])
 
-// ----------------------------------------------------------------
-// text search test
-import * as dfd from 'danfojs/dist/danfojs-browser/src';
-import stringSimilarity from 'string-similarity';
+const update = () => {
+  items.value.push(
+      {
+        id:"P" + String(items.value.length),
+        "name":"cwe",
+        type:"table"
+      }
+    )
+    console.log("Items:",items.value.length)
+    setTimeout(update, 2000)    
+  }
 
-try {
-  const data = {
-  "title": ["The Hitchhiker's Guide to the Galaxy", "The Lord of the Rings", "Harry Potter and the Sorcerer's Stone", "To Kill a Mockingbird"],
-  "author": ["Douglas Adams", "J.R.R. Tolkien", "J.K. Rowling", "Harper Lee"],
-  "year": [1979, 1954, 1997, 1960]
-};
+setTimeout(update, 2000)
 
-const df = new dfd.DataFrame(data);
+/*
+import { RandomGen } from "../classes/RandomGen"
+const rg = new RandomGen("P2")
+rg.period = 3
+rg.run()
 
-// Find best match for "Lord of the Rings" in the "title" column
-const matches = stringSimilarity.findBestMatch("Lord of the Rings", df.title.values);
-console.log(matches);
-console.log(matches.bestMatch);
-console.log(matches);
+// globals
+import { Signals } from "../services/GlobalDefs"
+// listener
+import { LinePlot } from "../classes/LinePlot"
+const lp = new LinePlot("P2")
+// tell listener to listen to source
+lp.msgOn(Signals.UPDPREFIX + rg.id)
+*/
 
-} catch (e) {
-  console.log("Failed:",e)
-}
-
-
-
-console.log(stringSimilarity.compareTwoStrings("healed", "sealed"))
-// → 0.8
-
-console.log(stringSimilarity.compareTwoStrings(
-  "Olive-green table for sale, in extremely good condition.",
-  "For sale: table in very good  condition, olive green in colour."
-))
-// → 0.6060606060606061
-
-console.log(stringSimilarity.compareTwoStrings(
-  "Olive-green table for sale, in extremely good condition.",
-  "For sale: green Subaru Impreza, 210,000 miles"
-))
-// → 0.2558139534883721
-
-console.log(stringSimilarity.compareTwoStrings(
-  "Olive-green table for sale, in extremely good condition.",
-  "Wanted: mountain bike with at least 21 gears."
-))
-// → 0.1411764705882353
 
 
 //////////////

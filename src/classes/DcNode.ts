@@ -5,7 +5,7 @@ import eventBus from '../services/eventBus';
 // globals
 import { Signals } from "../services/GlobalDefs"
 // provider/subscriber
-import { pubStore } from '../services/pubStore'
+import { PubStore } from '../services/PubStore'
 
 // dataframe
 import * as dfd from 'danfojs/dist/danfojs-browser/src';
@@ -23,7 +23,7 @@ export class DcNode {
   static debug = true // false;
   // store/messaging
   // static part
-  static readonly providers = pubStore()
+  static readonly providers = PubStore()
   static readonly signals = Signals
   static readonly dfd = dfd
   // instance part
