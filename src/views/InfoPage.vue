@@ -77,6 +77,7 @@ const rg = new RandomGen("P2")
 rg.period = 3
 rg.run()
 
+/*
 // globals
 import { Signals } from "../services/GlobalDefs"
 // listener
@@ -92,7 +93,7 @@ setTimeout(()=>{
   lp.msgOff(Signals.UPDPREFIX + rg.id)
 },10000)
 //lp.msgOff(Signals.UPDPREFIX + rg.id)
-
+*/
 
 </script>
 

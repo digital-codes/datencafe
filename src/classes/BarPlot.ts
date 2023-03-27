@@ -2,7 +2,7 @@
 
 import {DcNode} from "./DcNode"
 
-export class LinePlot extends DcNode {
+export class BarPlot extends DcNode {
   // properties
   readonly _type: string
   private updCnt = 0
@@ -13,8 +13,8 @@ export class LinePlot extends DcNode {
     // access to super properties in the derived constructor
     // may result in "undefined" ...
     super(id)
-    this._type = "linechart"
-    super.icon = "/img/widgets/LinePlot.png"
+    this._type = "barchart"
+    super.icon = "/img/widgets/BarPlot.png"
     DcNode.print(this._type + " created") // no access to super._id etc here
   }
   // getters/setters
@@ -32,7 +32,7 @@ export class LinePlot extends DcNode {
     if ((target === undefined) || (target == null) ) {
       throw (new Error("Invalid ID: " + String(divId)))
     }
-    df.plot(divId).line()
+    df.plot(divId).bar()
     /*
     df.describe().print()
     df.print()

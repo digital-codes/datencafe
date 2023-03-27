@@ -21,15 +21,10 @@
           <ion-row>
             <ion-col size="7">
               Flow
-              <!--
               <CytoFlow msg="Flow demo" />
-
-              -->
             </ion-col>
             <ion-col size="5" sytle="overflow-y:scroll;">
               Viz
-              <!--VizPage /-->
-              <!--StoreTest /-->
               <DanfoPlot :propItems="items"/>
             </ion-col>
           </ion-row>
@@ -48,6 +43,10 @@ import { ref } from "vue"
 
 // items
 const items = ref([
+])
+
+/*
+const items = ref([
 {id:"P1","name":"sskdmk",type:"chart"},
 {id:"P2","name":"cwe",type:"table"}
 ])
@@ -65,8 +64,8 @@ const update = () => {
   }
 
 setTimeout(update, 2000)
+*/
 
-/*
 import { RandomGen } from "../classes/RandomGen"
 const rg = new RandomGen("P2")
 rg.period = 3
@@ -76,10 +75,32 @@ rg.run()
 import { Signals } from "../services/GlobalDefs"
 // listener
 import { LinePlot } from "../classes/LinePlot"
-const lp = new LinePlot("P2")
+const lp1 = new LinePlot("P1")
+lp1.name = "fkwenfj"
+// add to items
+items.value.push(
+      {
+        id:lp1.id,
+        name:lp1.name,
+        type:"chart"
+      }
+    )
 // tell listener to listen to source
-lp.msgOn(Signals.UPDPREFIX + rg.id)
-*/
+lp1.msgOn(Signals.UPDPREFIX + rg.id)
+// 
+import { BarPlot } from "../classes/BarPlot"
+const lp2 = new BarPlot("P2")
+lp2.name = "32rfewe"
+// add to items
+items.value.push(
+      {
+        id:lp2.id,
+        name:lp2.name,
+        type:"table"
+      }
+    )
+// tell listener to listen to source
+lp2.msgOn(Signals.UPDPREFIX + rg.id)
 
 
 
