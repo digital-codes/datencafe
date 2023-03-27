@@ -4,7 +4,7 @@ export class DcNode {
   // properties
   _name: string;
   readonly _id: string;
-  icon: string | null = null
+  _icon: string | null = null
   _data: any = {}
   _config: any = {}
   _root = false
@@ -14,7 +14,7 @@ export class DcNode {
   // constructor
   constructor(id?:string) {
     if (id == undefined) {
-      throw (new Error("Can't vreate instance without id"))
+      throw (new Error("Can't create instance without id"))
     }
     this._id = id
     this._name = id // initialize with id as name
@@ -61,6 +61,8 @@ export class DcNode {
   set root(x) { this._root = x }
   get valid(): boolean { return this._valid }
   set valid(x) { this._valid = x }
+  get icon(): string | null { return this._icon }
+  set icon(x) { this._icon = x }
 } 
 
   

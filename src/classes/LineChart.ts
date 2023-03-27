@@ -13,6 +13,7 @@ export class LineChart extends DcNode {
     // may result in "undefined" ...
     super(id)
     this._type = "linechart"
+    super.icon = "/img/widgets/LinePlot.png"
     DcNode.print(this._type + " created") // no access to super._id etc here
   }
   // getters

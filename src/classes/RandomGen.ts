@@ -4,6 +4,7 @@ import {DcNode} from "./DcNode"
 
 import * as dfd from 'danfojs/dist/danfojs-browser/src';
 
+
 export class RandomGen extends DcNode {
   // properties
   readonly _type: string
@@ -15,13 +16,14 @@ export class RandomGen extends DcNode {
   private active = false
   private tm: any | null = null
   // constructor
-  constructor(id:string) {
+  constructor(id?:string) {
     // although we need to call this first,
     // the super elements will be initialized later
     // access to super properties in the derived constructor
     // may result in "undefined" ...
     super(id)
     this._type = "randomgen"
+    super.icon = "/img/widgets/Random.png"
     DcNode.print(this._type + " created") // no access to super._id etc here
     //RandomGen.insts.set(id,this)
   }
@@ -30,16 +32,32 @@ export class RandomGen extends DcNode {
     this.genCnt++
     DcNode.print("Generate " + String(this.genCnt)) 
     const dt:any = {} // [[]] as number[][] 
+    const rows = this._rows/2 + Math.floor(Math.random()*this._rows/2)
     for (let c=0;c<this._cols;c++) {
-      const cl = [] as number[]
-      for (let r=0;r<this._rows;r++) {
-        cl.push(Math.random()*100)
+      const cl = [] as any[] // number[]
+      for (let r=0;r<rows;r++) {
+        switch (c) {
+          case 0: {
+            let s = ""
+            for (let i=0;i<5;i++) {
+              s += String.fromCharCode(65 + Math.floor(Math.random()*26))
+            }
+            cl.push(s)           
+            }
+            break;
+          case 1:
+            // int on col 1
+            cl.push(Math.floor(Math.random()*100))
+            break;
+          default:
+            cl.push(Math.random()*100)
+        }
       }
       const key = "COL" + String(c+1)
       dt[key] = cl
     }
     this.df = await new dfd.DataFrame(dt)
-    //await this.df.print()
+    await this.df.print()
 
     if (this.active == true) {
         // https://stackoverflow.com/questions/5911211/settimeout-inside-javascript-class-using-this

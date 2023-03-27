@@ -13,6 +13,7 @@ export class CsvLoader extends DcNode {
     // may result in "undefined" ...
     super(id)
     this._type = "csvloader"
+    super.icon = "/img/widgets/CSVFile.png"
     DcNode.print(this._type + " created") // no access to super._id etc here
   }
   // getters

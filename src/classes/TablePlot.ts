@@ -2,7 +2,7 @@
 
 import {DcNode} from "./DcNode"
 
-export class ColumnSelection extends DcNode {
+export class TablePlot extends DcNode {
   // properties
   readonly _type: string
   // constructor
@@ -12,8 +12,8 @@ export class ColumnSelection extends DcNode {
     // access to super properties in the derived constructor
     // may result in "undefined" ...
     super(id)
-    this._type = "columnselection"
-    super.icon = "/img/widgets/SelectColumns.png"
+    this._type = "tableplot"
+    super.icon = "/img/widgets/Table.png"
     DcNode.print(this._type + " created") // no access to super._id etc here
   }
   // getters
