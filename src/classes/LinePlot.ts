@@ -20,10 +20,10 @@ export class LinePlot extends DcNode {
   // getters/setters
   get type() { return this._type }
   // methods
-  async updated(msg:string) {
+  async updated(msg:string,y?:any) {
     this.updCnt++
     const src = msg.split("-")[1]
-    DcNode.print(src + " updated " + this.id +": " + String(this.updCnt))
+    DcNode.print(src + " updated " + this.id +": " + String(this.updCnt) + "..." + String(y))
     const dt = DcNode.providers.getDataById(src)
     const df = new DcNode.dfd.DataFrame(dt)
     const divId = DcNode.signals.PLOTPREFIX + this.id
@@ -41,7 +41,7 @@ export class LinePlot extends DcNode {
   msgOn(x: string) {
     // set event listener for signal 
     DcNode.print("msg on for " + x)
-    this.messaging.on(x,()=>{this.updated(x)})
+    this.messaging.on(x,(y:any)=>{this.updated(x,y)})
   }
   msgOff(x: string) {
     // set event listener for signal 

@@ -60,7 +60,7 @@ export class RandomGen extends DcNode {
     // this.df.print()
     await DcNode.providers.update(this.id,dfd.toJSON(this.df))
     //await subscribers.update(d.id,d.ep)
-    await this.messaging.emit(DcNode.signals.UPDPREFIX as string + this.id)
+    await this.messaging.emit(DcNode.signals.UPDPREFIX as string + this.id,2*this.genCnt)
  
 
     if (this.active == true) {

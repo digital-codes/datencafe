@@ -20,14 +20,14 @@ export class DataInfo extends DcNode {
   // getters/setters
   get type() { return this._type }
   // methods
-  async updated(msg:string) {
+  async updated(msg:string,y?:any) {
     this.updCnt++
     const src = msg.split("-")[1]
     DcNode.print(src + " updated " + this.id +": " + String(this.updCnt))
     const dt = DcNode.providers.getDataById(src)
     const df = new DcNode.dfd.DataFrame(dt)
     const divId = DcNode.signals.PLOTPREFIX + this.id
-    console.log("Target:",divId)
+    // check valid target id
     const target = document.getElementById(divId)
     if ((target === undefined) || (target == null) ) {
       throw (new Error("Invalid ID: " + String(divId)))
@@ -40,15 +40,25 @@ export class DataInfo extends DcNode {
     ds.columns.forEach((c) => {
       ds1.addColumn(c, ds.column(c), {inplace:true});
     })
+    // get number of columns for table width adjustment
+    // assume 5 rem per columns ~ 80 px
+    const maxWidth = 600
+    const width = ds1.columns.length * 80
+    if (width > maxWidth) {
+      if (!target.style) throw (new Error("No style on div"))
+      //target.style.width = String(Math.min(width,maxWidth)) + "px"
+      target.style.width = String(width) + "px"
+    }
     ds1.plot(divId).table()
-  /* compute table width from number of columns in display class
-  and set width via item prop. Scrolling-X handled via chartitem  */
+
+    /* compute table width from number of columns in display class
+    and set width via item prop. Scrolling-X handled via chartitem  */
 
   }
   msgOn(x: string) {
     // set event listener for signal 
     DcNode.print("msg on for " + x)
-    this.messaging.on(x,()=>{this.updated(x)})
+    this.messaging.on(x,(y:any)=>{this.updated(x,y)})
   }
   msgOff(x: string) {
     // set event listener for signal 

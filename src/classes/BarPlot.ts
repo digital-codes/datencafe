@@ -20,7 +20,7 @@ export class BarPlot extends DcNode {
   // getters/setters
   get type() { return this._type }
   // methods
-  async updated(msg:string) {
+  async updated(msg:string,y?:any) {
     this.updCnt++
     const src = msg.split("-")[1]
     DcNode.print(src + " updated " + this.id +": " + String(this.updCnt))
@@ -41,7 +41,7 @@ export class BarPlot extends DcNode {
   msgOn(x: string) {
     // set event listener for signal 
     DcNode.print("msg on for " + x)
-    this.messaging.on(x,()=>{this.updated(x)})
+    this.messaging.on(x,(y:any)=>{this.updated(x,y)})
   }
   msgOff(x: string) {
     // set event listener for signal 

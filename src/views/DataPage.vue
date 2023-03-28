@@ -69,7 +69,7 @@ setTimeout(update, 2000)
 import { RandomGen } from "../classes/RandomGen"
 const rg = new RandomGen("P2")
 rg.period = 3
-rg.cols = 17
+rg.cols = 5
 rg.run()
 
 // globals
@@ -79,7 +79,7 @@ import { LinePlot } from "../classes/LinePlot"
 const chart1 = new LinePlot("P1")
 chart1.name = "fkwenfj"
 // add to items
-items.value.push(
+items.value.unshift(
       {
         id:chart1.id,
         name:chart1.name,
@@ -93,7 +93,7 @@ import { BarPlot } from "../classes/BarPlot"
 const chart2 = new BarPlot("P2")
 chart2.name = "32rfewe"
 // add to items
-items.value.push(
+items.value.unshift(
       {
         id:chart2.id,
         name:chart2.name,
@@ -108,7 +108,7 @@ import { DataInfo } from "../classes/DataInfo"
 const chart3 = new DataInfo("P4")
 chart3.name = "32r Info fewe"
 // add to items
-items.value.push(
+items.value.unshift(
       {
         id:chart3.id,
         name:chart3.name,
