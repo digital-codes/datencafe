@@ -27,7 +27,7 @@ export class DcNode {
   static readonly signals = Signals
   static readonly dfd = dfd
   // instance part
-  readonly messaging = eventBus
+  readonly _messaging = eventBus
   // --------
   // constructor
   constructor(id?:string) {
@@ -81,6 +81,7 @@ export class DcNode {
   set valid(x) { this._valid = x }
   get icon(): string | null { return this._icon }
   set icon(x) { this._icon = x }
+  get messaging() { return this._messaging }
 } 
 
   

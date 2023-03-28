@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from '@ionic/vue-router';
 import { RouteRecordRaw } from 'vue-router';
 import TopNav from '../components/TopNav.vue';
 
+
 const routes: Array<RouteRecordRaw> = [
   {
     path: '',

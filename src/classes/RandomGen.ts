@@ -58,9 +58,9 @@ export class RandomGen extends DcNode {
     }
     this.df = await new dfd.DataFrame(dt)
     // this.df.print()
-    await DcNode.providers.update(this.id,dfd.toJSON(this.df))
+    await DcNode.providers.update(super.id,dfd.toJSON(this.df))
     //await subscribers.update(d.id,d.ep)
-    await this.messaging.emit(DcNode.signals.UPDPREFIX as string + this.id,2*this.genCnt)
+    await super.messaging.emit(DcNode.signals.UPDPREFIX as string + super.id,2*this.genCnt)
  
 
     if (this.active == true) {
@@ -74,7 +74,7 @@ export class RandomGen extends DcNode {
   async run() {
     if (this.active == true) return
     // add to store
-    DcNode.providers.add(this.id)
+    DcNode.providers.add(super.id)
     // start generator
     this.active = true
     DcNode.print("Start generating @ " + String(this.genCnt)) 
@@ -84,7 +84,7 @@ export class RandomGen extends DcNode {
     // stop generator
     this.active = false
     // remove
-    DcNode.providers.remove(this.id)
+    DcNode.providers.remove(super.id)
     if (this.tm != null) {
       clearTimeout(this.tm)
       this.tm = null

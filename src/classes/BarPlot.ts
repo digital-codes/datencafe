@@ -23,10 +23,10 @@ export class BarPlot extends DcNode {
   async updated(msg:string,y?:any) {
     this.updCnt++
     const src = msg.split("-")[1]
-    DcNode.print(src + " updated " + this.id +": " + String(this.updCnt))
+    DcNode.print(src + " updated " + super.id +": " + String(this.updCnt))
     const dt = DcNode.providers.getDataById(src)
     const df = new DcNode.dfd.DataFrame(dt)
-    const divId = DcNode.signals.PLOTPREFIX + this.id
+    const divId = DcNode.signals.PLOTPREFIX + super.id
     console.log("Target:",divId)
     const target = document.getElementById(divId)
     if ((target === undefined) || (target == null) ) {
@@ -41,12 +41,12 @@ export class BarPlot extends DcNode {
   msgOn(x: string) {
     // set event listener for signal 
     DcNode.print("msg on for " + x)
-    this.messaging.on(x,(y:any)=>{this.updated(x,y)})
+    super.messaging.on(x,(y:any)=>{this.updated(x,y)})
   }
   msgOff(x: string) {
     // set event listener for signal 
     DcNode.print("msg off for " + x)
-    this.messaging.off(x)
+    super.messaging.off(x)
   }
 
 } 
