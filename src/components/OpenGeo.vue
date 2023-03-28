@@ -39,7 +39,7 @@
   const theMap = ref(null)
   
   // for popup: https://leafletjs.com/examples/geojson/
-  function setPopus(feature, layer) {
+  function setPopups(feature, layer) {
     // does this feature have a property named popupContent?
     if (feature.properties && feature.properties.popupContent) {
         layer.bindPopup(feature.properties.popupContent);
@@ -125,10 +125,10 @@ function polyStyle(feature) {
         console.log("Options1:",layer.value.options)
         if (layer.value.options) {
           console.log("Modify options")
-          layer.value.options.onEachFeature = setPopus
+          layer.value.options.onEachFeature = setPopups
         } else {
           console.log("Add options")
-          layer.value.options = {onEachFeature:setPopus}
+          layer.value.options = {onEachFeature:setPopups}
         }
         console.log("Options2:",layer.value.options)
         await layer.value.addData(geoData.value)
