@@ -17,26 +17,22 @@
       </ion-header>
 
       <div id="container">
-        <ion-card color="light" v-for="(s,i) in msgs.stories" :key="i">
+        <!-- use en as default to get length of storylist -->
+        <ion-card color="light" v-for="(s,i) in storyItems.en" :key="i">
           <ion-card-header>
-            <ion-card-title>{{ $t(titles[i]) }}</ion-card-title>
-            <ion-card-subtitle>Card Subtitle</ion-card-subtitle>
+            <ion-card-title>{{ storyItem(i,"title") }}</ion-card-title>
+            <ion-card-subtitle>{{ storyItem(i,"date") }}, {{ storyItem(i,"author") }}, 
+              <a :href='"mailto:" +  storyItem(i,"email")'>{{ storyItem(i,"email") }}</a>
+            </ion-card-subtitle>
           </ion-card-header>
 
           <ion-card-content>
-            {{ $t(bodies[i]) }}
+            {{ storyItem(i,"body") }}
           </ion-card-content>
           <ion-card-header>
             <ion-button @click="clicked(i)">{{$t('download')}}</ion-button>
           </ion-card-header>
         </ion-card>
-        <!-- 
-              <div v-for="(s,i) in msgs.stories" :key="i">
-                  <h3>{{ $t(titles[i]) }}</h3>
-                  <p>{{ $t(bodies[i]) }}</p>
-              </div>
-
-        -->
       </div>
     </ion-content>
   </ion-page>
@@ -47,52 +43,25 @@ import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, Io
 import { IonButton } from '@ionic/vue';
 import { IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent } from '@ionic/vue'
 
-import { ref, onMounted, onBeforeMount } from "vue"
+import { ref, onMounted, onBeforeMount, computed } from "vue"
  
 // https://lokalise.com/blog/vue-i18n/
-// if we need translation inside methods, import this:
+// if we need translation inside methods, import this as well:
 import { useI18n } from 'vue-i18n'
-const { t } = useI18n({ useScope: 'global' })
-// and define the const somwhere
-//import i18n from '../i18n'
-import msgs from "../locales/en.json"
+const { t, locale } = useI18n({ useScope: 'global' })
 
-//const stories = ref([1,2,3])
-const loaded = ref(false)
-const data = ref([])
-
-const titles = ref([] as string[])
-const bodies = ref([] as string[])
-const stories = ref([]) as any
-
-
-// https://vue-i18n.intlify.dev/guide/migration/breaking.html
-
-/*
-const { locale, messages } = useI18n({ useScope: 'global' })
-
-const localMsgs = () => {
-  //console.log("L:",langSel.value)
-  const msgs = messages
-  return msgs
-
+import storyItems from "../assets/stories/stories.json"
+const storyItem = (idx,id) => {
+  //console.log(idx,id,locale.value)
+  //console.log(storyItems[locale.value])
+  const text = storyItems[locale.value][idx][id]
+  return text
 }
-*/
+
 
 const clicked = (id,msg) => {
   alert(String(id) + "..." + t("notimplemented"))
 }
-
-onBeforeMount(async () => {
-  msgs.stories.forEach((x,i) => {
-    //console.log(x,i)
-    titles.value.push("stories[" + String(i) + "].title")
-    bodies.value.push("stories[" + String(i) + "].body")
-  })
-  }
-)
-
-
 
 
 </script>
