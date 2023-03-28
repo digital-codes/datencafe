@@ -84,9 +84,9 @@
           -->
           <div>
             <ion-item>
-              <ion-label class="modeLbl">Light</ion-label>
+              <ion-label class="modeLbl left">{{ $t("light") }}</ion-label>
               <ion-toggle @ionChange="changeMode" :checked="false"></ion-toggle>
-              <ion-label class="modeLbl">Dark</ion-label>
+              <ion-label class="modeLbl right">{{ $t("dark") }}</ion-label>
             </ion-item>
           </div>
           <div>
@@ -103,32 +103,34 @@
               </ion-select>
             </ion-item>
           </ion-list>          
+          <!-- 
           <div>
             {{ $t("welcome") }}
           </div>
+          -->
         <ion-tab-button tab="info" href="/info">
           <font-awesome-icon :icon="['fas', 'coffee']" />
-          <ion-label>About</ion-label>
+          <ion-label>{{ $t("tabs.about") }}</ion-label>
         </ion-tab-button>
 
         <ion-tab-button tab="instructions" href="/instructions">
           <ion-icon :icon="search" />
-          <ion-label>Anleitung</ion-label>
+          <ion-label>{{ $t("tabs.tutorial") }}</ion-label>
         </ion-tab-button>
 
         <ion-tab-button tab="map" href="/map">
           <font-awesome-icon :icon="['fab', 'twitter']" />
-          <ion-label>Karte</ion-label>
+          <ion-label>{{ $t("tabs.map") }}</ion-label>
         </ion-tab-button>
 
         <ion-tab-button  tab="data" href="/data">
           <font-awesome-icon :icon="['fas', 'user-secret']" />
-          <ion-label>Daten</ion-label>
+          <ion-label>{{ $t("tabs.data") }}</ion-label>
         </ion-tab-button>
 
         <ion-tab-button tab="viz" href="/stories">
           <ion-icon :icon="search" />
-          <ion-label>Stories</ion-label>
+          <ion-label>{{ $t("tabs.stories") }}</ion-label>
         </ion-tab-button>
       </ion-tab-bar>
     </ion-tabs>
@@ -165,6 +167,12 @@
   font-size: 1rem;
 }
 .modeLbl {
-  width: 3rem;
+  width: 3.5rem;
+}
+.modeLbl.left {
+  text-align: right;
+}
+.modeLbl.right {
+  text-align: left;
 }
 </style>

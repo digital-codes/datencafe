@@ -1,8 +1,21 @@
 {
   "welcome": "Hallo",
   "greeting": "Hallo, {name}!",
+  "light":"Hell",
+  "dark":"Dunkel",
+  "tabs": {
+    "about":"Über",
+    "tutorial":"Anleitung",
+    "data":"Daten",
+    "map":"Karte",
+    "stories":"Stories"    
+  },
   "titles": {
-    "info": "Info DE"
+    "about": "Info DE",
+    "tutorial":"Anleitungen",
+    "data":"Daten und Visualisierungen",
+    "map":"Open Data Karte",
+    "stories":"Geschichten"    
   },
   "download": "Herunterladen",
   "notimplemented":"Noch nicht verfügbar",

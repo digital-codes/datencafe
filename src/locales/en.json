@@ -1,8 +1,21 @@
 {
   "welcome": "Hello",
   "greeting": "Hello, {name}!",
+  "light":"Light",
+  "dark":"Dark",
+  "tabs": {
+    "about":"About",
+    "tutorial":"Tutorials",
+    "data":"Data",
+    "map":"Map",
+    "stories":"Stories"    
+  },
   "titles": {
-    "info": "Info EN"
+    "about": "Info",
+    "tutorial":"Tutorials",
+    "data":"Data EN",
+    "map":"Open Data Map",
+    "stories":"Stories"    
   },
   "download": "Download",
   "notimplemented":"Not implemented yet",

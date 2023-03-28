@@ -5,7 +5,7 @@
         <ion-buttons slot="start">
           <ion-menu-button color="primary"></ion-menu-button>
         </ion-buttons>
-        <ion-title>Data</ion-title>
+        <ion-title>{{ $t("titles.stories") }}</ion-title>
       </ion-toolbar>
     </ion-header>
 

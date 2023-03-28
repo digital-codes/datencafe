@@ -5,7 +5,7 @@
         <ion-buttons slot="start">
           <ion-menu-button color="primary"></ion-menu-button>
         </ion-buttons>
-        <ion-title>Map</ion-title>
+        <ion-title>{{ $t("titles.map") }}</ion-title>
       </ion-toolbar>
     </ion-header>
 

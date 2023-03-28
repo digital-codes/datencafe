@@ -1,5 +1,5 @@
 <template>
-<div class="container" v-if="loaded">
+<div ref="plotWrap" class="container" >
   <div v-for="(item,index) in items" :key="index" class="chartItem">
     <h3 class="dftitle">{{ item.name }}</h3>
     <div :id="prefix + item.id" :class="item.type == 'table'?'dftable':'dfchart'">
@@ -25,11 +25,23 @@ const loaded = ref(false)
 const items = ref([])
 const prefix = Signals.PLOTPREFIX
 
+// same as for flowWrap ...
+const ww = ref(800)
+const wh = ref(400)
+const plotWrap = ref()
+
 onMounted(() => {
-    items.value = props.propItems
-    console.log("Mounted:",items.value)
-    loaded.value = true
-  })
+  // same as flowwrap
+  ww.value = window.innerWidth
+  wh.value = window.innerHeight
+  if (!plotWrap.value.style) plotWrap.value.style = {}
+  plotWrap.value.style.width = "100%" //String(ww.value) + "px"
+  plotWrap.value.style.height = String(wh.value * .7) + "px"
+
+  items.value = props.propItems
+  console.log("Mounted:",items.value)
+  loaded.value = true
+})
 
 watchEffect(() => {
   if (props.propItems) {
@@ -43,7 +55,9 @@ watchEffect(() => {
   <style scoped>
 
   .container {
+    /*
     max-height: 600px;
+    */
     overflow: scroll;
     padding-right: 20px;
   }
