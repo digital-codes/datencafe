@@ -113,25 +113,26 @@
           <ion-label>{{ $t("tabs.about") }}</ion-label>
         </ion-tab-button>
 
-        <ion-tab-button tab="instructions" href="/instructions">
-          <ion-icon :icon="search" />
-          <ion-label>{{ $t("tabs.tutorial") }}</ion-label>
+        <ion-tab-button tab="viz" href="/stories">
+          <font-awesome-icon :icon="['fas', 'book-open']" />
+          <ion-label>{{ $t("tabs.stories") }}</ion-label>
         </ion-tab-button>
 
         <ion-tab-button tab="map" href="/map">
-          <font-awesome-icon :icon="['fab', 'twitter']" />
+          <font-awesome-icon :icon="['fas', 'book-atlas']" />
           <ion-label>{{ $t("tabs.map") }}</ion-label>
         </ion-tab-button>
 
         <ion-tab-button  tab="data" href="/data">
-          <font-awesome-icon :icon="['fas', 'user-secret']" />
+          <font-awesome-icon :icon="['fas', 'wand-magic-sparkles']" />
           <ion-label>{{ $t("tabs.data") }}</ion-label>
         </ion-tab-button>
 
-        <ion-tab-button tab="viz" href="/stories">
-          <ion-icon :icon="search" />
-          <ion-label>{{ $t("tabs.stories") }}</ion-label>
+        <ion-tab-button tab="instructions" href="/instructions">
+          <font-awesome-icon :icon="['fas', 'graduation-cap']" />
+          <ion-label>{{ $t("tabs.tutorial") }}</ion-label>
         </ion-tab-button>
+
       </ion-tab-bar>
     </ion-tabs>
   </ion-page>
