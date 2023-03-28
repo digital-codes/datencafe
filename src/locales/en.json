@@ -4,6 +4,8 @@
   "titles": {
     "info": "Info EN"
   },
+  "download": "Download",
+  "notimplemented":"Not implemented yet",
   "stories": [
     {
       "title":"Using open data to improve public transportation",

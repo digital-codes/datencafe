@@ -17,6 +17,12 @@ export const PubStore = defineStore({
         items: [] as DataSrc[]
     }),
     actions: {
+        init(itemString:string) {
+            if (this.items.length > 0) {
+                throw (new Error("Can only init empty store!"))
+            }
+            this.items = JSON.parse(itemString) as DataSrc[]
+        },
         add(id?: string, root = false) {
             if (id === undefined) {
                 throw (new Error("Missing id on add()"))
@@ -72,6 +78,7 @@ export const PubStore = defineStore({
     },
     getters: {
         json: state => () => { return state.items },
+        jsonString: state => () => { return JSON.stringify(state.items) },
         exists: state => (id: string) => {
             console.log("exists?:", id)
             // find item 

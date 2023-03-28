@@ -26,6 +26,9 @@
           <ion-card-content>
             {{ $t(bodies[i]) }}
           </ion-card-content>
+          <ion-card-header>
+            <ion-button @click="clicked(i,$t('notimplemented'))">{{$t('download')}}</ion-button>
+          </ion-card-header>
         </ion-card>
         <!-- 
               <div v-for="(s,i) in msgs.stories" :key="i">
@@ -72,6 +75,11 @@ const localMsgs = () => {
 
 }
 */
+
+const clicked = (id,msg) => {
+  //alert(String(id) + "..." + this.$t('notimplemented'))
+  alert(String(id) + "..." + msg)
+}
 
 onBeforeMount(async () => {
   msgs.stories.forEach((x,i) => {

@@ -4,6 +4,8 @@
   "titles": {
     "info": "Info DE"
   },
+  "download": "Herunterladen",
+  "notimplemented":"Noch nicht verfügbar",
   "stories": [
     {
       "title":"Nutzung offener Daten zur Verbesserung des öffentlichen Verkehrs",
