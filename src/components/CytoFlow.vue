@@ -36,174 +36,12 @@ import { Signals } from "../services/GlobalDefs"
 import { popoverController } from '@ionic/vue';
 import Popover from './PopOver.vue'; // test
 import ImportPopover from './ImportPopover.vue';
+import InputselPopover from './InputselPopover.vue';
 import eventBus from '../services/eventBus';
-
-// ----------------------
-import { userStore } from '../services/store'
-const store = userStore()
 
 
 // provider/subscriber
 import { EP } from "../services/EndPoints"
-
-import { providerStore } from '../services/srcStore'
-import { Client, Provider } from '../services/srcStore'
-const providers = providerStore()
-
-import { subscriberStore } from '../services/dstStore'
-import { Subscriber } from '../services/dstStore'
-const subscribers = subscriberStore()
-
-// test stores
-for (let i=0;i<3;i++) {
-  const p = "P" + String(i)
-  providers.add(p)
-}
-for (let i=0;i<3;i++) {
-  const p = "P" + String(i)
-  providers.remove(p)
-}
-// test
-try {
-  providers.remove("XY")
-} catch (e) {
-  console.log("Faield:", e)
-}
-// ---
-for (let i=0;i<3;i++) {
-  const p = "S" + String(i)
-  subscribers.add(p)
-  console.log("exists:",subscribers.exists(p))
-}
-for (let i=0;i<3;i++) {
-  const p = "S" + String(i)
-  subscribers.remove(p)
-}
-// test
-try {
-  console.log("exists for remove:",subscribers.exists("XY"))
-  subscribers.remove("XY")
-} catch (e) {
-  console.log("Failed:", e)
-}
-
-// 
-providers.add("P1",true)
-providers.add("P2")
-console.log("Roots:",providers.getLoadedRoots())
-subscribers.add("S1")
-subscribers.add("S2")
-// connect
-providers.connect("P1",{id:"S1",ep:EP.DATA})
-providers.connect("P1",{id:"S2",ep:EP.EXTRA})
-providers.connect("P2",{id:"S2",ep:EP.DATA})
-providers.connect("P1",{id:"S1",ep:EP.EXTRA})
-
-// disconnect
-try {
-  providers.disconnect("P1",{id:"S1"})
-} catch (e) {
-  console.log("Failed:", e)
-}
-try {
-  providers.disconnect("P1",{id:"S2",ep:EP.EXTRA})
-} catch (e) {
-  console.log("Failed:", e)
-}
-try {
-  providers.disconnect("P2",{id:"S2",ep:EP.DATA})
-} catch (e) {
-  console.log("Failed:", e)
-}
-try {
-  providers.disconnect("P1",{id:"S1",ep:EP.EXTRA})
-} catch (e) {
-  console.log("Failed:", e)
-}
-
-// connect again
-try {
-  providers.connect("P1",{id:"S1",ep:EP.DATA})
-} catch (e) {
-  console.log("Failed:", e)
-}
-try {
-  providers.connect("P1",{id:"S2",ep:EP.EXTRA})
-} catch (e) {
-  console.log("Failed:", e)
-}
-try {
-  providers.connect("P2",{id:"S2",ep:EP.DATA})
-} catch (e) {
-  console.log("Failed:", e)
-}
-try {
-  providers.connect("P1",{id:"S1",ep:EP.EXTRA})
-} catch (e) {
-  console.log("Failed:", e)
-}
-
-try {
-  providers.connect("P3",{id:"S1",ep:EP.DATA})
-} catch (e) {
-  console.log("Faield:", e)
-}
-
-
-console.log("P",providers.json())
-console.log("S",subscribers.json())
-
-// update provider returns list of subscriber ids
-let dsts = providers.update("P1",{x:123,y:"wdw"})
-console.log("New data - dsts to update:",dsts)
-console.log("Roots:",providers.getLoadedRoots())
-console.log("P",providers.json())
-console.log("S",subscribers.json())
-
-// update without data
-dsts = providers.update("P1")
-console.log("dsts to update:",dsts)
-try {
-  dsts = providers.update("P2")
-  console.log("Reuse data - dsts to update:",dsts)
-} catch (e) {
-  console.log("Failed:", e)
-}
-
-dsts.forEach((d) => {
-  console.log("Updating:",d)
-  try {
-    subscribers.update(d.id,d.ep)
-  } catch (e) {
-    console.log("Failed:", e)
-  }
-})
-
-console.log("S",subscribers.json())
-
-const dt = ref([])
-// disconnect 2 additional endpoints to prevent errors
-providers.disconnect("P1",{id:"S1",ep:EP.EXTRA})
-providers.disconnect("P1",{id:"S2",ep:EP.EXTRA})
-
-const testData = () => {
-  const d = {"x":dt.value.length,"y":Math.random()*100 }
-  dt.value.push(d)
-  console.log("data",dt.value)
-  setTimeout(testData,5000)
-  const dsts = providers.update("P1",dfd.toJSON(new dfd.DataFrame(dt.value)))
-  console.log("P1 dsts to update:",dsts)
-  dsts.forEach(async (d) => {
-    console.log("UPD:",d.id,d.ep)
-    subscribers.update(d.id,d.ep)
-    await eventBus.emit(Signals.UPDPREFIX as string + d.id)
-  })
-
-}
-
-testData()
-
-
 
 // --------------------
 
@@ -224,6 +62,7 @@ const ctl = ref()
 const popBtn = ref()
 
 const popover = ref({})
+const inputselPop = ref({})
 
 // next node/edge continuosly increase
 const nextNode = ref(1)
@@ -234,17 +73,17 @@ const elements: ElementDefinition[] = [ // list of graph elements to start with
   { // node a
     group: 'nodes', 
     //data: { id: 'a', name:"a", type:{"name":"t1","shp":"square","bd":"#f00", "img":"url('/img/icons-bordered/cloud-arrow-down.png')"} },  
-    data: { id: 'a', name:"a", type:{"name":"t1","shp":"square","bd":"#f00", "img":"url('/img/widgets/CSVFile.png')"} },  
+    data: { id: 'a', name:"a", "ports":1, type:{"name":"t1","shp":"square","bd":"#f00", "img":"url('/img/widgets/CSVFile.png')"} },  
     position: {x:10, y:10},
   },
   { // node b
     group: 'nodes', 
-    data: { id: 'b', name:"b", type:{"name":"t3","shp":"roundrectangle","bd":"#f00", "img":"url('/img/widgets/LinePlot.png')"} }, 
+    data: { id: 'b', name:"b", "ports":1, type:{"name":"t3","shp":"roundrectangle","bd":"#f00", "img":"url('/img/widgets/LinePlot.png')"} }, 
     position: {x:250, y:100},
   },
   { // node c
     group: 'nodes', 
-    data: { id: 'c', name:"c", type:{"name":"t2","shp":"roundrectangle","bd":"#0f0", "img":"url('/img/widgets/Save.png')"}  },
+    data: { id: 'c', name:"c", "ports":2, type:{"name":"t2","shp":"roundrectangle","bd":"#0f0", "img":"url('/img/widgets/Save.png')"}  },
     position: {x:130, y:150},
   },
   { // edge ab
@@ -460,8 +299,8 @@ const ctxOptions = {
       tooltipText: 'add node',
       selector: "node,edge",
       //image: {src: "assets/add.svg", width: 12, height: 12, x: 6, y: 4},
-      coreAsWell: true,
-      onClickFunction: async function (event: EventObject) {
+      coreAsWell: false,
+      onClickFunction: async function (event?: EventObject) {
         console.log("Add node")
         const pos = event.position || event.cyPosition;
         const newId = "N" + String(nextNode.value++)
@@ -594,18 +433,31 @@ async function flowInit  ()  {
     cy.value.on('ehhoverover', async function(event: EventObject, sourceNode: NodeSingular, targetNode: NodeSingular) {
       console.log(`Edge for target ${targetNode.id()}`);
       // check target type and possibly have input type selected via popover
+      //openInputSel()
     });
 
         
     // When an edge is successfully created, log the event to the console
     cy.value.on('ehcomplete', async (event: EventObject, sourceNode: NodeSingular, targetNode: NodeSingular, addedEdge: EdgeSingular) => {
       console.log(`Edge created from ${sourceNode.id()} to ${targetNode.id()}`);
+      let port = {}
       // we have stored the edge type in the source node. copy to edge type
       const e = await cy.value.getElementById(addedEdge.data("id"))
       const s = await cy.value.getElementById(sourceNode.data("id"))
       const t = await cy.value.getElementById(targetNode.data("id"))
-      console.log("from ",s.data("name"), " to ",t.data("name"))
-      await e.data("type",s.data("edge"))
+      const tp = t.data("ports")
+      console.log("TP:",tp)
+      if (tp == 2) {
+        port = await openInputSel()
+        console.log("Port:",port)
+      }
+      if ("data" in port){
+        console.log("from ",s.data("name"), " to ",t.data("name"),", port: ",port.data)
+        await e.data("type",s.data("edge") + "-" + port.data)
+      } else {
+        console.log("from ",s.data("name"), " to ",t.data("name"))
+        await e.data("type",s.data("edge"))
+      }
       await s.removeData("edge")
       // we can open a dialog here like so:
           // popBtn.value.$el.click()
@@ -617,7 +469,7 @@ async function flowInit  ()  {
       //console.log("json len:",cy.value.json().elements.edges.length)
     });
 
-    cy.value.on('cxttap', 'node', function(event: EventObject) {
+    cy.value.on('cxttap', 'node', function(event?: EventObject) {
       const node = event.target;
       console.log('Node ' + node.id() + ' was right clicked');
       if (node.id() == "a")
@@ -654,6 +506,7 @@ async function flowInit  ()  {
     flowLoaded.value = true
     //flowWrap.value.addEventListener("sel",()=>{console.log("sel")})
     //addEventListener("sel",flowWrap.value,(e)=>{console.log("sel",e)})
+    /*
     eventBus.on('selected', (data) => {
       console.log("on selected:",data)
       // test if we can do something else while popover is active ..
@@ -666,6 +519,7 @@ async function flowInit  ()  {
           popover.value.dismiss(data,"123")
       }
     });
+    */
     eventBus.on('importSelection', (data) => {
       console.log("on importSelection:",data)
       // test if we can do something else while popover is active ..
@@ -678,7 +532,14 @@ async function flowInit  ()  {
           popover.value.dismiss(data,"123")
       }
     });
-    testStore()
+    eventBus.on('inputSelection', (data) => {
+      console.log("on inputSelection:",data)
+      // test if we can do something else while popover is active ..
+      // allow to close on specific return value. only if open
+      if (popover.value.open) {
+        popover.value.dismiss(data)
+      }
+    });
   })
   
 const ctlClick = async () => {
@@ -688,6 +549,29 @@ const ctlClick = async () => {
   createEvent()
 }
 
+const openInputSel = async (ev: Event) => {
+  popover.value = await popoverController.create({
+      component: InputselPopover,
+      event: ev,
+      size: "auto",
+      side:"right",
+      alignment:"start",
+      showBackdrop: true,
+      backdropDismiss: false,
+      dismissOnSelect: true,
+      reference: "trigger", // event or trigger
+      componentProps: { // Popover props
+          msg:"Select Input",
+          signal: "inputSelection",
+        }
+    })
+    await popover.value.present();
+    popover.value.open = true
+    const x = await popover.value.onDidDismiss();
+    console.log("Dismiss: ",x)
+    popover.value.open = false
+    return x
+}
 
 const openPopover = async (ev: Event) => {
   // create dummy dataframe for test
@@ -765,25 +649,6 @@ const createEvent = () => {
   popBtn.value.$el.click()
 }
 
-const testStore = async () => {
-
-  const newUser = {
-    id: '1234',
-      name: 'John Doe',
-      email: 'john@example.com',
-      address: {
-        street: '123 Main St',
-        city: 'Anytown',
-        state: 'CA',
-        zip: '12345'
-      },
-      phone: '555-555-1212'
-  }
-  await store.addUser(newUser)
-  const u = await store.getUserById(newUser.id)
-  console.log("User:",u)
-
-}
 
 </script>
 

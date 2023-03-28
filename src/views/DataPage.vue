@@ -68,7 +68,7 @@ setTimeout(update, 2000)
 
 import { RandomGen } from "../classes/RandomGen"
 const rg = new RandomGen("P2")
-rg.period = 3
+rg.period = 300
 rg.cols = 5
 rg.run()
 
