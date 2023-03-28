@@ -69,39 +69,57 @@ setTimeout(update, 2000)
 import { RandomGen } from "../classes/RandomGen"
 const rg = new RandomGen("P2")
 rg.period = 3
+rg.cols = 17
 rg.run()
 
 // globals
 import { Signals } from "../services/GlobalDefs"
 // listener
 import { LinePlot } from "../classes/LinePlot"
-const lp1 = new LinePlot("P1")
-lp1.name = "fkwenfj"
+const chart1 = new LinePlot("P1")
+chart1.name = "fkwenfj"
 // add to items
 items.value.push(
       {
-        id:lp1.id,
-        name:lp1.name,
+        id:chart1.id,
+        name:chart1.name,
         type:"chart"
       }
     )
 // tell listener to listen to source
-lp1.msgOn(Signals.UPDPREFIX + rg.id)
+chart1.msgOn(Signals.UPDPREFIX + rg.id)
 // 
 import { BarPlot } from "../classes/BarPlot"
-const lp2 = new BarPlot("P2")
-lp2.name = "32rfewe"
+const chart2 = new BarPlot("P2")
+chart2.name = "32rfewe"
 // add to items
 items.value.push(
       {
-        id:lp2.id,
-        name:lp2.name,
+        id:chart2.id,
+        name:chart2.name,
         type:"table"
       }
     )
 // tell listener to listen to source
-lp2.msgOn(Signals.UPDPREFIX + rg.id)
+chart2.msgOn(Signals.UPDPREFIX + rg.id)
 
+// 
+import { DataInfo } from "../classes/DataInfo"
+const chart3 = new DataInfo("P4")
+chart3.name = "32r Info fewe"
+// add to items
+items.value.push(
+      {
+        id:chart3.id,
+        name:chart3.name,
+        type:"table"
+      }
+    )
+// tell listener to listen to source
+chart3.msgOn(Signals.UPDPREFIX + rg.id)
+
+// tell listener to listen to source
+chart3.msgOn(Signals.UPDPREFIX + rg.id)
 
 
 //////////////

@@ -1,6 +1,6 @@
 <template>
 <div class="container" v-if="loaded">
-  <div v-for="(item,index) in items" :key="index">
+  <div v-for="(item,index) in items" :key="index" class="chartItem">
     <h3 class="dftitle">{{ item.name }}</h3>
     <div :id="prefix + item.id" :class="item.type == 'table'?'dftable':'dfchart'">
     </div>
@@ -48,6 +48,11 @@ watchEffect(() => {
     padding-right: 20px;
   }
 
+  .chartItem {
+    overflow-x: scroll;
+  }
+  /* compute table width from number of columns in display class
+  and set width via item prop. Scrolling-X handled via chartitem  */
   .dftable {
     background-color:#ccf;
     height:300px;
