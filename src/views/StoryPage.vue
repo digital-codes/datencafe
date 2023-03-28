@@ -27,7 +27,7 @@
             {{ $t(bodies[i]) }}
           </ion-card-content>
           <ion-card-header>
-            <ion-button @click="clicked(i,$t('notimplemented'))">{{$t('download')}}</ion-button>
+            <ion-button @click="clicked(i)">{{$t('download')}}</ion-button>
           </ion-card-header>
         </ion-card>
         <!-- 
@@ -50,7 +50,10 @@ import { IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent }
 import { ref, onMounted, onBeforeMount } from "vue"
  
 // https://lokalise.com/blog/vue-i18n/
-//import { useI18n } from 'vue-i18n'
+// if we need translation inside methods, import this:
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n({ useScope: 'global' })
+// and define the const somwhere
 //import i18n from '../i18n'
 import msgs from "../locales/en.json"
 
@@ -77,13 +80,12 @@ const localMsgs = () => {
 */
 
 const clicked = (id,msg) => {
-  //alert(String(id) + "..." + this.$t('notimplemented'))
-  alert(String(id) + "..." + msg)
+  alert(String(id) + "..." + t("notimplemented"))
 }
 
 onBeforeMount(async () => {
   msgs.stories.forEach((x,i) => {
-    console.log(x,i)
+    //console.log(x,i)
     titles.value.push("stories[" + String(i) + "].title")
     bodies.value.push("stories[" + String(i) + "].body")
   })
