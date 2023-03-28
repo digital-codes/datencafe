@@ -591,6 +591,12 @@ async function flowInit  ()  {
       console.log('Node ' + node.id() + ' was deselected');
     });
 
+    cy.value.on('ehhoverover', async function(event: EventObject, sourceNode: NodeSingular, targetNode: NodeSingular) {
+      console.log(`Edge for target ${targetNode.id()}`);
+      // check target type and possibly have input type selected via popover
+    });
+
+        
     // When an edge is successfully created, log the event to the console
     cy.value.on('ehcomplete', async (event: EventObject, sourceNode: NodeSingular, targetNode: NodeSingular, addedEdge: EdgeSingular) => {
       console.log(`Edge created from ${sourceNode.id()} to ${targetNode.id()}`);
