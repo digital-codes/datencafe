@@ -1,8 +1,9 @@
 <template>
   <ion-content class="ion-padding ion-popover">
     <p>{{ props.msg }}</p>
-    <ion-button @click="select(0)">A</ion-button>
-    <ion-button @click="select(1)">B</ion-button>
+    <div>
+    <ion-button v-for="(item,idx) in portBtns" :key="idx" @click="select(item)">{{item}}</ion-button>
+    </div>
 </ion-content>
 </template>
 
@@ -15,13 +16,28 @@ import eventBus from '../services/eventBus';
 
 const props = defineProps({
   msg:String,
-  signal:String
+  signal:String,
+  ports:{}
 })
 
-const select = async (s:number) => {
+const portBtns = ref([])
+
+onMounted(() => {
+  //console.log("Ports:",props.ports,props.ports.A)
+  Object.keys(props.ports).forEach(e => {
+    if (!props.ports[e]) {
+      console.log("btn:",e)
+      portBtns.value.push(e)
+    }
+  });
+  //console.log("Btns:",portBtns.value)
+})
+
+
+const select = async (s:string) => {
   console.log('sel',s)
   console.log('signal',props.signal)
-  await eventBus.emit(props.signal, s == 0?"A":"B");
+  await eventBus.emit(props.signal, s);
 }
 
 </script>

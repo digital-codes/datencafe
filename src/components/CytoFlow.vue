@@ -73,19 +73,20 @@ const elements: ElementDefinition[] = [ // list of graph elements to start with
   { // node a
     group: 'nodes', 
     //data: { id: 'a', name:"a", type:{"name":"t1","shp":"square","bd":"#f00", "img":"url('/img/icons-bordered/cloud-arrow-down.png')"} },  
-    data: { id: 'a', name:"a", "ports":1, type:{"name":"t1","shp":"square","bd":"#f00", "img":"url('/img/widgets/CSVFile.png')"} },  
+    data: { id: 'a', name:"a", "ports":{"A":false}, type:{"name":"t1","shp":"square","bd":"#f00", "img":"url('/img/widgets/CSVFile.png')"} },  
     position: {x:10, y:10},
   },
   { // node b
     group: 'nodes', 
-    data: { id: 'b', name:"b", "ports":1, type:{"name":"t3","shp":"roundrectangle","bd":"#f00", "img":"url('/img/widgets/LinePlot.png')"} }, 
+    data: { id: 'b', name:"b", "ports":{"A":false}, type:{"name":"t3","shp":"roundrectangle","bd":"#f00", "img":"url('/img/widgets/LinePlot.png')"} }, 
     position: {x:250, y:100},
   },
   { // node c
     group: 'nodes', 
-    data: { id: 'c', name:"c", "ports":2, type:{"name":"t2","shp":"roundrectangle","bd":"#0f0", "img":"url('/img/widgets/Save.png')"}  },
+    data: { id: 'c', name:"c", "ports":{"A":false, "B":false},  type:{"name":"t2","shp":"roundrectangle","bd":"#0f0", "img":"url('/img/widgets/Save.png')"}  },
     position: {x:130, y:150},
   },
+  /*
   { // edge ab
     group: 'edges', 
     data: { id: 'ab', source: 'a', target: 'b' }
@@ -98,6 +99,7 @@ const elements: ElementDefinition[] = [ // list of graph elements to start with
     group: 'edges', 
     data: { id: 'bc', source: 'b', target: 'c', type: "e2" }
   }
+  */
 ]
 
 // see https://stackoverflow.com/questions/58136352/cytoscape-js-position-label-text-on-top-of-edge
@@ -440,33 +442,53 @@ async function flowInit  ()  {
     // When an edge is successfully created, log the event to the console
     cy.value.on('ehcomplete', async (event: EventObject, sourceNode: NodeSingular, targetNode: NodeSingular, addedEdge: EdgeSingular) => {
       console.log(`Edge created from ${sourceNode.id()} to ${targetNode.id()}`);
-      let port = {}
+      // check valid target node first
+      const t = await cy.value.getElementById(targetNode.data("id"))
+      if (t.id() == undefined) {
+        console.log("Edge cancelled")
+        return
+      }
       // we have stored the edge type in the source node. copy to edge type
       const e = await cy.value.getElementById(addedEdge.data("id"))
       const s = await cy.value.getElementById(sourceNode.data("id"))
-      const t = await cy.value.getElementById(targetNode.data("id"))
+      // check ports, init with first item
+      let port = {data:Object.keys(t.data("ports"))[0]}
+      let block = false
       const tp = t.data("ports")
       console.log("TP:",tp)
-      if (tp == 2) {
-        port = await openInputSel()
+      if (Object.keys(tp).length > 1) {
+        port = await openInputSel(tp)
         console.log("Port:",port)
-      }
-      if ("data" in port){
-        console.log("from ",s.data("name"), " to ",t.data("name"),", port: ",port.data)
-        await e.data("type",s.data("edge") + "-" + port.data)
-      } else {
-        console.log("from ",s.data("name"), " to ",t.data("name"))
-        await e.data("type",s.data("edge"))
+        if (port.role != "button") {
+          // FIXME throws error on removing edge
+          // doint later with block seems to be fine
+          console.log("Selection cancelled")
+          block = true
+          //await addedEdge.remove()
+        } else {
+          console.log("Port:",port.data)
+          if ("data" in port){
+            console.log("from ",s.data("name"), " to ",t.data("name"),", port: ",port.data)
+            await e.data("type",s.data("edge") + "-" + port.data)
+          } else {
+            console.log("from ",s.data("name"), " to ",t.data("name"))
+            await e.data("type",s.data("edge"))
+          }
+        }
       }
       await s.removeData("edge")
-      // we can open a dialog here like so:
-          // popBtn.value.$el.click()
-          // with params edge.type, source.id, target.id
-          // to configure the target node
-          // and the store
 
-      //console.log("Elems:",elements.length)
-      //console.log("json len:",cy.value.json().elements.edges.length)
+      // test blocking
+      /*
+      if (t.id() == "b") {
+        block = true
+      }
+      */
+      if (block) {
+        console.log("Removing edge")
+        addedEdge.remove()
+      }
+
     });
 
     cy.value.on('cxttap', 'node', function(event?: EventObject) {
@@ -529,7 +551,7 @@ async function flowInit  ()  {
       // allow to close on specific return value. only if open
       if (popover.value.open) {
         if (data.close == true)
-          popover.value.dismiss(data,"123")
+          popover.value.dismiss(data,"button")
       }
     });
     eventBus.on('inputSelection', (data) => {
@@ -537,7 +559,7 @@ async function flowInit  ()  {
       // test if we can do something else while popover is active ..
       // allow to close on specific return value. only if open
       if (popover.value.open) {
-        popover.value.dismiss(data)
+        popover.value.dismiss(data,"button")
       }
     });
   })
@@ -549,20 +571,22 @@ const ctlClick = async () => {
   createEvent()
 }
 
-const openInputSel = async (ev: Event) => {
+//const openInputSel = async (ev: Event) => {
+const openInputSel = async (ports) => {
   popover.value = await popoverController.create({
       component: InputselPopover,
-      event: ev,
+      //event: ev,
       size: "auto",
       side:"right",
       alignment:"start",
       showBackdrop: true,
-      backdropDismiss: false,
+      backdropDismiss: true, // error when enabling dismiss
       dismissOnSelect: true,
       reference: "trigger", // event or trigger
       componentProps: { // Popover props
           msg:"Select Input",
           signal: "inputSelection",
+          ports: ports
         }
     })
     await popover.value.present();
