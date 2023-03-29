@@ -19,6 +19,22 @@
       <div id="container">
         <strong class="capitalize">{{ $route.params.id }}</strong>
         <p>{{ $t("titles.about") }}</p>
+
+          <font-awesome-icon :icon="['fas', 'book-atlas']" size="xl"/>
+
+
+  <ion-select interface="popover" :placeholder="selectedOption" @ionChange="selectOption">
+    <ion-select-option v-for="option in options" :key="option.value" :value="option.value">
+      <span>
+      <font-awesome-icon :icon="option.icon" size="xl" ></font-awesome-icon>
+      </span>
+      {{ option.label }}
+
+    </ion-select-option>
+  </ion-select>
+
+
+
       </div>
     </ion-content>
   </ion-page>
@@ -79,6 +95,28 @@ const rg = new RandomGen("P2")
 rg.period = 3
 rg.run()
 */
+
+
+import { IonSelect, IonSelectOption } from '@ionic/vue';
+import {ref} from "vue"
+
+const selectedOption = ref('Select an option')
+const options = ref([
+  /*
+        { value: 'option1', label: 'Option 1', icon: "['fas', 'globe']" },
+        { value: 'option2', label: 'Option 2', icon: "['fas', 'coffee']" },
+        { value: 'option3', label: 'Option 3', icon: "['fas', 'book']" }
+        */
+        { value: 'option1', label: 'Option 1', icon: "globe" },
+        { value: 'option2', label: 'Option 2', icon: "coffee" },
+        { value: 'option3', label: 'Option 3', icon: "book-atlas" }
+      ])
+
+const selectOption = (event) => {
+  console.log("Sel:",event.detail.value)
+  selectedOption.value = event.detail.value;
+}
+
 
 </script>
 

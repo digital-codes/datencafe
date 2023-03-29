@@ -1,14 +1,11 @@
   <script lang="ts" setup>
     import { IonPage, IonTabs, IonRouterOutlet, 
-      IonTabBar, IonTabButton, IonLabel, IonIcon, IonToggle,
+      IonTabBar, IonTabButton, IonLabel, IonToggle,
       IonSelect, IonSelectOption, } from '@ionic/vue';
   
-    import { playCircle, radio, library, search } from 'ionicons/icons';
-
     import { ref } from "vue"
   
     import { IonHeader } from '@ionic/vue';
-    import { cafeOutline } from 'ionicons/icons';
 
     // stores
     import { langStore } from '../services/store'
