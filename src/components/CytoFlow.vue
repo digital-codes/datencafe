@@ -439,7 +439,28 @@ async function flowInit  ()  {
       //openInputSel()
     });
     */
-        
+
+    cy.value.on('beforeAddChild', (event) => {
+      console.log("before add child")
+      const parent = event.target;
+      const child = event.added;
+
+      if (parent.data('id') === 'node1' || child.data('id') === 'node2') {
+        event.preventDefault();
+      }
+    });
+ 
+    
+
+    cy.value.on('beforeConnect', (event) => {
+      console.log("before connect")
+      const sourceNode = event.sourceNode();
+      const targetNode = event.targetNode();
+      if (sourceNode.data('id') === 'node1' || targetNode.data('id') === 'node2') {
+        event.preventDefault();
+      }
+    });    
+    
     // When an edge is successfully created, log the event to the console
     cy.value.on('ehcomplete', async (event: EventObject, sourceNode: NodeSingular, targetNode: NodeSingular, addedEdge: EdgeSingular) => {
       console.log(`Edge created from ${sourceNode.id()} to ${targetNode.id()}`);
@@ -464,41 +485,53 @@ async function flowInit  ()  {
       let port = {data:Object.keys(t.data("ports"))[0]}
       let block = false
       const tp = t.data("ports")
-      // console.log("TP:",tp)
-      // check popover
-      if (Object.keys(tp).length > 1) {
-        port = await openInputSel(tp)
-        console.log("Port:",port)
-        if (port.role != "button") {
-          // FIXME throws error on removing edge
-          // doint later with block seems to be fine
-          console.log("Selection cancelled")
-          block = true
-          //await addedEdge.remove()
-        } 
-      }
-      // add edge name
-      console.log("Port:",port.data)
-      if ("data" in port){
+      //
+      const portsAvail = Object.keys(tp).filter(key => !tp[key])
+      console.log("Available ports:",portsAvail)
+      if (portsAvail == 0) {
+        console.log("No free ports")
+        block = true
+      } else {
+        // check popover
+        if (Object.keys(tp).length > 1) {
+          port = await openInputSel(tp)
+          console.log("Port:",port)
+          if (port.role != "button") {
+            // FIXME throws error on removing edge
+            // doint later with block seems to be fine
+            console.log("Selection cancelled")
+            block = true
+            //await addedEdge.remove()
+          } 
+        }
+        // add edge name
         console.log("from ",s.data("name"), " to ",t.data("name"),", port: ",port.data)
         await e.data("type",s.data("edge") + "-" + port.data)
-      } else {
-        console.log("from ",s.data("name"), " to ",t.data("name"))
-        await e.data("type",s.data("edge"))
+        await s.removeData("edge")
       }
-      await s.removeData("edge")
 
       // test blocking
-      /*
+      /* 
       if (t.id() == "b") {
         block = true
       }
-      */
-      if (block) {
-        console.log("Removing edge")
-        addedEdge.remove()
+       */
+      if (!block) {
+        // update node data
+        t.data("ports")[port.data] = true
+      } else {
+        console.log("Removing edge",e.id())
+        if (e.id() !== undefined) {
+          try {
+            console.log("NOW")
+            await e.remove()
+            //await addedEdge.remove()
+            console.log("removed ...")
+          } catch (err) {
+            console.log("remove failed:",err.message)
+          }
+        }
       }
-
     });
 
     cy.value.on('cxttap', 'node', function(event?: EventObject) {
