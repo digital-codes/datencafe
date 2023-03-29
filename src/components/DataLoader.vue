@@ -51,7 +51,8 @@
       return
     }
     const csvOptions = {
-    delimiter: ",",
+    //delimiter: ",",
+    delimitersToGuess: [',', ';'],
     escapeChar:"\\",
     quoteChar:"\"",
     header:true, // header row
