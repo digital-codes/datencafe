@@ -13,9 +13,13 @@
   "titles": {
     "about": "Info",
     "tutorial":"Tutorials",
-    "data":"Data EN",
+    "data":{
+      "tab":"Data EN",
+      "workflow":"Workflow",
+      "views":"Visualization"
+    },
     "map":"Open Data Map",
-    "stories":"Stories"    
+    "stories":"Stories"
   },
   "download": "Download",
   "notimplemented":"Not implemented yet"

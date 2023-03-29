@@ -13,7 +13,11 @@
   "titles": {
     "about": "Info DE",
     "tutorial":"Anleitungen",
-    "data":"Daten und Visualisierungen",
+    "data":{
+      "tab":"Daten und Visualisierungen",
+      "workflow":"Arbeitsbereich",
+      "views":"Darstellungen"
+    },
     "map":"Open Data Karte",
     "stories":"Geschichten"    
   },

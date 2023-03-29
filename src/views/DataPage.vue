@@ -5,7 +5,7 @@
         <ion-buttons slot="start">
           <ion-menu-button color="primary"></ion-menu-button>
         </ion-buttons>
-        <ion-title>{{ $t("titles.data") }}</ion-title>
+        <ion-title>{{ $t("titles.data.tab") }}</ion-title>
       </ion-toolbar>
     </ion-header>
 
@@ -20,11 +20,11 @@
         <ion-grid fixed="true">
           <ion-row>
             <ion-col size="7">
-              Flow
-              <CytoFlow msg="Flow demo" />
+              <h3>{{$t("titles.data.workflow")}}</h3>
+              <WorkFlow msg="Flow demo" />
             </ion-col>
             <ion-col size="5" sytle="overflow-y:scroll;">
-              Viz
+              <h3>{{$t("titles.data.views")}}</h3>
               <DanfoPlot :propItems="items"/>
             </ion-col>
           </ion-row>
@@ -37,7 +37,7 @@
 <script setup lang="ts">
 import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
 import { IonCol, IonGrid, IonRow } from '@ionic/vue';
-import CytoFlow from '../components/CytoFlow.vue'
+import WorkFlow from '../components/WorkFlow.vue'
 import DanfoPlot from '../components/DanfoPlot.vue'
 import { ref } from "vue"
 

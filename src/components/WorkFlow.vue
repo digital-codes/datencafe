@@ -440,27 +440,6 @@ async function flowInit  ()  {
     });
     */
 
-    cy.value.on('beforeAddChild', (event) => {
-      console.log("before add child")
-      const parent = event.target;
-      const child = event.added;
-
-      if (parent.data('id') === 'node1' || child.data('id') === 'node2') {
-        event.preventDefault();
-      }
-    });
- 
-    
-
-    cy.value.on('beforeConnect', (event) => {
-      console.log("before connect")
-      const sourceNode = event.sourceNode();
-      const targetNode = event.targetNode();
-      if (sourceNode.data('id') === 'node1' || targetNode.data('id') === 'node2') {
-        event.preventDefault();
-      }
-    });    
-    
     // When an edge is successfully created, log the event to the console
     cy.value.on('ehcomplete', async (event: EventObject, sourceNode: NodeSingular, targetNode: NodeSingular, addedEdge: EdgeSingular) => {
       console.log(`Edge created from ${sourceNode.id()} to ${targetNode.id()}`);
@@ -519,6 +498,8 @@ async function flowInit  ()  {
       if (!block) {
         // update node data
         t.data("ports")[port.data] = true
+        // update edge data
+        await e.data("port",port.data)
       } else {
         console.log("Removing edge",e.id())
         if (e.id() !== undefined) {
@@ -555,6 +536,23 @@ async function flowInit  ()  {
     })
     cy.value.on("remove","edge",function(event: EventObject){
       console.log("Remove edge event:",event.target.data())
+      // get port + target parameters from edge:
+      const dt = event.target.data()
+      console.log("DT:",dt)
+      const port = dt.port
+      const dest = dt.target 
+      console.log("Port,target:",port,dest) 
+      if ((dest == undefined) || (port === undefined)) return
+      // get target node
+      const destNode = cy.value.getElementById(dest)
+      if ((destNode == undefined) || (destNode.data() === undefined)) return
+      console.log("tnode:",destNode,destNode.data(),destNode.data().ports[port])
+      // remove port assignment
+      destNode.data().ports[port] = false
+      console.log("tnode port new:",destNode.data().ports[port])
+      // 
+
+
     })
   }
 }

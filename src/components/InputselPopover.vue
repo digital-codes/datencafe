@@ -71,6 +71,11 @@ ion-popover ion-content {
   overflow: clip;
 }
 
+ion-content.ion-popover::part(scroll) {
+  overflow:clip;
+  }
+
+
 .popcheck {
     text-align:center;
   }
@@ -78,3 +83,4 @@ ion-popover ion-content {
   
 
 </style>
+
