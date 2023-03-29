@@ -432,30 +432,40 @@ async function flowInit  ()  {
       console.log('Node ' + node.id() + ' was deselected');
     });
 
+    /*
     cy.value.on('ehhoverover', async function(event: EventObject, sourceNode: NodeSingular, targetNode: NodeSingular) {
       console.log(`Edge for target ${targetNode.id()}`);
       // check target type and possibly have input type selected via popover
       //openInputSel()
     });
-
+    */
         
     // When an edge is successfully created, log the event to the console
     cy.value.on('ehcomplete', async (event: EventObject, sourceNode: NodeSingular, targetNode: NodeSingular, addedEdge: EdgeSingular) => {
       console.log(`Edge created from ${sourceNode.id()} to ${targetNode.id()}`);
-      // check valid target node first
+      // check valid elements first
       const t = await cy.value.getElementById(targetNode.data("id"))
-      if (t.id() == undefined) {
-        console.log("Edge cancelled")
+      if (t.id() === undefined) {
+        console.log("Edge cancelled1")
         return
       }
       // we have stored the edge type in the source node. copy to edge type
       const e = await cy.value.getElementById(addedEdge.data("id"))
+      if (e.id() === undefined) {
+        console.log("Edge cancelled2")
+        return
+      }
       const s = await cy.value.getElementById(sourceNode.data("id"))
+      if (s.id() === undefined) {
+        console.log("Edge cancelled3")
+        return
+      }
       // check ports, init with first item
       let port = {data:Object.keys(t.data("ports"))[0]}
       let block = false
       const tp = t.data("ports")
-      console.log("TP:",tp)
+      // console.log("TP:",tp)
+      // check popover
       if (Object.keys(tp).length > 1) {
         port = await openInputSel(tp)
         console.log("Port:",port)
@@ -465,16 +475,16 @@ async function flowInit  ()  {
           console.log("Selection cancelled")
           block = true
           //await addedEdge.remove()
-        } else {
-          console.log("Port:",port.data)
-          if ("data" in port){
-            console.log("from ",s.data("name"), " to ",t.data("name"),", port: ",port.data)
-            await e.data("type",s.data("edge") + "-" + port.data)
-          } else {
-            console.log("from ",s.data("name"), " to ",t.data("name"))
-            await e.data("type",s.data("edge"))
-          }
-        }
+        } 
+      }
+      // add edge name
+      console.log("Port:",port.data)
+      if ("data" in port){
+        console.log("from ",s.data("name"), " to ",t.data("name"),", port: ",port.data)
+        await e.data("type",s.data("edge") + "-" + port.data)
+      } else {
+        console.log("from ",s.data("name"), " to ",t.data("name"))
+        await e.data("type",s.data("edge"))
       }
       await s.removeData("edge")
 
