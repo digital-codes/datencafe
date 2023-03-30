@@ -20,20 +20,7 @@
         <strong class="capitalize">{{ $route.params.id }}</strong>
         <p>{{ $t("titles.about") }}</p>
 
-          <font-awesome-icon :icon="['fas', 'book-atlas']" size="xl"/>
-
-
-  <ion-select interface="popover" :placeholder="selectedOption" @ionChange="selectOption">
-    <ion-select-option v-for="option in options" :key="option.value" :value="option.value">
-      <span>
-      <font-awesome-icon :icon="option.icon" size="xl" ></font-awesome-icon>
-      </span>
-      {{ option.label }}
-
-    </ion-select-option>
-  </ion-select>
-
-
+      <NodesPop msg="nodespop" signal="123" class="nodelist" />
 
       </div>
     </ion-content>
@@ -96,26 +83,36 @@ rg.period = 3
 rg.run()
 */
 
+// --------------
+import { IonButton, IonIcon, IonItem, IonLabel, IonList, IonCheckbox } from '@ionic/vue';
+import { ref, onMounted } from "vue"
 
-import { IonSelect, IonSelectOption } from '@ionic/vue';
-import {ref} from "vue"
+import { useI18n } from 'vue-i18n'
+const { t, locale } = useI18n({ useScope: 'global' })
 
-const selectedOption = ref('Select an option')
-const options = ref([
-  /*
-        { value: 'option1', label: 'Option 1', icon: "['fas', 'globe']" },
-        { value: 'option2', label: 'Option 2', icon: "['fas', 'coffee']" },
-        { value: 'option3', label: 'Option 3', icon: "['fas', 'book']" }
-        */
-        { value: 'option1', label: 'Option 1', icon: "globe" },
-        { value: 'option2', label: 'Option 2', icon: "coffee" },
-        { value: 'option3', label: 'Option 3', icon: "book-atlas" }
-      ])
+import nodeTypes from "../assets/nodes/nodeTypes.json"
 
-const selectOption = (event) => {
-  console.log("Sel:",event.detail.value)
-  selectedOption.value = event.detail.value;
+import NodesPop from "../components/NodesPopover.vue"
+
+const nodeItem = (type,id) => {
+  const text = nodeTypes[type][locale.value][id]
+  return text
 }
+
+const options = ref([])
+
+const chk = ref([])
+const clk = (n:number) => {
+  console.log("clicked:",n)
+  console.log(chk.value[n],options.value[n].type)
+}
+
+onMounted(() => {
+  Object.keys(nodeTypes).forEach((e,i) => {
+    chk.value[i] = false
+    options.value[i] = {type: e, icon: nodeTypes[e].icon}
+  })
+})
 
 
 </script>
@@ -144,5 +141,10 @@ const selectOption = (event) => {
 
 #container a {
   text-decoration: none;
+}
+
+.nodelist {
+  height: 300px;
+  width: 400px;
 }
 </style>

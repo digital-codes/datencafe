@@ -7,18 +7,18 @@
     "about":"Über",
     "tutorial":"Anleitung",
     "data":"Daten",
-    "map":"Karte",
+    "work":"Arbeitsbereich",
     "stories":"Stories"    
   },
   "titles": {
     "about": "Info DE",
     "tutorial":"Anleitungen",
-    "data":{
-      "tab":"Daten und Visualisierungen",
-      "workflow":"Arbeitsbereich",
+    "work":{
+      "tab":"Bearbeiten und Visualisieren",
+      "workflow":"Vorgänge",
       "views":"Darstellungen"
     },
-    "map":"Open Data Karte",
+    "data":"Open Data Karte",
     "stories":"Geschichten"    
   },
   "download": "Herunterladen",

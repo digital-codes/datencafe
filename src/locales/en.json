@@ -7,18 +7,18 @@
     "about":"About",
     "tutorial":"Tutorials",
     "data":"Data",
-    "map":"Map",
+    "work":"workspace",
     "stories":"Stories"    
   },
   "titles": {
     "about": "Info",
     "tutorial":"Tutorials",
-    "data":{
-      "tab":"Data EN",
+    "work":{
+      "tab":"Actions and Visualizations",
       "workflow":"Workflow",
       "views":"Visualization"
     },
-    "map":"Open Data Map",
+    "data":"Open Data Map",
     "stories":"Stories"
   },
   "download": "Download",

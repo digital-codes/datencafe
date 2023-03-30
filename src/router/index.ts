@@ -21,8 +21,8 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import ('../views/InfoPage.vue')
       },
       {
-        path: '/map',
-        component: () => import ('../views/MapPage.vue')
+        path: '/data',
+        component: () => import ('../views/DataPage.vue')
       },
       {
         path: '/instructions',
@@ -33,8 +33,8 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import ('../views/StoryPage.vue')
       },
       {
-        path: '/data',
-        component: () => import ('../views/DataPage.vue')
+        path: '/work',
+        component: () => import ('../views/WorkPage.vue')
         /*
         component: DataPage,
         name: 'msg',

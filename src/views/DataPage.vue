@@ -5,7 +5,7 @@
         <ion-buttons slot="start">
           <ion-menu-button color="primary"></ion-menu-button>
         </ion-buttons>
-        <ion-title>{{ $t("titles.data.tab") }}</ion-title>
+        <ion-title>{{ $t("titles.data") }}</ion-title>
       </ion-toolbar>
     </ion-header>
 
@@ -17,18 +17,8 @@
       </ion-header>
 
       <div id="container">
-        <ion-grid fixed="true">
-          <ion-row>
-            <ion-col size="7">
-              <h3>{{$t("titles.data.workflow")}}</h3>
-              <WorkFlow msg="Flow demo" />
-            </ion-col>
-            <ion-col size="5" sytle="overflow-y:scroll;">
-              <h3>{{$t("titles.data.views")}}</h3>
-              <DanfoPlot :propItems="items"/>
-            </ion-col>
-          </ion-row>
-          </ion-grid>
+        <strong class="capitalize">{{ $route.params.id }}</strong>
+        <p>Map Sample</p>
       </div>
     </ion-content>
   </ion-page>
@@ -36,95 +26,6 @@
 
 <script setup lang="ts">
 import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
-import { IonCol, IonGrid, IonRow } from '@ionic/vue';
-import WorkFlow from '../components/WorkFlow.vue'
-import DanfoPlot from '../components/DanfoPlot.vue'
-import { ref } from "vue"
-
-// items
-const items = ref([
-])
-
-/*
-const items = ref([
-{id:"P1","name":"sskdmk",type:"chart"},
-{id:"P2","name":"cwe",type:"table"}
-])
-
-const update = () => {
-  items.value.push(
-      {
-        id:"P" + String(items.value.length),
-        "name":"cwe",
-        type:"table"
-      }
-    )
-    console.log("Items:",items.value.length)
-    setTimeout(update, 2000)    
-  }
-
-setTimeout(update, 2000)
-*/
-
-import { RandomGen } from "../classes/RandomGen"
-const rg = new RandomGen("P2")
-rg.period = 300
-rg.cols = 5
-rg.run()
-
-// globals
-import { Signals } from "../services/GlobalDefs"
-// listener
-import { LinePlot } from "../classes/LinePlot"
-const chart1 = new LinePlot("P1")
-chart1.name = "fkwenfj"
-// add to items
-items.value.unshift(
-      {
-        id:chart1.id,
-        name:chart1.name,
-        type:"chart"
-      }
-    )
-// tell listener to listen to source
-chart1.msgOn(Signals.UPDPREFIX + rg.id)
-// 
-import { BarPlot } from "../classes/BarPlot"
-const chart2 = new BarPlot("P2")
-chart2.name = "32rfewe"
-// add to items
-items.value.unshift(
-      {
-        id:chart2.id,
-        name:chart2.name,
-        type:"table"
-      }
-    )
-// tell listener to listen to source
-chart2.msgOn(Signals.UPDPREFIX + rg.id)
-
-// 
-import { DataInfo } from "../classes/DataInfo"
-const chart3 = new DataInfo("P4")
-chart3.name = "32r Info fewe"
-// add to items
-items.value.unshift(
-      {
-        id:chart3.id,
-        name:chart3.name,
-        type:"table"
-      }
-    )
-// tell listener to listen to source
-chart3.msgOn(Signals.UPDPREFIX + rg.id)
-
-// tell listener to listen to source
-chart3.msgOn(Signals.UPDPREFIX + rg.id)
-
-
-//////////////
-
-
 </script>
 
 <style scoped>
@@ -135,7 +36,6 @@ chart3.msgOn(Signals.UPDPREFIX + rg.id)
   right: 0;
   top: 50%;
   transform: translateY(-50%);
-  min-height:50%;
 }
 
 #container strong {
@@ -153,11 +53,4 @@ chart3.msgOn(Signals.UPDPREFIX + rg.id)
 #container a {
   text-decoration: none;
 }
-
-ion-grid {
-    --ion-grid-width: 100%;
-  }
-
 </style>
-
-

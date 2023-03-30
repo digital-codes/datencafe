@@ -1,0 +1,54 @@
+{
+    "random":{
+        "name":"random",
+        "icon":"fa-solid fa-globe",
+        "en": {
+            "label":"Random Data Generator",
+            "info":"More text for a popup or tooltip"
+        },
+        "de": {
+            "label":"Zufallsdaten Generator",
+            "info":"Mehr Text für den Tooltip"
+        }
+    },
+    "loadfile":{
+        "name":"loadfile",
+        "icon":"fa-solid fa-coffee",
+        "en": {
+            "label":"Load file",
+            "info":"More text for a popup or tooltip"
+        },
+        "de": {
+            "label":"Datei laden",
+            "info":"Mehr Text für den Tooltip"
+        }
+    },
+    "linechart":{
+        "name":"linechart",
+        "icon":"fa-solid fa-book-atlas",
+        "en": {
+            "label":"Line Chart",
+            "info":"More text for a popup or tooltip"
+        },
+        "de": {
+            "label":"Liniendiagramm",
+            "info":"Mehr Text für den Tooltip"
+        }
+    },
+    "barchart":{
+        "name":"barchart",
+        "icon":"fa-solid fa-book-atlas",
+        "en": {
+            "label":"Bar Chart",
+            "info":"More text for a popup or tooltip"
+        },
+        "de": {
+            "label":"Balkendiagramm",
+            "info":"Mehr Text für den Tooltip"
+        }
+    }
+}
+
+
+
+
