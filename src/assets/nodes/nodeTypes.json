@@ -64,6 +64,19 @@
             "info":"Mehr Text für den Tooltip"
         }
     },
+    "scatter":{
+        "name":"scatter",
+        "icon":"fa-solid fa-book-atlas",
+        "thumb":"/img/widgets/ScatterPlot.png",
+        "en": {
+            "label":"Scatterplot Chart",
+            "info":"More text for a popup or tooltip"
+        },
+        "de": {
+            "label":"Scatter Plot",
+            "info":"Mehr Text für den Tooltip"
+        }
+    },
     "addrows":{
         "name":"addrows",
         "icon":"fa-solid fa-book-atlas",
@@ -132,7 +145,7 @@
     "scalarmath":{
         "name":"scalarmath",
         "icon":"fa-solid fa-book-atlas",
-        "thumb":"/img/widgets/Preprocess.png",
+        "thumb":"/img/widgets/Preprocess-1D.png",
         "en": {
             "label":"Scalar Operations",
             "info":"More text for a popup or tooltip"
@@ -145,7 +158,7 @@
     "mathcombine":{
         "name":"mathcombine",
         "icon":"fa-solid fa-book-atlas",
-        "thumb":"/img/widgets/Preprocess.png",
+        "thumb":"/img/widgets/Preprocess-2D.png",
         "en": {
             "label":"Math operations on 2 datasets",
             "info":"More text for a popup or tooltip"
@@ -158,7 +171,7 @@
     "group":{
         "name":"group",
         "icon":"fa-solid fa-globe",
-        "thumb":"/img/widgets/Unique.png",
+        "thumb":"/img/widgets/GroupBy.png",
         "en": {
             "label":"Group data",
             "info":"More text for a popup or tooltip"
