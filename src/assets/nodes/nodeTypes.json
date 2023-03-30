@@ -1,31 +1,47 @@
 {
-    "random":{
-        "name":"random",
-        "icon":"fa-solid fa-globe",
-        "en": {
-            "label":"Random Data Generator",
-            "info":"More text for a popup or tooltip"
-        },
-        "de": {
-            "label":"Zufallsdaten Generator",
-            "info":"Mehr Text für den Tooltip"
-        }
-    },
     "loadfile":{
         "name":"loadfile",
         "icon":"fa-solid fa-coffee",
+        "thumb":"/img/widgets/CSVFile.png",
         "en": {
             "label":"Load file",
             "info":"More text for a popup or tooltip"
         },
         "de": {
             "label":"Datei laden",
+            "info":"Mehr Text für den Tooltip. ieofhiwefhwifhweihfweifh. ndqienfn eiwpf"
+        }
+    },
+    "datinfo":{
+        "name":"datinfo",
+        "icon":"fa-solid fa-book-atlas",
+        "thumb":"/img/widgets/DataInfo.png",
+        "en": {
+            "label":"Date description",
+            "info":"More text for a popup or tooltip"
+        },
+        "de": {
+            "label":"Datenbeschreibung",
+            "info":"Mehr Text für den Tooltip"
+        }
+    },
+    "table":{
+        "name":"table",
+        "icon":"fa-solid fa-book-atlas",
+        "thumb":"/img/widgets/Table.png",
+        "en": {
+            "label":"Tabular view",
+            "info":"More text for a popup or tooltip"
+        },
+        "de": {
+            "label":"Tabellenansicht",
             "info":"Mehr Text für den Tooltip"
         }
     },
     "linechart":{
         "name":"linechart",
         "icon":"fa-solid fa-book-atlas",
+        "thumb":"/img/widgets/LinePlot.png",
         "en": {
             "label":"Line Chart",
             "info":"More text for a popup or tooltip"
@@ -38,6 +54,7 @@
     "barchart":{
         "name":"barchart",
         "icon":"fa-solid fa-book-atlas",
+        "thumb":"/img/widgets/BarPlot.png",
         "en": {
             "label":"Bar Chart",
             "info":"More text for a popup or tooltip"
@@ -46,7 +63,139 @@
             "label":"Balkendiagramm",
             "info":"Mehr Text für den Tooltip"
         }
+    },
+    "addrows":{
+        "name":"addrows",
+        "icon":"fa-solid fa-book-atlas",
+        "thumb":"/img/widgets/Concatenate.png",
+        "en": {
+            "label":"Add Rows",
+            "info":"More text for a popup or tooltip"
+        },
+        "de": {
+            "label":"Zeilen hinzufügen",
+            "info":"Mehr Text für den Tooltip"
+        }
+    },
+    "addcols":{
+        "name":"addcols",
+        "icon":"fa-solid fa-book-atlas",
+        "thumb":"/img/widgets/MergeData.png",
+        "en": {
+            "label":"Add columns",
+            "info":"More text for a popup or tooltip"
+        },
+        "de": {
+            "label":"Spalten hinzufügen",
+            "info":"Mehr Text für den Tooltip"
+        }
+    },
+    "join":{
+        "name":"join",
+        "icon":"fa-solid fa-book-atlas",
+        "thumb":"/img/widgets/LinePlot.png",
+        "en": {
+            "label":"Join Data",
+            "info":"More text for a popup or tooltip"
+        },
+        "de": {
+            "label":"Daten zusammenführen",
+            "info":"Mehr Text für den Tooltip"
+        }
+    },
+    "colsel":{
+        "name":"colsel",
+        "icon":"fa-solid fa-book-atlas",
+        "thumb":"/img/widgets/SelectColumns.png",
+        "en": {
+            "label":"Select columns",
+            "info":"More text for a popup or tooltip"
+        },
+        "de": {
+            "label":"Spalten auswählen",
+            "info":"Mehr Text für den Tooltip"
+        }
+    },
+    "rowsel":{
+        "name":"rowsel",
+        "icon":"fa-solid fa-book-atlas",
+        "thumb":"/img/widgets/SelectRows.png",
+        "en": {
+            "label":"Select rows",
+            "info":"More text for a popup or tooltip"
+        },
+        "de": {
+            "label":"Zeilen auswählen",
+            "info":"Mehr Text für den Tooltip"
+        }
+    },
+    "scalarmath":{
+        "name":"scalarmath",
+        "icon":"fa-solid fa-book-atlas",
+        "thumb":"/img/widgets/Preprocess.png",
+        "en": {
+            "label":"Scalar Operations",
+            "info":"More text for a popup or tooltip"
+        },
+        "de": {
+            "label":"Skalare Operationen",
+            "info":"Mehr Text für den Tooltip"
+        }
+    },
+    "mathcombine":{
+        "name":"mathcombine",
+        "icon":"fa-solid fa-book-atlas",
+        "thumb":"/img/widgets/Preprocess.png",
+        "en": {
+            "label":"Math operations on 2 datasets",
+            "info":"More text for a popup or tooltip"
+        },
+        "de": {
+            "label":"Funktionen mit 2 Datensätzen",
+            "info":"Mehr Text für den Tooltip"
+        }
+    },
+    "group":{
+        "name":"group",
+        "icon":"fa-solid fa-globe",
+        "thumb":"/img/widgets/Unique.png",
+        "en": {
+            "label":"Group data",
+            "info":"More text for a popup or tooltip"
+        },
+        "de": {
+            "label":"Daten gruppieren",
+            "info":"Mehr Text für den Tooltip"
+        }
+    },
+    "save":{
+        "name":"save",
+        "icon":"fa-solid fa-globe",
+        "thumb":"/img/widgets/Save.png",
+        "en": {
+            "label":"Save data",
+            "info":"More text for a popup or tooltip"
+        },
+        "de": {
+            "label":"Daten speichern",
+            "info":"Mehr Text für den Tooltip"
+        }
+    },
+    "random":{
+        "name":"random",
+        "icon":"fa-solid fa-globe",
+        "thumb":"/img/widgets/Random.png",
+        "en": {
+            "label":"Random Data Generator",
+            "info":"More text for a popup or tooltip"
+        },
+        "de": {
+            "label":"Zufallsdaten Generator",
+            "info":"Mehr Text für den Tooltip"
+        }
     }
+    
+
 }
 
 

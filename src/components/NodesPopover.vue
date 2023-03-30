@@ -2,13 +2,23 @@
   <ion-content class="ion-padding ion-popover">
     <p>{{ props.msg }}</p>
     <ion-list class="list">
-      <ion-item v-for="(option,idx) in options" :key="option.type">
-        <ion-label>
+      <div v-for="(option,idx) in options" :key="option.type" class="item">
+      <ion-item >
+        <ion-label class="label">
           {{ nodeItem(option.type,"label") }}
         </ion-label>
-        <font-awesome-icon :icon="option.icon" size="xl" slot="start"/>
+          <ion-note class="tooltip">
+          {{ nodeItem(option.type,"info") }}
+          </ion-note>
+          <ion-thumbnail slot="start">
+            <img :alt='option.type' :src="option.thumb" />
+          </ion-thumbnail>
+        <!-- 
+        <font-awesome-icon :icon="option.icon" size="xl" slot="start"></font-awesome-icon>
+        -->
         <ion-checkbox slot="end" v-model="chk[idx]" @ionChange="clk(idx)"></ion-checkbox>
       </ion-item>
+    </div>
     </ion-list>
 </ion-content>
 </template>
@@ -16,6 +26,7 @@
 <script lang="ts" setup>
 import { IonContent, IonButton } from '@ionic/vue';
 import { IonItem, IonLabel, IonList, IonCheckbox } from '@ionic/vue';
+import { IonNote } from '@ionic/vue';
 
 import { ref, onMounted } from "vue"
 
@@ -50,7 +61,7 @@ const clk = async (n:number) => {
 onMounted(() => {
   Object.keys(nodeTypes).forEach((e,i) => {
     chk.value[i] = false
-    options.value[i] = {type: e, icon: nodeTypes[e].icon}
+    options.value[i] = {type: e, icon: nodeTypes[e].icon, thumb:nodeTypes[e].thumb }
   })
 })
 
@@ -100,7 +111,40 @@ ion-content.ion-popover::part(scroll) {
   overflow-x:hide;
   overflow-y: scroll;
 }
-  
+
+/* tooltip here ...
+https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_tooltip
+*/
+
+.item {
+  position: relative;
+  overflow: hidden; 
+}
+.label {
+  position: absolute;
+  top:0;
+  left: 0;
+}
+.tooltip {
+  visibility:hidden;
+  overflow: hidden; 
+  color: #c00;
+  height: 0;
+  font-size: 80%;
+}
+.item:hover .tooltip {
+  visibility:visible;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: #ddd;
+  width:90%;
+  height:100%;
+  overflow-wrap: break-word;
+  word-break:break-word;
+  overflow: clip; 
+}
+
 
 </style>
 
