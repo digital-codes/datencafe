@@ -1,0 +1,10 @@
+﻿city;country;technology;api;url;is_applicable;lat;long
+Dormagen;Deutschland;OpenDataSoft;https://opendata.dormagen.de/api/v2/catalog/datasets;opendata.dormagen.de;1;51,093685;6,828911
+Freiburg;Deutschland;Website;https://fritz.freiburg.de/duva2ckan/files/;fritz.freiburg.de;0;47,999008;7,842104
+Herne;Deutschland;GeoNetwork;https://opendata.herne.de/katalogopendata/doc/api/index.html;opendata.herne.de;1;51,536895;7,200915
+Mannheim;Deutschland;OpenDataSoft;https://mannheim.opendatasoft.com/api/v2/catalog/datasets;mannheim.opendatasoft.com;1;49,487459;8,6604
+Potsdam;Deutschland;OpenDataSoft;https://opendata.potsdam.de/api/v2/catalog/datasets;opendata.potsdam.de;1;52,390569;13,064473
+Kreis-Kleve;Deutschland;CKAN;https://www.offenesdatenportal.de/api/3/action/organization_activity_list?id=kreis-kleve;www.offenesdatenportal.de?id=kreis-kleve;0;51,8;6,2
+Kreis-Viersen;Deutschland;CKAN;https://www.offenesdatenportal.de/api/3/action/organization_activity_list?id=kreis-viersen;www.offenesdatenportal.de?id=kreis-viersen;0;51,255499;6,396523
+Rhein-Kreis-Neuss;Deutschland;OpenDataSoft;https://opendata.rhein-kreis-neuss.de/api/v2/catalog/datasets;opendata.rhein-kreis-neuss.de;1;51,204197;6,687951
+Bayern;Deutschland;CKAN;https://opendata.bayern.de/api/1/search/dataset?all_fields=1&q=*:*;opendata.bayern.de;0;49;12
