@@ -18,10 +18,15 @@
 
         <div id="container">
         <!-- use en as default to get length of storylist -->
-        <ion-card color="light" v-for="(s,i) in infoItems.en" :key="i">
+        <ion-card color="light" v-for="(item,i) in infoItems.en" :key="i">
           <ion-card-header>
             <ion-card-title>{{ infoItem(i,"title") }}</ion-card-title>
-            <ion-card-subtitle>{{ infoItem(i,"date") }} 
+            <div class="image">
+            <ion-img :src="item.image" :alt="item.alt"></ion-img>
+            <ion-label class="attribution">{{item.attribution}}</ion-label>
+            </div>
+            <ion-card-subtitle>
+              {{ infoItem(i,"date") }} 
             </ion-card-subtitle>
           </ion-card-header>
 
@@ -39,7 +44,7 @@
 <script setup lang="ts">
 
 import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
-import { IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent } from '@ionic/vue'
+import { IonCard, IonImg, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent } from '@ionic/vue'
 
 
 // https://lokalise.com/blog/vue-i18n/
@@ -144,5 +149,25 @@ rg.run()
 #container a {
   text-decoration: none;
 }
+
+.image {
+  background-color: #ddd;
+  opacity:.8;
+  padding: 1rem;
+  margin-top:1rem;
+
+}
+
+
+ion-img {
+  height: 150px;
+}
+
+ion-label.attribution {
+  font-size: 70%;
+  color:#444;
+  background: #eee;
+}
+
 
 </style>
