@@ -34,6 +34,7 @@
           </ion-card-header>
         </ion-card>
       </div>
+
     </ion-content>
   </ion-page>
 </template>

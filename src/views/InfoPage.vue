@@ -16,26 +16,56 @@
         </ion-toolbar>
       </ion-header>
 
-      <div id="container">
-        <strong class="capitalize">{{ $route.params.id }}</strong>
-        <p>{{ $t("titles.about") }}</p>
+        <div id="container">
+        <!-- use en as default to get length of storylist -->
+        <ion-card color="light" v-for="(s,i) in infoItems.en" :key="i">
+          <ion-card-header>
+            <ion-card-title>{{ infoItem(i,"title") }}</ion-card-title>
+            <ion-card-subtitle>{{ infoItem(i,"date") }} 
+            </ion-card-subtitle>
+          </ion-card-header>
 
-      <NodesPop msg="nodespop" signal="123" class="nodelist" />
-
+          <ion-card-content>
+            {{ infoItem(i,"body") }}
+          </ion-card-content>
+        </ion-card>
       </div>
+
+
     </ion-content>
   </ion-page>
 </template>
 
 <script setup lang="ts">
-import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
 
+import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
+import { IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent } from '@ionic/vue'
+
+
+// https://lokalise.com/blog/vue-i18n/
+// if we need translation inside methods, import this as well:
+import { useI18n } from 'vue-i18n'
+const { t, locale } = useI18n({ useScope: 'global' })
+
+import infoItems from "../assets/info/infoItems.json"
+const infoItem = (idx,id) => {
+  //console.log(idx,id,locale.value)
+  //console.log(storyItems[locale.value])
+  const text = infoItems[locale.value][idx][id]
+  return text
+}
+
+// ----------------------------------------------
+
+/*
 // text utils
 import {StringUtils} from "../services/StringUtils"
 
 StringUtils.bestMatch("abc",["abd","cbc","cbd"])
 StringUtils.compare("abc","cbc")
 
+
+*/
 
 /*
 import { CsvLoader } from "../classes/CsvLoader"
@@ -83,48 +113,20 @@ rg.period = 3
 rg.run()
 */
 
-// --------------
-import { IonButton, IonIcon, IonItem, IonLabel, IonList, IonCheckbox } from '@ionic/vue';
-import { ref, onMounted } from "vue"
-
-import { useI18n } from 'vue-i18n'
-const { t, locale } = useI18n({ useScope: 'global' })
-
-import nodeTypes from "../assets/nodes/nodeTypes.json"
-
-import NodesPop from "../components/NodesPopover.vue"
-
-const nodeItem = (type,id) => {
-  const text = nodeTypes[type][locale.value][id]
-  return text
-}
-
-const options = ref([])
-
-const chk = ref([])
-const clk = (n:number) => {
-  console.log("clicked:",n)
-  console.log(chk.value[n],options.value[n].type)
-}
-
-onMounted(() => {
-  Object.keys(nodeTypes).forEach((e,i) => {
-    chk.value[i] = false
-    options.value[i] = {type: e, icon: nodeTypes[e].icon}
-  })
-})
-
 
 </script>
 
 <style scoped>
 #container {
   text-align: center;
+  margin:10px;
+  /*
   position: absolute;
   left: 0;
   right: 0;
   top: 50%;
   transform: translateY(-50%);
+  */
 }
 
 #container strong {
@@ -143,8 +145,4 @@ onMounted(() => {
   text-decoration: none;
 }
 
-.nodelist {
-  height: 300px;
-  width: 400px;
-}
 </style>
