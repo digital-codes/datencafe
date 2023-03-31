@@ -33,6 +33,10 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import ('../views/StoryPage.vue')
       },
       {
+        path: '/login',
+        component: () => import ('../views/LoginPage.vue')
+      },
+      {
         path: '/work',
         component: () => import ('../views/WorkPage.vue')
         /*

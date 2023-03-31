@@ -8,7 +8,8 @@
     "tutorial":"Anleitung",
     "data":"Daten",
     "work":"Arbeitsbereich",
-    "stories":"Stories"    
+    "stories":"Stories",
+    "login":"Anmelden"
   },
   "titles": {
     "about": "Info DE",
@@ -19,7 +20,18 @@
       "views":"Darstellungen"
     },
     "data":"Open Data Karte",
-    "stories":"Geschichten"    
+    "stories":"Geschichten",
+    "login":"Anmelden"
+  },
+  "login": {
+    "titel":"Anmelden",
+    "register":"Registrierung nur mit Einladung",
+    "email":"E-Mail",
+    "pwd":"Passwort",
+    "submit":"Absenden",
+    "good":"Sie sind angemeldet",
+    "bad":"Anmeldung fehlgeschlagen"
+
   },
   "download": "Herunterladen",
   "notimplemented":"Noch nicht verfügbar"

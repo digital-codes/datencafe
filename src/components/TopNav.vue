@@ -109,6 +109,11 @@
           <ion-label>{{ $t("tabs.tutorial") }}</ion-label>
         </ion-tab-button>
 
+        <ion-tab-button tab="login" href="/login">
+          <font-awesome-icon :icon="['fas', 'user-secret']" />
+          <ion-label>{{ $t("tabs.login") }}</ion-label>
+        </ion-tab-button>
+
 
         <div>
             <ion-item>

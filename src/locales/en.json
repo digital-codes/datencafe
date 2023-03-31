@@ -8,7 +8,8 @@
     "tutorial":"Tutorials",
     "data":"Data",
     "work":"workspace",
-    "stories":"Stories"    
+    "stories":"Stories",
+    "login":"Login"
   },
   "titles": {
     "about": "Info",
@@ -19,7 +20,17 @@
       "views":"Visualization"
     },
     "data":"Open Data Map",
-    "stories":"Stories"
+    "stories":"Stories",
+    "login":"Login"
+  },
+  "login": {
+    "titel":"Login",
+    "register":"Registration by invitation only",
+    "email":"E-Mail",
+    "pwd":"Password",
+    "submit":"Submit",
+    "good":"You are logged in",
+    "bad":"Login failed"
   },
   "download": "Download",
   "notimplemented":"Not implemented yet"

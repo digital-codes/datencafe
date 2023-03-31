@@ -30,3 +30,6 @@ npm-debug.log*
 /platforms
 /plugins
 /www
+/public/php/users.csv
+/public/php/vendor
+
