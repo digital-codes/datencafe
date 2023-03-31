@@ -3,7 +3,7 @@
     {
       "title":"What",
       "icon":"",
-      "image":"https://upload.wikimedia.org/wikipedia/commons/3/34/Data%2C_Information%2C_Knowledge%2C_and_Wisdom_-rtwGimli_keynote_by_%40Nora3000_-viznotes_%2842038113741%29.jpg",
+      "image":"/img/info/Data%2C_Information%2C_Knowledge%2C_and_Wisdom_-rtwGimli_keynote_by_%40Nora3000_-viznotes_%2842038113741%29.jpg",
       "alt":"Image",
       "attribution":"Longlivetheux, CC BY-SA 4.0 <https://creativecommons.org/licenses/by-sa/4.0>, via Wikimedia Commons",
       "body":"This story could feature a city that released open data on public transportation schedules, routes, and delays. Local app developers were then able to create new tools and apps that made it easier for people to navigate the city's transportation system, resulting in a more efficient and convenient commute for residents.",
@@ -13,7 +13,7 @@
     {
       "title":"Who",
       "icon":"",
-      "image":"https://upload.wikimedia.org/wikipedia/commons/2/2a/Movie_audience_%281924%29.svg",
+      "image":"/img/info/Movie_audience_%281924%29.svg",
       "alt":"Image",
       "attribution":"Giulia Forsythe, CC BY 2.0 <https://creativecommons.org/licenses/by/2.0>, via Wikimedia Commons",
       "body":"This story could highlight a community that used open data on air and water quality to monitor pollution levels in their area. Armed with this information, they were able to take action to reduce pollution and improve the health of their community.",
@@ -23,7 +23,7 @@
     {
       "title":"Why",
       "icon":"",
-      "image":"https://upload.wikimedia.org/wikipedia/commons/2/21/BELIEVE_YOUR_SELF.jpg",
+      "image":"/img/info/BELIEVE_YOUR_SELF.jpg",
       "alt":"Image",
       "attribution":"Vusi vilanculos, CC BY-SA 4.0 <https://creativecommons.org/licenses/by-sa/4.0>, via Wikimedia Commons",
       "body":"This story could focus on how open data was used to coordinate disaster response efforts in the wake of a natural disaster. For example, communities could use open data to track the location and availability of emergency supplies, map out evacuation routes, and identify areas that were particularly vulnerable to damage.",
@@ -33,7 +33,7 @@
     {
       "title":"Imprint",
       "icon":"",
-      "image":"https://upload.wikimedia.org/wikipedia/commons/8/8d/Medieval_Seal_Matrix_imprint_%28FindID_10073%29.jpg",
+      "image":"/img/info/Medieval_Seal_Matrix_imprint_%28FindID_10073%29.jpg",
       "alt":"Image",
       "attribution":"North Lincolnshire Museum, CC BY 2.0 <https://creativecommons.org/licenses/by/2.0>, via Wikimedia Commons",
       "body":"This story could focus on how open data was used to coordinate disaster response efforts in the wake of a natural disaster. For example, communities could use open data to track the location and availability of emergency supplies, map out evacuation routes, and identify areas that were particularly vulnerable to damage.",
@@ -43,7 +43,7 @@
     {
       "title":"GDPR",
       "icon":"",
-      "image":"https://upload.wikimedia.org/wikipedia/commons/b/b0/GDPR%2C_rappresentazione_grafica.jpg",
+      "image":"/img/info/GDPR%2C_rappresentazione_grafica.jpg",
       "alt":"Image",
       "attribution":"Andrea Novello, CC BY-SA 4.0 <https://creativecommons.org/licenses/by-sa/4.0>, via Wikimedia Commons",
       "body":"This story could focus on how open data was used to coordinate disaster response efforts in the wake of a natural disaster. For example, communities could use open data to track the location and availability of emergency supplies, map out evacuation routes, and identify areas that were particularly vulnerable to damage.",
