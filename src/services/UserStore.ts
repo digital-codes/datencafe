@@ -2,26 +2,30 @@
 
 import { defineStore } from 'pinia'
 
-export const UerStore = defineStore({
+export interface UserInfo {
+    token: string // token
+}
+
+export const UserStore = defineStore({
     id: 'userstore',
     state: () => ({
-        token: "" 
+        info: {} as UserInfo
     }),
     actions: {
         clear() {
-            this.token = String("")
+            this.info = {token:""} as UserInfo
         },
         set(tok?: string) {
             if (tok === undefined) {
                 throw (new Error("Missing token on add()"))
             }
-            this.token = tok 
+            this.info = {token:tok} 
         },
     },
     getters: {
-        token: state => () => { return state.token },
+        token: state => () => { return state.info.token },
         exists: state => () => {
-            return state.token != ""
+            return state.info.token != ""
         },
     }
 })

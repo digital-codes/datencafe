@@ -4,7 +4,8 @@ import { defineStore } from 'pinia'
 
 
 export interface PoolItem {
-    id: string // the url
+    url: string // the url
+    name: string // human readable
     meta?: string // json string, optional
 }
 
@@ -21,24 +22,25 @@ export const PoolStore = defineStore({
             }
             this.items = JSON.parse(itemString) as PoolItem[]
         },
-        add(id?: string, meta="") {
-            if (id === undefined) {
-                throw (new Error("Missing id on add()"))
+        add(url?: string, name="", meta="") {
+            if (url === undefined) {
+                throw (new Error("Missing url on add()"))
             }
-            console.log("Add:", id)
+            console.log("Add:", url)
             const item = {
-                id: id,
+                url: url,
+                name: name,
                 meta: meta
             }
             this.items.push(item as PoolItem)
             console.log("pool size:", this.items.length)
         },
-        remove(id?: string) {
-            if (id === undefined) {
-                throw (new Error("Missing id on remove()"))
+        remove(url?: string) {
+            if (url === undefined) {
+                throw (new Error("Missing url on remove()"))
             }
-            console.log("Remove:", id)
-            const sidx = this.items.findIndex((item: PoolItem) => item.id === id)
+            console.log("Remove:", url)
+            const sidx = this.items.findIndex((item: PoolItem) => item.url === url)
             if (sidx === -1) {
                 throw new Error("Source doesn't exist")
             }

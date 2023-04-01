@@ -16,6 +16,10 @@
     import { Modes } from '../services/store'
     const theme = themeStore()
 
+  // user store
+  import { UserStore, UserInfo } from '../services/UserStore'
+  const userStore = UserStore()
+
   // globals
   import { Version } from "../services/GlobalDefs"
 
@@ -114,8 +118,12 @@
           <ion-label>{{ $t("tabs.login") }}</ion-label>
         </ion-tab-button>
 
+        <div v-if="userStore.exists()">
+            <font-awesome-icon :icon="['fas', 'user']" size="md" :style="{ color: 'blue' }"/>
+        </div>
 
-        <div>
+
+          <div>
             <ion-item>
               <ion-label class="modeLbl left">{{ $t("light") }}</ion-label>
               <ion-toggle @ionChange="changeMode" :checked="false"></ion-toggle>

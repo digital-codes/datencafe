@@ -51,6 +51,8 @@
         </ion-card>
       </div>
 
+      {{ userStore.exists() }}
+      {{ userStore.token() }}
 
     </ion-content>
   </ion-page>
@@ -62,7 +64,10 @@ import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, Io
 import { IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent } from '@ionic/vue'
 import { IonInput, IonItem, IonLabel, IonTextarea } from '@ionic/vue';
 
-import { ref } from 'vue';
+// user store
+import { UserStore, UserInfo } from '../services/UserStore'
+
+import { ref, onMounted } from 'vue';
 
 const loginGood = ref(false)
 const loginBad = ref(false)
@@ -86,6 +91,7 @@ const submitForm = () => {
     if (!response.ok) {
       loginBad.value = true
       loginGood.value = false
+      userStore.clear()
       throw new Error('Network response was not ok: ' + String(response.status));
    }
    return response.text();
@@ -96,13 +102,23 @@ const submitForm = () => {
     console.log(token)
     loginGood.value = true
     loginBad.value = false
+    userStore.set(token)
   })
   .catch(error => {
     loginGood.value = false
     loginBad.value = true
+    userStore.clear()
     console.error('There was an error:', error);
   });
 };
+
+const userStore = UserStore()
+
+// init store on mount
+onMounted(() => {
+  userStore.clear()
+})
+
 
 </script>
 
