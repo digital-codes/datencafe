@@ -119,8 +119,11 @@
         </ion-tab-button>
 
         <div v-if="userStore.exists()">
-            <font-awesome-icon :icon="['fas', 'user']" size="md" :style="{ color: 'blue' }"/>
+            <font-awesome-icon :icon="['fas', 'user']" size="md" class="token"/>
         </div>
+        <div v-else>
+          <font-awesome-icon :icon="['fas', 'user-slash']" size="md" class="notoken"/>
+        </div>          
 
 
           <div>
@@ -188,4 +191,13 @@
 .modeLbl.right {
   text-align: left;
 }
+
+.token {
+  color: var(--ion-color-primary);
+}
+
+.notoken {
+  color: var(--ion-color-warning-shade);
+}
+
 </style>

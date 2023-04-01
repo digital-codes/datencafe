@@ -51,9 +51,6 @@
         </ion-card>
       </div>
 
-      {{ userStore.exists() }}
-      {{ userStore.token() }}
-
     </ion-content>
   </ion-page>
 </template>
@@ -152,13 +149,13 @@ onMounted(() => {
 }
 
 .loginGood {
-  color:#000!important;
-  background: #0c0;
+  color: var(--ion-color-success-shade)!important;
+  background: var(--ion-color-shade);
 }
 
 .loginBad {
-  color:#000!important;
-  background: #c00;
+  color: var(--ion-color-danger-shade)!important;
+  background: var(--ion-color-shade);
 }
 
 
