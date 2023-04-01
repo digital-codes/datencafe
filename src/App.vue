@@ -1,19 +1,21 @@
 <template>
   <ion-app>
     <ion-router-outlet></ion-router-outlet>
-  <!-- 
+    <!-- 
+
     <ion-split-pane content-id="main-content">
       <ion-menu content-id="main-content" type="overlay">
         <ion-content>
           <ion-list id="inbox-list">
-            <ion-list-header>Inbox</ion-list-header>
-            <ion-note>hi@ionicframework.com</ion-note>
+            <ion-list-header>Pages</ion-list-header>
 
-            <ion-menu-toggle auto-hide="false" v-for="(p, i) in appPages" :key="i">
-              <ion-item @click="selectedIndex = i" router-direction="root" :router-link="p.url" lines="none" detail="false" class="hydrated" :class="{ selected: selectedIndex === i }">
-                <ion-icon aria-hidden="true" slot="start" :ios="p.iosIcon" :md="p.mdIcon"></ion-icon>
-                <ion-label>{{ p.title }}</ion-label>
+            <ion-menu-toggle auto-hide="false" v-for="(p, i) in routes" :key="i">
+abbc {{ route }}
+              <ion-item v-for="r in route" :key="r.path" :router="true" :to="r.path">
+xyz {{ r }}
+                <ion-label>123{{ r.name }}</ion-label>
               </ion-item>
+         
             </ion-menu-toggle>
           </ion-list>
         </ion-content>
@@ -27,7 +29,13 @@
 
 <script setup lang="ts">
 import TopNav from './components/TopNav.vue';
-import { ref } from 'vue';
+
+// user store
+import { UserStore, UserInfo } from './services/UserStore'
+
+import { ref, onMounted } from 'vue';
+
+import { routes } from "./router"
 
 import {
   IonApp,
@@ -68,6 +76,14 @@ import {
 
 // do not track ...
 console.log("DNT:",navigator.doNotTrack)
+
+const userStore = UserStore()
+
+
+// init store on mount
+onMounted(() => {
+  userStore.clear()
+})
 
 
 </script>

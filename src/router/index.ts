@@ -3,7 +3,7 @@ import { RouteRecordRaw } from 'vue-router';
 import TopNav from '../components/TopNav.vue';
 
 
-const routes: Array<RouteRecordRaw> = [
+export const routes: Array<RouteRecordRaw> = [
   {
     path: '',
     redirect: '/info'
@@ -13,30 +13,37 @@ const routes: Array<RouteRecordRaw> = [
     component: TopNav,
     children: [
       {
+        name:"Info",
         path: '',
         redirect: '/info',
       },
       {
+        name:"Info",
         path: '/info',
         component: () => import ('../views/InfoPage.vue')
       },
       {
+        name:"Data",
         path: '/data',
         component: () => import ('../views/DataPage.vue')
       },
       {
+        name:"Instructions",
         path: '/instructions',
         component: () => import ('../views/InstructionsPage.vue')
       },
       {
+        name:"Stories",
         path: '/stories',
         component: () => import ('../views/StoryPage.vue')
       },
       {
+        name:"Login",
         path: '/login',
         component: () => import ('../views/LoginPage.vue')
       },
       {
+        name:"Workspace",
         path: '/work',
         component: () => import ('../views/WorkPage.vue')
         /*

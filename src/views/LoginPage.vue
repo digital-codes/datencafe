@@ -61,10 +61,11 @@ import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, Io
 import { IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent } from '@ionic/vue'
 import { IonInput, IonItem, IonLabel, IonTextarea } from '@ionic/vue';
 
+import { ref } from 'vue';
+
 // user store
 import { UserStore, UserInfo } from '../services/UserStore'
-
-import { ref, onMounted } from 'vue';
+const userStore = UserStore()
 
 const loginGood = ref(false)
 const loginBad = ref(false)
@@ -108,13 +109,6 @@ const submitForm = () => {
     console.error('There was an error:', error);
   });
 };
-
-const userStore = UserStore()
-
-// init store on mount
-onMounted(() => {
-  userStore.clear()
-})
 
 
 </script>
