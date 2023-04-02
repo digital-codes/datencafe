@@ -57,8 +57,8 @@ library.add(faBook, faUser, faUserSlash, faHatWizard, faWandMagicSparkles)
 
 // ----------------
 // pinia
-import { createPinia, Pinia  } from 'pinia'
-const pinia:Pinia = createPinia()
+import { createPinia  } from 'pinia'
+const pinia = createPinia()
 
 import { UserStore, UserInfo } from './services/UserStore'
 
@@ -108,6 +108,7 @@ app.use(router);
 // axios
 //app.use(userService)
 
+/*
 router.beforeEach((to) => {
   // ✅ This will work because the router starts its navigation after
   // the router is installed and pinia will be installed too
@@ -115,7 +116,7 @@ router.beforeEach((to) => {
   const userStore = UserStore(pinia)
   console.log("Token:", userStore.exists(),userStore.token())
 })
-
+*/
 
 router.isReady().then(() => {
   app.mount('#app');

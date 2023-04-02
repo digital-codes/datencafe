@@ -73,7 +73,7 @@ import { RandomGen } from "../classes/RandomGen"
 onMounted(() => {
 
   const rg = new RandomGen("P1")
-  rg.period = 30
+  rg.period = 10
   rg.cols = 5
   rg.run()
 

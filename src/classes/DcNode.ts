@@ -5,11 +5,12 @@ import eventBus from '../services/eventBus';
 // globals
 import { Signals } from "../services/GlobalDefs"
 // provider/subscriber
-//import { PubStore } from '../services/PubStore'
+import { PubStore } from '../services/PubStore'
+const providers = PubStore()
 
 // dataframe
-//import * as dfd from 'danfojs/dist/danfojs-browser/src';
-import { DataFrame, toJSON, toCSV } from 'danfojs/dist/danfojs-browser/src';
+import * as dfd from 'danfojs/dist/danfojs-browser/src';
+//import { DataFrame, toJSON, toCSV } from 'danfojs/dist/danfojs-browser/src';
 
 export class DcNode {
   // properties"
@@ -24,9 +25,10 @@ export class DcNode {
   static debug = true // false;
   // store/messaging
   // static part
-  //static readonly providers = PubStore()
+  static readonly providers = PubStore()
   static readonly signals = Signals
-  static readonly dfd = {DataFrame:DataFrame, toJSON : toJSON, toCSV: toCSV} // dfd
+  //static readonly dfd = {DataFrame:DataFrame, toJSON : toJSON, toCSV: toCSV} // dfd
+  static readonly dfd = dfd
   // instance part
   readonly _messaging = eventBus
   // --------

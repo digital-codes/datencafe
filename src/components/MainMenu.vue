@@ -45,7 +45,6 @@
   
           </ion-content>
         </ion-menu>
-        <ion-router-outlet id="main-content"></ion-router-outlet>
   </template>
   
   <script setup lang="ts">

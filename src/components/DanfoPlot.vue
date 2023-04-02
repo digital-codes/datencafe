@@ -1,5 +1,9 @@
 <template>
 <div ref="plotWrap" class="container" >
+  <!-- 
+  <div v-for="(item,index) in items" :key="index" class="chartItem">
+  <div v-for="(item,index) in items" :key="item.key" class="chartItem">
+  -->
   <div v-for="(item,index) in items" :key="index" class="chartItem">
     <h3 class="dftitle">{{ item.name }}</h3>
     <!--
@@ -7,7 +11,9 @@
     -->
     <div :id="prefix + item.id" :class="item.type == 'table'?'dftable':'dfchart'">
     </div>
+    <!-- 
     <p>{{ item.key }}</p>
+    -->
   </div>
 </div>
 </template>
@@ -43,8 +49,10 @@ onMounted(() => {
   plotWrap.value.style.width = "100%" //String(ww.value) + "px"
   plotWrap.value.style.height = String(wh.value * .7) + "px"
 
-  items.value = props.propItems
-  console.log("Mounted:",items.value)
+  // here, we just initialize items. With initial value, watcheffect 
+  // will stilll be triggered ...
+  items.value = [] //props.propItems
+  console.log("DanfoPlot Mounted:",items.value)
   loaded.value = true
 })
 
@@ -53,11 +61,11 @@ watchEffect(() => {
     console.log("Danfo data update:", props.propItems)
     props.propItems.forEach(e => {
       e.key = 1 // init key
-      if (items.value.findIndex(i => {e.id == i.id}) == -1) {
-        console.log("Push item", e.id)
-        items.value.unshift(e)
+      if (items.value.findIndex(i => e.id == i.id) == -1) {
+        items.value.push(e) // unshift(e)
         // set messaging
         //const key = 
+        /*
         const signal = Signals.PLOTPREFIX + e.id
         eventBus.on(signal, () => {
           console.log("Update signal:", signal)
@@ -67,20 +75,20 @@ watchEffect(() => {
         const itemId = signal.split("-")[1]
         console.log("ItemId:", itemId)
         const idx = items.value.findIndex(ii => {
-          console.log("Checking ", ii.id)
-          return ii.id == itemId 
+          console.log(" On checking ", ii.id)
+          return (ii.id == itemId) 
         })
         if (idx == -1) {
           throw (new Error("Invalid id:" + itemId))
         }
         // update key
         items.value[idx].key++
-        console.log("Updated item key for: ",items.value[idx],items.value[idx].key)
-
+        console.log("Updated item key for: ",idx,items.value[idx],items.value[idx].key)
         })
+        */  
       }
     });
-    items.value = props.propItems
+    //items.value = props.propItems
   }
 });
 
