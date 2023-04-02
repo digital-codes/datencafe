@@ -1,6 +1,6 @@
 <template>
   <ion-app>
-    <ion-split-pane content-id="main-content">
+    <ion-split-pane when="(min-width: 4000px)" content-id="main-content">
       <MainMenu />
       <ion-router-outlet id="main-content"></ion-router-outlet>
     </ion-split-pane>
@@ -14,22 +14,11 @@ import {
   IonRouterOutlet,
   IonSplitPane,
 } from '@ionic/vue';
-import MainMenu from "@/components/MainMenu.vue";
 
-// user store
-import { UserStore, UserInfo } from './services/UserStore'
+import MainMenu from "@/components/MainMenu.vue";
 
 // do not track ...
 console.log("DNT:",navigator.doNotTrack)
-
-const userStore = UserStore()
-
-
-// init store on mount
-onMounted(() => {
-  userStore.clear()
-})
-
 
 </script>
 

@@ -32,8 +32,10 @@ import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, Io
 import { IonCol, IonGrid, IonRow } from '@ionic/vue';
 import WorkFlow from '../components/WorkFlow.vue'
 import DanfoPlot from '../components/DanfoPlot.vue'
-import { ref } from "vue"
+import { ref, onMounted } from "vue"
 import TitleBar from "@/components/TitleBar.vue"
+
+
 
 // items
 const items = ref([
@@ -60,60 +62,62 @@ const update = () => {
 setTimeout(update, 2000)
 */
 
-import { RandomGen } from "../classes/RandomGen"
-const rg = new RandomGen("P2")
-rg.period = 300
-rg.cols = 5
-rg.run()
-
 // globals
 import { Signals } from "../services/GlobalDefs"
 // listener
 import { LinePlot } from "../classes/LinePlot"
-const chart1 = new LinePlot("P1")
-chart1.name = "fkwenfj"
-// add to items
-items.value.unshift(
-      {
-        id:chart1.id,
-        name:chart1.name,
-        type:"chart"
-      }
-    )
-// tell listener to listen to source
-chart1.msgOn(Signals.UPDPREFIX + rg.id)
-// 
 import { BarPlot } from "../classes/BarPlot"
-const chart2 = new BarPlot("P2")
-chart2.name = "32rfewe"
-// add to items
-items.value.unshift(
-      {
-        id:chart2.id,
-        name:chart2.name,
-        type:"table"
-      }
-    )
-// tell listener to listen to source
-chart2.msgOn(Signals.UPDPREFIX + rg.id)
-
-// 
 import { DataInfo } from "../classes/DataInfo"
-const chart3 = new DataInfo("P4")
-chart3.name = "32r Info fewe"
-// add to items
-items.value.unshift(
-      {
-        id:chart3.id,
-        name:chart3.name,
-        type:"table"
-      }
-    )
-// tell listener to listen to source
-chart3.msgOn(Signals.UPDPREFIX + rg.id)
+import { RandomGen } from "../classes/RandomGen"
 
-// tell listener to listen to source
-chart3.msgOn(Signals.UPDPREFIX + rg.id)
+onMounted(() => {
+
+  const rg = new RandomGen("P1")
+  rg.period = 30
+  rg.cols = 5
+  rg.run()
+
+  const chart1 = new LinePlot("P2")
+  chart1.name = "fkwenfj"
+  // add to items
+  items.value.unshift(
+        {
+          id:chart1.id,
+          name:chart1.name,
+          type:"chart"
+        }
+      )
+  // tell listener to listen to source
+  chart1.msgOn(Signals.UPDPREFIX + rg.id)
+  // 
+  const chart2 = new BarPlot("P3")
+  chart2.name = "32rfewe"
+  // add to items
+  items.value.unshift(
+        {
+          id:chart2.id,
+          name:chart2.name,
+          type:"chart"
+        }
+      )
+  // tell listener to listen to source
+  chart2.msgOn(Signals.UPDPREFIX + rg.id)
+
+  // 
+  const chart3 = new DataInfo("P4")
+  chart3.name = "32r Info fewe"
+  // add to items
+  items.value.unshift(
+        {
+          id:chart3.id,
+          name:chart3.name,
+          type:"table"
+        }
+      )
+  // tell listener to listen to source
+  chart3.msgOn(Signals.UPDPREFIX + rg.id)
+
+})
 
 
 //////////////

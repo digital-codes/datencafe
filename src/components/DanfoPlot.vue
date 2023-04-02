@@ -2,8 +2,12 @@
 <div ref="plotWrap" class="container" >
   <div v-for="(item,index) in items" :key="index" class="chartItem">
     <h3 class="dftitle">{{ item.name }}</h3>
+    <!--
+    <div :id="prefix + item.id" :class="item.type == 'table'?'dftable':'dfchart'" :key="item.key">
+    -->
     <div :id="prefix + item.id" :class="item.type == 'table'?'dftable':'dfchart'">
     </div>
+    <p>{{ item.key }}</p>
   </div>
 </div>
 </template>
@@ -12,6 +16,7 @@
 import { ref, reactive, onMounted, watchEffect, computed } from "vue"
 // globals
 import { Signals } from "../services/GlobalDefs"
+import eventBus from '../services/eventBus';
 
 // items
 const props = defineProps({
@@ -45,10 +50,40 @@ onMounted(() => {
 
 watchEffect(() => {
   if (props.propItems) {
-    console.log("data update:", props.propItems)
+    console.log("Danfo data update:", props.propItems)
+    props.propItems.forEach(e => {
+      e.key = 1 // init key
+      if (items.value.findIndex(i => {e.id == i.id}) == -1) {
+        console.log("Push item", e.id)
+        items.value.unshift(e)
+        // set messaging
+        //const key = 
+        const signal = Signals.PLOTPREFIX + e.id
+        eventBus.on(signal, () => {
+          console.log("Update signal:", signal)
+        // test if we can do something else while popover is active ..
+        // allow to close on specific return value. only if open
+        console.log("FIXME: signal.off missing")
+        const itemId = signal.split("-")[1]
+        console.log("ItemId:", itemId)
+        const idx = items.value.findIndex(ii => {
+          console.log("Checking ", ii.id)
+          return ii.id == itemId 
+        })
+        if (idx == -1) {
+          throw (new Error("Invalid id:" + itemId))
+        }
+        // update key
+        items.value[idx].key++
+        console.log("Updated item key for: ",items.value[idx],items.value[idx].key)
+
+        })
+      }
+    });
     items.value = props.propItems
   }
 });
+
 
 </script>
   

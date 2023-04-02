@@ -4,9 +4,6 @@
   
   <script setup>
   import { onMounted, onUnmounted, ref, watchEffect } from 'vue';
-  //  import { DataFrame } from 'danfojs-node';
-  import * as dfd from 'danfojs/dist/danfojs-browser/src';
-  import * as io from "danfojs/dist/danfojs-base/io/browser"
   
   const props = defineProps({
     data: {

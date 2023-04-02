@@ -2,7 +2,11 @@
 
 import {DcNode} from "./DcNode"
 
-import * as dfd from 'danfojs/dist/danfojs-browser/src';
+import {DataFrame, toJSON} from 'danfojs/dist/danfojs-browser/src';
+
+// provider/subscriber
+import { PubStore } from '../services/PubStore'
+//const providers:any = PubStore()
 
 
 export class RandomGen extends DcNode {
@@ -12,9 +16,10 @@ export class RandomGen extends DcNode {
   _cols = 3 // columns
   _rows = 10 // rows 
   private genCnt = 0
-  private df = new dfd.DataFrame()
+  private df = new DataFrame()
   private active = false
   private tm: any | null = null
+  readonly providers:any = PubStore()
   // constructor
   constructor(id?:string) {
     // although we need to call this first,
@@ -56,9 +61,10 @@ export class RandomGen extends DcNode {
       const key = "COL" + String(c+1)
       dt[key] = cl
     }
-    this.df = await new dfd.DataFrame(dt)
+    this.df = await new DataFrame(dt)
     // this.df.print()
-    await DcNode.providers.update(super.id,dfd.toJSON(this.df))
+    //await DcNode.providers.update(super.id,toJSON(this.df))
+    await this.providers.update(super.id,toJSON(this.df))
     //await subscribers.update(d.id,d.ep)
     await super.messaging.emit(DcNode.signals.UPDPREFIX as string + super.id,2*this.genCnt)
  
@@ -74,7 +80,8 @@ export class RandomGen extends DcNode {
   async run() {
     if (this.active == true) return
     // add to store
-    DcNode.providers.add(super.id)
+    //DcNode.providers.add(super.id)
+    this.providers.add(super.id)
     // start generator
     this.active = true
     DcNode.print("Start generating @ " + String(this.genCnt)) 
@@ -84,7 +91,8 @@ export class RandomGen extends DcNode {
     // stop generator
     this.active = false
     // remove
-    DcNode.providers.remove(super.id)
+    //DcNode.providers.remove(super.id)
+    this.providers.remove(super.id)
     if (this.tm != null) {
       clearTimeout(this.tm)
       this.tm = null

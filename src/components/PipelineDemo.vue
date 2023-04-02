@@ -2,7 +2,7 @@
 
   import { onMounted, onUnmounted, ref, watchEffect } from 'vue';
 
-  import * as dfd from "danfojs/dist/danfojs-base/"
+//  import * as dfd from "danfojs/dist/danfojs-base/"
   import * as io from "danfojs/dist/danfojs-base/io/browser"
   import { moment } from 'moment-timezone'
 

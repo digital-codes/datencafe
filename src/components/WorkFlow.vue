@@ -27,7 +27,7 @@ import type { MenuOptions } from 'cytoscape-context-menus';
 
 import { IonButton } from '@ionic/vue';
 
-import * as dfd from 'danfojs/dist/danfojs-browser/src';
+import { DataFrame, toJSON } from 'danfojs/dist/danfojs-browser/src';
 
 // globals
 import { Signals } from "../services/GlobalDefs"
@@ -38,10 +38,6 @@ import Popover from './PopOver.vue'; // test
 import ImportPopover from './ImportPopover.vue';
 import InputselPopover from './InputselPopover.vue';
 import eventBus from '../services/eventBus';
-
-
-// provider/subscriber
-import { EP } from "../services/EndPoints"
 
 // --------------------
 
@@ -557,8 +553,6 @@ async function flowInit  ()  {
   }
 }
 
-
-
   onMounted(() =>  {
     ww.value = window.innerWidth
     wh.value = window.innerHeight
@@ -640,7 +634,7 @@ const openInputSel = async (ports) => {
 
 const openPopover = async (ev: Event) => {
   // create dummy dataframe for test
-  const df = await new dfd.DataFrame({
+  const df = await new DataFrame({
     "x1": [1, 2, 3, 4, 5, 1, 2, 3, 4, 5,1, 2, 3, 4, 5],
     "y1": [1, 2, 3, 4, 5, 1, 2, 3, 4, 5,1, 2, 3, 4, 5],
     "z1": ["asa","dw","ddddW","y","","asa","dw","ddddW","y","","asa","dw","ddddW","y",""],
@@ -651,9 +645,9 @@ const openPopover = async (ev: Event) => {
     )
     /* ************************************* */
     // test json to/ftom
-    const dfj = await dfd.toJSON(df)
+    const dfj = await toJSON(df)
     console.log("JSON:",dfj)
-    const df2 = await new dfd.DataFrame(dfj)
+    const df2 = await new DataFrame(dfj)
     df2.print(5)
     /* ************************************* */
 

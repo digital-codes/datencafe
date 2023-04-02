@@ -38,7 +38,7 @@
   const data = ref(null);
   const columns = ref([]);
   
-  import * as dfd from "danfojs/dist/danfojs-base/"
+  import {DataFrame}  from "danfojs/dist/danfojs-base/"
   import * as io from "danfojs/dist/danfojs-base/io/browser"
 
   const emit = defineEmits(['newData']);

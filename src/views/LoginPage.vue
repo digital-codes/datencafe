@@ -54,8 +54,6 @@ import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, Io
 import { IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent } from '@ionic/vue'
 import { IonInput, IonItem, IonLabel, IonTextarea } from '@ionic/vue';
 import TitleBar from "@/components/TitleBar.vue"
-
-
 import { ref } from 'vue';
 
 // user store

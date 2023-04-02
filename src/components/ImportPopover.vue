@@ -68,14 +68,14 @@ import { IonLabel, IonToolbar, IonInput, IonButton, IonButtons, IonCheckbox } fr
 
 
 import { ref, onMounted } from "vue"
-import * as dfd from 'danfojs/dist/danfojs-browser/src';
+import  { DataFrame } from 'danfojs/dist/danfojs-browser/src';
 
 import eventBus from '../services/eventBus';
 
 const props = defineProps({
   msg:String,
   dt: {
-    type: dfd.DataFrame, 
+    type: DataFrame, 
     required: true,
   },
 })

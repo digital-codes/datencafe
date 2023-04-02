@@ -1,6 +1,9 @@
 // csv node class, extends DcNode
 
 import {DcNode} from "./DcNode"
+// provider/subscriber
+import { PubStore } from '../services/PubStore'
+const providers = PubStore()
 
 export class TablePlot extends DcNode {
   // properties

@@ -25,7 +25,7 @@ export const UserStore = defineStore({
     getters: {
         token: state => () => { return state.info.token },
         exists: state => () => {
-            return state.info.token != ""
+            return ((state.info.token !== undefined) && (state.info.token !== ""))
         },
     }
 })

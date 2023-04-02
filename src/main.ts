@@ -57,24 +57,17 @@ library.add(faBook, faUser, faUserSlash, faHatWizard, faWandMagicSparkles)
 
 // ----------------
 // pinia
-import { createPinia } from 'pinia'
-const pinia = createPinia()
-// persist
-import piniaPersist from 'pinia-plugin-persist'
-pinia.use(piniaPersist)
+import { createPinia, Pinia  } from 'pinia'
+const pinia:Pinia = createPinia()
 
-/*
-import { providerStore, Provider } from './services/srcStore';
-const providers = providerStore();
-
-import { subscriberStore } from './services/dstStore';
-const subscribers = subscriberStore();
-*/
+import { UserStore, UserInfo } from './services/UserStore'
 
 // ----------------
 // axios
 import UserService from './services/axios';
 const userService = new UserService();
+
+
 
 // ----------------
 // localisation
@@ -96,6 +89,10 @@ const i18n = createI18n({
 
 const app = createApp(App)
 
+// Use Pinia store in the app
+app.use(pinia)
+//app.use(pinia as PiniaPlugin)
+
 app.component('font-awesome-icon', FontAwesomeIcon)
 
 // use localization
@@ -106,13 +103,18 @@ app.use(IonicVue)
 app.use(router);
 
 
-// Use Pinia store in the app
-app.use(pinia)
 //app.use(providers)
 
 // axios
 //app.use(userService)
 
+router.beforeEach((to) => {
+  // ✅ This will work because the router starts its navigation after
+  // the router is installed and pinia will be installed too
+  // user store
+  const userStore = UserStore(pinia)
+  console.log("Token:", userStore.exists(),userStore.token())
+})
 
 
 router.isReady().then(() => {

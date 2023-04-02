@@ -1,11 +1,14 @@
 // csv node class, extends DcNode
 
 import {DcNode} from "./DcNode"
+import { PubStore } from '../services/PubStore'
+//const providers = PubStore()
 
 export class DataInfo extends DcNode {
   // properties
   readonly _type: string
   private updCnt = 0
+  readonly providers:any = PubStore()
   // constructor
   constructor(id:string) {
     // although we need to call this first,
@@ -24,7 +27,7 @@ export class DataInfo extends DcNode {
     this.updCnt++
     const src = msg.split("-")[1]
     DcNode.print(src + " updated " + super.id +": " + String(this.updCnt))
-    const dt = DcNode.providers.getDataById(src)
+    const dt = this.providers.getDataById(src)
     const df = new DcNode.dfd.DataFrame(dt)
     const divId = DcNode.signals.PLOTPREFIX + super.id
     // check valid target id

@@ -15,7 +15,6 @@
 
 <script setup>
 import { ref } from 'vue';
-import * as dfd from 'danfojs/dist/danfojs-browser/src';
 import * as io from "danfojs/dist/danfojs-base/io/browser"
 
 const emit = defineEmits(['newData']);

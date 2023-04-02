@@ -1,11 +1,15 @@
 // csv node class, extends DcNode
 
 import {DcNode} from "./DcNode"
+// provider/subscriber
+import { PubStore } from '../services/PubStore'
+//const providers = PubStore()
 
 export class LinePlot extends DcNode {
   // properties
   readonly _type: string
   private updCnt = 0
+  readonly providers:any = PubStore()
   // constructor
   constructor(id:string) {
     // although we need to call this first,
@@ -24,7 +28,7 @@ export class LinePlot extends DcNode {
     this.updCnt++
     const src = msg.split("-")[1]
     DcNode.print(src + " updated " + super.id +": " + String(this.updCnt) + "..." + String(y))
-    const dt = DcNode.providers.getDataById(src)
+    const dt = this.providers.getDataById(src) 
     const df = new DcNode.dfd.DataFrame(dt)
     const divId = DcNode.signals.PLOTPREFIX + super.id
     console.log("Target:",divId)
@@ -32,7 +36,9 @@ export class LinePlot extends DcNode {
     if ((target === undefined) || (target == null) ) {
       throw (new Error("Invalid ID: " + String(divId)))
     }
-    df.plot(divId).line()
+    df.print()
+    await df.plot(divId).line()
+    await super.messaging.emit(divId) // div used for signalling ..
     /*
     df.describe().print()
     df.print()

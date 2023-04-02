@@ -18,7 +18,6 @@
   
   <script setup>
   import { ref, watchEffect } from 'vue';
-  import * as dfd from 'danfojs/dist/danfojs-browser/src';
   
   const props = defineProps({
     data: {
