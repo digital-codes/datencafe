@@ -17,7 +17,8 @@
     "work":{
       "tab":"Workspace",
       "workflow":"Workflow",
-      "views":"Visualization"
+      "views":"Visualization",
+      "patience":"Patience"
     },
     "data":"Open Data Map",
     "stories":"Stories",

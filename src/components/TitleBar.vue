@@ -1,10 +1,7 @@
 <template>
       <ion-header :translucent="true">
         <ion-toolbar>
-          <ion-buttons slot="end">
-            <ion-menu-button :auto-hide="true" color="primary"></ion-menu-button>
-          </ion-buttons>
-          <ion-buttons>
+          <ion-buttons slot="start">
           <div class="title">
           <font-awesome-icon class="logo" icon="fa-solid fa-mug-hot" size="2x" :style="{ color: 'red' }" />
           <span class="headline">Datencafe</span>
@@ -12,36 +9,47 @@
           </div>
           </ion-buttons>
 
-        <ion-buttons>
-        <div>
-            <ion-item>
-              <ion-label class="modeLbl left">{{ $t("light") }}</ion-label>
-              <ion-toggle @ionChange="changeMode" :checked="false"></ion-toggle>
-              <ion-label class="modeLbl right">{{ $t("dark") }}</ion-label>
-            </ion-item>
-          </div>
-        </ion-buttons>
-
-      <ion-buttons>
+          <ion-buttons slot="end">
           <div>
-            <font-awesome-icon :icon="['fas', 'globe']" size="xl"/>
-            <!-- 
-            <ion-button @click="changeLanguage('en')">EN</ion-button>
-            <ion-button @click="changeLanguage('de')">DE</ion-button>
-            -->
-          </div>
-          
-          <ion-list>
-            <ion-item>
-              <ion-select placeholder="Lang" interface="popover" @ionChange="selectLanguage" v-model="langSel">
-                <ion-select-option v-for="(l,idx) in availableLocales" :key="idx" :value="l">{{upper(l)}}</ion-select-option>
-              </ion-select>
-            </ion-item>
-          </ion-list>          
-        </ion-buttons>
-          
+              <ion-item>
+                <ion-label class="modeLbl left">{{ $t("light") }}</ion-label>
+                <ion-toggle @ionChange="changeMode" :checked="false"></ion-toggle>
+                <ion-label class="modeLbl right">{{ $t("dark") }}</ion-label>
+              </ion-item>
+            </div>
+          </ion-buttons>
 
-          <ion-title>{{ props.title }}</ion-title>
+        <ion-buttons slot="end">
+            <div>
+              <font-awesome-icon :icon="['fas', 'globe']" size="xl"/>
+              <!-- 
+              <ion-button @click="changeLanguage('en')">EN</ion-button>
+              <ion-button @click="changeLanguage('de')">DE</ion-button>
+              -->
+            </div>
+            
+            <ion-list>
+              <ion-item>
+                <ion-select placeholder="Lang" interface="popover" @ionChange="selectLanguage" v-model="langSel">
+                  <ion-select-option v-for="(l,idx) in availableLocales" :key="idx" :value="l">{{upper(l)}}</ion-select-option>
+                </ion-select>
+              </ion-item>
+            </ion-list>          
+          </ion-buttons>
+
+          <ion-buttons slot="end">
+            <div v-if="userStore.exists()">
+              <font-awesome-icon :icon="['fas', 'user']" size="md" class="token"/>
+            </div>
+            <div v-else>
+              <font-awesome-icon :icon="['fas', 'user-slash']" size="md" class="notoken"/>
+            </div>          
+          </ion-buttons>
+            
+          <ion-buttons slot="end">
+            <ion-menu-button :auto-hide="true" color="primary"></ion-menu-button>
+          </ion-buttons>
+
         </ion-toolbar>
       </ion-header>
   </template>
@@ -128,11 +136,19 @@
     display: inline-block;
 }
 .title {
-    padding:10px;
-    margin: 10px;
+  padding:0;
+  margin:0;
+    padding-left:10px;
+    margin-left: 10px;
     margin-right: auto;
     display: inline-flex;
     align-items: baseline;
+}
+.hamburger {
+  margin:0;
+  padding:0;
+  margin-right:10px;
+  padding-right:10px;
 }
 .headline {
     padding:10px;
