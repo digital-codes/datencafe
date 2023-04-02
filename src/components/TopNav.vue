@@ -76,18 +76,8 @@
           <span class="headline">Datencafe</span>
           <span class="version">{{Version}}</span>
           </div>
-          <!-- 
 
-          <div>
-          <font-awesome-icon :icon="['fas', 'user-secret']" />
-          <font-awesome-icon :icon="['fab', 'twitter']" size="xl" spin/>
-          </div>
-          -->
-          <!-- 
-          <div>
-            {{ $t("welcome") }}
-          </div>
-          -->
+          
         <ion-tab-button tab="info" href="/info">
           <font-awesome-icon :icon="['fas', 'coffee']" />
           <ion-label>{{ $t("tabs.about") }}</ion-label>

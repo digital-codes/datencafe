@@ -1,13 +1,6 @@
 <template>
   <ion-page>
-    <ion-header :translucent="true">
-      <ion-toolbar>
-        <ion-buttons slot="start">
-          <ion-menu-button color="primary"></ion-menu-button>
-        </ion-buttons>
-        <ion-title>{{ $t("titles.about") }}</ion-title>
-      </ion-toolbar>
-    </ion-header>
+    <TitleBar :title='$t("titles.about")' />
 
     <ion-content :fullscreen="true">
       <ion-header collapse="condense">
@@ -46,6 +39,7 @@
 import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
 import { IonCard, IonImg, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent } from '@ionic/vue'
 
+import TitleBar from "@/components/TitleBar.vue"
 
 // https://lokalise.com/blog/vue-i18n/
 // if we need translation inside methods, import this as well:

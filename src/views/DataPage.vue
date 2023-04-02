@@ -1,13 +1,6 @@
 <template>
-  <ion-page>
-    <ion-header :translucent="true">
-      <ion-toolbar>
-        <ion-buttons slot="start">
-          <ion-menu-button color="primary"></ion-menu-button>
-        </ion-buttons>
-        <ion-title>{{ $t("titles.data") }}</ion-title>
-      </ion-toolbar>
-    </ion-header>
+    <ion-page>
+    <TitleBar :title='$t("titles.data")' />
 
     <ion-content :fullscreen="true">
       <ion-header collapse="condense">
@@ -26,6 +19,8 @@
 
 <script setup lang="ts">
 import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
+import TitleBar from "@/components/TitleBar.vue"
+
 </script>
 
 <style scoped>

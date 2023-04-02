@@ -1,13 +1,6 @@
 <template>
   <ion-page>
-    <ion-header :translucent="true">
-      <ion-toolbar>
-        <ion-buttons slot="start">
-          <ion-menu-button color="primary"></ion-menu-button>
-        </ion-buttons>
-        <ion-title>{{ $t("titles.work.tab") }}</ion-title>
-      </ion-toolbar>
-    </ion-header>
+    <TitleBar :title='$t("titles.work.tab")' />
 
     <ion-content :fullscreen="true">
       <ion-header collapse="condense">
@@ -40,6 +33,7 @@ import { IonCol, IonGrid, IonRow } from '@ionic/vue';
 import WorkFlow from '../components/WorkFlow.vue'
 import DanfoPlot from '../components/DanfoPlot.vue'
 import { ref } from "vue"
+import TitleBar from "@/components/TitleBar.vue"
 
 // items
 const items = ref([

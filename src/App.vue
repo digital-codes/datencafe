@@ -1,78 +1,23 @@
 <template>
   <ion-app>
-    <ion-router-outlet></ion-router-outlet>
-    <!-- 
-
     <ion-split-pane content-id="main-content">
-      <ion-menu content-id="main-content" type="overlay">
-        <ion-content>
-          <ion-list id="inbox-list">
-            <ion-list-header>Pages</ion-list-header>
-
-            <ion-menu-toggle auto-hide="false" v-for="(p, i) in routes" :key="i">
-abbc {{ route }}
-              <ion-item v-for="r in route" :key="r.path" :router="true" :to="r.path">
-xyz {{ r }}
-                <ion-label>123{{ r.name }}</ion-label>
-              </ion-item>
-         
-            </ion-menu-toggle>
-          </ion-list>
-        </ion-content>
-      </ion-menu>
+      <MainMenu />
       <ion-router-outlet id="main-content"></ion-router-outlet>
     </ion-split-pane>
-
-  -->
   </ion-app>
 </template>
 
 <script setup lang="ts">
-import TopNav from './components/TopNav.vue';
-
-// user store
-import { UserStore, UserInfo } from './services/UserStore'
-
-import { ref, onMounted } from 'vue';
-
-import { routes } from "./router"
-
+import { onMounted } from "vue"
 import {
   IonApp,
-  IonContent,
-  IonIcon,
-  IonItem,
-  IonLabel,
-  IonList,
-  IonListHeader,
-  IonMenu,
-  IonMenuToggle,
-  IonNote,
   IonRouterOutlet,
   IonSplitPane,
 } from '@ionic/vue';
-import {
-  archiveOutline,
-  archiveSharp,
-  bookmarkOutline,
-  bookmarkSharp,
-  heartOutline,
-  heartSharp,
-  mailOutline,
-  mailSharp,
-  paperPlaneOutline,
-  paperPlaneSharp,
-  trashOutline,
-  trashSharp,
-  warningOutline,
-  warningSharp,
-} from 'ionicons/icons';
+import MainMenu from "@/components/MainMenu.vue";
 
-/**
- * analytics-outline
- */
-
-// fa: see https://fontawesome.com/docs/web/use-with/vue/add-icons
+// user store
+import { UserStore, UserInfo } from './services/UserStore'
 
 // do not track ...
 console.log("DNT:",navigator.doNotTrack)
