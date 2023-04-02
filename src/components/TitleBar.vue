@@ -47,7 +47,9 @@
   </template>
   
   <script setup lang="ts">
-  import { IonButtons, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
+  import { IonButtons, IonHeader, IonMenuButton, IonTitle, IonToolbar } from '@ionic/vue';
+  import { IonLabel, IonToggle,  IonSelect, IonSelectOption, } from '@ionic/vue';
+
   import { ref, onMounted } from "vue"
 
     // stores
