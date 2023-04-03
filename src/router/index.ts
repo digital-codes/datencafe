@@ -17,7 +17,7 @@ export const routes: Array<RouteRecordRaw> = [
   },
   {
     name: "Data",
-    path: '/data',
+    path: '/open',
     component: () => import('../views/DataPage.vue')
   },
   {

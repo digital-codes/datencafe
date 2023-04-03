@@ -15,7 +15,7 @@
                   <ion-button router-link="/home" router-direction="forward">Home</ion-button>
                   -->
                 </ion-item>
-                <ion-item router-link="/data" lines="none" >
+                <ion-item router-link="/open" lines="none" >
                   <font-awesome-icon aria-hidden="true" :icon="['fas', 'book-atlas']" slot="start" />
                   <ion-label>{{$t("titles.data")}}</ion-label>
                   <!-- 
