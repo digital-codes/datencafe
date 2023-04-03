@@ -14,33 +14,15 @@
           <ion-row>
             <ion-col size="7">
               <h3>{{$t("titles.work.workflow")}}</h3>
-              <Suspense>
-              <template #default>
-                <WorkFlowAsync msg="Flow demo"  />
-              </template>
-              <template #fallback>
-                <p>Loading1...</p>
-              </template>
-            </Suspense>
-
-              <!-- 
-              <WorkFlow msg="Flow demo" />
-              -->
+              <h2 v-if="FlowLoading" class="loading">Flow loading ...</h2>
+              <WorkFlowAsync msg="Flow demo" />
             </ion-col>
+
             <ion-col size="5" sytle="overflow-y:scroll;">
               <h3>{{$t("titles.work.views")}}</h3>
-              <Suspense>
-              <template #default>
-                <DanfoPlotAsync :propItems="items"/>
-              </template>
-              <template #fallback>
-                <p>Loading2...</p>
-              </template>
-            </Suspense>
-            <!-- 
-              <DanfoPlot :propItems="items"/>
-
-            -->
+           
+              <h2 v-if="ShowLoading"  class="loading">Show loading ...</h2>
+              <DanfoPlotAsync :propItems="items"/>
             </ion-col>
           </ion-row>
           </ion-grid>
@@ -53,25 +35,36 @@
 import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
 import { IonCol, IonGrid, IonRow } from '@ionic/vue';
 import { ref, onMounted } from "vue"
-import TitleBar from "@/components/TitleBar.vue"
-
+import { createAnimation } from '@ionic/vue';
 import { defineAsyncComponent } from 'vue';
+
+import TitleBar from "@/components/TitleBar.vue"
 
 const message = ref('Hello, World!');
 
-const FlowLoaded = ref(false)
-const DanfoLoaded = ref(false)
+const FlowLoading = ref(true)
+const ShowLoading = ref(true)
 
 const WorkFlowAsync = defineAsyncComponent({
   // A factory function that returns a Promise that resolves to
   // the component definition.
-  loader: () => import('../components/WorkFlow.vue')
+  loader: () => import('../components/WorkFlow.vue').then((module) => {
+    console.log('Cyto loaded');
+    // Update the ref when the async loading is complete
+    FlowLoading.value = false
+    return module;
+  })
 });
 
 const DanfoPlotAsync = defineAsyncComponent({
   // A factory function that returns a Promise that resolves to
   // the component definition.
-  loader: () => import('../components/DanfoPlot.vue')
+  loader: () => import('../components/DanfoPlot.vue').then((module) => {
+    console.log('Danfo loaded');
+    // Update the ref when the async loading is complete
+    ShowLoading.value = false
+    return module;
+  })
 });
 
 
@@ -115,6 +108,7 @@ import { DataInfo } from "../classes/DataInfo"
 import { RandomGen } from "../classes/RandomGen"
 
 onMounted(() => {
+
   /*
   const rg = new RandomGen("P1")
   rg.period = 10
@@ -199,6 +193,28 @@ onMounted(() => {
 ion-grid {
     --ion-grid-width: 100%;
   }
+
+ion-col {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.loading {
+  color: var(--ion-color-danger);
+  animation: blink-animation 1s steps(3, start) infinite;
+  -webkit-animation: blink-animation 1s steps(3, start) infinite;
+}  
+@keyframes blink-animation {
+  to {
+    visibility: hidden;
+  }
+}
+@-webkit-keyframes blink-animation {
+  to {
+    visibility: hidden;
+  }
+}
+
 
 </style>
 

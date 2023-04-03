@@ -32,11 +32,6 @@
                     {{$t("titles.work.tab")}}
                   </ion-label>
                 </ion-item>
-                <ion-item router-link="/work"  fill="solid" class="patience" lines="none" >
-                  <ion-label slot="end">
-                    {{$t("titles.work.patience")}}
-                  </ion-label>
-                </ion-item>
                 <ion-item router-link="/instructions" lines="none" >
                   <font-awesome-icon aria-hidden="true" :icon="['fas', 'graduation-cap']" slot="start" />
                   <ion-label>{{$t("titles.tutorial")}}</ion-label>
