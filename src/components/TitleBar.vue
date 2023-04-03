@@ -88,7 +88,7 @@
 
     // init store on mount
     onMounted(() => {
-      userStore.clear()
+      //userStore.clear()
     })
 
     /*
