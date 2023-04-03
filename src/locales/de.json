@@ -16,9 +16,15 @@
     "tutorial":"Anleitungen",
     "work":{
       "tab":"Arbeitsbereich",
-      "workflow":"Vorgänge",
-      "views":"Darstellungen",
-      "patience":"Bitte etwas Geduld ..."
+      "flow":"Vorgänge",
+      "view":{
+        "title":"Darstellungen",
+        "placeholder":"Erstelle einen Konzept mit Anzeige ..."
+      },
+      "loading": {
+        "flow":"Loading workflow pane ...",
+        "view":"Loading visualization pane ..."
+      }
     },
     "data":"Open Data Karte",
     "stories":"Geschichten",

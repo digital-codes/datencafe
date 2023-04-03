@@ -12,18 +12,19 @@
       <div id="container">
         <ion-grid fixed="true">
           <ion-row>
-            <ion-col size="7">
-              <h3>{{$t("titles.work.workflow")}}</h3>
-              <h2 v-if="FlowLoading" class="loading">Flow loading ...</h2>
+
+            <ion-col size="12" size-lg="7">
+              <h3>{{$t("titles.work.flow")}}</h3>
+              <p v-if="FlowLoading" class="loading">Flow loading ...</p>
               <WorkFlowAsync msg="Flow demo" />
             </ion-col>
 
-            <ion-col size="5" sytle="overflow-y:scroll;">
-              <h3>{{$t("titles.work.views")}}</h3>
-           
-              <h2 v-if="ShowLoading"  class="loading">Show loading ...</h2>
+            <ion-col  size="12" size-lg="5" sytle="overflow-y:scroll;">
+              <h3>{{$t("titles.work.view.title")}}</h3>
+              <p v-if="ShowLoading"  class="loading">Show loading ...</p>
               <DanfoPlotAsync :propItems="items"/>
             </ion-col>
+
           </ion-row>
           </ion-grid>
       </div>
@@ -197,10 +198,11 @@ ion-grid {
 ion-col {
   border: 1px solid #ccc;
   border-radius: 5px;
+  min-height:200px;
 }
 
 .loading {
-  color: var(--ion-color-danger);
+  border: 2px solid var(--ion-color-danger);
   animation: blink-animation 1s steps(3, start) infinite;
   -webkit-animation: blink-animation 1s steps(3, start) infinite;
 }  

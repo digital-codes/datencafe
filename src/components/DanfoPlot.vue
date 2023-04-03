@@ -4,6 +4,10 @@
   <div v-for="(item,index) in items" :key="index" class="chartItem">
   <div v-for="(item,index) in items" :key="item.key" class="chartItem">
   -->
+  <div v-if="items.length==0" >
+    <p>{{$t("titles.work.view.placeholder")}}</p>
+
+  </div>
   <div v-for="(item,index) in items" :key="index" class="chartItem">
     <h3 class="dftitle">{{ item.name }}</h3>
     <!--

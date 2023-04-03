@@ -4,17 +4,23 @@
           <ion-buttons slot="start">
           <div class="title">
           <font-awesome-icon class="logo" icon="fa-solid fa-mug-hot" size="2x" :style="{ color: 'red' }" />
-          <span class="headline">Datencafe</span>
-          <span class="version">{{Version}}</span>
+          <span class="headline ion-hide-sm-down">Datencafe</span>
+          <span class="version ion-hide-sm-down">{{Version}}</span>
           </div>
           </ion-buttons>
 
           <ion-buttons slot="end">
           <div>
               <ion-item>
+                <!-- 
                 <ion-label class="modeLbl left">{{ $t("light") }}</ion-label>
+                -->
+                <font-awesome-icon :icon="['fas', 'sun']" size="md" class="modeLbl left"/>
                 <ion-toggle @ionChange="changeMode" :checked="false"></ion-toggle>
+                <font-awesome-icon :icon="['fas', 'moon']" size="md" class="modeLbl right"/>
+                <!-- 
                 <ion-label class="modeLbl right">{{ $t("dark") }}</ion-label>
+                -->
               </ion-item>
             </div>
           </ion-buttons>
@@ -51,7 +57,14 @@
           </ion-buttons>
 
         </ion-toolbar>
+      <ion-toolbar class="ion-hide-sm-up">
+        <div class="smallheader">
+            <span class="headline">Datencafe</span>
+            <span class="version">{{Version}}</span>
+          </div>
+      </ion-toolbar>
       </ion-header>
+   
   </template>
   
   <script setup lang="ts">
@@ -162,8 +175,9 @@
   margin: 5px;
   font-size: 1rem;
 }
+/* with with text: 3.5rem */
 .modeLbl {
-  width: 3.5rem;
+  width: 1.5rem;
 }
 .modeLbl.left {
   text-align: right;
@@ -180,5 +194,15 @@
   color: var(--ion-color-warning-shade);
 }
 
+.smallheader {
+  text-align:center;
+  /*
+  z-index:10;
+  margin-top: 1rem;
+  */
+  border-bottom: solid 2px var(--ion-color-primary);
+  border-bottom-left-radius: 100px;
+  border-bottom-right-radius: 100px;
+}
 </style>
   

@@ -44,6 +44,8 @@ import { faGraduationCap } from '@fortawesome/free-solid-svg-icons/faGraduationC
 import { faBookOpen } from '@fortawesome/free-solid-svg-icons/faBookOpen'
 import { faBook } from '@fortawesome/free-solid-svg-icons/faBook'
 import { faUser } from '@fortawesome/free-solid-svg-icons/faUser'
+import { faSun } from '@fortawesome/free-solid-svg-icons/faSun'
+import { faMoon } from '@fortawesome/free-solid-svg-icons/faMoon'
 import { faUserSlash } from '@fortawesome/free-solid-svg-icons/faUserSlash'
 import { faBookAtlas } from '@fortawesome/free-solid-svg-icons/faBookAtlas'
 import { faHatWizard } from '@fortawesome/free-solid-svg-icons/faHatWizard'
@@ -54,6 +56,8 @@ library.add(faUserSecret, faTwitter, faMugHot, faCoffee)
 library.add(faArrowUp,faArrowDown,faArrowLeft,faArrowRight)
 library.add(faGlobe, faLanguage, faGraduationCap, faBookOpen, faBookAtlas)
 library.add(faBook, faUser, faUserSlash, faHatWizard, faWandMagicSparkles)
+library.add(faSun, faMoon)
+
 
 // ----------------
 // pinia

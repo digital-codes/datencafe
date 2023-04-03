@@ -16,9 +16,15 @@
     "tutorial":"Tutorials",
     "work":{
       "tab":"Workspace",
-      "workflow":"Workflow",
-      "views":"Visualization",
-      "patience":"Please be patient ..."
+      "flow":"Workflow",
+      "view":{
+        "title":"Visualization",
+        "placeholder":"Create a flow with display ..."
+      },
+      "loading": {
+        "flow":"Loading workflow pane ...",
+        "view":"Loading visualization pane ..."
+      }
     },
     "data":"Open Data Map",
     "stories":"Stories",
