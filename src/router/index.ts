@@ -5,7 +5,6 @@ import Home from '../views/InfoPage.vue';
 // don't load pages which use pinia here. only in below
 //import WorkPage from '../views/WorkPage.vue';
 
-
 export const routes: Array<RouteRecordRaw> = [
   {
     path: '',
@@ -39,12 +38,7 @@ export const routes: Array<RouteRecordRaw> = [
   {
     name: "Workspace",
     path: '/work',
-    component: () => import ('../views/WorkPage.vue')
-    /*
-    component: DataPage,
-    name: 'msg',
-    props: true 
-    */
+    component: () => import ('../views/WorkPage.vue'),
   },
 ]
 

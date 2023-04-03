@@ -30,7 +30,11 @@
                   <font-awesome-icon aria-hidden="true" :icon="['fas', 'wand-magic-sparkles']" slot="start" />
                   <ion-label>
                     {{$t("titles.work.tab")}}
-                    <span class="patience">({{$t("titles.work.patience")}})</span> 
+                  </ion-label>
+                </ion-item>
+                <ion-item router-link="/work"  fill="solid" class="patience" lines="none" >
+                  <ion-label slot="end">
+                    {{$t("titles.work.patience")}}
                   </ion-label>
                 </ion-item>
                 <ion-item router-link="/instructions" lines="none" >
@@ -192,14 +196,10 @@
   }
 
   .patience {
-    --color: var(--ion-color-warning))
+    --color: var(--ion-color-warning-shade);
+    --background-color:var(--ion-color-medium-shade);
     font-size:90%;
+    margin-left: 20%;
   }
   </style>
   
-<style>
-  .patience {
-    --color: var(--ion-color-warning))
-    font-size:90%;
-  }
-  </style>

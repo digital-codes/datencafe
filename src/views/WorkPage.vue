@@ -14,11 +14,33 @@
           <ion-row>
             <ion-col size="7">
               <h3>{{$t("titles.work.workflow")}}</h3>
+              <Suspense>
+              <template #default>
+                <WorkFlowAsync msg="Flow demo"  />
+              </template>
+              <template #fallback>
+                <p>Loading1...</p>
+              </template>
+            </Suspense>
+
+              <!-- 
               <WorkFlow msg="Flow demo" />
+              -->
             </ion-col>
             <ion-col size="5" sytle="overflow-y:scroll;">
               <h3>{{$t("titles.work.views")}}</h3>
+              <Suspense>
+              <template #default>
+                <DanfoPlotAsync :propItems="items"/>
+              </template>
+              <template #fallback>
+                <p>Loading2...</p>
+              </template>
+            </Suspense>
+            <!-- 
               <DanfoPlot :propItems="items"/>
+
+            -->
             </ion-col>
           </ion-row>
           </ion-grid>
@@ -30,10 +52,32 @@
 <script setup lang="ts">
 import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
 import { IonCol, IonGrid, IonRow } from '@ionic/vue';
-import WorkFlow from '../components/WorkFlow.vue'
-import DanfoPlot from '../components/DanfoPlot.vue'
 import { ref, onMounted } from "vue"
 import TitleBar from "@/components/TitleBar.vue"
+
+import { defineAsyncComponent } from 'vue';
+
+const message = ref('Hello, World!');
+
+const FlowLoaded = ref(false)
+const DanfoLoaded = ref(false)
+
+const WorkFlowAsync = defineAsyncComponent({
+  // A factory function that returns a Promise that resolves to
+  // the component definition.
+  loader: () => import('../components/WorkFlow.vue')
+});
+
+const DanfoPlotAsync = defineAsyncComponent({
+  // A factory function that returns a Promise that resolves to
+  // the component definition.
+  loader: () => import('../components/DanfoPlot.vue')
+});
+
+
+
+//import WorkFlow from '../components/WorkFlow.vue'
+//import DanfoPlot from '../components/DanfoPlot.vue'
 
 
 
@@ -71,7 +115,7 @@ import { DataInfo } from "../classes/DataInfo"
 import { RandomGen } from "../classes/RandomGen"
 
 onMounted(() => {
-
+  /*
   const rg = new RandomGen("P1")
   rg.period = 10
   rg.cols = 5
@@ -116,7 +160,7 @@ onMounted(() => {
       )
   // tell listener to listen to source
   chart3.msgOn(Signals.UPDPREFIX + rg.id)
-
+        */
 })
 
 
