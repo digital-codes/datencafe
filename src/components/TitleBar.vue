@@ -57,10 +57,9 @@
           </ion-buttons>
 
         </ion-toolbar>
-      <ion-toolbar class="ion-hide-sm-up">
+      <ion-toolbar class="ion-hide-sm-up toolbar-secondary">
         <div class="smallheader">
-            <span class="headline">Datencafe</span>
-            <span class="version">{{Version}}</span>
+            <span class="headline-secondary">Datencafe</span>
           </div>
       </ion-toolbar>
       </ion-header>
@@ -170,6 +169,13 @@
     padding-right: 0;
     font-size: 1.5rem;
 }
+.headline-secondary {
+    padding:0px;
+    margin: 0px;
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: red;
+}
 .version {
   padding:5px;
   margin: 5px;
@@ -194,15 +200,19 @@
   color: var(--ion-color-warning-shade);
 }
 
+.toolbar-secondary {
+  height: 48px;
+}
 .smallheader {
   text-align:center;
+  padding-bottom: 10px;
   /*
   z-index:10;
   margin-top: 1rem;
-  */
   border-bottom: solid 2px var(--ion-color-primary);
   border-bottom-left-radius: 100px;
   border-bottom-right-radius: 100px;
+  */
 }
 </style>
   

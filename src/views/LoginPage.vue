@@ -69,14 +69,40 @@ const form = ref({
 });
 
 
-const submitForm = () => {
-
+const submitForm = async () => {
   const requestOptions = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(form.value)
-  };
+  }
+  const urls = ["/php/corsProxyLogin.php",'http://localhost:9000/php/corsProxyLogin.php']
+  for (let i = 0; i < urls.length; i++) {
+    try {
+      const u = urls[i]
+      //console.log("Testing: ",u)
+      const rsp = await fetch(u, requestOptions)
+      if (rsp.status == 200) {
+        const data = await rsp.json()
+        //console.log(data);
+        const token = data.token //JSON.parse(data)
+        //console.log(token)
+        loginGood.value = true
+        loginBad.value = false
+        userStore.set(token)
+        break;
+      } else {
+        throw (new Error("Request failed: " + String(rsp.status)))
+      }
+    } catch (e) {
+      console.log("Error: ",e.message)
+      loginBad.value = true
+      loginGood.value = false
+      userStore.clear()
+    }
+  }
+}
 
+  /*
   fetch('http://localhost:9000/php/corsProxyLogin.php', requestOptions)
   .then(response => {
     if (!response.ok) {
@@ -101,7 +127,7 @@ const submitForm = () => {
     userStore.clear()
     console.error('There was an error:', error);
   });
-};
+  */
 
 
 </script>
