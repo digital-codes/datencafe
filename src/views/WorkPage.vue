@@ -15,14 +15,17 @@
 
             <ion-col size="12" size-lg="7">
               <h3>{{$t("titles.work.flow")}}</h3>
-              <p v-if="FlowLoading" class="loading">Flow loading ...</p>
+              <p v-if="FlowLoading" class="loading">Loading ...</p>
               <WorkFlowAsync msg="Flow demo" />
             </ion-col>
 
             <ion-col  size="12" size-lg="5" sytle="overflow-y:scroll;">
               <h3>{{$t("titles.work.view.title")}}</h3>
-              <p v-if="ShowLoading"  class="loading">Show loading ...</p>
+              <p v-if="FlowLoading"  class="loading">Loading ...</p>
+              <!-- 
               <DanfoPlotAsync :propItems="items"/>
+              -->
+              <DanfoPlot :propItems="items"/>
             </ion-col>
 
           </ion-row>
@@ -44,7 +47,7 @@ import TitleBar from "@/components/TitleBar.vue"
 const message = ref('Hello, World!');
 
 const FlowLoading = ref(true)
-const ShowLoading = ref(true)
+//const ShowLoading = ref(true)
 
 const WorkFlowAsync = defineAsyncComponent({
   // A factory function that returns a Promise that resolves to
@@ -56,7 +59,9 @@ const WorkFlowAsync = defineAsyncComponent({
     return module;
   })
 });
+//import WorkFlow from '../components/WorkFlow.vue'
 
+/*
 const DanfoPlotAsync = defineAsyncComponent({
   // A factory function that returns a Promise that resolves to
   // the component definition.
@@ -67,11 +72,8 @@ const DanfoPlotAsync = defineAsyncComponent({
     return module;
   })
 });
-
-
-
-//import WorkFlow from '../components/WorkFlow.vue'
-//import DanfoPlot from '../components/DanfoPlot.vue'
+*/
+import DanfoPlot from '../components/DanfoPlot.vue'
 
 
 

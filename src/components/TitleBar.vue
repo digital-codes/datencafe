@@ -70,7 +70,7 @@
   import { IonButtons, IonHeader, IonMenuButton, IonTitle, IonToolbar } from '@ionic/vue';
   import { IonLabel, IonToggle,  IonSelect, IonSelectOption, } from '@ionic/vue';
 
-  import { ref, onMounted } from "vue"
+  import { ref, computed, onMounted } from "vue"
 
     // stores
     // user store
@@ -101,6 +101,7 @@
     // init store on mount
     onMounted(() => {
       //userStore.clear()
+      selectLanguage()
     })
 
     /*
@@ -112,7 +113,7 @@
     */
     const langSel = ref(locale.value)
     const selectLanguage = () => {
-      //console.log("L:",langSel.value)
+      console.log("L:",langSel.value)
       language.set(langSel.value as Language)
       locale.value = language.get()
 

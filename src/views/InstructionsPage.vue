@@ -10,16 +10,41 @@
       </ion-header>
 
       <div id="container">
-        <strong class="capitalize">{{ $route.params.id }}</strong>
-        <p>Instructions Sample</p>
-      </div>
+      <ion-card color="light" v-for="(s,i) in items.en" :key="i">
+        <ion-card-header>
+          <ion-card-title>{{ item(i,"title") }}</ion-card-title>
+          <ion-card-subtitle>{{ item(i,"date") }}, {{ item(i,"author") }}, 
+            <a :href='"mailto:" +  item(i,"email")'>{{ item(i,"email") }}</a>
+          </ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+          {{ item(i,"body") }}
+        </ion-card-content>
+      </ion-card>
+    </div>
     </ion-content>
   </ion-page>
 </template>
 
 <script setup lang="ts">
 import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
+import { IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent } from '@ionic/vue'
 import TitleBar from "@/components/TitleBar.vue"
+
+import { ref, onMounted, onBeforeMount, computed } from "vue"
+ 
+// https://lokalise.com/blog/vue-i18n/
+// if we need translation inside methods, import this as well:
+import { useI18n } from 'vue-i18n'
+const { t, locale } = useI18n({ useScope: 'global' })
+
+import items from "../assets/tutor/tutorials.json"
+const item = (idx,id) => {
+  //console.log(idx,id,locale.value)
+  //console.log(storyItems[locale.value])
+  const text = items[locale.value][idx][id]
+  return text
+}
 
 </script>
 
