@@ -194,6 +194,19 @@
             "info":"Mehr Text für den Tooltip"
         }
     },
+    "pool":{
+        "name":"pool",
+        "icon":"fa-solid fa-cart-shopping",
+        "thumb":"/img/widgets/knime/cart.png",
+        "en": {
+            "label":"Data pool",
+            "info":"More text for a popup or tooltip"
+        },
+        "de": {
+            "label":"Datenpool",
+            "info":"Mehr Text für den Tooltip"
+        }
+    },
     "random":{
         "name":"random",
         "icon":"fa-solid fa-globe",

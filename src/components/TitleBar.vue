@@ -77,12 +77,12 @@
     import { UserStore, UserInfo } from '../services/UserStore'
     const userStore = UserStore()
 
-    import { langStore } from '../services/store'
-    import { Language } from '../services/store'
+    import { langStore } from '../services/UserStore'
+    import { Language } from '../services/UserStore'
     const language = langStore()
 
-    import { themeStore } from '../services/store'
-    import { Modes } from '../services/store'
+    import { themeStore } from '../services/UserStore'
+    import { Modes } from '../services/UserStore'
     const theme = themeStore()
 
     // globals

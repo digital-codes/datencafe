@@ -30,3 +30,71 @@ export const UserStore = defineStore({
     }
 })
 
+// -------- language
+enum Langs {
+    DE = "de",
+    EN = "en",
+  } 
+  
+  export interface Language {
+    lang: Langs
+  }
+  
+  export const langStore = defineStore({
+    id: 'language',
+    state: () => ({
+      lang: Langs.DE
+    }),
+    actions: {
+      set(lang:Langs) {
+        // console.log("set lang:",lang)
+        /*
+        if (! (typeof lang === 'string' && lang in Langs)) {
+          throw new Error ("Lang invalid:" + String(lang))
+        }
+        */
+        this.lang = lang
+      }
+    },
+    getters: {
+      get: state => () => {
+          return state.lang
+      }
+    }
+  })
+  
+  
+  // -------- theme
+  export enum Modes {
+    Dark = "dark",
+    Light = "light",
+  } 
+  
+  export interface Theme {
+    theme: Modes
+  }
+  
+  export const themeStore = defineStore({
+    id: 'theme',
+    state: () => ({
+      theme: Modes.Light
+    }),
+    actions: {
+      set(theme:Modes) {
+        // console.log("set theme:",theme)
+        /*
+        if (! (theme in Modes)) {
+          throw new Error ("Mode invalid:" + String(theme))
+        }
+        */
+        this.theme = theme
+      },
+    },
+    getters: {
+      get: state => () => {
+          return state.theme
+      }
+    }
+  })
+  
+  

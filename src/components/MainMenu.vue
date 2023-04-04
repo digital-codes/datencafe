@@ -2,7 +2,9 @@
         <ion-menu content-id="main-content" type="overlay">
           <ion-content>
             <ion-list id="inbox-list">
+              <!-- 
               <ion-list-header>Pages</ion-list-header>
+              -->
 
               <ion-menu-toggle auto-hide="false">
                 <!-- 

@@ -3,16 +3,8 @@
   "greeting": "Hello, {name}!",
   "light":"Light",
   "dark":"Dark",
-  "tabs": {
-    "about":"About",
-    "tutorial":"Tutorials",
-    "data":"Data",
-    "work":"workspace",
-    "stories":"Stories",
-    "login":"Login"
-  },
   "titles": {
-    "about": "Info",
+    "about": "About DatenCafe",
     "tutorial":"Tutorials",
     "work":{
       "tab":"Workspace",
@@ -26,7 +18,7 @@
         "view":"Loading visualization pane ..."
       }
     },
-    "data":"Open Data Map",
+    "data":"Open Data",
     "stories":"Stories",
     "login":"Login"
   },

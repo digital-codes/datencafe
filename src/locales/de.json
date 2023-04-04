@@ -3,30 +3,22 @@
   "greeting": "Hallo, {name}!",
   "light":"Hell",
   "dark":"Dunkel",
-  "tabs": {
-    "about":"Über",
-    "tutorial":"Anleitung",
-    "data":"Daten",
-    "work":"Arbeitsbereich",
-    "stories":"Stories",
-    "login":"Anmelden"
-  },
   "titles": {
-    "about": "Info DE",
+    "about": "Über das DatenCafe",
     "tutorial":"Anleitungen",
     "work":{
       "tab":"Arbeitsbereich",
       "flow":"Vorgänge",
       "view":{
         "title":"Darstellungen",
-        "placeholder":"Erstelle einen Konzept mit Anzeige ..."
+        "placeholder":"Erstelle ein Konzept mit Anzeige ..."
       },
       "loading": {
         "flow":"Loading workflow pane ...",
         "view":"Loading visualization pane ..."
       }
     },
-    "data":"Open Data Karte",
+    "data":"Offene Daten",
     "stories":"Geschichten",
     "login":"Anmelden"
   },

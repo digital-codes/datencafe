@@ -31,13 +31,15 @@ import { DataFrame, toJSON } from 'danfojs/dist/danfojs-browser/src';
 
 // globals
 import { Signals } from "../services/GlobalDefs"
+import eventBus from '../services/eventBus';
 
 // popover
 import { popoverController } from '@ionic/vue';
 import Popover from './PopOver.vue'; // test
 import ImportPopover from './ImportPopover.vue';
 import InputselPopover from './InputselPopover.vue';
-import eventBus from '../services/eventBus';
+import NodesPopover from "./NodesPopover.vue"
+
 
 // --------------------
 
@@ -607,9 +609,34 @@ const ctlClick = async () => {
 }
 
 //const openInputSel = async (ev: Event) => {
-const openInputSel = async (ports) => {
+  const openInputSel = async (ports) => {
   popover.value = await popoverController.create({
       component: InputselPopover,
+      //event: ev,
+      size: "auto",
+      side:"right",
+      alignment:"start",
+      showBackdrop: true,
+      backdropDismiss: true, // error when enabling dismiss
+      dismissOnSelect: true,
+      reference: "trigger", // event or trigger
+      componentProps: { // Popover props
+          msg:"Select Input",
+          signal: "inputSelection",
+          ports: ports
+        }
+    })
+    await popover.value.present();
+    popover.value.open = true
+    const x = await popover.value.onDidDismiss();
+    console.log("Dismiss: ",x)
+    popover.value.open = false
+    return x
+}
+
+const openNodeSel = async (ports) => {
+  popover.value = await popoverController.create({
+      component: NodesPopover,
       //event: ev,
       size: "auto",
       side:"right",
@@ -703,6 +730,9 @@ const createEvent = () => {
   });
   openPopover(event)
   */
+  openNodeSel()
+
+
   // or we just use the default from the popover button with reference = trigger
   console.log("btn",popBtn.value)
   popBtn.value.$el.click()
@@ -717,6 +747,7 @@ const createEvent = () => {
     <div ref="ctl" class="ctl">
       <ion-button @click='ctlClick'>Clk</ion-button>
       <ion-button ref="popBtn" @click="openPopover">Click Me</ion-button>
+      <NodesPopover/>
     </div>
     <div class="flow" ref="theFlow"></div>
   </div>
