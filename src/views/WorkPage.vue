@@ -219,6 +219,10 @@ ion-col {
   }
 }
 
+.work-container {
+  padding-left:.6rem;
+  padding-right:.6rem;
+  }
 @media only screen and (max-width: 996px) {
   .work-container {
     transform: translateY(-20%)!important;
