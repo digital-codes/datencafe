@@ -197,7 +197,7 @@
     "pool":{
         "name":"pool",
         "icon":"fa-solid fa-cart-shopping",
-        "thumb":"/img/widgets/knime/cart.png",
+        "thumb":"/img/widgets/Melt.png",
         "en": {
             "label":"Data pool",
             "info":"More text for a popup or tooltip"

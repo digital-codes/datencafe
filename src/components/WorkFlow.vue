@@ -319,13 +319,18 @@ const ctxOptions = {
           }
         })
         const nodeType = await openNodeSel()
-        console.log("Type selected:",nodeType)
-        const nodeIcon = nodeTypes[nodeType].icon
-        // set data
-        const nodeData = {"name":"new","type":{"name":"t0",
-          "shp":"circle","bd":"#f00", "img":"url('" + nodeIcon + "')"}}
-        newNode.data(nodeData)
-        //console.log("After add node:",JSON.stringify(cy.value.json()))
+        if (nodeType != "") {
+          console.log("Type selected:",nodeType,nodeTypes[nodeType])
+          const nodeIcon = nodeTypes[nodeType].thumb
+          // set data
+          const nodeData = {"name":"new","type":{"name":"t0",
+            "shp":"circle","bd":"#f00", "img":"url('" + nodeIcon + "')"}}
+          newNode.data(nodeData)
+          //console.log("After add node:",JSON.stringify(cy.value.json()))
+        } else {
+          console.log("Cancelled. Removing:",newNode.id())
+          cy.value.remove(newNode)
+        }
       }
     },
     /* */    
@@ -605,6 +610,14 @@ async function flowInit  ()  {
         popover.value.dismiss(data,"button")
       }
     });
+    eventBus.on('nodeSelection', (data) => {
+      console.log("on nodeSelection:",data)
+      // test if we can do something else while popover is active ..
+      // allow to close on specific return value. only if open
+      if (popover.value.open) {
+        popover.value.dismiss(data,"button")
+      }
+    });
   })
   
 const ctlClick = async () => {
@@ -659,9 +672,33 @@ const openNodeSel = async () => {
     await popover.value.present();
     popover.value.open = true
     const x = await popover.value.onDidDismiss();
+    console.log(x)
+    /*
+    port = await openInputSel(tp)
+          console.log("Port:",port)
+          if (port.role != "button") {
+            // FIXME throws error on removing edge
+            // doint later with block seems to be fine
+            console.log("Selection cancelled")
+            block = true
+            //await addedEdge.remove()
+          } 
+        }
+        // add edge name
+        console.log("from ",s.data("name"), " to ",t.data("name"),", port: ",port.data)
+        await e.data("type",s.data("edge") + "-" + port.data)
+        */
+
     console.log("Dismiss: ",x)
     popover.value.open = false
-    return x
+    if (x.role == "button") {
+      const nt = x.data
+      console.log("Type:",nt)
+      // find node
+      return nt
+    } else {
+      return ""
+    }
 }
 
 const openPopover = async (ev: Event) => {

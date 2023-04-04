@@ -9,7 +9,7 @@
         </ion-toolbar>
       </ion-header>
 
-      <div id="container">
+      <div id="container" class="work-container">
         <ion-grid fixed="true">
           <ion-row>
 
@@ -219,6 +219,11 @@ ion-col {
   }
 }
 
+@media only screen and (max-width: 996px) {
+  .work-container {
+    transform: translateY(-20%)!important;
+  }
+}
 
 </style>
 
