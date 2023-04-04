@@ -35,6 +35,7 @@ import eventBus from '../services/eventBus';
 const props = defineProps({
   msg:String,
   signal:String,
+  controller: Object
 })
 
 import { useI18n } from 'vue-i18n'

@@ -106,7 +106,7 @@
     "join":{
         "name":"join",
         "icon":"fa-solid fa-book-atlas",
-        "thumb":"/img/widgets/LinePlot.png",
+        "thumb":"/img/widgets/Join.png",
         "en": {
             "label":"Join Data",
             "info":"More text for a popup or tooltip"

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="80mm"
+   height="80mm"
+   viewBox="0 0 80 80"
+   version="1.1"
+   id="svg5"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs2">
+    <linearGradient
+       id="linearGradient4061">
+      <stop
+         style="stop-color:#000000;stop-opacity:1;"
+         offset="0"
+         id="stop4059" />
+    </linearGradient>
+  </defs>
+  <g
+     id="layer1">
+    <g
+       id="g6027"
+       transform="translate(-1.0000011)">
+      <path
+         style="fill:#ff45ff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:3.09144;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:markers stroke fill"
+         id="path1023-6-3"
+         d="M 40.816879,57.066763 A 21.454256,21.698151 0 0 1 32.091059,39.105992 21.454256,21.698151 0 0 1 41.609554,21.561853" />
+      <path
+         style="fill:#ff45ff;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:3.09144;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:markers stroke fill"
+         id="path1023-6-3-5"
+         d="m -41.609554,-21.561853 a 21.454256,21.698151 0 0 1 -8.72582,-17.960771 21.454256,21.698151 0 0 1 9.518495,-17.54414"
+         transform="scale(-1)" />
+      <ellipse
+         style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:3.09144;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:markers stroke fill"
+         id="path1023"
+         cx="28.5"
+         cy="39.499996"
+         rx="21.454279"
+         ry="21.454277" />
+      <ellipse
+         style="fill:none;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:3.09144;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1;paint-order:markers stroke fill"
+         id="path1023-6"
+         cx="53.5"
+         cy="39.499996"
+         rx="21.454279"
+         ry="21.454277" />
+    </g>
+  </g>
+</svg>

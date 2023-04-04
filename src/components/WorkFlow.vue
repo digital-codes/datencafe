@@ -305,31 +305,32 @@ const ctxOptions = {
       coreAsWell: false,
       onClickFunction: async function (event?: EventObject) {
         console.log("Add node")
-        const pos = event.position || event.cyPosition;
-        const newId = "N" + String(nextNode.value++)
-        const data = {
-          //group: 'nodes',
-          id:newId,
-        };
-        const newNode = await cy.value.add({
-          data: data,
-          position: {
-            x: pos.x + 20,
-            y: pos.y + 5
-          }
-        })
         const nodeType = await openNodeSel()
         if (nodeType != "") {
           console.log("Type selected:",nodeType,nodeTypes[nodeType])
+          // properties
           const nodeIcon = nodeTypes[nodeType].thumb
+          const pos = event.position || event.cyPosition;
+          const newId = "N" + String(nextNode.value++)
+          const data = {
+            //group: 'nodes',
+            id:newId,
+          };
+          // add node
+          const newNode = await cy.value.add({
+            data: data,
+            position: {
+              x: pos.x + 20,
+              y: pos.y + 5
+            }
+          })
           // set data
           const nodeData = {"name":"new","type":{"name":"t0",
             "shp":"circle","bd":"#f00", "img":"url('" + nodeIcon + "')"}}
           newNode.data(nodeData)
           //console.log("After add node:",JSON.stringify(cy.value.json()))
         } else {
-          console.log("Cancelled. Removing:",newNode.id())
-          cy.value.remove(newNode)
+          console.log("Cancelled. Removing:")
         }
       }
     },
@@ -661,8 +662,8 @@ const openNodeSel = async () => {
       side:"right",
       alignment:"start",
       showBackdrop: true,
-      backdropDismiss: true, // error when enabling dismiss
-      dismissOnSelect: true,
+      backdropDismiss: true, 
+      dismissOnSelect: false,
       reference: "trigger", // event or trigger
       componentProps: { // Popover props
           msg:"Select Input",
@@ -673,22 +674,6 @@ const openNodeSel = async () => {
     popover.value.open = true
     const x = await popover.value.onDidDismiss();
     console.log(x)
-    /*
-    port = await openInputSel(tp)
-          console.log("Port:",port)
-          if (port.role != "button") {
-            // FIXME throws error on removing edge
-            // doint later with block seems to be fine
-            console.log("Selection cancelled")
-            block = true
-            //await addedEdge.remove()
-          } 
-        }
-        // add edge name
-        console.log("from ",s.data("name"), " to ",t.data("name"),", port: ",port.data)
-        await e.data("type",s.data("edge") + "-" + port.data)
-        */
-
     console.log("Dismiss: ",x)
     popover.value.open = false
     if (x.role == "button") {
