@@ -718,7 +718,7 @@ const openPopover = async (ev: Event) => {
     popover.value.open = false
   }
 
-const createEvent = () => {
+const createEvent = async () => {
   console.log("Create event")
   /* we can create an event with position, which will be used
   ** when reference = event
@@ -730,12 +730,14 @@ const createEvent = () => {
   });
   openPopover(event)
   */
-  openNodeSel()
+  await openNodeSel()
 
 
   // or we just use the default from the popover button with reference = trigger
+  /*
   console.log("btn",popBtn.value)
   popBtn.value.$el.click()
+  */
 }
 
 
