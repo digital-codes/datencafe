@@ -40,6 +40,9 @@ import ImportPopover from './ImportPopover.vue';
 import InputselPopover from './InputselPopover.vue';
 import NodesPopover from "./NodesPopover.vue"
 
+// --------------------
+import nodeTypes from "../assets/nodes/nodeTypes.json"
+
 
 // --------------------
 
@@ -315,9 +318,12 @@ const ctxOptions = {
             y: pos.y + 5
           }
         })
+        const nodeType = await openNodeSel()
+        console.log("Type selected:",nodeType)
+        const nodeIcon = nodeTypes[nodeType].icon
         // set data
         const nodeData = {"name":"new","type":{"name":"t0",
-          "shp":"circle","bd":"#f00", "img":"url('/img/icons-bordered/question.png')"}}
+          "shp":"circle","bd":"#f00", "img":"url('" + nodeIcon + "')"}}
         newNode.data(nodeData)
         //console.log("After add node:",JSON.stringify(cy.value.json()))
       }
@@ -634,7 +640,7 @@ const ctlClick = async () => {
     return x
 }
 
-const openNodeSel = async (ports) => {
+const openNodeSel = async () => {
   popover.value = await popoverController.create({
       component: NodesPopover,
       //event: ev,
@@ -647,8 +653,7 @@ const openNodeSel = async (ports) => {
       reference: "trigger", // event or trigger
       componentProps: { // Popover props
           msg:"Select Input",
-          signal: "inputSelection",
-          ports: ports
+          signal: "nodeSelection"
         }
     })
     await popover.value.present();
