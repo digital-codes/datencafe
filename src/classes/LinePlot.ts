@@ -5,8 +5,9 @@ import {DcNode} from "./DcNode"
 
 export class LinePlot extends DcNode {
   // properties
-  readonly _type: string
   private updCnt = 0
+  static _display = true
+  static _type = "chart"
   // constructor
   constructor(id:string) {
     // although we need to call this first,
@@ -16,12 +17,11 @@ export class LinePlot extends DcNode {
     const ports: string[] = ["A"]
     const edges: string[] = ["d"]
     super(id,ports,edges)
-    this._type = "linechart"
-    super.icon = "/img/widgets/LinePlot.png"
-    DcNode.print(this._type + " created") // no access to super._id etc here
+    DcNode.print(LinePlot._type + " created") // no access to super._id etc here
   }
   // getters/setters
-  get type() { return this._type }
+  get type() { return LinePlot._type }
+  get display() { return LinePlot._display }
   // methods
   async updated(msg:string,y?:any) {
     this.updCnt++

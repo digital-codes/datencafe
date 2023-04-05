@@ -7,7 +7,8 @@ const providers = PubStore()
 
 export class TablePlot extends DcNode {
   // properties
-  readonly _type: string
+  static _display = true
+  static _type = "table"
   // constructor
   constructor(id:string) {
     // although we need to call this first,
@@ -17,12 +18,10 @@ export class TablePlot extends DcNode {
     const ports: string[] = ["A"]
     const edges: string[] = ["d"]
     super(id,ports,edges)
-    this._type = "tableplot"
-    super.icon = "/img/widgets/Table.png"
-    DcNode.print(this._type + " created") // no access to super._id etc here
+    DcNode.print(TablePlot._type + " created") // no access to super._id etc here
   }
   // getters
-  get type() { return this._type }
+  get type() { return TablePlot._type }
 } 
 
   

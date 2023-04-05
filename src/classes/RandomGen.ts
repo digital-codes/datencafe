@@ -8,7 +8,8 @@ import {DataFrame, toJSON} from 'danfojs/dist/danfojs-browser/src';
 
 export class RandomGen extends DcNode {
   // properties
-  readonly _type: string
+  static _display = false
+  static _type = "proc"
   _period = 5 // in seconds
   _cols = 3 // columns
   _rows = 10 // rows 
@@ -25,9 +26,7 @@ export class RandomGen extends DcNode {
     const ports: string[] = []
     const edges: string[] = ["d"]
     super(id,ports,edges)
-    this._type = "randomgen"
-    super.icon = "/img/widgets/Random.png"
-    DcNode.print(this._type + " created") // no access to super._id etc here
+    DcNode.print(RandomGen._type + " created") // no access to super._id etc here
     //RandomGen.insts.set(id,this)
   }
   // methods
@@ -98,7 +97,7 @@ export class RandomGen extends DcNode {
     DcNode.print("Stop generating @ " + String(this.genCnt)) 
   }
   // getters/setters
-  get type() { return this._type }
+  get type() { return RandomGen._type }
   get period() {return this._period}
   set period(x) {this._period = x}
   get cols() {return this._cols}

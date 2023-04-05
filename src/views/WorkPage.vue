@@ -1,39 +1,3 @@
-<template>
-  <ion-page>
-    <TitleBar :title='$t("titles.work.tab")' />
-
-    <ion-content :fullscreen="true">
-      <ion-header collapse="condense">
-        <ion-toolbar>
-          <ion-title size="large">{{ $route.params.id }}</ion-title>
-        </ion-toolbar>
-      </ion-header>
-
-      <div id="container" class="work-container">
-        <ion-grid fixed="true">
-          <ion-row>
-
-            <ion-col size="12" size-lg="7">
-              <h3>{{$t("titles.work.flow")}}</h3>
-              <p v-if="FlowLoading" class="loading">Loading ...</p>
-              <WorkFlowAsync msg="Flow demo" />
-            </ion-col>
-
-            <ion-col  size="12" size-lg="5" sytle="overflow-y:scroll;">
-              <h3>{{$t("titles.work.view.title")}}</h3>
-              <p v-if="FlowLoading"  class="loading">Loading ...</p>
-              <!-- 
-              <DanfoPlotAsync :propItems="items"/>
-              -->
-              <DanfoPlot :propItems="items"/>
-            </ion-col>
-
-          </ion-row>
-          </ion-grid>
-      </div>
-    </ion-content>
-  </ion-page>
-</template>
 
 <script setup lang="ts">
 import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
@@ -61,6 +25,22 @@ const WorkFlowAsync = defineAsyncComponent({
 });
 //import WorkFlow from '../components/WorkFlow.vue'
 
+const addViz = (event) => {
+  console.log("Add:",event)
+  items.value.unshift(event)
+}
+
+const delViz = (id) => {
+  console.log("Del:",id)
+  console.log("Items before:",items.value,items.value.length)
+  const idx = items.value.findIndex((e) => e.id == id)
+  if (idx == -1)
+    throw(new Error("Invalid id"))
+  console.log("idx:",idx)
+  items.value.splice(idx,1)
+  console.log("Items after:",items.value,items.value.length)
+}
+
 /*
 const DanfoPlotAsync = defineAsyncComponent({
   // A factory function that returns a Promise that resolves to
@@ -78,8 +58,7 @@ import DanfoPlot from '../components/DanfoPlot.vue'
 
 
 // items
-const items = ref([
-])
+const items = ref([])
 
 /*
 const items = ref([
@@ -160,11 +139,45 @@ onMounted(() => {
         */
 })
 
-
-//////////////
-
-
 </script>
+
+
+<template>
+  <ion-page>
+    <TitleBar :title='$t("titles.work.tab")' />
+
+    <ion-content :fullscreen="true">
+      <ion-header collapse="condense">
+        <ion-toolbar>
+          <ion-title size="large">{{ $route.params.id }}</ion-title>
+        </ion-toolbar>
+      </ion-header>
+
+      <div id="container" class="work-container">
+        <ion-grid fixed="true">
+          <ion-row>
+
+            <ion-col size="12" size-lg="7">
+              <h3>{{$t("titles.work.flow")}}</h3>
+              <p v-if="FlowLoading" class="loading">Loading ...</p>
+              <WorkFlowAsync msg="Flow demo" @add-viz="(e) => addViz(e)" @del-viz="(e) => delViz(e)" />
+            </ion-col>
+
+            <ion-col  size="12" size-lg="5" sytle="overflow-y:scroll;">
+              <h3>{{$t("titles.work.view.title")}}</h3>
+              <p v-if="FlowLoading"  class="loading">Loading ...</p>
+              <!-- 
+              <DanfoPlotAsync :propItems="items"/>
+              -->
+              <DanfoPlot :propItems="items"/>
+            </ion-col>
+
+          </ion-row>
+          </ion-grid>
+      </div>
+    </ion-content>
+  </ion-page>
+</template>
 
 <style scoped>
 #container {

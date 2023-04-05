@@ -4,7 +4,8 @@ import {DcNode} from "./DcNode"
 
 export class DataInfo extends DcNode {
   // properties
-  readonly _type: string
+  static _display = false
+  static _type = "proc"
   private updCnt = 0
   // constructor
   constructor(id:string) {
@@ -15,12 +16,10 @@ export class DataInfo extends DcNode {
     const ports: string[] = ["A"]
     const edges: string[] = ["d"]
     super(id,ports,edges)
-    this._type = "datainfo"
-    super.icon = "/img/widgets/DataInfo.png"
-    DcNode.print(this._type + " created") // no access to super._id etc here
+    DcNode.print(DataInfo._type + " created") // no access to super._id etc here
   }
   // getters/setters
-  get type() { return this._type }
+  get type() { return DataInfo._type }
   // methods
   async updated(msg:string,y?:any) {
     this.updCnt++

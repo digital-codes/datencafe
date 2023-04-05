@@ -53,7 +53,9 @@ import { nodeFactory } from "../services/NodeFactory"
 
 
 
-defineProps<{ msg: string }>()
+const props = defineProps<{ msg: string }>()
+
+const emit = defineEmits(["addViz","delViz"])
 
 const count = ref(0)
 const theFlow = ref(null)
@@ -252,6 +254,10 @@ const ctxOptions = {
         const { target } = event;
         console.log("Remove node:",target)
         cy.value.remove(target);
+        const instance = target.data("instance")
+        if (instance.display) {
+          emit("delViz",instance.id)
+        }
       },
       disabled: false
     },
@@ -350,6 +356,7 @@ const ctxOptions = {
             const nodeData = {
               "name":newId,
               "ports":ports,
+              "instance":instance,
               "type":{
                 "name":nodeType,
                 "shp":"circle",
@@ -360,6 +367,10 @@ const ctxOptions = {
             newNode.data(nodeData)
             console.log("New node:", newNode.data())
             //console.log("After add node:",JSON.stringify(cy.value.json()))
+            // check if we need to create a new diagram element 
+            if (instance.display) {
+              emit("addViz",{"id":instance.id,"name":instance.name,"type":"chart"})
+            }
           } catch (err) {
             alert("Invalid instance:" + err.message)
             return

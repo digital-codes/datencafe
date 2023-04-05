@@ -1,6 +1,6 @@
 {
-"type":"t1",
-"icon":"dnqwnd",
+"class":"ScatterPlot",
+"type":"chart",
 "ports":"'A','b'",
 "edges":"'e'"
 }

@@ -4,7 +4,8 @@ import {DcNode} from "./DcNode"
 
 export class MathOps extends DcNode {
   // properties
-  readonly _type: string
+  static _display = false
+  static _type = "proc"
   // constructor
   constructor(id:string) {
     // although we need to call this first,
@@ -14,12 +15,10 @@ export class MathOps extends DcNode {
     const ports: string[] = []
     const edges: string[] = ["d"]
     super(id,ports,edges)
-    this._type = "mathops"
-    super.icon = "/img/widgets/Preprocess.png"
-    DcNode.print(this._type + " created") // no access to super._id etc here
+    DcNode.print(MathOps._type + " created") // no access to super._id etc here
   }
   // getters
-  get type() { return this._type }
+  get type() { return MathOps._type }
 } 
 
   
