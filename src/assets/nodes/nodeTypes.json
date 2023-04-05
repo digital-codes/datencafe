@@ -41,7 +41,7 @@
     "linechart":{
         "name":"linechart",
         "icon":"fa-solid fa-book-atlas",
-        "thumb":"/img/widgets/LinePlot.png",
+        "thumb":"/img/widgets/LineChart.png",
         "en": {
             "label":"Line Chart",
             "info":"More text for a popup or tooltip"
@@ -74,6 +74,58 @@
         },
         "de": {
             "label":"Scatter Plot",
+            "info":"Mehr Text für den Tooltip"
+        }
+    },
+    "treemap":{
+        "name":"treemap",
+        "icon":"fa-solid fa-book-atlas",
+        "thumb":"/img/widgets/MosaicDisplay.png",
+        "en": {
+            "label":"Mosaic Plot (Tree Map)",
+            "info":"More text for a popup or tooltip"
+        },
+        "de": {
+            "label":"Mosaik",
+            "info":"Mehr Text für den Tooltip"
+        }
+    },
+    "histo":{
+        "name":"histo",
+        "icon":"fa-solid fa-cart-shopping",
+        "thumb":"/img/widgets/Distribution.png",
+        "en": {
+            "label":"Distribution",
+            "info":"More text for a popup or tooltip"
+        },
+        "de": {
+            "label":"Verteilung",
+            "info":"Mehr Text für den Tooltip"
+        }
+    },
+    "geomap":{
+        "name":"geomap",
+        "icon":"fa-solid fa-cart-shopping",
+        "thumb":"/img/widgets/GeoMap.png",
+        "en": {
+            "label":"Geo Map",
+            "info":"More text for a popup or tooltip"
+        },
+        "de": {
+            "label":"Karte",
+            "info":"Mehr Text für den Tooltip"
+        }
+    },
+    "choromap":{
+        "name":"choromap",
+        "icon":"fa-solid fa-cart-shopping",
+        "thumb":"/img/widgets/Choropleth.png",
+        "en": {
+            "label":"Choropleth Map",
+            "info":"More text for a popup or tooltip"
+        },
+        "de": {
+            "label":"Farbcodierte Karte",
             "info":"Mehr Text für den Tooltip"
         }
     },
@@ -210,7 +262,7 @@
     "random":{
         "name":"random",
         "icon":"fa-solid fa-globe",
-        "thumb":"/img/widgets/Random.png",
+        "thumb":"/img/widgets/RandomData.png",
         "en": {
             "label":"Random Data Generator",
             "info":"More text for a popup or tooltip"

@@ -127,10 +127,13 @@ If PNG icons needs, convert SVG like so (note: inkscape export is -e ?):
 or 
 
 > for i in *.svg; do inkscape -w 256 -h 256 $i -e `basename $i .svg`.png ; done
+> for i in *.svg; do inkscape -w 256 -h 256 $i --export-type=png `basename $i .svg`.png ; done
 
 Latter scales to w and h
 
 Add border to icons like so
 
 > for i in *.png; do convert \$i -bordercolor transparent -compose over  -border 16 ../icons-bordered/$i; done
+
+Note: remove the slash in front of \$
 
