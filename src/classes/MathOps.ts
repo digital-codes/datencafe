@@ -11,7 +11,9 @@ export class MathOps extends DcNode {
     // the super elements will be initialized later
     // access to super properties in the derived constructor
     // may result in "undefined" ...
-    super(id)
+    const ports: string[] = []
+    const edges: string[] = ["d"]
+    super(id,ports,edges)
     this._type = "mathops"
     super.icon = "/img/widgets/Preprocess.png"
     DcNode.print(this._type + " created") // no access to super._id etc here

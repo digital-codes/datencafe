@@ -42,7 +42,12 @@ import NodesPopover from "./NodesPopover.vue"
 
 // --------------------
 import nodeTypes from "../assets/nodes/nodeTypes.json"
-
+import { DcNode } from "../classes/DcNode"
+import { LinePlot } from "../classes/LinePlot"
+import { BarPlot } from "../classes/BarPlot"
+import { DataInfo } from "../classes/DataInfo"
+import { RandomGen } from "../classes/RandomGen"
+import { nodeFactory } from "../services/NodeFactory"
 
 // --------------------
 
@@ -306,8 +311,10 @@ const ctxOptions = {
       onClickFunction: async function (event?: EventObject) {
         console.log("Add node")
         const nodeType = await openNodeSel()
+        console.log("NodeType from add node",nodeType)
         if (nodeType != "") {
-          console.log("Type selected:",nodeType,nodeTypes[nodeType])
+          console.log("Type selected:",nodeType)
+          console.log("Type:",nodeTypes[nodeType])
           // properties
           const nodeIcon = nodeTypes[nodeType].thumb
           const pos = event.position || event.cyPosition;
@@ -324,11 +331,39 @@ const ctxOptions = {
               y: pos.y + 5
             }
           })
-          // set data
-          const nodeData = {"name":"new","type":{"name":"t0",
-            "shp":"circle","bd":"#f00", "img":"url('" + nodeIcon + "')"}}
-          newNode.data(nodeData)
-          //console.log("After add node:",JSON.stringify(cy.value.json()))
+          // create class instance
+          try {
+            const instance = await nodeFactory(newId,nodeType)
+            // get ports and edges from instance
+            const ports = {}
+            instance.ports.forEach(p => {
+              ports[p] = false
+            });
+            console.log("Ports:",ports)
+            // we don't use edges yet ...
+            const edges = {}
+            instance.edges.forEach(e => {
+              edges[e] = false
+            });
+            console.log("Edges:",edges)
+            // set data
+            const nodeData = {
+              "name":newId,
+              "ports":ports,
+              "type":{
+                "name":nodeType,
+                "shp":"circle",
+                "bd":"#f00", 
+                "img":"url('" + nodeIcon + "')"
+              }
+            }
+            newNode.data(nodeData)
+            console.log("New node:", newNode.data())
+            //console.log("After add node:",JSON.stringify(cy.value.json()))
+          } catch (err) {
+            alert("Invalid instance:" + err.message)
+            return
+          }
         } else {
           console.log("Cancelled. Removing:")
         }
@@ -670,15 +705,15 @@ const openNodeSel = async () => {
           signal: "nodeSelection"
         }
     })
-    await popover.value.present();
     popover.value.open = true
+    await popover.value.present();
     const x = await popover.value.onDidDismiss();
     console.log(x)
     console.log("Dismiss: ",x)
     popover.value.open = false
     if (x.role == "button") {
       const nt = x.data
-      console.log("Type:",nt)
+      console.log("Type from popup:",nt)
       // find node
       return nt
     } else {

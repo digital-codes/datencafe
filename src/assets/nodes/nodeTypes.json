@@ -13,8 +13,8 @@
             "info": "Mehr Text für den Tooltip. ieofhiwefhwifhweihfweifh. ndqienfn eiwpf"
         }
     },
-    "datinfo": {
-        "name": "datinfo",
+    "datainfo": {
+        "name": "datainfo",
         "icon": "fa-solid fa-book-atlas",
         "implemented": true,
         "thumb": "/img/widgets/DataInfo.png",
@@ -41,8 +41,8 @@
             "info": "Mehr Text für den Tooltip"
         }
     },
-    "linechart": {
-        "name": "linechart",
+    "lineplot": {
+        "name": "lineplot",
         "icon": "fa-solid fa-book-atlas",
         "implemented": true,
         "thumb": "/img/widgets/LineChart.png",
@@ -55,8 +55,8 @@
             "info": "Mehr Text für den Tooltip"
         }
     },
-    "barchart": {
-        "name": "barchart",
+    "barplot": {
+        "name": "barplot",
         "icon": "fa-solid fa-book-atlas",
         "implemented": true,
         "thumb": "/img/widgets/BarPlot.png",
@@ -70,7 +70,7 @@
         }
     },
     "scatter": {
-        "name": "scatter",
+        "name": "scatterplot",
         "icon": "fa-solid fa-book-atlas",
         "implemented": true,
         "thumb": "/img/widgets/ScatterPlot.png",
@@ -279,8 +279,8 @@
             "info": "Mehr Text für den Tooltip"
         }
     },
-    "random": {
-        "name": "random",
+    "randomgen": {
+        "name": "randomgen",
         "icon": "fa-solid fa-globe",
         "implemented": true,
         "thumb": "/img/widgets/RandomData.png",

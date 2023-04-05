@@ -14,7 +14,9 @@ export class TablePlot extends DcNode {
     // the super elements will be initialized later
     // access to super properties in the derived constructor
     // may result in "undefined" ...
-    super(id)
+    const ports: string[] = ["A"]
+    const edges: string[] = ["d"]
+    super(id,ports,edges)
     this._type = "tableplot"
     super.icon = "/img/widgets/Table.png"
     DcNode.print(this._type + " created") // no access to super._id etc here
