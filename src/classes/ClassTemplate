@@ -1,0 +1,45 @@
+// {{{type}}} node class, extends DcNode
+
+
+import {DcNode} from "./DcNode"
+
+export class LinePlot extends DcNode {
+  // properties
+  readonly _type: string
+  private updCnt = 0
+  // constructor
+  constructor(id:string) {
+    const ports: string[] = [{{{ports}}}]
+    const edges: string[] = [{{{edges}}}]
+    super(id,ports,edges)
+    this._type = "{{type}}"
+    super.icon = "{{icon}}"
+    DcNode.print(this._type + " created") // no access to super._id etc here
+  }
+  // getters/setters
+  get type() { return this._type }
+  // methods
+  async updated(msg:string,y?:any) {
+    this.updCnt++
+    const src = msg.split("-")[1]
+    DcNode.print(src + " updated " + super.id +": " + String(this.updCnt) + "..." + String(y))
+    const dt = DcNode.providers.getDataById(src) 
+    const df = new DcNode.dfd.DataFrame(dt)
+    const divId = DcNode.signals.PLOTPREFIX + super.id
+    const target = await document.getElementById(divId)
+    if ((target === undefined) || (target == null) ) {
+      throw (new Error("Invalid ID: " + String(divId)))
+    }
+    await df.plot(divId).line()
+  }
+  msgOn(x: string) {
+    // set event listener for signal 
+    DcNode.print("msg on for " + x)
+    super.messaging.on(x,(y:any)=>{this.updated(x,y)})
+  }
+  msgOff(x: string) {
+    // set event listener for signal 
+    DcNode.print("msg off for " + x)
+    super.messaging.off(x)
+  }
+} 
