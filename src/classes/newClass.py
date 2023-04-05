@@ -3,7 +3,7 @@ import json
 renderer = pystache.Renderer()
 
 # read data
-with open("data.json") as f:
+with open("classData.json") as f:
     dt = json.load(f)
 print(dt)
 
