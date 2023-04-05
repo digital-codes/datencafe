@@ -3,7 +3,7 @@
     <p>{{ props.msg }}</p>
     <ion-list class="list">
       <div v-for="(option,idx) in options" :key="option.type" class="item">
-      <ion-item >
+      <ion-item v-if="option.implemented">
         <ion-label class="label">
           {{ nodeItem(option.type,"label") }}
         </ion-label>
@@ -62,7 +62,12 @@ const clk = async (n:number) => {
 onMounted(() => {
   Object.keys(nodeTypes).forEach((e,i) => {
     chk.value[i] = false
-    options.value[i] = {type: e, icon: nodeTypes[e].icon, thumb:nodeTypes[e].thumb }
+    options.value[i] = {
+      type: e, 
+      icon: nodeTypes[e].icon, 
+      thumb:nodeTypes[e].thumb,
+      implemented:nodeTypes[e].implemented
+     }
   })
 })
 

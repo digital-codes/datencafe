@@ -1,281 +1,296 @@
 {
-    "loadfile":{
-        "name":"loadfile",
-        "icon":"fa-solid fa-coffee",
-        "thumb":"/img/widgets/CSVFile.png",
+    "loadfile": {
+        "name": "loadfile",
+        "icon": "fa-solid fa-coffee",
+        "implemented": true,
+        "thumb": "/img/widgets/CSVFile.png",
         "en": {
-            "label":"Load file",
-            "info":"More text for a popup or tooltip"
+            "label": "Load file",
+            "info": "More text for a popup or tooltip"
         },
         "de": {
-            "label":"Datei laden",
-            "info":"Mehr Text für den Tooltip. ieofhiwefhwifhweihfweifh. ndqienfn eiwpf"
+            "label": "Datei laden",
+            "info": "Mehr Text für den Tooltip. ieofhiwefhwifhweihfweifh. ndqienfn eiwpf"
         }
     },
-    "datinfo":{
-        "name":"datinfo",
-        "icon":"fa-solid fa-book-atlas",
-        "thumb":"/img/widgets/DataInfo.png",
+    "datinfo": {
+        "name": "datinfo",
+        "icon": "fa-solid fa-book-atlas",
+        "implemented": true,
+        "thumb": "/img/widgets/DataInfo.png",
         "en": {
-            "label":"Date description",
-            "info":"More text for a popup or tooltip. "
+            "label": "Date description",
+            "info": "More text for a popup or tooltip. "
         },
         "de": {
-            "label":"Datenbeschreibung",
-            "info":"Mehr Text für den Tooltip.Mehr Text für den Tooltip. ieofhiwefhwifhweihfweifh. ndqienfn eiwpf"
+            "label": "Datenbeschreibung",
+            "info": "Mehr Text für den Tooltip.Mehr Text für den Tooltip. ieofhiwefhwifhweihfweifh. ndqienfn eiwpf"
         }
     },
-    "table":{
-        "name":"table",
-        "icon":"fa-solid fa-book-atlas",
-        "thumb":"/img/widgets/Table.png",
+    "table": {
+        "name": "table",
+        "icon": "fa-solid fa-book-atlas",
+        "implemented": true,
+        "thumb": "/img/widgets/Table.png",
         "en": {
-            "label":"Tabular view",
-            "info":"More text for a popup or tooltip"
+            "label": "Tabular view",
+            "info": "More text for a popup or tooltip"
         },
         "de": {
-            "label":"Tabellenansicht",
-            "info":"Mehr Text für den Tooltip"
+            "label": "Tabellenansicht",
+            "info": "Mehr Text für den Tooltip"
         }
     },
-    "linechart":{
-        "name":"linechart",
-        "icon":"fa-solid fa-book-atlas",
-        "thumb":"/img/widgets/LineChart.png",
+    "linechart": {
+        "name": "linechart",
+        "icon": "fa-solid fa-book-atlas",
+        "implemented": true,
+        "thumb": "/img/widgets/LineChart.png",
         "en": {
-            "label":"Line Chart",
-            "info":"More text for a popup or tooltip"
+            "label": "Line Chart",
+            "info": "More text for a popup or tooltip"
         },
         "de": {
-            "label":"Liniendiagramm",
-            "info":"Mehr Text für den Tooltip"
+            "label": "Liniendiagramm",
+            "info": "Mehr Text für den Tooltip"
         }
     },
-    "barchart":{
-        "name":"barchart",
-        "icon":"fa-solid fa-book-atlas",
-        "thumb":"/img/widgets/BarPlot.png",
+    "barchart": {
+        "name": "barchart",
+        "icon": "fa-solid fa-book-atlas",
+        "implemented": true,
+        "thumb": "/img/widgets/BarPlot.png",
         "en": {
-            "label":"Bar Chart",
-            "info":"More text for a popup or tooltip"
+            "label": "Bar Chart",
+            "info": "More text for a popup or tooltip"
         },
         "de": {
-            "label":"Balkendiagramm",
-            "info":"Mehr Text für den Tooltip"
+            "label": "Balkendiagramm",
+            "info": "Mehr Text für den Tooltip"
         }
     },
-    "scatter":{
-        "name":"scatter",
-        "icon":"fa-solid fa-book-atlas",
-        "thumb":"/img/widgets/ScatterPlot.png",
+    "scatter": {
+        "name": "scatter",
+        "icon": "fa-solid fa-book-atlas",
+        "implemented": true,
+        "thumb": "/img/widgets/ScatterPlot.png",
         "en": {
-            "label":"Scatterplot Chart",
-            "info":"More text for a popup or tooltip"
+            "label": "Scatterplot Chart",
+            "info": "More text for a popup or tooltip"
         },
         "de": {
-            "label":"Scatter Plot",
-            "info":"Mehr Text für den Tooltip"
+            "label": "Scatter Plot",
+            "info": "Mehr Text für den Tooltip"
         }
     },
-    "treemap":{
-        "name":"treemap",
-        "icon":"fa-solid fa-book-atlas",
-        "thumb":"/img/widgets/MosaicDisplay.png",
+    "treemap": {
+        "name": "treemap",
+        "icon": "fa-solid fa-book-atlas",
+        "implemented": true,
+        "thumb": "/img/widgets/MosaicDisplay.png",
         "en": {
-            "label":"Mosaic Plot (Tree Map)",
-            "info":"More text for a popup or tooltip"
+            "label": "Mosaic Plot (Tree Map)",
+            "info": "More text for a popup or tooltip"
         },
         "de": {
-            "label":"Mosaik",
-            "info":"Mehr Text für den Tooltip"
+            "label": "Mosaik",
+            "info": "Mehr Text für den Tooltip"
         }
     },
-    "histo":{
-        "name":"histo",
-        "icon":"fa-solid fa-cart-shopping",
-        "thumb":"/img/widgets/Distribution.png",
+    "histo": {
+        "name": "histo",
+        "icon": "fa-solid fa-cart-shopping",
+        "implemented": true,
+        "thumb": "/img/widgets/Distribution.png",
         "en": {
-            "label":"Distribution",
-            "info":"More text for a popup or tooltip"
+            "label": "Distribution",
+            "info": "More text for a popup or tooltip"
         },
         "de": {
-            "label":"Verteilung",
-            "info":"Mehr Text für den Tooltip"
+            "label": "Verteilung",
+            "info": "Mehr Text für den Tooltip"
         }
     },
-    "geomap":{
-        "name":"geomap",
-        "icon":"fa-solid fa-cart-shopping",
-        "thumb":"/img/widgets/GeoMap.png",
+    "geomap": {
+        "name": "geomap",
+        "icon": "fa-solid fa-cart-shopping",
+        "implemented": true,
+        "thumb": "/img/widgets/GeoMap.png",
         "en": {
-            "label":"Geo Map",
-            "info":"More text for a popup or tooltip"
+            "label": "Geo Map",
+            "info": "More text for a popup or tooltip"
         },
         "de": {
-            "label":"Karte",
-            "info":"Mehr Text für den Tooltip"
+            "label": "Karte",
+            "info": "Mehr Text für den Tooltip"
         }
     },
-    "choromap":{
-        "name":"choromap",
-        "icon":"fa-solid fa-cart-shopping",
-        "thumb":"/img/widgets/Choropleth.png",
+    "choromap": {
+        "name": "choromap",
+        "icon": "fa-solid fa-cart-shopping",
+        "implemented": true,
+        "thumb": "/img/widgets/Choropleth.png",
         "en": {
-            "label":"Choropleth Map",
-            "info":"More text for a popup or tooltip"
+            "label": "Choropleth Map",
+            "info": "More text for a popup or tooltip"
         },
         "de": {
-            "label":"Farbcodierte Karte",
-            "info":"Mehr Text für den Tooltip"
+            "label": "Farbcodierte Karte",
+            "info": "Mehr Text für den Tooltip"
         }
     },
-    "addrows":{
-        "name":"addrows",
-        "icon":"fa-solid fa-book-atlas",
-        "thumb":"/img/widgets/Concatenate.png",
+    "addrows": {
+        "name": "addrows",
+        "icon": "fa-solid fa-book-atlas",
+        "implemented": true,
+        "thumb": "/img/widgets/Concatenate.png",
         "en": {
-            "label":"Add Rows",
-            "info":"More text for a popup or tooltip"
+            "label": "Add Rows",
+            "info": "More text for a popup or tooltip"
         },
         "de": {
-            "label":"Zeilen hinzufügen",
-            "info":"Mehr Text für den Tooltip"
+            "label": "Zeilen hinzufügen",
+            "info": "Mehr Text für den Tooltip"
         }
     },
-    "addcols":{
-        "name":"addcols",
-        "icon":"fa-solid fa-book-atlas",
-        "thumb":"/img/widgets/MergeData.png",
+    "addcols": {
+        "name": "addcols",
+        "icon": "fa-solid fa-book-atlas",
+        "implemented": true,
+        "thumb": "/img/widgets/MergeData.png",
         "en": {
-            "label":"Add columns",
-            "info":"More text for a popup or tooltip"
+            "label": "Add columns",
+            "info": "More text for a popup or tooltip"
         },
         "de": {
-            "label":"Spalten hinzufügen",
-            "info":"Mehr Text für den Tooltip"
+            "label": "Spalten hinzufügen",
+            "info": "Mehr Text für den Tooltip"
         }
     },
-    "join":{
-        "name":"join",
-        "icon":"fa-solid fa-book-atlas",
-        "thumb":"/img/widgets/Join.png",
+    "join": {
+        "name": "join",
+        "icon": "fa-solid fa-book-atlas",
+        "implemented": true,
+        "thumb": "/img/widgets/Join.png",
         "en": {
-            "label":"Join Data",
-            "info":"More text for a popup or tooltip"
+            "label": "Join Data",
+            "info": "More text for a popup or tooltip"
         },
         "de": {
-            "label":"Daten zusammenführen",
-            "info":"Mehr Text für den Tooltip"
+            "label": "Daten zusammenführen",
+            "info": "Mehr Text für den Tooltip"
         }
     },
-    "colsel":{
-        "name":"colsel",
-        "icon":"fa-solid fa-book-atlas",
-        "thumb":"/img/widgets/SelectColumns.png",
+    "colsel": {
+        "name": "colsel",
+        "icon": "fa-solid fa-book-atlas",
+        "implemented": true,
+        "thumb": "/img/widgets/SelectColumns.png",
         "en": {
-            "label":"Select columns",
-            "info":"More text for a popup or tooltip"
+            "label": "Select columns",
+            "info": "More text for a popup or tooltip"
         },
         "de": {
-            "label":"Spalten auswählen",
-            "info":"Mehr Text für den Tooltip"
+            "label": "Spalten auswählen",
+            "info": "Mehr Text für den Tooltip"
         }
     },
-    "rowsel":{
-        "name":"rowsel",
-        "icon":"fa-solid fa-book-atlas",
-        "thumb":"/img/widgets/SelectRows.png",
+    "rowsel": {
+        "name": "rowsel",
+        "icon": "fa-solid fa-book-atlas",
+        "implemented": true,
+        "thumb": "/img/widgets/SelectRows.png",
         "en": {
-            "label":"Select rows",
-            "info":"More text for a popup or tooltip"
+            "label": "Select rows",
+            "info": "More text for a popup or tooltip"
         },
         "de": {
-            "label":"Zeilen auswählen",
-            "info":"Mehr Text für den Tooltip"
+            "label": "Zeilen auswählen",
+            "info": "Mehr Text für den Tooltip"
         }
     },
-    "scalarmath":{
-        "name":"scalarmath",
-        "icon":"fa-solid fa-book-atlas",
-        "thumb":"/img/widgets/Preprocess-1D.png",
+    "scalarmath": {
+        "name": "scalarmath",
+        "icon": "fa-solid fa-book-atlas",
+        "implemented": true,
+        "thumb": "/img/widgets/Preprocess-1D.png",
         "en": {
-            "label":"Scalar Operations",
-            "info":"More text for a popup or tooltip"
+            "label": "Scalar Operations",
+            "info": "More text for a popup or tooltip"
         },
         "de": {
-            "label":"Skalare Operationen",
-            "info":"Mehr Text für den Tooltip"
+            "label": "Skalare Operationen",
+            "info": "Mehr Text für den Tooltip"
         }
     },
-    "mathcombine":{
-        "name":"mathcombine",
-        "icon":"fa-solid fa-book-atlas",
-        "thumb":"/img/widgets/Preprocess-2D.png",
+    "mathcombine": {
+        "name": "mathcombine",
+        "icon": "fa-solid fa-book-atlas",
+        "implemented": true,
+        "thumb": "/img/widgets/Preprocess-2D.png",
         "en": {
-            "label":"Math operations on 2 datasets",
-            "info":"More text for a popup or tooltip"
+            "label": "Math operations on 2 datasets",
+            "info": "More text for a popup or tooltip"
         },
         "de": {
-            "label":"Funktionen mit 2 Datensätzen",
-            "info":"Mehr Text für den Tooltip"
+            "label": "Funktionen mit 2 Datensätzen",
+            "info": "Mehr Text für den Tooltip"
         }
     },
-    "group":{
-        "name":"group",
-        "icon":"fa-solid fa-globe",
-        "thumb":"/img/widgets/GroupBy.png",
+    "group": {
+        "name": "group",
+        "icon": "fa-solid fa-globe",
+        "implemented": true,
+        "thumb": "/img/widgets/GroupBy.png",
         "en": {
-            "label":"Group data",
-            "info":"More text for a popup or tooltip"
+            "label": "Group data",
+            "info": "More text for a popup or tooltip"
         },
         "de": {
-            "label":"Daten gruppieren",
-            "info":"Mehr Text für den Tooltip"
+            "label": "Daten gruppieren",
+            "info": "Mehr Text für den Tooltip"
         }
     },
-    "save":{
-        "name":"save",
-        "icon":"fa-solid fa-globe",
-        "thumb":"/img/widgets/Save.png",
+    "save": {
+        "name": "save",
+        "icon": "fa-solid fa-globe",
+        "implemented": true,
+        "thumb": "/img/widgets/Save.png",
         "en": {
-            "label":"Save data",
-            "info":"More text for a popup or tooltip"
+            "label": "Save data",
+            "info": "More text for a popup or tooltip"
         },
         "de": {
-            "label":"Daten speichern",
-            "info":"Mehr Text für den Tooltip"
+            "label": "Daten speichern",
+            "info": "Mehr Text für den Tooltip"
         }
     },
-    "pool":{
-        "name":"pool",
-        "icon":"fa-solid fa-cart-shopping",
-        "thumb":"/img/widgets/Melt.png",
+    "pool": {
+        "name": "pool",
+        "icon": "fa-solid fa-cart-shopping",
+        "implemented": true,
+        "thumb": "/img/widgets/Melt.png",
         "en": {
-            "label":"Data pool",
-            "info":"More text for a popup or tooltip"
+            "label": "Data pool",
+            "info": "More text for a popup or tooltip"
         },
         "de": {
-            "label":"Datenpool",
-            "info":"Mehr Text für den Tooltip"
+            "label": "Datenpool",
+            "info": "Mehr Text für den Tooltip"
         }
     },
-    "random":{
-        "name":"random",
-        "icon":"fa-solid fa-globe",
-        "thumb":"/img/widgets/RandomData.png",
+    "random": {
+        "name": "random",
+        "icon": "fa-solid fa-globe",
+        "implemented": true,
+        "thumb": "/img/widgets/RandomData.png",
         "en": {
-            "label":"Random Data Generator",
-            "info":"More text for a popup or tooltip"
+            "label": "Random Data Generator",
+            "info": "More text for a popup or tooltip"
         },
         "de": {
-            "label":"Zufallsdaten Generator",
-            "info":"Mehr Text für den Tooltip"
+            "label": "Zufallsdaten Generator",
+            "info": "Mehr Text für den Tooltip"
         }
     }
-    
-
 }
-
-
-
-
