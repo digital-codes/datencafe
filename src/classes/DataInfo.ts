@@ -17,6 +17,8 @@ export class DataInfo extends DcNode {
     const edges: string[] = ["d"]
     super(id,ports,edges)
     DcNode.print(DataInfo._type + " created") // no access to super._id etc here
+    // add to providers
+    DcNode.providers.add(super.id)
   }
   // getters/setters
   get type() { return DataInfo._type }
@@ -28,33 +30,18 @@ export class DataInfo extends DcNode {
     DcNode.print(src + " updated " + super.id +": " + String(this.updCnt))
     const dt = DcNode.providers.getDataById(src)
     const df = new DcNode.dfd.DataFrame(dt)
-    const divId = DcNode.pre.PLOTPREFIX + super.id
-    // check valid target id
-    const target = document.getElementById(divId)
-    if ((target === undefined) || (target == null) ) {
-      throw (new Error("Invalid ID: " + String(divId)))
-    }
     // simple plot is missing row dlabels
     //df.describe().plot(divId).table()
-    const ds = df.describe()
+    const ds = await df.describe()
     // create right column order
-    const ds1 = new DcNode.dfd.DataFrame({"Type": ds.index})
-    ds.columns.forEach((c) => {
-      ds1.addColumn(c, ds.column(c), {inplace:true});
+    const ds1 = await new DcNode.dfd.DataFrame({"Type": ds.index})
+    ds.columns.forEach(async (c) => {
+      await ds1.addColumn(c, ds.column(c), {inplace:true});
     })
-    // get number of columns for table width adjustment
-    // assume 5 rem per columns ~ 80 px
-    const maxWidth = 600
-    const width = ds1.columns.length * 80
-    if (width > maxWidth) {
-      if (!target.style) throw (new Error("No style on div"))
-      //target.style.width = String(Math.min(width,maxWidth)) + "px"
-      target.style.width = String(width) + "px"
-    }
-    ds1.plot(divId).table()
-
-    /* compute table width from number of columns in display class
-    and set width via item prop. Scrolling-X handled via chartitem  */
+    //await DcNode.providers.update(super.id,toJSON(this.df))
+    await DcNode.providers.update(super.id,DcNode.dfd.toJSON(ds1))
+    //await subscribers.update(d.id,d.ep)
+    await super.messaging.emit(DcNode.signals.UPDPREFIX as string + super.id)
 
   }
   msgOn(x: string) {

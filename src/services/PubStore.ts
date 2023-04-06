@@ -64,7 +64,7 @@ export const PubStore = defineStore({
             console.log("Src found:", sidx, this.items[sidx].id)
             // set data, if provided
             if (data !== undefined) {
-                console.log("Setting data",data)
+                console.log("Setting data")
                 this.items[sidx].data = data
                 // also set loaded
                 this.items[sidx].loaded = true

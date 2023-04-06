@@ -242,7 +242,7 @@ const ctxMenu = ref()
 const ctxOptions = {
     // Customize event to bring up the context menu
     // Possible options https://js.cytoscape.org/#events/user-input-device-events
-    evtType: "dbltap", // 'cxttap'
+    evtType: 'cxttap',
     // List of initial menu items
     // A menu item must have either onClickFunction or submenu or both
     menuItems: [
@@ -567,6 +567,7 @@ async function flowInit  ()  {
         await targetInstance.msgOn(Signals.UPDPREFIX + s.id())
         //
         const sourceIdx = nodeList.value.findIndex(item => item.id == s.id()) 
+        // FIXME: call run() via context menu!!!
         await nodeList.value[sourceIdx].run()
       }
 
@@ -596,6 +597,7 @@ async function flowInit  ()  {
       }
     });
 
+    /*
     cy.value.on('cxttap', 'node', function(event?: EventObject) {
       const node = event.target;
       console.log('Node ' + node.id() + ' was right clicked');
@@ -604,6 +606,8 @@ async function flowInit  ()  {
       else 
         ctxMenu.value.hideMenuItem("edge2")
     });
+    */
+
     /*
     cy.value.on('dblclick', function(event: EventObject) {
       const pos = event.position || event.cyPosition;

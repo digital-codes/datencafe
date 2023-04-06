@@ -78,7 +78,7 @@ export class RandomGen extends DcNode {
     if (this.active == true) return
     // add to store
     //DcNode.providers.add(super.id)
-    DcNode.providers.add(super.id)
+    await DcNode.providers.add(super.id)
     // start generator
     this.active = true
     DcNode.print("Start generating @ " + String(this.genCnt)) 
