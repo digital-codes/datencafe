@@ -604,13 +604,13 @@ async function flowInit  ()  {
       else 
         ctxMenu.value.hideMenuItem("edge2")
     });
-
+    /*
     cy.value.on('dblclick', function(event: EventObject) {
       const pos = event.position || event.cyPosition;
       console.log('dblclick at ',pos);
       popBtn.value.$el.click()
     });
-
+    */
     // remove handlers. remove edge will be triggered on delete node with edges
     cy.value.on("remove","node",function(event: EventObject){
       console.log("Remove node event:",event.target.data())
