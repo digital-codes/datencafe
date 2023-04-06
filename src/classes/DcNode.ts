@@ -13,6 +13,10 @@ const providers = PubStore()
 //import * as dfd from 'danfojs/dist/danfojs-browser/src';
 import { DataFrame, toJSON, toCSV } from 'danfojs/dist/danfojs-browser/src';
 
+// nodeTypes
+//const typeFile = "../assets/nodes/nodeTypes.json"
+
+
 export class DcNode {
   // properties"
   // ports and edges are specific. define here

@@ -76,6 +76,7 @@ const inputselPop = ref({})
 const nextNode = ref(1)
 const nextEdge = ref(1)
 
+const nodeList = ref([])
 
 const elements: ElementDefinition[] = [ // list of graph elements to start with
   { // node a
@@ -258,6 +259,12 @@ const ctxOptions = {
         if (instance.display) {
           emit("delViz",instance.id)
         }
+        // remove from nodelist
+        const idx = nodeList.value.findIndex(item => item.id == instance.id)
+        if (idx == -1) {
+          throw (new Error("Invlaid instance"))
+        }
+        nodeList.value.splice(idx,1)
       },
       disabled: false
     },
@@ -378,6 +385,8 @@ const ctxOptions = {
             } else {
               console.log("No display on ",nodeData.instance)
             }
+            // add to list 
+            nodeList.value.push(instance)
           } catch (err) {
             alert("Invalid instance:" + err.message)
             return
@@ -550,6 +559,15 @@ async function flowInit  ()  {
         console.log("from ",s.data("name"), " to ",t.data("name"),", port: ",port.data)
         await e.data("type",s.data("edge") + "-" + port.data)
         await s.removeData("edge")
+        // we have a new connection from s to t. set up messaging
+        const targetIdx = nodeList.value.findIndex(item => item.id == t.id()) 
+        if (targetIdx == -1) throw (new Error("Invalid instance"))
+        const targetInstance = nodeList.value[targetIdx]
+        const signal = Signals.UPDPREFIX + s.id()
+        await targetInstance.msgOn(Signals.UPDPREFIX + s.id())
+        //
+        const sourceIdx = nodeList.value.findIndex(item => item.id == s.id()) 
+        await nodeList.value[sourceIdx].run()
       }
 
       // test blocking
@@ -833,7 +851,6 @@ const createEvent = async () => {
     </div>
     <div class="flow" ref="theFlow"></div>
   </div>
-
 </template>
 
 <style scoped>

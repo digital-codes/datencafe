@@ -43,12 +43,12 @@ export class LinePlot extends DcNode {
   }
   msgOn(x: string) {
     // set event listener for signal 
-    DcNode.print("msg on for " + x)
+    DcNode.print("msg ON for " + x)
     super.messaging.on(x,(y:any)=>{this.updated(x,y)})
   }
   msgOff(x: string) {
     // set event listener for signal 
-    DcNode.print("msg off for " + x)
+    DcNode.print("msg OFF for " + x)
     super.messaging.off(x)
   }
 

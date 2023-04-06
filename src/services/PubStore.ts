@@ -61,9 +61,10 @@ export const PubStore = defineStore({
             if (sidx === -1) {
                 throw new Error("Source doesn't exist")
             }
-            console.log("Src found:", this.items[sidx].id)
+            console.log("Src found:", sidx, this.items[sidx].id)
             // set data, if provided
             if (data !== undefined) {
+                console.log("Setting data",data)
                 this.items[sidx].data = data
                 // also set loaded
                 this.items[sidx].loaded = true
@@ -72,6 +73,7 @@ export const PubStore = defineStore({
                 if (!this.items[sidx].loaded) {
                     throw new Error("Update without loaded data")
                 }
+                console.log("Reusing data")
                 // reuse exisiting data
             }
         },
