@@ -242,7 +242,7 @@ const ctxMenu = ref()
 const ctxOptions = {
     // Customize event to bring up the context menu
     // Possible options https://js.cytoscape.org/#events/user-input-device-events
-    evtType: 'cxttap',
+    evtType: "dbltap", // 'cxttap'
     // List of initial menu items
     // A menu item must have either onClickFunction or submenu or both
     menuItems: [
