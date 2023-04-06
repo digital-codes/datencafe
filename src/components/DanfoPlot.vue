@@ -15,6 +15,7 @@
 <script setup>
 import { ref, reactive, onMounted, watchEffect, computed } from "vue"
 // globals
+import { PreFixes } from "../services/GlobalDefs"
 import { Signals } from "../services/GlobalDefs"
 import eventBus from '../services/eventBus';
 
@@ -28,7 +29,7 @@ const props = defineProps({
 
 const loaded = ref(false)
 const items = ref([])
-const prefix = Signals.PLOTPREFIX
+const prefix = PreFixes.PLOTPREFIX
 
 // same as for flowWrap ...
 const ww = ref(800)
@@ -56,7 +57,7 @@ watchEffect(() => {
     items.value = [] // props.propItems
     props.propItems.forEach(e => {
       e.key = 1 // init key
-      items.value.push(e) // unshift(e)
+      items.value.unshift(e) // unshift(e)
       /*
       if (items.value.findIndex(i => e.id == i.id) == -1) {
         items.value.push(e) // unshift(e)

@@ -1,27 +1,23 @@
-// csv node class, extends DcNode
+// proc node class, extends DcNode
+
 
 import {DcNode} from "./DcNode"
-// provider/subscriber
 
-export class LinePlot extends DcNode {
+export class AddCols extends DcNode {
   // properties
+  static _type = "proc"
   private updCnt = 0
-  static _display = true
-  static _type = "chart"
+  static _display = false
   // constructor
   constructor(id:string) {
-    // although we need to call this first,
-    // the super elements will be initialized later
-    // access to super properties in the derived constructor
-    // may result in "undefined" ...
-    const ports: string[] = ["A"]
-    const edges: string[] = ["d"]
+    const ports: string[] = ['A','B']
+    const edges: string[] = ['d']
     super(id,ports,edges)
-    DcNode.print(LinePlot._type + " created") // no access to super._id etc here
+    DcNode.print(AddCols._type + " created") // no access to super._id etc here
   }
   // getters/setters
-  get type() { return LinePlot._type }
-  get display() { return LinePlot._display }
+  get type() { return AddCols._type }
+  get display() { return AddCols._display }
   // methods
   async updated(msg:string,y?:any) {
     this.updCnt++
@@ -35,11 +31,6 @@ export class LinePlot extends DcNode {
       throw (new Error("Invalid ID: " + String(divId)))
     }
     await df.plot(divId).line()
-    //await super.messaging.emit(divId) // div used for signalling ..
-    /*
-    df.describe().print()
-    df.print()
-    */
   }
   msgOn(x: string) {
     // set event listener for signal 
@@ -51,8 +42,4 @@ export class LinePlot extends DcNode {
     DcNode.print("msg off for " + x)
     super.messaging.off(x)
   }
-
 } 
-
-  
-  

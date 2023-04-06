@@ -20,6 +20,7 @@ export class DataInfo extends DcNode {
   }
   // getters/setters
   get type() { return DataInfo._type }
+  get display() { return DataInfo._display }
   // methods
   async updated(msg:string,y?:any) {
     this.updCnt++
@@ -27,7 +28,7 @@ export class DataInfo extends DcNode {
     DcNode.print(src + " updated " + super.id +": " + String(this.updCnt))
     const dt = DcNode.providers.getDataById(src)
     const df = new DcNode.dfd.DataFrame(dt)
-    const divId = DcNode.signals.PLOTPREFIX + super.id
+    const divId = DcNode.pre.PLOTPREFIX + super.id
     // check valid target id
     const target = document.getElementById(divId)
     if ((target === undefined) || (target == null) ) {

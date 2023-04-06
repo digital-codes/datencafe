@@ -4,6 +4,7 @@
 import eventBus from '../services/eventBus';
 // globals
 import { Signals } from "../services/GlobalDefs"
+import { PreFixes } from "../services/GlobalDefs"
 // provider/subscriber
 import { PubStore } from '../services/PubStore'
 const providers = PubStore()
@@ -30,6 +31,7 @@ export class DcNode {
   // static part
   static readonly providers = PubStore()
   static readonly signals = Signals
+  static readonly pre = PreFixes
   static readonly dfd = {DataFrame:DataFrame, toJSON : toJSON, toCSV: toCSV} // dfd
   //static readonly dfd = dfd
   // instance part

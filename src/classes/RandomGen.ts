@@ -98,6 +98,7 @@ export class RandomGen extends DcNode {
   }
   // getters/setters
   get type() { return RandomGen._type }
+  get display() { return RandomGen._display }
   get period() {return this._period}
   set period(x) {this._period = x}
   get cols() {return this._cols}

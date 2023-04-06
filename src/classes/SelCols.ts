@@ -2,7 +2,7 @@
 
 import {DcNode} from "./DcNode"
 
-export class AppendRows extends DcNode {
+export class SelCols extends DcNode {
   // properties
   static _display = false
   static _type = "proc"
@@ -12,13 +12,15 @@ export class AppendRows extends DcNode {
     // the super elements will be initialized later
     // access to super properties in the derived constructor
     // may result in "undefined" ...
-    const ports: string[] = ["A","B"]
+    const ports: string[] = ["A"]
     const edges: string[] = ["d"]
     super(id,ports,edges)
-    DcNode.print(AppendRows._type + " created") // no access to super._id etc here
+    DcNode.print(SelCols._type + " created") // no access to super._id etc here
   }
   // getters
-  get type() { return AppendRows._type }
+  get type() { return SelCols._type }
+  get display() { return SelCols._display }
+
 } 
 
   

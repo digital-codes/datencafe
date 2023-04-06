@@ -27,8 +27,8 @@
             "info": "Mehr Text für den Tooltip.Mehr Text für den Tooltip. ieofhiwefhwifhweihfweifh. ndqienfn eiwpf"
         }
     },
-    "table": {
-        "name": "table",
+    "tableplot": {
+        "name": "tableplot",
         "icon": "fa-solid fa-book-atlas",
         "implemented": true,
         "thumb": "/img/widgets/Table.png",
@@ -72,7 +72,7 @@
     "scatter": {
         "name": "scatterplot",
         "icon": "fa-solid fa-book-atlas",
-        "implemented": true,
+        "implemented": false,
         "thumb": "/img/widgets/ScatterPlot.png",
         "en": {
             "label": "Scatterplot Chart",
@@ -86,7 +86,7 @@
     "treemap": {
         "name": "treemap",
         "icon": "fa-solid fa-book-atlas",
-        "implemented": true,
+        "implemented": false,
         "thumb": "/img/widgets/MosaicDisplay.png",
         "en": {
             "label": "Mosaic Plot (Tree Map)",
@@ -100,7 +100,7 @@
     "histo": {
         "name": "histo",
         "icon": "fa-solid fa-cart-shopping",
-        "implemented": true,
+        "implemented": false,
         "thumb": "/img/widgets/Distribution.png",
         "en": {
             "label": "Distribution",
@@ -114,7 +114,7 @@
     "geomap": {
         "name": "geomap",
         "icon": "fa-solid fa-cart-shopping",
-        "implemented": true,
+        "implemented": false,
         "thumb": "/img/widgets/GeoMap.png",
         "en": {
             "label": "Geo Map",
@@ -128,7 +128,7 @@
     "choromap": {
         "name": "choromap",
         "icon": "fa-solid fa-cart-shopping",
-        "implemented": true,
+        "implemented": false,
         "thumb": "/img/widgets/Choropleth.png",
         "en": {
             "label": "Choropleth Map",
@@ -170,7 +170,7 @@
     "join": {
         "name": "join",
         "icon": "fa-solid fa-book-atlas",
-        "implemented": true,
+        "implemented": false,
         "thumb": "/img/widgets/Join.png",
         "en": {
             "label": "Join Data",
@@ -181,8 +181,8 @@
             "info": "Mehr Text für den Tooltip"
         }
     },
-    "colsel": {
-        "name": "colsel",
+    "selcols": {
+        "name": "selcols",
         "icon": "fa-solid fa-book-atlas",
         "implemented": true,
         "thumb": "/img/widgets/SelectColumns.png",
@@ -195,8 +195,8 @@
             "info": "Mehr Text für den Tooltip"
         }
     },
-    "rowsel": {
-        "name": "rowsel",
+    "selrows": {
+        "name": "selrows",
         "icon": "fa-solid fa-book-atlas",
         "implemented": true,
         "thumb": "/img/widgets/SelectRows.png",
@@ -223,10 +223,10 @@
             "info": "Mehr Text für den Tooltip"
         }
     },
-    "mathcombine": {
-        "name": "mathcombine",
+    "dfmath": {
+        "name": "dfmath",
         "icon": "fa-solid fa-book-atlas",
-        "implemented": true,
+        "implemented": false,
         "thumb": "/img/widgets/Preprocess-2D.png",
         "en": {
             "label": "Math operations on 2 datasets",
@@ -240,7 +240,7 @@
     "group": {
         "name": "group",
         "icon": "fa-solid fa-globe",
-        "implemented": true,
+        "implemented": false,
         "thumb": "/img/widgets/GroupBy.png",
         "en": {
             "label": "Group data",
@@ -254,7 +254,7 @@
     "save": {
         "name": "save",
         "icon": "fa-solid fa-globe",
-        "implemented": true,
+        "implemented": false,
         "thumb": "/img/widgets/Save.png",
         "en": {
             "label": "Save data",
@@ -268,7 +268,7 @@
     "pool": {
         "name": "pool",
         "icon": "fa-solid fa-cart-shopping",
-        "implemented": true,
+        "implemented": false,
         "thumb": "/img/widgets/Melt.png",
         "en": {
             "label": "Data pool",

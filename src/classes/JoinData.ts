@@ -20,6 +20,8 @@ export class JoinData extends DcNode {
   }
   // getters
   get type() { return JoinData._type }
+  get display() { return JoinData._display }
+
 } 
 
   

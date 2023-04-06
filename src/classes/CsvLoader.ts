@@ -19,6 +19,8 @@ export class CsvLoader extends DcNode {
   }
   // getters
   get type() { return CsvLoader._type }
+  get display() { return CsvLoader._display }
+
 } 
 
   

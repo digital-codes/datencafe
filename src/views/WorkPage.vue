@@ -27,7 +27,7 @@ const WorkFlowAsync = defineAsyncComponent({
 
 const addViz = (event) => {
   console.log("Add:",event)
-  items.value.unshift(event)
+  items.value.push(event)
 }
 
 const delViz = (id) => {

@@ -356,7 +356,12 @@ const ctxOptions = {
             const nodeData = {
               "name":newId,
               "ports":ports,
-              "instance":instance,
+              "instance":{
+                "id":instance.id,
+                "name":instance.name,
+                "type":instance.type,
+                "display":instance.display | false
+              },
               "type":{
                 "name":nodeType,
                 "shp":"circle",
@@ -369,7 +374,9 @@ const ctxOptions = {
             //console.log("After add node:",JSON.stringify(cy.value.json()))
             // check if we need to create a new diagram element 
             if (instance.display) {
-              emit("addViz",{"id":instance.id,"name":instance.name,"type":"chart"})
+              emit("addViz",nodeData.instance)
+            } else {
+              console.log("No display on ",nodeData.instance)
             }
           } catch (err) {
             alert("Invalid instance:" + err.message)

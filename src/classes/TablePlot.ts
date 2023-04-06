@@ -22,6 +22,8 @@ export class TablePlot extends DcNode {
   }
   // getters
   get type() { return TablePlot._type }
+  get display() { return TablePlot._display }
+
 } 
 
   

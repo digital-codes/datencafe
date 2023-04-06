@@ -10,6 +10,6 @@ print(dt)
 mist = renderer.render_path("ClassTemplate",dt)
 print(mist)
 
-with open("mist.ts","w") as f:
+with open(".".join([dt["class"],"ts"]),"w") as f:
     f.write(mist)
 

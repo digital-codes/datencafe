@@ -5,7 +5,6 @@ import {DcNode} from "./DcNode"
 
 export class {{class}} extends DcNode {
   // properties
-  static _display = false
   static _type = "proc"
   private updCnt = 0
   static _display = false
@@ -18,6 +17,7 @@ export class {{class}} extends DcNode {
   }
   // getters/setters
   get type() { return {{class}}._type }
+  get display() { return {{{class}}}._display }
   // methods
   async updated(msg:string,y?:any) {
     this.updCnt++
@@ -25,7 +25,7 @@ export class {{class}} extends DcNode {
     DcNode.print(src + " updated " + super.id +": " + String(this.updCnt) + "..." + String(y))
     const dt = DcNode.providers.getDataById(src) 
     const df = new DcNode.dfd.DataFrame(dt)
-    const divId = DcNode.signals.PLOTPREFIX + super.id
+    const divId = DcNode.pre.PLOTPREFIX + super.id
     const target = await document.getElementById(divId)
     if ((target === undefined) || (target == null) ) {
       throw (new Error("Invalid ID: " + String(divId)))

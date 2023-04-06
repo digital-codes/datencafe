@@ -1,7 +1,7 @@
 {
-"class":"ScatterPlot",
-"type":"chart",
-"ports":"'A','b'",
-"edges":"'e'"
+"class":"AddCols",
+"type":"proc",
+"ports":"'A','B'",
+"edges":"'d'"
 }
 

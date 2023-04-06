@@ -2,7 +2,7 @@
 
 import {DcNode} from "./DcNode"
 
-export class RowSelection extends DcNode {
+export class SelRows extends DcNode {
   // properties
   static _display = false
   static _type = "proc"
@@ -15,10 +15,12 @@ export class RowSelection extends DcNode {
     const ports: string[] = ["A"]
     const edges: string[] = ["d"]
     super(id,ports,edges)
-    DcNode.print(RowSelection._type + " created") // no access to super._id etc here
+    DcNode.print(SelRows._type + " created") // no access to super._id etc here
   }
   // getters
-  get type() { return RowSelection._type }
+  get type() { return SelRows._type }
+  get display() { return SelRows._display }
+
 } 
 
   
