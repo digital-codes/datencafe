@@ -84,6 +84,7 @@ const elements: ElementDefinition[] = [ // list of graph elements to start with
     data: { id: 'a', name:"a", "ports":{"A":false}, type:{"name":"t1","shp":"square","bd":"#f00", "img":"url('/img/widgets/CSVFile.png')"} },  
     position: {x:10, y:10},
   },
+  /*
   { // node b
     group: 'nodes', 
     data: { id: 'b', name:"b", "ports":{"A":false}, type:{"name":"t3","shp":"roundrectangle","bd":"#f00", "img":"url('/img/widgets/LinePlot.png')"} }, 
@@ -94,7 +95,6 @@ const elements: ElementDefinition[] = [ // list of graph elements to start with
     data: { id: 'c', name:"c", "ports":{"A":false, "B":false},  type:{"name":"t2","shp":"roundrectangle","bd":"#0f0", "img":"url('/img/widgets/Save.png')"}  },
     position: {x:130, y:150},
   },
-  /*
   { // edge ab
     group: 'edges', 
     data: { id: 'ab', source: 'a', target: 'b' }

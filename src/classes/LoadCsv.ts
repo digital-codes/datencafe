@@ -2,7 +2,7 @@
 
 import {DcNode} from "./DcNode"
 
-export class CsvLoader extends DcNode {
+export class LoadCsv extends DcNode {
   // properties
   static _display = false
   static _type = "proc"
@@ -15,11 +15,11 @@ export class CsvLoader extends DcNode {
     const ports: string[] = []
     const edges: string[] = ["d"]
     super(id,ports,edges)
-    DcNode.print(CsvLoader._type + " created") // no access to super._id etc here
+    DcNode.print(LoadCsv._type + " created") // no access to super._id etc here
   }
   // getters
-  get type() { return CsvLoader._type }
-  get display() { return CsvLoader._display }
+  get type() { return LoadCsv._type }
+  get display() { return LoadCsv._display }
 
 } 
 

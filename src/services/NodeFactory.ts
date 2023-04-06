@@ -3,7 +3,7 @@ import { LinePlot } from '../classes/LinePlot';
 import { DataInfo } from '../classes/DataInfo';
 import { BarPlot } from '../classes/BarPlot';
 import { TablePlot } from '../classes/TablePlot';
-import { CsvLoader } from '../classes/CsvLoader';
+import { LoadCsv } from '../classes/LoadCsv';
 import { SelCols } from '../classes/SelCols';
 import { SelRows } from '../classes/SelRows';
 import { JoinData } from '../classes/JoinData';
@@ -34,6 +34,9 @@ export const nodeFactory = async (id: string, type: string) => {
       return await new SelRows(id)
     case "scalarmath":
       return await new ScalarMath(id)
+    case "loadcsv":
+      return await new LoadCsv(id)
+
     /*
 case "scatter":
 return await new LinePlot(id)

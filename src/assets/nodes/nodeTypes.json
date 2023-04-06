@@ -1,15 +1,15 @@
 {
-    "loadfile": {
-        "name": "loadfile",
+    "loadcsv": {
+        "name": "loadcsv",
         "icon": "fa-solid fa-coffee",
         "implemented": true,
         "thumb": "/img/widgets/CSVFile.png",
         "en": {
-            "label": "Load file",
+            "label": "Load CSV file",
             "info": "More text for a popup or tooltip"
         },
         "de": {
-            "label": "Datei laden",
+            "label": "CSV Datei laden",
             "info": "Mehr Text für den Tooltip. ieofhiwefhwifhweihfweifh. ndqienfn eiwpf"
         }
     },

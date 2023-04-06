@@ -4,7 +4,10 @@
     <p>{{$t("titles.work.view.placeholder")}}</p>
 
   </div>
+  <!-- 
   <div v-for="(item,index) in items" :key="index" class="chartItem">
+  -->
+  <div v-for="item in items" :key="item.id" class="chartItem">
     <h3 class="dftitle">{{ item.name }}</h3>
     <div :id="prefix + item.id" :class="item.type == 'table'?'dftable':'dfchart'">
     </div>
@@ -54,16 +57,14 @@ onMounted(() => {
 watchEffect(() => {
   if (props.propItems) {
     console.log("Danfo data update:", props.propItems)
+    items.value = JSON.parse(JSON.stringify(props.propItems))
+    /*
     items.value = [] // props.propItems
     props.propItems.forEach(e => {
       e.key = 1 // init key
       items.value.unshift(e) // unshift(e)
-      /*
-      if (items.value.findIndex(i => e.id == i.id) == -1) {
-        items.value.push(e) // unshift(e)
-      }
-      */
     });
+    */
   }
 });
 
