@@ -12,30 +12,30 @@ import { AddRows } from '../classes/AddRows';
 import { AddCols } from '../classes/AddCols';
 
 // instance generator
-export const nodeFactory = async (id: string, type: string) => {
-  switch (type) {
+export const nodeFactory = async (id: string, type: any) => {
+  switch (type.name) {
     case "randomgen":
-      return await new RandomGen(id)
+      return await new RandomGen(id,type)
     case "datainfo":
-      return await new DataInfo(id)
+      return await new DataInfo(id,type)
     case "lineplot":
-      return await new LinePlot(id)
+      return await new LinePlot(id,type)
     case "barplot":
-      return await new BarPlot(id)
+      return await new BarPlot(id,type)
     case "tableplot":
-      return await new TablePlot(id)
+      return await new TablePlot(id,type)
     case "addrows":
-      return await new AddRows(id)
+      return await new AddRows(id,type)
     case "addcols":
-      return await new AddCols(id)
+      return await new AddCols(id,type)
     case "selcols":
-      return await new SelCols(id)
+      return await new SelCols(id,type)
     case "selrows":
-      return await new SelRows(id)
+      return await new SelRows(id,type)
     case "scalarmath":
-      return await new ScalarMath(id)
+      return await new ScalarMath(id,type)
     case "loadcsv":
-      return await new LoadCsv(id)
+      return await new LoadCsv(id,type)
 
     /*
 case "scatter":

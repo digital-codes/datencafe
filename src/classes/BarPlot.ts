@@ -1,14 +1,15 @@
 // csv node class, extends DcNode
 
 import {DcNode} from "./DcNode"
+import { NodeTypes } from '../services/GlobalDefs';
 
 export class BarPlot extends DcNode {
   // properties
   static _display = true
-  static _type = "chart"
+  static _type = NodeTypes.CHART 
   private updCnt = 0
   // constructor
-  constructor(id:string) {
+  constructor(id:string,typeInfo:any) {
     // although we need to call this first,
     // the super elements will be initialized later
     // access to super properties in the derived constructor

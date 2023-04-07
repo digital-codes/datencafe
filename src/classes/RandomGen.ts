@@ -4,12 +4,13 @@ import {DcNode} from "./DcNode"
 
 import {DataFrame, toJSON} from 'danfojs/dist/danfojs-browser/src';
 
+import { NodeTypes } from '../services/GlobalDefs';
 
 
 export class RandomGen extends DcNode {
   // properties
   static _display = false
-  static _type = "proc"
+  static _type = NodeTypes.GEN
   _period = 5 // in seconds
   _cols = 3 // columns
   _rows = 10 // rows 
@@ -18,7 +19,7 @@ export class RandomGen extends DcNode {
   private active = false
   private tm: any | null = null
   // constructor
-  constructor(id?:string) {
+  constructor(id:string, typeInfo:any) {
     // although we need to call this first,
     // the super elements will be initialized later
     // access to super properties in the derived constructor

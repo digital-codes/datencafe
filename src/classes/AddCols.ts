@@ -2,14 +2,15 @@
 
 
 import {DcNode} from "./DcNode"
+import { NodeTypes } from '../services/GlobalDefs';
 
 export class AddCols extends DcNode {
   // properties
-  static _type = "proc"
+  static _type = NodeTypes.PROC
   private updCnt = 0
   static _display = false
   // constructor
-  constructor(id:string) {
+  constructor(id:string,typeInfo:any) {
     const ports: string[] = ['A','B']
     const edges: string[] = ['d']
     super(id,ports,edges)

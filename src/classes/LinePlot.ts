@@ -1,15 +1,15 @@
 // csv node class, extends DcNode
 
 import {DcNode} from "./DcNode"
-// provider/subscriber
+import { NodeTypes } from '../services/GlobalDefs';
 
 export class LinePlot extends DcNode {
   // properties
   private updCnt = 0
   static _display = true
-  static _type = "chart"
+  static _type = NodeTypes.CHART //"chart"
   // constructor
-  constructor(id:string) {
+  constructor(id:string,typeInfo:any) {
     // although we need to call this first,
     // the super elements will be initialized later
     // access to super properties in the derived constructor

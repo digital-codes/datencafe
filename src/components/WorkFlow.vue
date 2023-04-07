@@ -48,6 +48,7 @@ import { BarPlot } from "../classes/BarPlot"
 import { DataInfo } from "../classes/DataInfo"
 import { RandomGen } from "../classes/RandomGen"
 import { nodeFactory } from "../services/NodeFactory"
+import { NodeTypes } from '../services/GlobalDefs';
 
 // --------------------
 
@@ -251,7 +252,7 @@ const ctxOptions = {
       content: 'Remove',
       tooltipText: 'Remove selected nodes',
       selector: 'node',
-      onClickFunction: (event: EventObject) => {
+      onClickFunction: async (event: EventObject) => {
         const { target } = event;
         console.log("Remove node:",target)
         cy.value.remove(target);
@@ -262,7 +263,12 @@ const ctxOptions = {
         // remove from nodelist
         const idx = nodeList.value.findIndex(item => item.id == instance.id)
         if (idx == -1) {
-          throw (new Error("Invlaid instance"))
+          throw (new Error("Invalid instance"))
+        } 
+        if (nodeList.value[idx].type == NodeTypes.GEN) {
+          // stop generators
+          console.log("Stopping generator on ",nodeList.value[idx].id)
+          await nodeList.value[idx].stop()
         }
         nodeList.value.splice(idx,1)
       },
@@ -305,10 +311,21 @@ const ctxOptions = {
       content: 'Remove',
       tooltipText: 'Remove selected edges',
       selector: 'edge',
-      onClickFunction: (event: EventObject) => {
+      onClickFunction: async (event: EventObject) => {
         const { target } = event;
         console.log("Remove edge:",target)
+        const src = target.data().source
+        const dst = target.data().target
+        console.log("S-T:",src,dst)
         cy.value.remove(target);
+        // FIXME move this section to event handler. here is only on click!
+        const dstIdx = nodeList.value.findIndex(item => item.id == dst)
+        if (dstIdx == -1) {
+          throw (new Error("Dst invalid"))
+        }   
+        const signal = Signals.UPDPREFIX + src
+        console.log("Singal off:",signal)
+        await nodeList.value[dstIdx].msgOff(signal)
       },
       disabled: false
     },
@@ -346,7 +363,7 @@ const ctxOptions = {
           })
           // create class instance
           try {
-            const instance = await nodeFactory(newId,nodeType)
+            const instance = await nodeFactory(newId,nodeTypes[nodeType])
             // get ports and edges from instance
             const ports = {}
             instance.ports.forEach(p => {
@@ -567,8 +584,10 @@ async function flowInit  ()  {
         await targetInstance.msgOn(Signals.UPDPREFIX + s.id())
         //
         const sourceIdx = nodeList.value.findIndex(item => item.id == s.id()) 
-        // FIXME: call run() via context menu!!!
-        await nodeList.value[sourceIdx].run()
+        // FIXME: start generators. maybe later via config
+        if (nodeList.value[sourceIdx].type == NodeTypes.GEN) {
+          await nodeList.value[sourceIdx].run()
+        }
       }
 
       // test blocking

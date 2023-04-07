@@ -1,17 +1,17 @@
 // csv node class, extends DcNode
 
 import {DcNode} from "./DcNode"
-// provider/subscriber
-import { PubStore } from '../services/PubStore'
-const providers = PubStore()
+
+import { NodeTypes } from '../services/GlobalDefs';
+
 
 export class TablePlot extends DcNode {
   // properties
   static _display = true
-  static _type = "table"
+  static _type = NodeTypes.TABLE
   private updCnt = 0
   // constructor
-  constructor(id:string) {
+  constructor(id:string,typeInfo:any) {
     // although we need to call this first,
     // the super elements will be initialized later
     // access to super properties in the derived constructor

@@ -1,14 +1,15 @@
 // csv node class, extends DcNode
 
 import {DcNode} from "./DcNode"
+import { NodeTypes } from '../services/GlobalDefs';
 
 export class DataInfo extends DcNode {
   // properties
   static _display = false
-  static _type = "proc"
+  static _type = NodeTypes.PROC
   private updCnt = 0
   // constructor
-  constructor(id:string) {
+  constructor(id:string,typeInfo:any) {
     // although we need to call this first,
     // the super elements will be initialized later
     // access to super properties in the derived constructor
