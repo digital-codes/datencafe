@@ -318,14 +318,6 @@ const ctxOptions = {
         const dst = target.data().target
         console.log("S-T:",src,dst)
         cy.value.remove(target);
-        // FIXME move this section to event handler. here is only on click!
-        const dstIdx = nodeList.value.findIndex(item => item.id == dst)
-        if (dstIdx == -1) {
-          throw (new Error("Dst invalid"))
-        }   
-        const signal = Signals.UPDPREFIX + src
-        console.log("Singal off:",signal)
-        await nodeList.value[dstIdx].msgOff(signal)
       },
       disabled: false
     },
@@ -638,24 +630,32 @@ async function flowInit  ()  {
     cy.value.on("remove","node",function(event: EventObject){
       console.log("Remove node event:",event.target.data())
     })
-    cy.value.on("remove","edge",function(event: EventObject){
+    cy.value.on("remove","edge",async function(event: EventObject){
       console.log("Remove edge event:",event.target.data())
       // get port + target parameters from edge:
       const dt = event.target.data()
       console.log("DT:",dt)
       const port = dt.port
-      const dest = dt.target 
-      console.log("Port,target:",port,dest) 
-      if ((dest == undefined) || (port === undefined)) return
+      const dst = dt.target 
+      const src = dt.source 
+      console.log("Port,target:",port,dst) 
+      if ((dst == undefined) || (port === undefined)) return
       // get target node
-      const destNode = cy.value.getElementById(dest)
+      const destNode = cy.value.getElementById(dst)
       if ((destNode == undefined) || (destNode.data() === undefined)) return
       console.log("tnode:",destNode,destNode.data(),destNode.data().ports[port])
       // remove port assignment
       destNode.data().ports[port] = false
       console.log("tnode port new:",destNode.data().ports[port])
-      // 
-
+      // also remove messaging 
+      console.log("Removing listener at:",dst)
+      const dstIdx = nodeList.value.findIndex(item => item.id == dst)
+      if (dstIdx == -1) {
+        throw (new Error("Dst invalid"))
+      }   
+      const signal = Signals.UPDPREFIX + src
+      console.log("Singal off:",signal)
+      await nodeList.value[dstIdx].msgOff(signal)
 
     })
   }
