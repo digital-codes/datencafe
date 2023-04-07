@@ -250,7 +250,56 @@ const ctxOptions = {
     // List of initial menu items
     // A menu item must have either onClickFunction or submenu or both
     menuItems: [
-      {
+    {
+      id: 'edge1',
+      content: 'Connect',
+      tooltipText: 'Start connection',
+      selector: 'node',
+      onClickFunction: async (event: EventObject) => {
+        const { target } = event;
+        //console.log("Start edge on:",target, target._private.data.id)
+        cy.value.edgehandles('enable').disableDrawMode();
+        const nd = await cy.value.getElementById(target.data("id"))
+        nd.data("edge","e1") // set a source type
+        //console.log("Node:",nd)
+        cy.value.edgehandles().start(nd)
+      },
+      disabled: false
+    },
+    /*
+    {
+      id: 'edge2',
+      content: 'Edge2',
+      tooltipText: 'Start edge 2',
+      selector: 'node',
+      onClickFunction: async (event: EventObject) => {
+        const { target } = event;
+        //console.log("Start edge on:",target, target._private.data.id)
+        cy.value.edgehandles('enable').disableDrawMode();
+        const nd = await cy.value.getElementById(target.data("id"))
+        nd.data("edge","e2") // set a source type
+        //console.log("Node:",nd)
+        cy.value.edgehandles().start(nd)
+      },
+      disabled: false
+    },
+    */
+    {
+      id: 'e-remove',
+      content: 'Remove',
+      tooltipText: 'Remove selected edges',
+      selector: 'edge',
+      onClickFunction: async (event: EventObject) => {
+        const { target } = event;
+        console.log("Remove edge:",target)
+        const src = target.data().source
+        const dst = target.data().target
+        console.log("S-T:",src,dst)
+        cy.value.remove(target);
+      },
+      disabled: false
+    },
+    {
       id: 'n-remove',
       content: 'Remove',
       tooltipText: 'Remove selected nodes',
@@ -277,55 +326,8 @@ const ctxOptions = {
       },
       disabled: false
     },
-    {
-      id: 'edge1',
-      content: 'Edge1',
-      tooltipText: 'Start edge 1',
-      selector: 'node',
-      onClickFunction: async (event: EventObject) => {
-        const { target } = event;
-        //console.log("Start edge on:",target, target._private.data.id)
-        cy.value.edgehandles('enable').disableDrawMode();
-        const nd = await cy.value.getElementById(target.data("id"))
-        nd.data("edge","e1") // set a source type
-        //console.log("Node:",nd)
-        cy.value.edgehandles().start(nd)
-      },
-      disabled: false
-    },
-    {
-      id: 'edge2',
-      content: 'Edge2',
-      tooltipText: 'Start edge 2',
-      selector: 'node',
-      onClickFunction: async (event: EventObject) => {
-        const { target } = event;
-        //console.log("Start edge on:",target, target._private.data.id)
-        cy.value.edgehandles('enable').disableDrawMode();
-        const nd = await cy.value.getElementById(target.data("id"))
-        nd.data("edge","e2") // set a source type
-        //console.log("Node:",nd)
-        cy.value.edgehandles().start(nd)
-      },
-      disabled: false
-    },
-    {
-      id: 'e-remove',
-      content: 'Remove',
-      tooltipText: 'Remove selected edges',
-      selector: 'edge',
-      onClickFunction: async (event: EventObject) => {
-        const { target } = event;
-        console.log("Remove edge:",target)
-        const src = target.data().source
-        const dst = target.data().target
-        console.log("S-T:",src,dst)
-        cy.value.remove(target);
-      },
-      disabled: false
-    },
     // should work on background click but doesn't
-    /* */
+    /* 
     {
       id: 'add-node',
       content: 'add node',
@@ -408,7 +410,7 @@ const ctxOptions = {
         }
       }
     },
-    /* */    
+    */    
     ],
     // css classes that menu items will have
     menuItemClasses: [
@@ -863,6 +865,166 @@ const createEvent = async () => {
   */
 }
 
+/*
+ cy.zoom()        
+
+Get or set the zoom level of the graph.
+cy.zoom()
+
+Get the zoom level.
+
+cy.zoom( level )
+
+Set the zoom level.
+
+    level
+
+    The zoom level to set.
+
+cy.zoom( options )
+
+Set the zoom level.
+
+    options
+
+    The options for zooming.
+        level
+
+        The zoom level to set.
+        position
+
+        The position about which to zoom.
+        renderedPosition
+
+        The rendered position about which to zoom.
+
+Details
+
+The zoom level must be a positive number. Zoom levels that are not numbers are ignored; zoom levels that are numbers but outside of the range of valid zoom levels are considered to be the closest, valid zoom level.
+
+When zooming about a point via cy.zoom( options ), the options are defined as follows.
+
+For zooming about a rendered position (i.e. a position on-screen):
+
+cy.zoom({
+  level: 2.0, // the zoom level
+  renderedPosition: { x: 100, y: 100 }
+});
+
+--------
+
+ cy.pan()      
+
+Get or set the panning position of the graph.
+cy.pan()
+
+Get the current panning position.
+
+cy.pan( renderedPosition )
+
+Set the current panning position.
+
+    renderedPosition
+
+    The rendered position to pan the graph to.
+
+Details
+
+This function pans the graph viewport origin to the specified rendered pixel position.
+Examples
+
+Pan the graph to (100, 100) rendered pixels.
+
+cy.pan({
+  x: 100,
+  y: 100 
+});
+
+console.log( cy.pan() ); // prints { x: 100, y: 100 }
+-----------------
+cy.panBy()    
+
+Relatively pan the graph by a specified rendered position vector.
+cy.panBy( renderedPosition )
+
+    renderedPosition
+
+    The rendered position vector to pan the graph by.
+
+Details
+
+This function shifts the viewport relatively by the specified position in rendered pixels. That is, specifying a shift of 100 to the right means a translation of 100 on-screen pixels to the right.
+Examples
+
+Pan the graph 100 pixels to the right.
+
+
+cy.panBy({
+  x: 100,
+  y: 0 
+});
+
+----------
+
+cy.width()  
+
+Get the on-screen width of the viewport in pixels.
+cy.height()  
+
+Get the on-screen height of the viewport in pixels.
+cy.extent()  
+
+Get the extent of the viewport, a bounding box in model co-ordinates that lets you know what model positions are visible in the viewport.
+Details
+
+This function returns a plain object bounding box with format { x1, y1, x2, y2, w, h }.
+
+*/
+
+function panLeft() {
+  cy.value.panBy({x:-100,y:0})
+  return cy.value.pan()
+}
+function panRight() {
+  cy.value.panBy({x:100,y:0})
+  return cy.value.pan()
+}
+function panDown() {
+  cy.value.panBy({x:0,y:100})
+  return cy.value.pan()
+}
+function panUp() {
+  cy.value.panBy({x:0,y:-100})
+  return cy.value.pan()
+}
+
+function zoomIn() {
+  const z = cy.value.zoom()
+  if (z < 10)
+    cy.value.zoom(Math.floor(z + 1))
+  else 
+    cy.value.zoom(10)
+  return cy.value.zoom()
+}
+function zoomOut() {
+  const z = cy.value.zoom()
+  if (z > 1)
+    cy.value.zoom(Math.floor(z - 1))
+  else 
+    cy.value.zoom(1)
+  return cy.value.zoom()
+}
+function zoomFit() {
+  cy.value.fit()
+  extent()
+  return cy.value.zoom()
+}
+function extent() {
+  const x = cy.value.extent()
+  console.log("Extent:",x)
+  return x
+}
+
 async function newNode() {
     console.log("Add node")
     const nodeType = await openNodeSel()
@@ -881,8 +1043,8 @@ async function newNode() {
       const newNode = await cy.value.add({
         data: data,
         position: {
-          x: 20,
-          y: 100
+          x: 100,
+          y: 200
         }
       })
       // create class instance
@@ -942,56 +1104,92 @@ async function newNode() {
 
 <template>
 
-  <!-- 
-    ctl buttons from /img:
-    magnifying-glass-minus, magnifying-glass-plus, expand
-    angle-down, left, right, up
-    bars | plug | star | wand-magic-sparkles   for node selection
-
-
-  -->
-
-
   <div ref="flowWrap" class="wrap">
-    <ion-toolbar class="toolbar">
+    <ion-toolbar class="toolbar ion-hide-md-down">
       <ion-buttons slot="start">
-        <ion-button ref="popBtn" @click="openPopover">
+        <ion-button ref="popBtn" @click="zoomFit">
         <font-awesome-icon :icon="['fas', 'expand']" size="2x" class="toolbtn"></font-awesome-icon>
         </ion-button>
       </ion-buttons>
       <ion-buttons slot="start">
-        <ion-button ref="popBtn" @click="openPopover">
+        <ion-button ref="popBtn" @click="zoomIn">
         <font-awesome-icon :icon="['fas', 'magnifying-glass-plus']" size="2x" class="toolbtn"></font-awesome-icon>
       </ion-button>
       </ion-buttons>
       <ion-buttons slot="start" >
-        <ion-button ref="popBtn" @click="openPopover">
+        <ion-button ref="popBtn" @click="zoomOut">
         <font-awesome-icon :icon="['fas', 'magnifying-glass-minus']" size="2x" class="toolbtn"></font-awesome-icon>
       </ion-button>
       </ion-buttons>
       <ion-buttons slot="start">
-        <ion-button ref="popBtn" @click="openPopover">
+        <ion-button ref="popBtn" @click="panLeft">
         <font-awesome-icon :icon="['fas', 'arrow-left']" size="2x" class="toolbtn"></font-awesome-icon>
       </ion-button>
       </ion-buttons>
       <ion-buttons slot="start">
-        <ion-button ref="popBtn" @click="openPopover">
+        <ion-button ref="popBtn" @click="panRight">
         <font-awesome-icon :icon="['fas', 'arrow-right']" size="2x" class="toolbtn"></font-awesome-icon>
       </ion-button>
       </ion-buttons>
       <ion-buttons slot="start">
-        <ion-button ref="popBtn" @click="openPopover">
+        <ion-button ref="popBtn" @click="panUp">
         <font-awesome-icon :icon="['fas', 'arrow-up']" size="2x" class="toolbtn"></font-awesome-icon>
       </ion-button>
       </ion-buttons>
       <ion-buttons slot="start">
-        <ion-button ref="popBtn" @click="openPopover">
+        <ion-button ref="popBtn" @click="panDown">
         <font-awesome-icon :icon="['fas', 'arrow-down']" size="2x" class="toolbtn"></font-awesome-icon>
       </ion-button>
       </ion-buttons>
       <ion-buttons slot="end">
         <ion-button ref="popBtn" @click="newNode">
           <font-awesome-icon :icon="['fas', 'wand-magic-sparkles']" size="2x" class="toolbtn"></font-awesome-icon>
+          New
+        </ion-button>
+        <!-- 
+        <NodeSel msg="Select Input" signal="nodeSelection" />
+        -->
+      </ion-buttons>
+    </ion-toolbar>
+    <ion-toolbar class="toolbar-sm ion-hide-md-up">
+      <ion-buttons slot="start">
+        <ion-button ref="popBtn" @click="zoomFit">
+        <font-awesome-icon :icon="['fas', 'expand']" size="md" class="toolbtn"></font-awesome-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-buttons slot="start">
+        <ion-button ref="popBtn" @click="zoomIn">
+        <font-awesome-icon :icon="['fas', 'magnifying-glass-plus']" size="md" class="toolbtn"></font-awesome-icon>
+      </ion-button>
+      </ion-buttons>
+      <ion-buttons slot="start" >
+        <ion-button ref="popBtn" @click="zoomOut">
+        <font-awesome-icon :icon="['fas', 'magnifying-glass-minus']" size="md" class="toolbtn"></font-awesome-icon>
+      </ion-button>
+      </ion-buttons>
+      <ion-buttons slot="start">
+        <ion-button ref="popBtn" @click="panLeft">
+        <font-awesome-icon :icon="['fas', 'arrow-left']" size="md" class="toolbtn"></font-awesome-icon>
+      </ion-button>
+      </ion-buttons>
+      <ion-buttons slot="start">
+        <ion-button ref="popBtn" @click="panRight">
+        <font-awesome-icon :icon="['fas', 'arrow-right']" size="md" class="toolbtn"></font-awesome-icon>
+      </ion-button>
+      </ion-buttons>
+      <ion-buttons slot="start">
+        <ion-button ref="popBtn" @click="panUp">
+        <font-awesome-icon :icon="['fas', 'arrow-up']" size="md" class="toolbtn"></font-awesome-icon>
+      </ion-button>
+      </ion-buttons>
+      <ion-buttons slot="start">
+        <ion-button ref="popBtn" @click="panDown">
+        <font-awesome-icon :icon="['fas', 'arrow-down']" size="md" class="toolbtn"></font-awesome-icon>
+      </ion-button>
+      </ion-buttons>
+      <ion-buttons slot="end">
+        <ion-button ref="popBtn" @click="newNode">
+          <font-awesome-icon :icon="['fas', 'wand-magic-sparkles']" size="md" class="toolbtn"></font-awesome-icon>
           New
         </ion-button>
         <!-- 
@@ -1014,12 +1212,22 @@ async function newNode() {
   /* dark mode not working yet, set light BG */
   background-color: #fff;
 }
+
 .toolbar {
   position:absolute;
   top:0;
   left:0;
   z-index: 100;
   max-width: 30rem;
+  border: 3px solid #ccc;
+}
+
+.toolbar-sm {
+  position:absolute;
+  top:0;
+  left:0;
+  z-index: 100;
+  max-width: 20rem;
   border: 3px solid #ccc;
 }
 
