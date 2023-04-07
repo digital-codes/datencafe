@@ -41,6 +41,7 @@ import InputselPopover from './InputselPopover.vue';
 import NodesPopover from "./NodesPopover.vue"
 
 // --------------------
+import NodeSel  from './NodeSel.vue';
 import nodeTypes from "../assets/nodes/nodeTypes.json"
 import { DcNode } from "../classes/DcNode"
 import { LinePlot } from "../classes/LinePlot"
@@ -49,6 +50,8 @@ import { DataInfo } from "../classes/DataInfo"
 import { RandomGen } from "../classes/RandomGen"
 import { nodeFactory } from "../services/NodeFactory"
 import { NodeTypes } from '../services/GlobalDefs';
+
+import { IonButtons, IonToolbar } from '@ionic/vue';
 
 // --------------------
 
@@ -80,13 +83,13 @@ const nextEdge = ref(1)
 const nodeList = ref([])
 
 const elements: ElementDefinition[] = [ // list of graph elements to start with
+  /*
   { // node a
     group: 'nodes', 
     //data: { id: 'a', name:"a", type:{"name":"t1","shp":"square","bd":"#f00", "img":"url('/img/icons-bordered/cloud-arrow-down.png')"} },  
     data: { id: 'a', name:"a", "ports":{"A":false}, type:{"name":"t1","shp":"square","bd":"#f00", "img":"url('/img/widgets/CSVFile.png')"} },  
     position: {x:10, y:10},
   },
-  /*
   { // node b
     group: 'nodes', 
     data: { id: 'b', name:"b", "ports":{"A":false}, type:{"name":"t3","shp":"roundrectangle","bd":"#f00", "img":"url('/img/widgets/LinePlot.png')"} }, 
@@ -853,7 +856,6 @@ const createEvent = async () => {
   */
   await openNodeSel()
 
-
   // or we just use the default from the popover button with reference = trigger
   /*
   console.log("btn",popBtn.value)
@@ -861,16 +863,146 @@ const createEvent = async () => {
   */
 }
 
+async function newNode() {
+    console.log("Add node")
+    const nodeType = await openNodeSel()
+    console.log("NodeType from add node",nodeType)
+    if (nodeType != "") {
+      console.log("Type selected:",nodeType)
+      console.log("Type:",nodeTypes[nodeType])
+      // properties
+      const nodeIcon = nodeTypes[nodeType].thumb
+      const newId = "N" + String(nextNode.value++)
+      const data = {
+        //group: 'nodes',
+        id:newId,
+      };
+      // add node
+      const newNode = await cy.value.add({
+        data: data,
+        position: {
+          x: 20,
+          y: 100
+        }
+      })
+      // create class instance
+      try {
+        const instance = await nodeFactory(newId,nodeTypes[nodeType])
+        // get ports and edges from instance
+        const ports = {}
+        instance.ports.forEach(p => {
+          ports[p] = false
+        });
+        console.log("Ports:",ports)
+        // we don't use edges yet ...
+        const edges = {}
+        instance.edges.forEach(e => {
+          edges[e] = false
+        });
+        console.log("Edges:",edges)
+        // set data
+        const nodeData = {
+          "name":newId,
+          "ports":ports,
+          "instance":{
+            "id":instance.id,
+            "name":instance.name,
+            "type":instance.type,
+            "display":instance.display | false
+          },
+          "type":{
+            "name":nodeType,
+            "shp":"circle",
+            "bd":"#f00", 
+            "img":"url('" + nodeIcon + "')"
+          }
+        }
+        newNode.data(nodeData)
+        console.log("New node:", newNode.data())
+        //console.log("After add node:",JSON.stringify(cy.value.json()))
+        // check if we need to create a new diagram element 
+        if (instance.display) {
+          emit("addViz",nodeData.instance)
+        } else {
+          console.log("No display on ",nodeData.instance)
+        }
+        // add to list 
+        nodeList.value.push(instance)
+      } catch (err) {
+        alert("Invalid instance:" + err.message)
+        return
+      }
+    } else {
+      console.log("Cancelled. Removing:")
+    }
+  }
+
 
 </script>
 
 <template>
 
+  <!-- 
+    ctl buttons from /img:
+    magnifying-glass-minus, magnifying-glass-plus, expand
+    angle-down, left, right, up
+    bars | plug | star | wand-magic-sparkles   for node selection
+
+
+  -->
+
+
   <div ref="flowWrap" class="wrap">
+    <ion-toolbar class="toolbar">
+      <ion-buttons slot="start">
+        <ion-button ref="popBtn" @click="openPopover">
+        <font-awesome-icon :icon="['fas', 'expand']" size="2x" class="toolbtn"></font-awesome-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-buttons slot="start">
+        <ion-button ref="popBtn" @click="openPopover">
+        <font-awesome-icon :icon="['fas', 'magnifying-glass-plus']" size="2x" class="toolbtn"></font-awesome-icon>
+      </ion-button>
+      </ion-buttons>
+      <ion-buttons slot="start" >
+        <ion-button ref="popBtn" @click="openPopover">
+        <font-awesome-icon :icon="['fas', 'magnifying-glass-minus']" size="2x" class="toolbtn"></font-awesome-icon>
+      </ion-button>
+      </ion-buttons>
+      <ion-buttons slot="start">
+        <ion-button ref="popBtn" @click="openPopover">
+        <font-awesome-icon :icon="['fas', 'arrow-left']" size="2x" class="toolbtn"></font-awesome-icon>
+      </ion-button>
+      </ion-buttons>
+      <ion-buttons slot="start">
+        <ion-button ref="popBtn" @click="openPopover">
+        <font-awesome-icon :icon="['fas', 'arrow-right']" size="2x" class="toolbtn"></font-awesome-icon>
+      </ion-button>
+      </ion-buttons>
+      <ion-buttons slot="start">
+        <ion-button ref="popBtn" @click="openPopover">
+        <font-awesome-icon :icon="['fas', 'arrow-up']" size="2x" class="toolbtn"></font-awesome-icon>
+      </ion-button>
+      </ion-buttons>
+      <ion-buttons slot="start">
+        <ion-button ref="popBtn" @click="openPopover">
+        <font-awesome-icon :icon="['fas', 'arrow-down']" size="2x" class="toolbtn"></font-awesome-icon>
+      </ion-button>
+      </ion-buttons>
+      <ion-buttons slot="end">
+        <ion-button ref="popBtn" @click="newNode">
+          <font-awesome-icon :icon="['fas', 'wand-magic-sparkles']" size="2x" class="toolbtn"></font-awesome-icon>
+          New
+        </ion-button>
+        <!-- 
+        <NodeSel msg="Select Input" signal="nodeSelection" />
+        -->
+      </ion-buttons>
+    </ion-toolbar>
+
     <div ref="ctl" class="ctl">
       <ion-button @click='ctlClick'>Clk</ion-button>
       <ion-button ref="popBtn" @click="openPopover">Click Me</ion-button>
-      <NodesPopover/>
     </div>
     <div class="flow" ref="theFlow"></div>
   </div>
@@ -882,11 +1014,20 @@ const createEvent = async () => {
   /* dark mode not working yet, set light BG */
   background-color: #fff;
 }
+.toolbar {
+  position:absolute;
+  top:0;
+  left:0;
+  z-index: 100;
+  max-width: 30rem;
+  border: 3px solid #ccc;
+}
+
 .ctl {
   position:absolute;
   top:0;
-  left:300px;
-  z-index: 100;
+  left:500px;
+  z-index: 10;
   width:50px;
   height:50px;
   background:#cc0;
