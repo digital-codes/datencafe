@@ -33,12 +33,13 @@ import { DataFrame, toJSON } from 'danfojs/dist/danfojs-browser/src';
 import { Signals } from "../services/GlobalDefs"
 import eventBus from '../services/eventBus';
 
-// popover
+// popovers
 import { popoverController } from '@ionic/vue';
 import Popover from './PopOver.vue'; // test
 import ImportPopover from './ImportPopover.vue';
 import InputselPopover from './InputselPopover.vue';
 import NodesPopover from "./NodesPopover.vue"
+import CtxPopover from "./CtxPopover.vue"
 
 // --------------------
 import NodeSel  from './NodeSel.vue';
@@ -81,6 +82,8 @@ const nextNode = ref(1)
 const nextEdge = ref(1)
 
 const nodeList = ref([])
+
+const nextInsertedX = ref(0)
 
 const elements: ElementDefinition[] = [ // list of graph elements to start with
   /* 
@@ -130,7 +133,7 @@ const style: Stylesheet[] = [ // the stylesheet for the graph
         'width': '30px',
         'height': '30px',
         'border-width': '2px',
-        'border-color': '#000'
+        /*'border-color': '#000'*/
       }    
   },
   /* warnung during new edges
@@ -396,6 +399,8 @@ async function flowInit  ()  {
       elements:elements,
       // initial viewport state:
       zoom: 1,
+      minZoom: 1,
+      maxZoom: 10,
       pan: { x: 0, y: 0 },
       /*
       panningEnabled: {
@@ -545,13 +550,49 @@ async function flowInit  ()  {
       }
     });
 
-    /*
-    cy.value.on('dblclick', function(event: EventObject) {
+    /* */
+    cy.value.on('dblclick', "node", async function(event: EventObject) {
       const pos = event.position || event.cyPosition;
-      console.log('dblclick at ',pos);
-      popBtn.value.$el.click()
+      console.log('Node dblclick at ',pos,event.target.data("id"), event);
+      const id = event.target.data("id")
+      const idx = nodeList.value.findIndex(e => e.id == id)
+      if (idx == -1) throw(new Error("Invalid id"))
+      const nd = nodeList.value[idx]
+      const options = ["config","remove"]
+      switch (nodeList.value[idx].type) {
+        case NodeTypes.CHART:
+        case NodeTypes.TABLE:
+        case NodeTypes.OUTPUT:
+          break
+        default:
+          options.push("connect")
+      }
+      const nodeAction = await openCtxPopover(options)
+      if (nodeAction.role != "button") return
+      console.log("Action:",nodeAction)
+      switch (nodeAction.data){
+        case "config":
+          console.log("Config")
+          break;
+        case "connect":
+          console.log("Connect")
+          break;
+        case "remove":
+          console.log("Remove")
+          break;
+        default:
+          throw(new Error("Invalid CTX action: " + nodeAction.data))          
+      }
+
+      // popBtn.value.$el.click() 
     });
-    */
+    cy.value.on('dblclick', "edge", async function(event: EventObject) {
+      const pos = event.position || event.cyPosition;
+      console.log('Edge dblclick at ',pos, event);
+      //await openCtxPopover(event)
+      // popBtn.value.$el.click() 
+    });
+    /* */
     // remove handlers. remove edge will be triggered on delete node with edges
     cy.value.on("remove","node",function(event: EventObject){
       console.log("Remove node event:",event.target.data())
@@ -631,6 +672,14 @@ async function flowInit  ()  {
         popover.value.dismiss(data,"button")
       }
     });
+    eventBus.on('ctxSelection', (data) => {
+      console.log("on ctxSelection:",data)
+      // test if we can do something else while popover is active ..
+      // allow to close on specific return value. only if open
+      if (popover.value.open) {
+        popover.value.dismiss(data,"button")
+      }
+    });
     eventBus.on('nodeSelection', (data) => {
       console.log("on nodeSelection:",data)
       // test if we can do something else while popover is active ..
@@ -647,6 +696,33 @@ const ctlClick = async () => {
   console.log("JSON:",JSON.stringify(j))
   createEvent()
 }
+
+
+const openCtxPopover = async (options: any) => {
+  popover.value = await popoverController.create({
+      component: CtxPopover,
+      //event: ev,
+      size: "auto",
+      side:"right",
+      alignment:"start",
+      showBackdrop: true,
+      backdropDismiss: true, 
+      dismissOnSelect: false,
+      reference: "trigger", // event or trigger
+      componentProps: { // Popover props
+          msg:"Dummy",
+          signal: "ctxSelection",
+          options:options
+        }
+    })
+    await popover.value.present();
+    popover.value.open = true
+    const x = await popover.value.onDidDismiss();
+    console.log("Dismiss: ",x)
+    popover.value.open = false
+    return x
+}
+
 
 //const openInputSel = async (ev: Event) => {
   const openInputSel = async (ports) => {
@@ -902,23 +978,34 @@ This function returns a plain object bounding box with format { x1, y1, x2, y2, 
 
 */
 
+// pan dims are 2000x1000. also size at zoom=1
+// larger zoom size becomes smaller
+
 function panLeft() {
-  cy.value.panBy({x:-100,y:0})
+  if (cy.value.pan().x > 100) {
+    cy.value.panBy({x:-100,y:0})
+  }  
   console.log("Extent:",cy.value.extent())
   return cy.value.pan()
 }
 function panRight() {
-  cy.value.panBy({x:100,y:0})
+  if (cy.value.pan().x < 2000) {
+    cy.value.panBy({x:100,y:0})
+  }
   console.log("Extent:",cy.value.extent())
   return cy.value.pan()
 }
 function panDown() {
-  cy.value.panBy({x:0,y:100})
+  if (cy.value.pan().y < 1000) {
+    cy.value.panBy({x:0,y:100})
+  }
   console.log("Extent:",cy.value.extent())
   return cy.value.pan()
 }
 function panUp() {
-  cy.value.panBy({x:0,y:-100})
+  if (cy.value.pan().y > 100) {
+    cy.value.panBy({x:0,y:-100})
+  }
   console.log("Extent:",cy.value.extent())
   return cy.value.pan()
 }
@@ -969,11 +1056,18 @@ async function newNode() {
         id:newId,
       };
       // add node
+      // first get pan dimentsions
+      const pan = cy.value.pan() 
+      const xtent = cy.value.extent()
+      console.log("Pan:",pan,xtent)
+      // set x position to middle // left[], y to center
+      const xpos = xtent.x1 + xtent.w/2 + nextInsertedX.value++ *5
+      const ypos = xtent.y1 + xtent.h/2 + nextInsertedX.value++ *5
       const newNode = await cy.value.add({
         data: data,
         position: {
-          x: 100,
-          y: 200
+          x: xpos,
+          y: ypos
         }
       })
       // create class instance
@@ -1155,10 +1249,12 @@ async function newNode() {
       </ion-buttons>
     </ion-toolbar>
 
+    <!-- 
     <div ref="ctl" class="ctl">
       <ion-button @click='ctlClick'>Clk</ion-button>
       <ion-button ref="popBtn" @click="openPopover">Click Me</ion-button>
     </div>
+    -->
     <div class="flow" ref="theFlow"></div>
   </div>
 </template>
