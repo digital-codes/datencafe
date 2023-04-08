@@ -65,6 +65,7 @@ ion-popover {
 ion-popover ion-content {
   max-height: calc(80vh - 100px);
   max-width: calc(100vw - 200px);
+  --min-width: 280px;
   overflow: clip;
 }
 

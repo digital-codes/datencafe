@@ -51,11 +51,14 @@ const item = (idx,id) => {
 <style scoped>
 #container {
   text-align: center;
+  margin:10px;
+  /*
   position: absolute;
   left: 0;
   right: 0;
   top: 50%;
   transform: translateY(-50%);
+  */
 }
 
 #container strong {
@@ -73,4 +76,25 @@ const item = (idx,id) => {
 #container a {
   text-decoration: none;
 }
+
+.image {
+  background-color: #ddd;
+  opacity:.8;
+  padding: 1rem;
+  margin-top:1rem;
+
+}
+
+
+ion-img {
+  height: 150px;
+}
+
+ion-label.attribution {
+  font-size: 70%;
+  color:#444;
+  background: #eee;
+}
+
+
 </style>

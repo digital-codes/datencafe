@@ -11,7 +11,7 @@
           <ion-thumbnail slot="start">
             <img :alt='option.type' :src="option.thumb" />
           </ion-thumbnail>
-        <ion-checkbox slot="end" v-model="chk[idx]" @ionChange="clk(idx)"></ion-checkbox>
+        <ion-checkbox slot="start" v-model="chk[idx]" @ionChange="clk(idx)"></ion-checkbox>
       </ion-item>
     </div>
     </ion-list>
@@ -95,6 +95,7 @@ https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_tooltip
   height: 0;
   font-size: 80%;
 }
+
 .item:hover .tooltip {
   visibility:visible;
   position: absolute;

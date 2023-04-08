@@ -983,18 +983,22 @@ This function returns a plain object bounding box with format { x1, y1, x2, y2, 
 
 function panLeft() {
   cy.value.panBy({x:-100,y:0})
+  console.log("Extent:",cy.value.extent())
   return cy.value.pan()
 }
 function panRight() {
   cy.value.panBy({x:100,y:0})
+  console.log("Extent:",cy.value.extent())
   return cy.value.pan()
 }
 function panDown() {
   cy.value.panBy({x:0,y:100})
+  console.log("Extent:",cy.value.extent())
   return cy.value.pan()
 }
 function panUp() {
   cy.value.panBy({x:0,y:-100})
+  console.log("Extent:",cy.value.extent())
   return cy.value.pan()
 }
 
@@ -1004,6 +1008,7 @@ function zoomIn() {
     cy.value.zoom(Math.floor(z + 1))
   else 
     cy.value.zoom(10)
+  console.log("Extent:",cy.value.extent())
   return cy.value.zoom()
 }
 function zoomOut() {
@@ -1012,11 +1017,12 @@ function zoomOut() {
     cy.value.zoom(Math.floor(z - 1))
   else 
     cy.value.zoom(1)
+  console.log("Extent:",cy.value.extent())
   return cy.value.zoom()
 }
 function zoomFit() {
   cy.value.fit()
-  extent()
+  console.log("Extent:",cy.value.extent())
   return cy.value.zoom()
 }
 function extent() {
@@ -1144,7 +1150,7 @@ async function newNode() {
       <ion-buttons slot="end">
         <ion-button ref="popBtn" @click="newNode">
           <font-awesome-icon :icon="['fas', 'wand-magic-sparkles']" size="2x" class="toolbtn"></font-awesome-icon>
-          New
+          {{ $t("flow.tools.new")}}
         </ion-button>
         <!-- 
         <NodeSel msg="Select Input" signal="nodeSelection" />
@@ -1190,7 +1196,7 @@ async function newNode() {
       <ion-buttons slot="end">
         <ion-button ref="popBtn" @click="newNode">
           <font-awesome-icon :icon="['fas', 'wand-magic-sparkles']" size="md" class="toolbtn"></font-awesome-icon>
-          New
+          {{ $t("flow.tools.new")}}
         </ion-button>
         <!-- 
         <NodeSel msg="Select Input" signal="nodeSelection" />

@@ -22,6 +22,18 @@
     "stories":"Stories",
     "login":"Login"
   },
+  "flow":{
+    "tools":{
+      "zoomfit":"Zoom full",
+      "zoomin":"Zoom in",
+      "zoomout":"Zoom out",
+      "panleft":"Pan left",
+      "panright":"Pan right",
+      "panup":"Pan up",
+      "pandown":"Pan donw",
+      "new":"New"
+    }
+  },
   "login": {
     "titel":"Login",
     "register":"Registration by invitation only",

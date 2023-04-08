@@ -22,6 +22,18 @@
     "stories":"Geschichten",
     "login":"Anmelden"
   },
+  "flow":{
+    "tools":{
+      "zoomfit":"Zoom full",
+      "zoomin":"Zoom in",
+      "zoomout":"Zoom out",
+      "panleft":"Pan link",
+      "panright":"Pan rechts",
+      "panup":"Pan hoch",
+      "pandown":"Pan runter",
+      "new":"Neu"
+    }
+  },
   "login": {
     "titel":"Anmelden",
     "register":"Registrierung nur mit Einladung",
