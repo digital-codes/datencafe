@@ -550,10 +550,11 @@ async function flowInit  ()  {
       }
     });
 
-    /* */
-    cy.value.on('dblclick', "node", async function(event: EventObject) {
+    /* 
+    // dbltab copy of dblclick
+    cy.value.on('dbltap', "node", async function(event: EventObject) {
       const pos = event.position || event.cyPosition;
-      console.log('Node dblclick at ',pos,event.target.data("id"), event);
+      console.log('Node dbltab at ',pos,event.target.data("id"), event);
       const id = event.target.data("id")
       const idx = nodeList.value.findIndex(e => e.id == id)
       if (idx == -1) throw(new Error("Invalid id"))
@@ -567,7 +568,7 @@ async function flowInit  ()  {
         default:
           options.push("connect")
       }
-      const nodeAction = await openCtxPopover(options)
+      const nodeAction = await openCtxPopover(options.sort())
       if (nodeAction.role != "button") return
       console.log("Action:",nodeAction)
       switch (nodeAction.data){
@@ -576,6 +577,46 @@ async function flowInit  ()  {
           break;
         case "connect":
           console.log("Connect")
+          break;
+        case "remove":
+          console.log("Remove")
+          break;
+        default:
+          throw(new Error("Invalid CTX action: " + nodeAction.data))          
+      }
+
+      // popBtn.value.$el.click() 
+    });
+    */
+    cy.value.on('dbltap', "node", async function(event: EventObject) {
+      const pos = event.position || event.cyPosition;
+      console.log('Node dbltap or dblclick at ',pos,event.target.data("id"), event);
+      const id = event.target.data("id")
+      const idx = nodeList.value.findIndex(e => e.id == id)
+      if (idx == -1) throw(new Error("Invalid id"))
+      const instance = nodeList.value[idx]
+      const options = ["config","remove"]
+      switch (instance.type) {
+        case NodeTypes.CHART:
+        case NodeTypes.TABLE:
+        case NodeTypes.OUTPUT:
+          break
+        default:
+          options.push("connect")
+      }
+      const nd = await cy.value.getElementById(id)
+      const nodeAction = await openCtxPopover(options.sort())
+      if (nodeAction.role != "button") return
+      console.log("Action:",nodeAction)
+      switch (nodeAction.data){
+        case "config":
+          console.log("Config")
+          break;
+        case "connect":
+          console.log("Connect")
+          await nd.data("edge","e1") // set a source type
+          //console.log("Node:",nd)
+          await cy.value.edgehandles().start(nd)
           break;
         case "remove":
           console.log("Remove")
