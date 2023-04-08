@@ -6,7 +6,7 @@ import { NodeTypes } from '../services/GlobalDefs';
 export class LoadCsv extends DcNode {
   // properties
   static _display = false
-  static _type = NodeTypes.PROC
+  static _type = NodeTypes.INPUT
   // constructor
   constructor(id:string,typeInfo:any) {
     // although we need to call this first,

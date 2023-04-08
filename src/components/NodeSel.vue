@@ -20,7 +20,7 @@
 <script lang="ts" setup>
 import { IonContent, IonButton } from '@ionic/vue';
 import { IonItem, IonLabel, IonList, IonCheckbox } from '@ionic/vue';
-import { IonNote } from '@ionic/vue';
+import { IonNote, IonThumbnail } from '@ionic/vue';
 
 import { ref, onMounted } from "vue"
 

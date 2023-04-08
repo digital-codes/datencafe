@@ -83,7 +83,7 @@ const nextEdge = ref(1)
 const nodeList = ref([])
 
 const elements: ElementDefinition[] = [ // list of graph elements to start with
-  /*
+  /* 
   { // node a
     group: 'nodes', 
     //data: { id: 'a', name:"a", type:{"name":"t1","shp":"square","bd":"#f00", "img":"url('/img/icons-bordered/cloud-arrow-down.png')"} },  
@@ -126,7 +126,7 @@ const style: Stylesheet[] = [ // the stylesheet for the graph
       "text-halign": "center",    
         'background-fit': 'contain',
         'background-color': '#fff',
-        'shape': 'circle',
+        'shape': 'rectangle',
         'width': '30px',
         'height': '30px',
         'border-width': '2px',
@@ -326,91 +326,6 @@ const ctxOptions = {
       },
       disabled: false
     },
-    // should work on background click but doesn't
-    /* 
-    {
-      id: 'add-node',
-      content: 'add node',
-      tooltipText: 'add node',
-      selector: "node,edge",
-      //image: {src: "assets/add.svg", width: 12, height: 12, x: 6, y: 4},
-      coreAsWell: false,
-      onClickFunction: async function (event?: EventObject) {
-        console.log("Add node")
-        const nodeType = await openNodeSel()
-        console.log("NodeType from add node",nodeType)
-        if (nodeType != "") {
-          console.log("Type selected:",nodeType)
-          console.log("Type:",nodeTypes[nodeType])
-          // properties
-          const nodeIcon = nodeTypes[nodeType].thumb
-          const pos = event.position || event.cyPosition;
-          const newId = "N" + String(nextNode.value++)
-          const data = {
-            //group: 'nodes',
-            id:newId,
-          };
-          // add node
-          const newNode = await cy.value.add({
-            data: data,
-            position: {
-              x: pos.x + 20,
-              y: pos.y + 5
-            }
-          })
-          // create class instance
-          try {
-            const instance = await nodeFactory(newId,nodeTypes[nodeType])
-            // get ports and edges from instance
-            const ports = {}
-            instance.ports.forEach(p => {
-              ports[p] = false
-            });
-            console.log("Ports:",ports)
-            // we don't use edges yet ...
-            const edges = {}
-            instance.edges.forEach(e => {
-              edges[e] = false
-            });
-            console.log("Edges:",edges)
-            // set data
-            const nodeData = {
-              "name":newId,
-              "ports":ports,
-              "instance":{
-                "id":instance.id,
-                "name":instance.name,
-                "type":instance.type,
-                "display":instance.display | false
-              },
-              "type":{
-                "name":nodeType,
-                "shp":"circle",
-                "bd":"#f00", 
-                "img":"url('" + nodeIcon + "')"
-              }
-            }
-            newNode.data(nodeData)
-            console.log("New node:", newNode.data())
-            //console.log("After add node:",JSON.stringify(cy.value.json()))
-            // check if we need to create a new diagram element 
-            if (instance.display) {
-              emit("addViz",nodeData.instance)
-            } else {
-              console.log("No display on ",nodeData.instance)
-            }
-            // add to list 
-            nodeList.value.push(instance)
-          } catch (err) {
-            alert("Invalid instance:" + err.message)
-            return
-          }
-        } else {
-          console.log("Cancelled. Removing:")
-        }
-      }
-    },
-    */    
     ],
     // css classes that menu items will have
     menuItemClasses: [
@@ -613,16 +528,22 @@ async function flowInit  ()  {
       }
     });
 
-    /*
+    // disable edges from endpoints (chart, table, output)
     cy.value.on('cxttap', 'node', function(event?: EventObject) {
       const node = event.target;
       console.log('Node ' + node.id() + ' was right clicked');
-      if (node.id() == "a")
-        ctxMenu.value.showMenuItem("edge2")
-      else 
-        ctxMenu.value.hideMenuItem("edge2")
+      const idx = nodeList.value.findIndex(e => e.id == node.id())
+      if (idx == -1) throw (new Error("Invalid node"))
+      switch (nodeList.value[idx].type) {
+        case NodeTypes.CHART:
+        case NodeTypes.TABLE:
+        case NodeTypes.OUTPUT:
+          ctxMenu.value.hideMenuItem("edge1")
+          break
+        default:
+          ctxMenu.value.showMenuItem("edge1")
+      }
     });
-    */
 
     /*
     cy.value.on('dblclick', function(event: EventObject) {
@@ -1003,6 +924,8 @@ function panUp() {
 }
 
 function zoomIn() {
+  // get panning position first
+  const p = cy.value.pan()
   const z = cy.value.zoom()
   if (z < 10)
     cy.value.zoom(Math.floor(z + 1))
@@ -1056,6 +979,12 @@ async function newNode() {
       // create class instance
       try {
         const instance = await nodeFactory(newId,nodeTypes[nodeType])
+        /*
+        console.log("Instance:",instance,instance.class)
+        console.log(nodeTypes["lineplot"])
+        console.log(nodeTypes[instance.class])
+        console.log("Class description:",nodeTypes[instance.class])
+        */
         // get ports and edges from instance
         const ports = {}
         instance.ports.forEach(p => {
@@ -1068,6 +997,28 @@ async function newNode() {
           edges[e] = false
         });
         console.log("Edges:",edges)
+        // determine style (shape,color) from type
+        // good shapes: ellipse, rectange, roundrectangle, diamond
+        let shape, border
+        switch (instance.type) {
+          case NodeTypes.CHART:
+          case NodeTypes.TABLE:
+            shape = "rectangle"
+            border = "#0f0"
+            break
+          case NodeTypes.PROC:
+            shape = "diamond"
+            border = "#000"
+            break
+          case NodeTypes.INPUT:
+          case NodeTypes.GEN:
+            shape = "roundrectangle"
+            border = "#00f"
+            break
+          default:
+            shape = "ellipse"
+            border = "#f00"
+        }
         // set data
         const nodeData = {
           "name":newId,
@@ -1080,8 +1031,8 @@ async function newNode() {
           },
           "type":{
             "name":nodeType,
-            "shp":"circle",
-            "bd":"#f00", 
+            "shp":shape, 
+            "bd":border, 
             "img":"url('" + nodeIcon + "')"
           }
         }

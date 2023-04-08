@@ -2,31 +2,11 @@
   <ion-content class="ion-padding ion-popover">
     <p>{{ props.msg }}</p>
     <NodeSel :signal="signal" />
-    <!-- 
-    <ion-list class="list">
-      <div v-for="(option,idx) in options" :key="option.type" class="item">
-      <ion-item v-if="option.implemented">
-        <ion-label class="label">
-          {{ nodeItem(option.type,"label") }}
-        </ion-label>
-          <ion-note class="tooltip">
-          {{ nodeItem(option.type,"info") }}
-          </ion-note>
-          <ion-thumbnail slot="start">
-            <img :alt='option.type' :src="option.thumb" />
-          </ion-thumbnail>
-        <ion-checkbox slot="end" v-model="chk[idx]" @ionChange="clk(idx)"></ion-checkbox>
-      </ion-item>
-    </div>
-    </ion-list>
-    -->
 </ion-content>
 </template>
 
 <script lang="ts" setup>
-import { IonContent, IonButton } from '@ionic/vue';
-import { IonItem, IonLabel, IonList, IonCheckbox } from '@ionic/vue';
-import { IonNote } from '@ionic/vue';
+import { IonContent } from '@ionic/vue';
 import { ref, onMounted } from "vue"
 
 import NodeSel  from './NodeSel.vue';
