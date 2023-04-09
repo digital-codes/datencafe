@@ -588,7 +588,8 @@ async function flowInit  ()  {
       // popBtn.value.$el.click() 
     });
     */
-    cy.value.on('dbltap', "node", async function(event: EventObject) {
+    // try taphold instead of dbltap. latter not working on ios?
+    cy.value.on('taphold', "node", async function(event: EventObject) {
       const pos = event.position || event.cyPosition;
       console.log('Node dbltap or dblclick at ',pos,event.target.data("id"), event);
       const id = event.target.data("id")
