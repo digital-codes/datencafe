@@ -35,14 +35,14 @@ import eventBus from '../services/eventBus';
 
 // popovers
 import { popoverController } from '@ionic/vue';
-import Popover from './PopOver.vue'; // test
-import ImportPopover from './ImportPopover.vue';
-import InputselPopover from './InputselPopover.vue';
-import NodesPopover from "./NodesPopover.vue"
-import CtxPopover from "./CtxPopover.vue"
+import Popover from './popovers/PopOver.vue'; // test
+import ImportPopover from './popovers/ImportPopover.vue';
+import InputselPopover from './popovers/InputselPopover.vue';
+import NodesPopover from "./popovers/NodesPopover.vue"
+import CtxPopover from "./popovers/CtxPopover.vue"
 
 // --------------------
-import NodeSel  from './NodeSel.vue';
+import NodeSel  from './popovers/NodeSel.vue';
 import nodeTypes from "../assets/nodes/nodeTypes.json"
 import { DcNode } from "../classes/DcNode"
 import { LinePlot } from "../classes/LinePlot"
@@ -309,6 +309,8 @@ const ctxOptions = {
       selector: 'node',
       onClickFunction: async (event: EventObject) => {
         const { target } = event;
+        await removeNode(target)
+        /*
         console.log("Remove node:",target)
         cy.value.remove(target);
         const instance = target.data("instance")
@@ -326,6 +328,7 @@ const ctxOptions = {
           await nodeList.value[idx].stop()
         }
         nodeList.value.splice(idx,1)
+        */
       },
       disabled: false
     },
@@ -550,45 +553,9 @@ async function flowInit  ()  {
       }
     });
 
-    /* 
     // dbltab copy of dblclick
-    cy.value.on('dbltap', "node", async function(event: EventObject) {
-      const pos = event.position || event.cyPosition;
-      console.log('Node dbltab at ',pos,event.target.data("id"), event);
-      const id = event.target.data("id")
-      const idx = nodeList.value.findIndex(e => e.id == id)
-      if (idx == -1) throw(new Error("Invalid id"))
-      const nd = nodeList.value[idx]
-      const options = ["config","remove"]
-      switch (nodeList.value[idx].type) {
-        case NodeTypes.CHART:
-        case NodeTypes.TABLE:
-        case NodeTypes.OUTPUT:
-          break
-        default:
-          options.push("connect")
-      }
-      const nodeAction = await openCtxPopover(options.sort())
-      if (nodeAction.role != "button") return
-      console.log("Action:",nodeAction)
-      switch (nodeAction.data){
-        case "config":
-          console.log("Config")
-          break;
-        case "connect":
-          console.log("Connect")
-          break;
-        case "remove":
-          console.log("Remove")
-          break;
-        default:
-          throw(new Error("Invalid CTX action: " + nodeAction.data))          
-      }
-
-      // popBtn.value.$el.click() 
-    });
-    */
     // try taphold instead of dbltap. latter not working on ios?
+    // taphold alos not working
     cy.value.on('taphold', "node", async function(event: EventObject) {
       const pos = event.position || event.cyPosition;
       console.log('Node dbltap or dblclick at ',pos,event.target.data("id"), event);
@@ -605,9 +572,11 @@ async function flowInit  ()  {
         default:
           options.push("connect")
       }
-      const nd = await cy.value.getElementById(id)
       const nodeAction = await openCtxPopover(options.sort())
       if (nodeAction.role != "button") return
+      const nd = await cy.value.getElementById(id)
+      const {target} = event
+      // or event.target
       console.log("Action:",nodeAction)
       switch (nodeAction.data){
         case "config":
@@ -621,6 +590,7 @@ async function flowInit  ()  {
           break;
         case "remove":
           console.log("Remove")
+          await removeNode(target)
           break;
         default:
           throw(new Error("Invalid CTX action: " + nodeAction.data))          
@@ -628,6 +598,31 @@ async function flowInit  ()  {
 
       // popBtn.value.$el.click() 
     });
+
+    cy.value.on('taphold', "edge", async function(event: EventObject) {
+      console.log('Edge taphold ',event.target.data("id"), event);
+      const id = event.target.data("id")
+      const options = ["remove"]
+      const action = await openCtxPopover(options.sort())
+      if (action.role != "button") return
+      console.log("Action:",action)
+      const {target} = event
+      const src = target.data().source
+      const dst = target.data().target
+      switch (action.data){
+        case "remove":
+          console.log("Remove edge")
+
+          console.log("Remove edge:",target)
+          console.log("S-T:",src,dst)
+          cy.value.remove(target);
+
+          break;
+        default:
+          throw(new Error("Invalid CTX action: " + action.data))          
+      }
+    });
+
     cy.value.on('dblclick', "edge", async function(event: EventObject) {
       const pos = event.position || event.cyPosition;
       console.log('Edge dblclick at ',pos, event);
@@ -752,7 +747,6 @@ const openCtxPopover = async (options: any) => {
       dismissOnSelect: false,
       reference: "trigger", // event or trigger
       componentProps: { // Popover props
-          msg:"Dummy",
           signal: "ctxSelection",
           options:options
         }
@@ -1081,6 +1075,26 @@ function extent() {
   const x = cy.value.extent()
   console.log("Extent:",x)
   return x
+}
+
+async function removeNode(target) {
+  console.log("Remove node:",target)
+  cy.value.remove(target);
+  const instance = target.data("instance")
+  if (instance.display) {
+    emit("delViz",instance.id)
+  }
+  // remove from nodelist
+  const idx = nodeList.value.findIndex(item => item.id == instance.id)
+  if (idx == -1) {
+    throw (new Error("Invalid instance"))
+  } 
+  if (nodeList.value[idx].type == NodeTypes.GEN) {
+    // stop generators
+    console.log("Stopping generator on ",nodeList.value[idx].id)
+    await nodeList.value[idx].stop()
+  }
+  nodeList.value.splice(idx,1)
 }
 
 async function newNode() {

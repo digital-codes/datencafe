@@ -24,7 +24,7 @@ import { IonNote, IonThumbnail } from '@ionic/vue';
 
 import { ref, onMounted } from "vue"
 
-import eventBus from '../services/eventBus';
+import eventBus from '@/services/eventBus';
 
 const props = defineProps({
   signal:String,
@@ -33,7 +33,7 @@ const props = defineProps({
 import { useI18n } from 'vue-i18n'
 const { t, locale } = useI18n({ useScope: 'global' })
 
-import nodeTypes from "../assets/nodes/nodeTypes.json"
+import nodeTypes from "@/assets/nodes/nodeTypes.json"
 const nodeItem = (type,id) => {
   const text = nodeTypes[type][locale.value][id]
   return text

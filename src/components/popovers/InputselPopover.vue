@@ -12,7 +12,7 @@ import { IonContent, IonButton } from '@ionic/vue';
 
 import { ref, onMounted } from "vue"
 
-import eventBus from '../services/eventBus';
+import eventBus from '@/services/eventBus';
 
 const props = defineProps({
   msg:String,

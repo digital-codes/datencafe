@@ -70,7 +70,7 @@ import { IonLabel, IonToolbar, IonInput, IonButton, IonButtons, IonCheckbox } fr
 import { ref, onMounted } from "vue"
 import  { DataFrame } from 'danfojs/dist/danfojs-browser/src';
 
-import eventBus from '../services/eventBus';
+import eventBus from '@/services/eventBus';
 
 const props = defineProps({
   msg:String,

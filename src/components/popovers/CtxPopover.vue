@@ -1,17 +1,12 @@
 <template>
   <ion-content class="ion-padding ion-popover">
-    <p>{{ props.msg }}</p>
+    <p>{{ $t("flow.ctx.actions") }}</p>
     <div>
     <span v-for="option in options" :key="option">
-      <ion-button v-if="option=='config'" @click="config">{{$t("ctx.config")}}</ion-button>
-      <ion-button v-if="option=='connect'" @click="connect">{{$t("ctx.connect")}}</ion-button>
-      <ion-button v-if="option=='remove'" @click="remove">{{$t("ctx.remove")}}</ion-button>
+      <ion-button v-if="option=='config'" @click="config">{{$t("flow.ctx.config")}}</ion-button>
+      <ion-button v-if="option=='connect'" @click="connect">{{$t("flow.ctx.connect")}}</ion-button>
+      <ion-button v-if="option=='remove'" @click="remove">{{$t("flow.ctx.remove")}}</ion-button>
     </span>
-    <!--
-    <ion-button @click="config">{{$t("ctx.config")}}</ion-button>
-    <ion-button @click="connect">{{$t("ctx.connect")}}</ion-button>
-    <ion-button @click="remove">{{$t("ctx.remove")}}</ion-button>
-    -->
     </div>
 </ion-content>
 </template>
@@ -21,10 +16,9 @@ import { IonContent, IonButton } from '@ionic/vue';
 
 import { ref, onMounted } from "vue"
 
-import eventBus from '../services/eventBus';
+import eventBus from '@/services/eventBus';
 
 const props = defineProps({
-  msg:String,
   signal:String,
   options: [] as string[]
 })

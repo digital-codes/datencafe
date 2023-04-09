@@ -32,6 +32,12 @@
       "panup":"Pan hoch",
       "pandown":"Pan runter",
       "new":"Neu"
+    },
+    "ctx":{
+      "actions":"Aktionen",
+      "config":"Einstellen",
+      "connect":"Verbinden",
+      "remove":"Löschen"
     }
   },
   "login": {

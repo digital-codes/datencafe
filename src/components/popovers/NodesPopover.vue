@@ -9,7 +9,7 @@
 import { IonContent } from '@ionic/vue';
 import { ref, onMounted } from "vue"
 
-import NodeSel  from './NodeSel.vue';
+import NodeSel  from '@/components/popovers/NodeSel.vue';
 
 const props = defineProps({
   msg:String,
