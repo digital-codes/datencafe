@@ -3,9 +3,16 @@
         <ion-toolbar>
           <ion-buttons slot="start">
           <div class="title">
-          <font-awesome-icon class="logo" icon="fa-solid fa-mug-hot" size="2x" :style="{ color: 'red' }" />
-          <span class="headline ion-hide-sm-down">Datencafe</span>
+            <!-- 
+            <font-awesome-icon class="logo" icon="fa-solid fa-mug-hot" size="2x" :style="{ color: 'red' }" />
+            -->
+            <ion-thumbnail  class="logo" >
+              <img alt="Daten.Cafe Logo" src="/img/logo/datencafe.svg" />
+            </ion-thumbnail>
+            <div>
+          <span class="headline ion-hide-sm-down">Daten.Cafe</span>
           <span class="version ion-hide-sm-down">{{Version}}</span>
+            </div>
           </div>
           </ion-buttons>
 
@@ -68,7 +75,7 @@
   
   <script setup lang="ts">
   import { IonButtons, IonHeader, IonMenuButton, IonTitle, IonToolbar } from '@ionic/vue';
-  import { IonLabel, IonToggle,  IonSelect, IonSelectOption, } from '@ionic/vue';
+  import { IonLabel, IonToggle,  IonImage, IonThumbnail, IonSelect, IonSelectOption, } from '@ionic/vue';
 
   import { ref, computed, onMounted } from "vue"
 
@@ -155,7 +162,10 @@
     margin-left: 10px;
     margin-right: auto;
     display: inline-flex;
-    align-items: baseline;
+    align-items: center;
+}
+ion-thumbnail.logo {
+  --size:96px;
 }
 .hamburger {
   margin:0;
