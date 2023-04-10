@@ -1,7 +1,7 @@
 // csv node class, extends DcNode
 
 import {DcNode} from "./DcNode"
-import { NodeTypes } from '../services/GlobalDefs';
+import { NodeTypes } from '@/services/GlobalDefs';
 
 export class ScalarMath extends DcNode {
   // properties
@@ -13,7 +13,7 @@ export class ScalarMath extends DcNode {
     // the super elements will be initialized later
     // access to super properties in the derived constructor
     // may result in "undefined" ...
-    const ports: string[] = []
+    const ports: string[] = ["A","S"]
     const edges: string[] = ["d"]
     super(id,ports,edges)
     DcNode.print(ScalarMath._type + " created") // no access to super._id etc here

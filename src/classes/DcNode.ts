@@ -1,12 +1,12 @@
 // node class
 
 // store and messaging
-import eventBus from '../services/eventBus';
+import eventBus from '@/services/eventBus';
 // globals
-import { Signals } from "../services/GlobalDefs"
-import { PreFixes } from "../services/GlobalDefs"
+import { Signals } from "@/services/GlobalDefs"
+import { PreFixes } from "@/services/GlobalDefs"
 // provider/subscriber
-import { PubStore } from '../services/PubStore'
+import { PubStore } from '@/services/PubStore'
 const providers = PubStore()
 
 // dataframe

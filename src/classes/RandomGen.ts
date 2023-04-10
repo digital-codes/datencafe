@@ -4,7 +4,7 @@ import {DcNode} from "./DcNode"
 
 import {DataFrame, toJSON} from 'danfojs/dist/danfojs-browser/src';
 
-import { NodeTypes } from '../services/GlobalDefs';
+import { NodeTypes } from '@/services/GlobalDefs';
 
 
 export class RandomGen extends DcNode {

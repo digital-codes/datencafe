@@ -2,7 +2,7 @@
 
 import {DcNode} from "./DcNode"
 
-import { NodeTypes } from '../services/GlobalDefs';
+import { NodeTypes } from '@/services/GlobalDefs';
 
 
 export class TablePlot extends DcNode {

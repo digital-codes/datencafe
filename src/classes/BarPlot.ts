@@ -1,7 +1,7 @@
 // csv node class, extends DcNode
 
 import {DcNode} from "./DcNode"
-import { NodeTypes } from '../services/GlobalDefs';
+import { NodeTypes } from '@/services/GlobalDefs';
 
 export class BarPlot extends DcNode {
   // properties
