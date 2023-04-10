@@ -35,8 +35,12 @@
                   </ion-label>
                 </ion-item>
                 <ion-item router-link="/instructions" lines="none" >
-                  <font-awesome-icon aria-hidden="true" :icon="['fas', 'graduation-cap']" slot="start" />
+                  <font-awesome-icon aria-hidden="true" :icon="['fas', 'receipt']" slot="start" />
                   <ion-label>{{$t("titles.tutorial")}}</ion-label>
+                </ion-item>
+                <ion-item router-link="/advanced" lines="none" >
+                  <font-awesome-icon aria-hidden="true" :icon="['fas', 'rocket']" slot="start" />
+                  <ion-label>{{$t("titles.advanced")}}</ion-label>
                 </ion-item>
                 <ion-item router-link="/login" lines="none" >
                   <font-awesome-icon aria-hidden="true" :icon="['fas', 'user-secret']" slot="start" />

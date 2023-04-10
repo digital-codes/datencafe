@@ -4,8 +4,9 @@
   "light":"Light",
   "dark":"Dark",
   "titles": {
-    "about": "About DatenCafe",
+    "about": "About Daten.Cafe",
     "tutorial":"Tutorials",
+    "advanced":"Advanced",
     "work":{
       "tab":"Workspace",
       "flow":"Workflow",

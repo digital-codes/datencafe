@@ -40,6 +40,11 @@ export const routes: Array<RouteRecordRaw> = [
     path: '/work',
     component: () => import ('../views/WorkPage.vue'),
   },
+  {
+    name: "Advanced",
+    path: '/advanced',
+    component: () => import ('../views/AdvancedPage.vue'),
+  },
 ]
 
 const router = createRouter({

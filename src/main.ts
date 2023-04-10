@@ -54,6 +54,9 @@ import { faWandMagicSparkles } from '@fortawesome/free-solid-svg-icons/faWandMag
 import { faExpand } from '@fortawesome/free-solid-svg-icons/faExpand'
 import { faMagnifyingGlassMinus } from '@fortawesome/free-solid-svg-icons/faMagnifyingGlassMinus'
 import { faMagnifyingGlassPlus } from '@fortawesome/free-solid-svg-icons/faMagnifyingGlassPlus'
+import { faRocket } from '@fortawesome/free-solid-svg-icons/faRocket'
+import { faStar } from '@fortawesome/free-solid-svg-icons/faStar'
+import { faReceipt } from '@fortawesome/free-solid-svg-icons/faReceipt'
 
 
 /* add icons to the library */
@@ -62,7 +65,9 @@ library.add(faArrowUp,faArrowDown,faArrowLeft,faArrowRight)
 library.add(faGlobe, faLanguage, faGraduationCap, faBookOpen, faBookAtlas)
 library.add(faBook, faUser, faUserSlash, faHatWizard, faWandMagicSparkles)
 library.add(faSun, faMoon, faCartShopping)
+library.add(faRocket, faStar, faReceipt)
 library.add(faMagnifyingGlassPlus, faMagnifyingGlassMinus, faExpand)
+
 
 
 // ----------------

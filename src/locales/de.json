@@ -4,8 +4,9 @@
   "light":"Hell",
   "dark":"Dunkel",
   "titles": {
-    "about": "Über das DatenCafe",
+    "about": "Über Daten.Cafe",
     "tutorial":"Anleitungen",
+    "advanced":"Fortgeschritten",
     "work":{
       "tab":"Arbeitsbereich",
       "flow":"Vorgänge",

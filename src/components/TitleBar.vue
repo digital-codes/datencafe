@@ -66,7 +66,7 @@
         </ion-toolbar>
       <ion-toolbar class="ion-hide-sm-up toolbar-secondary">
         <div class="smallheader">
-            <span class="headline-secondary">Datencafe</span>
+            <span class="headline-secondary">Daten.Cafe</span>
           </div>
       </ion-toolbar>
       </ion-header>
@@ -152,21 +152,34 @@
     padding-left:1rem;
     padding-right:1rem;
 }
-.logo {
-    display: inline-block;
-}
+
 .title {
   padding:0;
   margin:0;
-    padding-left:10px;
-    margin-left: 10px;
-    margin-right: auto;
-    display: inline-flex;
-    align-items: center;
+  padding-left:10px;
+  margin-left: 10px;
+  margin-right: auto;
+  display: inline-flex;
+  align-items: center;
 }
+
 ion-thumbnail.logo {
   --size:96px;
 }
+
+/* sm is 576, md is 768 */
+@media only screen and (max-width: 768px) {
+  .title {
+    padding-left:0;
+    margin-left:0;
+  }
+
+  ion-thumbnail.logo {
+    --size:48px;
+  }
+}
+
+
 .hamburger {
   margin:0;
   padding:0;
@@ -179,6 +192,8 @@ ion-thumbnail.logo {
     margin-right: 0;
     padding-right: 0;
     font-size: 1.5rem;
+    font-weight: 500;
+    color: red;
 }
 .headline-secondary {
     padding:0px;
