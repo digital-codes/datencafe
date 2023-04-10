@@ -5,6 +5,7 @@
     <span v-for="option in options" :key="option">
       <ion-button v-if="option=='config'" @click="config">{{$t("flow.ctx.config")}}</ion-button>
       <ion-button v-if="option=='connect'" @click="connect">{{$t("flow.ctx.connect")}}</ion-button>
+      <ion-button v-if="option=='download'" @click="connect">{{$t("flow.ctx.download")}}</ion-button>
       <ion-button v-if="option=='remove'" @click="remove">{{$t("flow.ctx.remove")}}</ion-button>
     </span>
     </div>
@@ -26,6 +27,10 @@ const props = defineProps({
 const config = async () => {
   console.log('signal',props.signal)
   await eventBus.emit(props.signal, "config");
+}
+const download = async () => {
+  console.log('signal',props.signal)
+  await eventBus.emit(props.signal, "download");
 }
 const connect = async () => {
   console.log('signal',props.signal)

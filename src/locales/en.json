@@ -37,6 +37,7 @@
       "actions":"Actions",
       "config":"Configure",
       "connect":"Connect",
+      "download":"Download",
       "remove":"Delete"
     }
   },
