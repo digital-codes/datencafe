@@ -66,10 +66,12 @@ export class DcNode {
   }
   // methods
   json() {
-    // stringify class only returns properties,
+    // return props with config. Data fails due to wrong json method
     // but not methods
-    const j = JSON.stringify(this)
-    DcNode.print("Object: " + j)
+    //const j = JSON.stringify(this)
+    // const j = JSON.stringify({id:this.id,name:this.name,ports:this.ports,edges:this.edges,config:this.config})
+    const j = {id:this.id,name:this.name,ports:this.ports,edges:this.edges,config:this.config}
+    DcNode.print("Object: " + JSON.stringify(j))
     return j
   }
   setFunction(f:(...parms: any[]) => any) {

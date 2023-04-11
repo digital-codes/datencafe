@@ -13,6 +13,20 @@
             "info": "Mehr Text für den Tooltip. ieofhiwefhwifhweihfweifh. ndqienfn eiwpf"
         }
     },
+    "loadjson": {
+        "name": "loadjson",
+        "icon": "fa-solid fa-coffee",
+        "implemented": true,
+        "thumb": "/img/widgets/JSONFile.png",
+        "en": {
+            "label": "Load JSON/GeoJSON file",
+            "info": "More text for a popup or tooltip"
+        },
+        "de": {
+            "label": "JSON/GeoJSON Datei laden",
+            "info": "Mehr Text für den Tooltip. ieofhiwefhwifhweihfweifh. ndqienfn eiwpf"
+        }
+    },
     "datainfo": {
         "name": "datainfo",
         "icon": "fa-solid fa-book-atlas",

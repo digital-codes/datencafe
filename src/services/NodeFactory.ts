@@ -1,41 +1,44 @@
-import { RandomGen } from '../classes/RandomGen';
-import { LinePlot } from '../classes/LinePlot';
-import { DataInfo } from '../classes/DataInfo';
-import { BarPlot } from '../classes/BarPlot';
-import { TablePlot } from '../classes/TablePlot';
-import { LoadCsv } from '../classes/LoadCsv';
-import { SelCols } from '../classes/SelCols';
-import { SelRows } from '../classes/SelRows';
-import { JoinData } from '../classes/JoinData';
-import { ScalarMath } from '../classes/ScalarMath';
-import { AddRows } from '../classes/AddRows';
-import { AddCols } from '../classes/AddCols';
+import { RandomGen } from '@/classes/RandomGen';
+import { LinePlot } from '@/classes/LinePlot';
+import { DataInfo } from '@/classes/DataInfo';
+import { BarPlot } from '@/classes/BarPlot';
+import { TablePlot } from '@/classes/TablePlot';
+import { LoadCsv } from '@/classes/LoadCsv';
+import { LoadJson } from '@/classes/LoadJson';
+import { SelCols } from '@/classes/SelCols';
+import { SelRows } from '@/classes/SelRows';
+import { JoinData } from '@/classes/JoinData';
+import { ScalarMath } from '@/classes/ScalarMath';
+import { AddRows } from '@/classes/AddRows';
+import { AddCols } from '@/classes/AddCols';
 
 // instance generator
 export const nodeFactory = async (id: string, type: any) => {
   switch (type.name) {
     case "randomgen":
-      return await new RandomGen(id,type)
+      return await new RandomGen(id, type)
     case "datainfo":
-      return await new DataInfo(id,type)
+      return await new DataInfo(id, type)
     case "lineplot":
-      return await new LinePlot(id,type)
+      return await new LinePlot(id, type)
     case "barplot":
-      return await new BarPlot(id,type)
+      return await new BarPlot(id, type)
     case "tableplot":
-      return await new TablePlot(id,type)
+      return await new TablePlot(id, type)
     case "addrows":
-      return await new AddRows(id,type)
+      return await new AddRows(id, type)
     case "addcols":
-      return await new AddCols(id,type)
+      return await new AddCols(id, type)
     case "selcols":
-      return await new SelCols(id,type)
+      return await new SelCols(id, type)
     case "selrows":
-      return await new SelRows(id,type)
+      return await new SelRows(id, type)
     case "scalarmath":
-      return await new ScalarMath(id,type)
+      return await new ScalarMath(id, type)
     case "loadcsv":
-      return await new LoadCsv(id,type)
+      return await new LoadCsv(id, type)
+    case "loadjson":
+      return await new LoadJson(id, type)
 
     /*
 case "scatter":

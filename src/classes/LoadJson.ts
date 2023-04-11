@@ -4,11 +4,11 @@ import {DcNode} from "./DcNode"
 import {DataFrame, toJSON} from 'danfojs/dist/danfojs-browser/src';
 import { NodeTypes } from '@/services/GlobalDefs';
 
-import { readCSVBrowser } from "danfojs/dist/danfojs-base/io/browser"
-import { CsvInputOptionsBrowser } from "danfojs/dist/danfojs-base/shared/types";
+import { readJSONBrowser } from "danfojs/dist/danfojs-base/io/browser"
+import { JsonInputOptionsBrowser } from "danfojs/dist/danfojs-base/shared/types";
 import testFetch from "@/services/TestFetch" 
 
-export class LoadCsv extends DcNode {
+export class LoadJson extends DcNode {
   // properties
   static _display = false
   static _type = NodeTypes.INPUT
@@ -34,7 +34,7 @@ export class LoadCsv extends DcNode {
       ]
     }
     super(id,ports,edges,cfg as any)
-    DcNode.print(LoadCsv._type + " created") // no access to super._id etc here
+    DcNode.print(LoadJson._type + " created") // no access to super._id etc here
     //setTimeout(() => {this.load(url)},1000)
   }
   // methods
@@ -65,10 +65,14 @@ export class LoadCsv extends DcNode {
     console.log("Local url: ",url)
   }
   try {
-      const fetchOk = await testFetch(url)
+      const fetchOk = await testFetch(url,true) // check for feature collection 
       console.log("Test:",fetchOk)
       if (!fetchOk.success) {
         alert("URL cannot be loaded directly")
+        return
+      }
+      if (fetchOk.status == "geojson") {
+        alert("Use GeoJson loader")
         return
       }      
     } catch (e) {
@@ -76,16 +80,16 @@ export class LoadCsv extends DcNode {
       alert("URL cannot be loaded directly")
       return
     }
-    const csvOptions = {
-      //delimiter: ",",
-      delimitersToGuess: [',', ';'],
-      //escapeChar:"\\",
-      //quoteChar:"\"",
-      header:true, // header row
-      preview:0, // > 0 is how many lines previews
-      skipEmptyLines:true
-    } as CsvInputOptionsBrowser
+    const options = {
+        headers: {
+          Accept: "application/json",
+          // Authorization: "Bearer YWRtaW46YWRtaW4="
+        }
+    } as JsonInputOptionsBrowser
+    /*
     this.df = await readCSVBrowser(url,csvOptions)
+    */
+    this.df = await readJSONBrowser(url,options) as DataFrame
     this.df.print()
     /*
     console.log("Values:",this.df.values)
@@ -96,8 +100,8 @@ export class LoadCsv extends DcNode {
   }
 
   // getters
-  get type() { return LoadCsv._type }
-  get display() { return LoadCsv._display }
+  get type() { return LoadJson._type }
+  get display() { return LoadJson._display }
 
 } 
 

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, watch, nextTick } from 'vue'
+import { ref, computed, onMounted, watch, nextTick } from 'vue'
 
 import cytoscape from "cytoscape"
 
@@ -30,16 +30,20 @@ import { IonButton } from '@ionic/vue';
 import { DataFrame, toJSON } from 'danfojs/dist/danfojs-browser/src';
 
 // globals
-import { Signals } from "../services/GlobalDefs"
-import eventBus from '../services/eventBus';
+import { Signals } from "@/services/GlobalDefs"
+import eventBus from '@/services/eventBus';
+
+// provider/subscriber
+import { PubStore } from '@/services/PubStore'
+const providers = PubStore()
 
 // popovers
 import { popoverController } from '@ionic/vue';
-import Popover from './popovers/PopOver.vue'; // test
-import ImportPopover from './popovers/ImportPopover.vue';
-import InputselPopover from './popovers/InputselPopover.vue';
-import NodesPopover from "./popovers/NodesPopover.vue"
-import CtxPopover from "./popovers/CtxPopover.vue"
+import Popover from '@/components/popovers/PopOver.vue'; // test
+import ImportPopover from '@/components/popovers/ImportPopover.vue';
+import InputselPopover from '@/components/popovers/InputselPopover.vue';
+import NodesPopover from "@/components/popovers/NodesPopover.vue"
+import CtxPopover from "@/components/popovers/CtxPopover.vue"
 // config popups
 import CfgValuePop from "@/components/popovers/CfgValuePopover.vue"
 import CfgValueParms from "@/components/popovers/CfgValuePopover.vue"
@@ -47,15 +51,10 @@ import CfgSelectPop from "@/components/popovers/CfgSelectPopover.vue"
 import CfgSelectParms from "@/components/popovers/CfgSelectPopover.vue"
 
 // --------------------
-import NodeSel  from './popovers/NodeSel.vue';
-import nodeTypes from "../assets/nodes/nodeTypes.json"
-import { DcNode } from "../classes/DcNode"
-import { LinePlot } from "../classes/LinePlot"
-import { BarPlot } from "../classes/BarPlot"
-import { DataInfo } from "../classes/DataInfo"
-import { RandomGen } from "../classes/RandomGen"
-import { nodeFactory } from "../services/NodeFactory"
-import { NodeTypes } from '../services/GlobalDefs';
+import NodeSel  from '@/components/popovers/NodeSel.vue';
+import nodeTypes from "@/assets/nodes/nodeTypes.json"
+import { nodeFactory } from "@/services/NodeFactory"
+import { NodeTypes } from '@/services/GlobalDefs';
 
 import { IonButtons, IonToolbar } from '@ionic/vue';
 
@@ -1308,6 +1307,61 @@ function defaultPopupHandler (data) {
 }
 
 
+async function loadFlow() {
+  console.log("Load flow")
+}
+
+const downUrl = computed(() => {
+  console.log("Save flow")
+  const flow = cy.value.json()
+  console.log("Flow",flow)
+  const nodes = []
+  nodeList.value.forEach(n => nodes.push(n.json()))
+  console.log("Nodes",nodes)
+  const data = providers.json()
+  console.log("Data:",data)
+  // https://stackoverflow.com/questions/72997146/how-to-push-data-to-local-json-file-on-button-click-using-javascript
+  try {
+    const contentType = 'application/json'
+    const flowData = JSON.stringify({flow:flow,nodes:nodes,data:data},null,2)
+    const blob = new Blob([flowData], { type: contentType })
+    const url = window.URL.createObjectURL(blob)
+    console.log("downurl",url)
+    return url
+  } catch (e) {
+    console.log("Failed: ",e)
+    return "/"
+  }
+
+})
+/*
+async function saveFlow() {
+  console.log("Save flow")
+  const flow = cy.value.json()
+  console.log("Flow",flow)
+  const nodes = []
+  nodeList.value.forEach(n => nodes.push(n.json()))
+  console.log("Nodes",nodes)
+  const data = providers.json()
+  console.log("Data:",data)
+  // https://stackoverflow.com/questions/72997146/how-to-push-data-to-local-json-file-on-button-click-using-javascript
+  try {
+    const contentType = 'application/json'
+    const flowData = JSON.stringify({flow:flow,nodes:nodes,data:data},null,2)
+    const blob = new Blob([flowData], { type: contentType })
+    const downUrl = window.URL.createObjectURL(blob)
+    console.log("downurl",downUrl)
+    return downUrl
+  } catch (e) {
+    console.log("Failed: ",e)
+    return "/"
+  }
+
+
+}
+*/
+
+
 </script>
 
 <template>
@@ -1347,6 +1401,16 @@ function defaultPopupHandler (data) {
       <ion-buttons slot="start">
         <ion-button ref="popBtn" @click="panDown">
         <font-awesome-icon :icon="['fas', 'arrow-down']" size="2x" class="toolbtn"></font-awesome-icon>
+      </ion-button>
+      </ion-buttons>
+      <ion-buttons v-if="nodeList.length == 0" slot="end">
+        <ion-button  @click="loadFlow">
+        <font-awesome-icon :icon="['fas', 'upload']" size="2x" class="toolbtn"></font-awesome-icon>
+      </ion-button>
+      </ion-buttons>
+      <ion-buttons v-if="nodeList.length > 0" slot="end">
+        <ion-button  download="flow.json" :href="downUrl">
+        <font-awesome-icon :icon="['fas', 'download']" size="2x" class="toolbtn"></font-awesome-icon>
       </ion-button>
       </ion-buttons>
       <ion-buttons slot="end">
@@ -1393,6 +1457,16 @@ function defaultPopupHandler (data) {
       <ion-buttons slot="start">
         <ion-button ref="popBtn" @click="panDown">
         <font-awesome-icon :icon="['fas', 'arrow-down']" size="md" class="toolbtn"></font-awesome-icon>
+      </ion-button>
+      </ion-buttons>
+      <ion-buttons v-if="flowEmpty" slot="end">
+        <ion-button  @click="loadFlow">
+        <font-awesome-icon :icon="['fas', 'upload']" size="2x" class="toolbtn"></font-awesome-icon>
+      </ion-button>
+      </ion-buttons>
+      <ion-buttons v-if="!flowEmpty" slot="end">
+        <ion-button  @click="saveFlow">
+        <font-awesome-icon :icon="['fas', 'download']" size="2x" class="toolbtn"></font-awesome-icon>
       </ion-button>
       </ion-buttons>
       <ion-buttons slot="end">

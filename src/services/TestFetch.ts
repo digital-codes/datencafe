@@ -3,7 +3,7 @@
  * return false on cors error or other error
  */
 
-export default async (url: string) => {
+export default async (url: string, geoCheck = false) => {
     console.log("test fetch")
     const options = {
         method: "GET", // *GET, POST, PUT, DELETE, etc.
@@ -21,10 +21,21 @@ export default async (url: string) => {
     try {
         const r = await fetch(url, options)
         console.log("Status:", r.status)
-        return r.status == 200 ? true : false
+        if (r.status != 200) return {success:false,status:r.text()}
+        let type = "json"
+        if (geoCheck) {
+            console.log("Geocheck")
+            // check geojson content
+            const content = await r.json()
+            if ((Object.keys(content).includes("type")) && (content.type.toLowerCase() == "FeatureCollection".toLowerCase() )) {
+                type = "geojson"
+                console.log("Geojson")
+            }
+        }
+        return {success:true,status:type}
     } catch (e) {
         console.log("Failed:", e)
-        return false
+        return {success:false,status:String(e)}
     }
 }
 
