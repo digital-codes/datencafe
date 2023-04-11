@@ -26,7 +26,7 @@ export class DcNode {
   readonly _id: string;
   _icon: string | null = null
   _data: any = {}
-  readonly _config: any = {}
+  _config: any = {}
   _root = false
   _valid = false
   _eval: (...parms: any[]) => any = () => {alert("eval function undefined")} 
@@ -92,7 +92,7 @@ export class DcNode {
   get data(): any {return this._data}
   set data(x) { this._data = x }
   get config(): any {return this._config}
-  //private set config(x) { this._config = x }
+  protected set config(x) { this._config = x }
   get root(): boolean { return this._root }
   set root(x) { this._root = x }
   get valid(): boolean { return this._valid }
