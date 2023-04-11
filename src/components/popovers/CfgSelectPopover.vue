@@ -16,6 +16,13 @@
 </template>
 
 <script lang="ts" setup>
+/**
+ * handles single selection
+ * returns single item on update for close  
+ * can be cancelled (no data)
+ * 
+ */ 
+
 import { IonContent, IonButton } from '@ionic/vue';
 import { IonInput, IonLabel, IonSelect, IonSelectOption, IonCheckbox } from '@ionic/vue';
 

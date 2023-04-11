@@ -14,6 +14,12 @@
 </template>
 
 <script lang="ts" setup>
+/**
+ * handles multiple options
+ * returns single item on update  
+ * teminates on close (no data)
+ * 
+ */ 
 import { IonContent, IonButton } from '@ionic/vue';
 import { IonInput, IonLabel, IonSelect, IonSelectOption, IonCheckbox } from '@ionic/vue';
 

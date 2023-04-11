@@ -1,5 +1,5 @@
 {
-"class":"AddCols",
+"class":"NewClass",
 "type":"proc",
 "ports":"'A','B'",
 "edges":"'d'"

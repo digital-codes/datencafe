@@ -581,6 +581,7 @@ async function flowInit  ()  {
       switch (nodeAction.data){
         case "config":
           console.log("Config")
+          await configNode(instance)
           break;
         case "connect":
           console.log("Connect")
@@ -1095,6 +1096,13 @@ async function removeNode(target) {
     await nodeList.value[idx].stop()
   }
   nodeList.value.splice(idx,1)
+}
+
+async function configNode(instance) {
+  console.log("Node config:",instance.id)
+  const url = "https://raw.githubusercontent.com/digital-codes/datencafe/main/public/data/d3-date-sample.csv"    
+  //const url = "https://transparenz.karlsruhe.de/dataset/cc50eb96-6c3d-4d6f-9dcd-c56c4969ff59/resource/565c1c6e-a50c-46d2-8638-22896d21096f/download/altersstruktur-der-bevolkerung-unter-3-jahrige-nach-geschlecht.csv"
+  await instance.load(url)
 }
 
 async function newNode() {
