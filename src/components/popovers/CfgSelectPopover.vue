@@ -17,9 +17,6 @@
         </ion-select>
       </ion-item>
       <!-- 
-      <ion-select placeholder="Lang" interface="popover" @ionChange="selectLanguage" v-model="langSel">
-      <ion-select-option v-for="(l,idx) in availableLocales" :key="idx" :value="l">{{upper(l)}}</ion-select-option>
-      </ion-select>
       <ion-button v-if="option=='config'" @click="config">{{$t("flow.ctx.config")}}</ion-button>
       <ion-button v-if="option=='connect'" @click="connect">{{$t("flow.ctx.connect")}}</ion-button>
       <ion-button v-if="option=='download'" @click="connect">{{$t("flow.ctx.download")}}</ion-button>

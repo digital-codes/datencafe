@@ -10,6 +10,7 @@
       </ion-header>
 
       <div id="container">
+        <ion-button @click="testPop">Pop</ion-button>
       <ion-card color="light" v-for="(s,i) in items.en" :key="i">
         <ion-card-header>
           <ion-card-title>{{ item(i,"title") }}</ion-card-title>
@@ -30,6 +31,81 @@
 import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
 import { IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent } from '@ionic/vue'
 import TitleBar from "@/components/TitleBar.vue"
+
+// ------- testing ----
+import { popoverController } from '@ionic/vue';
+import CfgValuePop from "@/components/popovers/CfgValuePopover.vue"
+import CfgValueParms from "@/components/popovers/CfgValuePopover.vue"
+
+import eventBus from '@/services/eventBus';
+const cfgSignal = "cfgsig"
+/*
+id: string // for translation 
+    type: string // ui element type: url, text, number
+    label: string // label
+    value?: any // default and return value 
+    min?: any // 
+    max?: any // 
+*/
+const p1:CfgValueParms  = {
+  id:"cfg1",
+  type:"url",
+  label:"url 123",
+  value:"abc"
+}
+const p2:CfgValueParms  = {
+  id:"cfg2",
+  type:"number",
+  label:"number 3",
+  value:3
+}
+
+const popover = ref()
+
+async function testPop() {
+  console.log("test pop")
+  const options = [p1,p2] as CfgValueParms[]
+  const pop = await openPop(options)
+  console.log("pop done:",pop)
+}
+
+const openPop = async (options: any) => {
+  console.log("Open Pop")
+  popover.value = await popoverController.create({
+      component: CfgValuePop,
+      //event: ev,
+      size: "auto",
+      side:"right",
+      alignment:"start",
+      showBackdrop: true,
+      backdropDismiss: true, 
+      dismissOnSelect: false,
+      reference: "trigger", // event or trigger
+      componentProps: { // Popover props
+          signal: cfgSignal,
+          options:options
+        }
+    })
+    await popover.value.present();
+    popover.value.open = true
+    const x = await popover.value.onDidDismiss();
+    console.log("Dismiss: ",x)
+    popover.value.open = false
+    return x
+}
+
+eventBus.on(cfgSignal, (data) => {
+      console.log("on cfg:",data)
+      if (data == "close") {
+        popover.value.dismiss(data,"button")
+      } else {
+        console.log("Handle data here:",data)
+      }
+    });
+
+
+// --------------------
+
 
 import { ref, onMounted, onBeforeMount, computed } from "vue"
  
