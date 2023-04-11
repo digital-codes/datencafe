@@ -10,7 +10,8 @@
       </ion-header>
 
       <div id="container">
-        <ion-button @click="testPop">Pop</ion-button>
+        <ion-button @click="testVPop">VPop</ion-button>
+        <ion-button @click="testSPop">SPop</ion-button>
       <ion-card color="light" v-for="(s,i) in items.en" :key="i">
         <ion-card-header>
           <ion-card-title>{{ item(i,"title") }}</ion-card-title>
@@ -37,6 +38,9 @@ import { popoverController } from '@ionic/vue';
 import CfgValuePop from "@/components/popovers/CfgValuePopover.vue"
 import CfgValueParms from "@/components/popovers/CfgValuePopover.vue"
 
+import CfgSelectPop from "@/components/popovers/CfgSelectPopover.vue"
+import CfgSelectParms from "@/components/popovers/CfgSelectPopover.vue"
+
 import eventBus from '@/services/eventBus';
 const cfgSignal = "cfgsig"
 /*
@@ -62,14 +66,14 @@ const p2:CfgValueParms  = {
 
 const popover = ref()
 
-async function testPop() {
+async function testVPop() {
   console.log("test pop")
   const options = [p1,p2] as CfgValueParms[]
-  const pop = await openPop(options)
+  const pop = await openVPop(options)
   console.log("pop done:",pop)
 }
 
-const openPop = async (options: any) => {
+const openVPop = async (options: any) => {
   console.log("Open Pop")
   popover.value = await popoverController.create({
       component: CfgValuePop,
@@ -94,12 +98,49 @@ const openPop = async (options: any) => {
     return x
 }
 
+async function testSPop() {
+  console.log("test s pop")
+  const options = {id:"sel1","label":"Operator:",value:["+","-","*","/"]} as CfgSelectParms
+  const pop = await openSPop(options)
+  console.log("pop done:",pop)
+}
+
+const openSPop = async (options: any) => {
+  console.log("Open Pop")
+  popover.value = await popoverController.create({
+      component: CfgSelectPop,
+      //event: ev,
+      size: "auto",
+      side:"right",
+      alignment:"start",
+      showBackdrop: true,
+      backdropDismiss: true, 
+      dismissOnSelect: false,
+      reference: "trigger", // event or trigger
+      componentProps: { // Popover props
+          signal: cfgSignal,
+          options:options
+        }
+    })
+    await popover.value.present();
+    popover.value.open = true
+    const x = await popover.value.onDidDismiss();
+    console.log("Dismiss: ",x)
+    popover.value.open = false
+    return x
+}
+
 eventBus.on(cfgSignal, (data) => {
       console.log("on cfg:",data)
-      if (data == "close") {
-        popover.value.dismiss(data,"button")
-      } else {
-        console.log("Handle data here:",data)
+      switch (data.id) {
+        case "close":        
+          popover.value.dismiss(data,"button")
+          break
+        case "cancel":
+          popover.value.dismiss(data,"backdrop")
+          break
+        default:
+          console.log("Handle data here:",data)
       }
     });
 

@@ -40,6 +40,12 @@
       "connect":"Connect",
       "download":"Download",
       "remove":"Delete"
+    },
+    "cfg":{
+      "params":"Settings",
+      "close":"Close",
+      "ops":"Operators",
+      "sel":"Selection"
     }
   },
   "login": {

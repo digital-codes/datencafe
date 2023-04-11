@@ -2,10 +2,10 @@
   <ion-content class="ion-padding ion-popover">
     <p>{{ $t("flow.cfg.params") }}</p>
     <div>
-    <span v-for="option in options" :key="option.id">
+    <span v-for="(option,idx) in options" :key="option.id">
       <ion-item>
-        <ion-label>{{ option.label }}</ion-label>
-        <ion-input :value="option.value" :type="option.type" @ionchange="update(event,option.label)"></ion-input>
+        <ion-label>{{ option.label }}: </ion-label>
+        <ion-input :value="option.value" :type="option.type" @ionChange="update(option.id,idx)" v-model="vals[idx]"></ion-input>
       </ion-item>
     </span>
     <ion-button @click="close">{{$t("flow.cfg.close")}}</ion-button>
@@ -25,22 +25,32 @@ export interface CfgValueParms {
     id: string // for translation 
     type: string // ui element type: url, text, number
     label: string // label
-    value?: any // default and return value 
+    value?: string | [] // default and return value 
     min?: any // 
     max?: any // 
 }
 
+const vals = ref([])
 
 const props = defineProps({
   signal:String,
   options: [] as CfgValueParms[]
 })
 
-const update = async (ev,lbl) => {
-  console.log('ev',ev,ev.target,lbl)
+onMounted(() => {
+  props.options.forEach(e => vals.value.push(e.value))
+})
+
+const update = async (id,idx) => {
+  console.log('ev',id,idx,vals.value)
   //const inp = await getInputElement
   console.log('signal',props.signal)
-  await eventBus.emit(props.signal, "x");
+  await eventBus.emit(props.signal, {id:id,value:String(vals.value[idx])} as CfgValueParms);
+}
+
+const close = async () => {
+  //console.log('close')
+  await eventBus.emit(props.signal, {"id":"close","value":""} as CfgValueParms);
 }
 
 </script>

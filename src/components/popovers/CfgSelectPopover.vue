@@ -2,27 +2,15 @@
   <ion-content class="ion-padding ion-popover">
     <p>{{ $t("flow.cfg.params") }}</p>
     <div>
-    <span v-for="option in options" :key="option.id">
-      <ion-item>
-        <ion-label>{{ option.label }}</ion-label>
-        <ion-input v-if="(option.type=='url')||(option.type=='text')||(option.type=='number')" :value="option.value" :type="option.type"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label>{{ option.label }}</ion-label>
-        <ion-select v-if="(option.type=='math')" :value="option.value" >
-          <ion-select-option value="plus">+</ion-select-option>
-          <ion-select-option value="minus">-</ion-select-option>
-          <ion-select-option value="mult">*</ion-select-option>
-          <ion-select-option value="div">/</ion-select-option>
+      <span>
+        <ion-label>{{ props.options.label }}</ion-label>
+        <ion-select @ionChange="update($event.detail.value)" @ionCancel="cancel">
+          <ion-select-option v-for="option in props.options.value" :key="option">{{option}}</ion-select-option>
         </ion-select>
-      </ion-item>
+      </span>
       <!-- 
-      <ion-button v-if="option=='config'" @click="config">{{$t("flow.ctx.config")}}</ion-button>
-      <ion-button v-if="option=='connect'" @click="connect">{{$t("flow.ctx.connect")}}</ion-button>
-      <ion-button v-if="option=='download'" @click="connect">{{$t("flow.ctx.download")}}</ion-button>
-      <ion-button v-if="option=='remove'" @click="remove">{{$t("flow.ctx.remove")}}</ion-button>
+      <ion-button @click="close">{{$t("flow.cfg.close")}}</ion-button>
       -->
-    </span>
     </div>
 </ion-content>
 </template>
@@ -35,36 +23,27 @@ import { ref, onMounted } from "vue"
 
 import eventBus from '@/services/eventBus';
 
-export interface CfgSimpleParms {
+export interface CfgSelectParms {
     id: string // for translation 
-    type: string // ui element: value input (url, text, number), select input , math operator (+,-,*,/), log operator (<,>,==,!=), switch
+    type?: string // ui element: value input (url, text, number), select input , math operator (+,-,*,/), log operator (<,>,==,!=), switch
     label: string // label
-    value?: any // default and return value 
-    min?: any // 
-    max?: any // 
-}
+    value: string | [] // [select options] or [result]     min?: any // 
+  }
 
 
 const props = defineProps({
   signal:String,
-  options: [] as CfgSimpleParms[]
+  options: {} as CfgSelectParms
 })
 
-const config = async () => {
-  console.log('signal',props.signal)
-  await eventBus.emit(props.signal, "config");
+const update = async (val) => {
+  //console.log('ev',val)
+  await eventBus.emit(props.signal, {id:"close", value:String(val)} as CfgSelectParms);
 }
-const download = async () => {
-  console.log('signal',props.signal)
-  await eventBus.emit(props.signal, "download");
-}
-const connect = async () => {
-  console.log('signal',props.signal)
-  await eventBus.emit(props.signal, "connect");
-}
-const remove = async () => {
-  console.log('signal',props.signal)
-  await eventBus.emit(props.signal, "remove");
+
+const cancel = async () => {
+  //console.log('cancel')
+  await eventBus.emit(props.signal, {"id":"cancel","value":""} as CfgSelectParms);
 }
 
 </script>

@@ -40,6 +40,13 @@
       "connect":"Verbinden",
       "download":"Herunterladen",
       "remove":"Löschen"
+    },
+    "cfg":{
+      "params":"Einstellungen",
+      "close":"Schliessen",
+      "ops":"Operatoren",
+      "sel":"Auswahl"
+
     }
   },
   "login": {
