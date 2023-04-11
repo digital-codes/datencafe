@@ -56,7 +56,7 @@ const update = async (id,idx) => {
 
 const close = async () => {
   //console.log('close')
-  await eventBus.emit(props.signal, {"id":"close","value":""} as CfgValueParms);
+  await eventBus.emit(props.signal, {"id":"close","value":JSON.stringify(vals.value)} as CfgValueParms);
 }
 
 </script>

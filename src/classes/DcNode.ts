@@ -26,7 +26,7 @@ export class DcNode {
   readonly _id: string;
   _icon: string | null = null
   _data: any = {}
-  _config: any = {}
+  readonly _config: any = {}
   _root = false
   _valid = false
   _eval: (...parms: any[]) => any = () => {alert("eval function undefined")} 
@@ -42,13 +42,14 @@ export class DcNode {
   readonly _messaging = eventBus
   // --------
   // constructor
-  constructor(id?:string,ports:string[]=["A"],edges:string[]=["d"]) {
+  constructor(id?:string,ports:string[]=["A"],edges:string[]=["d"],cfg={}) {
     if (id == undefined) {
       throw (new Error("Can't create instance without id"))
     }
     this._id = id
     this._ports = ports
     this._edges = edges
+    this._config = cfg
     this._name = id // initialize with id as name
     DcNode.print("Created: " + this._id + " as " + this._name)
   }
@@ -91,7 +92,7 @@ export class DcNode {
   get data(): any {return this._data}
   set data(x) { this._data = x }
   get config(): any {return this._config}
-  set config(x) { this._config = x }
+  //private set config(x) { this._config = x }
   get root(): boolean { return this._root }
   set root(x) { this._root = x }
   get valid(): boolean { return this._valid }

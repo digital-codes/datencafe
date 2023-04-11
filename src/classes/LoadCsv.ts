@@ -21,13 +21,30 @@ export class LoadCsv extends DcNode {
     // may result in "undefined" ...
     const ports: string[] = []
     const edges: string[] = ["d"]
-    super(id,ports,edges)
+    const cfg = {
+      pop:"value",
+      options: [
+        {
+          id:"url",
+          type:"url",
+          label:"URL",
+          value:""
+        }
+      ]
+    }
+    super(id,ports,edges,cfg as any)
     DcNode.print(LoadCsv._type + " created") // no access to super._id etc here
-    const url = "https://transparenz.karlsruhe.de/dataset/cc50eb96-6c3d-4d6f-9dcd-c56c4969ff59/resource/565c1c6e-a50c-46d2-8638-22896d21096f/download/altersstruktur-der-bevolkerung-unter-3-jahrige-nach-geschlecht.csv"
-    //const url = "https://raw.githubusercontent.com/digital-codes/datencafe/main/public/data/d3-date-sample.csv"    
     //setTimeout(() => {this.load(url)},1000)
   }
   // methods
+  async configure(options: any[]) {
+    console.log("configure with: ",options)
+    if (options[0] != "") {
+      const url = options[0]
+      console.log("Config URL: ",url)
+      await this.load(url)
+    } 
+  }
   async load (url: string) {
   DcNode.print("Load on " + String(super.name))
   if (url === undefined) throw (new Error("Invalid URL"))

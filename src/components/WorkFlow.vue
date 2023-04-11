@@ -40,6 +40,11 @@ import ImportPopover from './popovers/ImportPopover.vue';
 import InputselPopover from './popovers/InputselPopover.vue';
 import NodesPopover from "./popovers/NodesPopover.vue"
 import CtxPopover from "./popovers/CtxPopover.vue"
+// config popups
+import CfgValuePop from "@/components/popovers/CfgValuePopover.vue"
+import CfgValueParms from "@/components/popovers/CfgValuePopover.vue"
+import CfgSelectPop from "@/components/popovers/CfgSelectPopover.vue"
+import CfgSelectParms from "@/components/popovers/CfgSelectPopover.vue"
 
 // --------------------
 import NodeSel  from './popovers/NodeSel.vue';
@@ -690,6 +695,19 @@ async function flowInit  ()  {
       }
     });
     */
+    /*
+    eventBus.on('popUp', (data) => {
+      console.log("on PopUp:",data)
+      // test if we can do something else while popover is active ..
+      // allow to close on specific return value. only if open
+      if (popover.value.open) {
+        popover.value.dismiss(data,"button")
+      }
+    });
+    */
+    eventBus.on('popUp', (data) => defaultPopupHandler(data) );
+    
+    /*
     eventBus.on('importSelection', (data) => {
       console.log("on importSelection:",data)
       // test if we can do something else while popover is active ..
@@ -726,14 +744,60 @@ async function flowInit  ()  {
         popover.value.dismiss(data,"button")
       }
     });
+    */
   })
-  
-const ctlClick = async () => {
-  console.log("clk")
-  const j = await cy.value.json()
-  console.log("JSON:",JSON.stringify(j))
-  createEvent()
+
+  /*
+  const ctlClick = async () => {
+    console.log("clk")
+    const j = await cy.value.json()
+    console.log("JSON:",JSON.stringify(j))
+    createEvent()
+  }
+*/
+
+const openCfgValuePopover = async (options: any) => {
+  popover.value = await popoverController.create({
+      component: CfgValuePop,
+      size: "auto",
+      side:"right",
+      alignment:"start",
+      showBackdrop: true,
+      backdropDismiss: true, 
+      dismissOnSelect: false,
+      reference: "trigger", // event or trigger
+      componentProps: { // Popover props
+          signal: "popUp",
+          options:options
+        }
+    })
+    // set popup handler
+    eventBus.off("popUp")
+    eventBus.on("popUp",(data) => 
+    {
+      console.log("Pop default signal:",data)
+      switch (data.id) {
+        case "close":        
+          popover.value.dismiss(data,"button")
+          break
+        case "cancel":
+          popover.value.dismiss(data,"backdrop")
+          break
+        default:
+          console.log("Handle data here:",data)
+      }
+    })
+    await popover.value.present();
+    popover.value.open = true
+    const x = await popover.value.onDidDismiss();
+    console.log("Dismiss: ",x)
+    popover.value.open = false
+    eventBus.off("popUp")
+    // restore default handler
+    eventBus.on('popUp', (data) => defaultPopupHandler(data) );
+    return x
 }
+
 
 
 const openCtxPopover = async (options: any) => {
@@ -748,7 +812,7 @@ const openCtxPopover = async (options: any) => {
       dismissOnSelect: false,
       reference: "trigger", // event or trigger
       componentProps: { // Popover props
-          signal: "ctxSelection",
+          signal: "popUp",
           options:options
         }
     })
@@ -775,7 +839,7 @@ const openCtxPopover = async (options: any) => {
       reference: "trigger", // event or trigger
       componentProps: { // Popover props
           msg:"Select Input",
-          signal: "inputSelection",
+          signal: "popUp",
           ports: ports
         }
     })
@@ -800,7 +864,7 @@ const openNodeSel = async () => {
       reference: "trigger", // event or trigger
       componentProps: { // Popover props
           msg:"Select Input",
-          signal: "nodeSelection"
+          signal: "popUp"
         }
     })
     popover.value.open = true
@@ -1100,9 +1164,29 @@ async function removeNode(target) {
 
 async function configNode(instance) {
   console.log("Node config:",instance.id)
-  const url = "https://raw.githubusercontent.com/digital-codes/datencafe/main/public/data/d3-date-sample.csv"    
+  console.log("Config:",instance.config)
+  if (instance.config.pop === undefined) {
+    console.log("No config")
+    return
+  }
+  let config = {}
+  switch (instance.config.pop) {
+    case "value":
+      config = await openCfgValuePopover(instance.config.options)
+      if (config.role == "button"){
+        config = JSON.parse(config.data.value)
+        console.log("Updating instance with ",config)
+        instance.configure(config) // value array
+      }
+      break
+    case "select":
+      break
+    default:
+      throw(new Error("Invalid config pop"))
+  }
+  //const url = "https://raw.githubusercontent.com/digital-codes/datencafe/main/public/data/d3-date-sample.csv"    
   //const url = "https://transparenz.karlsruhe.de/dataset/cc50eb96-6c3d-4d6f-9dcd-c56c4969ff59/resource/565c1c6e-a50c-46d2-8638-22896d21096f/download/altersstruktur-der-bevolkerung-unter-3-jahrige-nach-geschlecht.csv"
-  await instance.load(url)
+  //await instance.load(url)
 }
 
 async function newNode() {
@@ -1213,6 +1297,15 @@ async function newNode() {
       console.log("Cancelled. Removing:")
     }
   }
+
+function defaultPopupHandler (data) {
+    console.log("on PopUp:",data)
+    // test if we can do something else while popover is active ..
+    // allow to close on specific return value. only if open
+    if (popover.value.open) {
+      popover.value.dismiss(data,"button")
+    }
+}
 
 
 </script>
