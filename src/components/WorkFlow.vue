@@ -1426,52 +1426,52 @@ async function saveFlow() {
     <ion-toolbar class="toolbar-sm ion-hide-md-up">
       <ion-buttons slot="start">
         <ion-button ref="popBtn" @click="zoomFit">
-        <font-awesome-icon :icon="['fas', 'expand']" size="md" class="toolbtn"></font-awesome-icon>
+        <font-awesome-icon :icon="['fas', 'expand']" size="sm" class="toolbtn"></font-awesome-icon>
         </ion-button>
       </ion-buttons>
       <ion-buttons slot="start">
         <ion-button ref="popBtn" @click="zoomIn">
-        <font-awesome-icon :icon="['fas', 'magnifying-glass-plus']" size="md" class="toolbtn"></font-awesome-icon>
+        <font-awesome-icon :icon="['fas', 'magnifying-glass-plus']" size="sm" class="toolbtn"></font-awesome-icon>
       </ion-button>
       </ion-buttons>
       <ion-buttons slot="start" >
         <ion-button ref="popBtn" @click="zoomOut">
-        <font-awesome-icon :icon="['fas', 'magnifying-glass-minus']" size="md" class="toolbtn"></font-awesome-icon>
+        <font-awesome-icon :icon="['fas', 'magnifying-glass-minus']" size="sm" class="toolbtn"></font-awesome-icon>
       </ion-button>
       </ion-buttons>
       <ion-buttons slot="start">
         <ion-button ref="popBtn" @click="panLeft">
-        <font-awesome-icon :icon="['fas', 'arrow-left']" size="md" class="toolbtn"></font-awesome-icon>
+        <font-awesome-icon :icon="['fas', 'arrow-left']" size="sm" class="toolbtn"></font-awesome-icon>
       </ion-button>
       </ion-buttons>
       <ion-buttons slot="start">
         <ion-button ref="popBtn" @click="panRight">
-        <font-awesome-icon :icon="['fas', 'arrow-right']" size="md" class="toolbtn"></font-awesome-icon>
+        <font-awesome-icon :icon="['fas', 'arrow-right']" size="sm" class="toolbtn"></font-awesome-icon>
       </ion-button>
       </ion-buttons>
       <ion-buttons slot="start">
         <ion-button ref="popBtn" @click="panUp">
-        <font-awesome-icon :icon="['fas', 'arrow-up']" size="md" class="toolbtn"></font-awesome-icon>
+        <font-awesome-icon :icon="['fas', 'arrow-up']" size="sm" class="toolbtn"></font-awesome-icon>
       </ion-button>
       </ion-buttons>
       <ion-buttons slot="start">
         <ion-button ref="popBtn" @click="panDown">
-        <font-awesome-icon :icon="['fas', 'arrow-down']" size="md" class="toolbtn"></font-awesome-icon>
+        <font-awesome-icon :icon="['fas', 'arrow-down']" size="sm" class="toolbtn"></font-awesome-icon>
       </ion-button>
       </ion-buttons>
-      <ion-buttons v-if="flowEmpty" slot="end">
+      <ion-buttons v-if="nodeList.length == 0" slot="end">
         <ion-button  @click="loadFlow">
-        <font-awesome-icon :icon="['fas', 'upload']" size="2x" class="toolbtn"></font-awesome-icon>
+        <font-awesome-icon :icon="['fas', 'upload']" size="sm" class="toolbtn"></font-awesome-icon>
       </ion-button>
       </ion-buttons>
-      <ion-buttons v-if="!flowEmpty" slot="end">
-        <ion-button  @click="saveFlow">
-        <font-awesome-icon :icon="['fas', 'download']" size="2x" class="toolbtn"></font-awesome-icon>
+      <ion-buttons v-if="nodeList.length > 0" slot="end">
+        <ion-button  download="flow.json" :href="downUrl">
+        <font-awesome-icon :icon="['fas', 'download']" size="sm" class="toolbtn"></font-awesome-icon>
       </ion-button>
       </ion-buttons>
       <ion-buttons slot="end">
         <ion-button ref="popBtn" @click="newNode">
-          <font-awesome-icon :icon="['fas', 'wand-magic-sparkles']" size="md" class="toolbtn"></font-awesome-icon>
+          <font-awesome-icon :icon="['fas', 'wand-magic-sparkles']" size="sm" class="toolbtn"></font-awesome-icon>
           {{ $t("flow.tools.new")}}
         </ion-button>
         <!-- 
