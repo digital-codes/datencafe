@@ -28,15 +28,13 @@
                   <font-awesome-icon aria-hidden="true" :icon="['fas', 'book-open']" slot="start" />
                   <ion-label>{{$t("titles.stories")}}</ion-label>
                 </ion-item>
-                <ion-item router-link="/work" lines="none" >
-                  <font-awesome-icon aria-hidden="true" :icon="['fas', 'wand-magic-sparkles']" slot="start" />
-                  <ion-label>
-                    {{$t("titles.work.tab")}}
-                  </ion-label>
-                </ion-item>
                 <ion-item router-link="/instructions" lines="none" >
                   <font-awesome-icon aria-hidden="true" :icon="['fas', 'receipt']" slot="start" />
                   <ion-label>{{$t("titles.tutorial")}}</ion-label>
+                </ion-item>
+                <ion-item router-link="/work" lines="none" >
+                  <font-awesome-icon aria-hidden="true" :icon="['fas', 'wand-magic-sparkles']" slot="start" />
+                  <ion-label>{{$t("titles.work.tab")}}</ion-label>
                 </ion-item>
                 <ion-item router-link="/advanced" lines="none" >
                   <font-awesome-icon aria-hidden="true" :icon="['fas', 'rocket']" slot="start" />

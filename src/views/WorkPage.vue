@@ -1,6 +1,6 @@
 
 <script setup lang="ts">
-import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
+import { IonButton, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
 import { IonCol, IonGrid, IonRow } from '@ionic/vue';
 import { ref, onMounted } from "vue"
 import { createAnimation } from '@ionic/vue';
@@ -139,26 +139,44 @@ onMounted(() => {
         */
 })
 
-</script>
+const content = ref()
 
+const scrollToBottom = () => {
+  // Passing a duration to the method makes it so the scroll slowly
+  // goes to the bottom instead of instantly
+  content.value.$el.scrollToBottom(500);
+}
+const scrollToTop = () => {
+  // Passing a duration to the method makes it so the scroll slowly
+  // goes to the top instead of instantly
+  content.value.$el.scrollToTop(500);
+}
+
+</script>
 
 <template>
   <ion-page>
     <TitleBar :title='$t("titles.work.tab")' />
 
-    <ion-content :fullscreen="true">
+    <ion-content :fullscreen="true" ref="content">
       <ion-header collapse="condense">
-        <ion-toolbar>
           <ion-title size="large">{{ $route.params.id }}</ion-title>
-        </ion-toolbar>
       </ion-header>
-
       <div id="container" class="work-container">
         <ion-grid fixed="true">
           <ion-row>
 
             <ion-col size="12" size-lg="7">
-              <h3>{{$t("titles.work.flow")}}</h3>
+              <div class="headline">
+              <h3>{{$t("titles.work.flow")}}
+              </h3>
+              <ion-button color="warning" class="scroll-btn ion-hide-lg-up" @click="scrollToBottom()">
+                <font-awesome-icon class="scroll-icon" aria-hidden="true" :icon="['fas', 'angle-down']"  />
+                <font-awesome-icon class="scroll-icon" aria-hidden="true" :icon="['fas', 'chart-area']"  />
+              </ion-button>
+              </div>
+
+
               <p v-if="FlowLoading" class="loading">Loading ...</p>
               <WorkFlowAsync msg="Flow demo" @add-viz="(e) => addViz(e)" @del-viz="(e) => delViz(e)" />
             </ion-col>
@@ -170,6 +188,11 @@ onMounted(() => {
               <DanfoPlotAsync :propItems="items"/>
               -->
               <DanfoPlot :propItems="items"/>
+
+              <ion-button color="warning" expand="block" class="scroll-btn ion-hide-lg-up" @click="scrollToTop()">
+                <font-awesome-icon class="scroll-icon" aria-hidden="true" :icon="['fas', 'angle-up']"  />
+                <font-awesome-icon class="scroll-icon" aria-hidden="true" :icon="['fas', 'diagram-project']"  />
+              </ion-button>
             </ion-col>
 
           </ion-row>
@@ -240,6 +263,28 @@ ion-col {
   .work-container {
     transform: translateY(-20%)!important;
   }
+}
+
+
+
+ion-button {
+  font-size: 1rem;
+  margin-top: 16px;
+  margin-bottom: 10px;
+  font-weight: 500;
+  line-height: 1.2;  
+}
+.scroll-icon {
+  padding-left:.5rem;
+  padding-right:.5rem;
+}
+
+.headline h3 {
+  display:inline-block;
+}
+.headline ion-button {
+  display:block;
+  float:right;
 }
 
 </style>

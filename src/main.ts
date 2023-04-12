@@ -38,6 +38,8 @@ import { faArrowRight } from '@fortawesome/free-solid-svg-icons/faArrowRight'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons/faArrowLeft'
 import { faArrowUp } from '@fortawesome/free-solid-svg-icons/faArrowUp'
 import { faArrowDown } from '@fortawesome/free-solid-svg-icons/faArrowDown'
+import { faAngleUp } from '@fortawesome/free-solid-svg-icons/faAngleUp'
+import { faAngleDown } from '@fortawesome/free-solid-svg-icons/faAngleDown'
 import { faGlobe } from '@fortawesome/free-solid-svg-icons/faGlobe'
 import { faLanguage } from '@fortawesome/free-solid-svg-icons/faLanguage'
 import { faGraduationCap } from '@fortawesome/free-solid-svg-icons/faGraduationCap'
@@ -59,14 +61,16 @@ import { faStar } from '@fortawesome/free-solid-svg-icons/faStar'
 import { faReceipt } from '@fortawesome/free-solid-svg-icons/faReceipt'
 import { faDownload } from '@fortawesome/free-solid-svg-icons/faDownload'
 import { faUpload } from '@fortawesome/free-solid-svg-icons/faUpload'
+import { faChartArea } from '@fortawesome/free-solid-svg-icons/faChartArea'
+import { faDiagramProject } from '@fortawesome/free-solid-svg-icons/faDiagramProject'
 
 
 /* add icons to the library */
 library.add(faUserSecret, faTwitter, faMugHot, faCoffee)
-library.add(faArrowUp,faArrowDown,faArrowLeft,faArrowRight)
+library.add(faArrowUp,faArrowDown,faArrowLeft,faArrowRight,faAngleUp,faAngleDown)
 library.add(faGlobe, faLanguage, faGraduationCap, faBookOpen, faBookAtlas)
 library.add(faBook, faUser, faUserSlash, faHatWizard, faWandMagicSparkles)
-library.add(faSun, faMoon, faCartShopping)
+library.add(faSun, faMoon, faCartShopping, faChartArea,faDiagramProject)
 library.add(faRocket, faStar, faReceipt, faDownload, faUpload)
 library.add(faMagnifyingGlassPlus, faMagnifyingGlassMinus, faExpand)
 
