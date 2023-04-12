@@ -17,11 +17,14 @@ export const PubStore = defineStore({
         items: [] as DataSrc[]
     }),
     actions: {
-        init(itemString:string) {
+        clear() {
+            this.items = JSON.parse(JSON.stringify([])) as DataSrc[]
+        },
+        init(items:DataSrc[]) {
             if (this.items.length > 0) {
                 throw (new Error("Can only init empty store!"))
             }
-            this.items = JSON.parse(itemString) as DataSrc[]
+            this.items = JSON.parse(JSON.stringify(items)) as DataSrc[]
         },
         add(id?: string, root = false) {
             if (id === undefined) {

@@ -48,6 +48,16 @@ ion-popover ion-content {
   --min-width: 280px;
   overflow: clip;
 }
+/* sm is 576, md is 768 */
+@media only screen and (max-width: 768px) {
+  ion-popover ion-content {
+    max-height: calc(80vh - 1rem);
+    max-width: calc(100vw - 1rem);
+  }
+}
+
+
+
 
 ion-content.ion-popover::part(scroll) {
   overflow:clip;

@@ -5,6 +5,7 @@ import { BarPlot } from '@/classes/BarPlot';
 import { TablePlot } from '@/classes/TablePlot';
 import { LoadCsv } from '@/classes/LoadCsv';
 import { LoadJson } from '@/classes/LoadJson';
+import { SelCell } from '@/classes/SelCell';
 import { SelCols } from '@/classes/SelCols';
 import { SelRows } from '@/classes/SelRows';
 import { JoinData } from '@/classes/JoinData';
@@ -29,6 +30,8 @@ export const nodeFactory = async (id: string, type: any) => {
       return await new AddRows(id, type)
     case "addcols":
       return await new AddCols(id, type)
+    case "selcell":
+      return await new SelCell(id, type)
     case "selcols":
       return await new SelCols(id, type)
     case "selrows":

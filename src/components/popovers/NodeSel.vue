@@ -2,10 +2,10 @@
     <ion-list class="list">
       <div v-for="(option,idx) in options" :key="option.type" class="item">
       <ion-item v-if="option.implemented">
-        <ion-label class="label">
+        <ion-label class="label ion-hide-sm-down">
           {{ nodeItem(option.type,"label") }}
         </ion-label>
-          <ion-note class="tooltip">
+          <ion-note class="tooltip  ion-hide-sm-down">
           {{ nodeItem(option.type,"info") }}
           </ion-note>
           <ion-thumbnail slot="start">

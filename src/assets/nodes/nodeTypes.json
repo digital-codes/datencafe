@@ -195,6 +195,20 @@
             "info": "Mehr Text für den Tooltip"
         }
     },
+    "selcell": {
+        "name": "selcell",
+        "icon": "fa-solid fa-book-atlas",
+        "implemented": true,
+        "thumb": "/img/widgets/SelectCell.png",
+        "en": {
+            "label": "Select cell",
+            "info": "More text for a popup or tooltip"
+        },
+        "de": {
+            "label": "Zelle auswählen",
+            "info": "Mehr Text für den Tooltip"
+        }
+    },
     "selcols": {
         "name": "selcols",
         "icon": "fa-solid fa-book-atlas",

@@ -76,7 +76,6 @@ const flowWrap = ref()
 const flowLoaded = ref(false)
 
 const ctl = ref()
-const popBtn = ref()
 
 const popover = ref({})
 const inputselPop = ref({})
@@ -606,7 +605,6 @@ async function flowInit  ()  {
           throw(new Error("Invalid CTX action: " + nodeAction.data))          
       }
 
-      // popBtn.value.$el.click() 
     });
 
     cy.value.on('taphold', "edge", async function(event: EventObject) {
@@ -636,8 +634,6 @@ async function flowInit  ()  {
     cy.value.on('dblclick', "edge", async function(event: EventObject) {
       const pos = event.position || event.cyPosition;
       console.log('Edge dblclick at ',pos, event);
-      //await openCtxPopover(event)
-      // popBtn.value.$el.click() 
     });
     /* */
     // remove handlers. remove edge will be triggered on delete node with edges
@@ -960,11 +956,6 @@ const createEvent = async () => {
   */
   await openNodeSel()
 
-  // or we just use the default from the popover button with reference = trigger
-  /*
-  console.log("btn",popBtn.value)
-  popBtn.value.$el.click()
-  */
 }
 
 /*
@@ -1253,12 +1244,12 @@ async function newNode() {
             border = "#0f0"
             break
           case NodeTypes.PROC:
-            shape = "diamond"
+            shape = "roundrectangle" 
             border = "#000"
             break
           case NodeTypes.INPUT:
           case NodeTypes.GEN:
-            shape = "roundrectangle"
+            shape = "round-octagon"
             border = "#00f"
             break
           default:
@@ -1314,6 +1305,28 @@ function defaultPopupHandler (data) {
 
 async function loadFlow() {
   console.log("Load flow")
+}
+
+async function clearFlow() {
+  console.log("Clear flow")
+  await cy.value.remove("*")
+  //await cy.value.remove("edges")
+  //await cy.value.remove("nodes")
+  await cy.value.removeData()
+  // remove node messaging
+  console.log("also remove charts")
+  nodeList.value.forEach(n => {
+    // remove listeners
+    n.signals.forEach(s => n.messaging.off(s))
+    // remove charts
+    if (n.display) {
+      emit("delViz",n.id)
+    }
+  })
+  // remove all nodes
+  nodeList.value = []
+  // clear storage
+  providers.clear()
 }
 
 const downUrl = computed(() => {
@@ -1374,37 +1387,37 @@ async function saveFlow() {
   <div ref="flowWrap" class="wrap">
     <ion-toolbar class="toolbar ion-hide-md-down">
       <ion-buttons slot="start">
-        <ion-button ref="popBtn" @click="zoomFit">
+        <ion-button @click="zoomFit">
         <font-awesome-icon :icon="['fas', 'expand']" size="2x" class="toolbtn"></font-awesome-icon>
         </ion-button>
       </ion-buttons>
-      <ion-buttons slot="start">
-        <ion-button ref="popBtn" @click="zoomIn">
+      <ion-buttons class="ion-hide-sm-down"  slot="start">
+        <ion-button @click="zoomIn">
         <font-awesome-icon :icon="['fas', 'magnifying-glass-plus']" size="2x" class="toolbtn"></font-awesome-icon>
       </ion-button>
       </ion-buttons>
-      <ion-buttons slot="start" >
-        <ion-button ref="popBtn" @click="zoomOut">
+      <ion-buttons class="ion-hide-sm-down"  slot="start" >
+        <ion-button @click="zoomOut">
         <font-awesome-icon :icon="['fas', 'magnifying-glass-minus']" size="2x" class="toolbtn"></font-awesome-icon>
       </ion-button>
       </ion-buttons>
-      <ion-buttons slot="start">
-        <ion-button ref="popBtn" @click="panLeft">
+      <ion-buttons class="ion-hide-sm-down" slot="start">
+        <ion-button @click="panLeft">
         <font-awesome-icon :icon="['fas', 'arrow-left']" size="2x" class="toolbtn"></font-awesome-icon>
       </ion-button>
       </ion-buttons>
-      <ion-buttons slot="start">
-        <ion-button ref="popBtn" @click="panRight">
+      <ion-buttons class="ion-hide-sm-down"  slot="start">
+        <ion-button @click="panRight">
         <font-awesome-icon :icon="['fas', 'arrow-right']" size="2x" class="toolbtn"></font-awesome-icon>
       </ion-button>
       </ion-buttons>
-      <ion-buttons slot="start">
-        <ion-button ref="popBtn" @click="panUp">
+      <ion-buttons class="ion-hide-sm-down"  slot="start">
+        <ion-button @click="panUp">
         <font-awesome-icon :icon="['fas', 'arrow-up']" size="2x" class="toolbtn"></font-awesome-icon>
       </ion-button>
       </ion-buttons>
-      <ion-buttons slot="start">
-        <ion-button ref="popBtn" @click="panDown">
+      <ion-buttons class="ion-hide-sm-down"  slot="start">
+        <ion-button @click="panDown">
         <font-awesome-icon :icon="['fas', 'arrow-down']" size="2x" class="toolbtn"></font-awesome-icon>
       </ion-button>
       </ion-buttons>
@@ -1414,12 +1427,17 @@ async function saveFlow() {
       </ion-button>
       </ion-buttons>
       <ion-buttons v-if="nodeList.length > 0" slot="end">
+        <ion-button  @click="clearFlow">
+        <font-awesome-icon :icon="['fas', 'trash-can']" size="2x" class="toolbtn"></font-awesome-icon>
+      </ion-button>
+      </ion-buttons>
+      <ion-buttons v-if="nodeList.length > 0" slot="end">
         <ion-button  download="flow.json" :href="downUrl">
         <font-awesome-icon :icon="['fas', 'download']" size="2x" class="toolbtn"></font-awesome-icon>
       </ion-button>
       </ion-buttons>
       <ion-buttons slot="end">
-        <ion-button ref="popBtn" @click="newNode">
+        <ion-button @click="newNode">
           <font-awesome-icon :icon="['fas', 'wand-magic-sparkles']" size="2x" class="toolbtn"></font-awesome-icon>
           {{ $t("flow.tools.new")}}
         </ion-button>
@@ -1430,43 +1448,18 @@ async function saveFlow() {
     </ion-toolbar>
     <ion-toolbar class="toolbar-sm ion-hide-md-up">
       <ion-buttons slot="start">
-        <ion-button ref="popBtn" @click="zoomFit">
+        <ion-button @click="zoomFit">
         <font-awesome-icon :icon="['fas', 'expand']" size="sm" class="toolbtn"></font-awesome-icon>
         </ion-button>
-      </ion-buttons>
-      <ion-buttons slot="start">
-        <ion-button ref="popBtn" @click="zoomIn">
-        <font-awesome-icon :icon="['fas', 'magnifying-glass-plus']" size="sm" class="toolbtn"></font-awesome-icon>
-      </ion-button>
-      </ion-buttons>
-      <ion-buttons slot="start" >
-        <ion-button ref="popBtn" @click="zoomOut">
-        <font-awesome-icon :icon="['fas', 'magnifying-glass-minus']" size="sm" class="toolbtn"></font-awesome-icon>
-      </ion-button>
-      </ion-buttons>
-      <ion-buttons slot="start">
-        <ion-button ref="popBtn" @click="panLeft">
-        <font-awesome-icon :icon="['fas', 'arrow-left']" size="sm" class="toolbtn"></font-awesome-icon>
-      </ion-button>
-      </ion-buttons>
-      <ion-buttons slot="start">
-        <ion-button ref="popBtn" @click="panRight">
-        <font-awesome-icon :icon="['fas', 'arrow-right']" size="sm" class="toolbtn"></font-awesome-icon>
-      </ion-button>
-      </ion-buttons>
-      <ion-buttons slot="start">
-        <ion-button ref="popBtn" @click="panUp">
-        <font-awesome-icon :icon="['fas', 'arrow-up']" size="sm" class="toolbtn"></font-awesome-icon>
-      </ion-button>
-      </ion-buttons>
-      <ion-buttons slot="start">
-        <ion-button ref="popBtn" @click="panDown">
-        <font-awesome-icon :icon="['fas', 'arrow-down']" size="sm" class="toolbtn"></font-awesome-icon>
-      </ion-button>
       </ion-buttons>
       <ion-buttons v-if="nodeList.length == 0" slot="end">
         <ion-button  @click="loadFlow">
         <font-awesome-icon :icon="['fas', 'upload']" size="sm" class="toolbtn"></font-awesome-icon>
+      </ion-button>
+      </ion-buttons>
+      <ion-buttons v-if="nodeList.length > 0" slot="end">
+        <ion-button  @click="clearFlow">
+        <font-awesome-icon :icon="['fas', 'trash-can']" size="sm" class="toolbtn"></font-awesome-icon>
       </ion-button>
       </ion-buttons>
       <ion-buttons v-if="nodeList.length > 0" slot="end">
@@ -1475,7 +1468,7 @@ async function saveFlow() {
       </ion-button>
       </ion-buttons>
       <ion-buttons slot="end">
-        <ion-button ref="popBtn" @click="newNode">
+        <ion-button @click="newNode">
           <font-awesome-icon :icon="['fas', 'wand-magic-sparkles']" size="sm" class="toolbtn"></font-awesome-icon>
           {{ $t("flow.tools.new")}}
         </ion-button>
@@ -1488,7 +1481,7 @@ async function saveFlow() {
     <!-- 
     <div ref="ctl" class="ctl">
       <ion-button @click='ctlClick'>Clk</ion-button>
-      <ion-button ref="popBtn" @click="openPopover">Click Me</ion-button>
+      <ion-button @click="openPopover">Click Me</ion-button>
     </div>
     -->
     <div class="flow" ref="theFlow"></div>
@@ -1506,8 +1499,8 @@ async function saveFlow() {
   position:absolute;
   top:0;
   left:0;
-  z-index: 100;
-  max-width: 30rem;
+  z-index: 10;
+  max-width: 32rem;
   border: 3px solid #ccc;
 }
 
@@ -1515,7 +1508,7 @@ async function saveFlow() {
   position:absolute;
   top:0;
   left:0;
-  z-index: 100;
+  z-index: 10;
   max-width: 20rem;
   border: 3px solid #ccc;
 }
