@@ -1313,6 +1313,8 @@ async function clearFlow() {
   //await cy.value.remove("edges")
   //await cy.value.remove("nodes")
   await cy.value.removeData()
+  // clear storage
+  providers.clear()
   // remove node messaging
   console.log("also remove charts")
   nodeList.value.forEach(n => {
@@ -1325,8 +1327,6 @@ async function clearFlow() {
   })
   // remove all nodes
   nodeList.value = []
-  // clear storage
-  providers.clear()
 }
 
 const downUrl = computed(() => {
