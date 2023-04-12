@@ -16,7 +16,7 @@ export class DataInfo extends DcNode {
     // may result in "undefined" ...
     const ports: string[] = ["A"]
     const edges: string[] = ["d"]
-    super(id,ports,edges)
+    super(id,"datainfo",ports,edges)
     DcNode.print(DataInfo._type + " created") // no access to super._id etc here
     // add to providers
     DcNode.providers.add(super.id)

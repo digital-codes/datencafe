@@ -33,7 +33,7 @@ export class LoadCsv extends DcNode {
         }
       ]
     }
-    super(id,ports,edges,cfg as any)
+    super(id,"loadcsv",ports,edges,cfg as any)
     DcNode.print(LoadCsv._type + " created") // no access to super._id etc here
     //setTimeout(() => {this.load(url)},1000)
   }

@@ -16,7 +16,7 @@ export class BarPlot extends DcNode {
     // may result in "undefined" ...
     const ports: string[] = ["A"]
     const edges: string[] = ["d"]
-    super(id,ports,edges)
+    super(id,"barplot",ports,edges)
     DcNode.print(BarPlot._type + " created") // no access to super._id etc here
   }
   // getters/setters

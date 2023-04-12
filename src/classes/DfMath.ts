@@ -15,7 +15,7 @@ export class ScalarMath extends DcNode {
     // may result in "undefined" ...
     const ports: string[] = ["A","B"]
     const edges: string[] = ["d"]
-    super(id,ports,edges)
+    super(id,"dfmath",ports,edges)
     DcNode.print(ScalarMath._type + " created") // no access to super._id etc here
   }
   // getters

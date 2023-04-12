@@ -26,7 +26,7 @@ export class RandomGen extends DcNode {
     // may result in "undefined" ...
     const ports: string[] = []
     const edges: string[] = ["d"]
-    super(id,ports,edges)
+    super(id,"randomgen",ports,edges)
     DcNode.print(RandomGen._type + " created") // no access to super._id etc here
     //RandomGen.insts.set(id,this)
   }

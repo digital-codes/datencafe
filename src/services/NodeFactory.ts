@@ -64,6 +64,6 @@ case "pool":
 return await new LinePlot(id)
 */
     default:
-      throw (new Error("Invalid class type"))
+      throw (new Error("Invalid class type: " + String(type.name)))
   }
 }

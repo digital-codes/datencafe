@@ -18,7 +18,7 @@ export class TablePlot extends DcNode {
     // may result in "undefined" ...
     const ports: string[] = ["A"]
     const edges: string[] = ["d"]
-    super(id,ports,edges)
+    super(id,"tableplot",ports,edges)
     DcNode.print(TablePlot._type + " created") // no access to super._id etc here
   }
   // getters

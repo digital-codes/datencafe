@@ -13,7 +13,7 @@ export class AddCols extends DcNode {
   constructor(id:string,typeInfo:any) {
     const ports: string[] = ['A','B']
     const edges: string[] = ['d']
-    super(id,ports,edges)
+    super(id,"addcols",ports,edges)
     DcNode.print(AddCols._type + " created") // no access to super._id etc here
   }
   // getters/setters

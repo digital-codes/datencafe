@@ -20,6 +20,7 @@ import { DataFrame, toJSON, toCSV } from 'danfojs/dist/danfojs-browser/src';
 export class DcNode {
   // properties"
   // ports and edges are specific. define here
+  readonly _cls: string
   readonly _ports: string[]
   readonly _edges: string[]
   _name: string;
@@ -43,11 +44,15 @@ export class DcNode {
   readonly _messaging = eventBus
   // --------
   // constructor
-  constructor(id?:string,ports:string[]=["A"],edges:string[]=["d"],cfg={}) {
+  constructor(id?:string,cls?:string, ports:string[]=["A"],edges:string[]=["d"],cfg={}) {
     if (id == undefined) {
       throw (new Error("Can't create instance without id"))
     }
+    if (cls == undefined) {
+      throw (new Error("Can't create instance without classname"))
+    }
     this._id = id
+    this._cls = cls
     this._ports = ports
     this._edges = edges
     this._config = cfg
@@ -73,7 +78,7 @@ export class DcNode {
     // const j = JSON.stringify({id:this.id,name:this.name,ports:this.ports,edges:this.edges,config:this.config})
     //const j = {id:this.id,name:this.name,ports:this.ports,edges:this.edges,config:this.config,sigs:this.signals}
     // ports and edges are fixed 
-    const j = {id:this.id,name:this.name,config:this.config,sigs:this.signals}
+    const j = {id:this.id,name:this.name,classname:this.classname,config:this.config,sigs:this.signals}
     DcNode.print("Object: " + JSON.stringify(j))
     return j
   }
@@ -89,6 +94,7 @@ export class DcNode {
   // getters/setters
   // readonly first
   get id() { return this._id }
+  get classname() { return this._cls }
   get ports() {return this._ports}
   get edges() {return this._edges}
   //

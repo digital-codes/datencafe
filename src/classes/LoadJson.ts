@@ -33,7 +33,7 @@ export class LoadJson extends DcNode {
         }
       ]
     }
-    super(id,ports,edges,cfg as any)
+    super(id,"loadjson",ports,edges,cfg as any)
     DcNode.print(LoadJson._type + " created") // no access to super._id etc here
     //setTimeout(() => {this.load(url)},1000)
   }

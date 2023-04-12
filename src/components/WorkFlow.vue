@@ -76,13 +76,13 @@ const flowWrap = ref()
 const flowLoaded = ref(false)
 
 const ctl = ref()
+const fileInput = ref(null)
 
 const popover = ref({})
 const inputselPop = ref({})
 
 // next node/edge continuosly increase
 const nextNode = ref(1)
-const nextEdge = ref(1)
 
 const nodeList = ref([])
 
@@ -1303,9 +1303,93 @@ function defaultPopupHandler (data) {
 }
 
 
-async function loadFlow() {
+function loadFlow() {
   console.log("Load flow")
+  fileInput.value.click()
 }
+
+
+async function handleFileUpload(event) {
+  const files = event.target.files
+  console.log("Files loaded:",files.length)
+  console.log(files[0])
+  // Do something with the uploaded files
+  const reader = new FileReader();
+    reader.onload = async () => {
+      const text = reader.result;
+      //const df = new DataFrame(text, { delimiter: delimiter.value });
+      //dataframe.value = df;
+      const design = JSON.parse(text)
+      console.log("design loaded:",design)
+      await initFlow(design)
+    };
+  await reader.readAsText(files[0]);
+}
+
+async function initFlow(design: any) {
+  const fields = Object.keys(design)
+  console.log("Fields:", fields)
+  if (!fields.includes("flow")) throw (new Error("Flow missing"))
+  if (!fields.includes("nodes")) throw (new Error("Nodes missing"))
+  if (!fields.includes("data")) throw (new Error("Data missing"))
+  try {
+    await cy.value.json(design.flow)
+  } catch (e) {
+    console.log("Setting flow failed:",e.message)
+    return
+  } 
+  console.log("Setting flow OK")
+  try {
+    await providers.init(design.data)
+  } catch (e) {
+    console.log("Setting data failed:",e.message)
+    return
+  } 
+  console.log("Setting data OK")
+  try {
+    design.nodes.forEach(async(n) => {
+      console.log("Node:",n.id,n.classname)
+      // create the class instance
+      try {
+        const instance = await nodeFactory(n.id,nodeTypes[n.classname])
+        if (instance.display) {
+          await emit("addViz",n.id)
+        }
+        // configure
+        console.log("Config:",n.config)
+        instance.config = n.config
+        // signalling
+        console.log("Signals:",n.sigs)
+        n.sigs.forEach(async(s) => {
+          console.log("Signal on for ",s)
+          await instance.msgOn(s)
+        })
+        // add to list 
+        nodeList.value.push(instance)
+      } catch (e) {
+        console.log("Instance constructor failed:",e.message,n.id,n.classname)
+        return
+      } 
+    })
+  } catch (e) {
+    console.log("Setting nodes failed:",e.message)
+    return
+  } 
+  console.log("Setting nodes OK")
+
+}
+
+/*
+const loadFile = () => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const text = reader.result;
+      const df = new DataFrame(text, { delimiter: delimiter.value });
+      dataframe.value = df;
+    };
+    reader.readAsText(file.value);
+  };
+*/
 
 async function clearFlow() {
   console.log("Clear flow")
@@ -1319,7 +1403,7 @@ async function clearFlow() {
   console.log("also remove charts")
   nodeList.value.forEach(n => {
     // remove listeners
-    n.signals.forEach(s => n.messaging.off(s))
+    n.signals.forEach(s => n.msgOff(s))
     // remove charts
     if (n.display) {
       emit("delViz",n.id)
@@ -1341,7 +1425,7 @@ const downUrl = computed(() => {
   // https://stackoverflow.com/questions/72997146/how-to-push-data-to-local-json-file-on-button-click-using-javascript
   try {
     const contentType = 'application/json'
-    const flowData = JSON.stringify({flow:flow,nodes:nodes,data:data},null,2)
+    const flowData = JSON.stringify({flow:flow,nodes:nodes,data:data,next:nextNode.value},null,2)
     const blob = new Blob([flowData], { type: contentType })
     const url = window.URL.createObjectURL(blob)
     console.log("downurl",url)
@@ -1385,6 +1469,7 @@ async function saveFlow() {
 <template>
 
   <div ref="flowWrap" class="wrap">
+    <input ref="fileInput" type="file" style="display:none" @change="handleFileUpload" />
     <ion-toolbar class="toolbar ion-hide-md-down">
       <ion-buttons slot="start">
         <ion-button @click="zoomFit">

@@ -15,7 +15,7 @@ export class SelCell extends DcNode {
     // may result in "undefined" ...
     const ports: string[] = ["A"]
     const edges: string[] = ["d"]
-    super(id,ports,edges)
+    super(id,"selcell",ports,edges)
     DcNode.print(SelCell._type + " created") // no access to super._id etc here
   }
   // getters
