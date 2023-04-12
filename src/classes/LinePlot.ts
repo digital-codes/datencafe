@@ -45,13 +45,24 @@ export class LinePlot extends DcNode {
     // set event listener for signal 
     DcNode.print("msg ON for " + x)
     super.messaging.on(x,(y:any)=>{this.updated(x,y)})
+    const sigs = super.signals
+    if (!sigs.includes(x)) {
+      sigs.push(x)
+      super.signals = sigs
+    }
+    DcNode.print("Signals now: " + JSON.stringify(x))
   }
   msgOff(x: string) {
     // set event listener for signal 
     DcNode.print("msg OFF for " + x)
     super.messaging.off(x)
+    const sigs = super.signals
+    const idx = sigs.findIndex(s => s == x)
+    if (idx == -1) throw (new Error("Invalid signal"))
+    sigs.splice(idx,1)
+    super.signals = sigs
+    DcNode.print("Signals now: " + JSON.stringify(sigs))
   }
-
 } 
 
   

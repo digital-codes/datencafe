@@ -506,6 +506,11 @@ async function flowInit  ()  {
         const targetInstance = nodeList.value[targetIdx]
         const signal = Signals.UPDPREFIX + s.id()
         await targetInstance.msgOn(Signals.UPDPREFIX + s.id())
+        // check if data avail for source if root
+        if (providers.exists(s.id()) && providers.isLoadedRoot(s.id())) {
+          //console.log("Send signal ", Signals.UPDPREFIX + s.id())
+          await eventBus.emit(Signals.UPDPREFIX + s.id())
+        }
         //
         const sourceIdx = nodeList.value.findIndex(item => item.id == s.id()) 
         // FIXME: start generators. maybe later via config

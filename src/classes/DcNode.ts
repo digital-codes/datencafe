@@ -71,7 +71,7 @@ export class DcNode {
     // but not methods
     //const j = JSON.stringify(this)
     // const j = JSON.stringify({id:this.id,name:this.name,ports:this.ports,edges:this.edges,config:this.config})
-    const j = {id:this.id,name:this.name,ports:this.ports,edges:this.edges,config:this.config}
+    const j = {id:this.id,name:this.name,ports:this.ports,edges:this.edges,config:this.config,sigs:this.signals}
     DcNode.print("Object: " + JSON.stringify(j))
     return j
   }

@@ -87,6 +87,14 @@ export const PubStore = defineStore({
             const idx = state.items.findIndex((item: DataSrc) => (item.id === id))
             return (idx === -1) ? false : true
         },
+        isLoadedRoot: state => (id: string) => {
+            console.log("loaded root?:", id)
+            const s = state.items.find((item: DataSrc) => item.id === id)
+            if (s === undefined) {
+                throw new Error("Invalid item id")
+            }
+            return (s.root && s.loaded)
+        },
         getDataById: state => (id: string) => {
             const s = state.items.find((item: DataSrc) => item.id === id)
             if (s === undefined) {
