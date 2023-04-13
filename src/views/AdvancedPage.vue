@@ -1,12 +1,8 @@
 <template>
   <ion-page>
-    <TitleBar :title='$t("titles.advanced")' />
+    <TitleBar :title='$t("titles.advanced")' icon="rocket"/>
 
     <ion-content :fullscreen="true">
-      <ion-header collapse="condense">
-          <ion-title size="large">{{ $route.params.id }}</ion-title>
-      </ion-header>
-
       <div id="container">
         <!-- use en as default to get length of storylist -->
         <ion-card color="light" v-for="(s,i) in storyItems.en" :key="i">

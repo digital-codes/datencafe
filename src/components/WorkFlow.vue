@@ -12,11 +12,8 @@ https://github.com/cytoscape/cytoscape.js-cxtmenu
 
 // import extensions
 // no context menu!
-import contextMenus from 'cytoscape-context-menus';
-//import 'cytoscape-context-menus/cytoscape-context-menus.css';
 import edgehandles from 'cytoscape-edgehandles';
 // register extensions
-//cytoscape.use(contextMenus);
 cytoscape.use( edgehandles );
 
 
@@ -81,6 +78,8 @@ const flowLoaded = ref(false)
 
 const ctl = ref()
 const fileInput = ref(null)
+const scrotDown = ref(null)
+const scrotData = ref(null)
 
 const popover = ref({})
 const inputselPop = ref({})
@@ -1345,6 +1344,7 @@ async function initFlow(design: any) {
   try {
     await cy.value.json(design.flow)
     console.log("Setting flow OK")
+    await cy.value.fit()
   } catch (e) {
     console.log("Setting flow failed:",e.message)
     return
@@ -1434,6 +1434,18 @@ async function clearFlow() {
   nodeList.value = []
 }
 
+
+async function screenShot() {
+  console.log("Screenshot")
+  scrotData.value = await cy.value.png({
+    output:"base64uri",
+    bg:"#ffffff",
+    maxWidth:1920
+  })
+  await DelayTimer(100)
+  await scrotDown.value.click()
+}
+
 // this way the computation is repeated always.
 // compute only after button click
 const downUrl = computed(() => {
@@ -1493,6 +1505,7 @@ async function saveFlow() {
 
   <div ref="flowWrap" class="wrap">
     <input ref="fileInput" type="file" style="display:none" @change="handleFileUpload" />
+    <a ref="scrotDown" style="display:none" :href="scrotData"  download="flow.png" ></a>
     <ion-toolbar class="toolbar ion-hide-md-down">
       <ion-buttons slot="start">
         <ion-button @click="zoomFit">
@@ -1529,9 +1542,9 @@ async function saveFlow() {
         <font-awesome-icon :icon="['fas', 'arrow-down']" size="2x" class="toolbtn"></font-awesome-icon>
       </ion-button>
       </ion-buttons>
-      <ion-buttons v-if="nodeList.length == 0" slot="end">
-        <ion-button  @click="loadFlow">
-        <font-awesome-icon :icon="['fas', 'upload']" size="2x" class="toolbtn"></font-awesome-icon>
+      <ion-buttons v-if="nodeList.length > 0" slot="end">
+        <ion-button  @click="screenShot">
+        <font-awesome-icon :icon="['fas', 'image']" size="2x" class="toolbtn"></font-awesome-icon>
       </ion-button>
       </ion-buttons>
       <ion-buttons v-if="nodeList.length > 0" slot="end">
@@ -1542,6 +1555,11 @@ async function saveFlow() {
       <ion-buttons v-if="nodeList.length > 0" slot="end">
         <ion-button  download="flow.json" :href="downUrl">
         <font-awesome-icon :icon="['fas', 'download']" size="2x" class="toolbtn"></font-awesome-icon>
+      </ion-button>
+      </ion-buttons>
+      <ion-buttons v-if="nodeList.length == 0" slot="end">
+        <ion-button  @click="loadFlow">
+        <font-awesome-icon :icon="['fas', 'upload']" size="2x" class="toolbtn"></font-awesome-icon>
       </ion-button>
       </ion-buttons>
       <ion-buttons slot="end">
@@ -1560,9 +1578,9 @@ async function saveFlow() {
         <font-awesome-icon :icon="['fas', 'expand']" size="sm" class="toolbtn"></font-awesome-icon>
         </ion-button>
       </ion-buttons>
-      <ion-buttons v-if="nodeList.length == 0" slot="end">
-        <ion-button  @click="loadFlow">
-        <font-awesome-icon :icon="['fas', 'upload']" size="sm" class="toolbtn"></font-awesome-icon>
+      <ion-buttons v-if="nodeList.length > 0" slot="end">
+        <ion-button  @click="screenShot">
+        <font-awesome-icon :icon="['fas', 'image']" size="sm" class="toolbtn"></font-awesome-icon>
       </ion-button>
       </ion-buttons>
       <ion-buttons v-if="nodeList.length > 0" slot="end">
@@ -1573,6 +1591,11 @@ async function saveFlow() {
       <ion-buttons v-if="nodeList.length > 0" slot="end">
         <ion-button  download="flow.json" :href="downUrl">
         <font-awesome-icon :icon="['fas', 'download']" size="sm" class="toolbtn"></font-awesome-icon>
+      </ion-button>
+      </ion-buttons>
+      <ion-buttons v-if="nodeList.length == 0" slot="end">
+        <ion-button  @click="loadFlow">
+        <font-awesome-icon :icon="['fas', 'upload']" size="sm" class="toolbtn"></font-awesome-icon>
       </ion-button>
       </ion-buttons>
       <ion-buttons slot="end">

@@ -1,11 +1,8 @@
 <template>
   <ion-page>
-    <TitleBar :title='$t("titles.tutorial")' />
+    <TitleBar :title='$t("titles.tutorial")' icon="receipt"/>
 
     <ion-content :fullscreen="true">
-      <ion-header collapse="condense">
-          <ion-title size="large">{{ $route.params.id }}</ion-title>
-      </ion-header>
 
       <div id="container">
         <ion-button @click="testVPop">VPop</ion-button>

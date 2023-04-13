@@ -9,6 +9,8 @@
             <ion-thumbnail  class="logo" >
               <img alt="Daten.Cafe Logo" src="/img/logo/datencafe.svg" />
             </ion-thumbnail>
+            <font-awesome-icon :icon="icon" size="xl" class="ion-hide-md-down"/>
+            <font-awesome-icon :icon="icon" size="1x" class="ion-hide-md-up"/>
             <div>
           <span class="headline ion-hide-sm-down">Daten.Cafe</span>
           <span class="version ion-hide-sm-down">{{Version}}</span>
@@ -76,7 +78,6 @@
   <script setup lang="ts">
   import { IonButtons, IonHeader, IonMenuButton, IonTitle, IonToolbar } from '@ionic/vue';
   import { IonLabel, IonToggle,  IonImage, IonThumbnail, IonSelect, IonSelectOption, } from '@ionic/vue';
-
   import { ref, computed, onMounted } from "vue"
 
     // stores
@@ -96,7 +97,8 @@
     import { Version } from "../services/GlobalDefs"
 
     const props = defineProps({
-    title:String
+    title:String,
+    icon:String
   })
 
 
@@ -104,11 +106,14 @@
     import { useI18n } from 'vue-i18n'
     const { locale, availableLocales } = useI18n({ useScope: 'global' })
 
-
+const icon = ref()
     // init store on mount
     onMounted(() => {
       //userStore.clear()
       selectLanguage()
+      icon.value = (props.icon === undefined)? ['fas', 'question'] : ['fas', props.icon]
+      console.log(props,"Icon:",icon.value)
+
     })
 
     /*

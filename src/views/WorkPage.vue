@@ -156,12 +156,9 @@ const scrollToTop = () => {
 
 <template>
   <ion-page>
-    <TitleBar :title='$t("titles.work.tab")' />
+    <TitleBar :title='$t("titles.work.tab")'  icon="wand-magic-sparkles"/>
 
     <ion-content :fullscreen="true" ref="content">
-      <ion-header collapse="condense">
-          <ion-title size="large">{{ $route.params.id }}</ion-title>
-      </ion-header>
       <div id="container" class="work-container">
         <ion-grid fixed="true">
           <ion-row>
@@ -181,7 +178,7 @@ const scrollToTop = () => {
               <WorkFlowAsync msg="Flow demo" @add-viz="(e) => addViz(e)" @del-viz="(e) => delViz(e)" />
             </ion-col>
 
-            <ion-col  size="12" size-lg="5" sytle="overflow-y:scroll;">
+            <ion-col  size="12" size-lg="5" sytle="overflow-y:scroll;" id="viz">
               <h3>{{$t("titles.work.view.title")}}</h3>
               <p v-if="FlowLoading"  class="loading">Loading ...</p>
               <!-- 

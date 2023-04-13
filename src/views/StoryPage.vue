@@ -1,11 +1,8 @@
 <template>
   <ion-page>
-    <TitleBar :title='$t("titles.stories")' />
+    <TitleBar :title='$t("titles.stories")' icon="book-open"/>
 
     <ion-content :fullscreen="true">
-      <ion-header collapse="condense">
-          <ion-title size="large">{{ $route.params.id }}</ion-title>
-      </ion-header>
 
       <div id="container">
         <!-- use en as default to get length of storylist -->

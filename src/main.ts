@@ -48,6 +48,7 @@ import { faBook } from '@fortawesome/free-solid-svg-icons/faBook'
 import { faUser } from '@fortawesome/free-solid-svg-icons/faUser'
 import { faSun } from '@fortawesome/free-solid-svg-icons/faSun'
 import { faMoon } from '@fortawesome/free-solid-svg-icons/faMoon'
+import { faImage } from '@fortawesome/free-solid-svg-icons/faImage'
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons/faCartShopping'
 import { faUserSlash } from '@fortawesome/free-solid-svg-icons/faUserSlash'
 import { faBookAtlas } from '@fortawesome/free-solid-svg-icons/faBookAtlas'
@@ -73,7 +74,7 @@ library.add(faGlobe, faLanguage, faGraduationCap, faBookOpen, faBookAtlas)
 library.add(faBook, faUser, faUserSlash, faHatWizard, faWandMagicSparkles)
 library.add(faSun, faMoon, faCartShopping, faChartArea,faDiagramProject)
 library.add(faRocket, faStar, faReceipt, faDownload, faUpload,faTrashCan)
-library.add(faMagnifyingGlassPlus, faMagnifyingGlassMinus, faExpand)
+library.add(faMagnifyingGlassPlus, faMagnifyingGlassMinus, faExpand,faImage)
 
 
 

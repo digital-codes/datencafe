@@ -1,11 +1,8 @@
 <template>
     <ion-page>
-    <TitleBar :title='$t("titles.data")' />
+    <TitleBar :title='$t("titles.data")' icon="book-atlas"/>
 
     <ion-content :fullscreen="true">
-      <ion-header collapse="condense">
-          <ion-title size="large">{{ $route.params.id }}</ion-title>
-      </ion-header>
 
       <div id="container">
         <ion-card color="light" v-for="(s,i) in items.en" :key="i">
