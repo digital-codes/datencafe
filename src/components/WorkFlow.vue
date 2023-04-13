@@ -37,6 +37,9 @@ import eventBus from '@/services/eventBus';
 import { PubStore } from '@/services/PubStore'
 const providers = PubStore()
 
+// delay timer
+import { DelayTimer } from "@/services/DelayTimer"
+
 // popovers
 import { popoverController } from '@ionic/vue';
 import Popover from '@/components/popovers/PopOver.vue'; // test
@@ -1332,20 +1335,24 @@ async function initFlow(design: any) {
   if (!fields.includes("flow")) throw (new Error("Flow missing"))
   if (!fields.includes("nodes")) throw (new Error("Nodes missing"))
   if (!fields.includes("data")) throw (new Error("Data missing"))
+  if (!fields.includes("next")) throw (new Error("Next missing"))
+  // set next id
+  nextNode.value = design.next
+  // set flow
   try {
     await cy.value.json(design.flow)
+    console.log("Setting flow OK")
   } catch (e) {
     console.log("Setting flow failed:",e.message)
     return
   } 
-  console.log("Setting flow OK")
   try {
     await providers.init(design.data)
+    console.log("Setting data OK")
   } catch (e) {
     console.log("Setting data failed:",e.message)
     return
   } 
-  console.log("Setting data OK")
   try {
     design.nodes.forEach(async(n) => {
       console.log("Node:",n.id,n.classname)
@@ -1353,7 +1360,7 @@ async function initFlow(design: any) {
       try {
         const instance = await nodeFactory(n.id,nodeTypes[n.classname])
         if (instance.display) {
-          await emit("addViz",n.id)
+          await emit("addViz",{id:instance.id,name:instance.name,type:instance.type})
         }
         // configure
         console.log("Config:",n.config)
@@ -1375,7 +1382,18 @@ async function initFlow(design: any) {
     console.log("Setting nodes failed:",e.message)
     return
   } 
-  console.log("Setting nodes OK")
+  // finally trigger updates on root nodes
+  // FIXME we should wait until all nodes are processed ... might need a watch item
+  await DelayTimer(1000)
+  const roots = providers.getLoadedRoots()
+  //console.log("Roots:",roots)
+  roots.forEach(async(n) => {
+    //console.log("Root id:",n.id)
+    const signal = Signals.UPDPREFIX + n.id
+    await eventBus.emit(signal)
+    await DelayTimer(50)
+  })
+
 
 }
 
@@ -1413,29 +1431,31 @@ async function clearFlow() {
   nodeList.value = []
 }
 
+// this way the computation is repeated always.
+// compute only after button click
 const downUrl = computed(() => {
   console.log("Save flow")
   const flow = cy.value.json()
-  console.log("Flow",flow)
+  //console.log("Flow",flow)
   const nodes = []
   nodeList.value.forEach(n => nodes.push(n.json()))
-  console.log("Nodes",nodes)
+  //console.log("Nodes",nodes)
   const data = providers.json()
-  console.log("Data:",data)
+  //console.log("Data:",data)
   // https://stackoverflow.com/questions/72997146/how-to-push-data-to-local-json-file-on-button-click-using-javascript
   try {
     const contentType = 'application/json'
     const flowData = JSON.stringify({flow:flow,nodes:nodes,data:data,next:nextNode.value},null,2)
     const blob = new Blob([flowData], { type: contentType })
     const url = window.URL.createObjectURL(blob)
-    console.log("downurl",url)
+    console.log("downurl updated")
     return url
   } catch (e) {
-    console.log("Failed: ",e)
+    console.log("Failed: ",e.message)
     return "/"
   }
-
 })
+
 /*
 async function saveFlow() {
   console.log("Save flow")

@@ -9,6 +9,7 @@ import { NodeTypes } from '@/services/GlobalDefs';
 
 export class RandomGen extends DcNode {
   // properties
+  // FIXME  parms must go into config, together with active state
   static _display = false
   static _type = NodeTypes.GEN
   _period = 5 // in seconds

@@ -1,10 +1,10 @@
 export const DelayTimer = function (milliseconds: number): Promise<void> {
-    return new Promise<void>((resolve) => {
-      setTimeout(() => {
-        resolve();
-      }, milliseconds);
-    });
-  }
+  return new Promise<void>((resolve) => {
+    setTimeout(() => {
+      resolve();
+    }, milliseconds);
+  });
+}
 
   /*
   async function example() {
