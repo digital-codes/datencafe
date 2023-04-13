@@ -11,11 +11,12 @@ https://github.com/cytoscape/cytoscape.js-cxtmenu
 */
 
 // import extensions
+// no context menu!
 import contextMenus from 'cytoscape-context-menus';
-import 'cytoscape-context-menus/cytoscape-context-menus.css';
+//import 'cytoscape-context-menus/cytoscape-context-menus.css';
 import edgehandles from 'cytoscape-edgehandles';
 // register extensions
-cytoscape.use(contextMenus);
+//cytoscape.use(contextMenus);
 cytoscape.use( edgehandles );
 
 
@@ -250,7 +251,7 @@ const eh = ref()
 
 // context menu
 
-const ctxMenu = ref()
+//const ctxMenu = ref()
 
 const ctxOptions = {
     // Customize event to bring up the context menu
@@ -427,7 +428,7 @@ async function flowInit  ()  {
       // edge handles
       eh.value = await cy.value.edgehandles( edgeOptions )
       // context menu
-      ctxMenu.value = await cy.value.contextMenus(ctxOptions)
+      //ctxMenu.value = await cy.value.contextMenus(ctxOptions)
       // append. works ... usable via show/hide 
       // await ctxMenu.value.appendMenuItem(extraItem)
       // 
@@ -548,6 +549,7 @@ async function flowInit  ()  {
     });
 
     // disable edges from endpoints (chart, table, output)
+    /*
     cy.value.on('cxttap', 'node', function(event?: EventObject) {
       const node = event.target;
       console.log('Node ' + node.id() + ' was right clicked');
@@ -563,6 +565,7 @@ async function flowInit  ()  {
           ctxMenu.value.showMenuItem("edge1")
       }
     });
+    */
 
     // dbltab copy of dblclick
     // try taphold instead of dbltap. latter not working on ios?
