@@ -2,6 +2,10 @@
       <ion-header :translucent="true">
         <ion-toolbar>
           <ion-buttons slot="start">
+            <ion-menu-button :auto-hide="true" color="primary"></ion-menu-button>
+          </ion-buttons>
+
+          <ion-buttons slot="start">
           <div class="title">
             <!-- 
             <font-awesome-icon class="logo" icon="fa-solid fa-mug-hot" size="2x" :style="{ color: 'red' }" />
@@ -52,7 +56,7 @@
             </ion-list>          
           </ion-buttons>
 
-          <ion-buttons slot="end">
+          <ion-buttons slot="end" class="lastItem">
             <div v-if="userStore.exists()">
               <font-awesome-icon :icon="['fas', 'user']" size="1x" class="token"/>
             </div>
@@ -60,10 +64,12 @@
               <font-awesome-icon :icon="['fas', 'user-slash']" size="1x" class="notoken"/>
             </div>          
           </ion-buttons>
-            
+            <!-- 
           <ion-buttons slot="end">
             <ion-menu-button :auto-hide="true" color="primary"></ion-menu-button>
           </ion-buttons>
+
+            -->
 
         </ion-toolbar>
       <ion-toolbar class="ion-hide-sm-up toolbar-secondary">
@@ -244,6 +250,10 @@ ion-thumbnail.logo {
   border-bottom-left-radius: 100px;
   border-bottom-right-radius: 100px;
   */
+}
+
+.lastItem {
+  margin-right: 1rem;
 }
 </style>
   

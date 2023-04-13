@@ -30,7 +30,6 @@ export class BarPlot extends DcNode {
     const dt = DcNode.providers.getDataById(src)
     const df = new DcNode.dfd.DataFrame(dt)
     const divId = DcNode.pre.PLOTPREFIX + super.id
-    console.log("Target:",divId)
     const target = document.getElementById(divId)
     if ((target === undefined) || (target == null) ) {
       throw (new Error("Invalid ID: " + String(divId)))
@@ -44,7 +43,7 @@ export class BarPlot extends DcNode {
   }
   msgOn(x: string) {
     // set event listener for signal 
-    DcNode.print("msg on for " + x)
+    DcNode.print("msg ON for " + x)
     super.messaging.on(x,(y:any)=>{this.updated(x,y)})
     const sigs = this.signals
     if (!sigs.includes(x)) {
@@ -55,7 +54,7 @@ export class BarPlot extends DcNode {
   }
   msgOff(x: string) {
     // set event listener for signal 
-    DcNode.print("msg off for " + x)
+    DcNode.print("msg OFF for " + x)
     super.messaging.off(x)
     const sigs = this.signals
     const idx = sigs.findIndex(s => s == x)

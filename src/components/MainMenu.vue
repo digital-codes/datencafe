@@ -10,37 +10,37 @@
                 <!-- 
                 <ion-item @click="selectedIndex = i" router-direction="root" :router-link="p.url" lines="none" detail="false" class="hydrated" :class="{ selected: selectedIndex === i }">
                 -->
-                <ion-item router-link="/info" lines="none" >
+                <ion-item button router-link="/info" lines="none" >
                   <font-awesome-icon aria-hidden="true" :icon="['fas', 'coffee']" slot="start" fixed-width />
                   <ion-label>{{$t("titles.about")}}</ion-label>
                   <!-- 
                   <ion-button router-link="/home" router-direction="forward">Home</ion-button>
                   -->
                 </ion-item>
-                <ion-item router-link="/open" lines="none" >
+                <ion-item button router-link="/open" lines="none" >
                   <font-awesome-icon aria-hidden="true" :icon="['fas', 'book-atlas']" slot="start" fixed-width  />
                   <ion-label>{{$t("titles.data")}}</ion-label>
                   <!-- 
                   <ion-button router-link="/other">Home</ion-button>
                   -->
                 </ion-item>
-                <ion-item router-link="/stories" lines="none" >
+                <ion-item button router-link="/stories" lines="none" >
                   <font-awesome-icon aria-hidden="true" :icon="['fas', 'book-open']" slot="start" fixed-width />
                   <ion-label>{{$t("titles.stories")}}</ion-label>
                 </ion-item>
-                <ion-item router-link="/instructions" lines="none" >
+                <ion-item button router-link="/instructions" lines="none" >
                   <font-awesome-icon aria-hidden="true" :icon="['fas', 'receipt']" slot="start" fixed-width />
                   <ion-label>{{$t("titles.tutorial")}}</ion-label>
                 </ion-item>
-                <ion-item router-link="/work" lines="none" >
+                <ion-item button router-link="/work" lines="none" >
                   <font-awesome-icon aria-hidden="true" :icon="['fas', 'wand-magic-sparkles']" slot="start" fixed-width />
                   <ion-label>{{$t("titles.work.tab")}}</ion-label>
                 </ion-item>
-                <ion-item router-link="/advanced" lines="none" >
+                <ion-item button router-link="/advanced" lines="none" >
                   <font-awesome-icon aria-hidden="true" :icon="['fas', 'rocket']" slot="start" fixed-width />
                   <ion-label>{{$t("titles.advanced")}}</ion-label>
                 </ion-item>
-                <ion-item router-link="/login" lines="none" >
+                <ion-item button router-link="/login" lines="none" >
                   <font-awesome-icon aria-hidden="true" :icon="['fas', 'user-secret']" slot="start" fixed-width />
                   <ion-label>{{$t("titles.login")}}</ion-label>
                 </ion-item>
