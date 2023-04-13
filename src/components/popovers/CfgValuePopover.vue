@@ -5,7 +5,7 @@
     <span v-for="(option,idx) in options" :key="option.id">
       <ion-item>
         <ion-label>{{ option.label }}: </ion-label>
-        <ion-input :value="option.value" :type="option.type" @ionChange="update(option.id,idx)" v-model="vals[idx]"></ion-input>
+        <ion-input :value="option.value" :min="option.min" :max="option.max" :type="option.type" @ionChange="update(option.id,idx)" v-model="vals[idx]"></ion-input>
       </ion-item>
     </span>
     <ion-button @click="close">{{$t("flow.cfg.close")}}</ion-button>
@@ -32,8 +32,8 @@ export interface CfgValueParms {
     type: string // ui element type: url, text, number
     label: string // label
     value?: string | [] // default and return value 
-    min?: any // 
-    max?: any // 
+    min?: string // 
+    max?: string // 
 }
 
 const vals = ref([])

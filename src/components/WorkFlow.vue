@@ -514,11 +514,13 @@ async function flowInit  ()  {
           await eventBus.emit(Signals.UPDPREFIX + s.id())
         }
         //
+        /*
         const sourceIdx = nodeList.value.findIndex(item => item.id == s.id()) 
         // FIXME: start generators. maybe later via config
         if (nodeList.value[sourceIdx].type == NodeTypes.GEN) {
           await nodeList.value[sourceIdx].run()
         }
+        */
       }
 
       // test blocking
@@ -1368,6 +1370,15 @@ async function initFlow(design: any) {
         // configure
         console.log("Config:",n.config)
         instance.config = n.config
+        // FIXME check running state on generator
+        if (instance.type == NodeTypes.GEN) {
+          const runIdx = instance.config.options.findIndex((item:any) => {return item.id == "run"})
+          if (runIdx == -1) throw (new Error("Invalid config at run"))
+          if (parseInt(instance.config.options[runIdx].value) != 0) {
+            console.log("Starting generator on ",instance.id)
+            instance.run()
+          }
+        }
         // signalling
         console.log("Signals:",n.sigs)
         n.sigs.forEach(async(s) => {
@@ -1631,7 +1642,7 @@ async function saveFlow() {
   top:0;
   left:0;
   z-index: 10;
-  max-width: 32rem;
+  max-width: 34rem;
   border: 3px solid #ccc;
 }
 

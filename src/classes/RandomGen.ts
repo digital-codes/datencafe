@@ -27,45 +27,107 @@ export class RandomGen extends DcNode {
     // may result in "undefined" ...
     const ports: string[] = []
     const edges: string[] = ["d"]
-    super(id,"randomgen",ports,edges)
+    const cfg = {
+      pop:"value",
+      options: [
+        {
+          id:"cols",
+          type:"number",
+          label:"Numeric Columns",
+          value:"1",
+          min:"1",
+          max:"5"
+        },
+        {
+          id:"text",
+          type:"number",
+          label:"Text Columns",
+          value:"1",
+          min:"0",
+          max:"1"
+        },
+        {
+          id:"rows",
+          type:"number",
+          label:"Rows",
+          value:"10",
+          min:"1",
+          max:"30"
+        },
+        {
+          id:"period",
+          type:"number",
+          label:"Period (s)",
+          value:"5",
+          min:"1",
+          max:"60"
+        },
+        {
+          id:"run",
+          type:"number",
+          label:"Run",
+          value:"0",
+          min:"0",
+          max:"1"
+        }
+      ]
+    }
+    super(id,"randomgen",ports,edges,cfg as any)
     DcNode.print(RandomGen._type + " created") // no access to super._id etc here
     //RandomGen.insts.set(id,this)
   }
   // methods
+  // methods
+  async configure(options: any[]) {
+    // we know the config structure here, so can just use the index
+    const config = this.config
+    options.forEach((o,i) => {
+      config.options[i].value = o
+    })
+    this.config = config // update config
+    const runIdx = this.config.options.findIndex((item:any) => {return item.id == "run"})
+    if (runIdx == -1) throw (new Error("Invalid config at run"))
+    if (parseInt(this.config.options[runIdx].value) == 0) {
+      this.stop()
+    } else {
+      this.run()
+    }
+  }
   async generate () {
     this.genCnt++
     DcNode.print("Generate " + String(this.genCnt)) 
+    const options = this.config.options
     const dt:any = {} // [[]] as number[][] 
-    const rows = this._rows/2 + Math.floor(Math.random()*this._rows/2)
-    for (let c=0;c<this._cols;c++) {
+    const rows = options[options.findIndex((o:any) => o.id == "rows")].value
+    const cols = options[options.findIndex((o:any) => o.id == "cols")].value
+    const txtCols = options[options.findIndex((o:any) => o.id == "text")].value
+    const period = options[options.findIndex((o:any) => o.id == "period")].value
+    for (let c=0;c<cols;c++) {
       const cl = [] as any[] // number[]
       for (let r=0;r<rows;r++) {
-        switch (c) {
-          case 0: {
-            let s = ""
-            for (let i=0;i<5;i++) {
-              s += String.fromCharCode(65 + Math.floor(Math.random()*26))
-            }
-            cl.push(s)           
-            }
-            break;
-          case 1:
-            // int on col 1
-            cl.push(Math.floor(Math.random()*100))
-            break;
-          default:
-            cl.push(Math.random()*100)
-        }
+        cl.push(Math.random()*100)
       }
       const key = "COL" + String(c+1)
       dt[key] = cl
     }
+    for (let c=0;c<txtCols;c++) {
+      const cl = [] as any[] // number[]
+      for (let r=0;r<rows;r++) {
+        let s = ""
+        for (let i=0;i<5;i++) {
+          s += String.fromCharCode(65 + Math.floor(Math.random()*26))
+        }
+        cl.push(s)           
+      }
+      const key = "TCOL" + String(c+1)
+      dt[key] = cl
+    }
     this.df = await new DataFrame(dt)
-    // this.df.print()
+    this.df.print()
     //await DcNode.providers.update(super.id,toJSON(this.df))
-    await DcNode.providers.update(super.id,toJSON(this.df))
+    await DcNode.providers.update(this.id,toJSON(this.df))
     //await subscribers.update(d.id,d.ep)
-    await super.messaging.emit(DcNode.signals.UPDPREFIX as string + super.id,2*this.genCnt)
+    await super.messaging.emit(DcNode.signals.UPDPREFIX as string + this.id,2*this.genCnt)
  
 
     if (this.active == true) {
@@ -80,7 +142,7 @@ export class RandomGen extends DcNode {
     if (this.active == true) return
     // add to store
     //DcNode.providers.add(super.id)
-    await DcNode.providers.add(super.id)
+    await DcNode.providers.add(this.id)
     // start generator
     this.active = true
     DcNode.print("Start generating @ " + String(this.genCnt)) 
@@ -91,7 +153,9 @@ export class RandomGen extends DcNode {
     this.active = false
     // remove
     //DcNode.providers.remove(super.id)
-    DcNode.providers.remove(super.id)
+    if (!DcNode.providers.exists(this.id))
+      return
+    DcNode.providers.remove(this.id)
     if (this.tm != null) {
       clearTimeout(this.tm)
       this.tm = null

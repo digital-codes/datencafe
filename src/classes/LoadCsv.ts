@@ -44,20 +44,20 @@ export class LoadCsv extends DcNode {
     if (options[0] != "") {
       const url = options[0]
       //console.log("Config URL: ",url)
-      const config = super.config
+      const config = this.config
       //console.log("Old config: ",config)
       // set the config value(s)
       config.options[0].value = url
-      super.config = config // update config
+      this.config = config // update config
       await this.load(url)
     } 
   }
   async load (url: string) {
-  DcNode.print("Load on " + String(super.name))
+  DcNode.print("Load on " + String(this.name))
   if (url === undefined) throw (new Error("Invalid URL"))
-  if (!await DcNode.providers.exists(super.id)) {
+  if (!await DcNode.providers.exists(this.id)) {
     // create item in pubstore if not exists
-    await DcNode.providers.add(super.id,true) // file loaders are root nodes
+    await DcNode.providers.add(this.id,true) // file loaders are root nodes
   }
   if (!url.includes("http")) {
     // local urls supported ... detect full host address with port number ...

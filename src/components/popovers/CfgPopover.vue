@@ -5,7 +5,20 @@
     <span v-for="option in options" :key="option.id">
       <ion-item>
         <ion-label>{{ option.label }}</ion-label>
-        <ion-input v-if="(option.type=='url')||(option.type=='text')||(option.type=='number')" :value="option.value" :type="option.type"></ion-input>
+        <ion-input v-if="(option.type=='url')" :value="option.value" :type="option.type"></ion-input>
+        <ion-input v-if="(option.type=='text')" :value="option.value" :type="option.type"></ion-input>
+        <ion-input v-if="((option.type=='number') && (option.min !== undefined) && (option.max !== undefined))" 
+          :value="option.value" :type="option.type" 
+          :min="option.min" :max="option.max"
+        >{{option.min}} / {{option.max}}</ion-input>
+        <ion-input v-if="((option.type=='number') && (option.min === undefined) && (option.max !== undefined))" 
+          :value="option.value" :type="option.type" 
+          :max="option.max"
+        ></ion-input>
+        <ion-input v-if="((option.type=='number') && (option.min !== undefined) && (option.max === undefined))" 
+          :value="option.value" :type="option.type" 
+          :min="option.min"
+        ></ion-input>
       </ion-item>
       <ion-item>
         <ion-label>{{ option.label }}</ion-label>
@@ -54,6 +67,7 @@ const props = defineProps({
 })
 
 const config = async () => {
+  console.log("Cfg:",props.options)
   console.log('signal',props.signal)
   await eventBus.emit(props.signal, "config");
 }
