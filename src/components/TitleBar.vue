@@ -22,9 +22,9 @@
                 <!-- 
                 <ion-label class="modeLbl left">{{ $t("light") }}</ion-label>
                 -->
-                <font-awesome-icon :icon="['fas', 'sun']" size="md" class="modeLbl left"/>
+                <font-awesome-icon :icon="['fas', 'sun']" size="1x" class="modeLbl left"/>
                 <ion-toggle @ionChange="changeMode" :checked="false"></ion-toggle>
-                <font-awesome-icon :icon="['fas', 'moon']" size="md" class="modeLbl right"/>
+                <font-awesome-icon :icon="['fas', 'moon']" size="1x" class="modeLbl right"/>
                 <!-- 
                 <ion-label class="modeLbl right">{{ $t("dark") }}</ion-label>
                 -->
@@ -52,10 +52,10 @@
 
           <ion-buttons slot="end">
             <div v-if="userStore.exists()">
-              <font-awesome-icon :icon="['fas', 'user']" size="md" class="token"/>
+              <font-awesome-icon :icon="['fas', 'user']" size="1x" class="token"/>
             </div>
             <div v-else>
-              <font-awesome-icon :icon="['fas', 'user-slash']" size="md" class="notoken"/>
+              <font-awesome-icon :icon="['fas', 'user-slash']" size="1x" class="notoken"/>
             </div>          
           </ion-buttons>
             
