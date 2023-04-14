@@ -1519,10 +1519,10 @@ async function saveFlow() {
     <input ref="fileInput" type="file" style="display:none" @change="handleFileUpload" />
     <a ref="scrotDown" style="display:none" :href="scrotData"  download="flow.png" ></a>
     <ion-toolbar class="toolbar ion-hide-md-down">
-      <ion-buttons slot="start">
-        <ion-button @click="zoomFit">
-        <font-awesome-icon :icon="['fas', 'expand']" size="2x" class="toolbtn"></font-awesome-icon>
-        </ion-button>
+      <ion-buttons class="ion-hide-sm-down question"  slot="start">
+        <ion-button @click="question">
+        <font-awesome-icon :icon="['fas', 'question']" size="2x" class="toolbtn"></font-awesome-icon>
+      </ion-button>
       </ion-buttons>
       <!-- 
       <ion-buttons class="ion-hide-sm-down"  slot="start">
@@ -1557,10 +1557,10 @@ async function saveFlow() {
       </ion-buttons>
 
       -->
-      <ion-buttons class="ion-hide-sm-down"  slot="start">
-        <ion-button @click="zoomIn">
-        <font-awesome-icon :icon="['fas', 'question']" size="2x" class="toolbtn"></font-awesome-icon>
-      </ion-button>
+      <ion-buttons slot="start">
+        <ion-button @click="zoomFit">
+        <font-awesome-icon :icon="['fas', 'expand']" size="2x" class="toolbtn"></font-awesome-icon>
+        </ion-button>
       </ion-buttons>
       <ion-buttons class="ion-hide-sm-down"  slot="start" >
         <ion-button @click="zoomOut">
@@ -1603,11 +1603,29 @@ async function saveFlow() {
       </ion-buttons>
     </ion-toolbar>
     <ion-toolbar class="toolbar-sm ion-hide-md-up">
+      <ion-buttons slot="start" class="question">
+        <ion-button @click="question">
+        <font-awesome-icon :icon="['fas', 'question']" size="sm" class="toolbtn"></font-awesome-icon>
+      </ion-button>
+      </ion-buttons>
+
       <ion-buttons slot="start">
         <ion-button @click="zoomFit">
         <font-awesome-icon :icon="['fas', 'expand']" size="sm" class="toolbtn"></font-awesome-icon>
         </ion-button>
       </ion-buttons>
+
+      <ion-buttons slot="start" >
+        <ion-button @click="zoomOut">
+        <font-awesome-icon :icon="['fas', 'pen-to-square']" size="sm" class="toolbtn"></font-awesome-icon>
+      </ion-button>
+      </ion-buttons>
+      <ion-buttons slot="start">
+        <ion-button @click="panRight">
+        <font-awesome-icon :icon="['fas', 'tags']" size="sm" class="toolbtn"></font-awesome-icon>
+      </ion-button>
+      </ion-buttons>
+
       <ion-buttons v-if="nodeList.length > 0" slot="end">
         <ion-button  @click="screenShot">
         <font-awesome-icon :icon="['fas', 'image']" size="sm" class="toolbtn"></font-awesome-icon>
@@ -1674,6 +1692,9 @@ async function saveFlow() {
   border: 3px solid #ccc;
 }
 
+.question {
+  margin-right: 1rem;
+}
 .ctl {
   position:absolute;
   top:0;
@@ -1726,12 +1747,5 @@ async function saveFlow() {
   margin:3px;
 }
 
-
 </style>
 
-<style>
-/* global styling for popovers */
-.popCtx {
-  
-}
-</style>
