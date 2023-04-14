@@ -35,12 +35,24 @@ export class AddCols extends DcNode {
   }
   msgOn(x: string) {
     // set event listener for signal 
-    DcNode.print("msg on for " + x)
+    DcNode.print("msg ON for " + x)
     super.messaging.on(x,(y:any)=>{this.updated(x,y)})
+    const sigs = this.signals
+    if (!sigs.includes(x)) {
+      sigs.push(x)
+      this.signals = sigs
+    }
+    DcNode.print("Signals now: " + JSON.stringify(x))
   }
   msgOff(x: string) {
     // set event listener for signal 
-    DcNode.print("msg off for " + x)
+    DcNode.print("msg OFF for " + x)
     super.messaging.off(x)
+    const sigs = this.signals
+    const idx = sigs.findIndex(s => s == x)
+    if (idx == -1) throw (new Error("Invalid signal"))
+    sigs.splice(idx,1)
+    this.signals = sigs
+    DcNode.print("Signals now: " + JSON.stringify(sigs))
   }
 } 

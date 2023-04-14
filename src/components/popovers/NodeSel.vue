@@ -1,17 +1,17 @@
 <template>
-    <ion-list class="list">
+    <ion-list class="list" lines="none">
       <div v-for="(option,idx) in options" :key="option.type" class="item">
       <ion-item v-if="option.implemented">
+        <ion-thumbnail slot="start">
+            <img :alt='option.type' :src="option.thumb" />
+        </ion-thumbnail>
+        <ion-checkbox slot="start" v-model="chk[idx]" @ionChange="clk(idx)"></ion-checkbox>
         <ion-label class="label ion-hide-sm-down">
           {{ nodeItem(option.type,"label") }}
         </ion-label>
-          <ion-note class="tooltip  ion-hide-sm-down">
+        <ion-note class="tooltip ion-hide-sm-down">
           {{ nodeItem(option.type,"info") }}
-          </ion-note>
-          <ion-thumbnail slot="start">
-            <img :alt='option.type' :src="option.thumb" />
-          </ion-thumbnail>
-        <ion-checkbox slot="start" v-model="chk[idx]" @ionChange="clk(idx)"></ion-checkbox>
+        </ion-note>
       </ion-item>
     </div>
     </ion-list>
@@ -108,6 +108,20 @@ https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_tooltip
   word-break:break-word;
   overflow: clip; 
 }
+
+
+.list {
+  max-height: 200px;
+  max-width: 400px;
+  overflow-x:hide;
+  overflow-y: scroll;
+  min-width: 14rem;
+}
+
+/* tooltip here ...
+https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_tooltip
+*/
+
 
 
 </style>

@@ -67,6 +67,19 @@ import { faQuestion } from '@fortawesome/free-solid-svg-icons/faQuestion'
 import { faChartArea } from '@fortawesome/free-solid-svg-icons/faChartArea'
 import { faDiagramProject } from '@fortawesome/free-solid-svg-icons/faDiagramProject'
 
+import { faInfo } from '@fortawesome/free-solid-svg-icons/faInfo'
+import { faMessage } from '@fortawesome/free-solid-svg-icons/faMessage'
+import { faComment } from '@fortawesome/free-solid-svg-icons/faComment'
+import { faList } from '@fortawesome/free-solid-svg-icons/faList'
+import { faListCheck } from '@fortawesome/free-solid-svg-icons/faListCheck'
+import { faTag } from '@fortawesome/free-solid-svg-icons/faTag'
+import { faTags } from '@fortawesome/free-solid-svg-icons/faTags'
+import { faHeading } from '@fortawesome/free-solid-svg-icons/faHeading'
+import { faTimeline } from '@fortawesome/free-solid-svg-icons/faTimeline'
+import { faNewspaper } from '@fortawesome/free-solid-svg-icons/faNewspaper'
+import { faPenToSquare } from '@fortawesome/free-solid-svg-icons/faPenToSquare'
+
+
 
 /* add icons to the library */
 library.add(faUserSecret, faTwitter, faMugHot, faCoffee)
@@ -76,7 +89,8 @@ library.add(faBook, faUser, faUserSlash, faHatWizard, faWandMagicSparkles)
 library.add(faSun, faMoon, faCartShopping, faChartArea,faDiagramProject)
 library.add(faRocket, faStar, faReceipt, faDownload, faUpload,faTrashCan)
 library.add(faMagnifyingGlassPlus, faMagnifyingGlassMinus, faExpand,faImage,faQuestion)
-
+library.add(faList, faListCheck, faTag, faTags, faHeading, faTimeline, faNewspaper)
+library.add(faPenToSquare, faInfo, faMessage,faComment)
 
 
 // ----------------

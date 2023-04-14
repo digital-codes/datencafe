@@ -163,7 +163,7 @@ const scrollToTop = () => {
         <ion-grid fixed="true">
           <ion-row>
 
-            <ion-col size="12" size-lg="7">
+            <ion-col size="12" size-lg="7" class="flowArea">
               <div class="headline">
               <h3>{{$t("titles.work.flow")}}
               </h3>
@@ -178,7 +178,7 @@ const scrollToTop = () => {
               <WorkFlowAsync msg="Flow demo" @add-viz="(e) => addViz(e)" @del-viz="(e) => delViz(e)" />
             </ion-col>
 
-            <ion-col  size="12" size-lg="5" sytle="overflow-y:scroll;" id="viz">
+            <ion-col  size="12" size-lg="5" sytle="overflow-y:scroll;" id="viz"  class="chartArea">
               <h3>{{$t("titles.work.view.title")}}</h3>
               <p v-if="FlowLoading"  class="loading">Loading ...</p>
               <!-- 
@@ -283,6 +283,37 @@ ion-button {
   display:block;
   float:right;
 }
+
+@media print {
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Set the page size to A4 */
+    @page {
+      size: A4;
+    }
+
+    /* Center the content horizontally */
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    /* Set the width of the element to the width of A4 minus the margins */
+    .chartArea {
+      width: calc(100vw - 40px);
+      margin: 20px;
+    }
+    /* Set the width of the element to the width of A4 minus the margins */
+    .flowArea {
+      display: none;
+    }
+  }
+
 
 </style>
 

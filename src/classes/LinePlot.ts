@@ -2,6 +2,7 @@
 
 import {DcNode} from "./DcNode"
 import { NodeTypes } from '@/services/GlobalDefs';
+import { DelayTimer } from "@/services/DelayTimer"
 
 export class LinePlot extends DcNode {
   // properties

@@ -811,8 +811,9 @@ const openCtxPopover = async (options: any) => {
   popover.value = await popoverController.create({
       component: CtxPopover,
       //event: ev,
+      cssClass:" popCtx",
       size: "auto",
-      side:"right",
+      side:"left",
       alignment:"start",
       showBackdrop: true,
       backdropDismiss: true, 
@@ -1523,6 +1524,7 @@ async function saveFlow() {
         <font-awesome-icon :icon="['fas', 'expand']" size="2x" class="toolbtn"></font-awesome-icon>
         </ion-button>
       </ion-buttons>
+      <!-- 
       <ion-buttons class="ion-hide-sm-down"  slot="start">
         <ion-button @click="zoomIn">
         <font-awesome-icon :icon="['fas', 'magnifying-glass-plus']" size="2x" class="toolbtn"></font-awesome-icon>
@@ -1551,6 +1553,23 @@ async function saveFlow() {
       <ion-buttons class="ion-hide-sm-down"  slot="start">
         <ion-button @click="panDown">
         <font-awesome-icon :icon="['fas', 'arrow-down']" size="2x" class="toolbtn"></font-awesome-icon>
+      </ion-button>
+      </ion-buttons>
+
+      -->
+      <ion-buttons class="ion-hide-sm-down"  slot="start">
+        <ion-button @click="zoomIn">
+        <font-awesome-icon :icon="['fas', 'question']" size="2x" class="toolbtn"></font-awesome-icon>
+      </ion-button>
+      </ion-buttons>
+      <ion-buttons class="ion-hide-sm-down"  slot="start" >
+        <ion-button @click="zoomOut">
+        <font-awesome-icon :icon="['fas', 'pen-to-square']" size="2x" class="toolbtn"></font-awesome-icon>
+      </ion-button>
+      </ion-buttons>
+      <ion-buttons class="ion-hide-sm-down"  slot="start">
+        <ion-button @click="panRight">
+        <font-awesome-icon :icon="['fas', 'tags']" size="2x" class="toolbtn"></font-awesome-icon>
       </ion-button>
       </ion-buttons>
       <ion-buttons v-if="nodeList.length > 0" slot="end">
@@ -1707,4 +1726,12 @@ async function saveFlow() {
   margin:3px;
 }
 
+
+</style>
+
+<style>
+/* global styling for popovers */
+.popCtx {
+  
+}
 </style>

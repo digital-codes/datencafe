@@ -68,45 +68,6 @@ ion-content.ion-popover::part(scroll) {
     text-align:center;
   }
   
-  .list {
-  max-height: 200px;
-  max-width: 400px;
-  overflow-x:hide;
-  overflow-y: scroll;
-}
-
-/* tooltip here ...
-https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_tooltip
-*/
-
-.item {
-  position: relative;
-  overflow: hidden; 
-}
-.label {
-  position: absolute;
-  top:0;
-  left: 0;
-}
-.tooltip {
-  visibility:hidden;
-  overflow: hidden; 
-  color: #c00;
-  height: 0;
-  font-size: 80%;
-}
-.item:hover .tooltip {
-  visibility:visible;
-  position: absolute;
-  left: 0;
-  top: 0;
-  background: #ddd;
-  width:90%;
-  height:100%;
-  overflow-wrap: break-word;
-  word-break:break-word;
-  overflow: clip; 
-}
 
 
 </style>
