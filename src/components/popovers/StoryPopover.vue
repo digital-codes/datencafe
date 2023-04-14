@@ -2,8 +2,45 @@
   <ion-content class="ion-padding ion-popover">
     <p>{{ $t("flow.cfg.params") }}</p>
     <div>
+      <ion-list>
+        <ion-label>Category</ion-label>
     <ion-item>
-      <ion-textarea placeholder="Type something here" :auto-grow="true" maxlength=1000 wrap="soft" inputmode="text"
+      <ion-select placeholder="Select fruit" v-model="category">
+        <ion-select-option value="apples">Apples</ion-select-option>
+        <ion-select-option value="apples">Apples</ion-select-option>
+        <ion-select-option value="apples">Apples</ion-select-option>
+        <ion-select-option value="apples">Apples</ion-select-option>
+        <ion-select-option value="apples">Apples</ion-select-option>
+        <ion-select-option value="apples">Apples</ion-select-option>
+        <ion-select-option value="apples">Apples</ion-select-option>
+        <ion-select-option value="apples">Apples</ion-select-option>
+        <ion-select-option value="oranges">Oranges</ion-select-option>
+        <ion-select-option value="bananas">Bananas</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+  <ion-list>
+        <ion-label>Tags</ion-label>
+    <ion-item>
+      <ion-select multiple="true" placeholder="Select fruit" v-model="tags">
+        <ion-select-option value="apples">Apples</ion-select-option>
+        <ion-select-option value="apples">Apples</ion-select-option>
+        <ion-select-option value="apples">Apples</ion-select-option>
+        <ion-select-option value="apples">Apples</ion-select-option>
+        <ion-select-option value="apples">Apples</ion-select-option>
+        <ion-select-option value="apples">Apples</ion-select-option>
+        <ion-select-option value="apples">Apples</ion-select-option>
+        <ion-select-option value="apples">Apples</ion-select-option>
+        <ion-select-option value="oranges">Oranges</ion-select-option>
+        <ion-select-option value="bananas">Bananas</ion-select-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
+      <ion-label>Story</ion-label>
+      <ion-item class="storyItem">
+      <ion-textarea class="story" v-model="story" 
+        placeholder="Type something here" :auto-grow="true" maxlength=1000 wrap="soft" inputmode="text"
         value="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tellus sem, auctor accumsan egestas sed, venenatis at ex. Nam consequat ex odio, suscipit rhoncus orci dictum eget. Aenean sit amet ligula varius felis facilisis lacinia nec volutpat nulla. Duis ullamcorper sit amet turpis sed blandit. Integer pretium massa eu faucibus interdum.">
       </ion-textarea>
   </ion-item>
@@ -20,7 +57,8 @@
  * 
  */ 
 import { IonContent, IonButton } from '@ionic/vue';
-import { IonItem, IonTextarea } from '@ionic/vue';
+import { IonLabel, IonItem, IonTextarea } from '@ionic/vue';
+import { IonList, IonSelect, IonSelectOption } from '@ionic/vue';
 
 import { ref, onMounted } from "vue"
 
@@ -35,27 +73,23 @@ export interface CfgValueParms {
     max?: string // 
 }
 
-const vals = ref([])
+const story = ref("")
+const tags = ref([])
+const category = ref("")
 
 const props = defineProps({
   signal:String,
-  options: [] as CfgValueParms[]
 })
 
 onMounted(() => {
-  props.options.forEach(e => vals.value.push(e.value))
+  //props.options.forEach(e => vals.value.push(e.value))
 })
-
-const update = async (id,idx) => {
-  console.log('ev',id,idx,vals.value)
-  //const inp = await getInputElement
-  console.log('signal',props.signal)
-  await eventBus.emit(props.signal, {id:id,value:String(vals.value[idx])} as CfgValueParms);
-}
 
 const close = async () => {
   //console.log('close')
-  await eventBus.emit(props.signal, {"id":"close","value":JSON.stringify(vals.value)} as CfgValueParms);
+  const data = {"tags":tags.value,"category":category.value,"story":story.value}
+  console.log(data)
+  await eventBus.emit(props.signal, {"id":"close","value":JSON.stringify(data)} as CfgValueParms);
 }
 
 </script>
@@ -93,12 +127,13 @@ ion-content.ion-popover::part(scroll) {
   overflow:clip;
   }
 
-
-.popcheck {
-    text-align:center;
-  }
-  
-  
+.storyItem {
+  max-height: 150px;
+  overflow: scroll;
+}
+.story {
+}
+ 
 
 </style>
 

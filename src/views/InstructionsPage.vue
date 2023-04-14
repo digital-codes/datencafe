@@ -7,6 +7,7 @@
       <div id="container">
         <ion-button @click="testVPop">VPop</ion-button>
         <ion-button @click="testSPop">SPop</ion-button>
+        <ion-button @click="testStoryPop">StoryPop</ion-button>
       <ion-card color="light" v-for="(s,i) in items.en" :key="i">
         <ion-card-header>
           <ion-card-title>{{ item(i,"title") }}</ion-card-title>
@@ -35,6 +36,9 @@ import CfgValueParms from "@/components/popovers/CfgValuePopover.vue"
 
 import CfgSelectPop from "@/components/popovers/CfgSelectPopover.vue"
 import CfgSelectParms from "@/components/popovers/CfgSelectPopover.vue"
+
+import StoryPop from "@/components/popovers/StoryPopover.vue"
+
 
 import eventBus from '@/services/eventBus';
 const cfgSignal = "cfgsig"
@@ -124,6 +128,37 @@ const openSPop = async (options: any) => {
     popover.value.open = false
     return x
 }
+
+async function testStoryPop() {
+  console.log("test story pop")
+  const pop = await openStoryPop()
+  console.log("pop done:",pop)
+}
+
+const openStoryPop = async () => {
+  console.log("Open Pop")
+  popover.value = await popoverController.create({
+      component: StoryPop,
+      //event: ev,
+      size: "auto",
+      side:"right",
+      alignment:"start",
+      showBackdrop: true,
+      backdropDismiss: true, 
+      dismissOnSelect: false,
+      reference: "trigger", // event or trigger
+      componentProps: { // Popover props
+          signal: cfgSignal,
+        }
+    })
+    await popover.value.present();
+    popover.value.open = true
+    const x = await popover.value.onDidDismiss();
+    console.log("Dismiss: ",x)
+    popover.value.open = false
+    return x
+}
+
 
 eventBus.on(cfgSignal, (data) => {
       console.log("on cfg:",data)
