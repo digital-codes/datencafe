@@ -57,11 +57,11 @@
           </ion-buttons>
 
           <ion-buttons slot="end" class="lastItem">
-            <div v-if="userStore.exists()">
-              <font-awesome-icon :icon="['fas', 'user']" size="1x" class="token"/>
+            <div v-if="hasToken">
+              <font-awesome-icon :icon="['fas', 'user']" size="1x" class="tok"/>
             </div>
             <div v-else>
-              <font-awesome-icon :icon="['fas', 'user-slash']" size="1x" class="notoken"/>
+              <font-awesome-icon :icon="['fas', 'user-slash']" size="1x" class="notok"/>
             </div>          
           </ion-buttons>
             <!-- 
@@ -83,24 +83,24 @@
   
   <script setup lang="ts">
   import { IonButtons, IonHeader, IonMenuButton, IonTitle, IonToolbar } from '@ionic/vue';
-  import { IonLabel, IonToggle,  IonImage, IonThumbnail, IonSelect, IonSelectOption, } from '@ionic/vue';
+  import { IonLabel, IonList, IonItem, IonToggle,  IonImage, IonThumbnail, IonSelect, IonSelectOption, } from '@ionic/vue';
   import { ref, computed, onMounted } from "vue"
 
     // stores
+    import { LangStore } from '@/services/UserStore'
+    import { Language } from '@/services/UserStore'
+    const language = LangStore()
+
+    import { ThemeStore } from '@/services/UserStore'
+    import { Modes } from '@/services/UserStore'
+    const theme = ThemeStore()
+
     // user store
-    import { UserStore, UserInfo } from '../services/UserStore'
+    import { UserStore, UserInfo } from '@/services/UserStore'
     const userStore = UserStore()
 
-    import { langStore } from '../services/UserStore'
-    import { Language } from '../services/UserStore'
-    const language = langStore()
-
-    import { themeStore } from '../services/UserStore'
-    import { Modes } from '../services/UserStore'
-    const theme = themeStore()
-
     // globals
-    import { Version } from "../services/GlobalDefs"
+    import { Version } from "@/services/GlobalDefs"
 
     const props = defineProps({
     title:String,
@@ -113,14 +113,20 @@
     const { locale, availableLocales } = useI18n({ useScope: 'global' })
 
 const thumb = ref(['fas', 'question'])
-    // init store on mount
-    onMounted(() => {
-      //userStore.clear()
-      selectLanguage()
-      thumb.value = (props.thumb === undefined)? ['fas', 'question'] : ['fas', props.thumb]
-      console.log(props,"Icon:",thumb.value)
+// init store on mount
 
-    })
+const hasToken = computed(() => {
+  return userStore.exists()
+  })
+
+onMounted(async () => {
+  //await userStore.clear()
+  await selectLanguage()
+
+  thumb.value = (props.thumb === undefined)? thumb.value : ['fas', props.thumb]
+  console.log(props,"Icon:",thumb.value)
+
+})
 
     /*
     const changeLanguage = (lang) => {
@@ -145,6 +151,7 @@ const thumb = ref(['fas', 'question'])
     const changeMode = () => {
       dark.value = !dark.value
       theme.set((dark.value? Modes.Dark : Modes.Light))
+      userStore.setDark(dark.value)
       if (theme.get() == Modes.Dark) {
         document.body.classList.add('dark')
       } else {
@@ -229,11 +236,11 @@ ion-thumbnail.logo {
   text-align: left;
 }
 
-.token {
+.tok {
   color: var(--ion-color-primary);
 }
 
-.notoken {
+.notok {
   color: var(--ion-color-warning-shade);
 }
 

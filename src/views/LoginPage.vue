@@ -45,14 +45,14 @@
 
 <script setup lang="ts">
 
-import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
+import { IonButton, IonContent, IonHeader, IonButtons, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
 import { IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent } from '@ionic/vue'
 import { IonInput, IonItem, IonLabel, IonTextarea } from '@ionic/vue';
 import TitleBar from "@/components/TitleBar.vue"
 import { ref } from 'vue';
 
 // user store
-import { UserStore, UserInfo } from '../services/UserStore'
+import { UserStore, UserInfo } from '@/services/UserStore'
 const userStore = UserStore()
 
 const loginGood = ref(false)
@@ -83,7 +83,7 @@ const submitForm = async () => {
         //console.log(token)
         loginGood.value = true
         loginBad.value = false
-        userStore.set(token)
+        await userStore.setToken(token)
         break;
       } else {
         throw (new Error("Request failed: " + String(rsp.status)))
@@ -92,7 +92,6 @@ const submitForm = async () => {
       console.log("Error: ",e.message)
       loginBad.value = true
       loginGood.value = false
-      userStore.clear()
     }
   }
 }

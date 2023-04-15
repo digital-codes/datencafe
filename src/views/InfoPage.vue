@@ -31,8 +31,8 @@
 
 <script setup lang="ts">
 
-import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
-import { IonCard, IonImg, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent } from '@ionic/vue'
+import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonLabel, IonTitle, IonToolbar } from '@ionic/vue';
+import { IonList, IonCard, IonImg, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent } from '@ionic/vue'
 
 import TitleBar from "@/components/TitleBar.vue"
 

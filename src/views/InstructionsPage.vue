@@ -170,7 +170,6 @@ eventBus.on(cfgSignal, (data) => {
           popover.value.dismiss(data,"backdrop")
           break
         default:
-          console.log("Handle data here:",data)
       }
     });
 

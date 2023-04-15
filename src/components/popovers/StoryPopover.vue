@@ -2,7 +2,16 @@
   <ion-content class="ion-padding ion-popover">
     <p>{{ $t("flow.cfg.params") }}</p>
     <div>
-      <ion-list>
+      <ion-item>
+        <ion-input type="text" placeholder="Title" v-model="title" />
+        <ion-input type="text" placeholder="Name" v-model="author" />
+      </ion-item>
+      <ion-item>
+        <ion-input type="email" placeholder="Email" v-model="email" />
+      <ion-input type="text" placeholder="Date" v-model="date" />
+      </ion-item>
+      <ion-item>
+      <ion-list class="list">
         <ion-label>Category</ion-label>
     <ion-item>
       <ion-select placeholder="Select fruit" v-model="category">
@@ -19,7 +28,7 @@
       </ion-select>
     </ion-item>
   </ion-list>
-  <ion-list>
+  <ion-list class="list">
         <ion-label>Tags</ion-label>
     <ion-item>
       <ion-select multiple="true" placeholder="Select fruit" v-model="tags">
@@ -36,12 +45,13 @@
       </ion-select>
     </ion-item>
   </ion-list>
+</ion-item>
 
       <ion-label>Story</ion-label>
       <ion-item class="storyItem">
       <ion-textarea class="story" v-model="story" 
         placeholder="Type something here" :auto-grow="true" maxlength=1000 wrap="soft" inputmode="text"
-        value="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris tellus sem, auctor accumsan egestas sed, venenatis at ex. Nam consequat ex odio, suscipit rhoncus orci dictum eget. Aenean sit amet ligula varius felis facilisis lacinia nec volutpat nulla. Duis ullamcorper sit amet turpis sed blandit. Integer pretium massa eu faucibus interdum.">
+        value="">
       </ion-textarea>
   </ion-item>
     <ion-button @click="close">{{$t("flow.cfg.close")}}</ion-button>
@@ -57,39 +67,63 @@
  * 
  */ 
 import { IonContent, IonButton } from '@ionic/vue';
-import { IonLabel, IonItem, IonTextarea } from '@ionic/vue';
+import { IonLabel, IonItem, IonInput, IonTextarea } from '@ionic/vue';
 import { IonList, IonSelect, IonSelectOption } from '@ionic/vue';
 
 import { ref, onMounted } from "vue"
 
 import eventBus from '@/services/eventBus';
 
-export interface CfgValueParms {
-    id: string // for translation 
-    type: string // ui element type: url, text, number
-    label: string // label
-    value?: string | [] // default and return value 
-    min?: string // 
-    max?: string // 
-}
+import { UserStore, UserInfo } from '@/services/UserStore'
+const userStore = UserStore();
 
+
+const title = ref("")
 const story = ref("")
 const tags = ref([])
 const category = ref("")
+const author = ref("")
+const date = ref("")
+const email = ref("")
 
 const props = defineProps({
-  signal:String,
+  signal:String
 })
 
-onMounted(() => {
+onMounted(async () => {
+  // load from store
+  const story = await userStore.getStory()
+  title.value = story.title 
+  author.value = story.author 
+  email.value = story.email
+  date.value = story.date
+  category.value = story.category
+  tags.value = story.tags
+  story.value = story.text
   //props.options.forEach(e => vals.value.push(e.value))
 })
 
 const close = async () => {
   //console.log('close')
-  const data = {"tags":tags.value,"category":category.value,"story":story.value}
+  const data = {
+    "title":title.value,
+    "author":author.value,
+    "email":email.value,
+    "date":date.value,
+    "tags":tags.value,
+    "category":category.value,
+    "story":story.value
+  }
   console.log(data)
-  await eventBus.emit(props.signal, {"id":"close","value":JSON.stringify(data)} as CfgValueParms);
+  await userStore.setTitle(title.value)
+  await userStore.setAuthor(author.value)
+  await userStore.setDate(date.value)
+  await userStore.setEmail(email.value)
+  await userStore.setCategory(category.value)
+  await userStore.setTags(tags.value)
+  await userStore.setText(story.value)
+  await eventBus.emit(props.signal, {"id":"close"});
+
 }
 
 </script>
@@ -119,7 +153,7 @@ ion-popover {
 
 ion-popover ion-content {
   max-height: calc(80vh - 100px);
-  max-width: calc(100vw - 200px);
+  width: calc(100vw - 200px);
   overflow: clip;
 }
 
@@ -127,13 +161,19 @@ ion-content.ion-popover::part(scroll) {
   overflow:clip;
   }
 
-.storyItem {
-  max-height: 150px;
+textarea {
   overflow: scroll;
+
+}
+.storyItem {
+  max-height: 100px;
 }
 .story {
 }
- 
+
+.list {
+  width:48%;
+}
 
 </style>
 

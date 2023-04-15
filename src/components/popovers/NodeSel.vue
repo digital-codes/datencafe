@@ -112,7 +112,8 @@ https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_tooltip
 
 .list {
   max-height: 200px;
-  max-width: 400px;
+  /* max-width: 400px;*/
+  width:100%;
   overflow-x:hide;
   overflow-y: scroll;
   min-width: 14rem;

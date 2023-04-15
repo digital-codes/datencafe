@@ -8,17 +8,26 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted } from "vue"
+import { onMounted, computed } from "vue"
+import { UserStore, UserInfo } from '@/services/UserStore'
+const userStore = UserStore();
+
 import {
   IonApp,
   IonRouterOutlet,
   IonSplitPane,
+  IonList
 } from '@ionic/vue';
 
 import MainMenu from "@/components/MainMenu.vue";
 
 // do not track ...
-console.log("DNT:",navigator.doNotTrack)
+onMounted(async () => {
+  console.log("DNT:",navigator.doNotTrack)
+  await userStore.clear()
+})
+
+
 
 </script>
 

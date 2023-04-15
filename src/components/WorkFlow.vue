@@ -35,6 +35,10 @@ import eventBus from '@/services/eventBus';
 import { PubStore } from '@/services/PubStore'
 const providers = PubStore()
 
+// user store
+import { UserStore, UserInfo } from '@/services/UserStore'
+const userStore = UserStore()
+
 // delay timer
 import { DelayTimer } from "@/services/DelayTimer"
 
@@ -1472,7 +1476,9 @@ const downUrl = computed(() => {
   // https://stackoverflow.com/questions/72997146/how-to-push-data-to-local-json-file-on-button-click-using-javascript
   try {
     const contentType = 'application/json'
-    const flowData = JSON.stringify({flow:flow,nodes:nodes,data:data,next:nextNode.value},null,2)
+    const story = userStore.getStory()
+    console.log("Story:",story)
+    const flowData = JSON.stringify({flow:flow,nodes:nodes,data:data,next:nextNode.value,story:story},null,2)
     const blob = new Blob([flowData], { type: contentType })
     const url = window.URL.createObjectURL(blob)
     console.log("downurl updated")

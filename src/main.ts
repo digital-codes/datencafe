@@ -98,11 +98,14 @@ library.add(faPenToSquare, faInfo, faMessage,faComment)
 import { createPinia  } from 'pinia'
 const pinia = createPinia()
 
-import { UserStore, UserInfo } from './services/UserStore'
+/*
+import { UserStore, UserInfo } from '@/services/UserStore'
+const userStore = UserStore();
+*/
 
 // ----------------
 // axios
-import UserService from './services/axios';
+import UserService from '@/services/axios';
 const userService = new UserService();
 
 
