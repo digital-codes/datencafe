@@ -33,7 +33,7 @@
       <ion-item class="storyItem">
       <ion-textarea class="story" v-model="story" 
         placeholder="Type something here" :auto-grow="true" maxlength=1000 wrap="soft" inputmode="text"
-        value="">
+        :value="story">
       </ion-textarea>
   </ion-item>
     <ion-button @click="close">{{$t("flow.cfg.close")}}</ion-button>
@@ -98,18 +98,17 @@ const tg = (idx) => {
 
 onMounted(async () => {
   // load from store
-  const story = await userStore.getStory()
+  const oldStory = await userStore.getStory()
   console.log("Old Story:",story)
-  title.value = story.title 
-  author.value = story.author 
-  email.value = story.email
-  date.value = story.date
-  link.value = story.link
-  story.value = story.text
-  category.value = story.category
-  tags.value = story.tags
+  title.value = oldStory.title 
+  author.value = oldStory.author 
+  email.value = oldStory.email
+  date.value = oldStory.date
+  link.value = oldStory.link
+  story.value = oldStory.text
+  category.value = oldStory.category
+  tags.value = oldStory.tags
   //props.options.forEach(e => vals.value.push(e.value))
-  console.log("tags: ${tags}, cats: ${categories}")
 })
 
 const close = async () => {

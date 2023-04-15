@@ -53,13 +53,17 @@ const clr = {
 
 export const UserStore = defineStore({
   id: "userstore",
-  state: () => clr,
+  state: () => JSON.parse(JSON.stringify(clr)),
   actions: {
     clear() {
       console.log("clear user");
       this.token = clr.token;
       this.dark = clr.dark;
       this.lang = clr.lang;
+      this.clearStory()
+    },
+    clearStory() {
+      console.log("clear story");
       this.title = clr.title;
       this.author = clr.author;
       this.email = clr.email;
@@ -68,8 +72,8 @@ export const UserStore = defineStore({
       this.category = clr.category;
       this.tags = clr.tags;
       this.text = clr.text;
-    },
 
+    },
     setToken(tok?: string) {
       if (tok === undefined) {
         throw new Error("Missing token on add()");

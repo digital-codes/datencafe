@@ -2,7 +2,9 @@
   <ion-app>
     <ion-split-pane when="(min-width: 4000px)" content-id="main-content">
       <MainMenu />
-      <ion-router-outlet id="main-content"></ion-router-outlet>
+      
+          <ion-router-outlet id="main-content"></ion-router-outlet>
+
     </ion-split-pane>
   </ion-app>
 </template>
@@ -16,10 +18,12 @@ import {
   IonApp,
   IonRouterOutlet,
   IonSplitPane,
-  IonList
+  IonList,
+  IonPage
 } from '@ionic/vue';
 
 import MainMenu from "@/components/MainMenu.vue";
+import TitleBar from "@/components/TitleBar.vue";
 
 // do not track ...
 onMounted(async () => {

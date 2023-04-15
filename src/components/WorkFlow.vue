@@ -50,11 +50,15 @@ import ImportPopover from '@/components/popovers/ImportPopover.vue';
 import InputselPopover from '@/components/popovers/InputselPopover.vue';
 import NodesPopover from "@/components/popovers/NodesPopover.vue"
 import CtxPopover from "@/components/popovers/CtxPopover.vue"
+
 // config popups
 import CfgValuePop from "@/components/popovers/CfgValuePopover.vue"
 import CfgValueParms from "@/components/popovers/CfgValuePopover.vue"
 import CfgSelectPop from "@/components/popovers/CfgSelectPopover.vue"
 import CfgSelectParms from "@/components/popovers/CfgSelectPopover.vue"
+
+// story pop
+import StoryPop from "@/components/popovers/StoryPopover.vue"
 
 // --------------------
 import NodeSel from '@/components/popovers/NodeSel.vue';
@@ -684,6 +688,30 @@ async function flowInit() {
 
     })
   }
+}
+
+// story popover
+const openStoryPop = async () => {
+  console.log("Open Pop")
+  popover.value = await popoverController.create({
+      component: StoryPop,
+      //event: ev,
+      size: "auto",
+      side:"right",
+      alignment:"start",
+      showBackdrop: true,
+      backdropDismiss: true, 
+      dismissOnSelect: false,
+      reference: "trigger", // event or trigger
+      componentProps: { // Popover props
+          signal: "popUp",
+        }
+    })
+    await popover.value.present();
+    popover.value.open = true
+    const x = await popover.value.onDidDismiss();
+    console.log("Dismiss: ",x)
+    popover.value.open = false
 }
 
 
@@ -1345,14 +1373,25 @@ async function handleFileUpload(event) {
 }
 
 async function initFlow(design: any) {
+  // FIXME version missing
   const fields = Object.keys(design)
   console.log("Fields:", fields)
   if (!fields.includes("flow")) throw (new Error("Flow missing"))
   if (!fields.includes("nodes")) throw (new Error("Nodes missing"))
   if (!fields.includes("data")) throw (new Error("Data missing"))
   if (!fields.includes("next")) throw (new Error("Next missing"))
+  if (!fields.includes("story")) throw (new Error("Story missing"))
   // set next id
   nextNode.value = design.next
+  // set story
+  await userStore.setTitle(design.story.title)
+  await userStore.setAuthor(design.story.author)
+  await userStore.setDate(design.story.date)
+  await userStore.setEmail(design.story.email)
+  await userStore.setLink(design.story.link)
+  await userStore.setCategory(design.story.category)
+  await userStore.setTags(design.story.tags)
+  await userStore.setText(design.story.text)
   // set flow
   try {
     await cy.value.json(design.flow)
@@ -1454,6 +1493,9 @@ async function clearFlow() {
   })
   // remove all nodes
   nodeList.value = []
+  // clear story
+  await userStore.clearStory()
+  console.log(userStore.getStory())
 }
 
 
@@ -1587,7 +1629,7 @@ const toggleTooltips = () => {
         </ion-button>
       </ion-buttons>
       <ion-buttons slot="start">
-        <ion-button id="storyRef" @click="editStory">
+        <ion-button id="storyRef" @click="openStoryPop">
           <font-awesome-icon :icon="['fas', 'pen-to-square']" size="2x" class="toolbtn"></font-awesome-icon>
         </ion-button>
       </ion-buttons>
