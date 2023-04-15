@@ -31,6 +31,7 @@
     "cytoscape-edgehandles": "^4.0.1",
     "danfojs": "^1.1.2",
     "ionicons": "^6.0.3",
+    "jspdf": "^2.5.1",
     "leaflet": "^1.9.3",
     "mitt": "^3.0.0",
     "moment-timezone": "^0.5.41",

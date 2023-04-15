@@ -8,6 +8,7 @@
         <ion-button @click="testVPop">VPop</ion-button>
         <ion-button @click="testSPop">SPop</ion-button>
         <ion-button @click="testStoryPop">StoryPop</ion-button>
+        <ion-button @click="pdfgen">PDF</ion-button>
       <ion-card color="light" v-for="(s,i) in items.en" :key="i">
         <ion-card-header>
           <ion-card-title>{{ item(i,"title") }}</ion-card-title>
@@ -28,6 +29,30 @@
 import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
 import { IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent } from '@ionic/vue'
 import TitleBar from "@/components/TitleBar.vue"
+
+// --------- testing pdf --------
+import { jsPDF } from "jspdf";
+/*
+*/
+async function pdfgen() {
+
+  // Default export is a4 paper, portrait, using millimeters for units
+  const options = {
+    format: "a4",
+    orientation: "landscape",
+    unit: "mm"
+  }
+  const doc = new jsPDF(options);
+
+  doc.text("Hello world!", 10, 10);
+
+  doc.addPage(options)
+  const img = "http://localhost:8080/img/info/Data%2C_Information%2C_Knowledge%2C_and_Wisdom_-rtwGimli_keynote_by_%40Nora3000_-viznotes_%2842038113741%29.jpg"
+  doc.addImage(img, "JPG", 10,10, 160, 80, "IMG")
+  doc.save("a4.pdf");
+
+}
+
 
 // ------- testing ----
 import { popoverController } from '@ionic/vue';
