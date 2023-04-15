@@ -1,6 +1,7 @@
 {
   "en": {
     "fields":{
+      "heading":"Description",
       "catLabel":"Category",
       "tagLabel":"Tags",
       "cats":"Select Category",
@@ -9,7 +10,8 @@
       "email":"Email",
       "date":"Date",
       "link":"Link",
-      "title":"Title"
+      "title":"Title",
+      "text":"Story text here..."
     },
     "categories": {
       "labels": [
@@ -54,6 +56,7 @@
   },
   "de": {
     "fields":{
+      "heading":"Beschreibung",
       "catLabel":"Kategorien",
       "tagLabel":"Tags",
       "cats":"Kategorie wählen",
@@ -62,7 +65,8 @@
       "email":"Email",
       "date":"Datum",
       "link":"Link",
-      "title":"Titel"
+      "title":"Titel",
+      "text":"Hier kommt die Datengeschichte ..."
     },
     "categories": {
       "labels": [

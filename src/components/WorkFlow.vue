@@ -696,8 +696,9 @@ const openStoryPop = async () => {
   popover.value = await popoverController.create({
       component: StoryPop,
       //event: ev,
-      size: "auto",
-      side:"right",
+      size: "cover",
+      side:"left",
+      cssClass:"storyPop",
       alignment:"start",
       showBackdrop: true,
       backdropDismiss: true, 

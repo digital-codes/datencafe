@@ -1,38 +1,47 @@
 <template>
-  <ion-content class="ion-padding ion-popover">
-    <p>{{ $t("flow.cfg.params") }}</p>
+  <ion-content class="ion-padding ion-popover storyPop">
+    <!-- 
+    <p>{{ labels[locale].fields.heading }}</p>
+
+    -->
     <div>
-      <ion-item>
+      <ion-item >
         <ion-input type="text" :placeholder="labels[locale].fields.title" v-model="title" />
+      </ion-item>
+      <ion-item >
         <ion-input type="text" :placeholder="labels[locale].fields.author" v-model="author" />
+        <ion-input type="text" :placeholder="labels[locale].fields.date" v-model="date" />
       </ion-item>
       <ion-item>
         <ion-input type="email" :placeholder="labels[locale].fields.email" v-model="email" />
-      <ion-input type="text" :placeholder="labels[locale].fields.date" v-model="date" />
       </ion-item>
       <ion-item>
       <ion-list class="list">
         <ion-label>{{ labels[locale].fields.catLabel }}</ion-label>
-    <ion-item>
+      <ion-item>
       <ion-select :placeholder="labels[locale].fields.cats" v-model="category">
         <ion-select-option v-for="(c,idx) in labels['en'].categories.labels" :key="idx" :value="cats(idx).label">{{cats(idx).label}}</ion-select-option>
       </ion-select>
-    </ion-item>
-  </ion-list>
-  <ion-list class="list">
+      </ion-item>
+      </ion-list>
+      </ion-item>
+
+      <ion-item>
+      <ion-list class="list">
         <ion-label>{{ labels[locale].fields.tagLabel }}</ion-label>
-    <ion-item>
-      <ion-select multiple="true" :placeholder="labels[locale].fields.tags" v-model="tags">
+        <ion-item>
+        <ion-select multiple="true" :placeholder="labels[locale].fields.tags" v-model="tags">
         <ion-select-option v-for="(t,idx) in labels['en'].tags" :key="idx" :value="tg(idx)">{{tg(idx)}}</ion-select-option>
       </ion-select>
-    </ion-item>
-  </ion-list>
-</ion-item>
-
+      </ion-item>
+      </ion-list>
+      </ion-item>
+      <!-- 
       <ion-label>Story</ion-label>
+      -->
       <ion-item class="storyItem">
       <ion-textarea class="story" v-model="story" 
-        placeholder="Type something here" :auto-grow="true" maxlength=1000 wrap="soft" inputmode="text"
+      :placeholder="labels[locale].fields.text" :auto-grow="true" maxlength=1000 wrap="soft" inputmode="text"
         :value="story">
       </ion-textarea>
   </ion-item>
@@ -139,7 +148,7 @@ const close = async () => {
 </script>
 
 
-<style>
+<style scoped>
 
 ion-buttons {
   /*
@@ -147,7 +156,7 @@ ion-buttons {
   */
 }
 
-ion-popover {
+ion-popover.storyPop {
   margin:5px;
   --width: auto;
   --height: auto;
@@ -161,15 +170,21 @@ ion-popover {
   */
 }
 
-ion-popover ion-content {
-  max-height: calc(80vh - 100px);
-  width: calc(100vw - 200px);
+ion-popover.storyPop ion-content {
+  height: calc(80vh - 20px);
+  width: calc(100vw - 20px);
+  --height: calc(80vh - 20px);
+  --width: calc(100vw - 20px);
   overflow: clip;
 }
 
 ion-content.ion-popover::part(scroll) {
   overflow:clip;
   }
+
+.storyPop {
+  min-width:300px;
+}
 
 textarea {
   overflow: scroll;

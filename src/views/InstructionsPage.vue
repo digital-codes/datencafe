@@ -8,10 +8,10 @@
         <!-- 
         <ion-button @click="testVPop">VPop</ion-button>
         <ion-button @click="testSPop">SPop</ion-button>
+        -->
         <ion-button @click="testStoryPop">StoryPop</ion-button>
         <ion-button @click="pdfgen">PDF</ion-button>
 
-        -->
       <ion-card color="light" v-for="(s,i) in items.en" :key="i">
         <ion-card-header>
           <ion-card-title>{{ item(i,"title") }}</ion-card-title>
@@ -48,6 +48,11 @@ async function pdfgen() {
   const doc = new jsPDF(options);
 
   doc.text("Hello world!", 10, 10);
+  doc.text("Hello world!", 10, 20);
+  doc.text("Hello wo  rld!", 10, 30);
+  doc.text("Hello world!", 10, 40);
+  doc.text("Hello world!", 10, 50);
+  doc.text("Hello world!", 10, 60);
 
   doc.addPage(options)
   const img = "http://localhost:8080/img/info/Data%2C_Information%2C_Knowledge%2C_and_Wisdom_-rtwGimli_keynote_by_%40Nora3000_-viznotes_%2842038113741%29.jpg"
@@ -168,8 +173,9 @@ const openStoryPop = async () => {
   popover.value = await popoverController.create({
       component: StoryPop,
       //event: ev,
-      size: "auto",
-      side:"right",
+      size: "cover",
+      side:"left",
+      cssClass:"storyPop",
       alignment:"start",
       showBackdrop: true,
       backdropDismiss: true, 
@@ -270,5 +276,30 @@ ion-label.attribution {
   background: #eee;
 }
 
+ion-popover.storyPop {
+  --offset-y:10px;
+}
+/*
+html.ion-ce.plt-iphone.plt-ios.plt-mobile.plt-mobileweb.ios body.backdrop-no-scroll div#app ion-app.ios.ion-page ion-popover#ion-overlay-2.storyPop.ios.popover-side-right div.popover-viewport ion-content.ion-padding.ion-popover.ios.content-sizing.overscroll.content-ltr
+
+.ion-padding
+/html/body/div/ion-app/ion-popover/div/ion-content
+
+*/
+
+
+</style>
+
+
+<style>
+
+ion-popover.storyPop ion-content {
+  background: #eef;
+  --background: #eef;
+  --border-radius: 8px;
+  line-height: 2rem;
+  overflow: clip;
+  width: 300px; 
+}
 
 </style>
