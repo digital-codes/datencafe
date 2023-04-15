@@ -1681,7 +1681,7 @@ const toggleTooltips = () => {
       </ion-buttons>
 
       <ion-buttons slot="start">
-        <ion-button id="storyRef" @click="editStory">
+        <ion-button id="storyRef" @click="openStoryPop">
           <font-awesome-icon :icon="['fas', 'pen-to-square']" size="sm" class="toolbtn"></font-awesome-icon>
         </ion-button>
       </ion-buttons>
