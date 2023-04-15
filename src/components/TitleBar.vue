@@ -24,16 +24,16 @@
 
           <ion-buttons slot="end">
           <div>
+            <!-- 
               <ion-item id="modeRef" >
-                <!-- 
-                <ion-label class="modeLbl left">{{ $t("light") }}</ion-label>
-                -->
                 <font-awesome-icon :icon="['fas', 'sun']" size="1x" class="modeLbl left"/>
-                <ion-toggle @ionChange="changeMode" :checked="false"></ion-toggle>
+                <ion-toggle @ionChange="changeMode" :checked="dark1"></ion-toggle>
                 <font-awesome-icon :icon="['fas', 'moon']" size="1x" class="modeLbl right"/>
-                <!-- 
-                <ion-label class="modeLbl right">{{ $t("dark") }}</ion-label>
-                -->
+              </ion-item>
+            -->
+              <ion-item id="modeRef" >
+                <font-awesome-icon v-if="isDark" button @click="changeMode" :icon="['fas', 'sun']" size="1x" class="modeLbl"/>
+                <font-awesome-icon v-if="!isDark" button @click="changeMode" :icon="['fas', 'moon']" size="1x" class="modeLbl"/>
               </ion-item>
 
             </div>
@@ -49,8 +49,16 @@
             </div>
             
             <ion-list>
+              <!-- 
               <ion-item>
                 <ion-select placeholder="Lang" interface="popover" @ionChange="selectLanguage" v-model="langSel">
+                  <ion-select-option v-for="(l,idx) in availableLocales" :key="idx" :value="langSel">{{upper(l)}}</ion-select-option>
+                </ion-select>
+              </ion-item>
+
+              -->
+              <ion-item>
+                <ion-select :placeholder="upper(langSel)" interface="popover" @ionChange="selectLanguage" v-model="language">
                   <ion-select-option v-for="(l,idx) in availableLocales" :key="idx" :value="l">{{upper(l)}}</ion-select-option>
                 </ion-select>
               </ion-item>
@@ -58,12 +66,8 @@
           </ion-buttons>
 
           <ion-buttons slot="end" class="lastItem" id="userRef">
-            <div v-if="hasToken">
-              <font-awesome-icon :icon="['fas', 'user']" size="1x" class="tok"/>
-            </div>
-            <div v-else>
-              <font-awesome-icon :icon="['fas', 'user-slash']" size="1x" class="notok"/>
-            </div>          
+              <font-awesome-icon v-if="hasToken" :icon="['fas', 'user']" size="1x" class="tok"/>
+              <font-awesome-icon v-else :icon="['fas', 'user-slash']" size="1x" class="notok"/>
           </ion-buttons>
             <!-- 
           <ion-buttons slot="end">
@@ -88,11 +92,11 @@
       <ion-popover trigger="langRef" trigger-action="hover" show-backdrop="false" size="auto" side="bottom" alignment="start">
               <ion-content class="ion-padding">{{ $t("tooltip.lang") }}</ion-content>
       </ion-popover>
-      <ion-popover trigger="userRef" trigger-action="hover" show-backdrop="false" size="auto" side="bottom" alignment="start">
-        <ion-content class="ion-padding">{{ $t("tooltip.user") }}</ion-content>
+      -->
+      <ion-popover cssClass="custom-popover-class" trigger="userRef" trigger-action="click" show-backdrop="false" size="auto" side="bottom" alignment="start">
+        <ion-content class="ion-padding">{{ $t(userText) }}</ion-content>
       </ion-popover>
 
-      -->
 
   </template>
   
@@ -103,13 +107,9 @@
   import { ref, computed, onMounted } from "vue"
 
     // stores
-    import { LangStore } from '@/services/UserStore'
     import { Language } from '@/services/UserStore'
-    const language = LangStore()
 
-    import { ThemeStore } from '@/services/UserStore'
     import { Modes } from '@/services/UserStore'
-    const theme = ThemeStore()
 
     // user store
     import { UserStore, UserInfo } from '@/services/UserStore'
@@ -138,12 +138,21 @@ const hasToken = computed(() => {
   return userStore.exists()
   })
 
+const userText = computed(() => {
+  return hasToken.value?"tooltip.signedin":"tooltip.signedout"
+})
+
 onMounted(async () => {
   //await userStore.clear()
   await selectLanguage()
 
+  // read mode
+  dark.value = userStore.getDark()
+  
   thumb.value = (props.thumb === undefined)? thumb.value : ['fas', props.thumb]
   console.log(props,"Icon:",thumb.value)
+
+
 
 })
 
@@ -154,30 +163,42 @@ onMounted(async () => {
       //console.log("Lang store:",language.get())
     };    
     */
-    const langSel = ref(locale.value)
+    //const langSel = ref(locale.value)
+    const langSel = computed(() => (userStore.getLang()))
+    const language = ref(locale.value)
+    /*
     const selectLanguage = () => {
       console.log("L:",langSel.value)
-      language.set(langSel.value as Language)
-      locale.value = language.get()
+      userStore.setLang(langSel.value as Language)
+      locale.value = userStore.getLang()
+      console.log("Current lang:",locale.value)
+    }
+    */
 
+    const selectLanguage = () => {
+      console.log("L:",language.value)
+      userStore.setLang(language.value as Language)
+      locale.value = userStore.getLang()
+      console.log("Current lang:",locale.value, langSel.value)
     }
 
     const upper = (s) => s.toUpperCase()
 
     // theme switch
-    const dark = ref(false)
+    const dark = ref(Modes.Dark)
+    const isDark = computed(() => (userStore.getDark() == Modes.Dark) )
 
     const changeMode = () => {
-      dark.value = !dark.value
-      theme.set((dark.value? Modes.Dark : Modes.Light))
+      console.log("Change mode, now ",dark.value)
+      dark.value = (dark.value == Modes.Dark)?Modes.Light:Modes.Dark
       userStore.setDark(dark.value)
-      if (theme.get() == Modes.Dark) {
+      if (userStore.getDark() == Modes.Dark) {
         document.body.classList.add('dark')
       } else {
         document.body.classList.remove('dark')
-
       }
       // document.body.classList.toggle('dark', (theme.get() == Modes.Dark));
+      console.log("Final mode is dark:",isDark.value)
     };    
 
 
@@ -219,6 +240,13 @@ ion-thumbnail.logo {
   ion-thumbnail.logo {
     --size:48px;
   }
+
+  .custom-popover-class {
+  --offset-y: 30px;
+  }
+
+
+
 }
 
 
@@ -285,6 +313,7 @@ ion-thumbnail.logo {
 
 .lastItem {
   margin-right: 1rem;
+  margin-left: 1rem;
 }
 </style>
   

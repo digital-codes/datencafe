@@ -27,6 +27,8 @@
     "mode":"Hell/Dunkel",
     "lang":"Sprache",
     "user":"Anmeldung",
+    "signedin":"Angemeldet",
+    "signedout":"Abgemeldet",
     "scrollup":"Zum Flow",
     "scrolldown":"Zu den Ansichten"
   },

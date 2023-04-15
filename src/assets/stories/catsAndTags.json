@@ -1,0 +1,108 @@
+{
+  "en": {
+    "fields":{
+      "catLabel":"Category",
+      "tagLabel":"Tags",
+      "cats":"Select Category",
+      "tags":"Select Tag(s)",
+      "author":"Name",
+      "email":"Email",
+      "date":"Date",
+      "link":"Link",
+      "title":"Title"
+    },
+    "categories": {
+      "labels": [
+        "General Life",
+        "Climate",
+        "Science",
+        "Government",
+        "Health",
+        "Nature",
+        "Sustainability"
+      ],
+      "icons": [
+        "fa-people-roof",
+        "fa-cloud-sun-rain",
+        "fa-microscope",
+        "fa-landmark-flag",
+        "fa-book-medical",
+        "fa-leaf",
+        "fa-recycle"
+      ]
+    },
+    "tags": [
+      "Personal Finance",
+      "Mobility",
+      "Tourism",
+      "Art",
+      "Government Policies",
+      "Public Administration",
+      "Human Rights",
+      "Natural Science",
+      "Geo",
+      "Humanities",
+      "Nutrition",
+      "Health",
+      "Wildlife",
+      "Climate Change",
+      "Natural Disasters",
+      "Renewable Energy",
+      "Sustainable Production",
+      "Circular Economy"
+    ]
+  },
+  "de": {
+    "fields":{
+      "catLabel":"Kategorien",
+      "tagLabel":"Tags",
+      "cats":"Kategorie wählen",
+      "tags":"Tag(s) wählen",
+      "author":"Name",
+      "email":"Email",
+      "date":"Datum",
+      "link":"Link",
+      "title":"Titel"
+    },
+    "categories": {
+      "labels": [
+        "Allgemeines Leben",
+        "Politik",
+        "Wissenschaft",
+        "Regierung",
+        "Gesundheit",
+        "Natur",
+        "Nachhaltigkeit"
+      ],
+      "icons": [
+        "fa-people-roof",
+        "fa-cloud-sun-rain",
+        "fa-microscope",
+        "fa-landmark-flag",
+        "fa-book-medical",
+        "fa-leaf",
+        "fa-recycle"
+      ]
+    },
+    "tags": [
+      "Persönliche Finanzen",
+      "Mobilität",
+      "Tourismus",
+      "Kunst",
+      "Regierungspolitik",
+      "Öffentliche Verwaltung",
+      "Menschenrechte",
+      "Naturwissenschaften",
+      "Geo",
+      "Geisteswissenschaften",
+      "Ernährung",
+      "Gesundheit",
+      "Wildnis",
+      "Klimawandel",
+      "Naturkatastrophen",
+      "Erneuerbare Energie",
+      "Nachhaltige Produktion",
+      "Kreislaufwirtschaft"
+    ]
+  }
+}

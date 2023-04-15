@@ -14,7 +14,7 @@ https://github.com/cytoscape/cytoscape.js-cxtmenu
 // no context menu!
 import edgehandles from 'cytoscape-edgehandles';
 // register extensions
-cytoscape.use( edgehandles );
+cytoscape.use(edgehandles);
 
 
 import type { ElementDefinition, Stylesheet } from 'cytoscape';
@@ -57,7 +57,7 @@ import CfgSelectPop from "@/components/popovers/CfgSelectPopover.vue"
 import CfgSelectParms from "@/components/popovers/CfgSelectPopover.vue"
 
 // --------------------
-import NodeSel  from '@/components/popovers/NodeSel.vue';
+import NodeSel from '@/components/popovers/NodeSel.vue';
 import nodeTypes from "@/assets/nodes/nodeTypes.json"
 import { nodeFactory } from "@/services/NodeFactory"
 import { NodeTypes } from '@/services/GlobalDefs';
@@ -70,7 +70,7 @@ import { IonButtons, IonToolbar } from '@ionic/vue';
 
 const props = defineProps<{ msg: string }>()
 
-const emit = defineEmits(["addViz","delViz"])
+const emit = defineEmits(["addViz", "delViz"])
 
 const count = ref(0)
 const theFlow = ref(null)
@@ -135,20 +135,20 @@ const elements: ElementDefinition[] = [ // list of graph elements to start with
 // see https://stackoverflow.com/questions/58136352/cytoscape-js-position-label-text-on-top-of-edge
 
 const style: Stylesheet[] = [ // the stylesheet for the graph
-{
+  {
     selector: 'node[name]',
     style: {
       'label': 'data(name)',
       "text-valign": "bottom",
-      "text-halign": "center",    
-        'background-fit': 'contain',
-        'background-color': '#fff',
-        'shape': 'rectangle',
-        'width': '30px',
-        'height': '30px',
-        'border-width': '2px',
-        /*'border-color': '#000'*/
-      }    
+      "text-halign": "center",
+      'background-fit': 'contain',
+      'background-color': '#fff',
+      'shape': 'rectangle',
+      'width': '30px',
+      'height': '30px',
+      'border-width': '2px',
+      /*'border-color': '#000'*/
+    }
   },
   /* warnung during new edges
   {
@@ -163,7 +163,7 @@ const style: Stylesheet[] = [ // the stylesheet for the graph
   {
     selector: 'node[type.shp]',
     style: {
-      "shape":"data(type.shp)",
+      "shape": "data(type.shp)",
     }
   },
   {
@@ -193,41 +193,41 @@ const style: Stylesheet[] = [ // the stylesheet for the graph
     selector: 'edge[type]',
     style: {
       'label': 'data(type)',
-      "font-size":"10px",
+      "font-size": "10px",
       "text-rotation": "autorotate",
-        "text-margin-x": "0px",
-        "text-margin-y": "0px" 
-      }
+      "text-margin-x": "0px",
+      "text-margin-y": "0px"
+    }
   },
   {
     //selector: 'edge[type].dark',
     selector: 'edge[dark]',
     style: {
-      "color":"#f88",
-      "background-color":"#000",
-      }
+      "color": "#f88",
+      "background-color": "#000",
+    }
   },
   // edge extension
   {
     selector: '.eh-preview',
     style: {
-      "opacity":1, 
+      "opacity": 1,
       'background-color': 'red',
       'line-color': 'red',
       'target-arrow-color': 'blue',
       'source-arrow-color': 'red'
     }
-  },    
+  },
   {
     selector: '.eh-ghost-edge',
     style: {
-      "opacity":0,
+      "opacity": 0,
       'background-color': 'green',
       'line-color': 'green',
       'target-arrow-color': 'blue',
       'source-arrow-color': 'red'
     }
-  },    
+  },
   {
     selector: '.eh-source',
     style: {
@@ -261,12 +261,12 @@ const eh = ref()
 //const ctxMenu = ref()
 
 const ctxOptions = {
-    // Customize event to bring up the context menu
-    // Possible options https://js.cytoscape.org/#events/user-input-device-events
-    evtType: 'cxttap',
-    // List of initial menu items
-    // A menu item must have either onClickFunction or submenu or both
-    menuItems: [
+  // Customize event to bring up the context menu
+  // Possible options https://js.cytoscape.org/#events/user-input-device-events
+  evtType: 'cxttap',
+  // List of initial menu items
+  // A menu item must have either onClickFunction or submenu or both
+  menuItems: [
     {
       id: 'edge1',
       content: 'Connect',
@@ -277,7 +277,7 @@ const ctxOptions = {
         //console.log("Start edge on:",target, target._private.data.id)
         cy.value.edgehandles('enable').disableDrawMode();
         const nd = await cy.value.getElementById(target.data("id"))
-        nd.data("edge","e1") // set a source type
+        nd.data("edge", "e1") // set a source type
         //console.log("Node:",nd)
         cy.value.edgehandles().start(nd)
       },
@@ -308,10 +308,10 @@ const ctxOptions = {
       selector: 'edge',
       onClickFunction: async (event: EventObject) => {
         const { target } = event;
-        console.log("Remove edge:",target)
+        console.log("Remove edge:", target)
         const src = target.data().source
         const dst = target.data().target
-        console.log("S-T:",src,dst)
+        console.log("S-T:", src, dst)
         cy.value.remove(target);
       },
       disabled: false
@@ -346,111 +346,111 @@ const ctxOptions = {
       },
       disabled: false
     },
-    ],
-    // css classes that menu items will have
-    menuItemClasses: [
-      "ctx-item"
-      // add class names to this list
-    ],
-    // css classes that context menu will have
-    contextMenuClasses: [
-      "ctx-menu"
-      // add class names to this list
-    ],
-    // Indicates that the menu item has a submenu. If not provided default one will be used
-    //submenuIndicator: { src: '/submenu-indicator-default.svg', width: 12, height: 12 }
-    submenuIndicator: { src: "/assets/icon/arrow-right.svg", width: 12, height: 12 }
-  };
+  ],
+  // css classes that menu items will have
+  menuItemClasses: [
+    "ctx-item"
+    // add class names to this list
+  ],
+  // css classes that context menu will have
+  contextMenuClasses: [
+    "ctx-menu"
+    // add class names to this list
+  ],
+  // Indicates that the menu item has a submenu. If not provided default one will be used
+  //submenuIndicator: { src: '/submenu-indicator-default.svg', width: 12, height: 12 }
+  submenuIndicator: { src: "/assets/icon/arrow-right.svg", width: 12, height: 12 }
+};
 
 const edgeOptions = {
-  edgeParams: function( sourceNode: NodeSingular, targetNode: NodeSingular ){
+  edgeParams: function (sourceNode: NodeSingular, targetNode: NodeSingular) {
     console.log("eparms")
     // for edges between the specified source and target
     // return element object to be passed to cy.add() for edge
     return {};
   },
-    hoverDelay: 150, // time spent hovering over a target node before it is considered selected
-    snap: true, // when enabled, the edge can be drawn by just moving close to a target node (can be confusing on compound graphs)
-    loopAllowed: false,
-    snapThreshold: 50, // the target node must be less than or equal to this many pixels away from the cursor/finger
-    snapFrequency: 15, // the number of times per second (Hz) that snap checks done (lower is less expensive)
-    noEdgeEventsInDraw: true, // set events:no to edges during draws, prevents mouseouts on compounds
-    disableBrowserGestures: true // during an edge drawing gesture, disable browser gestures such as two-finger trackpad swipe and pinch-to-zoom
-     
+  hoverDelay: 150, // time spent hovering over a target node before it is considered selected
+  snap: true, // when enabled, the edge can be drawn by just moving close to a target node (can be confusing on compound graphs)
+  loopAllowed: false,
+  snapThreshold: 50, // the target node must be less than or equal to this many pixels away from the cursor/finger
+  snapFrequency: 15, // the number of times per second (Hz) that snap checks done (lower is less expensive)
+  noEdgeEventsInDraw: true, // set events:no to edges during draws, prevents mouseouts on compounds
+  disableBrowserGestures: true // during an edge drawing gesture, disable browser gestures such as two-finger trackpad swipe and pinch-to-zoom
+
 }
 
 const extraItem = {
-      id: 'n-extra',
-      content: 'Extra',
-      tooltipText: 'Extra',
-      selector: 'node',
-      onClickFunction: (event: EventObject) => {
-        const { target } = event;
-        console.log("Extra on :",target)
-      },
-      disabled: false
+  id: 'n-extra',
+  content: 'Extra',
+  tooltipText: 'Extra',
+  selector: 'node',
+  onClickFunction: (event: EventObject) => {
+    const { target } = event;
+    console.log("Extra on :", target)
+  },
+  disabled: false
 }
 
 watch(
-  flowLoaded,(a) => {
-    console.log("loaded:",a)
+  flowLoaded, (a) => {
+    console.log("loaded:", a)
     if (a) {
       console.log("Next")
       /* 
        await nextTick() // not enough
       flowInit()
       */
-      setTimeout(flowInit,100)
+      setTimeout(flowInit, 100)
     }
   }
 )
 
 
 //onMounted(async () => {
-async function flowInit  ()  {
-    console.log("CTR:",theFlow.value)
-    cy.value = await cytoscape({
-      container: theFlow.value,
-      layout:layout,
-      style:style,
-      elements:elements,
-      // initial viewport state:
-      zoom: 1,
-      minZoom: 1,
-      maxZoom: 10,
-      pan: { x: 0, y: 0 },
-      /*
-      panningEnabled: {
-        // set the panning step to 100 pixels
-        step: 10
-      },
-      */
-      wheelSensitivity: 0.2,
-    })
-    if (!cy.value) {
-      console.log("cy falied")
-    } else {
-      await cy.value.center()
-      await cy.value.fit()
-      // edge handles
-      eh.value = await cy.value.edgehandles( edgeOptions )
-      // context menu
-      //ctxMenu.value = await cy.value.contextMenus(ctxOptions)
-      // append. works ... usable via show/hide 
-      // await ctxMenu.value.appendMenuItem(extraItem)
-      // 
-      const j = await cy.value.json()
-      console.log("JSON:",j)
-  
+async function flowInit() {
+  console.log("CTR:", theFlow.value)
+  cy.value = await cytoscape({
+    container: theFlow.value,
+    layout: layout,
+    style: style,
+    elements: elements,
+    // initial viewport state:
+    zoom: 1,
+    minZoom: 1,
+    maxZoom: 10,
+    pan: { x: 0, y: 0 },
+    /*
+    panningEnabled: {
+      // set the panning step to 100 pixels
+      step: 10
+    },
+    */
+    wheelSensitivity: 0.2,
+  })
+  if (!cy.value) {
+    console.log("cy falied")
+  } else {
+    await cy.value.center()
+    await cy.value.fit()
+    // edge handles
+    eh.value = await cy.value.edgehandles(edgeOptions)
+    // context menu
+    //ctxMenu.value = await cy.value.contextMenus(ctxOptions)
+    // append. works ... usable via show/hide 
+    // await ctxMenu.value.appendMenuItem(extraItem)
+    // 
+    const j = await cy.value.json()
+    console.log("JSON:", j)
+
     // add callbacks
     // NB: adding edges will cause temporary edge and node-add/remove event in addition to
     // the final add  
-    cy.value.on('select', 'node', function(event: EventObject) {
+    cy.value.on('select', 'node', function (event: EventObject) {
       const node = event.target;
       console.log('Node ' + node.id() + ' was selected');
     });
 
-    cy.value.on('unselect', 'node', function(event: EventObject) {
+    cy.value.on('unselect', 'node', function (event: EventObject) {
       const node = event.target;
       console.log('Node ' + node.id() + ' was deselected');
     });
@@ -484,12 +484,12 @@ async function flowInit  ()  {
         return
       }
       // check ports, init with first item
-      let port = {data:Object.keys(t.data("ports"))[0]}
+      let port = { data: Object.keys(t.data("ports"))[0] }
       let block = false
       const tp = t.data("ports")
       //
       const portsAvail = Object.keys(tp).filter(key => !tp[key])
-      console.log("Available ports:",portsAvail)
+      console.log("Available ports:", portsAvail)
       if (portsAvail == 0) {
         console.log("No free ports")
         block = true
@@ -497,21 +497,21 @@ async function flowInit  ()  {
         // check popover
         if (Object.keys(tp).length > 1) {
           port = await openInputSel(tp)
-          console.log("Port:",port)
+          console.log("Port:", port)
           if (port.role != "button") {
             // FIXME throws error on removing edge
             // doint later with block seems to be fine
             console.log("Selection cancelled")
             block = true
             //await addedEdge.remove()
-          } 
+          }
         }
         // add edge name
-        console.log("from ",s.data("name"), " to ",t.data("name"),", port: ",port.data)
-        await e.data("type",s.data("edge") + "-" + port.data)
+        console.log("from ", s.data("name"), " to ", t.data("name"), ", port: ", port.data)
+        await e.data("type", s.data("edge") + "-" + port.data)
         await s.removeData("edge")
         // we have a new connection from s to t. set up messaging
-        const targetIdx = nodeList.value.findIndex(item => item.id == t.id()) 
+        const targetIdx = nodeList.value.findIndex(item => item.id == t.id())
         if (targetIdx == -1) throw (new Error("Invalid instance"))
         const targetInstance = nodeList.value[targetIdx]
         const signal = Signals.UPDPREFIX + s.id()
@@ -541,9 +541,9 @@ async function flowInit  ()  {
         // update node data
         t.data("ports")[port.data] = true
         // update edge data
-        await e.data("port",port.data)
+        await e.data("port", port.data)
       } else {
-        console.log("Removing edge",e.id())
+        console.log("Removing edge", e.id())
         if (e.id() !== undefined) {
           try {
             console.log("NOW")
@@ -551,7 +551,7 @@ async function flowInit  ()  {
             //await addedEdge.remove()
             console.log("removed ...")
           } catch (err) {
-            console.log("remove failed:",err.message)
+            console.log("remove failed:", err.message)
           }
         }
       }
@@ -579,14 +579,14 @@ async function flowInit  ()  {
     // dbltab copy of dblclick
     // try taphold instead of dbltap. latter not working on ios?
     // taphold alos not working
-    cy.value.on('taphold', "node", async function(event: EventObject) {
+    cy.value.on('taphold', "node", async function (event: EventObject) {
       const pos = event.position || event.cyPosition;
-      console.log('Node dbltap or dblclick at ',pos,event.target.data("id"), event);
+      console.log('Node dbltap or dblclick at ', pos, event.target.data("id"), event);
       const id = event.target.data("id")
       const idx = nodeList.value.findIndex(e => e.id == id)
-      if (idx == -1) throw(new Error("Invalid id"))
+      if (idx == -1) throw (new Error("Invalid id"))
       const instance = nodeList.value[idx]
-      const options = ["config","remove"]
+      const options = ["config", "remove"]
       switch (instance.type) {
         case NodeTypes.CHART:
         case NodeTypes.TABLE:
@@ -598,17 +598,17 @@ async function flowInit  ()  {
       const nodeAction = await openCtxPopover(options.sort())
       if (nodeAction.role != "button") return
       const nd = await cy.value.getElementById(id)
-      const {target} = event
+      const { target } = event
       // or event.target
-      console.log("Action:",nodeAction)
-      switch (nodeAction.data){
+      console.log("Action:", nodeAction)
+      switch (nodeAction.data) {
         case "config":
           console.log("Config")
           await configNode(instance)
           break;
         case "connect":
           console.log("Connect")
-          await nd.data("edge","e1") // set a source type
+          await nd.data("edge", "e1") // set a source type
           //console.log("Node:",nd)
           await cy.value.edgehandles().start(nd)
           break;
@@ -617,69 +617,69 @@ async function flowInit  ()  {
           await removeNode(target)
           break;
         default:
-          throw(new Error("Invalid CTX action: " + nodeAction.data))          
+          throw (new Error("Invalid CTX action: " + nodeAction.data))
       }
 
     });
 
-    cy.value.on('taphold', "edge", async function(event: EventObject) {
-      console.log('Edge taphold ',event.target.data("id"), event);
+    cy.value.on('taphold', "edge", async function (event: EventObject) {
+      console.log('Edge taphold ', event.target.data("id"), event);
       const id = event.target.data("id")
       const options = ["remove"]
       const action = await openCtxPopover(options.sort())
       if (action.role != "button") return
-      console.log("Action:",action)
-      const {target} = event
+      console.log("Action:", action)
+      const { target } = event
       const src = target.data().source
       const dst = target.data().target
-      switch (action.data){
+      switch (action.data) {
         case "remove":
           console.log("Remove edge")
 
-          console.log("Remove edge:",target)
-          console.log("S-T:",src,dst)
+          console.log("Remove edge:", target)
+          console.log("S-T:", src, dst)
           cy.value.remove(target);
 
           break;
         default:
-          throw(new Error("Invalid CTX action: " + action.data))          
+          throw (new Error("Invalid CTX action: " + action.data))
       }
     });
 
-    cy.value.on('dblclick', "edge", async function(event: EventObject) {
+    cy.value.on('dblclick', "edge", async function (event: EventObject) {
       const pos = event.position || event.cyPosition;
-      console.log('Edge dblclick at ',pos, event);
+      console.log('Edge dblclick at ', pos, event);
     });
     /* */
     // remove handlers. remove edge will be triggered on delete node with edges
-    cy.value.on("remove","node",function(event: EventObject){
-      console.log("Remove node event:",event.target.data())
+    cy.value.on("remove", "node", function (event: EventObject) {
+      console.log("Remove node event:", event.target.data())
     })
-    cy.value.on("remove","edge",async function(event: EventObject){
-      console.log("Remove edge event:",event.target.data())
+    cy.value.on("remove", "edge", async function (event: EventObject) {
+      console.log("Remove edge event:", event.target.data())
       // get port + target parameters from edge:
       const dt = event.target.data()
-      console.log("DT:",dt)
+      console.log("DT:", dt)
       const port = dt.port
-      const dst = dt.target 
-      const src = dt.source 
-      console.log("Port,target:",port,dst) 
+      const dst = dt.target
+      const src = dt.source
+      console.log("Port,target:", port, dst)
       if ((dst == undefined) || (port === undefined)) return
       // get target node
       const destNode = cy.value.getElementById(dst)
       if ((destNode == undefined) || (destNode.data() === undefined)) return
-      console.log("tnode:",destNode,destNode.data(),destNode.data().ports[port])
+      console.log("tnode:", destNode, destNode.data(), destNode.data().ports[port])
       // remove port assignment
       destNode.data().ports[port] = false
-      console.log("tnode port new:",destNode.data().ports[port])
+      console.log("tnode port new:", destNode.data().ports[port])
       // also remove messaging 
-      console.log("Removing listener at:",dst)
+      console.log("Removing listener at:", dst)
       const dstIdx = nodeList.value.findIndex(item => item.id == dst)
       if (dstIdx == -1) {
         throw (new Error("Dst invalid"))
-      }   
+      }
       const signal = Signals.UPDPREFIX + src
-      console.log("Singal off:",signal)
+      console.log("Singal off:", signal)
       await nodeList.value[dstIdx].msgOff(signal)
 
     })
@@ -687,279 +687,278 @@ async function flowInit  ()  {
 }
 
 
-  onMounted(() =>  {
-    ww.value = window.innerWidth
-    wh.value = window.innerHeight
-    console.log("ww,wh",ww.value,wh.value)
-    // set variable so we can toggle toolbar etc
-    smallScreen.value = (ww.value <= 996)?true:false
-    if (!flowWrap.value.style) flowWrap.value.style = {}
-    flowWrap.value.style.width = "100%" //String(ww.value) + "px"
-    flowWrap.value.style.height = String(wh.value * .7) + "px"
-    flowLoaded.value = true
-    //flowWrap.value.addEventListener("sel",()=>{console.log("sel")})
-    //addEventListener("sel",flowWrap.value,(e)=>{console.log("sel",e)})
-    /*
-    eventBus.on('selected', (data) => {
-      console.log("on selected:",data)
-      // test if we can do something else while popover is active ..
-      const clrs = ["#f00","#f0f","#ff0","#00f"]
-      ctl.value.style.background = clrs[Math.floor(Math.random()*clrs.length)];
-      // works. background changes
-      // allow to close on specific return value. only if open
-      if (popover.value.open) {
-        if (data == "default")
-          popover.value.dismiss(data,"123")
-      }
-    });
-    */
-    /*
-    eventBus.on('popUp', (data) => {
-      console.log("on PopUp:",data)
-      // test if we can do something else while popover is active ..
-      // allow to close on specific return value. only if open
-      if (popover.value.open) {
-        popover.value.dismiss(data,"button")
-      }
-    });
-    */
-    eventBus.on('popUp', (data) => defaultPopupHandler(data) );
-    
-    /*
-    eventBus.on('importSelection', (data) => {
-      console.log("on importSelection:",data)
-      // test if we can do something else while popover is active ..
-      const clrs = ["#f00","#f0f","#ff0","#00f"]
-      ctl.value.style.background = clrs[Math.floor(Math.random()*clrs.length)];
-      // works. background changes
-      // allow to close on specific return value. only if open
-      if (popover.value.open) {
-        if (data.close == true)
-          popover.value.dismiss(data,"button")
-      }
-    });
-    eventBus.on('inputSelection', (data) => {
-      console.log("on inputSelection:",data)
-      // test if we can do something else while popover is active ..
-      // allow to close on specific return value. only if open
-      if (popover.value.open) {
-        popover.value.dismiss(data,"button")
-      }
-    });
-    eventBus.on('ctxSelection', (data) => {
-      console.log("on ctxSelection:",data)
-      // test if we can do something else while popover is active ..
-      // allow to close on specific return value. only if open
-      if (popover.value.open) {
-        popover.value.dismiss(data,"button")
-      }
-    });
-    eventBus.on('nodeSelection', (data) => {
-      console.log("on nodeSelection:",data)
-      // test if we can do something else while popover is active ..
-      // allow to close on specific return value. only if open
-      if (popover.value.open) {
-        popover.value.dismiss(data,"button")
-      }
-    });
-    */
-  })
+onMounted(() => {
+  ww.value = window.innerWidth
+  wh.value = window.innerHeight
+  console.log("ww,wh", ww.value, wh.value)
+  // set variable so we can toggle toolbar etc
+  smallScreen.value = (ww.value <= 996) ? true : false
+  if (!flowWrap.value.style) flowWrap.value.style = {}
+  flowWrap.value.style.width = "100%" //String(ww.value) + "px"
+  flowWrap.value.style.height = String(wh.value * .7) + "px"
+  flowLoaded.value = true
+  //flowWrap.value.addEventListener("sel",()=>{console.log("sel")})
+  //addEventListener("sel",flowWrap.value,(e)=>{console.log("sel",e)})
+  /*
+  eventBus.on('selected', (data) => {
+    console.log("on selected:",data)
+    // test if we can do something else while popover is active ..
+    const clrs = ["#f00","#f0f","#ff0","#00f"]
+    ctl.value.style.background = clrs[Math.floor(Math.random()*clrs.length)];
+    // works. background changes
+    // allow to close on specific return value. only if open
+    if (popover.value.open) {
+      if (data == "default")
+        popover.value.dismiss(data,"123")
+    }
+  });
+  */
+  /*
+  eventBus.on('popUp', (data) => {
+    console.log("on PopUp:",data)
+    // test if we can do something else while popover is active ..
+    // allow to close on specific return value. only if open
+    if (popover.value.open) {
+      popover.value.dismiss(data,"button")
+    }
+  });
+  */
+  eventBus.on('popUp', (data) => defaultPopupHandler(data));
 
   /*
-  const ctlClick = async () => {
-    console.log("clk")
-    const j = await cy.value.json()
-    console.log("JSON:",JSON.stringify(j))
-    createEvent()
-  }
+  eventBus.on('importSelection', (data) => {
+    console.log("on importSelection:",data)
+    // test if we can do something else while popover is active ..
+    const clrs = ["#f00","#f0f","#ff0","#00f"]
+    ctl.value.style.background = clrs[Math.floor(Math.random()*clrs.length)];
+    // works. background changes
+    // allow to close on specific return value. only if open
+    if (popover.value.open) {
+      if (data.close == true)
+        popover.value.dismiss(data,"button")
+    }
+  });
+  eventBus.on('inputSelection', (data) => {
+    console.log("on inputSelection:",data)
+    // test if we can do something else while popover is active ..
+    // allow to close on specific return value. only if open
+    if (popover.value.open) {
+      popover.value.dismiss(data,"button")
+    }
+  });
+  eventBus.on('ctxSelection', (data) => {
+    console.log("on ctxSelection:",data)
+    // test if we can do something else while popover is active ..
+    // allow to close on specific return value. only if open
+    if (popover.value.open) {
+      popover.value.dismiss(data,"button")
+    }
+  });
+  eventBus.on('nodeSelection', (data) => {
+    console.log("on nodeSelection:",data)
+    // test if we can do something else while popover is active ..
+    // allow to close on specific return value. only if open
+    if (popover.value.open) {
+      popover.value.dismiss(data,"button")
+    }
+  });
+  */
+})
+
+/*
+const ctlClick = async () => {
+  console.log("clk")
+  const j = await cy.value.json()
+  console.log("JSON:",JSON.stringify(j))
+  createEvent()
+}
 */
 
 const openCfgValuePopover = async (options: any) => {
   popover.value = await popoverController.create({
-      component: CfgValuePop,
-      size: "auto",
-      side:"right",
-      alignment:"start",
-      showBackdrop: true,
-      backdropDismiss: true, 
-      dismissOnSelect: false,
-      reference: "trigger", // event or trigger
-      componentProps: { // Popover props
-          signal: "popUp",
-          options:options
-        }
-    })
-    // set popup handler
-    eventBus.off("popUp")
-    eventBus.on("popUp",(data) => 
-    {
-      console.log("Pop default signal:",data)
-      switch (data.id) {
-        case "close":        
-          popover.value.dismiss(data,"button")
-          break
-        case "cancel":
-          popover.value.dismiss(data,"backdrop")
-          break
-        default:
-          console.log("Handle data here:",data)
-      }
-    })
-    await popover.value.present();
-    popover.value.open = true
-    const x = await popover.value.onDidDismiss();
-    console.log("Dismiss: ",x)
-    popover.value.open = false
-    eventBus.off("popUp")
-    // restore default handler
-    eventBus.on('popUp', (data) => defaultPopupHandler(data) );
-    return x
+    component: CfgValuePop,
+    size: "auto",
+    side: "right",
+    alignment: "start",
+    showBackdrop: true,
+    backdropDismiss: true,
+    dismissOnSelect: false,
+    reference: "trigger", // event or trigger
+    componentProps: { // Popover props
+      signal: "popUp",
+      options: options
+    }
+  })
+  // set popup handler
+  eventBus.off("popUp")
+  eventBus.on("popUp", (data) => {
+    console.log("Pop default signal:", data)
+    switch (data.id) {
+      case "close":
+        popover.value.dismiss(data, "button")
+        break
+      case "cancel":
+        popover.value.dismiss(data, "backdrop")
+        break
+      default:
+        console.log("Handle data here:", data)
+    }
+  })
+  await popover.value.present();
+  popover.value.open = true
+  const x = await popover.value.onDidDismiss();
+  console.log("Dismiss: ", x)
+  popover.value.open = false
+  eventBus.off("popUp")
+  // restore default handler
+  eventBus.on('popUp', (data) => defaultPopupHandler(data));
+  return x
 }
 
 
 
 const openCtxPopover = async (options: any) => {
   popover.value = await popoverController.create({
-      component: CtxPopover,
-      //event: ev,
-      cssClass:" popCtx",
-      size: "auto",
-      side:"left",
-      alignment:"start",
-      showBackdrop: true,
-      backdropDismiss: true, 
-      dismissOnSelect: false,
-      reference: "trigger", // event or trigger
-      componentProps: { // Popover props
-          signal: "popUp",
-          options:options
-        }
-    })
-    await popover.value.present();
-    popover.value.open = true
-    const x = await popover.value.onDidDismiss();
-    console.log("Dismiss: ",x)
-    popover.value.open = false
-    return x
+    component: CtxPopover,
+    //event: ev,
+    cssClass: " popCtx",
+    size: "auto",
+    side: "left",
+    alignment: "start",
+    showBackdrop: true,
+    backdropDismiss: true,
+    dismissOnSelect: false,
+    reference: "trigger", // event or trigger
+    componentProps: { // Popover props
+      signal: "popUp",
+      options: options
+    }
+  })
+  await popover.value.present();
+  popover.value.open = true
+  const x = await popover.value.onDidDismiss();
+  console.log("Dismiss: ", x)
+  popover.value.open = false
+  return x
 }
 
 
 //const openInputSel = async (ev: Event) => {
-  const openInputSel = async (ports) => {
+const openInputSel = async (ports) => {
   popover.value = await popoverController.create({
-      component: InputselPopover,
-      //event: ev,
-      size: "auto",
-      side:"right",
-      alignment:"start",
-      showBackdrop: true,
-      backdropDismiss: true, // error when enabling dismiss
-      dismissOnSelect: true,
-      reference: "trigger", // event or trigger
-      componentProps: { // Popover props
-          msg:"Select Input",
-          signal: "popUp",
-          ports: ports
-        }
-    })
-    await popover.value.present();
-    popover.value.open = true
-    const x = await popover.value.onDidDismiss();
-    console.log("Dismiss: ",x)
-    popover.value.open = false
-    return x
+    component: InputselPopover,
+    //event: ev,
+    size: "auto",
+    side: "right",
+    alignment: "start",
+    showBackdrop: true,
+    backdropDismiss: true, // error when enabling dismiss
+    dismissOnSelect: true,
+    reference: "trigger", // event or trigger
+    componentProps: { // Popover props
+      msg: "Select Input",
+      signal: "popUp",
+      ports: ports
+    }
+  })
+  await popover.value.present();
+  popover.value.open = true
+  const x = await popover.value.onDidDismiss();
+  console.log("Dismiss: ", x)
+  popover.value.open = false
+  return x
 }
 
 const openNodeSel = async () => {
   popover.value = await popoverController.create({
-      component: NodesPopover,
-      //event: ev,
-      size: "auto",
-      side:"right",
-      alignment:"start",
-      showBackdrop: true,
-      backdropDismiss: true, 
-      dismissOnSelect: false,
-      reference: "trigger", // event or trigger
-      componentProps: { // Popover props
-          msg:"Select Input",
-          signal: "popUp"
-        }
-    })
-    popover.value.open = true
-    await popover.value.present();
-    const x = await popover.value.onDidDismiss();
-    console.log(x)
-    console.log("Dismiss: ",x)
-    popover.value.open = false
-    if (x.role == "button") {
-      const nt = x.data
-      console.log("Type from popup:",nt)
-      // find node
-      return nt
-    } else {
-      return ""
+    component: NodesPopover,
+    //event: ev,
+    size: "auto",
+    side: "right",
+    alignment: "start",
+    showBackdrop: true,
+    backdropDismiss: true,
+    dismissOnSelect: false,
+    reference: "trigger", // event or trigger
+    componentProps: { // Popover props
+      msg: "Select Input",
+      signal: "popUp"
     }
+  })
+  popover.value.open = true
+  await popover.value.present();
+  const x = await popover.value.onDidDismiss();
+  console.log(x)
+  console.log("Dismiss: ", x)
+  popover.value.open = false
+  if (x.role == "button") {
+    const nt = x.data
+    console.log("Type from popup:", nt)
+    // find node
+    return nt
+  } else {
+    return ""
+  }
 }
 
 const openPopover = async (ev: Event) => {
   // create dummy dataframe for test
   const df = await new DataFrame({
-    "x1": [1, 2, 3, 4, 5, 1, 2, 3, 4, 5,1, 2, 3, 4, 5],
-    "y1": [1, 2, 3, 4, 5, 1, 2, 3, 4, 5,1, 2, 3, 4, 5],
-    "z1": ["asa","dw","ddddW","y","","asa","dw","ddddW","y","","asa","dw","ddddW","y",""],
-    "x2": [1, 2, 3, 4, 5, 1, 2, 3, 4, 5,1, 2, 3, 4, 5],
-    "y2": [1, 2, 3, 4, 5, 1, 2, 3, 4, 5,1, 2, 3, 4, 5],
-    "z2": ["asa","dw","ddddW","y","","asa","dw","ddddW","y","","asa","dw","ddddW","y",""]
-      }
-    )
-    /* ************************************* */
-    // test json to/ftom
-    const dfj = await toJSON(df)
-    console.log("JSON:",dfj)
-    const df2 = await new DataFrame(dfj)
-    df2.print(5)
-    /* ************************************* */
-
-    /* */
-    popover.value = await popoverController.create({
-      component: ImportPopover,
-      event: ev,
-      size: "auto",
-      side:"right",
-      alignment:"start",
-      showBackdrop: false,
-      backdropDismiss: false,
-      dismissOnSelect: false,
-      reference: "trigger", // event or trigger
-      componentProps: { // Popover props
-          msg:"Select Option",
-          dt: df,
-        }
-    });
-    /* */
-    /* 
-  popover.value = await popoverController.create({
-      component: Popover,
-      event: ev,
-      size: "auto",
-      side:"right",
-      alignment:"start",
-      showBackdrop: false,
-      backdropDismiss: true,
-      dismissOnSelect: false,
-      reference: "trigger", // event or trigger
-      componentProps: { // Popover props
-          msg:"Select Option",
-          dt: ["default","one","two","three"],
-        }
-    });
-     */
-    await popover.value.present();
-    popover.value.open = true
-    await popover.value.onDidDismiss();
-    popover.value.open = false
+    "x1": [1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5],
+    "y1": [1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5],
+    "z1": ["asa", "dw", "ddddW", "y", "", "asa", "dw", "ddddW", "y", "", "asa", "dw", "ddddW", "y", ""],
+    "x2": [1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5],
+    "y2": [1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5],
+    "z2": ["asa", "dw", "ddddW", "y", "", "asa", "dw", "ddddW", "y", "", "asa", "dw", "ddddW", "y", ""]
   }
+  )
+  /* ************************************* */
+  // test json to/ftom
+  const dfj = await toJSON(df)
+  console.log("JSON:", dfj)
+  const df2 = await new DataFrame(dfj)
+  df2.print(5)
+  /* ************************************* */
+
+  /* */
+  popover.value = await popoverController.create({
+    component: ImportPopover,
+    event: ev,
+    size: "auto",
+    side: "right",
+    alignment: "start",
+    showBackdrop: false,
+    backdropDismiss: false,
+    dismissOnSelect: false,
+    reference: "trigger", // event or trigger
+    componentProps: { // Popover props
+      msg: "Select Option",
+      dt: df,
+    }
+  });
+  /* */
+  /* 
+popover.value = await popoverController.create({
+    component: Popover,
+    event: ev,
+    size: "auto",
+    side:"right",
+    alignment:"start",
+    showBackdrop: false,
+    backdropDismiss: true,
+    dismissOnSelect: false,
+    reference: "trigger", // event or trigger
+    componentProps: { // Popover props
+        msg:"Select Option",
+        dt: ["default","one","two","three"],
+      }
+  });
+   */
+  await popover.value.present();
+  popover.value.open = true
+  await popover.value.onDidDismiss();
+  popover.value.open = false
+}
 
 const createEvent = async () => {
   console.log("Create event")
@@ -1098,30 +1097,30 @@ This function returns a plain object bounding box with format { x1, y1, x2, y2, 
 
 function panLeft() {
   if (cy.value.pan().x > 100) {
-    cy.value.panBy({x:-100,y:0})
-  }  
-  console.log("Extent:",cy.value.extent())
+    cy.value.panBy({ x: -100, y: 0 })
+  }
+  console.log("Extent:", cy.value.extent())
   return cy.value.pan()
 }
 function panRight() {
   if (cy.value.pan().x < 2000) {
-    cy.value.panBy({x:100,y:0})
+    cy.value.panBy({ x: 100, y: 0 })
   }
-  console.log("Extent:",cy.value.extent())
+  console.log("Extent:", cy.value.extent())
   return cy.value.pan()
 }
 function panDown() {
   if (cy.value.pan().y < 1000) {
-    cy.value.panBy({x:0,y:100})
+    cy.value.panBy({ x: 0, y: 100 })
   }
-  console.log("Extent:",cy.value.extent())
+  console.log("Extent:", cy.value.extent())
   return cy.value.pan()
 }
 function panUp() {
   if (cy.value.pan().y > 100) {
-    cy.value.panBy({x:0,y:-100})
+    cy.value.panBy({ x: 0, y: -100 })
   }
-  console.log("Extent:",cy.value.extent())
+  console.log("Extent:", cy.value.extent())
   return cy.value.pan()
 }
 
@@ -1131,54 +1130,54 @@ function zoomIn() {
   const z = cy.value.zoom()
   if (z < 10)
     cy.value.zoom(Math.floor(z + 1))
-  else 
+  else
     cy.value.zoom(10)
-  console.log("Extent:",cy.value.extent())
+  console.log("Extent:", cy.value.extent())
   return cy.value.zoom()
 }
 function zoomOut() {
   const z = cy.value.zoom()
   if (z > 1)
     cy.value.zoom(Math.floor(z - 1))
-  else 
+  else
     cy.value.zoom(1)
-  console.log("Extent:",cy.value.extent())
+  console.log("Extent:", cy.value.extent())
   return cy.value.zoom()
 }
 function zoomFit() {
   cy.value.fit()
-  console.log("Extent:",cy.value.extent())
+  console.log("Extent:", cy.value.extent())
   return cy.value.zoom()
 }
 function extent() {
   const x = cy.value.extent()
-  console.log("Extent:",x)
+  console.log("Extent:", x)
   return x
 }
 
 async function removeNode(target) {
-  console.log("Remove node:",target)
+  console.log("Remove node:", target)
   cy.value.remove(target);
   const instance = target.data("instance")
   if (instance.display) {
-    emit("delViz",instance.id)
+    emit("delViz", instance.id)
   }
   // remove from nodelist
   const idx = nodeList.value.findIndex(item => item.id == instance.id)
   if (idx == -1) {
     throw (new Error("Invalid instance"))
-  } 
+  }
   if (nodeList.value[idx].type == NodeTypes.GEN) {
     // stop generators
-    console.log("Stopping generator on ",nodeList.value[idx].id)
+    console.log("Stopping generator on ", nodeList.value[idx].id)
     await nodeList.value[idx].stop()
   }
-  nodeList.value.splice(idx,1)
+  nodeList.value.splice(idx, 1)
 }
 
 async function configNode(instance) {
-  console.log("Node config:",instance.id)
-  console.log("Config:",instance.config)
+  console.log("Node config:", instance.id)
+  console.log("Config:", instance.config)
   if (instance.config.pop === undefined) {
     console.log("No config")
     return
@@ -1187,16 +1186,16 @@ async function configNode(instance) {
   switch (instance.config.pop) {
     case "value":
       config = await openCfgValuePopover(instance.config.options)
-      if (config.role == "button"){
+      if (config.role == "button") {
         config = JSON.parse(config.data.value)
-        console.log("Updating instance with ",config)
+        console.log("Updating instance with ", config)
         instance.configure(config) // value array
       }
       break
     case "select":
       break
     default:
-      throw(new Error("Invalid config pop"))
+      throw (new Error("Invalid config pop"))
   }
   //const url = "https://raw.githubusercontent.com/digital-codes/datencafe/main/public/data/d3-date-sample.csv"    
   //const url = "https://transparenz.karlsruhe.de/dataset/cc50eb96-6c3d-4d6f-9dcd-c56c4969ff59/resource/565c1c6e-a50c-46d2-8638-22896d21096f/download/altersstruktur-der-bevolkerung-unter-3-jahrige-nach-geschlecht.csv"
@@ -1204,121 +1203,121 @@ async function configNode(instance) {
 }
 
 async function newNode() {
-    console.log("Add node")
-    const nodeType = await openNodeSel()
-    console.log("NodeType from add node",nodeType)
-    if (nodeType != "") {
-      console.log("Type selected:",nodeType)
-      console.log("Type:",nodeTypes[nodeType])
-      // properties
-      const nodeIcon = nodeTypes[nodeType].thumb
-      const newId = "N" + String(nextNode.value++)
-      const data = {
-        //group: 'nodes',
-        id:newId,
-      };
-      // add node
-      // first get pan dimentsions
-      const pan = cy.value.pan() 
-      const xtent = cy.value.extent()
-      console.log("Pan:",pan,xtent)
-      // set x position to middle // left[], y to center
-      const xpos = xtent.x1 + xtent.w/2 + nextInsertedX.value++ *5
-      const ypos = xtent.y1 + xtent.h/2 + nextInsertedX.value++ *5
-      const newNode = await cy.value.add({
-        data: data,
-        position: {
-          x: xpos,
-          y: ypos
-        }
-      })
-      // create class instance
-      try {
-        const instance = await nodeFactory(newId,nodeTypes[nodeType])
-        /*
-        console.log("Instance:",instance,instance.class)
-        console.log(nodeTypes["lineplot"])
-        console.log(nodeTypes[instance.class])
-        console.log("Class description:",nodeTypes[instance.class])
-        */
-        // get ports and edges from instance
-        const ports = {}
-        instance.ports.forEach(p => {
-          ports[p] = false
-        });
-        console.log("Ports:",ports)
-        // we don't use edges yet ...
-        const edges = {}
-        instance.edges.forEach(e => {
-          edges[e] = false
-        });
-        console.log("Edges:",edges)
-        // determine style (shape,color) from type
-        // good shapes: ellipse, rectange, roundrectangle, diamond
-        let shape, border
-        switch (instance.type) {
-          case NodeTypes.CHART:
-          case NodeTypes.TABLE:
-            shape = "rectangle"
-            border = "#0f0"
-            break
-          case NodeTypes.PROC:
-            shape = "roundrectangle" 
-            border = "#000"
-            break
-          case NodeTypes.INPUT:
-          case NodeTypes.GEN:
-            shape = "round-octagon"
-            border = "#00f"
-            break
-          default:
-            shape = "ellipse"
-            border = "#f00"
-        }
-        // set data
-        const nodeData = {
-          "name":newId,
-          "ports":ports,
-          "instance":{
-            "id":instance.id,
-            "name":instance.name,
-            "type":instance.type,
-            "display":instance.display | false
-          },
-          "type":{
-            "name":nodeType,
-            "shp":shape, 
-            "bd":border, 
-            "img":"url('" + nodeIcon + "')"
-          }
-        }
-        newNode.data(nodeData)
-        console.log("New node:", newNode.data())
-        //console.log("After add node:",JSON.stringify(cy.value.json()))
-        // check if we need to create a new diagram element 
-        if (instance.display) {
-          emit("addViz",nodeData.instance)
-        } else {
-          console.log("No display on ",nodeData.instance)
-        }
-        // add to list 
-        nodeList.value.push(instance)
-      } catch (err) {
-        alert("Invalid instance:" + err.message)
-        return
+  console.log("Add node")
+  const nodeType = await openNodeSel()
+  console.log("NodeType from add node", nodeType)
+  if (nodeType != "") {
+    console.log("Type selected:", nodeType)
+    console.log("Type:", nodeTypes[nodeType])
+    // properties
+    const nodeIcon = nodeTypes[nodeType].thumb
+    const newId = "N" + String(nextNode.value++)
+    const data = {
+      //group: 'nodes',
+      id: newId,
+    };
+    // add node
+    // first get pan dimentsions
+    const pan = cy.value.pan()
+    const xtent = cy.value.extent()
+    console.log("Pan:", pan, xtent)
+    // set x position to middle // left[], y to center
+    const xpos = xtent.x1 + xtent.w / 2 + nextInsertedX.value++ * 5
+    const ypos = xtent.y1 + xtent.h / 2 + nextInsertedX.value++ * 5
+    const newNode = await cy.value.add({
+      data: data,
+      position: {
+        x: xpos,
+        y: ypos
       }
-    } else {
-      console.log("Cancelled. Removing:")
+    })
+    // create class instance
+    try {
+      const instance = await nodeFactory(newId, nodeTypes[nodeType])
+      /*
+      console.log("Instance:",instance,instance.class)
+      console.log(nodeTypes["lineplot"])
+      console.log(nodeTypes[instance.class])
+      console.log("Class description:",nodeTypes[instance.class])
+      */
+      // get ports and edges from instance
+      const ports = {}
+      instance.ports.forEach(p => {
+        ports[p] = false
+      });
+      console.log("Ports:", ports)
+      // we don't use edges yet ...
+      const edges = {}
+      instance.edges.forEach(e => {
+        edges[e] = false
+      });
+      console.log("Edges:", edges)
+      // determine style (shape,color) from type
+      // good shapes: ellipse, rectange, roundrectangle, diamond
+      let shape, border
+      switch (instance.type) {
+        case NodeTypes.CHART:
+        case NodeTypes.TABLE:
+          shape = "rectangle"
+          border = "#0f0"
+          break
+        case NodeTypes.PROC:
+          shape = "roundrectangle"
+          border = "#000"
+          break
+        case NodeTypes.INPUT:
+        case NodeTypes.GEN:
+          shape = "round-octagon"
+          border = "#00f"
+          break
+        default:
+          shape = "ellipse"
+          border = "#f00"
+      }
+      // set data
+      const nodeData = {
+        "name": newId,
+        "ports": ports,
+        "instance": {
+          "id": instance.id,
+          "name": instance.name,
+          "type": instance.type,
+          "display": instance.display | false
+        },
+        "type": {
+          "name": nodeType,
+          "shp": shape,
+          "bd": border,
+          "img": "url('" + nodeIcon + "')"
+        }
+      }
+      newNode.data(nodeData)
+      console.log("New node:", newNode.data())
+      //console.log("After add node:",JSON.stringify(cy.value.json()))
+      // check if we need to create a new diagram element 
+      if (instance.display) {
+        emit("addViz", nodeData.instance)
+      } else {
+        console.log("No display on ", nodeData.instance)
+      }
+      // add to list 
+      nodeList.value.push(instance)
+    } catch (err) {
+      alert("Invalid instance:" + err.message)
+      return
     }
+  } else {
+    console.log("Cancelled. Removing:")
   }
+}
 
-function defaultPopupHandler (data) {
-    console.log("on PopUp:",data)
-    // test if we can do something else while popover is active ..
-    // allow to close on specific return value. only if open
-    if (popover.value.open) {
-      popover.value.dismiss(data,"button")
-    }
+function defaultPopupHandler(data) {
+  console.log("on PopUp:", data)
+  // test if we can do something else while popover is active ..
+  // allow to close on specific return value. only if open
+  if (popover.value.open) {
+    popover.value.dismiss(data, "button")
+  }
 }
 
 
@@ -1330,18 +1329,18 @@ function loadFlow() {
 
 async function handleFileUpload(event) {
   const files = event.target.files
-  console.log("Files loaded:",files.length)
+  console.log("Files loaded:", files.length)
   console.log(files[0])
   // Do something with the uploaded files
   const reader = new FileReader();
-    reader.onload = async () => {
-      const text = reader.result;
-      //const df = new DataFrame(text, { delimiter: delimiter.value });
-      //dataframe.value = df;
-      const design = JSON.parse(text)
-      console.log("design loaded:",design)
-      await initFlow(design)
-    };
+  reader.onload = async () => {
+    const text = reader.result;
+    //const df = new DataFrame(text, { delimiter: delimiter.value });
+    //dataframe.value = df;
+    const design = JSON.parse(text)
+    console.log("design loaded:", design)
+    await initFlow(design)
+  };
   await reader.readAsText(files[0]);
 }
 
@@ -1360,60 +1359,60 @@ async function initFlow(design: any) {
     console.log("Setting flow OK")
     await cy.value.fit()
   } catch (e) {
-    console.log("Setting flow failed:",e.message)
+    console.log("Setting flow failed:", e.message)
     return
-  } 
+  }
   try {
     await providers.init(design.data)
     console.log("Setting data OK")
   } catch (e) {
-    console.log("Setting data failed:",e.message)
+    console.log("Setting data failed:", e.message)
     return
-  } 
+  }
   try {
-    design.nodes.forEach(async(n) => {
-      console.log("Node:",n.id,n.classname)
+    design.nodes.forEach(async (n) => {
+      console.log("Node:", n.id, n.classname)
       // create the class instance
       try {
-        const instance = await nodeFactory(n.id,nodeTypes[n.classname])
+        const instance = await nodeFactory(n.id, nodeTypes[n.classname])
         if (instance.display) {
-          await emit("addViz",{id:instance.id,name:instance.name,type:instance.type})
+          await emit("addViz", { id: instance.id, name: instance.name, type: instance.type })
         }
         // configure
-        console.log("Config:",n.config)
+        console.log("Config:", n.config)
         instance.config = n.config
         // FIXME check running state on generator
         if (instance.type == NodeTypes.GEN) {
-          const runIdx = instance.config.options.findIndex((item:any) => {return item.id == "run"})
+          const runIdx = instance.config.options.findIndex((item: any) => { return item.id == "run" })
           if (runIdx == -1) throw (new Error("Invalid config at run"))
           if (parseInt(instance.config.options[runIdx].value) != 0) {
-            console.log("Starting generator on ",instance.id)
+            console.log("Starting generator on ", instance.id)
             instance.run()
           }
         }
         // signalling
-        console.log("Signals:",n.sigs)
-        n.sigs.forEach(async(s) => {
-          console.log("Signal on for ",s)
+        console.log("Signals:", n.sigs)
+        n.sigs.forEach(async (s) => {
+          console.log("Signal on for ", s)
           await instance.msgOn(s)
         })
         // add to list 
         nodeList.value.push(instance)
       } catch (e) {
-        console.log("Instance constructor failed:",e.message,n.id,n.classname)
+        console.log("Instance constructor failed:", e.message, n.id, n.classname)
         return
-      } 
+      }
     })
   } catch (e) {
-    console.log("Setting nodes failed:",e.message)
+    console.log("Setting nodes failed:", e.message)
     return
-  } 
+  }
   // finally trigger updates on root nodes
   // FIXME we should wait until all nodes are processed ... might need a watch item
   await DelayTimer(1000)
   const roots = providers.getLoadedRoots()
   //console.log("Roots:",roots)
-  roots.forEach(async(n) => {
+  roots.forEach(async (n) => {
     //console.log("Root id:",n.id)
     const signal = Signals.UPDPREFIX + n.id
     await eventBus.emit(signal)
@@ -1450,7 +1449,7 @@ async function clearFlow() {
     n.signals.forEach(s => n.msgOff(s))
     // remove charts
     if (n.display) {
-      emit("delViz",n.id)
+      emit("delViz", n.id)
     }
   })
   // remove all nodes
@@ -1461,9 +1460,9 @@ async function clearFlow() {
 async function screenShot() {
   console.log("Screenshot")
   scrotData.value = await cy.value.png({
-    output:"base64uri",
-    bg:"#ffffff",
-    maxWidth:1920
+    output: "base64uri",
+    bg: "#ffffff",
+    maxWidth: 1920
   })
   await DelayTimer(100)
   await scrotDown.value.click()
@@ -1488,14 +1487,14 @@ const downUrl = computed(() => {
   try {
     const contentType = 'application/json'
     const story = userStore.getStory()
-    console.log("Story:",story)
-    const flowData = JSON.stringify({flow:flow,nodes:nodes,data:data,next:nextNode.value,story:story},null,2)
+    console.log("Story:", story)
+    const flowData = JSON.stringify({ flow: flow, nodes: nodes, data: data, next: nextNode.value, story: story }, null, 2)
     const blob = new Blob([flowData], { type: contentType })
     const url = window.URL.createObjectURL(blob)
     console.log("downurl updated")
     return url
   } catch (e) {
-    console.log("Failed: ",e.message)
+    console.log("Failed: ", e.message)
     return "/"
   }
 })
@@ -1529,227 +1528,207 @@ async function saveFlow() {
 
 // tooltips
 const tooltipsOpen = ref(false)
-const closeTooltips = () => {tooltipsOpen.value = false}
-const openTooltips = () => {tooltipsOpen.value = true}
+const closeTooltips = () => { tooltipsOpen.value = false }
+const openTooltips = () => { tooltipsOpen.value = true }
 const toggleTooltips = () => {
   tooltipsOpen.value = !tooltipsOpen.value
-  console.log("Toggle:",tooltipsOpen)
+  console.log("Toggle:", tooltipsOpen)
 }
 
 
 </script>
 
 <template>
-
   <div ref="flowWrap" class="wrap">
     <input ref="fileInput" type="file" style="display:none" @change="handleFileUpload" />
-    <a ref="scrotDown" style="display:none" :href="scrotData"  download="flow.png" ></a>
+    <a ref="scrotDown" style="display:none" :href="scrotData" download="flow.png"></a>
     <ion-toolbar v-if="!smallScreen" class="toolbar ion-hide-md-down">
-      <ion-buttons  id="helpRef"  class="ion-hide-sm-down question"  slot="start">
+      <ion-buttons id="helpRef" class="ion-hide-sm-down question" slot="start">
         <ion-button @click="toggleTooltips">
-        <font-awesome-icon :icon="['fas', 'question']" size="2x" class="toolbtn"></font-awesome-icon>
-      </ion-button>
-      </ion-buttons>
-      <!-- 
-      <ion-buttons class="ion-hide-sm-down"  slot="start">
-        <ion-button @click="zoomIn">
-        <font-awesome-icon :icon="['fas', 'magnifying-glass-plus']" size="2x" class="toolbtn"></font-awesome-icon>
-      </ion-button>
-      </ion-buttons>
-      <ion-buttons class="ion-hide-sm-down"  slot="start" >
-        <ion-button @click="zoomOut">
-        <font-awesome-icon :icon="['fas', 'magnifying-glass-minus']" size="2x" class="toolbtn"></font-awesome-icon>
-      </ion-button>
-      </ion-buttons>
-      <ion-buttons class="ion-hide-sm-down" slot="start">
-        <ion-button @click="panLeft">
-        <font-awesome-icon :icon="['fas', 'arrow-left']" size="2x" class="toolbtn"></font-awesome-icon>
-      </ion-button>
-      </ion-buttons>
-      <ion-buttons class="ion-hide-sm-down"  slot="start">
-        <ion-button @click="panRight">
-        <font-awesome-icon :icon="['fas', 'arrow-right']" size="2x" class="toolbtn"></font-awesome-icon>
-      </ion-button>
-      </ion-buttons>
-      <ion-buttons class="ion-hide-sm-down"  slot="start">
-        <ion-button @click="panUp">
-        <font-awesome-icon :icon="['fas', 'arrow-up']" size="2x" class="toolbtn"></font-awesome-icon>
-      </ion-button>
-      </ion-buttons>
-      <ion-buttons class="ion-hide-sm-down"  slot="start">
-        <ion-button @click="panDown">
-        <font-awesome-icon :icon="['fas', 'arrow-down']" size="2x" class="toolbtn"></font-awesome-icon>
-      </ion-button>
-      </ion-buttons>
-
-      -->
-      <ion-buttons slot="start">
-        <ion-button id="fitRef" @click="zoomFit">
-        <font-awesome-icon :icon="['fas', 'expand']" size="2x" class="toolbtn"></font-awesome-icon>
+          <font-awesome-icon :icon="['fas', 'question']" size="2x" class="toolbtn"></font-awesome-icon>
         </ion-button>
       </ion-buttons>
-      <ion-buttons  slot="start" >
+      <!-- 
+        <ion-buttons class="ion-hide-sm-down"  slot="start">
+          <ion-button @click="zoomIn">
+          <font-awesome-icon :icon="['fas', 'magnifying-glass-plus']" size="2x" class="toolbtn"></font-awesome-icon>
+        </ion-button>
+        </ion-buttons>
+        <ion-buttons class="ion-hide-sm-down"  slot="start" >
+          <ion-button @click="zoomOut">
+          <font-awesome-icon :icon="['fas', 'magnifying-glass-minus']" size="2x" class="toolbtn"></font-awesome-icon>
+        </ion-button>
+        </ion-buttons>
+        <ion-buttons class="ion-hide-sm-down" slot="start">
+          <ion-button @click="panLeft">
+          <font-awesome-icon :icon="['fas', 'arrow-left']" size="2x" class="toolbtn"></font-awesome-icon>
+        </ion-button>
+        </ion-buttons>
+        <ion-buttons class="ion-hide-sm-down"  slot="start">
+          <ion-button @click="panRight">
+          <font-awesome-icon :icon="['fas', 'arrow-right']" size="2x" class="toolbtn"></font-awesome-icon>
+        </ion-button>
+        </ion-buttons>
+        <ion-buttons class="ion-hide-sm-down"  slot="start">
+          <ion-button @click="panUp">
+          <font-awesome-icon :icon="['fas', 'arrow-up']" size="2x" class="toolbtn"></font-awesome-icon>
+        </ion-button>
+        </ion-buttons>
+        <ion-buttons class="ion-hide-sm-down"  slot="start">
+          <ion-button @click="panDown">
+          <font-awesome-icon :icon="['fas', 'arrow-down']" size="2x" class="toolbtn"></font-awesome-icon>
+        </ion-button>
+        </ion-buttons>
+
+        -->
+      <ion-buttons slot="start">
+        <ion-button id="fitRef" @click="zoomFit">
+          <font-awesome-icon :icon="['fas', 'expand']" size="2x" class="toolbtn"></font-awesome-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-buttons slot="start">
         <ion-button id="storyRef" @click="editStory">
-        <font-awesome-icon :icon="['fas', 'pen-to-square']" size="2x" class="toolbtn"></font-awesome-icon>
-      </ion-button>
+          <font-awesome-icon :icon="['fas', 'pen-to-square']" size="2x" class="toolbtn"></font-awesome-icon>
+        </ion-button>
       </ion-buttons>
-      <ion-buttons  slot="start">
+      <ion-buttons slot="start">
         <ion-button id="pdfRef" @click="makePdf">
-        <font-awesome-icon :icon="['fas', 'file-pdf']" size="2x" class="toolbtn"></font-awesome-icon>
-      </ion-button>
+          <font-awesome-icon :icon="['fas', 'file-pdf']" size="2x" class="toolbtn"></font-awesome-icon>
+        </ion-button>
       </ion-buttons>
-      <ion-buttons  slot="start">
+      <ion-buttons slot="start">
         <ion-button id="captureRef" :disabled="nodeList.length == 0" @click="screenShot">
-        <font-awesome-icon :icon="['fas', 'image']" size="2x" class="toolbtn"></font-awesome-icon>
-      </ion-button>
+          <font-awesome-icon :icon="['fas', 'image']" size="2x" class="toolbtn"></font-awesome-icon>
+        </ion-button>
       </ion-buttons>
-      <ion-buttons  slot="end">
+      <ion-buttons slot="end">
         <ion-button id="trashRef" :disabled="nodeList.length == 0" @click="clearFlow">
-        <font-awesome-icon :icon="['fas', 'trash-can']" size="2x" class="toolbtn"></font-awesome-icon>
-      </ion-button>
+          <font-awesome-icon :icon="['fas', 'trash-can']" size="2x" class="toolbtn"></font-awesome-icon>
+        </ion-button>
       </ion-buttons>
       <ion-buttons slot="end">
-        <ion-button id="downRef" :disabled="nodeList.length == 0"  download="flow.json" :href="downUrl">
-        <font-awesome-icon :icon="['fas', 'download']" size="2x" class="toolbtn"></font-awesome-icon>
-      </ion-button>
+        <ion-button id="downRef" :disabled="nodeList.length == 0" download="flow.json" :href="downUrl">
+          <font-awesome-icon :icon="['fas', 'download']" size="2x" class="toolbtn"></font-awesome-icon>
+        </ion-button>
       </ion-buttons>
       <ion-buttons slot="end">
-        <ion-button id="upRef" :disabled="nodeList.length > 0"  @click="loadFlow">
-        <font-awesome-icon :icon="['fas', 'upload']" size="2x" class="toolbtn"></font-awesome-icon>
-      </ion-button>
+        <ion-button id="upRef" :disabled="nodeList.length > 0" @click="loadFlow">
+          <font-awesome-icon :icon="['fas', 'upload']" size="2x" class="toolbtn"></font-awesome-icon>
+        </ion-button>
       </ion-buttons>
       <ion-buttons slot="end">
         <ion-button id="newRef" @click="newNode">
           <font-awesome-icon :icon="['fas', 'wand-magic-sparkles']" size="2x" class="toolbtn"></font-awesome-icon>
         </ion-button>
         <!-- 
-        <NodeSel msg="Select Input" signal="nodeSelection" />
-        -->
+          <NodeSel msg="Select Input" signal="nodeSelection" />
+          -->
       </ion-buttons>
     </ion-toolbar>
     <ion-toolbar v-if="smallScreen" class="toolbar-sm ion-hide-md-up">
       <ion-buttons slot="start" class="question">
-        <ion-button  id="helpRef"  @click="toggleTooltips">
-        <font-awesome-icon :icon="['fas', 'question']" size="sm" class="toolbtn"></font-awesome-icon>
-      </ion-button>
-      </ion-buttons>
-
-      <ion-buttons slot="start">
-        <ion-button  id="fitRef"  @click="zoomFit">
-        <font-awesome-icon :icon="['fas', 'expand']" size="sm" class="toolbtn"></font-awesome-icon>
+        <ion-button id="helpRef" @click="toggleTooltips">
+          <font-awesome-icon :icon="['fas', 'question']" size="sm" class="toolbtn"></font-awesome-icon>
         </ion-button>
       </ion-buttons>
 
-      <ion-buttons slot="start" >
-        <ion-button id="storyRef" @click="editStory">
-        <font-awesome-icon :icon="['fas', 'pen-to-square']" size="sm" class="toolbtn"></font-awesome-icon>
-      </ion-button>
-      </ion-buttons>
-
-      <ion-buttons  slot="start">
-        <ion-button id="pdfRef" @click="makePdf">
-        <font-awesome-icon :icon="['fas', 'file-pdf']" size="sm" class="toolbtn"></font-awesome-icon>
-      </ion-button>
+      <ion-buttons slot="start">
+        <ion-button id="fitRef" @click="zoomFit">
+          <font-awesome-icon :icon="['fas', 'expand']" size="sm" class="toolbtn"></font-awesome-icon>
+        </ion-button>
       </ion-buttons>
 
       <ion-buttons slot="start">
-        <ion-button id="captureRef" :disabled="nodeList.length == 0"   @click="screenShot">
-        <font-awesome-icon :icon="['fas', 'image']" size="sm" class="toolbtn"></font-awesome-icon>
-      </ion-button>
+        <ion-button id="storyRef" @click="editStory">
+          <font-awesome-icon :icon="['fas', 'pen-to-square']" size="sm" class="toolbtn"></font-awesome-icon>
+        </ion-button>
+      </ion-buttons>
+
+      <ion-buttons slot="start">
+        <ion-button id="pdfRef" @click="makePdf">
+          <font-awesome-icon :icon="['fas', 'file-pdf']" size="sm" class="toolbtn"></font-awesome-icon>
+        </ion-button>
+      </ion-buttons>
+
+      <ion-buttons slot="start">
+        <ion-button id="captureRef" :disabled="nodeList.length == 0" @click="screenShot">
+          <font-awesome-icon :icon="['fas', 'image']" size="sm" class="toolbtn"></font-awesome-icon>
+        </ion-button>
       </ion-buttons>
       <ion-buttons slot="end">
-        <ion-button id="trashRef" :disabled="nodeList.length == 0"   @click="clearFlow">
-        <font-awesome-icon :icon="['fas', 'trash-can']" size="sm" class="toolbtn"></font-awesome-icon>
-      </ion-button>
+        <ion-button id="trashRef" :disabled="nodeList.length == 0" @click="clearFlow">
+          <font-awesome-icon :icon="['fas', 'trash-can']" size="sm" class="toolbtn"></font-awesome-icon>
+        </ion-button>
       </ion-buttons>
       <ion-buttons slot="end">
-        <ion-button id="downRef" :disabled="nodeList.length == 0"  download="flow.json" :href="downUrl">
-        <font-awesome-icon :icon="['fas', 'download']" size="sm" class="toolbtn"></font-awesome-icon>
-      </ion-button>
-      </ion-buttons>
-      <ion-buttons  slot="end">
-        <ion-button id="upRef" :disabled="nodeList.length = 0"   @click="loadFlow">
-        <font-awesome-icon :icon="['fas', 'upload']" size="sm" class="toolbtn"></font-awesome-icon>
-      </ion-button>
+        <ion-button id="downRef" :disabled="nodeList.length == 0" download="flow.json" :href="downUrl">
+          <font-awesome-icon :icon="['fas', 'download']" size="sm" class="toolbtn"></font-awesome-icon>
+        </ion-button>
       </ion-buttons>
       <ion-buttons slot="end">
-        <ion-button id="newRef"  @click="newNode">
-          <font-awesome-icon  :icon="['fas', 'wand-magic-sparkles']" size="sm" class="toolbtn"></font-awesome-icon>
+        <ion-button id="upRef" :disabled="nodeList.length = 0" @click="loadFlow">
+          <font-awesome-icon :icon="['fas', 'upload']" size="sm" class="toolbtn"></font-awesome-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-buttons slot="end">
+        <ion-button id="newRef" @click="newNode">
+          <font-awesome-icon :icon="['fas', 'wand-magic-sparkles']" size="sm" class="toolbtn"></font-awesome-icon>
         </ion-button>
         <!-- 
-        <NodeSel msg="Select Input" signal="nodeSelection" />
-        -->
+          <NodeSel msg="Select Input" signal="nodeSelection" />
+          -->
       </ion-buttons>
     </ion-toolbar>
 
     <!-- 
-    <div ref="ctl" class="ctl">
-      <ion-button @click='ctlClick'>Clk</ion-button>
-      <ion-button @click="openPopover">Click Me</ion-button>
-    </div>
-    -->
+      <div ref="ctl" class="ctl">
+        <ion-button @click='ctlClick'>Clk</ion-button>
+        <ion-button @click="openPopover">Click Me</ion-button>
+      </div>
+      -->
     <div class="flow" ref="theFlow"></div>
   </div>
 
-      <!-- tooltips --> 
-      <!-- 
-      <ion-popover trigger="helpRef" trigger-action="hover" show-backdrop="false" size="auto" side="bottom" alignment="start">
-              <ion-content class="ion-padding">{{ $t("flow.tooltip.help") }}</ion-content>
-      </ion-popover>
+  <!-- tooltips -->
+  <!-- 
+        <ion-popover trigger="helpRef" trigger-action="hover" show-backdrop="false" size="auto" side="bottom" alignment="start">
+                <ion-content class="ion-padding">{{ $t("flow.tooltip.help") }}</ion-content>
+        </ion-popover>
 
-      -->
+        -->
 
-      <ion-popover 
-        cssClass="my-custom-popover-class pop1 popLeft"
-        :isOpen="tooltipsOpen" 
-         trigger="fitRef"  trigger-action="context-menu" show-backdrop="false" size="auto" side="bottom" alignment="start">
-              <ion-content class="ion-padding">{{ $t("flow.tooltip.fit") }}</ion-content>
-      </ion-popover>
-      <ion-popover 
-        cssClass="my-custom-popover-class pop2 popLeft"
-        :isOpen="tooltipsOpen" 
-         trigger="storyRef" trigger-action="context-menu" show-backdrop="false" size="auto" side="bottom" alignment="start">
-              <ion-content class="ion-padding">{{ $t("flow.tooltip.story") }}</ion-content>
-      </ion-popover>
-      <ion-popover 
-        cssClass="my-custom-popover-class pop3 popLeft"
-        :isOpen="tooltipsOpen" 
-         trigger="pdfRef" trigger-action="context-menu" show-backdrop="false" size="auto" side="bottom" alignment="start">
-              <ion-content class="ion-padding">{{ $t("flow.tooltip.pdf") }}</ion-content>
-      </ion-popover>
-      <ion-popover 
-        cssClass="my-custom-popover-class pop4 popLeft"
-        :isOpen="tooltipsOpen" 
-         trigger="captureRef" trigger-action="context-menu" show-backdrop="false" size="auto" side="bottom" alignment="start">
-              <ion-content class="ion-padding">{{ $t("flow.tooltip.capture") }}</ion-content>
-      </ion-popover>
-      <ion-popover 
-        cssClass="my-custom-popover-class pop1"
-        :isOpen="tooltipsOpen" 
-         trigger="trashRef" trigger-action="context-menu" show-backdrop="false" size="auto" side="bottom" alignment="start">
-              <ion-content class="ion-padding">{{ $t("flow.tooltip.trash") }}</ion-content>
-      </ion-popover>
-      <ion-popover 
-        cssClass="my-custom-popover-class pop2"
-        :isOpen="tooltipsOpen" 
-        trigger="downRef" trigger-action="context-menu" show-backdrop="false" size="auto" side="bottom" alignment="start">
-              <ion-content class="ion-padding">{{ $t("flow.tooltip.down") }}</ion-content>
-      </ion-popover>
-      <ion-popover  
-        cssClass="my-custom-popover-class pop3"
-        :isOpen="tooltipsOpen" 
-        trigger="upRef" trigger-action="context-menu" show-backdrop="false" size="auto" side="bottom" alignment="start">
-              <ion-content class="ion-padding">{{ $t("flow.tooltip.up") }}</ion-content>
-      </ion-popover>
-      <ion-popover
-        cssClass="my-custom-popover-class pop4"
-        :isOpen="tooltipsOpen" 
-        @didDismiss="closeTooltips"
-        trigger="newRef" trigger-action="context-menu" show-backdrop="false" 
-        size="auto" side="bottom" alignment="start">
-              <ion-content class="ion-padding">{{ $t("flow.tooltip.new") }}</ion-content>
-      </ion-popover>
-
+  <ion-popover cssClass="my-custom-popover-class pop1 popLeft" :isOpen="tooltipsOpen" trigger="fitRef"
+    trigger-action="context-menu" show-backdrop="false" size="auto" side="bottom" alignment="start">
+    <ion-content class="ion-padding">{{ $t("flow.tooltip.fit") }}</ion-content>
+  </ion-popover>
+  <ion-popover cssClass="my-custom-popover-class pop2 popLeft" :isOpen="tooltipsOpen" trigger="storyRef"
+    trigger-action="context-menu" show-backdrop="false" size="auto" side="bottom" alignment="start">
+    <ion-content class="ion-padding">{{ $t("flow.tooltip.story") }}</ion-content>
+  </ion-popover>
+  <ion-popover cssClass="my-custom-popover-class pop3 popLeft" :isOpen="tooltipsOpen" trigger="pdfRef"
+    trigger-action="context-menu" show-backdrop="false" size="auto" side="bottom" alignment="start">
+    <ion-content class="ion-padding">{{ $t("flow.tooltip.pdf") }}</ion-content>
+  </ion-popover>
+  <ion-popover cssClass="my-custom-popover-class pop4 popLeft" :isOpen="tooltipsOpen" trigger="captureRef"
+    trigger-action="context-menu" show-backdrop="false" size="auto" side="bottom" alignment="start">
+    <ion-content class="ion-padding">{{ $t("flow.tooltip.capture") }}</ion-content>
+  </ion-popover>
+  <ion-popover cssClass="my-custom-popover-class pop1" :isOpen="tooltipsOpen" trigger="trashRef"
+    trigger-action="context-menu" show-backdrop="false" size="auto" side="bottom" alignment="start">
+    <ion-content class="ion-padding">{{ $t("flow.tooltip.trash") }}</ion-content>
+  </ion-popover>
+  <ion-popover cssClass="my-custom-popover-class pop2" :isOpen="tooltipsOpen" trigger="downRef"
+    trigger-action="context-menu" show-backdrop="false" size="auto" side="bottom" alignment="start">
+    <ion-content class="ion-padding">{{ $t("flow.tooltip.down") }}</ion-content>
+  </ion-popover>
+  <ion-popover cssClass="my-custom-popover-class pop3" :isOpen="tooltipsOpen" trigger="upRef"
+    trigger-action="context-menu" show-backdrop="false" size="auto" side="bottom" alignment="start">
+    <ion-content class="ion-padding">{{ $t("flow.tooltip.up") }}</ion-content>
+  </ion-popover>
+  <ion-popover cssClass="my-custom-popover-class pop4" :isOpen="tooltipsOpen" @didDismiss="closeTooltips" trigger="newRef"
+    trigger-action="context-menu" show-backdrop="false" size="auto" side="bottom" alignment="start">
+    <ion-content class="ion-padding">{{ $t("flow.tooltip.new") }}</ion-content>
+  </ion-popover>
 </template>
 
 
@@ -1759,47 +1738,53 @@ const toggleTooltips = () => {
   --offset-y: 1px;
   --offset-x: -10px;
 }
-.my-custom-popover-class.pop1{
+
+.my-custom-popover-class.pop1 {
   --offset-y: 10px;
 }
+
 .my-custom-popover-class.pop2 {
   --offset-y: 80px;
 }
+
 .my-custom-popover-class.pop3 {
   --offset-y: 150px;
 }
+
 .my-custom-popover-class.pop4 {
   --offset-y: 220px;
 }
+
 .popLeft {
   --offset-x: -50px;
 }
+
 .my-custom-popover-class ion-content {
   --background: #eef;
   --border-radius: 8px;
-  line-height:1rem;
-  overflow:clip;
+  line-height: 1rem;
+  overflow: clip;
 }
 
 .wrap {
-  position:relative;
+  position: relative;
   /* dark mode not working yet, set light BG */
   background-color: #fff;
 }
 
 .toolbar {
-  position:absolute;
-  top:0;
-  left:0;
+  position: absolute;
+  top: 0;
+  left: 0;
   z-index: 10;
   max-width: 34rem;
   border: 3px solid #ccc;
 }
 
 .toolbar-sm {
-  position:absolute;
-  top:0;
-  left:0;
+  position: absolute;
+  top: 0;
+  left: 0;
   z-index: 10;
   max-width: 20rem;
   border: 3px solid #ccc;
@@ -1808,61 +1793,65 @@ const toggleTooltips = () => {
 .question {
   margin-right: 1rem;
 }
+
 .ctl {
-  position:absolute;
-  top:0;
-  left:500px;
+  position: absolute;
+  top: 0;
+  left: 500px;
   z-index: 10;
-  width:50px;
-  height:50px;
-  background:#cc0;
+  width: 50px;
+  height: 50px;
+  background: #cc0;
   display: flex;
-  align-items:center;
+  align-items: center;
   justify-content: center;
 
 
 }
+
 .flow {
-  width:100%;
+  width: 100%;
   min-width: 300px;
   height: 100%;
-  min-height:300px;
+  min-height: 300px;
   display: block;
 }
+
 .node {
   color: #f00;
 }
+
 .edge {
   color: #00f;
 }
 
 .t1 {
-  display:none;
+  display: none;
 }
 </style>
 
 <style>
 /* global styling */
 
-  
+
 
 .t1 {
-  display:none;
+  display: none;
 }
+
 .flow canvas {
-  left:0;
+  left: 0;
 }
 
 .ctx-menu {
-  background-color :#422;
-  padding:3px;
+  background-color: #422;
+  padding: 3px;
 }
 
 .ctx-item {
-  background-color :#f0f;
-  padding:3px;
-  margin:3px;
+  background-color: #f0f;
+  padding: 3px;
+  margin: 3px;
 }
-
 </style>
 

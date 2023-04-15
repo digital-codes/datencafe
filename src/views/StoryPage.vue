@@ -40,7 +40,7 @@ import { ref, onMounted, onBeforeMount, computed } from "vue"
 import { useI18n } from 'vue-i18n'
 const { t, locale } = useI18n({ useScope: 'global' })
 
-import storyItems from "../assets/stories/stories.json"
+import storyItems from "@/assets/stories/stories.json"
 const storyItem = (idx,id) => {
   //console.log(idx,id,locale.value)
   //console.log(storyItems[locale.value])

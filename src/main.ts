@@ -80,6 +80,13 @@ import { faTimeline } from '@fortawesome/free-solid-svg-icons/faTimeline'
 import { faNewspaper } from '@fortawesome/free-solid-svg-icons/faNewspaper'
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons/faPenToSquare'
 
+import { faRecycle } from '@fortawesome/free-solid-svg-icons'
+import { faPeopleRoof } from '@fortawesome/free-solid-svg-icons'
+import { faCloudSunRain } from '@fortawesome/free-solid-svg-icons'
+import { faMicroscope } from '@fortawesome/free-solid-svg-icons'
+import { faBookMedical } from '@fortawesome/free-solid-svg-icons'
+import { faLeaf } from '@fortawesome/free-solid-svg-icons'
+
 
 
 /* add icons to the library */
@@ -92,6 +99,7 @@ library.add(faRocket, faStar, faReceipt, faDownload, faUpload,faTrashCan)
 library.add(faMagnifyingGlassPlus, faMagnifyingGlassMinus, faExpand,faImage,faQuestion)
 library.add(faList, faListCheck, faTag, faTags, faHeading, faTimeline, faNewspaper)
 library.add(faPenToSquare, faInfo, faMessage,faComment,faFilePdf)
+library.add(faRecycle,faPeopleRoof,faCloudSunRain,faMicroscope,faBookMedical,faLeaf)
 
 
 // ----------------

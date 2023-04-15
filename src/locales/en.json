@@ -27,6 +27,8 @@
     "mode":"Dark/Light",
     "lang":"LANGUAGE",
     "user":"Account",
+    "signedin":"Signed-in",
+    "signedout":"Signed-out",
     "scrollup":"Flow",
     "scrolldown":"Vizualisations"
   },
