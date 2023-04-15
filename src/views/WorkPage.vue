@@ -1,7 +1,7 @@
 
 <script setup lang="ts">
 import { IonButton, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
-import { IonCol, IonGrid, IonRow } from '@ionic/vue';
+import { IonCol, IonGrid, IonRow, IonPopup } from '@ionic/vue';
 import { ref, onMounted } from "vue"
 import { createAnimation } from '@ionic/vue';
 import { defineAsyncComponent } from 'vue';
@@ -159,7 +159,7 @@ const scrollToTop = () => {
     <TitleBar :title='$t("titles.work.tab")'  thumb="wand-magic-sparkles"/>
 
     <ion-content :fullscreen="true" ref="content">
-      <div id="container" class="work-container">
+      <div id="container" class="container work-container">
         <ion-grid fixed="true">
           <ion-row>
 
@@ -167,7 +167,7 @@ const scrollToTop = () => {
               <div class="headline">
               <h3>{{$t("titles.work.flow")}}
               </h3>
-              <ion-button color="warning" class="scroll-btn ion-hide-lg-up" @click="scrollToBottom()">
+              <ion-button v-if="!FlowLoading"  id="scrollBottomRef" color="warning" class="scroll-btn ion-hide-lg-up" @click="scrollToBottom()">
                 <font-awesome-icon class="scroll-icon" aria-hidden="true" :icon="['fas', 'angle-down']"  />
                 <font-awesome-icon class="scroll-icon" aria-hidden="true" :icon="['fas', 'chart-area']"  />
               </ion-button>
@@ -186,7 +186,7 @@ const scrollToTop = () => {
               -->
               <DanfoPlot :propItems="items"/>
 
-              <ion-button color="warning" expand="block" class="scroll-btn ion-hide-lg-up" @click="scrollToTop()">
+              <ion-button v-if="!FlowLoading"  id="scrollTopRef" color="warning" expand="block" class="scroll-btn ion-hide-lg-up" @click="scrollToTop()">
                 <font-awesome-icon class="scroll-icon" aria-hidden="true" :icon="['fas', 'angle-up']"  />
                 <font-awesome-icon class="scroll-icon" aria-hidden="true" :icon="['fas', 'diagram-project']"  />
               </ion-button>
@@ -197,18 +197,33 @@ const scrollToTop = () => {
       </div>
     </ion-content>
   </ion-page>
+  <!-- tooltips --> 
+  <!-- 
+
+  <ion-popover  v-if="!FlowLoading"  trigger="scrollTopRef" trigger-action="hover" show-backdrop="false" size="auto" side="top" alignment="start">
+        <ion-content class="ion-padding">{{ $t("tooltip.scrolldown") }}</ion-content>
+  </ion-popover>
+  <ion-popover v-if="!FlowLoading"  trigger="scrollBottomRef" trigger-action="hover" show-backdrop="false" size="auto" side="left" alignment="start">
+        <ion-content class="ion-padding">{{ $t("tooltip.scrollup") }}</ion-content>
+  </ion-popover>
+  -->
+
 </template>
 
 <style scoped>
 #container {
   text-align: center;
+  margin:10px;
+  /*
   position: absolute;
   left: 0;
   right: 0;
   top: 50%;
   transform: translateY(-50%);
   min-height:50%;
+  */
 }
+
 
 #container strong {
   font-size: 20px;
@@ -253,13 +268,29 @@ ion-col {
 }
 
 .work-container {
-  padding-left:.6rem;
-  padding-right:.6rem;
+  padding-left:.4rem;
+  padding-right:.8rem;
   }
+
 @media only screen and (max-width: 996px) {
-  .work-container {
-    transform: translateY(-20%)!important;
+  #container {
+    position: absolute;
   }
+  .work-container {
+    /*
+    top: 50%;
+    transform: translateY(-20%)!important;
+    */
+  }
+
+  .flowArea {
+    background:#eef;
+  }
+  .chartArea {
+    background:#efe;
+    height: 35%;
+  }
+
 }
 
 
@@ -283,36 +314,6 @@ ion-button {
   display:block;
   float:right;
 }
-
-@media print {
-    html, body {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-    }
-
-    /* Set the page size to A4 */
-    @page {
-      size: A4;
-    }
-
-    /* Center the content horizontally */
-    body {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    
-    /* Set the width of the element to the width of A4 minus the margins */
-    .chartArea {
-      width: calc(100vw - 40px);
-      margin: 20px;
-    }
-    /* Set the width of the element to the width of A4 minus the margins */
-    .flowArea {
-      display: none;
-    }
-  }
 
 
 </style>

@@ -10,7 +10,7 @@
             <!-- 
             <font-awesome-icon class="logo" icon="fa-solid fa-mug-hot" size="2x" :style="{ color: 'red' }" />
             -->
-            <ion-thumbnail  class="logo" >
+            <ion-thumbnail class="logo" button router-link="/">
               <img alt="Daten.Cafe Logo" src="/img/logo/datencafe.svg" />
             </ion-thumbnail>
             <font-awesome-icon :icon="thumb" size="xl" class="ion-hide-md-down"/>
@@ -24,7 +24,7 @@
 
           <ion-buttons slot="end">
           <div>
-              <ion-item>
+              <ion-item id="modeRef" >
                 <!-- 
                 <ion-label class="modeLbl left">{{ $t("light") }}</ion-label>
                 -->
@@ -35,10 +35,11 @@
                 <ion-label class="modeLbl right">{{ $t("dark") }}</ion-label>
                 -->
               </ion-item>
+
             </div>
           </ion-buttons>
 
-        <ion-buttons slot="end">
+        <ion-buttons slot="end"  id="langRef">
             <div>
               <font-awesome-icon :icon="['fas', 'globe']" size="xl"/>
               <!-- 
@@ -56,7 +57,7 @@
             </ion-list>          
           </ion-buttons>
 
-          <ion-buttons slot="end" class="lastItem">
+          <ion-buttons slot="end" class="lastItem" id="userRef">
             <div v-if="hasToken">
               <font-awesome-icon :icon="['fas', 'user']" size="1x" class="tok"/>
             </div>
@@ -78,12 +79,27 @@
           </div>
       </ion-toolbar>
       </ion-header>
-   
+
+      <!-- tooltips not working together with buttons --> 
+      <!--
+      <ion-popover trigger="modeRef" trigger-action="hover" show-backdrop="false" size="auto" side="bottom" alignment="start">
+              <ion-content class="ion-padding">{{ $t("tooltip.mode") }}</ion-content>
+      </ion-popover>
+      <ion-popover trigger="langRef" trigger-action="hover" show-backdrop="false" size="auto" side="bottom" alignment="start">
+              <ion-content class="ion-padding">{{ $t("tooltip.lang") }}</ion-content>
+      </ion-popover>
+      <ion-popover trigger="userRef" trigger-action="hover" show-backdrop="false" size="auto" side="bottom" alignment="start">
+        <ion-content class="ion-padding">{{ $t("tooltip.user") }}</ion-content>
+      </ion-popover>
+
+      -->
+
   </template>
   
   <script setup lang="ts">
   import { IonButtons, IonHeader, IonMenuButton, IonTitle, IonToolbar } from '@ionic/vue';
   import { IonLabel, IonList, IonItem, IonToggle,  IonImage, IonThumbnail, IonSelect, IonSelectOption, } from '@ionic/vue';
+  import { IonButton, IonContent, IonPopover } from '@ionic/vue';
   import { ref, computed, onMounted } from "vue"
 
     // stores
@@ -106,6 +122,9 @@
     title:String,
     thumb:String
   })
+
+  // thumbnail refs for popovers
+  const thumbRef = ref() 
 
 
     // https://lokalise.com/blog/vue-i18n/
@@ -181,9 +200,14 @@ onMounted(async () => {
   align-items: center;
 }
 
+ion-thumbnail.logo:hover {
+  cursor: pointer;
+}
+
 ion-thumbnail.logo {
   --size:96px;
 }
+
 
 /* sm is 576, md is 768 */
 @media only screen and (max-width: 768px) {

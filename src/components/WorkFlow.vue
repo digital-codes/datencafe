@@ -43,6 +43,7 @@ const userStore = UserStore()
 import { DelayTimer } from "@/services/DelayTimer"
 
 // popovers
+import { IonContent, IonPopover } from '@ionic/vue';
 import { popoverController } from '@ionic/vue';
 import Popover from '@/components/popovers/PopOver.vue'; // test
 import ImportPopover from '@/components/popovers/ImportPopover.vue';
@@ -94,6 +95,9 @@ const nextNode = ref(1)
 const nodeList = ref([])
 
 const nextInsertedX = ref(0)
+
+const smallScreen = ref(false)
+
 
 const elements: ElementDefinition[] = [ // list of graph elements to start with
   /* 
@@ -682,10 +686,13 @@ async function flowInit  ()  {
   }
 }
 
+
   onMounted(() =>  {
     ww.value = window.innerWidth
     wh.value = window.innerHeight
     console.log("ww,wh",ww.value,wh.value)
+    // set variable so we can toggle toolbar etc
+    smallScreen.value = (ww.value <= 996)?true:false
     if (!flowWrap.value.style) flowWrap.value.style = {}
     flowWrap.value.style.width = "100%" //String(ww.value) + "px"
     flowWrap.value.style.height = String(wh.value * .7) + "px"
@@ -1466,6 +1473,10 @@ async function screenShot() {
 // compute only after button click
 const downUrl = computed(() => {
   console.log("Save flow")
+  if (nodeList.value.length == 0) {
+    return "/#"
+  }
+
   const flow = cy.value.json()
   //console.log("Flow",flow)
   const nodes = []
@@ -1516,6 +1527,15 @@ async function saveFlow() {
 }
 */
 
+// tooltips
+const tooltipsOpen = ref(false)
+const closeTooltips = () => {tooltipsOpen.value = false}
+const openTooltips = () => {tooltipsOpen.value = true}
+const toggleTooltips = () => {
+  tooltipsOpen.value = !tooltipsOpen.value
+  console.log("Toggle:",tooltipsOpen)
+}
+
 
 </script>
 
@@ -1524,9 +1544,9 @@ async function saveFlow() {
   <div ref="flowWrap" class="wrap">
     <input ref="fileInput" type="file" style="display:none" @change="handleFileUpload" />
     <a ref="scrotDown" style="display:none" :href="scrotData"  download="flow.png" ></a>
-    <ion-toolbar class="toolbar ion-hide-md-down">
-      <ion-buttons class="ion-hide-sm-down question"  slot="start">
-        <ion-button @click="question">
+    <ion-toolbar v-if="!smallScreen" class="toolbar ion-hide-md-down">
+      <ion-buttons  id="helpRef"  class="ion-hide-sm-down question"  slot="start">
+        <ion-button @click="toggleTooltips">
         <font-awesome-icon :icon="['fas', 'question']" size="2x" class="toolbtn"></font-awesome-icon>
       </ion-button>
       </ion-buttons>
@@ -1564,98 +1584,97 @@ async function saveFlow() {
 
       -->
       <ion-buttons slot="start">
-        <ion-button @click="zoomFit">
+        <ion-button id="fitRef" @click="zoomFit">
         <font-awesome-icon :icon="['fas', 'expand']" size="2x" class="toolbtn"></font-awesome-icon>
         </ion-button>
       </ion-buttons>
-      <ion-buttons class="ion-hide-sm-down"  slot="start" >
-        <ion-button @click="zoomOut">
+      <ion-buttons  slot="start" >
+        <ion-button id="storyRef" @click="editStory">
         <font-awesome-icon :icon="['fas', 'pen-to-square']" size="2x" class="toolbtn"></font-awesome-icon>
       </ion-button>
       </ion-buttons>
-      <ion-buttons class="ion-hide-sm-down"  slot="start">
-        <ion-button @click="panRight">
-        <font-awesome-icon :icon="['fas', 'tags']" size="2x" class="toolbtn"></font-awesome-icon>
+      <ion-buttons  slot="start">
+        <ion-button id="pdfRef" @click="makePdf">
+        <font-awesome-icon :icon="['fas', 'file-pdf']" size="2x" class="toolbtn"></font-awesome-icon>
       </ion-button>
       </ion-buttons>
-      <ion-buttons v-if="nodeList.length > 0" slot="end">
-        <ion-button  @click="screenShot">
+      <ion-buttons  slot="start">
+        <ion-button id="captureRef" :disabled="nodeList.length == 0" @click="screenShot">
         <font-awesome-icon :icon="['fas', 'image']" size="2x" class="toolbtn"></font-awesome-icon>
       </ion-button>
       </ion-buttons>
-      <ion-buttons v-if="nodeList.length > 0" slot="end">
-        <ion-button  @click="clearFlow">
+      <ion-buttons  slot="end">
+        <ion-button id="trashRef" :disabled="nodeList.length == 0" @click="clearFlow">
         <font-awesome-icon :icon="['fas', 'trash-can']" size="2x" class="toolbtn"></font-awesome-icon>
       </ion-button>
       </ion-buttons>
-      <ion-buttons v-if="nodeList.length > 0" slot="end">
-        <ion-button  download="flow.json" :href="downUrl">
+      <ion-buttons slot="end">
+        <ion-button id="downRef" :disabled="nodeList.length == 0"  download="flow.json" :href="downUrl">
         <font-awesome-icon :icon="['fas', 'download']" size="2x" class="toolbtn"></font-awesome-icon>
       </ion-button>
       </ion-buttons>
-      <ion-buttons v-if="nodeList.length == 0" slot="end">
-        <ion-button  @click="loadFlow">
+      <ion-buttons slot="end">
+        <ion-button id="upRef" :disabled="nodeList.length > 0"  @click="loadFlow">
         <font-awesome-icon :icon="['fas', 'upload']" size="2x" class="toolbtn"></font-awesome-icon>
       </ion-button>
       </ion-buttons>
       <ion-buttons slot="end">
-        <ion-button @click="newNode">
+        <ion-button id="newRef" @click="newNode">
           <font-awesome-icon :icon="['fas', 'wand-magic-sparkles']" size="2x" class="toolbtn"></font-awesome-icon>
-          {{ $t("flow.tools.new")}}
         </ion-button>
         <!-- 
         <NodeSel msg="Select Input" signal="nodeSelection" />
         -->
       </ion-buttons>
     </ion-toolbar>
-    <ion-toolbar class="toolbar-sm ion-hide-md-up">
+    <ion-toolbar v-if="smallScreen" class="toolbar-sm ion-hide-md-up">
       <ion-buttons slot="start" class="question">
-        <ion-button @click="question">
+        <ion-button  id="helpRef"  @click="toggleTooltips">
         <font-awesome-icon :icon="['fas', 'question']" size="sm" class="toolbtn"></font-awesome-icon>
       </ion-button>
       </ion-buttons>
 
       <ion-buttons slot="start">
-        <ion-button @click="zoomFit">
+        <ion-button  id="fitRef"  @click="zoomFit">
         <font-awesome-icon :icon="['fas', 'expand']" size="sm" class="toolbtn"></font-awesome-icon>
         </ion-button>
       </ion-buttons>
 
       <ion-buttons slot="start" >
-        <ion-button @click="zoomOut">
+        <ion-button id="storyRef" @click="editStory">
         <font-awesome-icon :icon="['fas', 'pen-to-square']" size="sm" class="toolbtn"></font-awesome-icon>
       </ion-button>
       </ion-buttons>
-      <ion-buttons slot="start">
-        <ion-button @click="panRight">
-        <font-awesome-icon :icon="['fas', 'tags']" size="sm" class="toolbtn"></font-awesome-icon>
+
+      <ion-buttons  slot="start">
+        <ion-button id="pdfRef" @click="makePdf">
+        <font-awesome-icon :icon="['fas', 'file-pdf']" size="sm" class="toolbtn"></font-awesome-icon>
       </ion-button>
       </ion-buttons>
 
-      <ion-buttons v-if="nodeList.length > 0" slot="end">
-        <ion-button  @click="screenShot">
+      <ion-buttons slot="start">
+        <ion-button id="captureRef" :disabled="nodeList.length == 0"   @click="screenShot">
         <font-awesome-icon :icon="['fas', 'image']" size="sm" class="toolbtn"></font-awesome-icon>
       </ion-button>
       </ion-buttons>
-      <ion-buttons v-if="nodeList.length > 0" slot="end">
-        <ion-button  @click="clearFlow">
+      <ion-buttons slot="end">
+        <ion-button id="trashRef" :disabled="nodeList.length == 0"   @click="clearFlow">
         <font-awesome-icon :icon="['fas', 'trash-can']" size="sm" class="toolbtn"></font-awesome-icon>
       </ion-button>
       </ion-buttons>
-      <ion-buttons v-if="nodeList.length > 0" slot="end">
-        <ion-button  download="flow.json" :href="downUrl">
+      <ion-buttons slot="end">
+        <ion-button id="downRef" :disabled="nodeList.length == 0"  download="flow.json" :href="downUrl">
         <font-awesome-icon :icon="['fas', 'download']" size="sm" class="toolbtn"></font-awesome-icon>
       </ion-button>
       </ion-buttons>
-      <ion-buttons v-if="nodeList.length == 0" slot="end">
-        <ion-button  @click="loadFlow">
+      <ion-buttons  slot="end">
+        <ion-button id="upRef" :disabled="nodeList.length = 0"   @click="loadFlow">
         <font-awesome-icon :icon="['fas', 'upload']" size="sm" class="toolbtn"></font-awesome-icon>
       </ion-button>
       </ion-buttons>
       <ion-buttons slot="end">
-        <ion-button @click="newNode">
-          <font-awesome-icon :icon="['fas', 'wand-magic-sparkles']" size="sm" class="toolbtn"></font-awesome-icon>
-          {{ $t("flow.tools.new")}}
+        <ion-button id="newRef"  @click="newNode">
+          <font-awesome-icon  :icon="['fas', 'wand-magic-sparkles']" size="sm" class="toolbtn"></font-awesome-icon>
         </ion-button>
         <!-- 
         <NodeSel msg="Select Input" signal="nodeSelection" />
@@ -1671,9 +1690,97 @@ async function saveFlow() {
     -->
     <div class="flow" ref="theFlow"></div>
   </div>
+
+      <!-- tooltips --> 
+      <!-- 
+      <ion-popover trigger="helpRef" trigger-action="hover" show-backdrop="false" size="auto" side="bottom" alignment="start">
+              <ion-content class="ion-padding">{{ $t("flow.tooltip.help") }}</ion-content>
+      </ion-popover>
+
+      -->
+
+      <ion-popover 
+        cssClass="my-custom-popover-class pop1 popLeft"
+        :isOpen="tooltipsOpen" 
+         trigger="fitRef"  trigger-action="context-menu" show-backdrop="false" size="auto" side="bottom" alignment="start">
+              <ion-content class="ion-padding">{{ $t("flow.tooltip.fit") }}</ion-content>
+      </ion-popover>
+      <ion-popover 
+        cssClass="my-custom-popover-class pop2 popLeft"
+        :isOpen="tooltipsOpen" 
+         trigger="storyRef" trigger-action="context-menu" show-backdrop="false" size="auto" side="bottom" alignment="start">
+              <ion-content class="ion-padding">{{ $t("flow.tooltip.story") }}</ion-content>
+      </ion-popover>
+      <ion-popover 
+        cssClass="my-custom-popover-class pop3 popLeft"
+        :isOpen="tooltipsOpen" 
+         trigger="pdfRef" trigger-action="context-menu" show-backdrop="false" size="auto" side="bottom" alignment="start">
+              <ion-content class="ion-padding">{{ $t("flow.tooltip.pdf") }}</ion-content>
+      </ion-popover>
+      <ion-popover 
+        cssClass="my-custom-popover-class pop4 popLeft"
+        :isOpen="tooltipsOpen" 
+         trigger="captureRef" trigger-action="context-menu" show-backdrop="false" size="auto" side="bottom" alignment="start">
+              <ion-content class="ion-padding">{{ $t("flow.tooltip.capture") }}</ion-content>
+      </ion-popover>
+      <ion-popover 
+        cssClass="my-custom-popover-class pop1"
+        :isOpen="tooltipsOpen" 
+         trigger="trashRef" trigger-action="context-menu" show-backdrop="false" size="auto" side="bottom" alignment="start">
+              <ion-content class="ion-padding">{{ $t("flow.tooltip.trash") }}</ion-content>
+      </ion-popover>
+      <ion-popover 
+        cssClass="my-custom-popover-class pop2"
+        :isOpen="tooltipsOpen" 
+        trigger="downRef" trigger-action="context-menu" show-backdrop="false" size="auto" side="bottom" alignment="start">
+              <ion-content class="ion-padding">{{ $t("flow.tooltip.down") }}</ion-content>
+      </ion-popover>
+      <ion-popover  
+        cssClass="my-custom-popover-class pop3"
+        :isOpen="tooltipsOpen" 
+        trigger="upRef" trigger-action="context-menu" show-backdrop="false" size="auto" side="bottom" alignment="start">
+              <ion-content class="ion-padding">{{ $t("flow.tooltip.up") }}</ion-content>
+      </ion-popover>
+      <ion-popover
+        cssClass="my-custom-popover-class pop4"
+        :isOpen="tooltipsOpen" 
+        @didDismiss="closeTooltips"
+        trigger="newRef" trigger-action="context-menu" show-backdrop="false" 
+        size="auto" side="bottom" alignment="start">
+              <ion-content class="ion-padding">{{ $t("flow.tooltip.new") }}</ion-content>
+      </ion-popover>
+
 </template>
 
+
 <style scoped>
+/* tooltip styling via custom class */
+.my-custom-popover-class {
+  --offset-y: 1px;
+  --offset-x: -10px;
+}
+.my-custom-popover-class.pop1{
+  --offset-y: 10px;
+}
+.my-custom-popover-class.pop2 {
+  --offset-y: 80px;
+}
+.my-custom-popover-class.pop3 {
+  --offset-y: 150px;
+}
+.my-custom-popover-class.pop4 {
+  --offset-y: 220px;
+}
+.popLeft {
+  --offset-x: -50px;
+}
+.my-custom-popover-class ion-content {
+  --background: #eef;
+  --border-radius: 8px;
+  line-height:1rem;
+  overflow:clip;
+}
+
 .wrap {
   position:relative;
   /* dark mode not working yet, set light BG */
@@ -1735,6 +1842,10 @@ async function saveFlow() {
 </style>
 
 <style>
+/* global styling */
+
+  
+
 .t1 {
   display:none;
 }

@@ -45,7 +45,8 @@ onMounted(() => {
   wh.value = window.innerHeight
   if (!plotWrap.value.style) plotWrap.value.style = {}
   plotWrap.value.style.width = "100%" //String(ww.value) + "px"
-  plotWrap.value.style.height = String(wh.value * .7) + "px"
+  // we can do this in css with calc ...
+  //plotWrap.value.style.height = String(wh.value * .6) + "px"
 
   // here, we just initialize items. With initial value, watcheffect 
   // will stilll be triggered ...
@@ -77,8 +78,16 @@ watchEffect(() => {
     /*
     max-height: 600px;
     */
+    height: calc(70vh);
     overflow: scroll;
     padding-right: 20px;
+    background:#fff;
+  }
+  @media only screen and (max-width: 996px) {
+    .container {
+      height: calc(60vh);
+      padding-right: 10px;
+    }
   }
 
   .chartItem {

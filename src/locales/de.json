@@ -23,23 +23,38 @@
     "stories":"Geschichten",
     "login":"Anmelden"
   },
+  "tooltip":{
+    "mode":"Hell/Dunkel",
+    "lang":"Sprache",
+    "user":"Anmeldung",
+    "scrollup":"Zum Flow",
+    "scrolldown":"Zu den Ansichten"
+  },
   "flow":{
-    "tools":{
-      "zoomfit":"Zoom full",
+    "tooltip":{
+      "fit":"Zoom auf alles",
+      "help":"Hilfe",
+      "story":"Deine Geschichte",
+      "pdf":"PDF von Allem",
+      "capture":"Flow Foto",
+      "trash":"Alles Löschen",
+      "up":"Flow Laden",
+      "down":"Flow Speichern",
+      "new":"Neues Element",
       "zoomin":"Zoom in",
       "zoomout":"Zoom out",
       "panleft":"Pan link",
       "panright":"Pan rechts",
       "panup":"Pan hoch",
-      "pandown":"Pan runter",
-      "new":"Neu"
+      "pandown":"Pan runter"
     },
     "ctx":{
       "actions":"Aktionen",
       "config":"Einstellen",
       "connect":"Verbinden",
       "download":"Herunterladen",
-      "remove":"Löschen"
+      "remove":"Löschen",
+      "rename":"Umbenennen"
     },
     "cfg":{
       "params":"Einstellungen",

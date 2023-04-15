@@ -23,23 +23,38 @@
     "stories":"Stories",
     "login":"Login"
   },
+  "tooltip":{
+    "mode":"Dark/Light",
+    "lang":"LANGUAGE",
+    "user":"Account",
+    "scrollup":"Flow",
+    "scrolldown":"Vizualisations"
+  },
   "flow":{
-    "tools":{
-      "zoomfit":"Zoom full",
+    "tooltip":{
+      "fit":"Zoom fit",
+      "help":"Help",
+      "story":"Your Data Story",
+      "pdf":"Save all as PDF",
+      "capture":"Flow Screenshot",
+      "trash":"Delete all",
+      "up":"Upload Flow",
+      "down":"Download Flow",
+      "new":"New Item",
       "zoomin":"Zoom in",
       "zoomout":"Zoom out",
       "panleft":"Pan left",
       "panright":"Pan right",
       "panup":"Pan up",
-      "pandown":"Pan donw",
-      "new":"New"
+      "pandown":"Pan donw"
     },
     "ctx":{
       "actions":"Actions",
       "config":"Configure",
       "connect":"Connect",
       "download":"Download",
-      "remove":"Delete"
+      "remove":"Delete",
+      "rename":"Rename"
     },
     "cfg":{
       "params":"Settings",
