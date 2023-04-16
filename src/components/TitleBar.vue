@@ -379,7 +379,7 @@ ion-toolbar {
   /*
     --background: var(--ion-color-light);
     */
-    --background: var(--ion-background-color);
+    --background: var(--ion-color-dark-contrast);
     --color: var(--ion-color-dark);
   }
 
