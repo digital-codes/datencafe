@@ -10,7 +10,7 @@
       "email":"Email",
       "date":"Date",
       "link":"Link",
-      "title":"Title",
+      "title":"Story Title",
       "text":"Story text here..."
     },
     "categories": {
@@ -65,7 +65,7 @@
       "email":"Email",
       "date":"Datum",
       "link":"Link",
-      "title":"Titel",
+      "title":"Titel der Geschichte",
       "text":"Hier kommt die Datengeschichte ..."
     },
     "categories": {

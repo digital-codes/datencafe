@@ -13,11 +13,17 @@
             <ion-thumbnail class="logo" button router-link="/">
               <img alt="Daten.Cafe Logo" src="/img/logo/datencafe.svg" />
             </ion-thumbnail>
-            <font-awesome-icon :icon="thumb" size="xl" class="ion-hide-md-down"/>
+            <!-- 
             <font-awesome-icon :icon="thumb" size="1x" class="ion-hide-md-up"/>
+            <font-awesome-icon :icon="thumb" size="xl" class="ion-hide-md-down"/>
+            -->
             <div>
           <span class="headline ion-hide-sm-down">Daten.Cafe</span>
           <span class="version ion-hide-sm-down">{{Version}}</span>
+          <!-- 
+          <font-awesome-icon icon="fa-solid fa-caret-right" size="2x" class="ion-hide-sm-down"/>
+          <span class="version ion-hide-sm-down">{{ $t(routeInfo.title) }}</span>
+          -->
             </div>
           </div>
           </ion-buttons>
@@ -79,7 +85,11 @@
         </ion-toolbar>
       <ion-toolbar class="ion-hide-sm-up toolbar-secondary">
         <div class="smallheader">
-            <span class="headline-secondary">Daten.Cafe</span>
+            <span class="headline-secondary">Daten.Cafe
+            </span>
+            <span>
+              <font-awesome-icon :icon="routeInfo.thumb" size="sm"/>
+            </span>
           </div>
       </ion-toolbar>
       </ion-header>
@@ -118,6 +128,29 @@
     // globals
     import { Version } from "@/services/GlobalDefs"
 
+    import { useRoute } from 'vue-router';
+    const route = useRoute()
+
+    const routeInfo = computed(() => {
+      switch (route.name) {
+        case "Info":
+          return {title:"titles.about", thumb:"coffee"}
+        case "Data":
+          return {title:"titles.data", thumb:"book-atlas"}
+        case "Stories":
+          return {title:"titles.advanced", thumb:"book-open"}
+        case "Instructions":
+          return {title:"titles.tutorial", thumb:"receipt"}
+        case "Advanced":
+          return {title:"titles.advanced", thumb:"rocket"}
+        case "Workspace":
+          return {title:"titles.work.tab", thumb:"wand-magic-sparkles"}
+        case "Login":
+         return {title:"titles.login", thumb:"user-secret"}
+        default:
+          return {title:"undefined", thumb:"question"}
+      }
+    })
     const props = defineProps({
     title:String,
     thumb:String

@@ -34,6 +34,7 @@ import { faUserSecret } from '@fortawesome/free-solid-svg-icons'
 import { faTwitter } from '@fortawesome/free-brands-svg-icons'
 import { faMugHot } from '@fortawesome/free-solid-svg-icons'
 import { faCoffee } from '@fortawesome/free-solid-svg-icons/faCoffee'
+import { faCaretRight } from '@fortawesome/free-solid-svg-icons'
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons/faArrowRight'
 import { faArrowLeft } from '@fortawesome/free-solid-svg-icons/faArrowLeft'
 import { faArrowUp } from '@fortawesome/free-solid-svg-icons/faArrowUp'
@@ -90,7 +91,7 @@ import { faLeaf } from '@fortawesome/free-solid-svg-icons'
 
 
 /* add icons to the library */
-library.add(faUserSecret, faTwitter, faMugHot, faCoffee)
+library.add(faUserSecret, faTwitter, faMugHot, faCoffee,faCaretRight)
 library.add(faArrowUp,faArrowDown,faArrowLeft,faArrowRight,faAngleUp,faAngleDown)
 library.add(faGlobe, faLanguage, faGraduationCap, faBookOpen, faBookAtlas)
 library.add(faBook, faUser, faUserSlash, faHatWizard, faWandMagicSparkles)

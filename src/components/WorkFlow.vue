@@ -28,7 +28,7 @@ import { IonButton } from '@ionic/vue';
 import { DataFrame, toJSON } from 'danfojs/dist/danfojs-browser/src';
 
 // globals
-import { Signals } from "@/services/GlobalDefs"
+import { Signals, Version } from "@/services/GlobalDefs"
 import eventBus from '@/services/eventBus';
 
 // provider/subscriber
@@ -1377,6 +1377,11 @@ async function initFlow(design: any) {
   // FIXME version missing
   const fields = Object.keys(design)
   console.log("Fields:", fields)
+  if (!fields.includes("version")) throw (new Error("Version missing"))
+  if (design.version != Version) {
+    alert("Version mismatch: loaded " + design.version +" - current " + Version)
+    throw (new Error("Version mismatch"))
+  }
   if (!fields.includes("flow")) throw (new Error("Flow missing"))
   if (!fields.includes("nodes")) throw (new Error("Nodes missing"))
   if (!fields.includes("data")) throw (new Error("Data missing"))
@@ -1531,7 +1536,7 @@ const downUrl = computed(() => {
     const contentType = 'application/json'
     const story = userStore.getStory()
     console.log("Story:", story)
-    const flowData = JSON.stringify({ flow: flow, nodes: nodes, data: data, next: nextNode.value, story: story }, null, 2)
+    const flowData = JSON.stringify({ version:Version,flow: flow, nodes: nodes, data: data, next: nextNode.value, story: story }, null, 2)
     const blob = new Blob([flowData], { type: contentType })
     const url = window.URL.createObjectURL(blob)
     console.log("downurl updated")
@@ -1585,7 +1590,7 @@ const toggleTooltips = () => {
   <div ref="flowWrap" class="wrap">
     <input ref="fileInput" type="file" style="display:none" @change="handleFileUpload" />
     <a ref="scrotDown" style="display:none" :href="scrotData" download="flow.png"></a>
-    <ion-toolbar v-if="!smallScreen" class="toolbar ion-hide-md-down">
+    <ion-toolbar v-if="!smallScreen" class="toolbar">
       <ion-buttons id="helpRef" class="ion-hide-sm-down question" slot="start">
         <ion-button @click="toggleTooltips">
           <font-awesome-icon :icon="['fas', 'question']" size="2x" class="toolbtn"></font-awesome-icon>
@@ -1668,7 +1673,7 @@ const toggleTooltips = () => {
           -->
       </ion-buttons>
     </ion-toolbar>
-    <ion-toolbar v-if="smallScreen" class="toolbar-sm ion-hide-md-up">
+    <ion-toolbar v-if="smallScreen" class="toolbar-sm">
       <ion-buttons slot="start" class="question">
         <ion-button id="helpRef" @click="toggleTooltips">
           <font-awesome-icon :icon="['fas', 'question']" size="sm" class="toolbtn"></font-awesome-icon>
@@ -1729,6 +1734,7 @@ const toggleTooltips = () => {
         <ion-button @click="openPopover">Click Me</ion-button>
       </div>
       -->
+      <!-- this is where the flow will be installed -->
     <div class="flow" ref="theFlow"></div>
   </div>
 
@@ -1803,7 +1809,7 @@ const toggleTooltips = () => {
 }
 
 .my-custom-popover-class ion-content {
-  --background: #eef;
+  --background: --var(--ion-color-light);
   --border-radius: 8px;
   line-height: 1rem;
   overflow: clip;
@@ -1812,25 +1818,27 @@ const toggleTooltips = () => {
 .wrap {
   position: relative;
   /* dark mode not working yet, set light BG */
-  background-color: #fff;
+  background-color: --var(--ion-color-light);
 }
 
 .toolbar {
+  background: var(--ion-color-light);
   position: absolute;
   top: 0;
   left: 0;
   z-index: 10;
   max-width: 34rem;
-  border: 3px solid #ccc;
+  border: 3px solid var(--ion-color-dark-shade);
 }
 
 .toolbar-sm {
+  background: var(--ion-color-light);
   position: absolute;
   top: 0;
   left: 0;
   z-index: 10;
   max-width: 20rem;
-  border: 3px solid #ccc;
+  border: 3px solid var(--ion-color-dark-shade);
 }
 
 .question {
@@ -1853,6 +1861,7 @@ const toggleTooltips = () => {
 }
 
 .flow {
+  background:#fff;
   width: 100%;
   min-width: 300px;
   height: 100%;

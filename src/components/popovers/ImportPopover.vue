@@ -180,13 +180,13 @@ tbody.popbody {
 
 th.popfield {
   box-sizing: border-box;
-  background: #ccf;
-  border:solid 2px #000;
+  background-color: var(--ion-color-light);
+  border:solid 2px var(--ion-color-dark);
 }
 td.popfield {
   box-sizing: border-box;
   width:5rem;
-  border:solid 1px #000;
+  border:solid 1px var(--ion-color-dark);
   --padding-bottom: 5px;
   --padding-end: 5px;
   --padding-start: 5px;
@@ -194,16 +194,16 @@ td.popfield {
 }
 
 td.popfield.activeCol {
-  background-color:#fff;
+  background-color:var(--ion-color-light);
 }
 td.popfield.disabledCol {
-  background-color:#ccc;
+  background-color:var(--ion-color-light-shade);
 }
 
 
 ion-input.popfield {
   box-sizing: border-box;
-    --background: #ccf;
+    --background: var(--ion-color-light-tint);
     --padding-bottom: 5px;
     --padding-end: 5px;
     --padding-start: 5px;

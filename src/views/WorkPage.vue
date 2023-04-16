@@ -284,10 +284,10 @@ ion-col {
   }
 
   .flowArea {
-    background:#eef;
+    border:solid 2px var(--ion-color-secondary-tint);
   }
   .chartArea {
-    background:#efe;
+    border: solid 2px var(--ion-color-primary-tint);
     height: 35%;
   }
 

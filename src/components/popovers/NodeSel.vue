@@ -66,7 +66,7 @@ onMounted(() => {
 </script>
 
 
-<style>
+<style scoped>
 
 ion-buttons {
   /*
@@ -91,9 +91,17 @@ https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_tooltip
 .tooltip {
   visibility:hidden;
   overflow: hidden; 
-  color: #c00;
+  /*
+  --color: var(--ion-color-warning-shade);
+  */
+  --color: var(--ion-color-primary-shade);
+  background-color: var(--ion-color-light);
   height: 0;
-  font-size: 80%;
+  font-size: 90%;
+}
+
+body.dark .tooltip {
+  --color: var(--ion-color-success);
 }
 
 .item:hover .tooltip {
@@ -101,7 +109,6 @@ https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_tooltip
   position: absolute;
   left: 0;
   top: 0;
-  background: #ddd;
   width:90%;
   height:100%;
   overflow-wrap: break-word;
@@ -109,7 +116,28 @@ https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_tooltip
   overflow: clip; 
 }
 
+ion-thumbnail {
+  background: #fff;
+}
+ion-checkbox {
+  /*
+  background: var(--ion-color-light);
+  border-color: var(--ion-color-dark);
+  */
+  background:#fff;
+  border-color:#000;
+  border-style: solid 2px;
 
+}
+/*
+.checkbox-icon {
+  background: var(--ion-color-light);
+  border-color: var(--ion-color-dark);
+  background:#fff;
+  border-color:#000;
+  border-style: solid 2px;
+}
+*/
 .list {
   max-height: 200px;
   /* max-width: 400px;*/

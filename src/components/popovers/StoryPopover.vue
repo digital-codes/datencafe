@@ -1,9 +1,6 @@
 <template>
   <ion-content class="ion-padding ion-popover storyPop">
-    <!-- 
     <p>{{ labels[locale].fields.heading }}</p>
-
-    -->
     <div>
       <ion-item >
         <ion-input type="text" :placeholder="labels[locale].fields.title" v-model="title" />
@@ -179,7 +176,7 @@ ion-popover.storyPop ion-content {
 }
 
 ion-content.ion-popover::part(scroll) {
-  overflow:clip;
+  overflow:scroll;
   }
 
 .storyPop {
