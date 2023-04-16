@@ -113,3 +113,17 @@ php
 
 Remember to always sanitize any user-generated or external HTML content before inserting it into the DOM to reduce the risk of XSS vulnerabilities.
 
+
+
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAAEsAQMAAABDsxw2AAAABlBMVEX///8AAABVwtN+AAAACXBI
+WXMAAA7EAAAOxAGVKw4bAAAB5UlEQVRoge2ZPY6DMBCFB1FQcgSOwtHgaByFI7ikQMzOG9tAnLW0
+i1KkeK9AxPmqwfMvQlEU9U1q1XXYq87TPKku4yrSx+OdWA3zt+YQO5xlMsiwYe0DjjtidcwMfAAT
+YLMdRcwMvBH7A+b2BbXYg9iHMfsMU+JU61+BWMbwdAzRMh9XgwOxhOUsozHL5GhZS0bECqkgVlqa
+ERnWt3+JPcOuJC7u8+byug6qAfXPRqyOtbtBjf0rMDAw4yxYho5YHTO335tYbAMDtMigwOQuYo+w
+FpGzOYw8y59RV0E3sxGrY7i/TuXbu3i0jNbtdmIVzKJlm2rGaNvFA6YiXnZKrIrpKS+2R6RnGUJx
+L4k9xczprZlRL8r9yEc6oQ/dvZchVmCxB0SwTIMJXQYk8fBqXmKhTDOp+PGRDnLzGHtnK35uvQyx
+AkOW8aoGHm3ubE3gENPzViYjYv/H2rNijLMJy0ZnEr+JWInB7dNGQHy07T2ganHJiRXuLNm4cZOS
+r2VZbBN7gl2LKvXfyevjhJZYHbsmtHjBpFGieV97Z2IldtsIYC/qIwfX9tuCj9g7JmmhjFGY+zOx
+z2GptjSt13cgVsXwzIsq9ZEO5L1MbZ9F7LaoitfSWpkFRaP3zqd1iT3EKIqivkM/32DazcX8rK4A
+AAAASUVORK5CYII=" />
+
