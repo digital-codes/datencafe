@@ -7,7 +7,9 @@
       </ion-item>
       <ion-item >
         <ion-input type="text" :placeholder="labels[locale].fields.author" v-model="author" />
+        <!-- date set via current date below
         <ion-input type="text" :placeholder="labels[locale].fields.date" v-model="date" />
+        -->
       </ion-item>
       <ion-item>
         <ion-input type="email" :placeholder="labels[locale].fields.email" v-model="email" />
@@ -119,11 +121,12 @@ onMounted(async () => {
 
 const close = async () => {
   //console.log('close')
+  const dt = new Date()
   const data = {
     "title":title.value,
     "author":author.value,
     "email":email.value,
-    "date":date.value,
+    "date":dt.toISOString(),
     "link":link.value,
     "tags":tags.value,
     "category":category.value,
