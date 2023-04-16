@@ -5,10 +5,8 @@
     <ion-content :fullscreen="true">
 
       <div id="container">
-        <!-- 
         <ion-button @click="testVPop">VPop</ion-button>
         <ion-button @click="testSPop">SPop</ion-button>
-        -->
         <ion-button @click="testStoryPop">StoryPop</ion-button>
         <ion-button @click="pdfgen">PDF</ion-button>
 
@@ -134,7 +132,7 @@ const openVPop = async (options: any) => {
 
 async function testSPop() {
   console.log("test s pop")
-  const options = {id:"sel1","label":"Operator:",value:["+","-","*","/"]} as CfgSelectParms
+  const options = {id:"sel1","label":"Operator:",value:["+","-","*","/"],current:"-"} as CfgSelectParms
   const pop = await openSPop(options)
   console.log("pop done:",pop)
 }

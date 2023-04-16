@@ -12,9 +12,6 @@ export class RandomGen extends DcNode {
   // FIXME  parms must go into config, together with active state
   static _display = false
   static _type = NodeTypes.GEN
-  _period = 5 // in seconds
-  _cols = 3 // columns
-  _rows = 10 // rows 
   private genCnt = 0
   private df = new DataFrame()
   private active = false
@@ -77,7 +74,6 @@ export class RandomGen extends DcNode {
     //RandomGen.insts.set(id,this)
   }
   // methods
-  // methods
   async configure(options: any[]) {
     // we know the config structure here, so can just use the index
     const config = this.config
@@ -135,7 +131,7 @@ export class RandomGen extends DcNode {
       // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind?retiredLocale=de
       // using an arrow function with settimeout and class instance is important
       // to prepare proper "this" context
-      this.tm = setTimeout(()=>{this.generate()},this._period*1000)
+      this.tm = setTimeout(()=>{this.generate()},this.config.options[options.findIndex((o:any) => o.id == "period")].value*1000)
     }
   }
   async run() {
@@ -165,12 +161,6 @@ export class RandomGen extends DcNode {
   // getters/setters
   get type() { return RandomGen._type }
   get display() { return RandomGen._display }
-  get period() {return this._period}
-  set period(x) {this._period = x}
-  get cols() {return this._cols}
-  set cols(x) {this._cols = x}
-  get rows() {return this._rows}
-  set rows(x) {this._rows = x}
 } 
 
   

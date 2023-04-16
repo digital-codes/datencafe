@@ -3,6 +3,7 @@
 
 import {DcNode} from "./DcNode"
 import { NodeTypes } from '@/services/GlobalDefs';
+import { DelayTimer } from "@/services/DelayTimer"
 
 export class AddCols extends DcNode {
   // properties
@@ -13,13 +14,30 @@ export class AddCols extends DcNode {
   constructor(id:string,typeInfo:any) {
     const ports: string[] = ['A','B']
     const edges: string[] = ['d']
-    super(id,"addcols",ports,edges)
+    const cfg = {
+      pop:"select",
+      options: 
+        {
+          id:"op",
+          type:"string",
+          label:"Operation",
+          value:["Join","Append","Add","Sub","Mul","Div"],
+          current:""
+        },
+      }
+    super(id,"addcols",ports,edges,cfg as any)
     DcNode.print(AddCols._type + " created") // no access to super._id etc here
   }
   // getters/setters
   get type() { return AddCols._type }
   get display() { return AddCols._display }
   // methods
+  async configure(option: string) {
+    // we know the config structure here, so can just use the index
+    this.config.options.current = option
+    DcNode.print("Set option:" + option)
+    // now check the sources and make the operation
+  }
   async updated(msg:string,y?:any) {
     this.updCnt++
     const src = msg.split("-")[1]

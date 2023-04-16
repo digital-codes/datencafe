@@ -867,6 +867,47 @@ const openCfgValuePopover = async (options: any) => {
   return x
 }
 
+const openCfgSelectPopover = async (options: any) => {
+  popover.value = await popoverController.create({
+    component: CfgSelectPop,
+    size: "auto",
+    side: "right",
+    alignment: "start",
+    showBackdrop: true,
+    backdropDismiss: true,
+    dismissOnSelect: false,
+    reference: "trigger", // event or trigger
+    componentProps: { // Popover props
+      signal: "popUp",
+      options: options
+    }
+  })
+  // set popup handler
+  eventBus.off("popUp")
+  eventBus.on("popUp", (data) => {
+    console.log("Pop default signal:", data)
+    switch (data.id) {
+      case "close":
+        popover.value.dismiss(data, "button")
+        break
+      case "cancel":
+        popover.value.dismiss(data, "backdrop")
+        break
+      default:
+        console.log("Handle data here:", data)
+    }
+  })
+  await popover.value.present();
+  popover.value.open = true
+  const x = await popover.value.onDidDismiss();
+  console.log("Dismiss: ", x)
+  popover.value.open = false
+  eventBus.off("popUp")
+  // restore default handler
+  eventBus.on('popUp', (data) => defaultPopupHandler(data));
+  return x
+}
+
 
 
 const openCtxPopover = async (options: any) => {
@@ -1245,6 +1286,12 @@ async function configNode(instance) {
       }
       break
     case "select":
+      config = await openCfgSelectPopover(instance.config.options)
+      if (config.role == "button") {
+        config = config.data.value
+        console.log("Updating instance with ", config)
+        instance.configure(config) // value array
+      }
       break
     default:
       throw (new Error("Invalid config pop"))

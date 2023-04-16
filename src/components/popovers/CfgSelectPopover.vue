@@ -4,7 +4,7 @@
     <div>
       <span>
         <ion-label>{{ props.options.label }}</ion-label>
-        <ion-select @ionChange="update($event.detail.value)" @ionCancel="cancel">
+        <ion-select :value="props.options.current" @ionChange="update($event.detail.value)" @ionCancel="cancel">
           <ion-select-option v-for="option in props.options.value" :key="option">{{option}}</ion-select-option>
         </ion-select>
       </span>
@@ -35,6 +35,7 @@ export interface CfgSelectParms {
     type?: string // ui element: value input (url, text, number), select input , math operator (+,-,*,/), log operator (<,>,==,!=), switch
     label: string // label
     value: string | [] // [select options] or [result]     min?: any // 
+    current?: string
   }
 
 
