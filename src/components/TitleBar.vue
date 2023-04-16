@@ -1,6 +1,6 @@
 <template>
-      <ion-header :translucent="true">
-        <ion-toolbar>
+      <ion-header :translucent="false">
+        <ion-toolbar class="toolbar">
           <ion-buttons slot="start">
             <ion-menu-button :auto-hide="true" color="primary"></ion-menu-button>
           </ion-buttons>
@@ -354,6 +354,7 @@ ion-thumbnail.logo {
   color: var(--ion-color-warning-shade);
 }
 
+
 .toolbar-secondary {
   height: 48px;
 }
@@ -373,5 +374,14 @@ ion-thumbnail.logo {
   margin-right: 1rem;
   margin-left: 1rem;
 }
+
+ion-toolbar {
+  /*
+    --background: var(--ion-color-light);
+    */
+    --background: var(--ion-background-color);
+    --color: var(--ion-color-dark);
+  }
+
 </style>
   

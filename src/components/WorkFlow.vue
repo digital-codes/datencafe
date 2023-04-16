@@ -69,7 +69,30 @@ import { NodeTypes } from '@/services/GlobalDefs';
 import { IonButtons, IonToolbar } from '@ionic/vue';
 
 // --------------------
+// page change on ios modfiy layout. maybe due to animation
+// try to restore when entering workspace
+import { useRoute } from 'vue-router';
+const route = useRoute()
 
+watch(
+  () => route.name,
+  (name) => {
+    console.log(`route is now : ${name}`)
+    if (name == "Workspace") {
+      ww.value = window.innerWidth
+      wh.value = window.innerHeight
+      console.log("ww,wh", ww.value, wh.value)
+      // set variable so we can toggle toolbar etc
+      smallScreen.value = (ww.value <= 996) ? true : false
+      console.log("Small:",smallScreen.value)
+      if (!flowWrap.value.style) flowWrap.value.style = {}
+      flowWrap.value.style.width = "100%" //String(ww.value) + "px"
+      flowWrap.value.style.height = String(wh.value * .7) + "px"
+    }
+  }
+)
+
+// -------------------------------
 
 
 const props = defineProps<{ msg: string }>()

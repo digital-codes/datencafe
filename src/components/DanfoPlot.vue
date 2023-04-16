@@ -90,17 +90,26 @@ watchEffect(() => {
     }
   }
 
+/* must fix h3 color */
+h3 {
+  color:#000;
+  border: solid 1px #ccc;
+  margin:5px;
+}
+
   .chartItem {
     overflow-x: scroll;
   }
   /* compute table width from number of columns in display class
   and set width via item prop. Scrolling-X handled via chartitem  */
   .dftable {
+    color:#000;
     background-color:#ccf;
     height:300px;
   }
 
   .dfchart {
+    color:#000;
     background-color:#cfc;
     height:300px;
   }
@@ -120,6 +129,7 @@ watchEffect(() => {
   
   th:first-child,
   td:first-child {
+    color:#000;
     background-color: #f0f0f0;
     font-weight: bold;
   }
