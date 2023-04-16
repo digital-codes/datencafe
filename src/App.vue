@@ -11,8 +11,11 @@
 
 <script setup lang="ts">
 import { onMounted, computed } from "vue"
-import { UserStore, UserInfo } from '@/services/UserStore'
+import { UserStore, Mode } from '@/services/UserStore'
 const userStore = UserStore();
+
+import { useI18n } from 'vue-i18n'
+const { locale } = useI18n({ useScope: 'global' })
 
 import {
   IonApp,
@@ -29,6 +32,13 @@ import TitleBar from "@/components/TitleBar.vue";
 onMounted(async () => {
   console.log("DNT:",navigator.doNotTrack)
   await userStore.clear()
+  await userStore.setLang(locale.value)
+  const mediaQueryObj = window.matchMedia('(prefers-color-scheme: dark)');
+  const isDarkMode = mediaQueryObj.matches;
+  if (isDarkMode) {
+    console.log("Dark")
+    await userStore.setDark(Mode.Dark)
+  } 
 })
 
 

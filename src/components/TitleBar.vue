@@ -64,14 +64,14 @@
 
               -->
               <ion-item>
-                <ion-select :placeholder="upper(langSel)" interface="popover" @ionChange="selectLanguage" v-model="language">
-                  <ion-select-option v-for="(l,idx) in availableLocales" :key="idx" :value="l">{{upper(l)}}</ion-select-option>
+                <ion-select :placeholder="language" interface="popover" @ionChange="selectLanguage" v-model="language">
+                  <ion-select-option v-for="(l,idx) in availableLocales" :key="idx" :value="l">{{l}}</ion-select-option>
                 </ion-select>
               </ion-item>
             </ion-list>          
           </ion-buttons>
 
-          <ion-buttons slot="end" class="lastItem" id="userRef">
+          <ion-buttons slot="end" class="lastItem" id="userRef" @click="userPop">
               <font-awesome-icon v-if="hasToken" :icon="['fas', 'user']" size="1x" class="tok"/>
               <font-awesome-icon v-else :icon="['fas', 'user-slash']" size="1x" class="notok"/>
           </ion-buttons>
@@ -103,9 +103,12 @@
               <ion-content class="ion-padding">{{ $t("tooltip.lang") }}</ion-content>
       </ion-popover>
       -->
+      <!-- 
       <ion-popover cssClass="custom-popover-class" trigger="userRef" trigger-action="click" show-backdrop="false" size="auto" side="bottom" alignment="start">
         <ion-content class="ion-padding">{{ $t(userText) }}</ion-content>
       </ion-popover>
+
+      -->      
 
 
   </template>
@@ -114,7 +117,8 @@
   import { IonButtons, IonHeader, IonMenuButton, IonTitle, IonToolbar } from '@ionic/vue';
   import { IonLabel, IonList, IonItem, IonToggle,  IonImage, IonThumbnail, IonSelect, IonSelectOption, } from '@ionic/vue';
   import { IonButton, IonContent, IonPopover } from '@ionic/vue';
-  import { ref, computed, onMounted } from "vue"
+  import { ref, computed, onMounted, watch, onBeforeMount } from "vue"
+  import { popoverController } from '@ionic/vue';
 
     // stores
     import { Language } from '@/services/UserStore'
@@ -122,14 +126,26 @@
     import { Modes } from '@/services/UserStore'
 
     // user store
-    import { UserStore, UserInfo } from '@/services/UserStore'
+    import { UserStore } from '@/services/UserStore'
     const userStore = UserStore()
+
+    // https://lokalise.com/blog/vue-i18n/
+    import { useI18n } from 'vue-i18n'
+    const { locale, availableLocales } = useI18n({ useScope: 'global' })
 
     // globals
     import { Version } from "@/services/GlobalDefs"
 
     import { useRoute } from 'vue-router';
     const route = useRoute()
+
+    watch(
+      () => route.name,
+      (name) => {
+        console.log(`route is now : ${name}`)
+        language.value = userStore.getLang() 
+      }
+    )
 
     const routeInfo = computed(() => {
       switch (route.name) {
@@ -160,9 +176,6 @@
   const thumbRef = ref() 
 
 
-    // https://lokalise.com/blog/vue-i18n/
-    import { useI18n } from 'vue-i18n'
-    const { locale, availableLocales } = useI18n({ useScope: 'global' })
 
 const thumb = ref(['fas', 'question'])
 // init store on mount
@@ -175,9 +188,10 @@ const userText = computed(() => {
   return hasToken.value?"tooltip.signedin":"tooltip.signedout"
 })
 
-onMounted(async () => {
+onBeforeMount(async () => {
   //await userStore.clear()
-  await selectLanguage()
+  //await selectLanguage()
+  language.value = await userStore.getLang() 
 
   // read mode
   dark.value = userStore.getDark()
@@ -189,33 +203,14 @@ onMounted(async () => {
 
 })
 
-    /*
-    const changeLanguage = (lang) => {
-      language.set(lang as Language)
-      locale.value = language.get()
-      //console.log("Lang store:",language.get())
-    };    
-    */
-    //const langSel = ref(locale.value)
-    const langSel = computed(() => (userStore.getLang()))
-    const language = ref(locale.value)
-    /*
-    const selectLanguage = () => {
-      console.log("L:",langSel.value)
-      userStore.setLang(langSel.value as Language)
-      locale.value = userStore.getLang()
-      console.log("Current lang:",locale.value)
-    }
-    */
+  const language = ref(locale.value)
 
     const selectLanguage = () => {
       console.log("L:",language.value)
       userStore.setLang(language.value as Language)
       locale.value = userStore.getLang()
-      console.log("Current lang:",locale.value, langSel.value)
+      console.log("Current lang:",locale.value)
     }
-
-    const upper = (s) => s.toUpperCase()
 
     // theme switch
     const dark = ref(Modes.Dark)
@@ -234,6 +229,36 @@ onMounted(async () => {
       console.log("Final mode is dark:",isDark.value)
     };    
 
+
+    const popover = ref()
+
+async function userPop() {
+  await openPop()
+}
+import AccountPopover from "@/components/popovers/AccountPopover.vue"
+
+const openPop = async (message:string) => {
+  popover.value = await popoverController.create({
+      component: AccountPopover,
+      //event: ev,
+      size: "auto",
+      side:"bottom",
+      alignment:"start",
+      showBackdrop: false,
+      backdropDismiss: true, 
+      dismissOnSelect: true,
+      reference: "trigger", // event or trigger
+      componentProps: { // Popover props
+          signal: "pop",
+          message:userText.value
+        }
+    })
+    await popover.value.present();
+    popover.value.open = true
+    const x = await popover.value.onDidDismiss();
+    console.log("Dismiss: ",x)
+    popover.value.open = false
+}
 
 
   </script>

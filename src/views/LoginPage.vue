@@ -52,7 +52,7 @@ import TitleBar from "@/components/TitleBar.vue"
 import { ref } from 'vue';
 
 // user store
-import { UserStore, UserInfo } from '@/services/UserStore'
+import { UserStore } from '@/services/UserStore'
 const userStore = UserStore()
 
 const loginGood = ref(false)
@@ -86,10 +86,12 @@ const submitForm = async () => {
         await userStore.setToken(token)
         break;
       } else {
+        await userStore.setToken("")
         throw (new Error("Request failed: " + String(rsp.status)))
       }
     } catch (e) {
       console.log("Error: ",e.message)
+      await userStore.setToken("")
       loginBad.value = true
       loginGood.value = false
     }
