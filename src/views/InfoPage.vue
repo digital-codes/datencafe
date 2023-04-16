@@ -7,7 +7,8 @@
         <div id="container">
         <!-- use en as default to get length of storylist -->
         <ion-card color="light" v-for="(item,i) in infoItems.en" :key="i">
-          <ion-card-header>
+          <article>
+            <ion-card-header>
             <ion-card-title>{{ infoItem(i,"title") }}</ion-card-title>
             <div class="image">
             <ion-img :src="item.image" :alt="item.alt"></ion-img>
@@ -21,6 +22,7 @@
           <ion-card-content>
             {{ infoItem(i,"body") }}
           </ion-card-content>
+          </article>
         </ion-card>
       </div>
 
@@ -65,6 +67,11 @@ StringUtils.compare("abc","cbc")
 
 </script>
 
+<style>
+@media print {
+  article {page-break-after: always;}
+}
+</style>
 <style scoped>
 #container {
   text-align: center;

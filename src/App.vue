@@ -2,9 +2,7 @@
   <ion-app>
     <ion-split-pane when="(min-width: 4000px)" content-id="main-content">
       <MainMenu />
-      
-          <ion-router-outlet id="main-content"></ion-router-outlet>
-
+      <ion-router-outlet id="main-content"></ion-router-outlet>
     </ion-split-pane>
   </ion-app>
 </template>
@@ -44,6 +42,17 @@ onMounted(async () => {
 
 
 </script>
+
+<style>
+@media print {
+  article {
+    page-break-after:always;
+  }
+  ion-card {
+    page-break-after:always;
+  }
+}
+</style>
 
 <style scoped>
 ion-menu ion-content {

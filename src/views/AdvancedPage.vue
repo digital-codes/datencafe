@@ -6,6 +6,7 @@
       <div id="container">
         <!-- use en as default to get length of storylist -->
         <ion-card color="light" v-for="(s,i) in storyItems.en" :key="i">
+          <article>
           <ion-card-header>
             <ion-card-title>{{ storyItem(i,"title") }}</ion-card-title>
             <ion-card-subtitle>{{ storyItem(i,"date") }}, {{ storyItem(i,"author") }}, 
@@ -16,6 +17,7 @@
           <ion-card-content>
             {{ storyItem(i,"body") }}
           </ion-card-content>
+        </article>
         </ion-card>
       </div>
 

@@ -13,6 +13,7 @@
         <ion-button @click="pdfgen">PDF</ion-button>
 
       <ion-card color="light" v-for="(s,i) in items.en" :key="i">
+        <article>
         <ion-card-header>
           <ion-card-title>{{ item(i,"title") }}</ion-card-title>
           <ion-card-subtitle>{{ item(i,"date") }}, {{ item(i,"author") }}, 
@@ -22,6 +23,7 @@
         <ion-card-content>
           {{ item(i,"body") }}
         </ion-card-content>
+      </article>
       </ion-card>
     </div>
     </ion-content>

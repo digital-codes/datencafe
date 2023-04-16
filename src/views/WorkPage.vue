@@ -89,55 +89,6 @@ import { BarPlot } from "../classes/BarPlot"
 import { DataInfo } from "../classes/DataInfo"
 import { RandomGen } from "../classes/RandomGen"
 
-onMounted(() => {
-
-  /*
-  const rg = new RandomGen("P1")
-  rg.period = 10
-  rg.cols = 5
-  rg.run()
-
-  const chart1 = new LinePlot("P2")
-  chart1.name = "fkwenfj"
-  // add to items
-  items.value.unshift(
-        {
-          id:chart1.id,
-          name:chart1.name,
-          type:"chart"
-        }
-      )
-  // tell listener to listen to source
-  chart1.msgOn(Signals.UPDPREFIX + rg.id)
-  // 
-  const chart2 = new BarPlot("P3")
-  chart2.name = "32rfewe"
-  // add to items
-  items.value.unshift(
-        {
-          id:chart2.id,
-          name:chart2.name,
-          type:"chart"
-        }
-      )
-  // tell listener to listen to source
-  chart2.msgOn(Signals.UPDPREFIX + rg.id)
-
-  // 
-  const chart3 = new DataInfo("P4")
-  chart3.name = "32r Info fewe"
-  // add to items
-  items.value.unshift(
-        {
-          id:chart3.id,
-          name:chart3.name,
-          type:"table"
-        }
-      )
-  // tell listener to listen to source
-  chart3.msgOn(Signals.UPDPREFIX + rg.id)
-        */
-})
 
 const content = ref()
 
@@ -164,21 +115,24 @@ const scrollToTop = () => {
           <ion-row>
 
             <ion-col size="12" size-lg="7" class="flowArea">
-              <div class="headline">
-              <h3>{{$t("titles.work.flow")}}
-              </h3>
-              <ion-button v-if="!FlowLoading"  id="scrollBottomRef" color="warning" class="scroll-btn ion-hide-lg-up" @click="scrollToBottom()">
-                <font-awesome-icon class="scroll-icon" aria-hidden="true" :icon="['fas', 'angle-down']"  />
-                <font-awesome-icon class="scroll-icon" aria-hidden="true" :icon="['fas', 'chart-area']"  />
-              </ion-button>
-              </div>
+              <section>
+                <div class="headline">
+                <h3>{{$t("titles.work.flow")}}
+                </h3>
+                <ion-button v-if="!FlowLoading"  id="scrollBottomRef" color="warning" class="scroll-btn ion-hide-lg-up" @click="scrollToBottom()">
+                  <font-awesome-icon class="scroll-icon" aria-hidden="true" :icon="['fas', 'angle-down']"  />
+                  <font-awesome-icon class="scroll-icon" aria-hidden="true" :icon="['fas', 'chart-area']"  />
+                </ion-button>
+                </div>
 
 
-              <p v-if="FlowLoading" class="loading">Loading ...</p>
-              <WorkFlowAsync msg="Flow demo" @add-viz="(e) => addViz(e)" @del-viz="(e) => delViz(e)" />
+                <p v-if="FlowLoading" class="loading">Loading ...</p>
+                <WorkFlowAsync msg="Flow demo" @add-viz="(e) => addViz(e)" @del-viz="(e) => delViz(e)" />
+                </section>
             </ion-col>
 
             <ion-col  size="12" size-lg="5" sytle="overflow-y:scroll;" id="viz"  class="chartArea">
+            <section>
               <h3>{{$t("titles.work.view.title")}}</h3>
               <p v-if="FlowLoading"  class="loading">Loading ...</p>
               <!-- 
@@ -190,6 +144,7 @@ const scrollToTop = () => {
                 <font-awesome-icon class="scroll-icon" aria-hidden="true" :icon="['fas', 'angle-up']"  />
                 <font-awesome-icon class="scroll-icon" aria-hidden="true" :icon="['fas', 'diagram-project']"  />
               </ion-button>
+              </section>
             </ion-col>
 
           </ion-row>

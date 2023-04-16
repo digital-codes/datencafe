@@ -7,6 +7,7 @@
         <div id="container">
         <!-- use en as default to get length of storylist -->
         <ion-card color="light" >
+          <article>
           <ion-card-header>
             <ion-card-title>{{ $t("login.titel") }}</ion-card-title>
             <ion-card-subtitle>
@@ -36,6 +37,7 @@
           <p v-if="loginGood" class="loginGood">{{ $t("login.good") }}</p>
           <p v-if="loginBad" class="loginBad">{{ $t("login.bad") }}</p>
           </ion-card-content>
+        </article>
         </ion-card>
       </div>
 
