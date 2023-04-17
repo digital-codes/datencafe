@@ -49,7 +49,7 @@ function checkToken($token) {
   global $jti_claim;
   $parser = new Parser(new JoseEncoder());
   $tok = $parser->parse($token);
-  echo("tok:" . $tok->toString() . PHP_EOL);
+  //echo("tok:" . $tok->toString() . PHP_EOL);
   $validator = new Validator();
 
   if (! $validator->validate($tok, new IdentifiedBy($jti_claim))) {
@@ -113,7 +113,7 @@ if (!isset($_SERVER['HTTP_AUTHORIZATION'])) {
   header("Content-type: $mime_type");
 
   // select 1 of 2 modes
-  $fetchMode = 2;
+  $fetchMode = 1;
 
   if ($fetchMode == 1) {
   // Fetch the content from the URL using cURL

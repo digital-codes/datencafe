@@ -15,7 +15,11 @@ export default async (url: string, proxy = false, geoCheck = false) => {
     if (proxy) {
         if (userStore.exists()) {
             hdrs.append('Authorization', "Bearer " + userStore.getToken());
-            url = "https://daten.cafe/php/corsProxyExec.php?url=" + url
+            if (location.hostname.includes("localhost"))
+                url = "http://localhost:9000/php/corsProxyExec.php?url=" + url
+            else
+                url = "/php/corsProxyExec.php?url=" + url
+
         } else {
             return {success:false,status:"No token"}
         }
@@ -42,7 +46,12 @@ export default async (url: string, proxy = false, geoCheck = false) => {
                 console.log("Geojson")
             }
         }
-        return {success:true,status:type}
+        // check if we had had a proxy access
+        const result: any = {success:true,status:type}
+        if (proxy) {
+            result.url = url
+        } 
+        return result
     } catch (e) {
         console.log("Failed:", e)
         return {success:false,status:String(e)}

@@ -8,6 +8,7 @@ import { readCSVBrowser } from "danfojs/dist/danfojs-base/io/browser"
 import { CsvInputOptionsBrowser } from "danfojs/dist/danfojs-base/shared/types";
 import testFetch from "@/services/TestFetch" 
 import { UserStore } from "@/services/UserStore";
+const userStore = UserStore()
 
 export class LoadCsv extends DcNode {
   // properties
@@ -83,21 +84,6 @@ export class LoadCsv extends DcNode {
       alert("URL cannot be loaded directly2")
       return
     }
-    // maybe try cors as well
-    if (corsRequired) {
-      try {
-        const fetchOk = await testFetch(url, true)
-        console.log("Test:",fetchOk)
-        if (!fetchOk.success) {
-          alert("CORS loading failed. Check URL")
-            return
-        }      
-      } catch (e) {
-        console.log("Fetch failed: ",e)
-        alert("URL cannot be loaded. Check URL")
-        return
-      }
-    } 
     const csvOptions = {
       //delimiter: ",",
       delimitersToGuess: [',', ';'],
@@ -106,7 +92,25 @@ export class LoadCsv extends DcNode {
       header:true, // header row
       preview:0, // > 0 is how many lines previews
       skipEmptyLines:true
-    } as CsvInputOptionsBrowser
+    } as any //CsvInputOptionsBrowser
+    // maybe try cors as well
+    if (corsRequired) {
+      try {
+        const fetchOk = await testFetch(url, true)
+        console.log("Test:",fetchOk)
+        if (!fetchOk.success) {
+          alert("CORS loading failed. Check URL")
+            return
+        }
+        // update url and hdrs
+        url = fetchOk.url
+        csvOptions.downloadRequestHeaders = {"Authorization":"Bearer " + userStore.getToken()}
+      } catch (e) {
+        console.log("Fetch failed: ",e)
+        alert("URL cannot be loaded. Check URL")
+        return
+      }
+    } 
     this.df = await readCSVBrowser(url,csvOptions)
     this.df.print()
     /*
