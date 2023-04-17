@@ -75,6 +75,7 @@
     "bad":"Login failed"
   },
   "download": "Download",
+  "downloadHint": "After download here, upload the file in the workspace",
   "notimplemented":"Not implemented yet"
 }
 

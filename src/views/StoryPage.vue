@@ -10,17 +10,26 @@
           <article>
           <ion-card-header>
             <ion-card-title>{{ storyItem(i,"title") }}</ion-card-title>
+            <ion-item>
+              <ion-thumbnail v-if="s.icon > ''" class="thumb">
+                <img  :src="s.icon" />
+            </ion-thumbnail>
             <ion-card-subtitle>{{ storyItem(i,"date") }}, {{ storyItem(i,"author") }}, 
               <a :href='"mailto:" +  storyItem(i,"email")'>{{ storyItem(i,"email") }}</a>
             </ion-card-subtitle>
+          </ion-item>
           </ion-card-header>
 
           <ion-card-content>
             {{ storyItem(i,"body") }}
           </ion-card-content>
           <ion-card-header>
-            <ion-button @click="clicked(i)">{{$t('download')}}</ion-button>
+            <ion-button v-if="s.link > ''" _target="blank" :download="s.link.split('/')[2]" :href="s.link">{{$t('download')}}</ion-button>
+            <ion-button v-if="s.link == ''" @click="clicked(i)">{{$t('download')}}</ion-button>
           </ion-card-header>
+          <ion-note>
+            {{$t('downloadHint')}} 
+          </ion-note>
         </article>
         </ion-card>
       </div>
@@ -31,7 +40,7 @@
 
 <script setup lang="ts">
 import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
-import { IonButton } from '@ionic/vue';
+import { IonButton, IonItem, IonThumbail, IonNote } from '@ionic/vue';
 import { IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent } from '@ionic/vue'
 import TitleBar from "@/components/TitleBar.vue"
 
@@ -52,6 +61,7 @@ const storyItem = (idx,id) => {
 
 
 const clicked = (id,msg) => {
+
   alert(String(id) + "..." + t("notimplemented"))
 }
 
@@ -87,4 +97,7 @@ const clicked = (id,msg) => {
   text-decoration: none;
 }
 
+.thumb {
+  width: 6rem;
+}
 </style>
