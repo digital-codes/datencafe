@@ -16,6 +16,10 @@ import { DataFrame, toJSON, toCSV } from 'danfojs/dist/danfojs-browser/src';
 // nodeTypes
 //const typeFile = "../assets/nodes/nodeTypes.json"
 
+export interface SigPort {
+  signal: string
+  port: string
+}
 
 export class DcNode {
   // properties"
@@ -28,7 +32,7 @@ export class DcNode {
   _icon: string | null = null
   _data: any = {}
   _config: any = {}
-  _signals: string[] = [] // listening to
+  _signals: SigPort[] = [] // listening to
   _root = false
   _valid = false
   _eval: (...parms: any[]) => any = () => {alert("eval function undefined")} 
@@ -100,7 +104,7 @@ export class DcNode {
   //
   get name() {return this._name }
   set name(x) { this._name = x }
-  get signals() {return this._signals }
+  get signals() {return this._signals.filter(s=>s.signal) }
   protected set signals(x) { this._signals = x }
   get data(): any {return this._data}
   set data(x) { this._data = x }

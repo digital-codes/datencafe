@@ -2,6 +2,7 @@
 
 
 import {DcNode} from "./DcNode"
+import {SigPort} from "./DcNode"
 import { NodeTypes } from '@/services/GlobalDefs';
 import { DelayTimer } from "@/services/DelayTimer"
 
@@ -37,40 +38,59 @@ export class AddCols extends DcNode {
     this.config.options.current = option
     DcNode.print("Set option:" + option)
     // now check the sources and make the operation
+    // both ports need to be connect, so we must have 2 signals
+    const sigs = this.signals
+    const signals: string[] = []
+    sigs.forEach((s) => {signals.push(s.signal)})
+    DcNode.print("Signals attached:" + JSON.stringify(signals))
+    // check if complete
+    if (this.signals.length < 2) {
+      return
+    }
+
   }
   async updated(msg:string,y?:any) {
+    // update only when both ports attached
+    if (this.signals.length < 2) {
+      return
+    }
+    DcNode.print("Updating with input ports attached")
     this.updCnt++
     const src = msg.split("-")[1]
     DcNode.print(src + " updated " + super.id +": " + String(this.updCnt) + "..." + String(y))
-    const dt = DcNode.providers.getDataById(src) 
-    const df = new DcNode.dfd.DataFrame(dt)
-    const divId = DcNode.pre.PLOTPREFIX + super.id
-    const target = await document.getElementById(divId)
-    if ((target === undefined) || (target == null) ) {
-      throw (new Error("Invalid ID: " + String(divId)))
-    }
-    await df.plot(divId).line()
+    const sigA = this.signals.find(s => s.port == "A")
+    const sigB = this.signals.find(s => s.port == "B")
+    if ((sigA == undefined) ||(sigB === undefined))
+      throw (new Error("Invalid signals"))
+    const dtA = DcNode.providers.getDataById(sigA.signal.split("-")[1]) 
+    const dfA = new DcNode.dfd.DataFrame(dtA)
+    const dtB = DcNode.providers.getDataById(sigB.signal.split("-")[1]) 
+    const dfB = new DcNode.dfd.DataFrame(dtB)
+    dfA.print()
+    dfB.print()
+    // perform op and put data into store
+    // then send message
   }
-  msgOn(x: string) {
+  msgOn(x: string, y: string) {
     // set event listener for signal 
-    DcNode.print("msg ON for " + x)
+    DcNode.print("msg ON for " + x + " on port " + y)
     super.messaging.on(x,(y:any)=>{this.updated(x,y)})
     const sigs = this.signals
-    if (!sigs.includes(x)) {
-      sigs.push(x)
-      this.signals = sigs
+    if (sigs.find(s => s.signal == x) === undefined){
+      sigs.push({signal:x,port:y} as SigPort)
     }
-    DcNode.print("Signals now: " + JSON.stringify(x))
+    this.signals = sigs
+    DcNode.print("Signals now: " + JSON.stringify(this.signals))
   }
   msgOff(x: string) {
     // set event listener for signal 
     DcNode.print("msg OFF for " + x)
     super.messaging.off(x)
     const sigs = this.signals
-    const idx = sigs.findIndex(s => s == x)
+    const idx = sigs.findIndex(s => s.signal == x)
     if (idx == -1) throw (new Error("Invalid signal"))
     sigs.splice(idx,1)
     this.signals = sigs
-    DcNode.print("Signals now: " + JSON.stringify(sigs))
+    DcNode.print("Signals now: " + JSON.stringify(this.signals))
   }
 } 

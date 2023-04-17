@@ -542,7 +542,7 @@ async function flowInit() {
         if (targetIdx == -1) throw (new Error("Invalid instance"))
         const targetInstance = nodeList.value[targetIdx]
         const signal = Signals.UPDPREFIX + s.id()
-        await targetInstance.msgOn(Signals.UPDPREFIX + s.id())
+        await targetInstance.msgOn(Signals.UPDPREFIX + s.id(),port.data)
         // check if data avail for source if root
         if (providers.exists(s.id()) && providers.isLoadedRoot(s.id())) {
           //console.log("Send signal ", Signals.UPDPREFIX + s.id())

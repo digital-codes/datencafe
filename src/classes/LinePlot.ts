@@ -1,6 +1,7 @@
 // csv node class, extends DcNode
 
 import {DcNode} from "./DcNode"
+import {SigPort} from "./DcNode"
 import { NodeTypes } from '@/services/GlobalDefs';
 import { DelayTimer } from "@/services/DelayTimer"
 
@@ -42,27 +43,27 @@ export class LinePlot extends DcNode {
     df.print()
     */
   }
-  msgOn(x: string) {
+  msgOn(x: string, y: string) {
     // set event listener for signal 
-    DcNode.print("msg ON for " + x)
+    DcNode.print("msg ON for " + x + " on port " + y)
     super.messaging.on(x,(y:any)=>{this.updated(x,y)})
     const sigs = this.signals
-    if (!sigs.includes(x)) {
-      sigs.push(x)
-      this.signals = sigs
+    if (sigs.find(s => s.signal == x) === undefined){
+      sigs.push({signal:x,port:y} as SigPort)
     }
-    DcNode.print("Signals now: " + JSON.stringify(x))
+    this.signals = sigs
+    DcNode.print("Signals now: " + JSON.stringify(this.signals))
   }
   msgOff(x: string) {
     // set event listener for signal 
     DcNode.print("msg OFF for " + x)
     super.messaging.off(x)
     const sigs = this.signals
-    const idx = sigs.findIndex(s => s == x)
+    const idx = sigs.findIndex(s => s.signal == x)
     if (idx == -1) throw (new Error("Invalid signal"))
     sigs.splice(idx,1)
     this.signals = sigs
-    DcNode.print("Signals now: " + JSON.stringify(sigs))
+    DcNode.print("Signals now: " + JSON.stringify(this.signals))
   }
 } 
 
