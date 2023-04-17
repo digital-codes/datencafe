@@ -110,9 +110,15 @@ export class AddCols extends DcNode {
     }
     // remaining ops
     if ( df === undefined) { 
+      /*
       const colsA = dfA.selectDtypes(['float32', "int32"]).columns
       const colsB = dfB.selectDtypes(['float32', "int32"]).columns
+      const colsS = dfA.selectDtypes(["string"]).columns
       console.log("DF numeric cols:", colsA, colsB)
+      console.log("DF string cols:", colsS)
+      */
+      const colsA = dfA.columns
+      const colsB = dfB.columns
       // find matching columns for math ops
       const sharedCols: string[] = []
       colsA.forEach((c) => { if (colsB.includes(c)) sharedCols.push(c) })
@@ -132,16 +138,16 @@ export class AddCols extends DcNode {
     DcNode.print("Performing operation:" + mode)
       switch (mode) {
         case "Add":
-          df = dfA.add(dfB)
+          df = dfA.selectDtypes(['float32', "int32"]).add(dfB.selectDtypes(['float32', "int32"]))
           break
         case "Sub":
-          df = dfA.sub(dfB)
+          df = dfA.selectDtypes(['float32', "int32"]).sub(dfB.selectDtypes(['float32', "int32"]))
           break
         case "Mul":
-          df = dfA.mul(dfB)
+          df = dfA.selectDtypes(['float32', "int32"]).mul(dfB.selectDtypes(['float32', "int32"]))
           break
         case "Div":
-          df = dfA.div(dfB)
+          df = dfA.selectDtypes(['float32', "int32"]).div(dfB.selectDtypes(['float32', "int32"]))
           break
         default:
           throw (new Error("Invalid mode:" + mode))
