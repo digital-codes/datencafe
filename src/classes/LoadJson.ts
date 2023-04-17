@@ -65,7 +65,7 @@ export class LoadJson extends DcNode {
     console.log("Local url: ",url)
   }
   try {
-      const fetchOk = await testFetch(url,false,true) // check for feature collection 
+      const fetchOk = await testFetch(url,"json",false,true) // check for feature collection 
       console.log("Test:",fetchOk)
       if (!fetchOk.success) {
         alert("URL cannot be loaded directly")

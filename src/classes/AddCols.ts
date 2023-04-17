@@ -46,6 +46,9 @@ export class AddCols extends DcNode {
     if (this.signals.length < 2) {
       return
     }
+    // just use first signal to trigger an update
+    DcNode.print("Updating with:" + this.signals[0].signal)
+    await this.messaging.emit(this.signals[0].signal)
   }
   async updated(msg: string, y?: any) {
     // update only when both ports attached
@@ -90,7 +93,6 @@ export class AddCols extends DcNode {
     dfB.print()
     const idxA = dfA.index
     const idxB = dfB.index
-    console.log("DFs index:", idxA, idxB)
     // assume we need same index on both dataframes
     if (idxA.length != idxB.length) {
       DcNode.print("Indices not same length")
@@ -110,13 +112,6 @@ export class AddCols extends DcNode {
     }
     // remaining ops
     if ( df === undefined) { 
-      /*
-      const colsA = dfA.selectDtypes(['float32', "int32"]).columns
-      const colsB = dfB.selectDtypes(['float32', "int32"]).columns
-      const colsS = dfA.selectDtypes(["string"]).columns
-      console.log("DF numeric cols:", colsA, colsB)
-      console.log("DF string cols:", colsS)
-      */
       const colsA = dfA.columns
       const colsB = dfB.columns
       // find matching columns for math ops
@@ -152,13 +147,14 @@ export class AddCols extends DcNode {
         default:
           throw (new Error("Invalid mode:" + mode))
       }
+      // finally add string columns
+      df = DcNode.dfd.concat({ dfList: [dfA.selectDtypes(['string']),df], axis: 1 })
     }
 
     // put data into store then send message
     await DcNode.providers.update(this.id, DcNode.dfd.toJSON(df))
     await DelayTimer(20)
     await this.messaging.emit(DcNode.signals.UPDPREFIX as string + this.id)
-
   }
   msgOn(x: string, y: string) {
     // set event listener for signal 
