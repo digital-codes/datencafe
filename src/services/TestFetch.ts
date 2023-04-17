@@ -5,7 +5,7 @@
 import { UserStore } from "@/services/UserStore";
 const userStore = UserStore()
 
-export default async (url: string, proxy = false, geoCheck = false) => {
+export default async (url: string, type="csv", proxy = false, geoCheck = false) => {
     console.log("test fetch:",proxy,geoCheck)
     const hdrs = new Headers();
     /*
@@ -15,8 +15,8 @@ export default async (url: string, proxy = false, geoCheck = false) => {
     if (proxy) {
         if (userStore.exists()) {
             hdrs.append('Authorization', "Bearer " + userStore.getToken());
-            if (location.hostname.includes("localhost"))
-                url = "http://localhost:9000/php/corsProxyExec.php?url=" + url
+            if (window.location.hostname.includes("localhost"))
+                url = "http://localhost:9000/php/corsProxyExec.php?url=" + url + "&type=" + type
             else
                 url = "/php/corsProxyExec.php?url=" + url
 

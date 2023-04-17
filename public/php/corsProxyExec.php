@@ -99,6 +99,11 @@ if (!isset($_SERVER['HTTP_AUTHORIZATION'])) {
   
   // Get the URL to proxy from the query string
   $url = $_GET['url'];
+  if (isset($_GET["type"])) {
+    $type = $_GET['type'];
+  } else {
+    $type = "json";
+  }
   
   // Make sure the URL is valid
   if (filter_var($url, FILTER_VALIDATE_URL) === false) {
@@ -107,10 +112,14 @@ if (!isset($_SERVER['HTTP_AUTHORIZATION'])) {
   }
   
   // Get the content type of the requested resource
-  $mime_type = mime_content_type($url);
+  //$mime_type = mime_content_type($url);
   
   // Set the content type header for the response
-  header("Content-type: $mime_type");
+  if ($type == "csv") {
+    header("Content-type: text/csv");
+  } else {
+    header("Content-type: application/json");
+  }
 
   // select 1 of 2 modes
   $fetchMode = 1;

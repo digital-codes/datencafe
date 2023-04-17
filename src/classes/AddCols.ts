@@ -88,11 +88,9 @@ export class AddCols extends DcNode {
     const dfB = await new DcNode.dfd.DataFrame(dtB)
     dfA.print()
     dfB.print()
-    const colsA = dfA.columns
-    const colsB = dfB.columns
     const idxA = dfA.index
     const idxB = dfB.index
-    console.log("DFs:", colsA, colsB, idxA, idxB)
+    console.log("DFs index:", idxA, idxB)
     // assume we need same index on both dataframes
     if (idxA.length != idxB.length) {
       DcNode.print("Indices not same length")
@@ -108,10 +106,13 @@ export class AddCols extends DcNode {
     // join mode on index col
     if (mode == "Join") {
       DcNode.print("Join")
-      df = DcNode.dfd.merge({ "left": dfA, "right": dfB, "on": [colsA[0]], how: "inner"})
+      df = DcNode.dfd.merge({ "left": dfA, "right": dfB, "on": [dfA.columns[0]], how: "inner"})
     }
     // remaining ops
     if ( df === undefined) { 
+      const colsA = dfA.selectDtypes(['float32', "int32"]).columns
+      const colsB = dfB.selectDtypes(['float32', "int32"]).columns
+      console.log("DF numeric cols:", colsA, colsB)
       // find matching columns for math ops
       const sharedCols: string[] = []
       colsA.forEach((c) => { if (colsB.includes(c)) sharedCols.push(c) })

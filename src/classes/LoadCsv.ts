@@ -68,14 +68,14 @@ export class LoadCsv extends DcNode {
   }
   let corsRequired = false
   try {
-      const fetchOk = await testFetch(url)
+      const fetchOk = await testFetch(url,"csv")
       console.log("Test:",fetchOk)
       if (!fetchOk.success) {
-        alert("URL cannot be loaded directly. Try CORS Widget or Log-In")
         const userStore = UserStore()
         if (userStore.exists()) {
           corsRequired = true
         } else {
+          alert("URL cannot be loaded directly. Log in and retry")
           return
         }
       }      
@@ -96,7 +96,7 @@ export class LoadCsv extends DcNode {
     // maybe try cors as well
     if (corsRequired) {
       try {
-        const fetchOk = await testFetch(url, true)
+        const fetchOk = await testFetch(url,"csv", true)
         console.log("Test:",fetchOk)
         if (!fetchOk.success) {
           alert("CORS loading failed. Check URL")
@@ -113,12 +113,13 @@ export class LoadCsv extends DcNode {
     } 
     this.df = await readCSVBrowser(url,csvOptions)
     this.df.print()
+    this.df.ctypes.print()
     /*
     console.log("Values:",this.df.values)
     console.log("Columns:",this.df.columns)
     */
-    await DcNode.providers.update(super.id,toJSON(this.df))
-    await super.messaging.emit(DcNode.signals.UPDPREFIX as string + super.id)
+    await DcNode.providers.update(this.id,toJSON(this.df))
+    await super.messaging.emit(DcNode.signals.UPDPREFIX as string + this.id)
   }
 
   // getters
