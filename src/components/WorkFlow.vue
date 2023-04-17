@@ -99,7 +99,7 @@ watch(
 
 const props = defineProps<{ msg: string }>()
 
-const emit = defineEmits(["addViz", "delViz"])
+const emit = defineEmits(["addViz", "delViz","pdf"])
 
 const count = ref(0)
 const theFlow = ref(null)
@@ -726,57 +726,101 @@ async function flowInit() {
 */
 import * as DOMPurify from 'dompurify'
 import  html2canvas from 'html2canvas'
+import { jsPDF } from "jspdf";
 
-const pdfWindow = ref(false)
-const pdfWrap = ref(null)
-const pdfContent = ref("")
-const hasNoPdf = true
 const makePdf = async () => {
   console.log("Make PDF")
-  if (hasNoPdf) {
-    alert("PDF not implemented yet")
-    return
+  alert("PDF not complete")
+  // pdf init
+  // Default export is a4 paper, portrait, using millimeters for units
+  const options = {
+    format: "a4",
+    orientation: "portrait",
+    unit: "mm"
   }
+  const doc = new jsPDF(options);
+
   // we actually start with markdown
+  /*
   let md = "# Daten.Cafe\n"
   md += "<img class='doclogo' src='/img/info/BELIEVE_YOUR_SELF.jpg'/>\n\n"
   md += "## Story\n"
   md += "kmkfweklf \n kkwdkwnqd \n"
   md += "## Workflow\n\n"
+  */
   const wf = await cy.value.png({
     output: "base64uri",
     bg: "#ffffff",
     maxWidth: 1920
   })
+
+  doc.text("Daten.Cafe", 10, 10);
+  const  img = new Image()
+  img.src = "/img/logo/datencafe.png"
+  await doc.addImage(img, "PNG", 50,20, 100, 100)
+
+  doc.text("Story", 10, 150);
+  doc.text("Bla ...", 10, 160);
+  doc.text("... bla", 10, 170);
+  await doc.addPage(options)
+
+  doc.text("Flow", 10, 10);
+  await doc.addImage(wf, "PNG", 10,20, 160, 160)
+  await doc.addPage(options)
+
   // both work
   //md += "![](" + wf + ")\n\n"
-  md += "<img class='doclogo' src='" + wf + "'>\n\n"
+  /*
+  md += "<img class='docimg' src='" + wf + "'>\n\n"
   md += "kmkfweklf \n kkwdkwnqd \n"
   md += "## Output\n\n"
   md += "kmkfweklf \n kkwdkwnqd \n"
+  */
 
   console.log("Nodes:",nodeList.value.length)
-  await nodeList.value.forEach(async (instance) => {
-    console.log(instance)
-    if (instance.display) {
+  // get display nodes
+  const displayNodes = nodeList.value.filter(i => i.display)
+  for (const instance of displayNodes) {
+  //nodeList.value.forEach(async (instance) => {
+    //console.log(instance)
       const divName = instance.id.toUpperCase()
       const elem = await document.getElementById("DFPLOT-" + divName)
       // seems to work but is too slow ...
       const viz = await html2canvas(elem) //, options)
       const dataURL = await viz.toDataURL();
+      /*
       md += "### " + divName + "\n\n"
-      //md += "<img class='docimg' src='" + dataURL + "'>\n\n"
+      md += "<img class='docimg' src='" + dataURL + "'>\n\n"
       md += "kmkfweklf \n kkwdkwnqd \n\n"
-    }
-  })
-  await DelayTimer(10)
-  console.log(md)
+      */
+      doc.text(divName, 10, 10);
+      await doc.addImage(dataURL, "PNG", 10,30, 160,120)
+      await doc.addPage(options)
+      
+  }
+  //console.log(md)
+  /*
   const html = await marked.parse(md)
-  console.log(html)
+  //console.log(html)
   const htmlClean = await DOMPurify.sanitize(html);
-  console.log(htmlClean)
-  pdfContent.value = htmlClean
-  pdfWindow.value = true
+  //console.log(htmlClean)
+  const style = '<style>\
+  .doclogo {width:30%;margin-left:auto;margin-right:auto;}\
+  .docimg {width:90%;margin-left:auto;margin-right:auto;}\
+  @media print {.docimg {page-break-after:always;} }\
+  </style>'
+  const htmlStyled = style + htmlClean
+  emit("pdf",htmlClean)
+  //pdfContent.value = htmlStyled
+  //pdfWindow.value = true
+
+
+  //const img = "http://localhost:8080/img/info/Data%2C_Information%2C_Knowledge%2C_and_Wisdom_-rtwGimli_keynote_by_%40Nora3000_-viznotes_%2842038113741%29.jpg"
+  //doc.addImage(img, "JPG", 10,10, 160, 80, "IMG")
+  */
+  doc.save("a4.pdf");
+
+
 }
 
 // story popover
@@ -2054,5 +2098,26 @@ const toggleTooltips = () => {
   padding: 3px;
   margin: 3px;
 }
+</style>
+
+<style>
+/*
+  .doclogo {
+    text-align:center;
+    width:50%;
+    margin-left:auto;
+    margin-right:auto;
+  }
+  .docimg {
+    width:90%;
+    margin-left:auto;
+    margin-right:auto;
+  }
+  @media print {
+    .docimg {
+      page-break-after:always;
+    } 
+  }
+*/
 </style>
 

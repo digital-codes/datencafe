@@ -13,6 +13,7 @@ const message = ref('Hello, World!');
 const FlowLoading = ref(true)
 //const ShowLoading = ref(true)
 
+
 const WorkFlowAsync = defineAsyncComponent({
   // A factory function that returns a Promise that resolves to
   // the component definition.
@@ -60,26 +61,6 @@ import DanfoPlot from '../components/DanfoPlot.vue'
 // items
 const items = ref([])
 
-/*
-const items = ref([
-{id:"P1","name":"sskdmk",type:"chart"},
-{id:"P2","name":"cwe",type:"table"}
-])
-
-const update = () => {
-  items.value.push(
-      {
-        id:"P" + String(items.value.length),
-        "name":"cwe",
-        type:"table"
-      }
-    )
-    console.log("Items:",items.value.length)
-    setTimeout(update, 2000)    
-  }
-
-setTimeout(update, 2000)
-*/
 
 // globals
 import { Signals } from "../services/GlobalDefs"
@@ -106,11 +87,12 @@ const scrollToTop = () => {
 </script>
 
 <template>
-  <ion-page>
+  <ion-page >
     <TitleBar :title='$t("titles.work.tab")'  thumb="wand-magic-sparkles"/>
 
     <ion-content :fullscreen="true" ref="content">
-      <div id="container" class="container work-container">
+    
+    <div id="container" class="container work-container">
         <ion-grid fixed="true">
           <ion-row>
 
@@ -166,6 +148,7 @@ const scrollToTop = () => {
 </template>
 
 <style scoped>
+
 #container {
   text-align: center;
   margin:10px;
