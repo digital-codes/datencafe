@@ -3,6 +3,8 @@ import { ref, computed, onMounted, watch, nextTick } from 'vue'
 
 import cytoscape from "cytoscape"
 
+import { marked } from "marked"
+
 /*
 https://github.com/cytoscape/cytoscape.js-edgehandles
 https://github.com/iVis-at-Bilkent/cytoscape.js-context-menus
@@ -711,6 +713,70 @@ async function flowInit() {
 
     })
   }
+}
+
+/*
+  const mdText = computed(() => {
+    let t = marked.parse(props.src)
+    if (props.zoom)
+        t = t.replace("<img ","<img class=\"mdimage zoomable\" ")
+    return t
+})
+
+*/
+import * as DOMPurify from 'dompurify'
+import  html2canvas from 'html2canvas'
+
+const pdfWindow = ref(false)
+const pdfWrap = ref(null)
+const pdfContent = ref("")
+const hasNoPdf = true
+const makePdf = async () => {
+  console.log("Make PDF")
+  if (hasNoPdf) {
+    alert("PDF not implemented yet")
+    return
+  }
+  // we actually start with markdown
+  let md = "# Daten.Cafe\n"
+  md += "<img class='doclogo' src='/img/info/BELIEVE_YOUR_SELF.jpg'/>\n\n"
+  md += "## Story\n"
+  md += "kmkfweklf \n kkwdkwnqd \n"
+  md += "## Workflow\n\n"
+  const wf = await cy.value.png({
+    output: "base64uri",
+    bg: "#ffffff",
+    maxWidth: 1920
+  })
+  // both work
+  //md += "![](" + wf + ")\n\n"
+  md += "<img class='doclogo' src='" + wf + "'>\n\n"
+  md += "kmkfweklf \n kkwdkwnqd \n"
+  md += "## Output\n\n"
+  md += "kmkfweklf \n kkwdkwnqd \n"
+
+  console.log("Nodes:",nodeList.value.length)
+  await nodeList.value.forEach(async (instance) => {
+    console.log(instance)
+    if (instance.display) {
+      const divName = instance.id.toUpperCase()
+      const elem = await document.getElementById("DFPLOT-" + divName)
+      // seems to work but is too slow ...
+      const viz = await html2canvas(elem) //, options)
+      const dataURL = await viz.toDataURL();
+      md += "### " + divName + "\n\n"
+      //md += "<img class='docimg' src='" + dataURL + "'>\n\n"
+      md += "kmkfweklf \n kkwdkwnqd \n\n"
+    }
+  })
+  await DelayTimer(10)
+  console.log(md)
+  const html = await marked.parse(md)
+  console.log(html)
+  const htmlClean = await DOMPurify.sanitize(html);
+  console.log(htmlClean)
+  pdfContent.value = htmlClean
+  pdfWindow.value = true
 }
 
 // story popover
@@ -1666,6 +1732,10 @@ const toggleTooltips = () => {
 </script>
 
 <template>
+  <div ref="pdfWrap" v-if="pdfWindow">
+    <div v-html="pdfContent">
+    </div>
+  </div>
   <div ref="flowWrap" class="wrap">
     <input ref="fileInput" type="file" style="display:none" @change="handleFileUpload" />
     <a ref="scrotDown" style="display:none" :href="scrotData" download="flow.png"></a>

@@ -32,6 +32,7 @@
     "cytoscape-edgehandles": "^4.0.1",
     "danfojs": "^1.1.2",
     "dompurify": "^3.0.2",
+    "html2canvas": "^1.4.1",
     "ionicons": "^6.0.3",
     "jspdf": "^2.5.1",
     "leaflet": "^1.9.3",

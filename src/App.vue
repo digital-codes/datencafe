@@ -9,7 +9,7 @@
 
 <script setup lang="ts">
 import { onMounted, computed } from "vue"
-import { UserStore, Mode } from '@/services/UserStore'
+import { UserStore, Modes } from '@/services/UserStore'
 const userStore = UserStore();
 
 import { useI18n } from 'vue-i18n'
@@ -35,7 +35,7 @@ onMounted(async () => {
   const isDarkMode = mediaQueryObj.matches;
   if (isDarkMode) {
     console.log("Dark")
-    await userStore.setDark(Mode.Dark)
+    await userStore.setDark(Modes.Dark)
   } 
 })
 

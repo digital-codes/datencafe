@@ -5,10 +5,12 @@
     <ion-content :fullscreen="true">
 
       <div id="container">
+        <!-- 
         <ion-button @click="testVPop">VPop</ion-button>
         <ion-button @click="testSPop">SPop</ion-button>
         <ion-button @click="testStoryPop">StoryPop</ion-button>
         <ion-button @click="pdfgen">PDF</ion-button>
+        -->
 
       <ion-card color="light" v-for="(s,i) in items.en" :key="i">
         <article>
