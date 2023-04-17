@@ -30,7 +30,7 @@ export class RandomGen extends DcNode {
         {
           id:"cols",
           type:"number",
-          label:"Numeric Columns",
+          label:"Numeric",
           value:"1",
           min:"1",
           max:"5"
@@ -38,7 +38,7 @@ export class RandomGen extends DcNode {
         {
           id:"text",
           type:"number",
-          label:"Text Columns",
+          label:"Text",
           value:"1",
           min:"0",
           max:"1"
