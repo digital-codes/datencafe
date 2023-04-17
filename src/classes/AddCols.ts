@@ -108,7 +108,7 @@ export class AddCols extends DcNode {
     // join mode on index col
     if (mode == "Join") {
       DcNode.print("Join")
-      return
+      df = DcNode.dfd.merge({ "left": dfA, "right": dfB, "on": [colsA[0]], how: "inner"})
     }
     // remaining ops
     if ( df === undefined) { 
