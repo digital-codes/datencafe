@@ -90,6 +90,11 @@ export class RandomGen extends DcNode {
     }
   }
   async generate () {
+    if (!this.active) {
+      DcNode.print("Terminated")
+      return
+    }
+
     this.genCnt++
     DcNode.print("Generate " + String(this.genCnt)) 
     const options = this.config.options

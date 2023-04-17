@@ -1561,11 +1561,20 @@ async function clearFlow() {
   console.log("also remove charts")
   nodeList.value.forEach(n => {
     // remove listeners
-    n.signals.forEach(s => n.msgOff(s))
+    n.signals.forEach(s => n.msgOff(s.signal))
     // remove charts
     if (n.display) {
       emit("delViz", n.id)
     }
+    if (n.type == NodeTypes.GEN) {
+      const runIdx = n.config.options.findIndex((item: any) => { return item.id == "run" })
+      if (runIdx == -1) throw (new Error("Invalid config at run"))
+      if (parseInt(n.config.options[runIdx].value) != 0) {
+        console.log("Stopping generator on ", n.id)
+        n.stop()
+      }
+    }
+
   })
   // remove all nodes
   nodeList.value = []
