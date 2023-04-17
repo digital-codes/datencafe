@@ -1509,7 +1509,7 @@ async function initFlow(design: any) {
         console.log("Signals:", n.sigs)
         n.sigs.forEach(async (s) => {
           console.log("Signal on for ", s)
-          await instance.msgOn(s)
+          await instance.msgOn(s.signal,s.port)
         })
         // add to list 
         nodeList.value.push(instance)

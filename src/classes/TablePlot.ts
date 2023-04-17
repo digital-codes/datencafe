@@ -36,7 +36,7 @@ export class TablePlot extends DcNode {
     if ((target === undefined) || (target == null) ) {
       throw (new Error("Invalid ID: " + String(divId)))
     }
-    await df.plot(divId).line()
+    await df.plot(divId).table()
   }
   msgOn(x: string, y: string) {
     // set event listener for signal 
