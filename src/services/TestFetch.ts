@@ -2,20 +2,30 @@
  * check if we can access the url without or with regular CORS settings
  * return false on cors error or other error
  */
+import { UserStore } from "@/services/UserStore";
+const userStore = UserStore()
 
-export default async (url: string, geoCheck = false) => {
-    console.log("test fetch")
+export default async (url: string, proxy = false, geoCheck = false) => {
+    console.log("test fetch:",proxy,geoCheck)
+    const hdrs = new Headers();
+    /*
+    myHeaders.append('Content-Type', 'application/json');
+    myHeaders.append('Authorization', '1234abcd');
+    */
+    if (proxy) {
+        if (userStore.exists()) {
+            hdrs.append('Authorization', "Bearer " + userStore.getToken());
+            url = "https://daten.cafe/php/corsProxyExec.php?url=" + url
+        } else {
+            return {success:false,status:"No token"}
+        }
+    }
     const options = {
         method: "GET", // *GET, POST, PUT, DELETE, etc.
         mode: "cors" as RequestMode, // no-cors, *cors, same-origin
         cache: "no-cache" as RequestCache, // *default, no-cache, reload, force-cache, only-if-cached
         //credentials: "same-origin", // include, *same-origin, omit
-        /*
-        headers: {
-        "Content-Type": "application/json",
-        // 'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        */
+        headers: hdrs,
         redirect: "follow" as RequestRedirect, // manual, *follow, error
     }
     try {
