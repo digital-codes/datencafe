@@ -1,0 +1,1105 @@
+{
+  "version": "0.3",
+  "flow": {
+    "elements": {
+      "nodes": [
+        {
+          "data": {
+            "id": "N2",
+            "name": "N2",
+            "ports": {
+              "A": true
+            },
+            "instance": {
+              "id": "N2",
+              "name": "N2",
+              "type": "chart",
+              "display": 1
+            },
+            "type": {
+              "name": "lineplot",
+              "shp": "rectangle",
+              "bd": "#0f0",
+              "img": "url('/img/widgets/LineChart.png')"
+            }
+          },
+          "position": {
+            "x": 453.68376116158674,
+            "y": 298.1551372473521
+          },
+          "group": "nodes",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": false,
+          "classes": ""
+        },
+        {
+          "data": {
+            "id": "N3",
+            "name": "N3",
+            "ports": {
+              "A": true,
+              "B": true
+            },
+            "instance": {
+              "id": "N3",
+              "name": "N3",
+              "type": "proc",
+              "display": 0
+            },
+            "type": {
+              "name": "addcols",
+              "shp": "roundrectangle",
+              "bd": "#000",
+              "img": "url('/img/widgets/MergeData.png')"
+            }
+          },
+          "position": {
+            "x": 331.1699198821359,
+            "y": 271.0001165149242
+          },
+          "group": "nodes",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": false,
+          "classes": ""
+        },
+        {
+          "data": {
+            "id": "N4",
+            "name": "N4",
+            "ports": {},
+            "instance": {
+              "id": "N4",
+              "name": "N4",
+              "type": "gen",
+              "display": 0
+            },
+            "type": {
+              "name": "randomgen",
+              "shp": "round-octagon",
+              "bd": "#00f",
+              "img": "url('/img/widgets/RandomData.png')"
+            }
+          },
+          "position": {
+            "x": 208.17502950406907,
+            "y": 378.87580177651404
+          },
+          "group": "nodes",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": false,
+          "classes": ""
+        },
+        {
+          "data": {
+            "id": "N5",
+            "name": "N5",
+            "ports": {},
+            "instance": {
+              "id": "N5",
+              "name": "N5",
+              "type": "gen",
+              "display": 0
+            },
+            "type": {
+              "name": "randomgen",
+              "shp": "round-octagon",
+              "bd": "#00f",
+              "img": "url('/img/widgets/RandomData.png')"
+            }
+          },
+          "position": {
+            "x": 213.916022795948,
+            "y": 264.634230857265
+          },
+          "group": "nodes",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": false,
+          "classes": ""
+        },
+        {
+          "data": {
+            "id": "N6",
+            "name": "N6",
+            "ports": {
+              "A": true
+            },
+            "instance": {
+              "id": "N6",
+              "name": "N6",
+              "type": "table",
+              "display": 1
+            },
+            "type": {
+              "name": "tableplot",
+              "shp": "rectangle",
+              "bd": "#0f0",
+              "img": "url('/img/widgets/Table.png')"
+            }
+          },
+          "position": {
+            "x": 454.40129817206804,
+            "y": 234.3879695359102
+          },
+          "group": "nodes",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": false,
+          "classes": ""
+        },
+        {
+          "data": {
+            "id": "N7",
+            "name": "N7",
+            "ports": {
+              "A": true
+            },
+            "instance": {
+              "id": "N7",
+              "name": "N7",
+              "type": "chart",
+              "display": 1
+            },
+            "type": {
+              "name": "barplot",
+              "shp": "rectangle",
+              "bd": "#0f0",
+              "img": "url('/img/widgets/BarPlot.png')"
+            }
+          },
+          "position": {
+            "x": 452.2440646617428,
+            "y": 362.9209962615807
+          },
+          "group": "nodes",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": false,
+          "classes": ""
+        },
+        {
+          "data": {
+            "id": "N8",
+            "name": "N8",
+            "ports": {
+              "A": true,
+              "B": true
+            },
+            "instance": {
+              "id": "N8",
+              "name": "N8",
+              "type": "proc",
+              "display": 0
+            },
+            "type": {
+              "name": "addrows",
+              "shp": "roundrectangle",
+              "bd": "#000",
+              "img": "url('/img/widgets/Concatenate.png')"
+            }
+          },
+          "position": {
+            "x": 323.33112438887457,
+            "y": 372.10741212874706
+          },
+          "group": "nodes",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": false,
+          "classes": ""
+        },
+        {
+          "data": {
+            "id": "N9",
+            "name": "N9",
+            "ports": {
+              "A": true
+            },
+            "instance": {
+              "id": "N9",
+              "name": "N9",
+              "type": "table",
+              "display": 1
+            },
+            "type": {
+              "name": "tableplot",
+              "shp": "rectangle",
+              "bd": "#0f0",
+              "img": "url('/img/widgets/Table.png')"
+            }
+          },
+          "position": {
+            "x": 452.6239782089404,
+            "y": 428.8367784340595
+          },
+          "group": "nodes",
+          "removed": false,
+          "selected": true,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": false,
+          "classes": ""
+        }
+      ],
+      "edges": [
+        {
+          "data": {
+            "source": "N4",
+            "target": "N3",
+            "id": "a1c896b3-8396-4248-8a61-cd0e110175a5",
+            "type": "e1-A",
+            "port": "A"
+          },
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "group": "edges",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": true,
+          "classes": ""
+        },
+        {
+          "data": {
+            "source": "N3",
+            "target": "N2",
+            "id": "187a6eca-5a9e-4417-b796-186c647b5649",
+            "type": "e1-A",
+            "port": "A"
+          },
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "group": "edges",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": true,
+          "classes": ""
+        },
+        {
+          "data": {
+            "source": "N5",
+            "target": "N3",
+            "id": "0d787f11-1714-4bab-bb42-157cb564cc5c",
+            "type": "e1-B",
+            "port": "B"
+          },
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "group": "edges",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": true,
+          "classes": ""
+        },
+        {
+          "data": {
+            "source": "N3",
+            "target": "N6",
+            "id": "ffe1d987-9bae-48f9-8f32-3e6b86a23823",
+            "type": "e1-A",
+            "port": "A"
+          },
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "group": "edges",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": true,
+          "classes": ""
+        },
+        {
+          "data": {
+            "source": "N3",
+            "target": "N7",
+            "id": "484073ee-851f-4ea7-9a84-aa863dba08a8",
+            "type": "e1-A",
+            "port": "A"
+          },
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "group": "edges",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": true,
+          "classes": ""
+        },
+        {
+          "data": {
+            "source": "N5",
+            "target": "N8",
+            "id": "f445b7b2-7912-45be-bee1-134def4ddfc8",
+            "type": "e1-A",
+            "port": "A"
+          },
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "group": "edges",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": true,
+          "classes": ""
+        },
+        {
+          "data": {
+            "source": "N4",
+            "target": "N8",
+            "id": "92fc061c-42ef-483e-9fea-3f30bc6dfbdc",
+            "type": "e1-B",
+            "port": "B"
+          },
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "group": "edges",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": true,
+          "classes": ""
+        },
+        {
+          "data": {
+            "source": "N8",
+            "target": "N9",
+            "id": "93cc1929-d8e1-433d-851c-53818edebe42",
+            "type": "e1-A",
+            "port": "A"
+          },
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "group": "edges",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": true,
+          "classes": ""
+        }
+      ]
+    },
+    "style": [
+      {
+        "selector": "node[name]",
+        "style": {
+          "label": "data(name)",
+          "text-valign": "bottom",
+          "text-halign": "center",
+          "background-fit": "contain",
+          "background-color": "rgb(255,255,255)",
+          "shape": "rectangle",
+          "width": "30px",
+          "height": "30px",
+          "border-width": "2px"
+        }
+      },
+      {
+        "selector": "node[type.shp]",
+        "style": {
+          "shape": "data(type.shp)"
+        }
+      },
+      {
+        "selector": "node[type.bd]",
+        "style": {
+          "border-color": "data(type.bd)"
+        }
+      },
+      {
+        "selector": "node[type.img]",
+        "style": {
+          "background-image": "data(type.img)"
+        }
+      },
+      {
+        "selector": "edge",
+        "style": {
+          "width": "3px",
+          "line-color": "rgb(204,204,204)",
+          "target-arrow-color": "rgb(204,204,204)",
+          "target-arrow-shape": "triangle",
+          "curve-style": "bezier"
+        }
+      },
+      {
+        "selector": "edge[type]",
+        "style": {
+          "label": "data(type)",
+          "font-size": "10px",
+          "text-rotation": "autorotate",
+          "text-margin-x": "0px",
+          "text-margin-y": "0px"
+        }
+      },
+      {
+        "selector": "edge[dark]",
+        "style": {
+          "color": "rgb(255,136,136)",
+          "background-color": "rgb(0,0,0)"
+        }
+      },
+      {
+        "selector": ".eh-preview",
+        "style": {
+          "opacity": "1",
+          "background-color": "rgb(255,0,0)",
+          "line-color": "rgb(255,0,0)",
+          "target-arrow-color": "rgb(0,0,255)",
+          "source-arrow-color": "rgb(255,0,0)"
+        }
+      },
+      {
+        "selector": ".eh-ghost-edge",
+        "style": {
+          "opacity": "0",
+          "background-color": "rgb(0,128,0)",
+          "line-color": "rgb(0,128,0)",
+          "target-arrow-color": "rgb(0,0,255)",
+          "source-arrow-color": "rgb(255,0,0)"
+        }
+      },
+      {
+        "selector": ".eh-source",
+        "style": {
+          "border-width": "2px",
+          "border-color": "rgb(255,0,0)"
+        }
+      },
+      {
+        "selector": ".eh-target",
+        "style": {
+          "border-width": "2px",
+          "border-color": "rgb(0,0,255)"
+        }
+      }
+    ],
+    "data": {},
+    "zoomingEnabled": true,
+    "userZoomingEnabled": true,
+    "zoom": 2.1927975714064267,
+    "minZoom": 1,
+    "maxZoom": 10,
+    "panningEnabled": true,
+    "userPanningEnabled": true,
+    "pan": {
+      "x": -374.1566806800718,
+      "y": -371.56423785178913
+    },
+    "boxSelectionEnabled": true,
+    "renderer": {
+      "name": "canvas"
+    },
+    "wheelSensitivity": 0.2
+  },
+  "nodes": [
+    {
+      "id": "N3",
+      "name": "N3",
+      "classname": "addcols",
+      "config": {
+        "pop": "select",
+        "options": {
+          "id": "op",
+          "type": "string",
+          "label": "Operation",
+          "value": [
+            "Join",
+            "Append",
+            "Add",
+            "Sub",
+            "Mul",
+            "Div"
+          ],
+          "current": "Mul"
+        }
+      },
+      "sigs": [
+        {
+          "signal": "UPD-N4",
+          "port": "A"
+        },
+        {
+          "signal": "UPD-N5",
+          "port": "B"
+        }
+      ]
+    },
+    {
+      "id": "N4",
+      "name": "N4",
+      "classname": "randomgen",
+      "config": {
+        "pop": "value",
+        "options": [
+          {
+            "id": "cols",
+            "type": "number",
+            "label": "Numeric Columns",
+            "value": "2",
+            "min": "1",
+            "max": "5"
+          },
+          {
+            "id": "text",
+            "type": "number",
+            "label": "Text Columns",
+            "value": "0",
+            "min": "0",
+            "max": "1"
+          },
+          {
+            "id": "rows",
+            "type": "number",
+            "label": "Rows",
+            "value": "10",
+            "min": "1",
+            "max": "30"
+          },
+          {
+            "id": "period",
+            "type": "number",
+            "label": "Period (s)",
+            "value": "5",
+            "min": "1",
+            "max": "60"
+          },
+          {
+            "id": "run",
+            "type": "number",
+            "label": "Run",
+            "value": "1",
+            "min": "0",
+            "max": "1"
+          }
+        ]
+      },
+      "sigs": []
+    },
+    {
+      "id": "N5",
+      "name": "N5",
+      "classname": "randomgen",
+      "config": {
+        "pop": "value",
+        "options": [
+          {
+            "id": "cols",
+            "type": "number",
+            "label": "Numeric Columns",
+            "value": "3",
+            "min": "1",
+            "max": "5"
+          },
+          {
+            "id": "text",
+            "type": "number",
+            "label": "Text Columns",
+            "value": "0",
+            "min": "0",
+            "max": "1"
+          },
+          {
+            "id": "rows",
+            "type": "number",
+            "label": "Rows",
+            "value": "10",
+            "min": "1",
+            "max": "30"
+          },
+          {
+            "id": "period",
+            "type": "number",
+            "label": "Period (s)",
+            "value": "5",
+            "min": "1",
+            "max": "60"
+          },
+          {
+            "id": "run",
+            "type": "number",
+            "label": "Run",
+            "value": "1",
+            "min": "0",
+            "max": "1"
+          }
+        ]
+      },
+      "sigs": []
+    },
+    {
+      "id": "N2",
+      "name": "N2",
+      "classname": "lineplot",
+      "config": {},
+      "sigs": [
+        {
+          "signal": "UPD-N3",
+          "port": "A"
+        }
+      ]
+    },
+    {
+      "id": "N6",
+      "name": "N6",
+      "classname": "tableplot",
+      "config": {},
+      "sigs": [
+        {
+          "signal": "UPD-N3",
+          "port": "A"
+        }
+      ]
+    },
+    {
+      "id": "N7",
+      "name": "N7",
+      "classname": "barplot",
+      "config": {},
+      "sigs": [
+        {
+          "signal": "UPD-N3",
+          "port": "A"
+        }
+      ]
+    },
+    {
+      "id": "N8",
+      "name": "N8",
+      "classname": "addrows",
+      "config": {},
+      "sigs": [
+        {
+          "signal": "UPD-N5",
+          "port": "A"
+        },
+        {
+          "signal": "UPD-N4",
+          "port": "B"
+        }
+      ]
+    },
+    {
+      "id": "N9",
+      "name": "N9",
+      "classname": "tableplot",
+      "config": {},
+      "sigs": [
+        {
+          "signal": "UPD-N8",
+          "port": "A"
+        }
+      ]
+    }
+  ],
+  "data": [
+    {
+      "id": "N3",
+      "data": [
+        {
+          "COL1": 2022.0218505859375,
+          "COL2": 3965.11669921875
+        },
+        {
+          "COL1": 109.70218658447266,
+          "COL2": 3550.229248046875
+        },
+        {
+          "COL1": 537.0720825195312,
+          "COL2": 1052.1976318359375
+        },
+        {
+          "COL1": 5518.47607421875,
+          "COL2": 5130.67041015625
+        },
+        {
+          "COL1": 2826.191162109375,
+          "COL2": 1354.8431396484375
+        },
+        {
+          "COL1": 3034.350341796875,
+          "COL2": 724.5545654296875
+        },
+        {
+          "COL1": 7425.5830078125,
+          "COL2": 2886.407470703125
+        },
+        {
+          "COL1": 1702.3924560546875,
+          "COL2": 23.148462295532227
+        },
+        {
+          "COL1": 1719.5770263671875,
+          "COL2": 3268.52978515625
+        },
+        {
+          "COL1": 3369.106689453125,
+          "COL2": 148.36727905273438
+        }
+      ],
+      "root": false,
+      "loaded": true
+    },
+    {
+      "id": "N1",
+      "data": [
+        {
+          "year": 2017,
+          "value": 135.98
+        },
+        {
+          "year": 2018,
+          "value": 147.49
+        },
+        {
+          "year": 2019,
+          "value": 146.93
+        },
+        {
+          "year": 2020,
+          "value": 139.89
+        },
+        {
+          "year": 2021,
+          "value": 125.6
+        },
+        {
+          "year": 2022,
+          "value": 108.13
+        }
+      ],
+      "root": true,
+      "loaded": true
+    },
+    {
+      "id": "N4",
+      "data": [
+        {
+          "COL1": 21.325487601570416,
+          "COL2": 43.469684387929895
+        },
+        {
+          "COL1": 1.2481764674779017,
+          "COL2": 70.71444999824075
+        },
+        {
+          "COL1": 9.726154788173357,
+          "COL2": 66.71052042245562
+        },
+        {
+          "COL1": 70.66506805558139,
+          "COL2": 96.01483385945032
+        },
+        {
+          "COL1": 61.05734717675052,
+          "COL2": 21.450757198052063
+        },
+        {
+          "COL1": 94.82721004296012,
+          "COL2": 15.86818172117448
+        },
+        {
+          "COL1": 84.08952400750402,
+          "COL2": 89.33974818315298
+        },
+        {
+          "COL1": 22.13388588650823,
+          "COL2": 92.26337110825476
+        },
+        {
+          "COL1": 77.457669433347,
+          "COL2": 77.5798810530137
+        },
+        {
+          "COL1": 44.968095485005996,
+          "COL2": 40.05369838601454
+        }
+      ],
+      "root": false,
+      "loaded": true
+    },
+    {
+      "id": "N3",
+      "data": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N4",
+      "data": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N5",
+      "data": [
+        {
+          "COL1": 94.81714508457682,
+          "COL2": 91.21567530329322,
+          "COL3": 21.92465526422901
+        },
+        {
+          "COL1": 87.88996792083884,
+          "COL2": 50.20514571609485,
+          "COL3": 4.388189415339195
+        },
+        {
+          "COL1": 55.219363474448166,
+          "COL2": 15.77258997534564,
+          "COL3": 22.02948530775014
+        },
+        {
+          "COL1": 78.09340586936978,
+          "COL2": 53.436224409546554,
+          "COL3": 9.18282146346514
+        },
+        {
+          "COL1": 46.28748862621953,
+          "COL2": 63.16061626243841,
+          "COL3": 94.98875654462546
+        },
+        {
+          "COL1": 31.998730177852263,
+          "COL2": 45.66084307423053,
+          "COL3": 94.86052369009661
+        },
+        {
+          "COL1": 88.30568360169453,
+          "COL2": 32.30821246145934,
+          "COL3": 43.258040333776734
+        },
+        {
+          "COL1": 76.91339587829744,
+          "COL2": 0.2508954611583625,
+          "COL3": 99.51384581858352
+        },
+        {
+          "COL1": 22.20021648048175,
+          "COL2": 42.131153691872605,
+          "COL3": 11.031301707377072
+        },
+        {
+          "COL1": 74.92216056818029,
+          "COL2": 3.7042090099226765,
+          "COL3": 43.08732333941761
+        }
+      ],
+      "root": false,
+      "loaded": true
+    },
+    {
+      "id": "N3",
+      "data": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N4",
+      "data": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N5",
+      "data": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N3",
+      "data": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N4",
+      "data": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N5",
+      "data": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N8",
+      "data": [
+        {
+          "COL1": 94.81714508457682,
+          "COL2": 91.21567530329322,
+          "COL3": 21.92465526422901
+        },
+        {
+          "COL1": 87.88996792083884,
+          "COL2": 50.20514571609485,
+          "COL3": 4.388189415339195
+        },
+        {
+          "COL1": 55.219363474448166,
+          "COL2": 15.77258997534564,
+          "COL3": 22.02948530775014
+        },
+        {
+          "COL1": 78.09340586936978,
+          "COL2": 53.436224409546554,
+          "COL3": 9.18282146346514
+        },
+        {
+          "COL1": 46.28748862621953,
+          "COL2": 63.16061626243841,
+          "COL3": 94.98875654462546
+        },
+        {
+          "COL1": 31.998730177852263,
+          "COL2": 45.66084307423053,
+          "COL3": 94.86052369009661
+        },
+        {
+          "COL1": 88.30568360169453,
+          "COL2": 32.30821246145934,
+          "COL3": 43.258040333776734
+        },
+        {
+          "COL1": 76.91339587829744,
+          "COL2": 0.2508954611583625,
+          "COL3": 99.51384581858352
+        },
+        {
+          "COL1": 22.20021648048175,
+          "COL2": 42.131153691872605,
+          "COL3": 11.031301707377072
+        },
+        {
+          "COL1": 74.92216056818029,
+          "COL2": 3.7042090099226765,
+          "COL3": 43.08732333941761
+        },
+        {
+          "COL1": 21.325487601570416,
+          "COL2": 43.469684387929895,
+          "COL3": null
+        },
+        {
+          "COL1": 1.2481764674779017,
+          "COL2": 70.71444999824075,
+          "COL3": null
+        },
+        {
+          "COL1": 9.726154788173357,
+          "COL2": 66.71052042245562,
+          "COL3": null
+        },
+        {
+          "COL1": 70.66506805558139,
+          "COL2": 96.01483385945032,
+          "COL3": null
+        },
+        {
+          "COL1": 61.05734717675052,
+          "COL2": 21.450757198052063,
+          "COL3": null
+        },
+        {
+          "COL1": 94.82721004296012,
+          "COL2": 15.86818172117448,
+          "COL3": null
+        },
+        {
+          "COL1": 84.08952400750402,
+          "COL2": 89.33974818315298,
+          "COL3": null
+        },
+        {
+          "COL1": 22.13388588650823,
+          "COL2": 92.26337110825476,
+          "COL3": null
+        },
+        {
+          "COL1": 77.457669433347,
+          "COL2": 77.5798810530137,
+          "COL3": null
+        },
+        {
+          "COL1": 44.968095485005996,
+          "COL2": 40.05369838601454,
+          "COL3": null
+        }
+      ],
+      "root": false,
+      "loaded": true
+    }
+  ],
+  "next": 10,
+  "story": {
+    "title": "Test für einfache Kombination von Daten",
+    "author": "AK",
+    "date": "",
+    "email": "",
+    "link": "",
+    "tags": [
+      "Nachhaltige Produktion"
+    ],
+    "category": "Allgemeines Leben",
+    "text": "Darstellung von einfachen Datenverknüpfungen mit folgender Operationen: Add,Sub,Mul,Div sowie Anfügen von Zeilen und Spalten und einfacher Join über die erste Spalte"
+  }
+}
