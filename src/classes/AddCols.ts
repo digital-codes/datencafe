@@ -39,29 +39,36 @@ export class AddCols extends DcNode {
     DcNode.print("Set option:" + option)
     // now check the sources and make the operation
     // both ports need to be connect, so we must have 2 signals
-    const sigs = this.signals
-    const signals: string[] = []
-    sigs.forEach((s) => {signals.push(s.signal)})
-    DcNode.print("Signals attached:" + JSON.stringify(signals))
+    DcNode.print("Signals attached:" + JSON.stringify(this.signals))
     // check if complete
     if (this.signals.length < 2) {
       return
     }
-
   }
   async updated(msg:string,y?:any) {
     // update only when both ports attached
+    DcNode.print("Update for " +  msg + ", " + this.id + "," + JSON.stringify(this.signals))
     if (this.signals.length < 2) {
+      DcNode.print("Update. Too few sources for " + this.id)
       return
     }
     DcNode.print("Updating with input ports attached")
     this.updCnt++
-    const src = msg.split("-")[1]
-    DcNode.print(src + " updated " + super.id +": " + String(this.updCnt) + "..." + String(y))
+    // in this case, we need to iterate over the attached signals to find the sources
+    // to be more precise, we need to find source for port a and b selectively
     const sigA = this.signals.find(s => s.port == "A")
     const sigB = this.signals.find(s => s.port == "B")
     if ((sigA == undefined) ||(sigB === undefined))
       throw (new Error("Invalid signals"))
+    // even if sources attached, data might not be available. check this first
+    if (!DcNode.providers.exists(sigA.signal.split("-")[1])) {
+      DcNode.print("No data port A")
+      return
+    }
+    if (!DcNode.providers.exists(sigB.signal.split("-")[1])) {
+      DcNode.print("No data port B")
+      return
+    }
     const dtA = DcNode.providers.getDataById(sigA.signal.split("-")[1]) 
     const dfA = new DcNode.dfd.DataFrame(dtA)
     const dtB = DcNode.providers.getDataById(sigB.signal.split("-")[1]) 
