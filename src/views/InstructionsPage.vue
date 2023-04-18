@@ -9,9 +9,18 @@
         <ion-button @click="testVPop">VPop</ion-button>
         <ion-button @click="testSPop">SPop</ion-button>
         <ion-button @click="testStoryPop">StoryPop</ion-button>
-        <ion-button @click="pdfgen">PDF</ion-button>
         -->
 
+        <ion-card color="light" v-if="mdLoaded">
+        <article>
+        <ion-card-content class="mdWrap">
+          <div v-html="getMd" class="tutor">
+        </div>
+        </ion-card-content>
+      </article>
+      </ion-card>
+
+      <!-- 
       <ion-card color="light" v-for="(s,i) in items.en" :key="i">
         <article>
         <ion-card-header>
@@ -25,6 +34,8 @@
         </ion-card-content>
       </article>
       </ion-card>
+
+      -->
     </div>
     </ion-content>
   </ion-page>
@@ -34,34 +45,6 @@
 import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
 import { IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent } from '@ionic/vue'
 import TitleBar from "@/components/TitleBar.vue"
-
-// --------- testing pdf --------
-import { jsPDF } from "jspdf";
-/*
-*/
-async function pdfgen() {
-
-  // Default export is a4 paper, portrait, using millimeters for units
-  const options = {
-    format: "a4",
-    orientation: "landscape",
-    unit: "mm"
-  }
-  const doc = new jsPDF(options);
-
-  doc.text("Hello world!", 10, 10);
-  doc.text("Hello world!", 10, 20);
-  doc.text("Hello wo  rld!", 10, 30);
-  doc.text("Hello world!", 10, 40);
-  doc.text("Hello world!", 10, 50);
-  doc.text("Hello world!", 10, 60);
-
-  doc.addPage(options)
-  const img = "http://localhost:8080/img/info/Data%2C_Information%2C_Knowledge%2C_and_Wisdom_-rtwGimli_keynote_by_%40Nora3000_-viznotes_%2842038113741%29.jpg"
-  doc.addImage(img, "JPG", 10,10, 160, 80, "IMG")
-  doc.save("a4.pdf");
-
-}
 
 
 // ------- testing ----
@@ -74,6 +57,8 @@ import CfgSelectParms from "@/components/popovers/CfgSelectPopover.vue"
 
 import StoryPop from "@/components/popovers/StoryPopover.vue"
 
+import { marked } from "marked"
+import * as DOMPurify from 'dompurify'
 
 import eventBus from '@/services/eventBus';
 const cfgSignal = "cfgsig"
@@ -220,18 +205,83 @@ import { ref, onMounted, onBeforeMount, computed } from "vue"
 import { useI18n } from 'vue-i18n'
 const { t, locale } = useI18n({ useScope: 'global' })
 
-import items from "../assets/tutor/tutorials.json"
-const item = (idx,id) => {
+//import items from "../assets/tutor/tutorials.json"
+import mdTutor from "../assets/tutor/tutorials-md.json"
+
+/*
+const mdItem = (idx,id) => {
   //console.log(idx,id,locale.value)
   //console.log(storyItems[locale.value])
-  const text = items[locale.value][idx][id]
+  const text = mdItems[locale.value][idx][id]
   return text
 }
+*/
+const mdContent = ref({en:"",de:""})
+const mdLoaded = ref(false)
+onMounted(async () => {
+  const langs = Object.keys(mdTutor)
+  for (const l of langs ) {
+    console.log("Lang:",l)
+    const htmlRaw = await marked.parse(mdTutor[l])
+    mdContent.value[l] = await DOMPurify.sanitize(htmlRaw);
+    //console.log(mdContent.value[l])
+  }
+  mdLoaded.value = true
+})
+
+const getMd = computed(()=>{
+  return mdContent.value[locale.value]
+})
 
 </script>
 
+<style>
+
+.tutor h2, .tutor h3 {
+  color: var(--ion-color-primary);
+  text-align: center;
+  font-size:120%;
+  margin-bottom: 1rem;
+  font-weight: bold;
+}
+
+.tutor h4 {
+  color: var(--ion-color-primary);
+  text-align: left;
+  font-size:120%;
+  margin-bottom: .5rem;
+}
+
+.tutor img {
+  width: 100px;
+  height:auto;
+  display: block;
+}
+
+.tutor li img {
+  width:48px;
+  height:auto;
+  display:inline;
+}
+
+.tutor img.large {
+  width:120px;
+  height:auto;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+.tutor img.wide {
+  height: 3rem;
+  width:auto;
+  display:block;
+}
+</style>
+
 <style scoped>
-#container {
+
+  #container {
   text-align: center;
   margin:10px;
   /*
@@ -267,6 +317,13 @@ const item = (idx,id) => {
 
 }
 
+ion-card-content {
+  text-align:left;
+}
+
+h2 {
+  text-align: center;
+}
 
 ion-img {
   height: 150px;

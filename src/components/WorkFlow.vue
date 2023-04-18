@@ -3,8 +3,6 @@ import { ref, computed, onMounted, watch, nextTick } from 'vue'
 
 import cytoscape from "cytoscape"
 
-import { marked } from "marked"
-
 /*
 https://github.com/cytoscape/cytoscape.js-edgehandles
 https://github.com/iVis-at-Bilkent/cytoscape.js-context-menus
@@ -69,6 +67,17 @@ import { nodeFactory } from "@/services/NodeFactory"
 import { NodeTypes } from '@/services/GlobalDefs';
 
 import { IonButtons, IonToolbar } from '@ionic/vue';
+
+// documentation stuff
+import  html2canvas from 'html2canvas'
+// ... for pdf
+import { jsPDF } from "jspdf";
+// ... for markdown
+import { marked } from "marked"
+import * as DOMPurify from 'dompurify'
+import router from "@/router"
+import { PrintStore } from "@/services/PrintStore"
+const printStore = PrintStore()
 
 // --------------------
 // page change on ios modfiy layout. maybe due to animation
@@ -715,24 +724,8 @@ async function flowInit() {
   }
 }
 
-/*
-  const mdText = computed(() => {
-    let t = marked.parse(props.src)
-    if (props.zoom)
-        t = t.replace("<img ","<img class=\"mdimage zoomable\" ")
-    return t
-})
 
-*/
-import * as DOMPurify from 'dompurify'
-import  html2canvas from 'html2canvas'
-import { jsPDF } from "jspdf";
-
-import router from "@/router"
-import { PrintStore } from "@/services/PrintStore"
-const printStore = PrintStore()
-
-const makePdf = async () => {
+const mdDocs = async () => {
   console.log("Make PDF")
   alert("Preparing PDF. Click OK then wait a moment ...")
   // pdf init
@@ -776,6 +769,106 @@ const makePdf = async () => {
   md += "kmkfweklf \n kkwdkwnqd \n"
   md += "## Workflow\n\n"
 
+  if (story.title > "") {
+    md += "## Title: " + story.title + "\n\n"
+    md += "Author: " + story.author + "\n\n"
+    md += "Date: " + story.date + "\n\n"
+    md += "Link: " + story.link + "\n\n"
+    md += story.text + "\n\n"
+  } else {
+    md += "## Title: Story... \n\n"
+    md += "Author: xyz\n\n"
+    md += "Date: 2023-01-01\n\n"
+    md += "Link: \n\n"
+  }
+
+  // get flow image
+  // extent:  { x1, y1, x2, y2, w, h }.
+  await cy.value.fit()
+  const flowWidth = await cy.value.extent().w
+  const flowHeight = await cy.value.extent().h
+  const flowAspect = flowWidth / flowHeight
+  //console.log("Flow aspect:",flowWidth, flowHeight, flowAspect)
+  const wf = await cy.value.png({
+    output: "base64uri",
+    bg: "#ffffff",
+    full:false,
+    scale:1,
+    maxWidth: 1280
+  })
+
+  md += "<img class='docimg' src='" + wf + "'>\n\n"
+  md += "kmkfweklf \n kkwdkwnqd \n"
+  md += "## Output\n\n"
+  md += "kmkfweklf \n kkwdkwnqd \n"
+
+  // get display nodes
+  const displayNodes = nodeList.value.filter(i => i.display)
+  for (const instance of displayNodes) {
+      const divName = instance.id.toUpperCase()
+      const elem = await document.getElementById("DFPLOT-" + divName)
+      // seems to work but is too slow ...
+      const viz = await html2canvas(elem, {logging:false}) //, options)
+      const width = viz.width
+      const height = viz.height
+      const aspect = width/height
+      const h = Math.round(imgWidth/aspect)
+      const dataURL = await viz.toDataURL();
+
+      md += "### " + divName + "\n\n"
+      md += "<img class='docimg' src='" + dataURL + "'>\n\n"
+      md += "kmkfweklf \n kkwdkwnqd \n\n"
+  }
+
+  const html = await marked.parse(md)
+  const htmlClean = await DOMPurify.sanitize(html);
+  // insert html 
+  await printStore.set(htmlClean)
+  // push to print page
+  router.push({
+    name: 'PrintPage'
+  })
+
+}
+
+const makePdf = async () => {
+  console.log("Make PDF")
+  alert("Preparing PDF. Click OK then wait a moment ...")
+  // pdf init
+  // Default export is a4 paper, portrait, using millimeters for units
+  const options = {
+    format: "a4",
+    orientation: "portrait",
+    unit: "mm"
+  }
+  const doc = new jsPDF(options);
+  // Set the font and font size
+  /*
+  base 14 fonts:
+    Courier
+    Courier-Bold
+    Courier-BoldOblique
+    Courier-Oblique
+    Helvetica
+    Helvetica-Bold
+    Helvetica-BoldOblique
+    Helvetica-Oblique
+    Times-Roman
+    Times-Bold
+    Times-Italic
+    Times-BoldItalic
+    Symbol
+    ZapfDingbats
+  */
+  doc.setFont("Helvetica");
+  doc.setFontSize(12);
+
+  const imgWidth = 160
+
+  // get story
+  const story = userStore.getStory()
+
+  // start document
   doc.text("Daten.Cafe", 10, 10);
   const  img = new Image()
   img.src = "/img/logo/datencafe.png"
@@ -790,14 +883,8 @@ const makePdf = async () => {
     // Define the text block and split it into lines using splitTextToSize method
     const text = story.text
     const lines = doc.splitTextToSize(text, imgWidth);
-
     // Add the lines to the PDF document
     doc.text(10, 200, lines);
-    /*
-    story.text.split("\n").forEach((l,i) => {
-      doc.text(l, 10, 200 + i*10);
-    })
-    */
   } else {
     doc.text("Story", 10, 150);
     doc.text("Bla ...", 10, 160);
@@ -821,14 +908,8 @@ const makePdf = async () => {
     maxWidth: 1280
   })
 
-
   doc.text("Flow", 10, 10);
   await doc.addImage(wf, "PNG", 10,20, imgWidth, Math.round(flowHeight/flowAspect))
-
-  md += "<img class='docimg' src='" + wf + "'>\n\n"
-  md += "kmkfweklf \n kkwdkwnqd \n"
-  md += "## Output\n\n"
-  md += "kmkfweklf \n kkwdkwnqd \n"
 
   console.log("Nodes:",nodeList.value.length)
   // get display nodes
@@ -839,7 +920,7 @@ const makePdf = async () => {
       const divName = instance.id.toUpperCase()
       const elem = await document.getElementById("DFPLOT-" + divName)
       // seems to work but is too slow ...
-      const viz = await html2canvas(elem, {logging:"error"}) //, options)
+      const viz = await html2canvas(elem, {logging:false}) //, options)
       const width = viz.width
       const height = viz.height
       const aspect = width/height
@@ -847,32 +928,13 @@ const makePdf = async () => {
       console.log("w,h,a:",width,height,h,aspect)
       const dataURL = await viz.toDataURL();
 
-      md += "### " + divName + "\n\n"
-      md += "<img class='docimg' src='" + dataURL + "'>\n\n"
-      md += "kmkfweklf \n kkwdkwnqd \n\n"
-
       await doc.addPage(options)
       doc.text(divName, 10, 10);
       await doc.addImage(dataURL, "PNG", 10,30, imgWidth,h)
       
   }
-  //console.log(md)
 
-  const html = await marked.parse(md)
-  //console.log(html)
-  const htmlClean = await DOMPurify.sanitize(html);
-  //console.log(htmlClean)
-
-  /*
-  // insert html 
-  await printStore.set(htmlClean)
-  // push to print page
-  router.push({
-    name: 'PrintPage'
-  })
-  */
-
-  doc.save("a4.pdf");
+  doc.save("datencafe-story.pdf");
 
 
 }
