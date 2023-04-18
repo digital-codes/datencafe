@@ -36,15 +36,7 @@ Overall, being data-literate can help you make better decisions in your daily li
 andreas.kugel@ok-lab-karlsruhe.de
 translate the previous statement into german language. use german simplle language
 
-Datenkompetenz bedeutet, dass man Daten verstehen und damit umgehen kann. In der heutigen Welt generieren wir viele Daten. Dies kann Informationen darüber sein, wie wir unsere Telefone nutzen, wie viel wir uns bewegen oder sogar wie viel Geld wir ausgeben. Daten werden auch in vielen Bereichen wie Gesundheitswesen, Wirtschaft und Wissenschaft verwendet.
-
-Durch Datenkompetenz können Sie Daten nutzen, um informierte Entscheidungen zu treffen. Wenn Sie beispielsweise versuchen, Gewicht zu verlieren, können Sie Ihre täglichen Schritte oder Kalorienzufuhr mithilfe einer App verfolgen. Sie können diese Daten verwenden, um zu sehen, ob Sie Fortschritte bei Ihrem Ziel machen.
-
-Datenkompetenz ist auch in Bereichen wie Gesundheitswesen wichtig. Ihr Arzt kann Daten wie Ihren Blutdruck oder Cholesterinspiegel verwenden, um festzustellen, ob Sie einem erhöhten Risiko für bestimmte Krankheiten ausgesetzt sind. Durch das Verständnis dieser Daten können Sie Änderungen im Lebensstil vornehmen, die dazu beitragen können, Ihr Risiko zu verringern.
-
-Datenkompetenz bedeutet nicht, dass Sie ein Mathematikexperte sein müssen. Es geht darum, die Grundlagen zu verstehen, wie Daten funktionieren, wie man Diagramme und Grafiken liest und wie man Daten in einer für Sie sinnvollen Weise interpretiert. Es ist wichtig zu beachten, dass Daten manipuliert oder voreingenommen sein können, daher ist es wichtig, kritisch zu sein, wenn man Daten betrachtet.
-
-Insgesamt kann Ihnen Datenkompetenz helfen, bessere Entscheidungen im täglichen Leben zu treffen und Ihnen helfen, die Welt um Sie herum zu verstehen.
+Datenkompetenz bedeutet, dass man Daten verstehen und damit umgehen kann. In der heutigen Welt generieren wir viele Daten. Dies kann Informationen darüber sein, wie wir unsere Telefone nutzen, wie viel wir uns bewegen oder sogar wie viel Geld wir ausgeben. Daten werden auch in vielen Bereichen wie Gesundheitswesen, Wirtschaft und Wissenschaft verwendet. Durch Datenkompetenz können Sie Daten nutzen, um informierte Entscheidungen zu treffen. Wenn Sie beispielsweise versuchen, Gewicht zu verlieren, können Sie Ihre täglichen Schritte oder Kalorienzufuhr mithilfe einer App verfolgen. Sie können diese Daten verwenden, um zu sehen, ob Sie Fortschritte bei Ihrem Ziel machen. Datenkompetenz ist auch in Bereichen wie Gesundheitswesen wichtig. Ihr Arzt kann Daten wie Ihren Blutdruck oder Cholesterinspiegel verwenden, um festzustellen, ob Sie einem erhöhten Risiko für bestimmte Krankheiten ausgesetzt sind. Durch das Verständnis dieser Daten können Sie Änderungen im Lebensstil vornehmen, die dazu beitragen können, Ihr Risiko zu verringern. Datenkompetenz bedeutet nicht, dass Sie ein Mathematikexperte sein müssen. Es geht darum, die Grundlagen zu verstehen, wie Daten funktionieren, wie man Diagramme und Grafiken liest und wie man Daten in einer für Sie sinnvollen Weise interpretiert. Es ist wichtig zu beachten, dass Daten manipuliert oder voreingenommen sein können, daher ist es wichtig, kritisch zu sein, wenn man Daten betrachtet. Insgesamt kann Ihnen Datenkompetenz helfen, bessere Entscheidungen im täglichen Leben zu treffen und Ihnen helfen, die Welt um Sie herum zu verstehen.
 andreas.kugel@ok-lab-karlsruhe.de
 translate the first and the second statements from abone into german
 
@@ -79,3 +71,10 @@ In der heutigen Zeit gibt es viele Möglichkeiten, Daten zu sammeln, sei es durc
 Datenkompetenz ist auch wichtig, um wissenschaftliche Ergebnisse zu kommunizieren und zu vermitteln. Durch die Darstellung von Daten in Diagrammen, Grafiken oder anderen visuellen Formaten können komplexe Ergebnisse einfach und verständlich dargestellt werden.
 
 Insgesamt ist Datenkompetenz ein wichtiger Aspekt der wissenschaftlichen Bildung und Teilhabe. Es ermöglicht es Wissenschaftlern, fundierte wissenschaftliche Erkenntnisse zu gewinnen, diese zu kommunizieren und auf dieser Basis weitere Forschung durchzuführen
+
+
+
+Datenkompetenz spielt eine wichtige Rolle im politischen Kontext. In der heutigen Zeit werden viele politische Entscheidungen auf Grundlage von Daten getroffen, sei es bei Wahlen, öffentlichen Umfragen oder der Bewertung von Regierungsmaßnahmen. Durch Datenkompetenz kann die Bevölkerung die Datengrundlage von politischen Entscheidungen verstehen und bewerten. Dadurch können sie besser entscheiden, welche Politiker oder Parteien ihre Meinung vertreten und welche Maßnahmen unterstützt oder abgelehnt werden sollten. Datenkompetenz ermöglicht es auch, Fehlinformationen und irreführende Daten von politischen Akteuren zu erkennen und zu widerlegen. Datenkompetenz ist auch in der Wissenschaft ein wichtiger Aspekt. Daten werden in vielen Bereichen der Wissenschaft gesammelt und analysiert, sei es in der Medizin, der Biologie, der Physik oder anderen Disziplinen.
+
+
+Open-Source No-Code bieten einen niedrigschwelligen Zugang zu modernen Datenverabeitungsverfahren. Daten.Cafe ermöglicht diesen Zugang für alle, ohne Installation und ohne Kommerz.

@@ -15,7 +15,8 @@
             <ion-label class="attribution">{{item.attribution}}</ion-label>
             </div>
             <ion-card-subtitle>
-              {{ infoItem(i,"date") }} 
+              <p>{{ infoItem(i,"date") }} </p>
+              <a v-if='infoItem(i,"link") > ""' :href='infoItem(i,"link")' target="_blank" >{{ infoItem(i,"link")  }}</a>
             </ion-card-subtitle>
           </ion-card-header>
 

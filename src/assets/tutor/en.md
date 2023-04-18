@@ -1,5 +1,7 @@
 ## Application Structure
 
+**Note: Contains automatically translated content**
+
 There are 7 pages. You might be most interested in [stories](/instructions#stories_), [tutorial](/instructions#tutorial_) and [workspace](/instructions#workspace_), but we will decribe all in order as they appear in the menu.
 
 <!-- 
@@ -18,31 +20,31 @@ There are 7 levels
 ### About Daten.Cafe
 
 <img src="/img/tutor/coffee.png" class="large">
-cwvevverw
 
+A brief introduction to the goals and the intended audience of Daten.Cafe
 
 ### Open Data
 
 <img src="/img/tutor/opendata.png" class="large">
 
-
-csdadsv
-
+Introduction to and overview of Open-Data concepts, data sources and applications. This sections is still completely missing, sorry.
 
 ##### Stories_
 ### Stories
 
 <img src="/img/tutor/stories.png" class="large">
 
-cswevwv
+Data stories and examples. We have only one useable story yet, try it out. 
+
+Create your own storied and share with your friends and collegues. Just pass on the file you can download from the workspace.
+
 
 ##### Tutorial_
 ### Tutorial
 
 <img src="/img/tutor/tutorial.png" class="large">
 
-scev
-
+The tutorial section. Your are right here ...
 
 ##### Workspace_
 ### Workspace
@@ -136,14 +138,38 @@ you may share it with other e.g. by email. We also collect interesting stories. 
 
 <img src="/img/tutor/advanced.png" class="large">
 
-ceev
-
+Collection of some ideas on how to proceed once you have enjoyed some stories.
 
 ### Account
 
 <img src="/img/tutor/account.png" class="large">
 
-evev
+Normally, you don't need to login to use the **Daten.Cafe** application
+
+#### **HOWEVER !!!** 
+
+there is a fundamental problem with all browser-based data tools
+
+**CORS: Cross-Origin-Resource-Sharing**
+
+Let's explain
+
+ * You access this application from https://daten.cafe
+ * You create a flow which wants to fetch some data e.g. from https://transparenz.karlsruhe.de/dataset/cc50eb96-6c3d-4d6f-9dcd-c56c4969ff59/resource/ea8303b4-0494-4f95-b624-f695753d1a2c/download/altersstruktur-der-bevolkerung-65-bis-unter-75-jahrige-nach-geschlecht.csv 
+ * This data is kept on a so called "open-data protal" and should therefore for freely accessible to anyone. 
+ * Now, your browser (Firefox, Safari, Chrome, whatsoever) detects that this is a different domain than the one you loaded the application from.
+ * This fact triggers the CORS mechanism:
+  * * Instead of just saying: "hey, give me the data" your browser says "Hello, I'm Daten.Cafe and I want to know if you would give the data to me if I were asking".  Unfortunately, many servers do not understand polite questions. As a result, we don't get access, although the server is perfectly fine with providing its data to anybody - provided he doesn't ask lengthy questions.
+ * There are 2 solutions to circumvent this problem:
+  * * Using a CORS-proxy server. This means, we send our request to another server which we are good friends with and ask it to get the data for us. This can be done in the background - provided your are good friends with the proxy server. And for this you will need the account and log in. Normally we will provide registration once you do a workshop with us.
+  * * We can force the browser to download the requested file to your machine locally (btw, this is what happens when you click on the link above). Once that is done, you can upload the file to your workflow. This is less convenient, as it requires manual interactions from your (download the file and upload the file). But on the other hand, you can do what you want and Daten.Cafe is an educational tool in the first place, not a high-end data-science application. So you're good anyway.
+
+CORS is a good feature in principle. It's just that many servers are not prepared to receive "polite" data requests from browsers. They didn't do this in the old days ...
+
+
+
+
+
 
 
 

@@ -1,24 +1,24 @@
 {
   "en": [
     {
-      "title":"What",
+      "title":"Daten.Cafe - Data Literacy",
       "icon":"",
       "image":"/img/info/Data%2C_Information%2C_Knowledge%2C_and_Wisdom_-rtwGimli_keynote_by_%40Nora3000_-viznotes_%2842038113741%29.jpg",
       "alt":"Image",
       "attribution":"Longlivetheux, CC BY-SA 4.0 <https://creativecommons.org/licenses/by-sa/4.0>, via Wikimedia Commons",
-      "body":"This story could feature a city that released open data on public transportation schedules, routes, and delays. Local app developers were then able to create new tools and apps that made it easier for people to navigate the city's transportation system, resulting in a more efficient and convenient commute for residents.",
-      "date":"2023/02/01",
-      "links":"123"
+      "body":"Needs translation from German.",
+      "date":"2023/04/18",
+      "link":"https://github.com/digital-codes/datencafe"
     },
     {
-      "title":"Who",
+      "title":"Who? All of us!",
       "icon":"",
       "image":"/img/info/Movie_audience_%281924%29.svg",
       "alt":"Image",
       "attribution":"Giulia Forsythe, CC BY 2.0 <https://creativecommons.org/licenses/by/2.0>, via Wikimedia Commons",
       "body":"This story could highlight a community that used open data on air and water quality to monitor pollution levels in their area. Armed with this information, they were able to take action to reduce pollution and improve the health of their community.",
       "date":"2023/02/01",
-      "links":"123"
+      "link":""
     },
     {
       "title":"Why",
@@ -28,7 +28,7 @@
       "attribution":"Vusi vilanculos, CC BY-SA 4.0 <https://creativecommons.org/licenses/by-sa/4.0>, via Wikimedia Commons",
       "body":"This story could focus on how open data was used to coordinate disaster response efforts in the wake of a natural disaster. For example, communities could use open data to track the location and availability of emergency supplies, map out evacuation routes, and identify areas that were particularly vulnerable to damage.",
       "date":"2023/02/01",
-      "links":"123"
+      "link":""
     },
     {
       "title":"Imprint",
@@ -36,9 +36,9 @@
       "image":"/img/info/Medieval_Seal_Matrix_imprint_%28FindID_10073%29.jpg",
       "alt":"Image",
       "attribution":"North Lincolnshire Museum, CC BY 2.0 <https://creativecommons.org/licenses/by/2.0>, via Wikimedia Commons",
-      "body":"This story could focus on how open data was used to coordinate disaster response efforts in the wake of a natural disaster. For example, communities could use open data to track the location and availability of emergency supplies, map out evacuation routes, and identify areas that were particularly vulnerable to damage.",
+      "body":"Not commercial.",
       "date":"2023/02/01",
-      "links":"123"
+      "link":""
     },
     {
       "title":"GDPR",
@@ -46,31 +46,31 @@
       "image":"/img/info/GDPR%2C_rappresentazione_grafica.jpg",
       "alt":"Image",
       "attribution":"Andrea Novello, CC BY-SA 4.0 <https://creativecommons.org/licenses/by-sa/4.0>, via Wikimedia Commons",
-      "body":"This story could focus on how open data was used to coordinate disaster response efforts in the wake of a natural disaster. For example, communities could use open data to track the location and availability of emergency supplies, map out evacuation routes, and identify areas that were particularly vulnerable to damage.",
+      "body":"No tracking cookies. Stores data in your browser (essential and you'd expect that). No proliferation. Beware: use at your own risk. Large data volumes might crash your browser.",
       "date":"2023/02/01",
-      "links":"123"
+      "link":""
     }
   ],
   "de": [
     {
-      "title":"Was ist das?",
+      "title":"Daten.Cafe - Datenkompetenz",
       "icon":"",
       "image":"",
       "alt":"Bild",
       "attribution":"",
-      "body":"This story could feature a city that released open data on public transportation schedules, routes, and delays. Local app developers were then able to create new tools and apps that made it easier for people to navigate the city's transportation system, resulting in a more efficient and convenient commute for residents.",
-      "date":"2023/02/01",
-      "links":"123"
+      "body":"Daten.Cafe will auf einfache Art grundlegende Kenntnisse in Datenkompetenz vermitteln. Freie Zugänglichkeit zur Anwendung und Austauschbarkeit sind wesentliche Konzepte. Die Anwendung ist nicht mobile-first, aber mobil tauglich und erlaubt das Erlernen und Üben der Konzepte auch auf (modernen) Smartphones. Datenkompetenz bedeutet, dass man Daten verstehen und damit umgehen kann. Es geht darum, wie Daten in verschiedenen Kontexten verwendet werden können, um informierte Entscheidungen zu treffen. Data Literacy ist eine Fähigkeit, die jeder haben sollte, da Daten in vielen Bereichen unseres Lebens eine wichtige Rolle spielen. In der heutigen Welt erzeugen wir viele Daten. Dies kann Informationen darüber sein, wie wir unsere Telefone nutzen, wie viel wir uns bewegen oder sogar wie viel Geld wir ausgeben. Daten werden auch in vielen Bereichen wie Gesundheitswesen, Wirtschaft und Wissenschaft verwendet. Durch Datenkompetenz können Sie Daten nutzen, um informierte Entscheidungen zu treffen. Wenn Sie beispielsweise versuchen, Gewicht zu verlieren, können Sie Ihre täglichen Schritte oder Kalorienzufuhr mithilfe einer App verfolgen. Sie können diese Daten verwenden, um zu sehen, ob Sie Fortschritte bei Ihrem Ziel machen. Datenkompetenz ist auch in Bereichen wie Gesundheitswesen wichtig. Ihr Arzt kann Daten wie Ihren Blutdruck oder Cholesterinspiegel verwenden, um festzustellen, ob Sie einem erhöhten Risiko für bestimmte Krankheiten ausgesetzt sind. Durch das Verständnis dieser Daten können Sie Änderungen im Lebensstil vornehmen, die dazu beitragen können, Ihr Risiko zu verringern.",
+      "date":"2023/04/18",
+      "link":"https://github.com/digital-codes/datencafe"
     },
     {
-      "title":"Für wen?",
+      "title":"Für wen? Für uns alle!",
       "icon":"",
       "image":"",
       "alt":"Bild",
       "attribution":"",
-      "body":"This story could highlight a community that used open data on air and water quality to monitor pollution levels in their area. Armed with this information, they were able to take action to reduce pollution and improve the health of their community.",
+      "body":"Datenkompetenz spielt eine wichtige Rolle im politischen Kontext. In der heutigen Zeit werden viele politische Entscheidungen auf Grundlage von Daten getroffen, sei es bei Wahlen, öffentlichen Umfragen oder der Bewertung von Regierungsmaßnahmen. Durch Datenkompetenz kann die Bevölkerung die Datengrundlage von politischen Entscheidungen verstehen und bewerten. Dadurch können sie besser entscheiden, welche Politiker oder Parteien ihre Meinung vertreten und welche Maßnahmen unterstützt oder abgelehnt werden sollten. Datenkompetenz ermöglicht es auch, Fehlinformationen und irreführende Daten von politischen Akteuren zu erkennen und zu widerlegen. Datenkompetenz ist auch in der Wissenschaft ein wichtiger Aspekt. Daten werden in vielen Bereichen der Wissenschaft gesammelt und analysiert, sei es in der Medizin, der Biologie, der Physik oder anderen Disziplinen. Datenkompetenz bedeutet nicht, dass Sie ein Mathematikexperte sein müssen. Es geht darum, die Grundlagen zu verstehen, wie Daten funktionieren, wie man Diagramme und Grafiken liest und wie man Daten in einer für Sie sinnvollen Weise interpretiert. Es ist wichtig zu beachten, dass Daten manipuliert oder voreingenommen sein können, daher ist es wichtig, kritisch zu sein, wenn man Daten betrachtet. Insgesamt kann Ihnen Datenkompetenz helfen, bessere Entscheidungen im täglichen Leben zu treffen und Ihnen helfen, die Welt um Sie herum zu verstehen.",
       "date":"2023/02/01",
-      "links":"123"
+      "link":""
     },
     {
       "title":"Warum?",
@@ -78,9 +78,9 @@
       "image":"",
       "alt":"Bild",
       "attribution":"",
-      "body":"This story could focus on how open data was used to coordinate disaster response efforts in the wake of a natural disaster. For example, communities could use open data to track the location and availability of emergency supplies, map out evacuation routes, and identify areas that were particularly vulnerable to damage.",
+      "body":"Datenkompetenz ist wichtig für die persönliche und berufliche Entwicklung. In vielen Arbeitsbereichen sind Datenanalyse- und Visualisierungsfähigkeiten zunehmend gefragt, und eine gute Datenkompetenz kann sich als wertvolles Asset erweisen. Darüber hinaus kann eine bessere Datenkompetenz dazu beitragen, Probleme und Herausforderungen in der Gesellschaft besser zu verstehen und anzugehen. Es ist daher wichtig, dass die breite Öffentlichkeit Zugang zu Datenkompetenz-Trainings und -Ressourcen hat. Regierungen, Unternehmen und gemeinnützige Organisationen sollten gemeinsam daran arbeiten, die Datenkompetenz in der Gesellschaft zu fördern und sicherzustellen, dass jeder Mensch Zugang zu den Werkzeugen und Ressourcen hat, die er benötigt, um datenkompetent zu werden. Insgesamt ist Datenkompetenz ein wichtiger Aspekt der modernen Welt und eine notwendige Fähigkeit für jeden Menschen, der in der heutigen Gesellschaft erfolgreich sein möchte.",
       "date":"2023/02/01",
-      "links":"123"
+      "link":""
     },
     {
       "title":"Impressum",
@@ -88,9 +88,9 @@
       "image":"",
       "alt":"Bild",
       "attribution":"",
-      "body":"This story could focus on how open data was used to coordinate disaster response efforts in the wake of a natural disaster. For example, communities could use open data to track the location and availability of emergency supplies, map out evacuation routes, and identify areas that were particularly vulnerable to damage.",
+      "body":"Nicht kommerziell.",
       "date":"2023/02/01",
-      "links":"123"
+      "link":""
     },
     {
       "title":"DSGVO",
@@ -98,9 +98,9 @@
       "image":"",
       "alt":"Bild",
       "attribution":"",
-      "body":"This story could focus on how open data was used to coordinate disaster response efforts in the wake of a natural disaster. For example, communities could use open data to track the location and availability of emergency supplies, map out evacuation routes, and identify areas that were particularly vulnerable to damage.",
+      "body":"Keine Tracking-Cookies. Speichern von Daten im Browser (muss sein). Keine Weitergabe. Achtung: Nutzen der Anwendung auf eigene Gefahr. Große Datenmengen können den Browser zum Absturz bringen.",
       "date":"2023/02/01",
-      "links":"123"
+      "link":""
     }
   ]
 }

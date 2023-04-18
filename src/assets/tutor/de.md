@@ -22,15 +22,16 @@ There are 7 levels
 ### Über Daten.Cafe
 
 <img src="/img/tutor/coffee.png" class="large">
-cwvevverw
+
+Eine kurze Einführung in die Ziele und die Zielgruppe von Daten.Cafe
+Open Data
 
 
 ### Offene Daten
 
 <img src="/img/tutor/opendata.png" class="large">
 
-
-csdadsv
+Einführung in und Überblick über Open-Data-Konzepte, Datenquellen und Anwendungen. Diese Sektion fehlt noch vollständig, tut uns leid.
 
 <!-- use H5 with underscore for link target -->
 
@@ -39,14 +40,17 @@ csdadsv
 
 <img src="/img/tutor/stories.png" class="large">
 
-cswevwv
+
+Daten-Geschichten und Beispiele. Wir haben bisher nur eine verwendbare Geschichte, probiere sie aus.
+
+Erstelle deine eigenen Geschichten und teile sie mit Freunden und Kollegen. Gib einfach die Datei weiter, die du aus dem Arbeitsbereich herunterladen kannst.
 
 ##### Tutorial_
 ### Anleitung
 
 <img src="/img/tutor/tutorial.png" class="large">
 
-scev
+Die Tutorial-Sektion. Du bist genau hier ...
 
 ##### Workspace_
 ### Arbeitsbereich
@@ -140,16 +144,32 @@ Scrollen Sie im Visualisierungsfenster, um alle Diagramme zu sehen.
 
 <img src="/img/tutor/advanced.png" class="large">
 
-ceev
-
+Ein paar Ideen, was für Dich interessant sein könnte, wenn Du Dich schon mit ein paar Datengeschichten vergnügt hast.
 
 ### Zugang
 
 <img src="/img/tutor/account.png" class="large">
 
-evev
+Normalerweise müssen Sie sich nicht anmelden, um die **Daten.Cafe** Anwendung zu verwenden.
 
+#### **ABER !!!** 
 
+Es gibt ein grundlegendes Problem mit allen browserbasierten Datentools
 
+**CORS: Cross-Origin-Resource-Sharing**
+
+Die Erklärung
+
+  * Sie greifen auf diese Anwendung über https://daten.cafe zu
+  * Sie erstellen einen Workflow, der einige Daten abrufen möchte, z.B. von https://transparenz.karlsruhe.de/dataset/cc50eb96-6c3d-4d6f-9dcd-c56c4969ff59/resource/ea8303b4-0494-4f95-b624-f695753d1a2c/download/altersstruktur-der-bevolkerung-65-bis-unter-75-jahrige-nach-geschlecht.csv
+  * Diese Daten werden auf einem sogenannten "Open-Data-Portal" aufbewahrt und sollten daher für jeden frei zugänglich sein.
+  * Ihr Browser (Firefox, Safari, Chrome, was auch immer) erkennt nun, dass dies eine andere Domäne ist als die, von der aus Sie die Anwendung geladen haben.
+  * Diese Tatsache löst den CORS-Mechanismus aus:
+  * * Anstatt nur zu sagen: "Hey, gib mir die Daten", sagt Ihr Browser "Hallo, ich bin Daten.Cafe und ich möchte wissen, ob Sie mir die Daten geben würden, wenn ich danach fragen würde". Leider verstehen viele Server höfliche Fragen nicht. Als Ergebnis bekommen wir keinen Zugang, obwohl der Server durchaus bereit ist, seine Daten jedem zur Verfügung zu stellen - vorausgesetzt er stellt keine langen Fragen.
+  * Es gibt 2 Lösungen, um dieses Problem zu umgehen:
+  * * Verwenden eines CORS-Proxy-Servers. Das bedeutet, dass wir unsere Anfrage an einen anderen Server senden, mit dem wir gut befreundet sind, und ihn bitten, die Daten für uns zu besorgen. Dies kann im Hintergrund geschehen - vorausgesetzt, Sie sind gut mit dem Proxy-Server befreundet. Und dafür benötigen Sie das Konto und die Anmeldung. Normalerweise bieten wir die Registrierung an, sobald Sie einen Workshop bei uns gemacht haben.
+  * * Wir können den Browser zwingen, die angeforderte Datei lokal auf Ihrem Rechner herunterzuladen (übrigens genau das, was passiert, wenn Sie auf den obigen Link klicken). Sobald dies erledigt ist, können Sie die Datei in Ihren Workflow hochladen. Dies ist weniger bequem, da es manuelle Interaktionen von Ihnen erfordert (Herunterladen der Datei und Hochladen der Datei). Aber andererseits können Sie tun, was Sie wollen, und Daten.Cafe ist in erster Linie ein Bildungswerkzeug, keine High-End-Datenwissenschaftsanwendung. Also sind Sie so oder so gut aufgehoben.
+
+CORS ist grundsätzlich eine gute Funktion. Es ist nur so, dass viele Server nicht darauf vorbereitet sind, "höfliche" Datenanfragen von Browsern zu erhalten. Das wurde früher nicht gemacht...
 
 

@@ -357,6 +357,11 @@ use h5 hidden with underscore
 
 <style scoped>
 
+.tutor {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 996px;  
+}
   #container {
   text-align: center;
   margin:10px;
