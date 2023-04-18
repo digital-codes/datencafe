@@ -7,6 +7,9 @@ import Print from '@/views/PrintPage.vue';
 // don't load pages which use pinia here. only in below
 //import WorkPage from '@/views/WorkPage.vue';
 
+//import PrintPage from "@/views/PrintPage.vue"
+
+
 export const routes: Array<RouteRecordRaw> = [
   {
     path: '',
@@ -48,12 +51,10 @@ export const routes: Array<RouteRecordRaw> = [
     component: () => import ('@/views/AdvancedPage.vue'),
   },
   {
-    name: "Print",
     path: '/print',
-    component: Print,
-    // add some meta info
-    meta: {icon:"fa-priint",label:"Print"}
-  },
+    name: 'PrintPage',
+    component: () => import('@/views/PrintPage.vue')
+  }  
 ]
 
 const router = createRouter({

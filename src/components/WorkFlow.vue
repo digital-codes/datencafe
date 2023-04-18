@@ -728,9 +728,13 @@ import * as DOMPurify from 'dompurify'
 import  html2canvas from 'html2canvas'
 import { jsPDF } from "jspdf";
 
+import router from "@/router"
+import { PrintStore } from "@/services/PrintStore"
+const printStore = PrintStore()
+
 const makePdf = async () => {
   console.log("Make PDF")
-  alert("PDF not complete")
+  alert("Preparing PDF. Click OK then wait a moment ...")
   // pdf init
   // Default export is a4 paper, portrait, using millimeters for units
   const options = {
@@ -739,6 +743,26 @@ const makePdf = async () => {
     unit: "mm"
   }
   const doc = new jsPDF(options);
+  // Set the font and font size
+  /*
+  base 14 fonts:
+    Courier
+    Courier-Bold
+    Courier-BoldOblique
+    Courier-Oblique
+    Helvetica
+    Helvetica-Bold
+    Helvetica-BoldOblique
+    Helvetica-Oblique
+    Times-Roman
+    Times-Bold
+    Times-Italic
+    Times-BoldItalic
+    Symbol
+    ZapfDingbats
+  */
+  doc.setFont("Helvetica");
+  doc.setFontSize(12);
 
   const imgWidth = 160
 
@@ -762,9 +786,18 @@ const makePdf = async () => {
     doc.text("Author: " + story.author, 10, 160);
     doc.text("Date: " + story.date, 10, 170);
     doc.text("Link: " + story.link, 10, 180);
+
+    // Define the text block and split it into lines using splitTextToSize method
+    const text = story.text
+    const lines = doc.splitTextToSize(text, imgWidth);
+
+    // Add the lines to the PDF document
+    doc.text(10, 200, lines);
+    /*
     story.text.split("\n").forEach((l,i) => {
       doc.text(l, 10, 200 + i*10);
     })
+    */
   } else {
     doc.text("Story", 10, 150);
     doc.text("Bla ...", 10, 160);
@@ -791,7 +824,6 @@ const makePdf = async () => {
 
   doc.text("Flow", 10, 10);
   await doc.addImage(wf, "PNG", 10,20, imgWidth, Math.round(flowHeight/flowAspect))
-  await doc.addPage(options)
 
   md += "<img class='docimg' src='" + wf + "'>\n\n"
   md += "kmkfweklf \n kkwdkwnqd \n"
@@ -819,9 +851,9 @@ const makePdf = async () => {
       md += "<img class='docimg' src='" + dataURL + "'>\n\n"
       md += "kmkfweklf \n kkwdkwnqd \n\n"
 
+      await doc.addPage(options)
       doc.text(divName, 10, 10);
       await doc.addImage(dataURL, "PNG", 10,30, imgWidth,h)
-      await doc.addPage(options)
       
   }
   //console.log(md)
@@ -830,17 +862,15 @@ const makePdf = async () => {
   //console.log(html)
   const htmlClean = await DOMPurify.sanitize(html);
   //console.log(htmlClean)
-  const style = '<style>\
-  .doclogo {width:30%;margin-left:auto;margin-right:auto;}\
-  .docimg {width:90%;margin-left:auto;margin-right:auto;}\
-  @media print {.docimg {page-break-after:always;} }\
-  </style>'
-  const htmlStyled = style + htmlClean
+
+  /*
   // insert html 
-  //pdfContent.value = htmlStyled
-  //pdfWindow.value = true
-  //const print = document.getElementById("print")
-  //print.innerHTML = htmlStyled
+  await printStore.set(htmlClean)
+  // push to print page
+  router.push({
+    name: 'PrintPage'
+  })
+  */
 
   doc.save("a4.pdf");
 
