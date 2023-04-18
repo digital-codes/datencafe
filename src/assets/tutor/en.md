@@ -51,6 +51,8 @@ pane to the right or bottom. You create your workflow in the flow editor.
 
 #### Toolbar
 
+The toolbar provides you with all required utilities, in particular:
+
 <img src="/img/tutor/toolbar-empty.png" class="wide">
 
   * ![](/img/tutor/help.png) Help
@@ -103,16 +105,15 @@ You might be asked which port to connect to. Select A or B
 ![](/img/tutor/edge-connect-final.png)
 
 When done, you should see a new connection
-![](/img/tutor/edge-connect-in-progress.png)
+![](/img/tutor/edge-connect-finish.png)
 
 When you add a visualization element (one of the *plot* items), it will be added to the visualization pane.
 You can match flow items and visualization items by their names.
 
-A very small flow would look like so, for example:
+A very small flow with two output elements would look like so, for example:
 
 ![](/img/tutor/miniflow.png)
 
-With two output elements.
 
 ![](/img/tutor/chartplot.png)
 

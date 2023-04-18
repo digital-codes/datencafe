@@ -44,87 +44,91 @@ scev
 
 ### Workspace
 
+**Achtung: Maschinelle Übersetzung**
+
 <img src="/img/tutor/workspace.png" class="large">
 
-the workspace has 2 regions. The flow editor to the left or top (on mobile) and the visualization
-pane to the right or bottom. You create your workflow in the flow editor.
+Der Arbeitsbereich hat 2 Felder. Der Flow-Editor befindet sich links oder oben (auf Mobilgeräten) und das Visualisierungsfenster befindet sich rechts oder unten. Sie erstellen Ihren Workflow im Flow-Editor.
 
-#### Toolbar
+#### Werkzeugleiste
+
+IN der Werkzeugleiste finden Sie alles Nötige, insbesondere:
 
 <img src="/img/tutor/toolbar-empty.png" class="wide">
 
-  * ![](/img/tutor/help.png) Help
-  * ![](/img/tutor/editStory.png) Edit story
-  * ![](/img/tutor/upload.png) Upload workflow 
-  * ![](/img/tutor/download.png) Download workflow 
-  * ![](/img/tutor/trash.png) Clear 
-  * ![](/img/tutor/newItem.png) New workflow item 
+  * ![](/img/tutor/help.png) Hilfe
+  * ![](/img/tutor/editStory.png) Geschichte bearbeiten
+  * ![](/img/tutor/upload.png) Workflow hochladen
+  * ![](/img/tutor/download.png) Workflow herunterladen 
+  * ![](/img/tutor/trash.png) Alles löschen 
+  * ![](/img/tutor/newItem.png) Neues Workflow Element 
+
 
 #### Flow
 
-On your first visit you might want to start with an example story from the [story page](/stories). 
-Download a story to your computer and upload it to the Workspace with the toolbar *upload*
+Bei Ihrem ersten Besuch möchten Sie möglicherweise mit einer Beispielgeschichte von der Story-Seite beginnen. Laden Sie eine Geschichte auf Ihren Computer herunter und laden Sie sie mit der Symbolleiste hochladen in den Workspace hoch.
 
-This is how story1 flow looks like: ![](/stories/story1.png)
+So sieht der Flow von Geschichte 1 aus: ![](/stories/story1.png)
 
-You can inspect and modify the example or start an entirely new flow. (Click the *trash* button for a fresh start.) 
+Sie können das Beispiel überprüfen und ändern oder einen vollständig neuen Flow starten. (Klicken Sie auf *Löschen* für einen Neuanfang.)
 
+Wählen Sie Elemente aus der Symbolleiste Neues Element. Das Element wird im Flow-Bereich angezeigt.
+Klicken und ziehen Sie Elemente herum.
 
-Select item(s) from toolbar *new item*. Item will appear on the flow pane.
-Click and drag items accros.
+Ziehen Sie den Hintergrund, um die Ansicht zu bewegen. Verwenden Sie die Mausrad-Steuerung oder Touch-Gesten zum Vergrößern und Verkleinern.
 
-Drag the background to move view. Use mouse scroll-ctrl or touch guestures
-to zoom in and out. 
+Langes Klicken auf ein Element öffnet das Kontextmenü. Optionen werden sein:
 
-Long click on item will open context menu. Options will be from 
-
- * Configure
- * Connect
- * Delete
+  * Konfigurieren
+  * Verbinden
+  * Löschen
 
 ![](/img/tutor/node-long-click.png)
 
-Not all options will be available on all items.
 
-Actual configuration options depend on node type, example *random generator*
+Nicht alle Optionen sind für alle Elemente verfügbar.
+
+Die tatsächlichen Konfigurationsoptionen hängen vom Knotentyp ab, zum Beispiel der Zufallsgenerator
 
 ![](/img/tutor/node-config.png)
 
-You may connect first, or configure first, doesn't matter. 
 
-Click *connect* to start a connection. Move the mouse a bit away from the source node. 
-An intermediate connection line should appear.
+Sie können zuerst verbinden oder zuerst konfigurieren, es spielt keine Rolle.
+
+Klicken Sie auf Verbinden, um eine Verbindung zu starten. Bewegen Sie die Maus ein Stück weg vom Quellknoten. Eine Verbindungsleitung sollte erscheinen.
 
 ![](/img/tutor/edge-connect-in-progress.png)
 
-Move to the target node and click.
 
-You might be asked which port to connect to. Select A or B
+Bewegen Sie sich zum Zielknoten und klicken Sie darauf.
+
+Es wird möglicherweise nach dem zu verbindenden Port gefragt. Wählen Sie A oder B
+
 ![](/img/tutor/edge-connect-final.png)
 
-When done, you should see a new connection
-![](/img/tutor/edge-connect-in-progress.png)
+Wenn Sie fertig sind, sehen Sie eine neue Verbindung
 
-When you add a visualization element (one of the *plot* items), it will be added to the visualization pane.
-You can match flow items and visualization items by their names.
+![](/img/tutor/edge-connect-finish.png)
 
-A very small flow would look like so, for example:
+Wenn Sie ein Visualisierungselement (eines der Plot-Elemente) hinzufügen, wird es dem Visualisierungsbereich hinzugefügt.
+Sie können Flow-Elemente und Visualisierungs-Elemente anhand ihrer Namen abgleichen.
+
+Ein sehr kleiner Flow mit zwei Ausgabe-Elementen würde zum Beispiel so aussehen:
 
 ![](/img/tutor/miniflow.png)
-
-With two output elements.
 
 ![](/img/tutor/chartplot.png)
 
 ![](/img/tutor/tableplot.png)
 
-Scroll in the visualization pane to see more of your charts
 
- * Click ![](/img/tutor/editStory.png) to add a description to your story. 
- * You can download your flow with the story with ![](/img/tutor/download.png). The file contains all information, so
-you may share it with other e.g. by email. We also collect interesting stories. 
-* Check the story page ![](/img/tutor/stories.png)
+Scrollen Sie im Visualisierungsfenster, um mehr Ihrer Diagramme zu sehen.
 
+    Klicken Sie auf ![](/img/t
+
+ * Klicken Sie ![](/img/tutor/editStory.png) um eine Beschreibung für Ihre GEschichte anzulegen
+ * Ihren Workflow mit Geschichte können Sie hier herunterladen: ![](/img/tutor/download.png). In der Datei sind alle Information enthalten und Sie können Sie mit anderen austauschen, z.B. per EMail. Und wir sammeln auch interessante Geschichten. 
+* Schauen SIe auf der Seite mit den Geschichten nach: ![](/img/tutor/stories.png)
 
 
 
