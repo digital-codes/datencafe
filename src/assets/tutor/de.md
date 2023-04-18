@@ -1,5 +1,8 @@
 ## Page Structure
 
+There are 7 pages. You might be most interested in [stories](/instructions#stories), [tutorial](/instructions#tutorial) and [workspace](/instructions#workspace), but we will decribe all in order as they appear in the menu.
+
+<!-- 
 There are 7 levels
 
   * ![](/img/tutor/coffee.png) General Information
@@ -10,6 +13,7 @@ There are 7 levels
   * ![](/img/tutor/advanced.png) Advanced 
   * ![](/img/tutor/account.png) Account 
 
+-->
 
 ### General Information
 
@@ -42,7 +46,8 @@ scev
 
 <img src="/img/tutor/workspace.png" class="large">
 
-sqevewv
+the workspace has 2 regions. The flow editor to the left or top (on mobile) and the visualization
+pane to the right or bottom. You create your workflow in the flow editor.
 
 #### Toolbar
 
@@ -57,7 +62,19 @@ sqevewv
 
 #### Flow
 
-Select item(s) from toolbar (new item)
+On your first visit you might want to start with an example story from the [story page](/stories). 
+Download a story to your computer and upload it to the Workspace with the toolbar *upload*
+
+This is how story1 flow looks like: ![](/stories/story1.png)
+
+You can inspect and modify the example or start an entirely new flow. (Click the *trash* button for a fresh start.) 
+
+
+Select item(s) from toolbar *new item*. Item will appear on the flow pane.
+Click and drag items accros.
+
+Drag the background to move view. Use mouse scroll-ctrl or touch guestures
+to zoom in and out. 
 
 Long click on item will open context menu. Options will be from 
 
@@ -65,9 +82,15 @@ Long click on item will open context menu. Options will be from
  * Connect
  * Delete
 
-![](/img/tutor/node-config.png)
+![](/img/tutor/node-long-click.png)
 
 Not all options will be available on all items.
+
+Actual configuration options depend on node type, example *random generator*
+
+![](/img/tutor/node-config.png)
+
+You may connect first, or configure first, doesn't matter. 
 
 Click *connect* to start a connection. Move the mouse a bit away from the source node. 
 An intermediate connection line should appear.
@@ -82,8 +105,25 @@ You might be asked which port to connect to. Select A or B
 When done, you should see a new connection
 ![](/img/tutor/edge-connect-in-progress.png)
 
+When you add a visualization element (one of the *plot* items), it will be added to the visualization pane.
+You can match flow items and visualization items by their names.
 
+A very small flow would look like so, for example:
 
+![](/img/tutor/miniflow.png)
+
+With two output elements.
+
+![](/img/tutor/chartplot.png)
+
+![](/img/tutor/tableplot.png)
+
+Scroll in the visualization pane to see more of your charts
+
+ * Click ![](/img/tutor/editStory.png) to add a description to your story. 
+ * You can download your flow with the story with ![](/img/tutor/download.png). The file contains all information, so
+you may share it with other e.g. by email. We also collect interesting stories. 
+* Check the story page ![](/img/tutor/stories.png)
 
 
 

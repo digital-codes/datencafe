@@ -1,5 +1,8 @@
 ## Page Structure
 
+There are 7 pages. You might be most interested in [stories](/instructions#stories), [tutorial](/instructions#tutorial) and [workspace](/instructions#workspace), but we will decribe all in order as they appear in the menu.
+
+<!-- 
 There are 7 levels
 
   * ![](/img/tutor/coffee.png) General Information
@@ -10,6 +13,7 @@ There are 7 levels
   * ![](/img/tutor/advanced.png) Advanced 
   * ![](/img/tutor/account.png) Account 
 
+-->
 
 ### General Information
 
@@ -57,6 +61,14 @@ pane to the right or bottom. You create your workflow in the flow editor.
   * ![](/img/tutor/newItem.png) New workflow item 
 
 #### Flow
+
+On your first visit you might want to start with an example story from the [story page](/stories). 
+Download a story to your computer and upload it to the Workspace with the toolbar *upload*
+
+This is how story1 flow looks like: ![](/stories/story1.png)
+
+You can inspect and modify the example or start an entirely new flow. (Click the *trash* button for a fresh start.) 
+
 
 Select item(s) from toolbar *new item*. Item will appear on the flow pane.
 Click and drag items accros.
