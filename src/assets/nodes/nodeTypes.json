@@ -27,6 +27,20 @@
             "info": "Mehr Text für den Tooltip. ieofhiwefhwifhweihfweifh. ndqienfn eiwpf"
         }
     },
+    "loadexcel": {
+        "name": "loadexcel",
+        "icon": "fa-solid fa-coffee",
+        "implemented": true,
+        "thumb": "/img/widgets/XLSFile.png",
+        "en": {
+            "label": "Load Excel file",
+            "info": "More text for a popup or tooltip"
+        },
+        "de": {
+            "label": "Excel Datei laden",
+            "info": "Mehr Text für den Tooltip. ieofhiwefhwifhweihfweifh. ndqienfn eiwpf"
+        }
+    },
     "datainfo": {
         "name": "datainfo",
         "icon": "fa-solid fa-book-atlas",

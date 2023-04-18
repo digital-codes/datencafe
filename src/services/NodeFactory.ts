@@ -3,6 +3,7 @@ import { LinePlot } from '@/classes/LinePlot';
 import { DataInfo } from '@/classes/DataInfo';
 import { BarPlot } from '@/classes/BarPlot';
 import { TablePlot } from '@/classes/TablePlot';
+import { LoadExcel } from '@/classes/LoadExcel';
 import { LoadCsv } from '@/classes/LoadCsv';
 import { LoadJson } from '@/classes/LoadJson';
 import { SelCell } from '@/classes/SelCell';
@@ -42,6 +43,8 @@ export const nodeFactory = async (id: string, type: any) => {
       return await new LoadCsv(id, type)
     case "loadjson":
       return await new LoadJson(id, type)
+    case "loadexcel":
+      return await new LoadExcel(id, type)
 
     /*
 case "scatter":

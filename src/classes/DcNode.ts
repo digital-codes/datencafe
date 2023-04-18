@@ -11,7 +11,7 @@ const providers = PubStore()
 
 // dataframe
 //import * as dfd from 'danfojs/dist/danfojs-browser/src';
-import { DataFrame, concat, merge, toJSON, toCSV } from 'danfojs/dist/danfojs-browser/src';
+import { DataFrame, concat, merge, toJSON, toCSV, readExcel } from 'danfojs/dist/danfojs-browser/src';
 
 // nodeTypes
 //const typeFile = "../assets/nodes/nodeTypes.json"
@@ -42,7 +42,7 @@ export class DcNode {
   static readonly providers = PubStore()
   static readonly signals = Signals
   static readonly pre = PreFixes
-  static readonly dfd = {DataFrame:DataFrame, toJSON : toJSON, toCSV: toCSV, concat: concat, merge: merge} // dfd
+  static readonly dfd = {DataFrame:DataFrame, toJSON : toJSON, toCSV: toCSV, readExcel: readExcel,concat: concat, merge: merge} // dfd
   //static readonly dfd = dfd
   // instance part
   readonly _messaging = eventBus

@@ -1,6 +1,10 @@
-## Page Structure
+## Aufbau der Webanwendung
 
-There are 7 pages. You might be most interested in [stories](/instructions#stories), [tutorial](/instructions#tutorial) and [workspace](/instructions#workspace), but we will decribe all in order as they appear in the menu.
+**Achtung: Enhält maschinelle Übersetzungen**
+
+<!-- use H5 with underscore for link targets -->
+
+Es gibt 7 Seiten. Diese sind besonders interessant: [Geschichten](/instructions#stories_), [Anleitungen](/instructions#tutorial_) und [Arbeitsbereich](/instructions#workspace_). Die Beschreibung folgt der Reihenfolge im Menu.
 
 <!-- 
 There are 7 levels
@@ -15,36 +19,37 @@ There are 7 levels
 
 -->
 
-### General Information
+### Über Daten.Cafe
 
 <img src="/img/tutor/coffee.png" class="large">
 cwvevverw
 
 
-### Open Data
+### Offene Daten
 
 <img src="/img/tutor/opendata.png" class="large">
 
 
 csdadsv
 
+<!-- use H5 with underscore for link target -->
 
-### Stories
+##### Stories_
+### Geschichten
 
 <img src="/img/tutor/stories.png" class="large">
 
 cswevwv
 
-### Tutorial
+##### Tutorial_
+### Anleitung
 
 <img src="/img/tutor/tutorial.png" class="large">
 
 scev
 
-
-### Workspace
-
-**Achtung: Maschinelle Übersetzung**
+##### Workspace_
+### Arbeitsbereich
 
 <img src="/img/tutor/workspace.png" class="large">
 
@@ -110,7 +115,7 @@ Wenn Sie fertig sind, sehen Sie eine neue Verbindung
 
 ![](/img/tutor/edge-connect-finish.png)
 
-Wenn Sie ein Visualisierungselement (eines der Plot-Elemente) hinzufügen, wird es dem Visualisierungsbereich hinzugefügt.
+Wenn Sie ein Visualisierungselement (eines der *Plot*-Elemente) hinzufügen, wird es dem Visualisierungsbereich hinzugefügt.
 Sie können Flow-Elemente und Visualisierungs-Elemente anhand ihrer Namen abgleichen.
 
 Ein sehr kleiner Flow mit zwei Ausgabe-Elementen würde zum Beispiel so aussehen:
@@ -122,9 +127,7 @@ Ein sehr kleiner Flow mit zwei Ausgabe-Elementen würde zum Beispiel so aussehen
 ![](/img/tutor/tableplot.png)
 
 
-Scrollen Sie im Visualisierungsfenster, um mehr Ihrer Diagramme zu sehen.
-
-    Klicken Sie auf ![](/img/t
+Scrollen Sie im Visualisierungsfenster, um alle Diagramme zu sehen.
 
  * Klicken Sie ![](/img/tutor/editStory.png) um eine Beschreibung für Ihre GEschichte anzulegen
  * Ihren Workflow mit Geschichte können Sie hier herunterladen: ![](/img/tutor/download.png). In der Datei sind alle Information enthalten und Sie können Sie mit anderen austauschen, z.B. per EMail. Und wir sammeln auch interessante Geschichten. 
@@ -133,14 +136,14 @@ Scrollen Sie im Visualisierungsfenster, um mehr Ihrer Diagramme zu sehen.
 
 
 
-### Advanced
+### Fortgeschritten
 
 <img src="/img/tutor/advanced.png" class="large">
 
 ceev
 
 
-### Account
+### Zugang
 
 <img src="/img/tutor/account.png" class="large">
 

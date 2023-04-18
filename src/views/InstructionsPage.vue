@@ -237,6 +237,53 @@ const getMd = computed(()=>{
 
 <style>
 
+/* try to compensate fixed header */
+/*
+.tutor h3.anchor {
+    display: block;
+    position: relative;
+    top: 250px;
+    visibility: hidden;
+}
+
+target works, but is initially visible, hidden only after first click
+:target {
+  display: block;
+  position: relative;
+  top: -120px; 
+  visibility: hidden;
+}
+
+use h5 hidden with underscore
+
+*/
+/* */
+
+.tutor h5 {
+  visibility:hidden;
+  height:0px;
+}
+.tutor #stories_ {
+  display: block;
+  position: relative;
+  top: -100px; 
+  visibility: hidden;
+}
+.tutor #tutorial_ {
+  display: block;
+  position: relative;
+  top: -100px; 
+  visibility: hidden;
+}
+.tutor #workspace_ {
+  display: block;
+  position: relative;
+  top: -100px; 
+  visibility: hidden;
+}
+
+
+
 .tutor h2, .tutor h3 {
   color: var(--ion-color-primary);
   text-align: center;
@@ -253,13 +300,41 @@ const getMd = computed(()=>{
 }
 
 .tutor img {
-  width: 100px;
+  width: 200px;
   height:auto;
   display: block;
 }
 
 .tutor li img {
   width:48px;
+  height:auto;
+  display:inline;
+}
+
+.tutor img.large {
+  width:200px;
+  height:auto;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+.tutor img.wide {
+  height: 4rem;
+  width:auto;
+  display:block;
+}
+
+@media screen and (max-width: 996px) {
+
+.tutor img {
+  width: 100px;
+  height:auto;
+  display: block;
+}
+
+.tutor li img {
+  width:32px;
   height:auto;
   display:inline;
 }
@@ -276,6 +351,7 @@ const getMd = computed(()=>{
   height: 3rem;
   width:auto;
   display:block;
+}
 }
 </style>
 

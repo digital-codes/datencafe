@@ -1,6 +1,6 @@
-## Page Structure
+## Application Structure
 
-There are 7 pages. You might be most interested in [stories](/instructions#stories), [tutorial](/instructions#tutorial) and [workspace](/instructions#workspace), but we will decribe all in order as they appear in the menu.
+There are 7 pages. You might be most interested in [stories](/instructions#stories_), [tutorial](/instructions#tutorial_) and [workspace](/instructions#workspace_), but we will decribe all in order as they appear in the menu.
 
 <!-- 
 There are 7 levels
@@ -15,7 +15,7 @@ There are 7 levels
 
 -->
 
-### General Information
+### About Daten.Cafe
 
 <img src="/img/tutor/coffee.png" class="large">
 cwvevverw
@@ -29,12 +29,14 @@ cwvevverw
 csdadsv
 
 
+##### Stories_
 ### Stories
 
 <img src="/img/tutor/stories.png" class="large">
 
 cswevwv
 
+##### Tutorial_
 ### Tutorial
 
 <img src="/img/tutor/tutorial.png" class="large">
@@ -42,6 +44,7 @@ cswevwv
 scev
 
 
+##### Workspace_
 ### Workspace
 
 <img src="/img/tutor/workspace.png" class="large">
@@ -119,12 +122,11 @@ A very small flow with two output elements would look like so, for example:
 
 ![](/img/tutor/tableplot.png)
 
-Scroll in the visualization pane to see more of your charts
+Scroll the visualization pane to see all charts.
 
  * Click ![](/img/tutor/editStory.png) to add a description to your story. 
- * You can download your flow with the story with ![](/img/tutor/download.png). The file contains all information, so
-you may share it with other e.g. by email. We also collect interesting stories. 
-* Check the story page ![](/img/tutor/stories.png)
+ * You can download your flow and story with ![](/img/tutor/download.png). The file contains all information, so
+you may share it with other e.g. by email. We also collect interesting stories. Check the story page ![](/img/tutor/stories.png) to see other work.
 
 
 
