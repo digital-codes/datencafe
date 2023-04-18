@@ -740,42 +740,63 @@ const makePdf = async () => {
   }
   const doc = new jsPDF(options);
 
+  const imgWidth = 160
+
+  // get story
+  const story = userStore.getStory()
+
   // we actually start with markdown
-  /*
   let md = "# Daten.Cafe\n"
-  md += "<img class='doclogo' src='/img/info/BELIEVE_YOUR_SELF.jpg'/>\n\n"
+  md += "<img class='doclogo' src='/img/logo/datencafe.png'/>\n\n"
   md += "## Story\n"
   md += "kmkfweklf \n kkwdkwnqd \n"
   md += "## Workflow\n\n"
-  */
-  const wf = await cy.value.png({
-    output: "base64uri",
-    bg: "#ffffff",
-    maxWidth: 1920
-  })
 
   doc.text("Daten.Cafe", 10, 10);
   const  img = new Image()
   img.src = "/img/logo/datencafe.png"
-  await doc.addImage(img, "PNG", 50,20, 100, 100)
+  await doc.addImage(img, "PNG", 50,20, imgWidth/2, imgWidth/2)
 
-  doc.text("Story", 10, 150);
-  doc.text("Bla ...", 10, 160);
-  doc.text("... bla", 10, 170);
+  if (story.title > "") {
+    doc.text("Title: " + story.title, 10, 150);
+    doc.text("Author: " + story.author, 10, 160);
+    doc.text("Date: " + story.date, 10, 170);
+    doc.text("Link: " + story.link, 10, 180);
+    story.text.split("\n").forEach((l,i) => {
+      doc.text(l, 10, 200 + i*10);
+    })
+  } else {
+    doc.text("Story", 10, 150);
+    doc.text("Bla ...", 10, 160);
+    doc.text("... bla", 10, 170);
+
+  }
   await doc.addPage(options)
+
+  // get flow image
+  // extent:  { x1, y1, x2, y2, w, h }.
+  await cy.value.fit()
+  const flowWidth = await cy.value.extent().w
+  const flowHeight = await cy.value.extent().h
+  const flowAspect = flowWidth / flowHeight
+  console.log("Flow aspect:",flowWidth, flowHeight, flowAspect)
+  const wf = await cy.value.png({
+    output: "base64uri",
+    bg: "#ffffff",
+    full:false,
+    scale:1,
+    maxWidth: 1280
+  })
+
 
   doc.text("Flow", 10, 10);
-  await doc.addImage(wf, "PNG", 10,20, 160, 160)
+  await doc.addImage(wf, "PNG", 10,20, imgWidth, Math.round(flowHeight/flowAspect))
   await doc.addPage(options)
 
-  // both work
-  //md += "![](" + wf + ")\n\n"
-  /*
   md += "<img class='docimg' src='" + wf + "'>\n\n"
   md += "kmkfweklf \n kkwdkwnqd \n"
   md += "## Output\n\n"
   md += "kmkfweklf \n kkwdkwnqd \n"
-  */
 
   console.log("Nodes:",nodeList.value.length)
   // get display nodes
@@ -787,19 +808,24 @@ const makePdf = async () => {
       const elem = await document.getElementById("DFPLOT-" + divName)
       // seems to work but is too slow ...
       const viz = await html2canvas(elem) //, options)
+      const width = viz.width
+      const height = viz.height
+      const aspect = width/height
+      const h = Math.round(imgWidth/aspect)
+      console.log("w,h,a:",width,height,h,aspect)
       const dataURL = await viz.toDataURL();
-      /*
+
       md += "### " + divName + "\n\n"
       md += "<img class='docimg' src='" + dataURL + "'>\n\n"
       md += "kmkfweklf \n kkwdkwnqd \n\n"
-      */
+
       doc.text(divName, 10, 10);
-      await doc.addImage(dataURL, "PNG", 10,30, 160,120)
+      await doc.addImage(dataURL, "PNG", 10,30, imgWidth,h)
       await doc.addPage(options)
       
   }
   //console.log(md)
-  /*
+
   const html = await marked.parse(md)
   //console.log(html)
   const htmlClean = await DOMPurify.sanitize(html);
@@ -810,14 +836,12 @@ const makePdf = async () => {
   @media print {.docimg {page-break-after:always;} }\
   </style>'
   const htmlStyled = style + htmlClean
-  emit("pdf",htmlClean)
+  // insert html 
   //pdfContent.value = htmlStyled
   //pdfWindow.value = true
+  //const print = document.getElementById("print")
+  //print.innerHTML = htmlStyled
 
-
-  //const img = "http://localhost:8080/img/info/Data%2C_Information%2C_Knowledge%2C_and_Wisdom_-rtwGimli_keynote_by_%40Nora3000_-viznotes_%2842038113741%29.jpg"
-  //doc.addImage(img, "JPG", 10,10, 160, 80, "IMG")
-  */
   doc.save("a4.pdf");
 
 

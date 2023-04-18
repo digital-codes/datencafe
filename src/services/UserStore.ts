@@ -105,7 +105,7 @@ export const UserStore = defineStore({
       this.email = email;
     },
     setLink(link = "") {
-      this.email = link;
+      this.link = link;
     },
     setDate(dt = "") {
       this.date = dt;

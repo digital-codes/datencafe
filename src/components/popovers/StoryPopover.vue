@@ -121,7 +121,7 @@ onMounted(async () => {
 
 const close = async () => {
   //console.log('close')
-  const dt = new Date()
+  const dt = await new Date()
   const data = {
     "title":title.value,
     "author":author.value,
@@ -135,7 +135,7 @@ const close = async () => {
   console.log("Update with:",data)
   await userStore.setTitle(title.value)
   await userStore.setAuthor(author.value)
-  await userStore.setDate(date.value)
+  await userStore.setDate(data.date)
   await userStore.setEmail(email.value)
   await userStore.setLink(link.value)
   await userStore.setCategory(category.value)
