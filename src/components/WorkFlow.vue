@@ -839,7 +839,7 @@ const makePdf = async () => {
       const divName = instance.id.toUpperCase()
       const elem = await document.getElementById("DFPLOT-" + divName)
       // seems to work but is too slow ...
-      const viz = await html2canvas(elem) //, options)
+      const viz = await html2canvas(elem, {logging:"error"}) //, options)
       const width = viz.width
       const height = viz.height
       const aspect = width/height
@@ -1649,7 +1649,8 @@ async function initFlow(design: any) {
     return
   }
   try {
-    design.nodes.forEach(async (n) => {
+    for (const n of design.nodes) {
+    // design.nodes.forEach(async (n) => {
       console.log("Node:", n.id, n.classname)
       // create the class instance
       try {
@@ -1671,17 +1672,18 @@ async function initFlow(design: any) {
         }
         // signalling
         console.log("Signals:", n.sigs)
-        n.sigs.forEach(async (s) => {
+        for (const s of n.sigs) {
+        //n.sigs.forEach(async (s) => {
           console.log("Signal on for ", s)
           await instance.msgOn(s.signal,s.port)
-        })
+        }
         // add to list 
         nodeList.value.push(instance)
       } catch (e) {
         console.log("Instance constructor failed:", e.message, n.id, n.classname)
         return
       }
-    })
+    }
   } catch (e) {
     console.log("Setting nodes failed:", e.message)
     return
