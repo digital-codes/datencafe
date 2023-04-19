@@ -726,42 +726,13 @@ async function flowInit() {
 
 
 const mdDocs = async () => {
-  console.log("Make PDF")
+  console.log("Make PDF via MD")
   alert("Preparing PDF. Click OK then wait a moment ...")
   // pdf init
-  // Default export is a4 paper, portrait, using millimeters for units
-  const options = {
-    format: "a4",
-    orientation: "portrait",
-    unit: "mm"
-  }
-  const doc = new jsPDF(options);
-  // Set the font and font size
-  /*
-  base 14 fonts:
-    Courier
-    Courier-Bold
-    Courier-BoldOblique
-    Courier-Oblique
-    Helvetica
-    Helvetica-Bold
-    Helvetica-BoldOblique
-    Helvetica-Oblique
-    Times-Roman
-    Times-Bold
-    Times-Italic
-    Times-BoldItalic
-    Symbol
-    ZapfDingbats
-  */
-  doc.setFont("Helvetica");
-  doc.setFontSize(12);
-
-  const imgWidth = 160
-
   // get story
   const story = userStore.getStory()
 
+  const imgWidth = 160
   // we actually start with markdown
   let md = "# Daten.Cafe\n"
   md += "<img class='doclogo' src='/img/logo/datencafe.png'/>\n\n"

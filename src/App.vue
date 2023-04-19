@@ -2,54 +2,133 @@
   <ion-app>
     <ion-split-pane when="(min-width: 4000px)" content-id="main-content">
       <MainMenu />
-      <ion-router-outlet id="main-content"></ion-router-outlet>
+      <ion-router-outlet id="main-content" animated="false"></ion-router-outlet>
     </ion-split-pane>
   </ion-app>
 </template>
 
 <script setup lang="ts">
-import { onMounted, computed } from "vue"
-import { UserStore, Modes } from '@/services/UserStore'
+import { onMounted, ref } from "vue";
+import { UserStore, Modes } from "@/services/UserStore";
 const userStore = UserStore();
 
-import { useI18n } from 'vue-i18n'
-const { locale } = useI18n({ useScope: 'global' })
+import { useI18n } from "vue-i18n";
+const { locale } = useI18n({ useScope: "global" });
 
 import {
   IonApp,
   IonRouterOutlet,
   IonSplitPane,
   IonList,
-  IonPage
-} from '@ionic/vue';
+  IonPage,
+} from "@ionic/vue";
 
 import MainMenu from "@/components/MainMenu.vue";
 import TitleBar from "@/components/TitleBar.vue";
 
 // do not track ...
 onMounted(async () => {
-  console.log("DNT:",navigator.doNotTrack)
-  await userStore.clear()
-  await userStore.setLang(locale.value)
-  const mediaQueryObj = window.matchMedia('(prefers-color-scheme: dark)');
+  console.log("DNT:", navigator.doNotTrack);
+  await userStore.clear();
+  await userStore.setLang(locale.value);
+  const mediaQueryObj = window.matchMedia("(prefers-color-scheme: dark)");
   const isDarkMode = mediaQueryObj.matches;
   if (isDarkMode) {
-    console.log("Dark")
-    await userStore.setDark(Modes.Dark)
-  } 
-})
+    console.log("Dark");
+    await userStore.setDark(Modes.Dark);
+  }
+});
+
+// test swiping. works. move to app ...
+import { createGesture } from "@ionic/vue";
+import { useRoute } from "vue-router";
+import router from "@/router"
+const route = useRoute();
+
+const gesture = ref();
+onMounted(() => {
+  const swipe = document.getElementById("main-content")
+  console.log("swipe target:", swipe);
+  gesture.value = createGesture({
+    el: swipe,
+    onMove: (detail) => {
+      onMove(detail);
+    },
+  });
+
+  gesture.value.enable();
+});
+
+const onMove = (detail) => {
+  //const type = detail.type;
+  //const currentX = detail.currentX;
+  //const deltaX = detail.deltaX;
+  //const velocityX = detail.velocityX;
+  const current = route.name
+  console.log("Swiped:", current, detail);
+
+  let left = ""
+  let right = ""
+  switch (route.name) {
+    case "Info":
+      left = ""
+      right = "Data"
+      break
+    case "Data":
+    left = "Info"
+      right = "Stories"
+      break
+    case "Stories":
+    left = "Data"
+      right = "Instructions"
+      break
+    case "Instructions":
+    left = "Data"
+      right = "Workspace"
+      break
+    case "Advanced":
+    left = "Workspace"
+      right = "Login"
+      break
+    case "Workspace":
+      // ignore
+      console.log("ignore")
+      break
+    case "Login":
+      left = "Advanced"
+      right = ""
+      break
+    default:
+      break
+  }
+
+  console.log(left,right)
+  if (detail.type == "pan") {
+    if (detail.velocityX > 1) {
+      if (left > "") {
+        router.push({ name:left })
+      }
+    }
+    if (detail.velocityX < -1) {
+      if (right > "") {
+        router.push({name:right})
+      }
+    }
+
+  }
 
 
-
+};
+// --------------
 </script>
 
 <style>
 @media print {
   article {
-    page-break-after:always;
+    page-break-after: always;
   }
   ion-card {
-    page-break-after:always;
+    page-break-after: always;
   }
 }
 </style>
