@@ -3,6 +3,7 @@ import sys
 import json
 import pandas as pd
 import markdown
+#  pip install --user markdown
 
 # relevant directories
 dirList = [
