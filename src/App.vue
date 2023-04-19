@@ -96,13 +96,18 @@ const onMove = (detail) => {
       left = "Data";
       right = "Workspace";
       break;
+    case "Workspace":
+      // check position here
+      if (detail.currentY < 100) {
+        left = "Instructions";
+        right = "Advanced";
+      } else {
+        console.log("ignore");
+      }
+      break;
     case "Advanced":
       left = "Workspace";
       right = "Login";
-      break;
-    case "Workspace":
-      // ignore
-      console.log("ignore");
       break;
     case "Login":
       left = "Advanced";

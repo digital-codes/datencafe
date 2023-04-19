@@ -2,13 +2,13 @@
   "en": [
     {
       "title":"Test for simple data combination methods",
-      "icon":"/stories/story1.png",
+      "icon":"/assets/stories/story1.png",
       "body":"So far, this is the only story you can download and use. Don't hesitate! Show how simple operations on multiple data sources work: Add,sub,mul,div of columns, append colums or rows and a simple join on the first column",
       "learn":"123",
       "author":"AK",
       "email":"andreas.kugel@ok-lab-karlsruhe.de",
       "date":"17.04.2023",
-      "link":"/stories/story1.json"
+      "link":"/assets/stories/story1.json"
     },
     {
       "title":"Using open data to improve public transportation",
@@ -44,13 +44,13 @@
   "de": [
     {
       "title":"Test für einfache Kombination von Daten",
-      "icon":"/stories/story1.png",
+      "icon":"/assets/stories/story1.png",
       "body":"Dies ist bisher die einzige Beispielgeschichte. Lade sie herunter und probier sie aus! Darstellung von einfachen Datenverknüpfungen mit folgender Operationen: Add,Sub,Mul,Div sowie Anfügen von Zeilen und Spalten und einfacher Join über die erste Spalte",
       "learn":"123",
       "author":"AK",
       "email":"andreas.kugel@ok-lab-karlsruhe.de",
       "date":"17.04.2023",
-      "link":"/stories/story1.json"
+      "link":"/assets/stories/story1.json"
     },
     {
       "title":"Nutzung offener Daten zur Verbesserung des öffentlichen Verkehrs",

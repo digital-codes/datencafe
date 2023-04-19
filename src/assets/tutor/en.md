@@ -1,8 +1,9 @@
-## Application Structure
+<!-- remember to have some comment lines in front of the first H§ -->
+### Application Structure
 
-**Note: Contains automatically translated content**
+**Warning: Contains automatically translated content**
 
-There are 7 pages. You might be most interested in [stories](/instructions#stories_), [tutorial](/instructions#tutorial_) and [workspace](/instructions#workspace_), but we will decribe all in order as they appear in the menu.
+There are 7 pages. You might be most interested in [stories](/instructions#stories), [tutorial](/instructions#tutorial) and [workspace](/instructions#workspace), but we will decribe all in order as they appear in the menu.
 
 <!-- 
 There are 7 levels
@@ -29,8 +30,8 @@ A brief introduction to the goals and the intended audience of Daten.Cafe
 
 Introduction to and overview of Open-Data concepts, data sources and applications. This sections is still completely missing, sorry.
 
-##### Stories_
 ### Stories
+##### {@id=stories} X
 
 <img src="/img/tutor/stories.png" class="large">
 
@@ -39,15 +40,15 @@ Data stories and examples. We have only one useable story yet, try it out.
 Create your own storied and share with your friends and collegues. Just pass on the file you can download from the workspace.
 
 
-##### Tutorial_
 ### Tutorial
+##### {@id=tutorial} X
 
 <img src="/img/tutor/tutorial.png" class="large">
 
 The tutorial section. Your are right here ...
 
-##### Workspace_
 ### Workspace
+##### {@id=workspace} X
 
 <img src="/img/tutor/workspace.png" class="large">
 

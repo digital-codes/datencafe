@@ -1,10 +1,11 @@
-## Aufbau der Webanwendung
+<!-- remember to have some comment lines in front of the first H§ -->
+### Aufbau der Webanwendung
 
-**Achtung: Enhält maschinelle Übersetzungen**
+**Achtung: Enthält maschinelle Übersetzungen**
 
 <!-- use H5 with underscore for link targets -->
 
-Es gibt 7 Seiten. Diese sind besonders interessant: [Geschichten](/instructions#stories_), [Anleitungen](/instructions#tutorial_) und [Arbeitsbereich](/instructions#workspace_). Die Beschreibung folgt der Reihenfolge im Menu.
+Es gibt 7 Seiten. Diese sind besonders interessant: [Geschichten](/instructions#stories), [Anleitungen](/instructions#tutorial) und [Arbeitsbereich](/instructions#workspace). Die Beschreibung folgt der Reihenfolge im Menu.
 
 <!-- 
 There are 7 levels
@@ -35,25 +36,25 @@ Einführung in und Überblick über Open-Data-Konzepte, Datenquellen und Anwendu
 
 <!-- use H5 with underscore for link target -->
 
-##### Stories_
 ### Geschichten
+##### {@id=stories} Stories
 
 <img src="/img/tutor/stories.png" class="large">
 
 
-Daten-Geschichten und Beispiele. Wir haben bisher nur eine verwendbare Geschichte, probiere sie aus.
+Daten-Geschichten und {@class=foo} Beispiele. Wir haben bisher nur eine verwendbare Geschichte, probiere sie aus.
 
 Erstelle deine eigenen Geschichten und teile sie mit Freunden und Kollegen. Gib einfach die Datei weiter, die du aus dem Arbeitsbereich herunterladen kannst.
 
-##### Tutorial_
 ### Anleitung
+##### {@id=tutorial} Tutorial
 
 <img src="/img/tutor/tutorial.png" class="large">
 
 Die Tutorial-Sektion. Du bist genau hier ...
 
-##### Workspace_
 ### Arbeitsbereich
+##### {@id=workspace} Workspace
 
 <img src="/img/tutor/workspace.png" class="large">
 

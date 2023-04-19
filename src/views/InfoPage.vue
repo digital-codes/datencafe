@@ -6,6 +6,8 @@
 
         <div id="container">
         <!-- use en as default to get length of storylist -->
+
+
         <ion-card color="light" v-for="(item,i) in infoItems.en" :key="i">
           <article>
             <ion-card-header>
@@ -25,6 +27,7 @@
           </ion-card-content>
           </article>
         </ion-card>
+
       </div>
 
 
@@ -43,6 +46,10 @@ import TitleBar from "@/components/TitleBar.vue"
 // if we need translation inside methods, import this as well:
 import { useI18n } from 'vue-i18n'
 const { t, locale } = useI18n({ useScope: 'global' })
+
+import { marked } from "marked"
+import * as DOMPurify from 'dompurify'
+
 
 import infoItems from "../assets/info/infoItems.json"
 const infoItem = (idx,id) => {
