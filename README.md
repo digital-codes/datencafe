@@ -13,6 +13,16 @@ Daten.Cafe aims to provide basic knowledge in data literacy in a simple way. Fre
 Visit the prototye to get more information on idea and current implementation status.
 
 
+## Framework and Libraries
+
+Framework is [Ionic](https://ionicframework.com/docs) version 6 with [Vue](https://vuejs.org/) version 3. Upgrade to Ionic v/ requires Typescript migration on several files. Initial tests promising but not complete yet,
+
+Flow editor is [cytoscape](https://js.cytoscape.org/). Potential lightweight alternative  [vue-flow](https://vueflow.dev/). Custom/simple solution should be possible, we don't need much magic here.
+
+Data processing library is [Danfo.js](https://danfo.jsdata.org/) providing "Pandas"-like dataframes. Some Tensor functions available as well, nit tested yet.
+
+### Data Processing 
+
 #### Node Types
 
 To date (April 2023, tag 0.3x), the following elements are considered to be implmented. Only all (small but usefull) subset is available yet.
@@ -70,7 +80,6 @@ To date (April 2023, tag 0.3x), the following elements are considered to be impl
 
 Probaly only DataFrames and scalars. 
 
-
 ### Viz
 
 Danfo has built-in plotting for dataframes using {Plotly](https://plotly.com/javascript/)
@@ -78,29 +87,6 @@ Danfo has built-in plotting for dataframes using {Plotly](https://plotly.com/jav
 Maps will probably use [Leaflet](https://leafletjs.com/)
 
 Migration to [Apache Echarts](https://echarts.apache.org/en/index.html) to be considered.
-
-## Development
-
-
-### Get started
-
- 1. Download repo
- 2. Install
- > npm i
- 3. Run dev server
- > npm run serve
- 4. Open Browser at http://localhost:8080/ 
-
-
-
-### Framework and Libraries
-
-Framework is [Ionic](https://ionicframework.com/docs) version 6 with [Vue](https://vuejs.org/) version 3. Upgrade to Ionic v/ requires Typescript migration on several files. Initial tests promising but not complete yet,
-
-Flow editor is [cytoscape](https://js.cytoscape.org/). Potential lightweight alternative  [vue-flow](https://vueflow.dev/). Custom/simple solution should be possible, we don't need much magic here.
-
-Data processing library is [Danfo.js](https://danfo.jsdata.org/) providing "Pandas"-like dataframes. Some Tensor functions available as well, nit tested yet.
-
 
 
 ### Icons
@@ -119,4 +105,19 @@ Add border to icons like so
 > for i in *.png; do convert \$i -bordercolor transparent -compose over  -border 16 ../icons-bordered/$i; done
 
 Note: remove the slash in front of \$ ...
+
+
+## Development
+
+
+### Get started
+
+ 1. Download repo
+ 2. Install
+ > npm i
+ 3. Run dev server
+ > npm run serve
+ 4. Open Browser at http://localhost:8080/ 
+
+
 
