@@ -1,22 +1,21 @@
-# Datencafe
-Simple Data Processing and Visualisation Tool
+# Daten.Cafe
 
-## App
-### Infos
+Simple *No-Code* Browser-based Data Processing and Visualisation Tool
 
+Daten.Cafe draws heavily from other low/no-code open-source tools, in particular [Knime](https://www.knime.com/) and [Orange3](https://orangedatamining.com/). We adopted most of the element icon from Orange3. However, Daten.Cafe doesn't aim to be a full-blown data-processing plattform. 
 
-### Instructions
+The goal of Daten.Cafe is to provide a (more or less) intuitive way to learn fundamental features of data, data processing and data visualization, thus enhancing data-literacy skills of everybody.
 
+Protoype running at [Daten.Cafe](https://daten.cafe)
 
+Daten.Cafe aims to provide basic knowledge in data literacy in a simple way. Free access to the application and sharable results are essential concepts. The application is not mobile-first, but at least mobile-compatiple, allowing learning and practicing of concepts on (modern) smartphones. 
 
-### Map
-
-
-
-### DataFlow
+Visit the prototye to get more information on idea and current implementation status.
 
 
 #### Node Types
+
+To date (April 2023, tag 0.3x), the following elements are considered to be implmented. Only all (small but usefull) subset is available yet.
 
   * Data Access
     * Load from Server
@@ -69,16 +68,20 @@ Simple Data Processing and Visualisation Tool
 
 #### Edge Types
 
-  * Results
-  * Copy (only on single input nodes)
-
+Probaly only DataFrames and scalars. 
 
 
 ### Viz
 
+Danfo has built-in plotting for dataframes using {Plotly](https://plotly.com/javascript/)
 
+Maps will probably use [Leaflet](https://leafletjs.com/)
+
+Migration to [Apache Echarts](https://echarts.apache.org/en/index.html) to be considered.
 
 ## Development
+
+
 ### Get started
 
  1. Download repo
@@ -89,51 +92,31 @@ Simple Data Processing and Visualisation Tool
  4. Open Browser at http://localhost:8080/ 
 
 
- 
 
 ### Framework and Libraries
- * Web
-   * [Ionic](https://ionicframework.com/docs) 
-   * [Vue3](https://vuejs.org/)
-   * [cytoscape]()
- * Tooling
-   * [danfojs]()
-   * [axios]
- * ... and others ...
+
+Framework is [Ionic](https://ionicframework.com/docs) version 6 with [Vue](https://vuejs.org/) version 3. Upgrade to Ionic v/ requires Typescript migration on several files. Initial tests promising but not complete yet,
+
+Flow editor is [cytoscape](https://js.cytoscape.org/). Potential lightweight alternative  [vue-flow](https://vueflow.dev/). Custom/simple solution should be possible, we don't need much magic here.
+
+Data processing library is [Danfo.js](https://danfo.jsdata.org/) providing "Pandas"-like dataframes. Some Tensor functions available as well, nit tested yet.
+
 
 
 ### Icons
 
-Potenitially useful fontawesome icons
-
- * database, server, file, file-export, files, file-import, file-check, file-exclamation,
- * file-arrow-up, file-arrow-down, file-slash, file-xmark, gear, gears, sliders, wrench, hammer, 
- * bars, sliders-up, list-check, toolbox, map, file-circle-question, file-circle-minus, file-circle-check,
- * file-circle-xmark, chart-pie, puzzle-piece, paper-plane, bong, hand, 
- * chart-simple, chart-pie, chart-line, chart-columns, chart-bar, diagram-project, comment, message,
- * table, table-cells, file-csv, stapler, square-root-variable, image, star, github, arrow-up,
- * check, circle-check, pin, pencil, plus, minus, arrows-rotate, trash-can, link, wand-magic-sparkles,
- * object-group, code-commit, download, upload, arrow-up/down, chevron-up/down,
- * magnifying-glass, magnifying-glass-plus, magnifying-glass-minus, expand, panorama,
- * eye, glasses, folder-open, play, copy, square, question, info,
- * 
+Basics: free [fontawesome](https://fontawesome.com/icons) icon set
 
 Individual SVGs and SVG-SPrites from [here](https://fontawesome.com/download)
 
 If PNG icons needs, convert SVG like so (note: inkscape export is -e ?):
 
-> for i in *.svg; do inkscape -w 256 $i -e `basename $i .svg`.png ; done
-
-or 
-
 > for i in *.svg; do inkscape -w 256 -h 256 $i -e `basename $i .svg`.png ; done
 > for i in *.svg; do inkscape -w 256 -h 256 $i --export-type=png `basename $i .svg`.png ; done
-
-Latter scales to w and h
 
 Add border to icons like so
 
 > for i in *.png; do convert \$i -bordercolor transparent -compose over  -border 16 ../icons-bordered/$i; done
 
-Note: remove the slash in front of \$
+Note: remove the slash in front of \$ ...
 

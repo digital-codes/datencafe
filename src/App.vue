@@ -42,21 +42,31 @@ onMounted(async () => {
 // test swiping. works. move to app ...
 import { createGesture } from "@ionic/vue";
 import { useRoute } from "vue-router";
-import router from "@/router"
+import router from "@/router";
 const route = useRoute();
 
 const gesture = ref();
+const forceMobile = true
 onMounted(() => {
-  const swipe = document.getElementById("main-content")
-  console.log("swipe target:", swipe);
-  gesture.value = createGesture({
-    el: swipe,
-    onMove: (detail) => {
-      onMove(detail);
-    },
-  });
+  if (forceMobile || 
+    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+      navigator.userAgent
+    )
+  ) {
+    // Code to run if the app is running on a mobile device
+    console.log("Running on a mobile device.");
 
-  gesture.value.enable();
+    const swipe = document.getElementById("main-content");
+    console.log("swipe target:", swipe);
+    gesture.value = createGesture({
+      el: swipe,
+      onMove: (detail) => {
+        onMove(detail);
+      },
+    });
+
+    gesture.value.enable();
+  }
 });
 
 const onMove = (detail) => {
@@ -64,60 +74,57 @@ const onMove = (detail) => {
   //const currentX = detail.currentX;
   //const deltaX = detail.deltaX;
   //const velocityX = detail.velocityX;
-  const current = route.name
+  const current = route.name;
   console.log("Swiped:", current, detail);
 
-  let left = ""
-  let right = ""
+  let left = "";
+  let right = "";
   switch (route.name) {
     case "Info":
-      left = ""
-      right = "Data"
-      break
+      left = "";
+      right = "Data";
+      break;
     case "Data":
-    left = "Info"
-      right = "Stories"
-      break
+      left = "Info";
+      right = "Stories";
+      break;
     case "Stories":
-    left = "Data"
-      right = "Instructions"
-      break
+      left = "Data";
+      right = "Instructions";
+      break;
     case "Instructions":
-    left = "Data"
-      right = "Workspace"
-      break
+      left = "Data";
+      right = "Workspace";
+      break;
     case "Advanced":
-    left = "Workspace"
-      right = "Login"
-      break
+      left = "Workspace";
+      right = "Login";
+      break;
     case "Workspace":
       // ignore
-      console.log("ignore")
-      break
+      console.log("ignore");
+      break;
     case "Login":
-      left = "Advanced"
-      right = ""
-      break
+      left = "Advanced";
+      right = "";
+      break;
     default:
-      break
+      break;
   }
 
-  console.log(left,right)
+  console.log(left, right);
   if (detail.type == "pan") {
     if (detail.velocityX > 1) {
       if (left > "") {
-        router.push({ name:left })
+        router.push({ name: left });
       }
     }
     if (detail.velocityX < -1) {
       if (right > "") {
-        router.push({name:right})
+        router.push({ name: right });
       }
     }
-
   }
-
-
 };
 // --------------
 </script>
