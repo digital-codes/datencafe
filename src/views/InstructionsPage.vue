@@ -70,28 +70,12 @@ const getItem = (idx,id) => {
 </script>
 
 <style>
-
-/* try to compensate fixed header */
-/*
-.tutor h3.anchor {
-    display: block;
-    position: relative;
-    top: 250px;
-    visibility: hidden;
+.tutor {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 996px;
+  text-align: justify;
 }
-
-target works, but is initially visible, hidden only after first click
-:target {
-  display: block;
-  position: relative;
-  top: -120px; 
-  visibility: hidden;
-}
-
-use h5 hidden with underscore
-
-*/
-/* */
 
 .tutor h5 {
   visibility:hidden;
@@ -101,30 +85,10 @@ use h5 hidden with underscore
   height:0px;
 }
 /*
-.tutor #stories {
-  display: block;
-  position: relative;
-  top: -100px; 
-  visibility: hidden;
-}
-.tutor #tutorial {
-  display: block;
-  position: relative;
-  top: -100px; 
-  visibility: hidden;
-}
-.tutor #workspace {
-  display: block;
-  position: relative;
-  top: -100px; 
-  visibility: hidden;
-}
-*/
-
 .tutor p, .tutor ul {
   text-align: left;
 }
-
+*/
 
 .tutor h2, .tutor h3 {
   color: var(--ion-color-primary);
@@ -140,6 +104,15 @@ use h5 hidden with underscore
   font-size:120%;
   margin-bottom: .5rem;
 }
+
+.tutor p {
+  text-align: justify;
+}
+
+.tutor ul {
+  text-align: left;
+}
+
 
 .tutor img {
   width: 200px;
@@ -166,6 +139,8 @@ use h5 hidden with underscore
   width:auto;
   display:block;
 }
+
+
 
 @media screen and (max-width: 996px) {
 
@@ -199,11 +174,13 @@ use h5 hidden with underscore
 
 <style scoped>
 
-.tutor {
+ion-card {
   margin-left: auto;
   margin-right: auto;
-  max-width: 996px;  
+  max-width: 996px;
+
 }
+
   #container {
   text-align: center;
   margin:10px;

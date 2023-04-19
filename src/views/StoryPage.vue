@@ -5,7 +5,41 @@
     <ion-content :fullscreen="true">
 
       <div id="container">
+
+        <ion-card color="light" v-for="(item,i) in items.en" :key="i">
+          <article>
+            <ion-card-header>
+            <ion-card-title>{{ getItem(i,"title") }}</ion-card-title>
+            <ion-item>
+              <ion-thumbnail v-if="item.icon > ''" class="thumb">
+                <img  :src="item.icon" />
+            </ion-thumbnail>
+            <ion-card-subtitle>{{ getItem(i,"date") }}, {{ getItem(i,"author") }}, 
+              <a :href='"mailto:" +  getItem(i,"email")'>{{ getItem(i,"email") }}</a>
+            </ion-card-subtitle>
+          </ion-item>
+          </ion-card-header>
+
+          <ion-card-content class="mdWrap">
+            <div v-html="getItem(i,'html')" class="tutor">
+          </div>
+
+        </ion-card-content>
+        <ion-card-header>
+            <ion-button v-if="item.link > ''" _target="blank" :download="item.link.split('/')[2]" :href="item.link">{{$t('download')}}</ion-button>
+            <!-- 
+            <ion-button v-if="s.link == ''" @click="clicked(i)">{{$t('download')}}</ion-button>
+            -->
+          </ion-card-header>
+          <ion-note v-if="item.link > ''">
+            {{$t('downloadHint')}} 
+          </ion-note>
+
+        </article>
+        </ion-card>
+
         <!-- use en as default to get length of storylist -->
+        <!-- 
         <ion-card color="light" v-for="(s,i) in storyItems.en" :key="i">
           <article>
           <ion-card-header>
@@ -25,13 +59,14 @@
           </ion-card-content>
           <ion-card-header>
             <ion-button v-if="s.link > ''" _target="blank" :download="s.link.split('/')[2]" :href="s.link">{{$t('download')}}</ion-button>
-            <ion-button v-if="s.link == ''" @click="clicked(i)">{{$t('download')}}</ion-button>
           </ion-card-header>
-          <ion-note>
+          <ion-note v-if="s.link > ''">
             {{$t('downloadHint')}} 
           </ion-note>
         </article>
         </ion-card>
+
+        -->
       </div>
 
     </ion-content>
@@ -44,13 +79,15 @@ import { IonButton, IonItem, IonThumbail, IonNote } from '@ionic/vue';
 import { IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent } from '@ionic/vue'
 import TitleBar from "@/components/TitleBar.vue"
 
-import { ref, onMounted, onBeforeMount, computed } from "vue"
- 
+
 // https://lokalise.com/blog/vue-i18n/
 // if we need translation inside methods, import this as well:
 import { useI18n } from 'vue-i18n'
 const { t, locale } = useI18n({ useScope: 'global' })
 
+import items from "@/assets/stories/stories-md.json"
+
+/*
 import storyItems from "@/assets/stories/stories.json"
 const storyItem = (idx,id) => {
   //console.log(idx,id,locale.value)
@@ -58,11 +95,10 @@ const storyItem = (idx,id) => {
   const text = storyItems[locale.value][idx][id]
   return text
 }
-
-
-const clicked = (id,msg) => {
-
-  alert(String(id) + "..." + t("notimplemented"))
+*/
+const getItem = (idx,id) => {
+  const text = items[locale.value][idx][id]
+  return text
 }
 
 
@@ -72,6 +108,9 @@ const clicked = (id,msg) => {
 #container {
   text-align: center;
   margin:10px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 996px;
   /*
   position: absolute;
   left: 0;
@@ -100,4 +139,13 @@ const clicked = (id,msg) => {
 .thumb {
   width: 6rem;
 }
+
+ion-card {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 996px;
+
+}
+
+
 </style>

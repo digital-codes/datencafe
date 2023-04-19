@@ -109,7 +109,12 @@ ion-label.attribution {
   background: #eee;
 }
 
+ion-card {
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 996px;
 
+}
 
 </style>
 
@@ -137,9 +142,7 @@ use h5 hidden with underscore
 */
 /* */
 .tutor {
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 996px;  
+  text-align: justify;
 }
 
 .tutor h5 {
@@ -149,11 +152,11 @@ use h5 hidden with underscore
   top: -100px; 
   height:0px;
 }
-
+/*
 .tutor p, .tutor ul {
   text-align: left;
 }
-
+*/
 
 .tutor h2, .tutor h3 {
   color: var(--ion-color-primary);
@@ -169,6 +172,15 @@ use h5 hidden with underscore
   font-size:120%;
   margin-bottom: .5rem;
 }
+
+.tutor p {
+  text-align: justify;
+}
+
+.tutor ul {
+  text-align: left;
+}
+
 
 .tutor img {
   width: 200px;

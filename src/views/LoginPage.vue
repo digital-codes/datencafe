@@ -134,6 +134,9 @@ const submitForm = async () => {
 #container {
   text-align: center;
   margin:10px;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 996px;
   /*
   position: absolute;
   left: 0;

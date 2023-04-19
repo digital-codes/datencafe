@@ -21,6 +21,9 @@
           <div>
             <span class="headline ion-hide-sm-down">Daten.Cafe</span>
             <span class="version ion-hide-sm-down">{{ Version }}</span>
+            <span>
+              <font-awesome-icon class="ion-hide-sm-down" :icon="routeInfo.thumb" size="1x" />
+          </span>
             <!-- 
           <font-awesome-icon icon="fa-solid fa-caret-right" size="2x" class="ion-hide-sm-down"/>
           <span class="version ion-hide-sm-down">{{ $t(routeInfo.title) }}</span>

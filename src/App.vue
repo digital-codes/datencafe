@@ -47,6 +47,7 @@ const route = useRoute();
 
 const gesture = ref();
 const forceMobile = true
+const debounce = ref(false)
 onMounted(() => {
   if (forceMobile || 
     /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
@@ -75,6 +76,11 @@ const onMove = (detail) => {
   //const deltaX = detail.deltaX;
   //const velocityX = detail.velocityX;
   const current = route.name;
+  // debounce. first
+  if (debounce.value) return
+  debounce.value = true
+  setTimeout(()=>{debounce.value = false},250)
+  //
   console.log("Swiped:", current, detail);
 
   let left = "";

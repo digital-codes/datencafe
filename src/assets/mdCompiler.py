@@ -40,9 +40,10 @@ def mdCompile(x):
             html = markdown.markdown(content, extensions=['legacy_attrs'])
             #print(html) # <p>Hello <em>World</em><p/>
             print("title",title)
-            md.append({"title":title,"body":content,"html":html})
+            item = {"title":title,"body":content,"html":html}
+            md.append(item)
+                
         mdList[lang] = md
-    mdList[lang] = md
     return mdList
 
 
@@ -53,7 +54,25 @@ for d in dirList:
         print(d,"no md")
         continue
     items = mdCompile(d)
-    print(d,"\n",len(items[list(items.keys())[0]]))
+    print(d,":",len(items[list(items.keys())[0]]))
+
+    # check if json files exist
+    for lang in list(items.keys()):
+        try:
+            with open(os.sep.join([d,lang + "-meta.json"])) as f:
+                meta = json.load(f)
+            if len(meta) != len(items[lang]):
+                print("length mismatch",meta[lang],items[lang])
+                continue
+            for i,m in enumerate(meta):
+                for k in list(m.keys()):
+                    items[lang][i][k] = m[k]
+        except:
+            print("No meta for ",d,lang)
+            pass
+        # append
+
+    
     outfile = "".join([d,"-md.json"])
     outpath = os.sep.join([d,outfile])
     with open(outpath,"w") as f:

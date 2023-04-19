@@ -16,24 +16,18 @@
 
 [Open Data Handbook](https://opendatahandbook.org/)
 
-https://upload.wikimedia.org/wikipedia/commons/a/a9/ABC_der_Offenheit_-_Brosch%C3%BCre_%282019%29.pdf
+[ABC der Offenheit](https://upload.wikimedia.org/wikipedia/commons/a/a9/ABC_der_Offenheit_-_Brosch%C3%BCre_%282019%29.pdf)
 
-https://data.europa.eu/de
+[Open Data Europa](https://data.europa.eu/de)
 
-https://www.ourcommons.ca/en/open-data
+[Open Data Kanada](https://www.opendatasociety.ca/open-data-portals)
 
-https://www.opendatasociety.ca/open-data-portals
+[Gov Data DE](https://www.govdata.de/)
 
-https://www.govdata.de/
+[Statistik DE](https://www.destatis.de/DE/Home/_inhalt.html)
 
-https://www.destatis.de/DE/Home/_inhalt.html
+[DWD](https://www.dwd.de/DE/leistungen/cdc/climate-data-center.html)
 
-https://www.dwd.de/DE/leistungen/cdc/climate-data-center.html
-
-https://climate.esa.int/de/odp/#/dashboard
-
-<!-- remember to have some comment lines in front of the first H§ -->
-### Punkt 3
-qwcqevev
+[ESA](https://climate.esa.int/de/odp/#/dashboard)
 
 
