@@ -10,10 +10,15 @@
           <article>
             <ion-card-header>
             <ion-card-title>{{ getItem(i,"title") }}</ion-card-title>
+            <div class="image" v-if="item.icon > ''">
+            <ion-img :src="item.icon" :alt="item.alt"></ion-img>
+            </div>
             <ion-item>
+            <!-- 
               <ion-thumbnail v-if="item.icon > ''" class="thumb">
                 <img  :src="item.icon" />
             </ion-thumbnail>
+            -->
             <ion-card-subtitle>{{ getItem(i,"date") }}, {{ getItem(i,"author") }}, 
               <a :href='"mailto:" +  getItem(i,"email")'>{{ getItem(i,"email") }}</a>
             </ion-card-subtitle>
@@ -146,6 +151,30 @@ ion-card {
   max-width: 996px;
 
 }
+
+.image {
+  background-color: #ddd;
+  opacity:.8;
+  padding: 1rem;
+  margin-top:1rem;
+
+}
+
+
+ion-img {
+  height: 150px;
+}
+
+ion-label.attribution {
+  font-size: 70%;
+  color:#444;
+  background: #eee;
+}
+
+ion-card-content {
+  text-align: justify;
+}
+
 
 
 </style>
