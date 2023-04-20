@@ -18,7 +18,22 @@ export class DataInfo extends DcNode {
     // may result in "undefined" ...
     const ports: string[] = ["A"]
     const edges: string[] = ["d"]
-    super(id, "datainfo", ports, edges)
+    // fill na option
+    const cfg = {
+      pop: "value",
+      options: [
+        {
+          id: "fillna",
+          type: "numeric",
+          label: "FILL",
+          value: "0",
+          min:"0",
+          max:"1"
+        },
+      ]
+    }
+
+    super(id, "datainfo", ports, edges,cfg)
     DcNode.print(DataInfo._type + " created") // no access to super._id etc here
     // add to providers
     DcNode.providers.add(super.id)
@@ -27,6 +42,15 @@ export class DataInfo extends DcNode {
   get type() { return DataInfo._type }
   get display() { return DataInfo._display }
   // methods
+  async configure(options: any[]) {
+    // we know the config structure here, so can just use the index
+    const config = this.config
+    for (let i = 0; i < options.length; i++) {
+      config.options[i].value = options[i]
+    }
+    // update
+    this.config = config // update config
+  }
   async updated(msg: string, y?: any) {
     // with a single source we are sure that update can deliver valid data
     // no need to check "hasData"
@@ -35,19 +59,29 @@ export class DataInfo extends DcNode {
     DcNode.print(src + " updated " + this.id + ": " + String(this.updCnt))
     const dt = DcNode.providers.getDataById(src)
     const df = new DcNode.dfd.DataFrame(dt)
+    // check fillna
+    if (this.config.options[0].value != "0") {
+      // NA values prevent describe!
+      await df.fillNa(0,{inplace:true})
+    } 
     // simple plot is missing row dlabels
     //df.describe().plot(divId).table()
-    const ds = await df.describe()
-    // create right column order
-    const ds1 = await new DcNode.dfd.DataFrame({ "Type": ds.index })
-    ds.columns.forEach(async (c) => {
-      await ds1.addColumn(c, ds.column(c), { inplace: true });
-    })
-    //await DcNode.providers.update(super.id,toJSON(this.df))
-    await DcNode.providers.update(this.id, DcNode.dfd.toJSON(ds1))
-    //await subscribers.update(d.id,d.ep)
-    await DelayTimer(20)
-    await this.messaging.emit(DcNode.signals.UPDPREFIX as string + this.id)
+    try {
+      const ds = await df.describe()
+      // create right column order
+      const ds1 = await new DcNode.dfd.DataFrame({ "Type": ds.index })
+      ds.columns.forEach(async (c) => {
+        await ds1.addColumn(c, ds.column(c), { inplace: true });
+      })
+      //await DcNode.providers.update(super.id,toJSON(this.df))
+      await DcNode.providers.update(this.id, DcNode.dfd.toJSON(ds1))
+      //await subscribers.update(d.id,d.ep)
+      await DelayTimer(20)
+      await this.messaging.emit(DcNode.signals.UPDPREFIX as string + this.id)
+    } catch (e) {
+      alert("Try to set 'FILL' option")
+      return
+    }
 
   }
   msgOn(x: string, y: string) {

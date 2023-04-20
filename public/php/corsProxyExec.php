@@ -122,7 +122,6 @@ switch ($type) {
         header("Content-type: application/json");
         break;
     case "xls":
-        $mime_type = mime_content_type($url);
         header("Content-type: " . $mime_type);
         break;
     case "csv":
@@ -141,8 +140,9 @@ if ($type == "csv") {
 }
 */
 // select 1 of 2 modes
-$fetchMode = 1;
+$fetchMode = 2;
 
+// get file, we need to save the file anyway ...
 if ($fetchMode == 2) {
     // Fetch the content from the URL using cURL
     $ch = curl_init($url);
@@ -151,12 +151,20 @@ if ($fetchMode == 2) {
     curl_close($ch);
     // Output the content
     // header('Content-Type: text/plain');
-    echo $content;
 } else {
     // Get the contents of the URL and output it
-    echo file_get_contents($url);
+    $content = curl_exec($ch);
 }
-
+// save
+$tmpfile = $tmpfname = tempnam(".", "CORS");
+file_put_contents($tmpfile,$content);
+// detect type
+$mime_type = mime_content_type($tmpfile);
+// set header
+header("Content-type: " . $mime_type);
+echo file_get_contents($tmpfile);
+// remove file
+unlink($tmpfile);
 
 ?>
 
