@@ -28,7 +28,9 @@ require 'vendor/autoload.php';
 
 // cors proxy login
 // Define the CSV file path
-$csv_file = 'users.csv';
+// $csv_file = 'users.csv';
+// on localhost we just force a token
+$csv_file = "/home/akugel/files/datencafe/users.csv";
 
 // Define the jti claim for JWT
 $jti_claim = "Ureiz5Koqua8ied5ook0";
@@ -128,7 +130,7 @@ function makeToken($username) {
       // Configures the time that the token can be used (nbf claim)
       ->canOnlyBeUsedAfter($now)
       // Configures the expiration time of the token (exp claim)
-      ->expiresAt($now->modify('+1 hour'))
+      ->expiresAt($now->modify('+4 hour'))
       // Configures a new claim, called "uid"
       ->withClaim('uid', $username)
       // Configures a new header, called "foo"

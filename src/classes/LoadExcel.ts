@@ -132,9 +132,7 @@ export class LoadExcel extends DcNode {
       } else {
         if (sheetNames.length > 1) {
           alert(`Warning: Multiple sheets: ${JSON.stringify(sheetNames)}. Picking first one`)
-          //sheetNames = sheetNames.slice(0,1)
-          // FIXME: fix 0
-          sheetNames = sheetNames.slice(1, 2)
+          sheetNames = sheetNames.slice(0, 1)
         }
       }
       // Parse each sheet into a JSON object
@@ -147,61 +145,16 @@ export class LoadExcel extends DcNode {
       if (data[0][0] === undefined) {
         data[0][0] = "Index"
       }
-      console.log(data)
       // all rows must be of same length
       for (let i = 1; i< data.length; i++) {
         while (data[i].length < data[0].length) data[i].push(NaN)
         if (data[i].length > data[0].length) {
-          console.log(data[i])
           data[i] = data[i].slice(0,data[0].length)
-          //throw (new Error("Invalid length " + String(data[i].length) + "-" + String(i)))
         }
       }
-      console.log(data)
-      // this.df = new DcNode.dfd.DataFrame(data.slice(1)) //, {columns: data[0]});
       this.df = await new DcNode.dfd.DataFrame(data, { columns: data[0] }) // , {columns: data[0]});
-      await this.df.print()
       await this.df.drop({ index: [0] , inplace:true});
-      await this.df.print()
       await this.df.resetIndex({inplace:true})
-      /*      
-      // NA values prevent describe!
-      await this.df.fillNa(0,{inplace:true})
-      await this.df.describe().print()
-      */
-      /*
-
-      //await this.df.describe().print()
-      // set  header
-      const oldHdr = this.df.columns
-      //const oldHdr = this.df.iloc({rows: [0]}).values as string[]
-      // important to have values[0]  .. we can request more than 1 row, sow iloc returns array
-      const newHdr = await this.df.iloc({ rows: [0] }).values[0] as string[]
-      // Create a mapping of old column names to new column names
-      const hdrMapping = {} as any;
-      for (let i = 0; i < newHdr.length; i++) {
-        const o = oldHdr[i]
-        const n = newHdr[i]
-        hdrMapping[o] = n
-      }
-      // Rename the columns of the DataFrame
-      //await this.df.rename(hdrMapping, { inplace: true });
-      // drop inplace doesn't work on rows?
-      await this.df.print()
-      //await this.df.describe().print()
-      //this.df = await this.df.drop({ index: [0] });
-      DcNode.print("Processed:" + sheetNames[0])
-      /*
-      const fileSheets = []
-      sheetNames.forEach((name,idx) => {
-        const worksheet = workbook.Sheets[name];
-        const data = utils.sheet_to_json(worksheet, {header: idx > 0?1:0});
-        fileSheets.push({name:name, data:data})
-        console.log("Data:\n",data)
-        this.df = new DcNode.dfd.DataFrame(data.slice(1)) //, {columns: data[0]});
-        console.log("Processed:",name)
-      })
-      */
     } catch (e) {
       await DcNode.print("xlsx failed:" + String(e))
       alert("xlsx failed:" + String(e))

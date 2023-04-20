@@ -24,7 +24,7 @@ export class DataInfo extends DcNode {
       options: [
         {
           id: "fillna",
-          type: "numeric",
+          type: "number",
           label: "FILL",
           value: "0",
           min:"0",
@@ -50,6 +50,12 @@ export class DataInfo extends DcNode {
     }
     // update
     this.config = config // update config
+    // check if we have data already
+    if (this.signals.length < 1) {
+      return
+    }
+    DcNode.print("Updating with:" + this.signals[0].signal)
+    await this.messaging.emit(this.signals[0].signal)
   }
   async updated(msg: string, y?: any) {
     // with a single source we are sure that update can deliver valid data
