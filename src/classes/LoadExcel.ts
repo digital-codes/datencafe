@@ -31,6 +31,12 @@ export class LoadExcel extends DcNode {
           type:"url",
           label:"URL",
           value:""
+        },
+        {
+          id:"sheet",
+          type:"text",
+          label:"Sheet",
+          value:""
         }
       ]
     }
@@ -42,16 +48,15 @@ export class LoadExcel extends DcNode {
   async configure(options: any[]) {
     console.log("configure with: ",options)
     // we know the config structure here, so can just use the index
+    const config = this.config
+    for (let i = 0; i < options.length; i++) {
+      config.options[i].value = options[i]
+    }
+    // update
+    this.config = config // update config
     if (options[0] != "") {
-      const url = options[0]
-      //console.log("Config URL: ",url)
-      const config = this.config
-      //console.log("Old config: ",config)
-      // set the config value(s)
-      config.options[0].value = url
-      this.config = config // update config
-      await this.load(url)
-    } 
+      await this.load(options[0])
+    }
   }
   async load (url: string) {
   DcNode.print("Load on " + String(this.name))
@@ -70,6 +75,8 @@ export class LoadExcel extends DcNode {
   // see https://docs.sheetjs.com/docs/solutions/input
 
   let corsRequired = false
+  let fileData
+  let fileType
   try {
       const fetchOk = await testFetch(url,"xls")
       console.log("Test:",fetchOk)
@@ -82,20 +89,16 @@ export class LoadExcel extends DcNode {
           return
         }
       }      
+      if (fetchOk.data) {
+        fileData = fetchOk.data
+        fileType = fetchOk.mime 
+      }
     } catch (e) {
       console.log("Fetch failed: ",e)
       alert("URL cannot be loaded directly2")
       return
     }
-    const csvOptions = {
-      //delimiter: ",",
-      delimitersToGuess: [',', ';'],
-      //escapeChar:"\\",
-      //quoteChar:"\"",
-      header:true, // header row
-      preview:0, // > 0 is how many lines previews
-      skipEmptyLines:true
-    } as any //CsvInputOptionsBrowser
+
     // maybe try cors as well
     if (corsRequired) {
       try {
@@ -105,16 +108,31 @@ export class LoadExcel extends DcNode {
           alert("CORS loading failed. Check URL")
             return
         }
-        // update url and hdrs
-        url = fetchOk.url
-        csvOptions.downloadRequestHeaders = {"Authorization":"Bearer " + userStore.getToken()}
+        if (fetchOk.data) {
+          fileData = fetchOk.data
+          fileType = fetchOk.mime 
+        } else {
+          DcNode.print("No file data")
+          return
+        }
       } catch (e) {
         console.log("Fetch failed: ",e)
         alert("URL cannot be loaded. Check URL")
         return
       }
     } 
-    this.df = await DcNode.dfd.readExcel(url,csvOptions) as DataFrame
+    //this.df = await DcNode.dfd.readExcel(url,csvOptions) as DataFrame
+    // Assuming you already have an existing ArrayBuffer named "myExcelArrayBuffer"
+    const myBlob = new Blob([fileData], { type: fileType}) //"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" });
+    const myFile = new File([myBlob], "filename.xlsx", { type: fileType }) //  "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" });
+    // check requested sheet name from config
+    const sheet = this.config.options[1].value 
+    if (sheet != "") {
+      console.log("Sheet:",sheet)
+      this.df = await DcNode.dfd.readExcel(myFile,{sheet:sheet}) as DataFrame
+    } else {
+      this.df = await DcNode.dfd.readExcel(myFile) as DataFrame
+    }
     this.df.print()
     this.df.ctypes.print()
     /*

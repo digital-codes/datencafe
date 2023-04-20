@@ -122,13 +122,15 @@ switch ($type) {
         header("Content-type: application/json");
         break;
     case "xls":
-        header("Content-type: application/binary");
+        $mime_type = mime_content_type($url);
+        header("Content-type: " . $mime_type);
         break;
     case "csv":
         header("Content-type: text/csv");
         break;
     default:
         header("Content-type: text/csv");
+        $mime_type = "";
         break;
 }
 /*
@@ -141,7 +143,7 @@ if ($type == "csv") {
 // select 1 of 2 modes
 $fetchMode = 1;
 
-if ($fetchMode == 1) {
+if ($fetchMode == 2) {
     // Fetch the content from the URL using cURL
     $ch = curl_init($url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
