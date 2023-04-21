@@ -31,6 +31,7 @@ onMounted(async () => {
   console.log("DNT:", navigator.doNotTrack);
   await userStore.clear();
   await userStore.setLang(locale.value);
+  await checkLSToken()
   const mediaQueryObj = window.matchMedia("(prefers-color-scheme: dark)");
   const isDarkMode = mediaQueryObj.matches;
   if (isDarkMode) {
@@ -38,6 +39,30 @@ onMounted(async () => {
     await userStore.setDark(Modes.Dark);
   }
 });
+
+// check if we have a token in localstorage for this domain
+const checkLSToken = async () => {
+  try {
+    const tok = localStorage.getItem('dctok')
+    const loc = localStorage.getItem('dcloc')
+    if ((tok === null) || (loc === null)){
+      console.log("LS empty")
+      return
+    } 
+    const current = window.location.hostname
+    if (current != loc) {
+      console.log("LS wrong")
+      return
+    }
+    await userStore.setToken(tok)
+    console.log("Token set")
+
+  } catch (e) {
+    console.log("LS error",e)
+    return
+  }
+
+}
 
 // test swiping. works. move to app ...
 import { createGesture } from "@ionic/vue";

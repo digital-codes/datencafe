@@ -51,14 +51,14 @@ import { IonButton, IonContent, IonHeader, IonButtons, IonMenuButton, IonPage, I
 import { IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent } from '@ionic/vue'
 import { IonInput, IonItem, IonLabel, IonTextarea } from '@ionic/vue';
 import TitleBar from "@/components/TitleBar.vue"
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 
 // user store
 import { UserStore } from '@/services/UserStore'
 const userStore = UserStore()
 
-const loginGood = ref(false)
-const loginBad = ref(false)
+const loginGood = computed(() => userStore.getToken() > "")
+const loginBad = computed(() => userStore.getToken() == "")
 
 const form = ref({
   username: '',
@@ -83,19 +83,29 @@ const submitForm = async () => {
         //console.log(data);
         const token = data.token //JSON.parse(data)
         //console.log(token)
-        loginGood.value = true
-        loginBad.value = false
+        //loginGood.value = true
+        //loginBad.value = false
         await userStore.setToken(token)
+        await localStorage.setItem('dctok',token)
+        const loc = window.location.hostname
+        await localStorage.setItem('dcloc',loc)
+        console.log("LS set")
         break;
       } else {
         await userStore.setToken("")
+        await localStorage.removeItem('dctok')
+        await localStorage.removeItem('dcloc')
+        console.log("LS clear1")
         throw (new Error("Request failed: " + String(rsp.status)))
       }
     } catch (e) {
       console.log("Error: ",e.message)
       await userStore.setToken("")
-      loginBad.value = true
-      loginGood.value = false
+      await localStorage.removeItem('dctok')
+      await localStorage.removeItem('dcloc')
+      console.log("LS clear2")
+      //loginBad.value = true
+      //loginGood.value = false
     }
   }
 }

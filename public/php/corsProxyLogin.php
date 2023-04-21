@@ -145,11 +145,11 @@ function login() {
     global $csv_file, $secret_key, $token_exp_time;
     // check if we are running on localhost. forced login then
     if (($_SERVER['SERVER_NAME'] === 'localhost') || ($_SERVER['REMOTE_ADDR'] === '127.0.0.1')) {
+      $csv_file = "./users.csv";    
       $token = makeToken("LOCALHOST"); //JWT::encode($payload, $secret_key);
       echo json_encode(array("token" => $token));
       return;
     }
-    
 
     // Extract the username and password from the request
     $params = extractUsernameAndPassword();
