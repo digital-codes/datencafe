@@ -658,6 +658,7 @@ async function flowInit() {
           break;
         case NodeSpec.INPUT:
           options.push("upload");
+          options.push("connect");
           break;
         default:
           options.push("connect");
@@ -675,7 +676,9 @@ async function flowInit() {
           break;
           case "upload":
           console.log("Upload");
-          await instance.upload();
+          // set target
+          dataFileTarget.value = instance
+          dataFileInput.value.click()
           break;
           case "download":
           console.log("Download");
@@ -1742,7 +1745,7 @@ function loadFlow() {
   fileInput.value.click();
 }
 
-async function handleFileUpload(event) {
+async function handleFlowUpload(event) {
   const files = event.target.files;
   console.log("Files loaded:", files.length);
   console.log(files[0]);
@@ -2005,9 +2008,26 @@ const toggleTooltips = () => {
   tooltipsOpen.value = !tooltipsOpen.value;
   console.log("Toggle:", tooltipsOpen);
 };
+
+// file upload
+const dataFileInput = ref(null) // button id
+const dataFileTarget = ref(null) // instance
+
+async function handleDataUpload(event) {
+  const files = await event.target.files
+  // call upload function
+  await dataFileTarget.value.upload(files)
+}
+
 </script>
 
 <template>
+  <!-- upload button -->
+    <div style="display:none!important">
+    <input ref="dataFileInput" type="file" style="display:none" @change="handleDataUpload" />
+    <button @click="startFileUpload">Upload File</button>
+  </div>
+
   <div ref="pdfWrap" v-if="pdfWindow">
     <div v-html="pdfContent"></div>
   </div>
@@ -2016,7 +2036,7 @@ const toggleTooltips = () => {
       ref="fileInput"
       type="file"
       style="display: none"
-      @change="handleFileUpload"
+      @change="handleFlowUpload"
     />
     <a
       ref="scrotDown"

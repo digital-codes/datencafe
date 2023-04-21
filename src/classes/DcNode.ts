@@ -99,7 +99,7 @@ export class DcNode {
   download() {
     DcNode.print("Download")
   }
-  upload() {
+  upload(file:any) {
     DcNode.print("upload")
   }
   // getters/setters

@@ -10,6 +10,16 @@ import testFetch from "@/services/TestFetch"
 import { UserStore } from "@/services/UserStore";
 const userStore = UserStore()
 
+const defaultCsvOptions = {
+  //delimiter: ",",
+  delimitersToGuess: [',', ';'],
+  //escapeChar:"\\",
+  //quoteChar:"\"",
+  header:true, // header row
+  preview:0, // > 0 is how many lines previews
+  skipEmptyLines:true
+} as any //CsvInputOptionsBrowser
+
 export class LoadCsv extends DcNode {
   // properties
   static _display = false
@@ -57,10 +67,6 @@ export class LoadCsv extends DcNode {
   async load (url: string) {
   DcNode.print("Load on " + String(this.name))
   if (url === undefined) throw (new Error("Invalid URL"))
-  if (!await DcNode.providers.exists(this.id)) {
-    // create item in pubstore if not exists
-    await DcNode.providers.add(this.id,true) // file loaders are root nodes
-  }
   if (!url.includes("http")) {
     // local urls supported ... detect full host address with port number ...
     url = window.location.href.split(window.location.pathname)[0]  + url
@@ -84,15 +90,7 @@ export class LoadCsv extends DcNode {
       alert("URL cannot be loaded directly2")
       return
     }
-    const csvOptions = {
-      //delimiter: ",",
-      delimitersToGuess: [',', ';'],
-      //escapeChar:"\\",
-      //quoteChar:"\"",
-      header:true, // header row
-      preview:0, // > 0 is how many lines previews
-      skipEmptyLines:true
-    } as any //CsvInputOptionsBrowser
+    const csvOptions = defaultCsvOptions
     // maybe try cors as well
     if (corsRequired) {
       try {
@@ -118,10 +116,35 @@ export class LoadCsv extends DcNode {
     console.log("Values:",this.df.values)
     console.log("Columns:",this.df.columns)
     */
+    if (!await DcNode.providers.exists(this.id)) {
+      // create item in pubstore if not exists
+      await DcNode.providers.add(this.id,true) // file loaders are root nodes
+    }
     await DcNode.providers.update(this.id,toJSON(this.df))
     await super.messaging.emit(DcNode.signals.UPDPREFIX as string + this.id)
   }
+  // overwrite upload function
+  async upload(file: any) {
+    if (file.length < 1) {
+      throw (new Error("Invalid upload"))
+    }
+    const name = file[0].name
+    if (!name.endsWith(".csv")) {
+      alert("Not a CVS file?")
+      return
+    }
+    const csvOptions = defaultCsvOptions
+    this.df = await readCSVBrowser(file[0],csvOptions)
+    this.df.print()
+    this.df.ctypes.print()
+    if (!await DcNode.providers.exists(this.id)) {
+      // create item in pubstore if not exists
+      await DcNode.providers.add(this.id,true) // file loaders are root nodes
+    }
+    await DcNode.providers.update(this.id,toJSON(this.df))
+    await super.messaging.emit(DcNode.signals.UPDPREFIX as string + this.id)
 
+  }
   // getters
   get type() { return LoadCsv._type }
   get display() { return LoadCsv._display }
