@@ -8,6 +8,7 @@ export enum PreFixes {
 
 export enum Signals {
   UPDPREFIX = "UPD-",
+  URLOADPREFIX = "IFRAME"
 
 }
 

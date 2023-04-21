@@ -77,6 +77,8 @@ export class LoadCsv extends DcNode {
           corsRequired = true
         } else {
           alert("URL cannot be loaded directly. Log in and retry")
+          // emit iframe download signal for url 
+          await super.messaging.emit(DcNode.signals.URLOADPREFIX, url)
           return
         }
       }      
@@ -91,7 +93,7 @@ export class LoadCsv extends DcNode {
         const fetchOk = await testFetch(url,"csv", true)
         if (!fetchOk.success) {
           alert("CORS loading failed. Check URL")
-            return
+          return
         }
         // update url and hdrs
         url = fetchOk.url

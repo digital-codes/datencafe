@@ -58,7 +58,9 @@ export class LoadJson extends DcNode {
     try {
       const fetchOk = await testFetch(url, "json", false, true); // check for feature collection
       if (!fetchOk.success) {
-        alert("URL cannot be loaded directly");
+        alert("URL cannot be loaded directly. Log in or download locally");
+          // emit iframe download signal for url 
+          await super.messaging.emit(DcNode.signals.URLOADPREFIX, url)
         return;
       }
       if (fetchOk.status == "geojson") {

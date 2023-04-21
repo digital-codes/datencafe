@@ -78,7 +78,9 @@ export class LoadExcel extends DcNode {
         if (userStore.exists()) {
           corsRequired = true;
         } else {
-          alert("URL cannot be loaded directly. Log in and retry");
+          alert("URL cannot be loaded directly. Log in or download locally");
+          // emit iframe download signal for url 
+          await super.messaging.emit(DcNode.signals.URLOADPREFIX, url)
           return;
         }
       }

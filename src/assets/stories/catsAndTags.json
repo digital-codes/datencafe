@@ -22,7 +22,8 @@
         "Health",
         "Education",
         "Nature",
-        "Sustainability"
+        "Sustainability",
+        "Daten.Cafe"
       ],
       "icons": [
         "fa-people-roof",
@@ -31,7 +32,8 @@
         "fa-landmark-flag",
         "fa-book-medical",
         "fa-leaf",
-        "fa-recycle"
+        "fa-recycle",
+        "fa-mug-hot"
       ]
     },
     "tags": [
@@ -52,7 +54,8 @@
       "Natural Disasters",
       "Renewable Energy",
       "Sustainable Production",
-      "Circular Economy"
+      "Circular Economy",
+      "Tutorial"
     ]
   },
   "de": {
@@ -78,7 +81,8 @@
         "Gesundheit",
         "Bildung",
         "Natur",
-        "Nachhaltigkeit"
+        "Nachhaltigkeit",
+        "Daten.Cafe"
       ],
       "icons": [
         "fa-people-roof",
@@ -87,7 +91,8 @@
         "fa-landmark-flag",
         "fa-book-medical",
         "fa-leaf",
-        "fa-recycle"
+        "fa-recycle",
+        "fa-mug-hot"
       ]
     },
     "tags": [
@@ -108,7 +113,8 @@
       "Naturkatastrophen",
       "Erneuerbare Energie",
       "Nachhaltige Produktion",
-      "Kreislaufwirtschaft"
+      "Kreislaufwirtschaft",
+      "Anleitung"
     ]
   }
 }

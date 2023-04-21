@@ -993,6 +993,14 @@ onMounted(() => {
   flowWrap.value.style.width = "100%"; //String(ww.value) + "px"
   flowWrap.value.style.height = String(wh.value * 0.7) + "px";
   flowLoaded.value = true;
+
+  // subscribe on iframe loading signal
+  eventBus.on(Signals.URLOADPREFIX, async (data) => {
+    console.log("on iframe:",data)
+    await openIframe(data)
+    setTimeout(closeIframe,1000)
+  });
+
   //flowWrap.value.addEventListener("sel",()=>{console.log("sel")})
   //addEventListener("sel",flowWrap.value,(e)=>{console.log("sel",e)})
   /*
@@ -2060,6 +2068,28 @@ async function downloadData(instance) {
   */
 }
 
+// download ifram stuff
+const wrapIframe = ref()
+const iframeUrl = ref()
+const showIframe = ref(false)
+const linkIframe = ref()
+const closeIframe = () => { 
+  showIframe.value = false 
+  iframeUrl.value = ""
+}
+const openIframe = async (url) => {
+  console.log("Toggle iframe, ", url)
+  if (url == "") {
+    showIframe.value = false 
+  } else {
+    iframeUrl.value = url 
+    showIframe.value = true
+    await DelayTimer(200)
+    linkIframe.value.click()
+  }
+  await DelayTimer(500)
+  return   
+}
 
 </script>
 
@@ -2073,10 +2103,22 @@ async function downloadData(instance) {
   <div style="display:none!important">
     <a ref="dataDownLoad" href="#" download="datencafe.csv" style="display: none;"></a>
   </div>
+  <!-- download iframe -->
+  <div ref="wrapIframe" style="display:none!important" >
+    <div v-if="showIframe">
+      <!-- 
+      <iframe :src="iframeUrl" class="iframe"/>
+      -->
+      <a :href="iframeUrl" download target="_blank" ref="linkIframe"></a>
 
+    </div>
+
+  </div>
+  <!-- pdf wrap for markdown version -->
   <div ref="pdfWrap" v-if="pdfWindow">
     <div v-html="pdfContent"></div>
   </div>
+  <!-- regular start -->
   <div ref="flowWrap" class="wrap">
     <input
       ref="fileInput"

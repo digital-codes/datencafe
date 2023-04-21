@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Interactive Chart with JointJS</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.4.0/backbone-min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jointjs/3.1.1/joint.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jointjs/3.1.1/joint.min.css" />
+    <style>
+        .highlighted {
+  stroke: #FF8C00;
+  stroke-width: 3;
+  stroke-dasharray: 5 5;
+}
+</style>
+</head>
+
+<body>
+    <div id="canvas"></div>
+
+    <script>
+        var graph = new joint.dia.Graph();
+        var paper = new joint.dia.Paper({
+            el: $('#canvas'),
+            model: graph,
+            width: 800,
+            height: 600,
+            gridSize: 10,
+            drawGrid: true
+        });
+
+
+        paper.on('cell:pointerclick', function(cellView) {
+            console.log("cell ptr click2")
+  var cell = cellView.model;
+  if (cell.highlighted) {
+    cellView.unhighlight(null, {highlighter: 'addClass'});
+  } else {
+    cellView.highlight(null, {highlighter: 'addClass', highlighterPadding: 10, highlighterClass: 'highlighted'});
+  }
+});
+/*
+        paper.on('cell:pointerclick', function (cellView) {
+            console.log("cell ptr click")
+            var cell = cellView.model;
+            if (cell.selected) {
+                cell.unhighlight(null, { highlighter: { name: 'addClass', options: { className: 'selected' } } });
+                cell.selected = false;
+            } else {
+                cell.highlight(null, { highlighter: { name: 'addClass', options: { className: 'selected' } } });
+                cell.selected = true;
+            }
+        });
+*/
+        paper.on('blank:pointerclick', function () {
+            console.log("blank ptr click")
+            _.each(graph.getElements(), function (element) {
+                if (element.selected) {
+                    element.unhighlight(null, { highlighter: { name: 'addClass', options: { className: 'selected' } } });
+                    element.selected = false;
+                }
+            });
+        });
+
+// Add an event handler for the 'link:connect' event
+paper.on('link:connect', function(linkView) {
+    console.log("cnnect")
+  var link = linkView.model;
+  console.log('New link connected:', link);
+});
+
+// Add an event handler for the 'link:disconnect' event
+paper.on('link:disconnect', function(linkView) {
+    console.log("disconnet")
+  var link = linkView.model;
+  console.log('Link disconnected:', link);
+});
+
+
+// Add an event handler for deleting links and removing them from the graph
+paper.on('link:remove', function(linkView, event, x, y) {
+  var link = linkView.model;
+  console.log('Link removed:', link);
+  link.remove();
+});
+
+
+
+// Add an event handler for removing nodes
+paper.on('cell:pointerdblclick', function(cellView) {
+    console.log("cell dblclk")
+  var cell = cellView.model;
+  if (cell.isElement()) {
+    cell.remove();
+  }
+});
+
+// Add an event handler for removing nodes
+paper.on('cell:remove', function(cellView) {
+    console.log("cell remove")
+});
+
+// Add an event handler for removing nodes
+paper.on('graph:remove', function(cellView) {
+    console.log("graph remove")
+});
+
+
+        var rect = new joint.shapes.basic.Rect({
+            position: { x: 100, y: 100 },
+            size: { width: 100, height: 50 },
+            attrs: {
+                rect: { fill: '#2ECC71' },
+                text: { text: 'Rect', fill: 'white' }
+            }
+        });
+
+        var circle = new joint.shapes.basic.Circle({
+            position: { x: 400, y: 100 },
+            size: { width: 50, height: 50 },
+            attrs: {
+                circle: { fill: '#3498DB' },
+                text: { text: 'Circle', fill: 'white' }
+            }
+        });
+        // create a new shape with ports
+        var custom1 = new joint.shapes.devs.Model({
+            position: { x: 300, y: 300 },
+            size: { width: 100, height: 100 },
+            inPorts: ['in1', 'in2'],
+            outPorts: ['out1', 'out2'],
+            attrs: {
+                '.body': { fill: '#E74C3C' },
+                '.label': { text: 'Shape with Ports', fill: 'white' },
+                '.inPorts circle': { fill: '#16A085', magnet: 'passive', type: 'input' },
+                '.outPorts circle': { fill: '#16A085', magnet: 'active', type: 'output' }
+            }
+        });
+        graph.addCell(custom1);
+        var custom2 = new joint.shapes.devs.Model({
+            position: { x: 300, y: 500 },
+            size: { width: 100, height: 100 },
+            inPorts: ['in1', 'in2'],
+            outPorts: ['out1', 'out2'],
+            attrs: {
+                '.body': { fill: '#E74C3C' },
+                '.label': { text: 'Shape with Ports', fill: 'white' },
+                '.inPorts circle': { fill: '#16A085', magnet: 'passive', type: 'input' },
+                '.outPorts circle': { fill: '#16A085', magnet: 'active', type: 'output' }
+            }
+        });
+        graph.addCell(custom2);
+
+        // create a link between two shapes
+        var link = new joint.shapes.standard.Link({
+            source: { id: custom1.id, port: 'out2' },
+            target: { id: custom2.id, port: 'in1' },
+            attrs: {
+                '.connection': { stroke: '#95A5A6', 'stroke-width': 2 }
+            }
+        });
+        graph.addCell(link);
+
+        graph.addCells([rect, circle]);
+
+        var selection = new Backbone.Collection();
+        /*
+        var selectionView = new joint.ui.SelectionView({
+            paper: paper,
+            graph: graph,
+            model: selection
+        });
+
+        paper.on('cell:pointerdown', function (cellView, evt) {
+            console.log("cel ptr down")
+            if (evt.ctrlKey || evt.metaKey) {
+                selection.add(cellView.model);
+                selectionView.createSelectionBox(cellView);
+            }
+        });
+
+        paper.on('blank:pointerdown', function (evt) {
+            console.log("blank ptr down")
+            if (evt.ctrlKey || evt.metaKey) {
+                selectionView.startSelecting(evt);
+            } else {
+                selection.reset([]);
+            }
+        });
+
+        selectionView.on('selection-box:pointerdown', function (evt) {
+            console.log("sel box ptr down")
+            if (evt.ctrlKey || evt.metaKey) {
+                var cell = selection.get($(evt.target).data('model'));
+                selection.remove(cell);
+                selectionView.destroySelectionBox(paper.findViewByModel(cell));
+            }
+        });
+        */
+
+
+
+    </script>
+</body>
+
+</html>
