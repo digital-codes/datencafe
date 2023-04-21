@@ -38,40 +38,6 @@
         },
         {
           "data": {
-            "id": "N3",
-            "name": "N3",
-            "ports": {
-              "A": true,
-              "B": true
-            },
-            "instance": {
-              "id": "N3",
-              "name": "N3",
-              "type": "proc",
-              "display": 0
-            },
-            "type": {
-              "name": "addcols",
-              "shp": "roundrectangle",
-              "bd": "#000",
-              "img": "url('/img/widgets/MergeData.png')"
-            }
-          },
-          "position": {
-            "x": 331.1699198821359,
-            "y": 271.0001165149242
-          },
-          "group": "nodes",
-          "removed": false,
-          "selected": false,
-          "selectable": true,
-          "locked": false,
-          "grabbable": true,
-          "pannable": false,
-          "classes": ""
-        },
-        {
-          "data": {
             "id": "N4",
             "name": "N4",
             "ports": {},
@@ -220,8 +186,8 @@
             }
           },
           "position": {
-            "x": 323.33112438887457,
-            "y": 372.10741212874706
+            "x": 324.39184732843984,
+            "y": 412.76845814541423
           },
           "group": "nodes",
           "removed": false,
@@ -258,7 +224,41 @@
           },
           "group": "nodes",
           "removed": false,
-          "selected": true,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": false,
+          "classes": ""
+        },
+        {
+          "data": {
+            "id": "N10",
+            "name": "N10",
+            "ports": {
+              "A": true,
+              "B": true
+            },
+            "instance": {
+              "id": "N10",
+              "name": "N10",
+              "type": "proc",
+              "display": 0
+            },
+            "type": {
+              "name": "addcols",
+              "shp": "roundrectangle",
+              "bd": "#000",
+              "img": "url('/img/widgets/MergeData.png')"
+            }
+          },
+          "position": {
+            "x": 333.96302249183657,
+            "y": 296.165382913245
+          },
+          "group": "nodes",
+          "removed": false,
+          "selected": false,
           "selectable": true,
           "locked": false,
           "grabbable": true,
@@ -267,111 +267,6 @@
         }
       ],
       "edges": [
-        {
-          "data": {
-            "source": "N4",
-            "target": "N3",
-            "id": "a1c896b3-8396-4248-8a61-cd0e110175a5",
-            "type": "e1-A",
-            "port": "A"
-          },
-          "position": {
-            "x": 0,
-            "y": 0
-          },
-          "group": "edges",
-          "removed": false,
-          "selected": false,
-          "selectable": true,
-          "locked": false,
-          "grabbable": true,
-          "pannable": true,
-          "classes": ""
-        },
-        {
-          "data": {
-            "source": "N3",
-            "target": "N2",
-            "id": "187a6eca-5a9e-4417-b796-186c647b5649",
-            "type": "e1-A",
-            "port": "A"
-          },
-          "position": {
-            "x": 0,
-            "y": 0
-          },
-          "group": "edges",
-          "removed": false,
-          "selected": false,
-          "selectable": true,
-          "locked": false,
-          "grabbable": true,
-          "pannable": true,
-          "classes": ""
-        },
-        {
-          "data": {
-            "source": "N5",
-            "target": "N3",
-            "id": "0d787f11-1714-4bab-bb42-157cb564cc5c",
-            "type": "e1-B",
-            "port": "B"
-          },
-          "position": {
-            "x": 0,
-            "y": 0
-          },
-          "group": "edges",
-          "removed": false,
-          "selected": false,
-          "selectable": true,
-          "locked": false,
-          "grabbable": true,
-          "pannable": true,
-          "classes": ""
-        },
-        {
-          "data": {
-            "source": "N3",
-            "target": "N6",
-            "id": "ffe1d987-9bae-48f9-8f32-3e6b86a23823",
-            "type": "e1-A",
-            "port": "A"
-          },
-          "position": {
-            "x": 0,
-            "y": 0
-          },
-          "group": "edges",
-          "removed": false,
-          "selected": false,
-          "selectable": true,
-          "locked": false,
-          "grabbable": true,
-          "pannable": true,
-          "classes": ""
-        },
-        {
-          "data": {
-            "source": "N3",
-            "target": "N7",
-            "id": "484073ee-851f-4ea7-9a84-aa863dba08a8",
-            "type": "e1-A",
-            "port": "A"
-          },
-          "position": {
-            "x": 0,
-            "y": 0
-          },
-          "group": "edges",
-          "removed": false,
-          "selected": false,
-          "selectable": true,
-          "locked": false,
-          "grabbable": true,
-          "pannable": true,
-          "classes": ""
-        },
         {
           "data": {
             "source": "N5",
@@ -419,6 +314,111 @@
             "source": "N8",
             "target": "N9",
             "id": "93cc1929-d8e1-433d-851c-53818edebe42",
+            "type": "e1-A",
+            "port": "A"
+          },
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "group": "edges",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": true,
+          "classes": ""
+        },
+        {
+          "data": {
+            "source": "N5",
+            "target": "N10",
+            "id": "76a10472-5dc1-4163-be2c-a4e7dd4f88a4",
+            "type": "e1-B",
+            "port": "B"
+          },
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "group": "edges",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": true,
+          "classes": ""
+        },
+        {
+          "data": {
+            "source": "N4",
+            "target": "N10",
+            "id": "b39f09c2-395e-495d-96e0-6d629ace7493",
+            "type": "e1-A",
+            "port": "A"
+          },
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "group": "edges",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": true,
+          "classes": ""
+        },
+        {
+          "data": {
+            "source": "N10",
+            "target": "N6",
+            "id": "2f4af8da-7390-43fb-9932-a5c4d358950f",
+            "type": "e1-A",
+            "port": "A"
+          },
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "group": "edges",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": true,
+          "classes": ""
+        },
+        {
+          "data": {
+            "source": "N10",
+            "target": "N2",
+            "id": "279c8f39-2a72-49b7-b73c-0df7a8112eb7",
+            "type": "e1-A",
+            "port": "A"
+          },
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "group": "edges",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": true,
+          "classes": ""
+        },
+        {
+          "data": {
+            "source": "N10",
+            "target": "N7",
+            "id": "dd2a404b-67db-44ec-98b8-e20d18e4cf45",
             "type": "e1-A",
             "port": "A"
           },
@@ -535,14 +535,14 @@
     "data": {},
     "zoomingEnabled": true,
     "userZoomingEnabled": true,
-    "zoom": 2.1927975714064267,
+    "zoom": 2.8274734887305164,
     "minZoom": 1,
     "maxZoom": 10,
     "panningEnabled": true,
     "userPanningEnabled": true,
     "pan": {
-      "x": -374.1566806800718,
-      "y": -371.56423785178913
+      "x": -397.2085003823506,
+      "y": -614.6587206317432
     },
     "boxSelectionEnabled": true,
     "renderer": {
@@ -551,38 +551,6 @@
     "wheelSensitivity": 0.2
   },
   "nodes": [
-    {
-      "id": "N3",
-      "name": "N3",
-      "classname": "addcols",
-      "config": {
-        "pop": "select",
-        "options": {
-          "id": "op",
-          "type": "string",
-          "label": "Operation",
-          "value": [
-            "Join",
-            "Append",
-            "Add",
-            "Sub",
-            "Mul",
-            "Div"
-          ],
-          "current": "Mul"
-        }
-      },
-      "sigs": [
-        {
-          "signal": "UPD-N4",
-          "port": "A"
-        },
-        {
-          "signal": "UPD-N5",
-          "port": "B"
-        }
-      ]
-    },
     {
       "id": "N4",
       "name": "N4",
@@ -618,7 +586,7 @@
             "id": "period",
             "type": "number",
             "label": "Period (s)",
-            "value": "5",
+            "value": "3",
             "min": "1",
             "max": "60"
           },
@@ -692,7 +660,7 @@
       "config": {},
       "sigs": [
         {
-          "signal": "UPD-N3",
+          "signal": "UPD-N10",
           "port": "A"
         }
       ]
@@ -704,7 +672,7 @@
       "config": {},
       "sigs": [
         {
-          "signal": "UPD-N3",
+          "signal": "UPD-N10",
           "port": "A"
         }
       ]
@@ -716,7 +684,7 @@
       "config": {},
       "sigs": [
         {
-          "signal": "UPD-N3",
+          "signal": "UPD-N10",
           "port": "A"
         }
       ]
@@ -745,6 +713,41 @@
       "sigs": [
         {
           "signal": "UPD-N8",
+          "port": "A"
+        }
+      ]
+    },
+    {
+      "id": "N10",
+      "name": "N10",
+      "classname": "addcols",
+      "config": {
+        "pop": "mixed",
+        "options": [
+          {
+            "id": "op",
+            "type": "string",
+            "label": "Operation",
+            "select": true,
+            "value": [
+              "Join",
+              "Append",
+              "Add",
+              "Sub",
+              "Mul",
+              "Div"
+            ],
+            "current": "Add"
+          }
+        ]
+      },
+      "sigs": [
+        {
+          "signal": "UPD-N5",
+          "port": "B"
+        },
+        {
+          "signal": "UPD-N4",
           "port": "A"
         }
       ]
@@ -833,44 +836,44 @@
       "id": "N4",
       "data": [
         {
-          "COL1": 21.325487601570416,
-          "COL2": 43.469684387929895
+          "COL1": 63.75243255589742,
+          "COL2": 14.889484534819209
         },
         {
-          "COL1": 1.2481764674779017,
-          "COL2": 70.71444999824075
+          "COL1": 48.239258170954315,
+          "COL2": 70.12674092170576
         },
         {
-          "COL1": 9.726154788173357,
-          "COL2": 66.71052042245562
+          "COL1": 18.595835470046985,
+          "COL2": 4.600235335695002
         },
         {
-          "COL1": 70.66506805558139,
-          "COL2": 96.01483385945032
+          "COL1": 92.32030106485529,
+          "COL2": 81.5719684882448
         },
         {
-          "COL1": 61.05734717675052,
-          "COL2": 21.450757198052063
+          "COL1": 98.5429336803631,
+          "COL2": 50.172609235619504
         },
         {
-          "COL1": 94.82721004296012,
-          "COL2": 15.86818172117448
+          "COL1": 85.16523345229197,
+          "COL2": 98.60593725356368
         },
         {
-          "COL1": 84.08952400750402,
-          "COL2": 89.33974818315298
+          "COL1": 40.03887646460736,
+          "COL2": 99.86276771882716
         },
         {
-          "COL1": 22.13388588650823,
-          "COL2": 92.26337110825476
+          "COL1": 13.306835755237334,
+          "COL2": 49.56602400051698
         },
         {
-          "COL1": 77.457669433347,
-          "COL2": 77.5798810530137
+          "COL1": 59.84317696014173,
+          "COL2": 41.78780864257813
         },
         {
-          "COL1": 44.968095485005996,
-          "COL2": 40.05369838601454
+          "COL1": 25.385104710696773,
+          "COL2": 59.933469769907944
         }
       ],
       "root": false,
@@ -892,54 +895,54 @@
       "id": "N5",
       "data": [
         {
-          "COL1": 94.81714508457682,
-          "COL2": 91.21567530329322,
-          "COL3": 21.92465526422901
+          "COL1": 11.726543089101993,
+          "COL2": 85.48500320141234,
+          "COL3": 50.74323614537041
         },
         {
-          "COL1": 87.88996792083884,
-          "COL2": 50.20514571609485,
-          "COL3": 4.388189415339195
+          "COL1": 77.80174085767966,
+          "COL2": 79.53149718222929,
+          "COL3": 61.9441949407458
         },
         {
-          "COL1": 55.219363474448166,
-          "COL2": 15.77258997534564,
-          "COL3": 22.02948530775014
+          "COL1": 36.97361898244777,
+          "COL2": 76.92413387415759,
+          "COL3": 67.64998708290915
         },
         {
-          "COL1": 78.09340586936978,
-          "COL2": 53.436224409546554,
-          "COL3": 9.18282146346514
+          "COL1": 78.37264682404061,
+          "COL2": 49.733262718468275,
+          "COL3": 85.08914603299073
         },
         {
-          "COL1": 46.28748862621953,
-          "COL2": 63.16061626243841,
-          "COL3": 94.98875654462546
+          "COL1": 38.93620699499307,
+          "COL2": 67.742520833894,
+          "COL3": 89.89887246758849
         },
         {
-          "COL1": 31.998730177852263,
-          "COL2": 45.66084307423053,
-          "COL3": 94.86052369009661
+          "COL1": 70.98196200045575,
+          "COL2": 88.19779119525363,
+          "COL3": 94.05675348499393
         },
         {
-          "COL1": 88.30568360169453,
-          "COL2": 32.30821246145934,
-          "COL3": 43.258040333776734
+          "COL1": 11.933572881432742,
+          "COL2": 67.23279269861794,
+          "COL3": 3.8419369391192393
         },
         {
-          "COL1": 76.91339587829744,
-          "COL2": 0.2508954611583625,
-          "COL3": 99.51384581858352
+          "COL1": 86.19755488262619,
+          "COL2": 76.31729497319604,
+          "COL3": 74.02417504858984
         },
         {
-          "COL1": 22.20021648048175,
-          "COL2": 42.131153691872605,
-          "COL3": 11.031301707377072
+          "COL1": 39.067236775729555,
+          "COL2": 69.92037845495412,
+          "COL3": 66.2594866502423
         },
         {
-          "COL1": 74.92216056818029,
-          "COL2": 3.7042090099226765,
-          "COL3": 43.08732333941761
+          "COL1": 58.21011700561836,
+          "COL2": 63.01732362729043,
+          "COL3": 79.33387261270535
         }
       ],
       "root": false,
@@ -985,111 +988,206 @@
       "id": "N8",
       "data": [
         {
-          "COL1": 94.81714508457682,
-          "COL2": 91.21567530329322,
-          "COL3": 21.92465526422901
+          "COL1": 11.726543089101993,
+          "COL2": 85.48500320141234,
+          "COL3": 50.74323614537041
         },
         {
-          "COL1": 87.88996792083884,
-          "COL2": 50.20514571609485,
-          "COL3": 4.388189415339195
+          "COL1": 77.80174085767966,
+          "COL2": 79.53149718222929,
+          "COL3": 61.9441949407458
         },
         {
-          "COL1": 55.219363474448166,
-          "COL2": 15.77258997534564,
-          "COL3": 22.02948530775014
+          "COL1": 36.97361898244777,
+          "COL2": 76.92413387415759,
+          "COL3": 67.64998708290915
         },
         {
-          "COL1": 78.09340586936978,
-          "COL2": 53.436224409546554,
-          "COL3": 9.18282146346514
+          "COL1": 78.37264682404061,
+          "COL2": 49.733262718468275,
+          "COL3": 85.08914603299073
         },
         {
-          "COL1": 46.28748862621953,
-          "COL2": 63.16061626243841,
-          "COL3": 94.98875654462546
+          "COL1": 38.93620699499307,
+          "COL2": 67.742520833894,
+          "COL3": 89.89887246758849
         },
         {
-          "COL1": 31.998730177852263,
-          "COL2": 45.66084307423053,
-          "COL3": 94.86052369009661
+          "COL1": 70.98196200045575,
+          "COL2": 88.19779119525363,
+          "COL3": 94.05675348499393
         },
         {
-          "COL1": 88.30568360169453,
-          "COL2": 32.30821246145934,
-          "COL3": 43.258040333776734
+          "COL1": 11.933572881432742,
+          "COL2": 67.23279269861794,
+          "COL3": 3.8419369391192393
         },
         {
-          "COL1": 76.91339587829744,
-          "COL2": 0.2508954611583625,
-          "COL3": 99.51384581858352
+          "COL1": 86.19755488262619,
+          "COL2": 76.31729497319604,
+          "COL3": 74.02417504858984
         },
         {
-          "COL1": 22.20021648048175,
-          "COL2": 42.131153691872605,
-          "COL3": 11.031301707377072
+          "COL1": 39.067236775729555,
+          "COL2": 69.92037845495412,
+          "COL3": 66.2594866502423
         },
         {
-          "COL1": 74.92216056818029,
-          "COL2": 3.7042090099226765,
-          "COL3": 43.08732333941761
+          "COL1": 58.21011700561836,
+          "COL2": 63.01732362729043,
+          "COL3": 79.33387261270535
         },
         {
-          "COL1": 21.325487601570416,
-          "COL2": 43.469684387929895,
+          "COL1": 63.75243255589742,
+          "COL2": 14.889484534819209,
           "COL3": null
         },
         {
-          "COL1": 1.2481764674779017,
-          "COL2": 70.71444999824075,
+          "COL1": 48.239258170954315,
+          "COL2": 70.12674092170576,
           "COL3": null
         },
         {
-          "COL1": 9.726154788173357,
-          "COL2": 66.71052042245562,
+          "COL1": 18.595835470046985,
+          "COL2": 4.600235335695002,
           "COL3": null
         },
         {
-          "COL1": 70.66506805558139,
-          "COL2": 96.01483385945032,
+          "COL1": 92.32030106485529,
+          "COL2": 81.5719684882448,
           "COL3": null
         },
         {
-          "COL1": 61.05734717675052,
-          "COL2": 21.450757198052063,
+          "COL1": 98.5429336803631,
+          "COL2": 50.172609235619504,
           "COL3": null
         },
         {
-          "COL1": 94.82721004296012,
-          "COL2": 15.86818172117448,
+          "COL1": 85.16523345229197,
+          "COL2": 98.60593725356368,
           "COL3": null
         },
         {
-          "COL1": 84.08952400750402,
-          "COL2": 89.33974818315298,
+          "COL1": 40.03887646460736,
+          "COL2": 99.86276771882716,
           "COL3": null
         },
         {
-          "COL1": 22.13388588650823,
-          "COL2": 92.26337110825476,
+          "COL1": 13.306835755237334,
+          "COL2": 49.56602400051698,
           "COL3": null
         },
         {
-          "COL1": 77.457669433347,
-          "COL2": 77.5798810530137,
+          "COL1": 59.84317696014173,
+          "COL2": 41.78780864257813,
           "COL3": null
         },
         {
-          "COL1": 44.968095485005996,
-          "COL2": 40.05369838601454,
+          "COL1": 25.385104710696773,
+          "COL2": 59.933469769907944,
           "COL3": null
         }
       ],
       "root": false,
       "loaded": true
+    },
+    {
+      "id": "N3",
+      "data": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N4",
+      "data": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N5",
+      "data": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N8",
+      "data": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N10",
+      "data": [
+        {
+          "COL1": 75.47897338867188,
+          "COL2": 100.37448120117188
+        },
+        {
+          "COL1": 126.04100036621094,
+          "COL2": 149.65823364257812
+        },
+        {
+          "COL1": 55.56945037841797,
+          "COL2": 81.52436828613281
+        },
+        {
+          "COL1": 170.69296264648438,
+          "COL2": 131.30523681640625
+        },
+        {
+          "COL1": 137.47914123535156,
+          "COL2": 117.91513061523438
+        },
+        {
+          "COL1": 156.14718627929688,
+          "COL2": 186.80372619628906
+        },
+        {
+          "COL1": 51.972450256347656,
+          "COL2": 167.09556579589844
+        },
+        {
+          "COL1": 99.50439453125,
+          "COL2": 125.88331604003906
+        },
+        {
+          "COL1": 98.91041564941406,
+          "COL2": 111.70819091796875
+        },
+        {
+          "COL1": 83.59522247314453,
+          "COL2": 122.95079040527344
+        }
+      ],
+      "root": false,
+      "loaded": true
+    },
+    {
+      "id": "N4",
+      "data": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N5",
+      "data": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N8",
+      "data": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N10",
+      "data": {},
+      "root": false,
+      "loaded": false
     }
   ],
-  "next": 10,
+  "next": 11,
   "story": {
     "title": "Test für einfache Kombination von Daten",
     "author": "AK",
