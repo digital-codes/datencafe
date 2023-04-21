@@ -8,7 +8,7 @@
   </template>
   
   <script setup>
-  import { ref, onMounted } from 'vue';
+  import { ref, onMounted, onUnmounted } from 'vue';
   import L from 'leaflet';
   import 'leaflet/dist/leaflet.css';
 
@@ -156,6 +156,10 @@ function polyStyle(feature) {
 
 });
 
+onUnmounted(async () => {
+  await layer.value.remove()
+  await map.value.remove()
+})
 
 </script>
 

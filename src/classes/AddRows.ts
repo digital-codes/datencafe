@@ -2,14 +2,14 @@
 
 import {DcNode} from "./DcNode"
 import {SigPort} from "./DcNode"
-import { NodeTypes } from '@/services/GlobalDefs';
+import { NodeSpec } from '@/services/GlobalDefs';
 import { DelayTimer } from "@/services/DelayTimer"
 
 export class AddRows extends DcNode {
   // properties
   static _display = false
   private updCnt = 0
-  static _type = NodeTypes.PROC
+  static _type = NodeSpec.PROC
   // constructor
   constructor(id: string, typeInfo: any) {
     const ports: string[] = ['A', 'B']

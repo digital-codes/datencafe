@@ -4,14 +4,14 @@ import {DcNode} from "./DcNode"
 
 import {DataFrame, toJSON} from 'danfojs/dist/danfojs-browser/src';
 
-import { NodeTypes } from '@/services/GlobalDefs';
+import { NodeSpec } from '@/services/GlobalDefs';
 
 
 export class RandomGen extends DcNode {
   // properties
   // FIXME  parms must go into config, together with active state
   static _display = false
-  static _type = NodeTypes.GEN
+  static _type = NodeSpec.GEN
   private genCnt = 0
   private df = new DataFrame()
   private active = false

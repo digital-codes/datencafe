@@ -5,7 +5,8 @@
     <span v-for="option in options" :key="option">
       <ion-button v-if="option=='config'" @click="config">{{$t("flow.ctx.config")}}</ion-button>
       <ion-button v-if="option=='connect'" @click="connect">{{$t("flow.ctx.connect")}}</ion-button>
-      <ion-button v-if="option=='download'" @click="connect">{{$t("flow.ctx.download")}}</ion-button>
+      <ion-button v-if="option=='upload'" @click="upload">{{$t("flow.ctx.upload")}}</ion-button>
+      <ion-button v-if="option=='download'" @click="download">{{$t("flow.ctx.download")}}</ion-button>
       <ion-button v-if="option=='remove'" @click="remove">{{$t("flow.ctx.remove")}}</ion-button>
     </span>
     </div>
@@ -14,8 +15,6 @@
 
 <script lang="ts" setup>
 import { IonContent, IonButton } from '@ionic/vue';
-
-import { ref, onMounted } from "vue"
 
 import eventBus from '@/services/eventBus';
 
@@ -31,6 +30,10 @@ const config = async () => {
 const download = async () => {
   console.log('signal',props.signal)
   await eventBus.emit(props.signal, "download");
+}
+const upload = async () => {
+  console.log('signal',props.signal)
+  await eventBus.emit(props.signal, "upload");
 }
 const connect = async () => {
   console.log('signal',props.signal)

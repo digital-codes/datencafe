@@ -2,11 +2,11 @@
 
 
 import {DcNode} from "./DcNode"
-import { NodeTypes } from '../services/GlobalDefs';
+import { NodeSpec } from '../services/GlobalDefs';
 
 export class {{class}} extends DcNode {
   // properties
-  static _type = NodeTypes.PROC
+  static _type = NodeSpec.PROC
   private updCnt = 0
   static _display = false
   // constructor

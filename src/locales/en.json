@@ -55,6 +55,7 @@
       "config":"Configure",
       "connect":"Connect",
       "download":"Download",
+      "upload":"Upload",
       "remove":"Delete",
       "rename":"Rename"
     },

@@ -1,12 +1,12 @@
 // csv node class, extends DcNode
 
 import {DcNode} from "./DcNode"
-import { NodeTypes } from '@/services/GlobalDefs';
+import { NodeSpec } from '@/services/GlobalDefs';
 
 export class SelRows extends DcNode {
   // properties
   static _display = false
-  static _type = NodeTypes.PROC
+  static _type = NodeSpec.PROC
   // constructor
   constructor(id:string,typeInfo:any) {
     // although we need to call this first,

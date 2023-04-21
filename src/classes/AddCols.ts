@@ -3,12 +3,12 @@
 
 import { DcNode } from "./DcNode"
 import { SigPort } from "./DcNode"
-import { NodeTypes } from '@/services/GlobalDefs';
+import { NodeSpec } from '@/services/GlobalDefs';
 import { DelayTimer } from "@/services/DelayTimer"
 
 export class AddCols extends DcNode {
   // properties
-  static _type = NodeTypes.PROC
+  static _type = NodeSpec.PROC
   private updCnt = 0
   static _display = false
   // constructor

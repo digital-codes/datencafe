@@ -95,6 +95,13 @@ export class DcNode {
     DcNode.print("Evaluating with parms: " + JSON.stringify(args))
     return this._eval(...args)
   }
+  // dummy up/download
+  download() {
+    DcNode.print("Download")
+  }
+  upload() {
+    DcNode.print("upload")
+  }
   // getters/setters
   // readonly first
   get id() { return this._id }
@@ -117,6 +124,7 @@ export class DcNode {
   get icon(): string | null { return this._icon }
   set icon(x) { this._icon = x }
   get messaging() { return this._messaging }
+  
 } 
 
   

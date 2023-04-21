@@ -12,7 +12,7 @@ export enum Signals {
 }
 
 
-export enum NodeTypes {
+export enum NodeSpec {
   CHART = "chart",
   TABLE = "table",
   PROC = "proc",

@@ -2,9 +2,8 @@
 
 import { DcNode } from "./DcNode"
 import { DataFrame, toJSON } from 'danfojs/dist/danfojs-browser/src';
-import { NodeTypes } from '@/services/GlobalDefs';
+import { NodeSpec } from '@/services/GlobalDefs';
 
-import { CsvInputOptionsBrowser } from "danfojs/dist/danfojs-base/shared/types";
 import testFetch from "@/services/TestFetch"
 import { UserStore } from "@/services/UserStore";
 const userStore = UserStore()
@@ -14,7 +13,7 @@ import { read, utils } from "xlsx";
 export class LoadExcel extends DcNode {
   // properties
   static _display = false
-  static _type = NodeTypes.INPUT
+  static _type = NodeSpec.INPUT
   private df = new DataFrame()
   // constructor
   constructor(id: string, typeInfo: any) {

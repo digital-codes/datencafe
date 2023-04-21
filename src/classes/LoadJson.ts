@@ -2,7 +2,7 @@
 
 import {DcNode} from "./DcNode"
 import {DataFrame, toJSON} from 'danfojs/dist/danfojs-browser/src';
-import { NodeTypes } from '@/services/GlobalDefs';
+import { NodeSpec } from '@/services/GlobalDefs';
 
 import { readJSONBrowser } from "danfojs/dist/danfojs-base/io/browser"
 import { JsonInputOptionsBrowser } from "danfojs/dist/danfojs-base/shared/types";
@@ -11,7 +11,7 @@ import testFetch from "@/services/TestFetch"
 export class LoadJson extends DcNode {
   // properties
   static _display = false
-  static _type = NodeTypes.INPUT
+  static _type = NodeSpec.INPUT
   private df = new DataFrame()
   // constructor
   constructor(id:string,typeInfo:any) {

@@ -2,13 +2,13 @@
 
 import {DcNode} from "./DcNode"
 import {SigPort} from "./DcNode"
-import { NodeTypes } from '@/services/GlobalDefs';
+import { NodeSpec } from '@/services/GlobalDefs';
 
 
 export class TablePlot extends DcNode {
   // properties
   static _display = true
-  static _type = NodeTypes.TABLE
+  static _type = NodeSpec.TABLE
   private updCnt = 0
   // constructor
   constructor(id:string,typeInfo:any) {

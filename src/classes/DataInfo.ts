@@ -2,13 +2,13 @@
 
 import { DcNode } from "./DcNode"
 import { SigPort } from "./DcNode"
-import { NodeTypes } from '@/services/GlobalDefs';
+import { NodeSpec } from '@/services/GlobalDefs';
 import { DelayTimer } from "@/services/DelayTimer"
 
 export class DataInfo extends DcNode {
   // properties
   static _display = false
-  static _type = NodeTypes.PROC
+  static _type = NodeSpec.PROC
   private updCnt = 0
   // constructor
   constructor(id: string, typeInfo: any) {

@@ -2,14 +2,14 @@
 
 import {DcNode} from "./DcNode"
 import {SigPort} from "./DcNode"
-import { NodeTypes } from '@/services/GlobalDefs';
+import { NodeSpec } from '@/services/GlobalDefs';
 import { DelayTimer } from "@/services/DelayTimer"
 
 export class LinePlot extends DcNode {
   // properties
   private updCnt = 0
   static _display = true
-  static _type = NodeTypes.CHART //"chart"
+  static _type = NodeSpec.CHART //"chart"
   // constructor
   constructor(id:string,typeInfo:any) {
     // although we need to call this first,
