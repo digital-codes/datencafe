@@ -51,13 +51,10 @@ export class LoadCsv extends DcNode {
   }
   // methods
   async configure(options: any[]) {
-    console.log("configure with: ",options)
     // we know the config structure here, so can just use the index
     if (options[0] != "") {
       const url = options[0]
-      //console.log("Config URL: ",url)
       const config = this.config
-      //console.log("Old config: ",config)
       // set the config value(s)
       config.options[0].value = url
       this.config = config // update config
@@ -70,12 +67,10 @@ export class LoadCsv extends DcNode {
   if (!url.includes("http")) {
     // local urls supported ... detect full host address with port number ...
     url = window.location.href.split(window.location.pathname)[0]  + url
-    console.log("Local url: ",url)
   }
   let corsRequired = false
   try {
       const fetchOk = await testFetch(url,"csv")
-      console.log("Test:",fetchOk)
       if (!fetchOk.success) {
         const userStore = UserStore()
         if (userStore.exists()) {
@@ -86,7 +81,6 @@ export class LoadCsv extends DcNode {
         }
       }      
     } catch (e) {
-      console.log("Fetch failed: ",e)
       alert("URL cannot be loaded directly2")
       return
     }
@@ -95,7 +89,6 @@ export class LoadCsv extends DcNode {
     if (corsRequired) {
       try {
         const fetchOk = await testFetch(url,"csv", true)
-        console.log("Test:",fetchOk)
         if (!fetchOk.success) {
           alert("CORS loading failed. Check URL")
             return
@@ -104,7 +97,6 @@ export class LoadCsv extends DcNode {
         url = fetchOk.url
         csvOptions.downloadRequestHeaders = {"Authorization":"Bearer " + userStore.getToken()}
       } catch (e) {
-        console.log("Fetch failed: ",e)
         alert("URL cannot be loaded. Check URL")
         return
       }
@@ -112,10 +104,6 @@ export class LoadCsv extends DcNode {
     this.df = await readCSVBrowser(url,csvOptions)
     this.df.print()
     this.df.ctypes.print()
-    /*
-    console.log("Values:",this.df.values)
-    console.log("Columns:",this.df.columns)
-    */
     if (!await DcNode.providers.exists(this.id)) {
       // create item in pubstore if not exists
       await DcNode.providers.add(this.id,true) // file loaders are root nodes

@@ -66,6 +66,8 @@ import NodeSel from "@/components/popovers/NodeSel.vue";
 import nodeTypes from "@/assets/nodes/nodeTypes.json";
 import { nodeFactory } from "@/services/NodeFactory";
 import { NodeSpec } from "@/services/GlobalDefs";
+import {DcNode} from "@/classes/DcNode" // base class of nodes
+
 
 import { IonButtons, IonToolbar } from "@ionic/vue";
 
@@ -682,7 +684,8 @@ async function flowInit() {
           break;
           case "download":
           console.log("Download");
-          await instance.download();
+          // we need the instance here to find sources
+          downloadData(instance)
           break;
         case "connect":
           console.log("Connect");
@@ -2009,7 +2012,7 @@ const toggleTooltips = () => {
   console.log("Toggle:", tooltipsOpen);
 };
 
-// file upload
+// data upload
 const dataFileInput = ref(null) // button id
 const dataFileTarget = ref(null) // instance
 
@@ -2019,6 +2022,45 @@ async function handleDataUpload(event) {
   await dataFileTarget.value.upload(files)
 }
 
+// data download 
+const dataDownLoad = ref()
+
+async function downloadData(instance) {
+  // find source node via port A. assume we are on display node 
+  // with single input
+  const src = instance.signals
+  if (src.length == 0) {
+    alert("No data available")
+    return
+  }
+  // get first src
+  const srcId = src[0].signal.split("-")[1]
+  // read data
+  if (!providers.exists(srcId)) throw (new Error("Invalid ID"))
+  const dt = providers.getDataById(srcId) 
+  const df = await new DcNode.dfd.DataFrame(dt)
+
+  // df.print()
+  // we can send csv or json
+  try {
+    // use selected node for filename
+    await DcNode.dfd.toCSV(df, { fileName: "datencafe-" + String(instance.id) + ".csv", download: true});
+
+  } catch (e) {
+    alert("Sorry, download failed")
+    return
+  }
+  /*
+  try {
+    await DcNode.dfd.toJSON(df, { fileName: "datencafe-" + String(instance.id) + ".json", download: true});
+
+  } catch (e) {
+    console.log("error2", e)
+  }
+  */
+}
+
+
 </script>
 
 <template>
@@ -2026,6 +2068,10 @@ async function handleDataUpload(event) {
     <div style="display:none!important">
     <input ref="dataFileInput" type="file" style="display:none" @change="handleDataUpload" />
     <button @click="startFileUpload">Upload File</button>
+  </div>
+  <!-- download link -->
+  <div style="display:none!important">
+    <a ref="dataDownLoad" href="#" download="datencafe.csv" style="display: none;"></a>
   </div>
 
   <div ref="pdfWrap" v-if="pdfWindow">

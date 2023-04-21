@@ -39,14 +39,10 @@ export class LoadJson extends DcNode {
   }
   // methods
   async configure(options: any[]) {
-    console.log("configure with: ", options);
     // we know the config structure here, so can just use the index
     if (options[0] != "") {
       const url = options[0];
-      //console.log("Config URL: ",url)
       const config = super.config;
-      //console.log("Old config: ",config)
-      // set the config value(s)
       config.options[0].value = url;
       super.config = config; // update config
       await this.load(url);
@@ -58,11 +54,9 @@ export class LoadJson extends DcNode {
     if (!url.includes("http")) {
       // local urls supported ... detect full host address with port number ...
       url = window.location.href.split(window.location.pathname)[0] + url;
-      console.log("Local url: ", url);
     }
     try {
       const fetchOk = await testFetch(url, "json", false, true); // check for feature collection
-      console.log("Test:", fetchOk);
       if (!fetchOk.success) {
         alert("URL cannot be loaded directly");
         return;
@@ -72,7 +66,6 @@ export class LoadJson extends DcNode {
         return;
       }
     } catch (e) {
-      console.log("Fetch failed: ", e);
       alert("URL cannot be loaded directly");
       return;
     }

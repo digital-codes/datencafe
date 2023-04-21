@@ -113,12 +113,9 @@ export class LoadExcel extends DcNode {
   }
   async loadXls(file: any) {
     const sheet = this.config.options[1].value;
-    console.log("Sheet ", sheet);
-    console.log("File ", file);
     try {
       const workbook = await read(file, { type: "buffer" });
       let sheetNames = workbook.SheetNames;
-      console.log("Sheets:", sheetNames);
       if (sheet != "") {
         sheetNames = sheetNames.filter((s) => s == sheet);
         if (sheetNames.length == 0) {
@@ -137,13 +134,10 @@ export class LoadExcel extends DcNode {
       }
       // Parse each sheet into a JSON object
       const worksheet = await workbook.Sheets[sheetNames[0]];
-      console.log("Worksheet", worksheet);
       // for header see https://docs.sheetjs.com/docs/api/utilities
       // header:1 results in array of array. later replace
       // header with row 0
       const data = (await utils.sheet_to_json(worksheet, { header: 1 })) as any;
-      console.log("Data", JSON.stringify(data));
-      //console.log(data[0][0],typeof(data[0][0]))
       if (data[0][0] === undefined) {
         data[0][0] = "Index";
       }
@@ -196,7 +190,6 @@ export class LoadExcel extends DcNode {
         resolve(event.target.result);
       };
     }).catch((error) => {
-      console.error(error);
       throw new Error("Load failed");
     });
 
