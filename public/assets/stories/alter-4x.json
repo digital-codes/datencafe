@@ -729,7 +729,7 @@
       "classname": "addcols",
       "config": {
         "pop": "select",
-        "options": {
+        "options": [{
           "id": "op",
           "type": "string",
           "label": "Operation",
@@ -742,7 +742,7 @@
             "Div"
           ],
           "current": "Add"
-        }
+        }]
       },
       "sigs": [
         {

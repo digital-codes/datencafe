@@ -63,8 +63,8 @@ export class DataInfo extends DcNode {
     this.updCnt++
     const src = msg.split("-")[1]
     DcNode.print(src + " updated " + this.id + ": " + String(this.updCnt))
-    const dt = DcNode.providers.getDataById(src)
-    const df = new DcNode.dfd.DataFrame(dt)
+    const dt = await DcNode.providers.getDataById(src)
+    const df = await new DcNode.dfd.DataFrame(dt)
     // check fillna
     if (this.config.options[0].value != "0") {
       // NA values prevent describe!

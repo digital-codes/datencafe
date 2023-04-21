@@ -16,15 +16,18 @@ export class AddCols extends DcNode {
     const ports: string[] = ['A', 'B']
     const edges: string[] = ['d']
     const cfg = {
-      pop: "select",
+      pop: "mixed",
       options:
+      [
       {
         id: "op",
         type: "string",
         label: "Operation",
+        select:true,
         value: ["Join", "Append", "Add", "Sub", "Mul", "Div"],
         current: ""
       },
+      ]
     }
     super(id, "addcols", ports, edges, cfg as any)
     DcNode.print(AddCols._type + " created") // no access to super._id etc here
@@ -35,10 +38,13 @@ export class AddCols extends DcNode {
   get type() { return AddCols._type }
   get display() { return AddCols._display }
   // methods
-  async configure(option: string) {
+  async configure(optionString: string) {
     // we know the config structure here, so can just use the index
-    this.config.options.current = option
-    DcNode.print("Set option:" + option)
+    const options = JSON.parse(optionString)
+    for (let i=0;i<this.config.options.length;i++) {
+      this.config.options[i].current = options[i]
+      DcNode.print("Set option:" + options[i])
+    }
     // now check the sources and make the operation
     // both ports need to be connect, so we must have 2 signals
     DcNode.print("Signals attached:" + JSON.stringify(this.signals))
@@ -61,7 +67,7 @@ export class AddCols extends DcNode {
       return
     }
     // check mode
-    const mode = this.config.options.current
+    const mode = this.config.options[0].current
     if (mode == "") {
       DcNode.print("Mode not configured")
       return
