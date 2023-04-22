@@ -62,6 +62,7 @@ export class AddRows extends DcNode {
 
     // put data into store then send message
     await DcNode.providers.update(this.id, DcNode.dfd.toJSON(df))
+    await this.messaging.emit(DcNode.signals.NODEANIMATE, this.id)
     await DelayTimer(20)
     await this.messaging.emit(DcNode.signals.UPDPREFIX as string + this.id)
   }

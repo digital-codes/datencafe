@@ -80,6 +80,7 @@ export class LoadExcel extends DcNode {
         } else {
           alert("URL cannot be loaded directly. Log in or download locally");
           // emit iframe download signal for url 
+          await this.messaging.emit(DcNode.signals.NODEANIMATE, this.id)
           await super.messaging.emit(DcNode.signals.URLOADPREFIX, url)
           return;
         }

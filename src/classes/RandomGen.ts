@@ -128,6 +128,7 @@ export class RandomGen extends DcNode {
     //await DcNode.providers.update(super.id,toJSON(this.df))
     await DcNode.providers.update(this.id,toJSON(this.df))
     //await subscribers.update(d.id,d.ep)
+    await this.messaging.emit(DcNode.signals.NODEANIMATE, this.id)
     await super.messaging.emit(DcNode.signals.UPDPREFIX as string + this.id,2*this.genCnt)
  
 

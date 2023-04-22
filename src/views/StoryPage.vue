@@ -31,7 +31,7 @@
 
         </ion-card-content>
         <ion-card-header>
-            <ion-button v-if="item.link > ''" _target="blank" :download="item.link.split('/')[2]" :href="item.link">{{$t('download')}}</ion-button>
+            <ion-button v-if="item.link > ''" _target="blank" :download="item.link.split('/')[3]" :href="item.link">{{$t('download')}}</ion-button>
             <!-- 
             <ion-button v-if="s.link == ''" @click="clicked(i)">{{$t('download')}}</ion-button>
             -->

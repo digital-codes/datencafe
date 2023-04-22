@@ -95,10 +95,7 @@ export class DcNode {
     DcNode.print("Evaluating with parms: " + JSON.stringify(args))
     return this._eval(...args)
   }
-  // dummy up/download
-  download() {
-    DcNode.print("Download")
-  }
+  // dummy up
   upload(file:any) {
     DcNode.print("upload")
   }

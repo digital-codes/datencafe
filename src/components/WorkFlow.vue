@@ -138,6 +138,8 @@ const nextInsertedX = ref(0);
 
 const smallScreen = ref(false);
 
+const animationStyled = ref(false)
+
 const elements: ElementDefinition[] = [
   // list of graph elements to start with
   /* 
@@ -191,16 +193,6 @@ const style: Stylesheet[] = [
       /*'border-color': '#000'*/
     },
   },
-  /* warnung during new edges
-  {
-    selector: 'node[type]',
-    style: {
-      "shape":"data(type.shp)",
-      'border-color': 'data(type.bd)',
-      'background-image': 'data(type.img)',
-    }
-  },
-  */
   {
     selector: "node[type.shp]",
     style: {
@@ -219,6 +211,7 @@ const style: Stylesheet[] = [
       "background-image": "data(type.img)",
     },
   },
+  // adding a cleass herer seems to not work ... add later
   {
     selector: "edge",
     style: {
@@ -471,6 +464,7 @@ async function flowInit() {
   if (!cy.value) {
     console.log("cy falied");
   } else {
+
     await cy.value.center();
     await cy.value.fit();
     // edge handles
@@ -1000,6 +994,35 @@ onMounted(() => {
     await openIframe(data)
     setTimeout(closeIframe,1000)
   });
+
+  // subscribe to resize
+  eventBus.on(Signals.RESIZE, async () => {
+    console.log("resize")
+    await DelayTimer(200)
+    await cy.value.resize()
+  });
+
+  // subscribe to nodeanimate
+  eventBus.on(Signals.NODEANIMATE, async (id) => {
+    console.log("animate",id)
+    try {
+      const node = await cy.value.getElementById(id)
+      const data = await node.data()
+      const oldShp = data.type.shp
+      node.style("shape","star")
+
+      await DelayTimer(100)
+      setTimeout(resetShp(id,oldShp),1000)
+      
+    } catch (e) {
+      console.log("Node no there ..." , id)
+    }
+
+  });
+  const resetShp = (id,shp) => {
+      const node = cy.value.getElementById(id)
+      node.style("shape",shp)
+    }
 
   //flowWrap.value.addEventListener("sel",()=>{console.log("sel")})
   //addEventListener("sel",flowWrap.value,(e)=>{console.log("sel",e)})

@@ -111,6 +111,7 @@ export class LoadCsv extends DcNode {
       await DcNode.providers.add(this.id,true) // file loaders are root nodes
     }
     await DcNode.providers.update(this.id,toJSON(this.df))
+    await this.messaging.emit(DcNode.signals.NODEANIMATE, this.id)
     await super.messaging.emit(DcNode.signals.UPDPREFIX as string + this.id)
   }
   // overwrite upload function

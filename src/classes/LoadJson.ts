@@ -87,6 +87,7 @@ export class LoadJson extends DcNode {
       await DcNode.providers.add(super.id, true); // file loaders are root nodes
     }
     await DcNode.providers.update(super.id, toJSON(this.df));
+    await this.messaging.emit(DcNode.signals.NODEANIMATE, this.id)
     await super.messaging.emit((DcNode.signals.UPDPREFIX as string) + super.id);
   }
   // overwrite upload function

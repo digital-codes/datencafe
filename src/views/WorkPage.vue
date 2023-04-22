@@ -5,6 +5,7 @@ import { IonCol, IonGrid, IonRow, IonPopup } from '@ionic/vue';
 import { ref, onMounted } from "vue"
 import { createAnimation } from '@ionic/vue';
 import { defineAsyncComponent } from 'vue';
+import { loadingController } from '@ionic/vue';
 
 import TitleBar from "@/components/TitleBar.vue"
 
@@ -13,6 +14,15 @@ const message = ref('Hello, World!');
 const FlowLoading = ref(true)
 //const ShowLoading = ref(true)
 
+const loaderPop = ref()
+
+onMounted(async () => {
+  loaderPop.value = await loadingController.create({
+    message: 'Loading Flow ...',
+    duration: 0,
+  });
+  loaderPop.value.present();
+})
 
 const WorkFlowAsync = defineAsyncComponent({
   // A factory function that returns a Promise that resolves to
@@ -21,6 +31,7 @@ const WorkFlowAsync = defineAsyncComponent({
     console.log('Cyto loaded');
     // Update the ref when the async loading is complete
     FlowLoading.value = false
+    loaderPop.value.dismiss()
     return module;
   })
 });
@@ -91,7 +102,6 @@ const scrollToTop = () => {
     <TitleBar :title='$t("titles.work.tab")'  thumb="wand-magic-sparkles"/>
 
     <ion-content :fullscreen="true" ref="content">
-    
     <div id="container" class="container work-container">
         <ion-grid fixed="true">
           <ion-row>
@@ -107,8 +117,6 @@ const scrollToTop = () => {
                 </ion-button>
                 </div>
 
-
-                <p v-if="FlowLoading" class="loading">Loading ...</p>
                 <WorkFlowAsync msg="Flow demo" @add-viz="(e) => addViz(e)" @del-viz="(e) => delViz(e)" />
                 </section>
             </ion-col>
@@ -116,7 +124,6 @@ const scrollToTop = () => {
             <ion-col  size="12" size-lg="5" sytle="overflow-y:scroll;" id="viz"  class="chartArea">
             <section>
               <h3>{{$t("titles.work.view.title")}}</h3>
-              <p v-if="FlowLoading"  class="loading">Loading ...</p>
               <!-- 
               <DanfoPlotAsync :propItems="items"/>
               -->

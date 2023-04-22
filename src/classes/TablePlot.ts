@@ -37,6 +37,7 @@ export class TablePlot extends DcNode {
       throw (new Error("Invalid ID: " + String(divId)))
     }
     await df.plot(divId).table()
+    await this.messaging.emit(DcNode.signals.NODEANIMATE, this.id)
   }
   msgOn(x: string, y: string) {
     // set event listener for signal 

@@ -211,6 +211,10 @@ const { locale, availableLocales } = useI18n({ useScope: "global" });
 
 // globals
 import { Version } from "@/services/GlobalDefs";
+import { Signals } from "../services/GlobalDefs"
+// event bus
+import eventBus from "@/services/eventBus";
+
 
 import { useRoute } from "vue-router";
 const route = useRoute();
@@ -220,6 +224,11 @@ watch(
   (name) => {
     console.log(`route is now : ${name}`);
     language.value = userStore.getLang();
+    // trigger resize on workpane
+    if (route.name == "Workspace") {
+      console.log("Send resize")
+      eventBus.emit(Signals.RESIZE)
+    }
   }
 );
 

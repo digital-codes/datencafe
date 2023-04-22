@@ -25,7 +25,7 @@
             </ion-card-subtitle>
           </ion-card-header>
 
-          <ion-card-content>
+          <ion-card-content class="infoCard">
             {{ infoItem(i,"body") }}
           </ion-card-content>
           </article>
@@ -284,6 +284,16 @@ ion-card {
 
 ion-card-content {
   text-align: justify;
+}
+
+ion-card-content {
+  max-height: 100px;
+}
+ion-card-content:hover {
+  max-height: unset;
+}
+ion-card-content:active {
+  max-height: unset;
 }
 
 </style>

@@ -37,6 +37,7 @@ export class LinePlot extends DcNode {
       throw (new Error("Invalid ID: " + String(divId)))
     }
     await df.plot(divId).line()
+    await this.messaging.emit(DcNode.signals.NODEANIMATE, this.id)
     //await super.messaging.emit(divId) // div used for signalling ..
     /*
     df.describe().print()

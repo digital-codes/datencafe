@@ -36,6 +36,7 @@ export class BarPlot extends DcNode {
       throw (new Error("Invalid ID: " + String(divId)))
     }
     await df.plot(divId).bar()
+    await this.messaging.emit(DcNode.signals.NODEANIMATE, this.id)
     //await super.messaging.emit(divId) // div used for signalling ..
     /*
     df.describe().print()
