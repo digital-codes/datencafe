@@ -72,24 +72,24 @@ export class LoadCsv extends DcNode {
     if (!fetchResult.success) {
       alert("URL cannot be loaded directly. Log in or load locally");
       await super.messaging.emit(DcNode.signals.URLOADPREFIX, url)
-      return;
-    }
-    // Create a new Blob object from the CSV string
-    const blob = new Blob([fetchResult.data], { type: 'text/csv' });
-    // Create a new File object from the Blob object
-    const file = new File([blob], url, { type: 'text/csv' });
-    this.df = await readCSVBrowser(file, defaultCsvOptions)
+    } else {
+      // Create a new Blob object from the CSV string
+      const blob = new Blob([fetchResult.data], { type: 'text/csv' });
+      // Create a new File object from the Blob object
+      const file = new File([blob], url, { type: 'text/csv' });
+      this.df = await readCSVBrowser(file, defaultCsvOptions)
 
-    // this.df = await readCSVBrowser(fetchResult.data, defaultCsvOptions)
-    this.df.print()
-    this.df.ctypes.print()
-    if (!await DcNode.providers.exists(this.id)) {
-      // create item in pubstore if not exists
-      await DcNode.providers.add(this.id, true) // file loaders are root nodes
+      // this.df = await readCSVBrowser(fetchResult.data, defaultCsvOptions)
+      this.df.print()
+      this.df.ctypes.print()
+      if (!await DcNode.providers.exists(this.id)) {
+        // create item in pubstore if not exists
+        await DcNode.providers.add(this.id, true) // file loaders are root nodes
+      }
+      await DcNode.providers.update(this.id, DcNode.dfd.toJSON(this.df))
+      await this.messaging.emit(DcNode.signals.NODEANIMATE, this.id)
+      await super.messaging.emit(DcNode.signals.UPDPREFIX as string + this.id)
     }
-    await DcNode.providers.update(this.id, DcNode.dfd.toJSON(this.df))
-    await this.messaging.emit(DcNode.signals.NODEANIMATE, this.id)
-    await super.messaging.emit(DcNode.signals.UPDPREFIX as string + this.id)
   }
   // overwrite upload function
   async upload(file: any) {

@@ -100,15 +100,19 @@ export class LoadJson extends DcNode {
         Accept: "application/json",
       },
     } as JsonInputOptionsBrowser;
-    this.df = (await readJSONBrowser(file[0], options)) as DataFrame;
-    this.df.print();
-    this.df.ctypes.print();
-    if (!(await DcNode.providers.exists(this.id))) {
-      // create item in pubstore if not exists
-      await DcNode.providers.add(this.id, true); // file loaders are root nodes
+    try {
+      this.df = (await readJSONBrowser(file[0], options)) as DataFrame;
+      this.df.print();
+      this.df.ctypes.print();
+      if (!(await DcNode.providers.exists(this.id))) {
+        // create item in pubstore if not exists
+        await DcNode.providers.add(this.id, true); // file loaders are root nodes
+      }
+      await DcNode.providers.update(this.id, toJSON(this.df));
+      await super.messaging.emit((DcNode.signals.UPDPREFIX as string) + this.id);
+    } catch {
+      alert("Cannot load this. Is it GeoJSON?")
     }
-    await DcNode.providers.update(this.id, toJSON(this.df));
-    await super.messaging.emit((DcNode.signals.UPDPREFIX as string) + this.id);
   }
 
   // getters

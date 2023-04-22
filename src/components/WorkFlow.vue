@@ -1963,6 +1963,8 @@ async function screenShot() {
 
 // this way the computation is repeated always.
 // compute only after button click
+const downUrl = ref()
+/*
 const downUrl = computed(() => {
   console.log("Save flow");
   if (nodeList.value.length == 0) {
@@ -2002,6 +2004,64 @@ const downUrl = computed(() => {
     return "/";
   }
 });
+*/
+
+const urlComplete = ref(false)
+const flowLink = ref ()
+const generateFlowUrl = async () => {
+  if (nodeList.value.length == 0) {
+    console.log("Flow empty");
+    return "/#";
+  }
+  urlComplete.value = false
+  await DelayTimer(50)
+  console.log("Save flow");
+
+  const flow = await cy.value.json();
+  //console.log("Flow",flow)
+  const nodes = [];
+  for (const n of nodeList.value) {
+    nodes.push(await n.json());
+  }
+  //console.log("Nodes",nodes)
+  const data = await providers.json();
+  //console.log("Data:",data)
+  // https://stackoverflow.com/questions/72997146/how-to-push-data-to-local-json-file-on-button-click-using-javascript
+  try {
+    const contentType = "application/json";
+    const story = await userStore.getStory();
+    console.log("Story:", story);
+    const flowData = await JSON.stringify(
+      {
+        version: Version,
+        flow: flow,
+        nodes: nodes,
+        data: data,
+        next: nextNode.value,
+        story: story,
+      },
+      null,
+      2
+    );
+    const blob = await new Blob([flowData], { type: contentType });
+    const newUrl = await window.URL.createObjectURL(blob);
+    await DelayTimer(50)
+    downUrl.value = newUrl
+    console.log("downurl updated");
+    // Simulate a click on the download link
+    await DelayTimer(100)
+    if (!smallScreen.value) 
+      document.getElementById("downRef-lg").click()
+    else 
+      document.getElementById("downRef-sm").click()
+    //flowLink.value.click();
+
+  } catch (e) {
+    console.log("Failed: ", e.message);
+    return "/";
+  }
+}
+
 
 /*
 async function saveFlow() {
@@ -2253,10 +2313,8 @@ const openIframe = async (url) => {
       </ion-buttons>
       <ion-buttons slot="end">
         <ion-button
-          id="downRef"
           :disabled="nodeList.length == 0"
-          download="flow.json"
-          :href="downUrl"
+          @click="generateFlowUrl"
         >
           <font-awesome-icon
             :icon="['fas', 'download']"
@@ -2264,6 +2322,12 @@ const openIframe = async (url) => {
             class="toolbtn"
           ></font-awesome-icon>
         </ion-button>
+        <a style="display:none!important"
+          id="downRef-lg"
+          ref = "flowLink"
+          download="flow.json"
+          :href="downUrl">
+        </a>
       </ion-buttons>
       <ion-buttons slot="end">
         <ion-button
@@ -2360,17 +2424,21 @@ const openIframe = async (url) => {
       </ion-buttons>
       <ion-buttons slot="end">
         <ion-button
-          id="downRef"
           :disabled="nodeList.length == 0"
-          download="flow.json"
-          :href="downUrl"
+          @click="generateFlowUrl"
         >
           <font-awesome-icon
             :icon="['fas', 'download']"
-            size="sm"
+            size="1x"
             class="toolbtn"
           ></font-awesome-icon>
         </ion-button>
+        <a style="display:none!important"
+          id="downRef-sm"
+          ref = "flowLink"
+          download="flow.json"
+          :href="downUrl">
+        </a>
       </ion-buttons>
       <ion-buttons slot="end">
         <ion-button

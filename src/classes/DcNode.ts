@@ -90,13 +90,12 @@ export class DcNode {
         if (userStore.exists()) {
           corsRequired = true;
         } else {
-          alert("URL cannot be loaded directly. Log in or load locally");
           // emit iframe download signal for url 
           await eventBus.emit(DcNode.signals.URLOADPREFIX, url)
-          return;
+          return {success:false}
         }
       } else {
-        return fetchResult
+        return {success:false}
       }
     } catch (e: any) {
       alert("URL cannot be loaded directly2 " + String(e));
@@ -107,9 +106,11 @@ export class DcNode {
         fetchResult = await testFetch(url, type, true);
         if (!fetchResult.success) {
           alert("CORS loading failed. Check URL");
+          return {success:false}
         }
       } catch (e) {
         alert("URL cannot be loaded. Check URL");
+        return {success:false}
       }
       return fetchResult
 
