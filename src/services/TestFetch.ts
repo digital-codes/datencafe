@@ -6,31 +6,42 @@ import { UserStore } from "@/services/UserStore";
 const userStore = UserStore()
 
 export default async (url: string, type="csv", proxy = false, geoCheck = false) => {
-    console.log("test fetch:",proxy,geoCheck)
+    console.log("test fetch:",type,proxy,geoCheck)
     const hdrs = new Headers();
     /*
     myHeaders.append('Content-Type', 'application/json');
     myHeaders.append('Authorization', '1234abcd');
     */
+    let options: any
     if (proxy) {
         if (userStore.exists()) {
             hdrs.append('Authorization', "Bearer " + userStore.getToken());
+            hdrs.append( 'Content-Type','application/json')
+            options = {
+                method: 'POST',
+                body: JSON.stringify({
+                    url:url,
+                    type:type
+                }),
+                headers: hdrs
+            }
             if (window.location.hostname.includes("localhost"))
-                url = "http://localhost:9000/php/corsProxyExec.php?url=" + url + "&type=" + type
+                url = "http://localhost:9000/php/corsProxyExec2.php"
             else
-                url = "/php/corsProxyExec.php?url=" + url
+                url = "/php/corsProxyExec2.php2"
 
         } else {
             return {success:false,status:"No token"}
         }
-    }
-    const options = {
-        method: "GET", // *GET, POST, PUT, DELETE, etc.
-        mode: "cors" as RequestMode, // no-cors, *cors, same-origin
-        cache: "no-cache" as RequestCache, // *default, no-cache, reload, force-cache, only-if-cached
-        //credentials: "same-origin", // include, *same-origin, omit
-        headers: hdrs,
-        redirect: "follow" as RequestRedirect, // manual, *follow, error
+    } else {
+        options = {
+            method: "GET", // *GET, POST, PUT, DELETE, etc.
+            mode: "cors" as RequestMode, // no-cors, *cors, same-origin
+            cache: "no-cache" as RequestCache, // *default, no-cache, reload, force-cache, only-if-cached
+            //credentials: "same-origin", // include, *same-origin, omit
+            headers: hdrs,
+            redirect: "follow" as RequestRedirect, // manual, *follow, error
+        }
     }
     try {
         const r = await fetch(url, options)
@@ -44,23 +55,14 @@ export default async (url: string, type="csv", proxy = false, geoCheck = false) 
         let data
         switch (type) {
             case "json":
-                if (geoCheck) {
-                    console.log("Geocheck")
-                    // check geojson content
-                    const content = await r.json()
-                    data = content
-                    if ((Object.keys(content).includes("type")) && (content.type.toLowerCase() == "FeatureCollection".toLowerCase() )) {
-                        type = "geojson"
-                        console.log("Geojson")
-                    }
-                }
+                data = await r.json()
                 break
             case "xls":
                 // https://stackoverflow.com/questions/56151816/how-to-load-and-parse-xlsx-file-using-fetch-api-and-xlsx-library
                 data = await r.arrayBuffer()
                 break
             case "csv":
-                data = r.json()
+                data = await r.text()
                 break
 
         }

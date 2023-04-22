@@ -72,21 +72,20 @@ export class LoadExcel extends DcNode {
     let corsRequired = false;
     let fileData;
     try {
-      const fetchOk = await testFetch(url, "xls");
-      if (!fetchOk.success) {
+      const fetchResult = await testFetch(url, "xls");
+      if (!fetchResult.success) {
         const userStore = UserStore();
         if (userStore.exists()) {
           corsRequired = true;
         } else {
-          alert("URL cannot be loaded directly. Log in or download locally");
+          alert("URL cannot be loaded directly. Log in or load locally");
           // emit iframe download signal for url 
-          await this.messaging.emit(DcNode.signals.NODEANIMATE, this.id)
           await super.messaging.emit(DcNode.signals.URLOADPREFIX, url)
           return;
         }
       }
-      if (fetchOk.data) {
-        fileData = fetchOk.data;
+      if (fetchResult.data) {
+        fileData = fetchResult.data;
       }
     } catch (e) {
       alert("URL cannot be loaded directly2");
@@ -96,13 +95,13 @@ export class LoadExcel extends DcNode {
     // maybe try cors as well
     if (corsRequired) {
       try {
-        const fetchOk = await testFetch(url, "xls", true);
-        if (!fetchOk.success) {
+        const fetchResult = await testFetch(url, "xls", true);
+        if (!fetchResult.success) {
           alert("CORS loading failed. Check URL");
           return;
         }
-        if (fetchOk.data) {
-          fileData = fetchOk.data;
+        if (fetchResult.data) {
+          fileData = fetchResult.data;
         } else {
           DcNode.print("No file data");
           return;
@@ -169,6 +168,7 @@ export class LoadExcel extends DcNode {
     }
 
     await DcNode.providers.update(this.id, toJSON(this.df));
+    await this.messaging.emit(DcNode.signals.NODEANIMATE, this.id)
     await super.messaging.emit((DcNode.signals.UPDPREFIX as string) + this.id);
   }
 

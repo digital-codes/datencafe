@@ -55,32 +55,27 @@ export class LoadJson extends DcNode {
       // local urls supported ... detect full host address with port number ...
       url = window.location.href.split(window.location.pathname)[0] + url;
     }
-    try {
-      const fetchOk = await testFetch(url, "json", false, true); // check for feature collection
-      if (!fetchOk.success) {
-        alert("URL cannot be loaded directly. Log in or download locally");
-          // emit iframe download signal for url 
-          await super.messaging.emit(DcNode.signals.URLOADPREFIX, url)
-        return;
-      }
-      if (fetchOk.status == "geojson") {
-        alert("Use GeoJson loader");
-        return;
-      }
-    } catch (e) {
-      alert("URL cannot be loaded directly");
+    const fetchResult = await DcNode.fetchFile(url, "json")
+    if (!fetchResult.success) {
+      alert("URL cannot be loaded directly. Log in or load locally");
+      await super.messaging.emit(DcNode.signals.URLOADPREFIX, url)
       return;
     }
+    console.log(Object.keys(fetchResult.data))
+    if ((Object.keys(fetchResult.data).includes("type")) && (fetchResult.data.type.toLowerCase() == "FeatureCollection".toLowerCase() )) {
+      alert("Use GeoJson loader");
+      return;
+    }
+    const blob = new Blob([JSON.stringify(fetchResult.data)], { type: 'application/json' });
+    // Create a new File object from the Blob object
+    const file = new File([blob], url, { type: 'application/json' });
     const options = {
       headers: {
         Accept: "application/json",
         // Authorization: "Bearer YWRtaW46YWRtaW4="
       },
     } as JsonInputOptionsBrowser;
-    /*
-    this.df = await readCSVBrowser(url,csvOptions)
-    */
-    this.df = (await readJSONBrowser(url, options)) as DataFrame;
+    this.df = (await readJSONBrowser(file, options)) as DataFrame;
     this.df.print();
     if (!(await DcNode.providers.exists(super.id))) {
       // create item in pubstore if not exists

@@ -13,6 +13,14 @@ module.exports = {
   /* */ 
 
   configureWebpack: {
+    module: {
+      rules: [
+        {
+          exclude: "/public/php/"
+        }
+      ],
+ 
+    },
     plugins: isProduction ? [
       new BundleAnalyzerPlugin(prodOptions),
     ]: [],
