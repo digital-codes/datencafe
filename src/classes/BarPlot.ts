@@ -3,7 +3,6 @@
 import {DcNode} from "./DcNode"
 import {SigPort} from "./DcNode"
 import { NodeSpec } from '@/services/GlobalDefs';
-import * as Plotly from "plotly.js-dist-min"
 
 export class BarPlot extends DcNode {
   // properties
@@ -37,9 +36,10 @@ export class BarPlot extends DcNode {
       throw (new Error("Invalid ID: " + String(divId)))
     }
     const plot = await df.plot(divId).bar()
+    /* toImg not included in danfo plotly distribution
     const img = await Plotly.toImage(plot,{height:300,width:300})
     console.log(img)
-
+    */
     await this.messaging.emit(DcNode.signals.NODEANIMATE, this.id)
     //await super.messaging.emit(divId) // div used for signalling ..
     /*
