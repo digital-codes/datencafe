@@ -28,7 +28,7 @@ export default async (url: string, type="csv", proxy = false, geoCheck = false) 
             if (window.location.hostname.includes("localhost"))
                 url = "http://localhost:9000/php/corsProxyExec2.php"
             else
-                url = "/php/corsProxyExec2.php2"
+                url = "/php/corsProxyExec2.php"
 
         } else {
             return {success:false,status:"No token"}
