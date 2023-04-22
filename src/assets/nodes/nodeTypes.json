@@ -19,11 +19,25 @@
         "implemented": true,
         "thumb": "/img/widgets/JSONFile.png",
         "en": {
-            "label": "Load JSON/GeoJSON file",
+            "label": "Load JSON file",
             "info": "More text for a popup or tooltip"
         },
         "de": {
-            "label": "JSON/GeoJSON Datei laden",
+            "label": "JSON Datei laden",
+            "info": "Mehr Text für den Tooltip. ieofhiwefhwifhweihfweifh. ndqienfn eiwpf"
+        }
+    },
+    "loadgeo": {
+        "name": "loadgeo",
+        "icon": "fa-solid fa-coffee",
+        "implemented": true,
+        "thumb": "/img/widgets/GEOFile.png",
+        "en": {
+            "label": "Load GeoJSON file",
+            "info": "More text for a popup or tooltip"
+        },
+        "de": {
+            "label": "GeoJSON Datei laden",
             "info": "Mehr Text für den Tooltip. ieofhiwefhwifhweihfweifh. ndqienfn eiwpf"
         }
     },
@@ -94,6 +108,20 @@
         },
         "de": {
             "label": "Balkendiagramm",
+            "info": "Mehr Text für den Tooltip"
+        }
+    },
+    "pointmap": {
+        "name": "pointmap",
+        "icon": "fa-solid fa-book-atlas",
+        "implemented": true,
+        "thumb": "/img/widgets/GeoMap.png",
+        "en": {
+            "label": "Geo Map",
+            "info": "More text for a popup or tooltip"
+        },
+        "de": {
+            "label": "Karte",
             "info": "Mehr Text für den Tooltip"
         }
     },
