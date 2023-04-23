@@ -123,21 +123,7 @@ const scrollToTop = () => {
             <ion-col size="12" size-lg="7" ref="flowArea" class="flowArea">
               <section>
                 <div class="headline">
-                <h3>{{$t("titles.work.flow")}}
-                </h3>
-                <!-- 
-
-                <ion-button v-if="(!FlowLoading && hideViz)"  id="scrollBottomRef" color="warning" class="scroll-btn ion-hide-lg-up" @click="scrollToBottom()">
-                  <font-awesome-icon class="scroll-icon" aria-hidden="true" :icon="['fas', 'angle-down']"  />
-                  <font-awesome-icon class="scroll-icon" aria-hidden="true" :icon="['fas', 'chart-area']"  />
-                </ion-button>
-
-                <ion-button v-if="(!FlowLoading && !hideViz)"  id="scrollTopRef" color="warning" class="scroll-btn ion-hide-lg-up" @click="scrollToTop()">
-                <font-awesome-icon class="scroll-icon" aria-hidden="true" :icon="['fas', 'angle-up']"  />
-                <font-awesome-icon class="scroll-icon" aria-hidden="true" :icon="['fas', 'diagram-project']"  />
-                </ion-button>
-                -->
-
+                <h3>{{$t("titles.work.flow")}}</h3>
                 </div>
 
                 <WorkFlowAsync msg="Flow demo" @add-viz="(e) => addViz(e)" @del-viz="(e) => delViz(e)" />
@@ -147,7 +133,10 @@ const scrollToTop = () => {
             <ion-col  size="12" size-lg="5" sytle="overflow-y:scroll;" 
               ref="vizArea" id="viz" class="chartArea" :class="{covered: hideViz}" >
             <section>
-              <h3>{{$t("titles.work.view.title")}}</h3>
+              <div class="headline">
+                <h3>{{$t("titles.work.view.title")}}</h3>
+                </div>
+
               <!-- 
               <DanfoPlotAsync :propItems="items"/>
               -->
@@ -259,6 +248,9 @@ ion-button .scoll-btn {
 
 .headline h3 {
   display:inline-block;
+  margin-top:8px;
+  /* don't switch mode here. we have a white background */
+  color: #000;
 }
 .headline ion-button {
   display:block;
@@ -279,7 +271,7 @@ ion-button .scoll-btn {
 
   ion-row {
     position: relative;
-    height: 80vh;
+    height: 77vh;
     width:95vw;
     overflow: hidden;
   }
@@ -293,16 +285,18 @@ ion-button .scoll-btn {
 
   .flowArea {
     border:solid 2px var(--ion-color-secondary-tint);
-    height: 80vh;
+    height: 75vh;
     z-index: 2;
     background: #fff;
+    color: #000;
   }
 
   .chartArea {
     border: solid 2px var(--ion-color-primary-tint);
-    height: 80vh;
+    height: 75vh;
     z-index: 3;
     background: #fff;
+    color: #000;
   }
 
   .covered {

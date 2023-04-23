@@ -23,4 +23,13 @@ export enum NodeSpec {
   INPUT = "input",
   OUTPUT = "output"
 }
-  
+
+
+export enum FlowSpec {
+  ZOOM = 1,
+  MINZOOM = .5,
+  MAXZOOM = 10,
+  SHEIGHT = .65,
+  LHEIGHT = .75
+}
+

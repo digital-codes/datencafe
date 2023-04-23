@@ -1,5 +1,5 @@
 <template>
-  <ion-content class="ion-padding ion-popover storyPop">
+  <ion-content class="ion-content ion-padding settingsPop">
     <p>{{ $t("flow.settings.header") }}</p>
     <div>
       <ion-text :color="conscolor">{{ $t("flow.settings.consent") }}</ion-text>
@@ -12,7 +12,7 @@
       <ion-text color="primary">{{ $t("flow.settings.fullsize") }} </ion-text>
       <ion-item  lines="none">
         <ion-label slot="start">{{ $t("no") }}  </ion-label>
-        <ion-toggle slot="start" v-model="fullsize"></ion-toggle>
+        <ion-toggle disabled slot="start" v-model="fullsize"></ion-toggle>
         <ion-label slot="start">{{ $t("yes") }} </ion-label>
       </ion-item>      
       <ion-button @click="close">{{$t("flow.cfg.close")}}</ion-button>
@@ -73,8 +73,13 @@ const close = async () => {
 
 </script>
 
+<style>
+
+
+</style>
 
 <style scoped>
+
 
 ion-buttons {
   /*
@@ -82,7 +87,7 @@ ion-buttons {
   */
 }
 
-ion-popover.storyPop {
+ion-content.settingsPop {
   margin:5px;
   --width: auto;
   --height: auto;
@@ -96,7 +101,7 @@ ion-popover.storyPop {
   */
 }
 
-ion-popover.storyPop ion-content {
+ion-content.settingsPop ion-content {
   height: calc(80vh - 20px);
   width: calc(100vw - 20px);
   --height: calc(80vh - 20px);
@@ -104,11 +109,11 @@ ion-popover.storyPop ion-content {
   overflow: clip;
 }
 
-ion-content.ion-popover::part(scroll) {
+ion-content.ion-content::part(scroll) {
   overflow:scroll;
   }
 
-.storyPop {
+.settingsPop {
   min-width:300px;
 }
 

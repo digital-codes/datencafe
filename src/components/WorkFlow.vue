@@ -27,7 +27,7 @@ import { IonButton } from "@ionic/vue";
 import { DataFrame, toJSON } from "danfojs/dist/danfojs-browser/src";
 
 // globals
-import { Signals, Version } from "@/services/GlobalDefs";
+import { Signals, Version, FlowSpec } from "@/services/GlobalDefs";
 import eventBus from "@/services/eventBus";
 
 // provider/subscriber
@@ -101,8 +101,12 @@ watch(
       smallScreen.value = ww.value <= 996 ? true : false;
       console.log("Small:", smallScreen.value);
       if (!flowWrap.value.style) flowWrap.value.style = {};
+      /*
       flowWrap.value.style.width = "100%"; //String(ww.value) + "px"
-      flowWrap.value.style.height = String(wh.value * 0.7) + "px";
+      */
+      const hf = smallScreen.value?FlowSpec.SHEIGHT:FlowSpec.LHEIGHT
+      console.log("HF:",hf)
+      flowWrap.value.style.height = String(wh.value * hf) + "px";
     }
   }
 );
@@ -450,9 +454,9 @@ async function flowInit() {
     style: style,
     elements: elements,
     // initial viewport state:
-    zoom: 1,
-    minZoom: 1,
-    maxZoom: 10,
+    zoom: FlowSpec.ZOOM,
+    minZoom: FlowSpec.MINZOOM,
+    maxZoom: FlowSpec.MAXZOOM,
     pan: { x: 0, y: 0 },
     /*
     panningEnabled: {
@@ -1015,8 +1019,14 @@ onMounted(() => {
   // set variable so we can toggle toolbar etc
   smallScreen.value = ww.value <= 996 ? true : false;
   if (!flowWrap.value.style) flowWrap.value.style = {};
+  /*
   flowWrap.value.style.width = "100%"; //String(ww.value) + "px"
-  flowWrap.value.style.height = String(wh.value * 0.7) + "px";
+  */
+  const hf = smallScreen.value?FlowSpec.SHEIGHT:FlowSpec.LHEIGHT
+  console.log("HF:",hf)
+  flowWrap.value.style.height = 
+        String(wh.value * hf) + "px";
+
   flowLoaded.value = true;
 
   // subscribe on iframe loading signal
@@ -1598,19 +1608,20 @@ function panUp() {
   return cy.value.pan();
 }
 
+
 function zoomIn() {
   // get panning position first
   const p = cy.value.pan();
   const z = cy.value.zoom();
-  if (z < 10) cy.value.zoom(Math.floor(z + 1));
-  else cy.value.zoom(10);
+  if (z < FlowSpec.MAXZOOM) cy.value.zoom(Math.floor(z + 1));
+  else cy.value.zoom(FlowSpec.MAXZOOM);
   console.log("Extent:", cy.value.extent());
   return cy.value.zoom();
 }
 function zoomOut() {
   const z = cy.value.zoom();
-  if (z > 1) cy.value.zoom(Math.floor(z - 1));
-  else cy.value.zoom(1);
+  if (z > FlowSpec.MINZOOM) cy.value.zoom(Math.max(Math.floor(z - 1),FlowSpec.MINZOOM));
+  else cy.value.zoom(FlowSpec.MINZOOM);
   console.log("Extent:", cy.value.extent());
   return cy.value.zoom();
 }
@@ -1864,6 +1875,8 @@ async function initFlow(design: any) {
     await cy.value.json(design.flow);
     console.log("Setting flow OK");
     await cy.value.fit();
+    await cy.value.minZoom( FlowSpec.MINZOOM)
+    await cy.value.maxZoom( FlowSpec.MAXZOOM)
   } catch (e) {
     console.log("Setting flow failed:", e.message);
     return false;
@@ -2067,7 +2080,12 @@ const generateFlowUrl = async () => {
     nodes.push(await n.json());
   }
   //console.log("Nodes",nodes)
-  const data = await providers.json();
+  const fullSize = await userStore.getFullsize()
+  const data = await providers.json()
+  if (!fullSize) {
+    // probably delete all data 
+    console.log("Sparse saving not implemented ...") 
+  }
   //console.log("Data:",data)
   // https://stackoverflow.com/questions/72997146/how-to-push-data-to-local-json-file-on-button-click-using-javascript
   try {
@@ -2515,7 +2533,7 @@ const openSettings = () => {
       <ion-buttons slot="end">
         <ion-button
           id="upRef"
-          :disabled="(nodeList.length = 0)"
+          :disabled="nodeList.length > 0"
           @click="loadFlow"
         >
           <font-awesome-icon
@@ -2717,6 +2735,7 @@ const openSettings = () => {
   position: relative;
   /* dark mode not working yet, set light BG */
   background-color: --var(--ion-color-light);
+  height:100%;
 }
 
 .toolbar {
@@ -2730,6 +2749,21 @@ const openSettings = () => {
 }
 
 .toolbar-sm {
+  background: #fff;
+  color: #000;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  max-width: 22rem;
+  border: 3px solid #000;
+}
+.toolbar-sm>div {
+  background: #fff;
+}
+
+/* no mode adaptation with index toggling ...
+.toolbar-sm {
   background: var(--ion-color-light);
   position: absolute;
   top: 0;
@@ -2738,7 +2772,7 @@ const openSettings = () => {
   max-width: 22rem;
   border: 3px solid var(--ion-color-dark-shade);
 }
-
+*/
 .question {
   margin-right: 1rem;
 }
