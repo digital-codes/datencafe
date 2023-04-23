@@ -126,7 +126,7 @@ export class RandomGen extends DcNode {
     this.df = await new DataFrame(dt)
     this.df.print()
     //await DcNode.providers.update(super.id,toJSON(this.df))
-    await DcNode.providers.update(this.id,toJSON(this.df))
+    await DcNode.providers.update(this.id,toJSON(this.df),{"generator":"random"})
     //await subscribers.update(d.id,d.ep)
     await this.messaging.emit(DcNode.signals.NODEANIMATE, this.id)
     await super.messaging.emit(DcNode.signals.UPDPREFIX as string + this.id,2*this.genCnt)
@@ -144,7 +144,7 @@ export class RandomGen extends DcNode {
     if (this.active == true) return
     // add to store
     //DcNode.providers.add(super.id)
-    await DcNode.providers.add(this.id)
+    await DcNode.providers.add(this.id,true) // generators are root nodes too. probabyl
     // start generator
     this.active = true
     DcNode.print("Start generating @ " + String(this.genCnt)) 

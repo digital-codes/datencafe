@@ -8,6 +8,7 @@ export interface DataSrc {
     data: any // dataframe as json
     root: boolean // root node, e.g. file input
     loaded: boolean // for root
+    meta: any
 }
 
 
@@ -54,7 +55,7 @@ export const PubStore = defineStore({
             console.log("Removed")
             console.log("sources:", this.items.length)
         },
-        update(id?: string, data?: any) {
+        update(id?: string, data?: any, meta?:any) {
             if (id === undefined) {
                 throw (new Error("Missing id on update"))
             }
@@ -78,6 +79,12 @@ export const PubStore = defineStore({
                 }
                 console.log("Reusing data")
                 // reuse exisiting data
+            }
+            if (meta !== undefined) {
+                console.log("Setting meta")
+                this.items[sidx].meta = meta
+            } else {
+                this.items[sidx].meta = {}
             }
         },
     },
@@ -114,6 +121,14 @@ export const PubStore = defineStore({
             }
             console.log("Getting data for:", s.id)
             return s.data
+        },
+        getMetaById: state => (id: string) => {
+            const s = state.items.find((item: DataSrc) => item.id === id)
+            if (s === undefined) {
+                throw new Error("Invalid item id")
+            }
+            console.log("Getting meta for:", s.id)
+            return s.meta
         },
         getLoadedRoots: state => () => {
             const rts = state.items.filter((item) => (item.root && item.loaded))
