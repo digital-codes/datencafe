@@ -6,6 +6,11 @@ import { NodeSpec } from "@/services/GlobalDefs";
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
+// user store
+import { UserStore } from "@/services/UserStore";
+const userStore = UserStore();
+
+
 // fix missing marker icon on build
 import { icon, Marker } from "leaflet";
 const iconRetinaUrl = "img/geo/marker-icon-2x.png";
@@ -67,50 +72,28 @@ export class PointMap extends DcNode {
       await this.map.remove()
     }
     */
-    /*
-    info
-// Load the Mapbox tile layer
-L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
-    attribution: 'Map data &copy; <a href="https://www.mapbox.com/">Mapbox</a>',
-    id: 'mapbox/streets-v11',
-    tileSize: 512,
-    zoomOffset: -1,
-    accessToken: 'YOUR_ACCESS_TOKEN_HERE'
-}).addTo(map);
-^
-
-we can include the as an url parameter. should be ok
-
-daten.cafe/tileProxy.php?token=token&z={z}&x={x}&y={y},{
-  attribution:"",
-  token:token
-} 
-
-      await L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png?token={token}", {
-        attribution: "Map data &copy; OpenStreetMap contributors",
-
-      await L.tileLayer("daten.cafe/tileProxy.php?token=token&z={z}&x={x}&y={y},{
-        attribution: "Map data &copy; OpenStreetMap contributors",
-        token:"1234"
-      }).addTo(this.map);
-
-      await L.tileLayer("daten.cafe/tileProxy.php?token=1234&z={z}&x={x}&y={y}",{
-        attribution: "Map data &copy; OpenStreetMap contributors"
-      }).addTo(this.map);
-
-    */
 
     // init
+    // check if should use the cors proxy ...
     if (!this.map) {
       this.map = await L.map(divId);
-      /*
-      await L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        attribution: "Map data &copy; OpenStreetMap contributors",
-      }).addTo(this.map);
-      */
-      await L.tileLayer("http://localhost:9000/php/tileProxy.php?token=1234&z={z}&x={x}&y={y}",{
-        attribution: "Map data &copy; OpenStreetMap contributors"
-      }).addTo(this.map);
+      // check token. use proxy if existing
+      // we could maybe use the normal way if we have consent?
+      // or use a proxy setting ....
+      if (userStore.exists()) {
+        const token = await userStore.getToken()
+        const parms = "?token=" + token + "&z={z}&x={x}&y={y}"
+        let url
+        if (window.location.hostname.includes("localhost"))
+          url = "http://localhost:9000/php/tileProxy.php" + parms
+        else 
+          url = "/php/tileProxy.php" + parms;
+        await L.tileLayer(url).addTo(this.map);
+      } else {
+        await L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+          attribution: "Map data &copy; OpenStreetMap contributors",
+        }).addTo(this.map);
+      }
 
       this.layer = await L.geoJSON(undefined);
 

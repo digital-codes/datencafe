@@ -88,17 +88,22 @@ if (!isset($_GET["token"])) {
     http_response_code(401);
     exit('Unauthorized');
 }
+// check parms
+if (!isset($_GET["x"])) {
+    http_response_code(400);
+    exit('Invalid Request');
+}
+if (!isset($_GET["y"])) {
+    http_response_code(400);
+    exit('Invalid Request');
+}
+if (!isset($_GET["z"])) {
+    http_response_code(400);
+    exit('Invalid Request');
+}
+
 $token = $_GET["token"];
 
-/*
-// Verify the token and get the user ID
-try {
-    $user_id = parseToken($token);
-} catch (Exception $e) {
-    http_response_code(401);
-    exit('Unauthorized');
-}
-*/
 // Get the URL to proxy from the query string
 // parms are x, y, z
 $base = "https://tile.openstreetmap.org/";
@@ -121,12 +126,8 @@ curl_setopt($ch, CURLOPT_USERAGENT, 'Daten.Cafe/1.0'); // Set the User-Agent hea
 $content = curl_exec($ch);
 curl_close($ch);
 
-/*
-// Get the contents of the URL and output it
-$content = file_get_contents($url);
-*/
 // save
-$tmpfile = tempnam(".", "CORS") . ".png";
+$tmpfile = tempnam(".", "CORS");
 file_put_contents($tmpfile,$content);
 // detect type
 $mime_type = mime_content_type($tmpfile);
@@ -134,7 +135,8 @@ $mime_type = mime_content_type($tmpfile);
 header("Content-type: " . $mime_type);
 echo file_get_contents($tmpfile);
 // remove file
-// unlink($tmpfile);
+unlink($tmpfile);
+
 
 ?>
 

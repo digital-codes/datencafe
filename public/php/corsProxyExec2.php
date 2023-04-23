@@ -150,7 +150,7 @@ if ($fetchMode == 2) {
     $content = curl_exec($ch);
 }
 // save
-$tmpfile = $tmpfname = tempnam(".", "CORS");
+$tmpfile = tempnam(".", "CORS");
 file_put_contents($tmpfile,$content);
 // detect type
 $mime_type = mime_content_type($tmpfile);
