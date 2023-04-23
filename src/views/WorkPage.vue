@@ -83,16 +83,21 @@ import { RandomGen } from "../classes/RandomGen"
 
 
 const content = ref()
+const vizArea = ref()
+const flowArea = ref()
+const hideViz = ref(true)
 
 const scrollToBottom = () => {
   // Passing a duration to the method makes it so the scroll slowly
   // goes to the bottom instead of instantly
-  content.value.$el.scrollToBottom(500);
+  hideViz.value = false
+  //content.value.$el.scrollToBottom(500);
 }
 const scrollToTop = () => {
   // Passing a duration to the method makes it so the scroll slowly
   // goes to the top instead of instantly
-  content.value.$el.scrollToTop(500);
+  hideViz.value = true
+  // content.value.$el.scrollToTop(500);
 }
 
 </script>
@@ -105,23 +110,42 @@ const scrollToTop = () => {
     <div id="container" class="container work-container">
         <ion-grid fixed="true">
           <ion-row>
+            <div class="switch">
+              <ion-button v-if="(!FlowLoading && hideViz)"  id="scrollBottomRef" color="warning" class="scroll-btn ion-hide-lg-up" @click="scrollToBottom()">
+                  <font-awesome-icon class="scroll-icon" aria-hidden="true" :icon="['fas', 'chart-area']"  />
+                </ion-button>
 
-            <ion-col size="12" size-lg="7" class="flowArea">
+                <ion-button v-if="(!FlowLoading && !hideViz)"  id="scrollTopRef" color="warning" class="scroll-btn ion-hide-lg-up" @click="scrollToTop()">
+                <font-awesome-icon class="scroll-icon" aria-hidden="true" :icon="['fas', 'diagram-project']"  />
+                </ion-button>
+            </div>
+
+            <ion-col size="12" size-lg="7" ref="flowArea" class="flowArea">
               <section>
                 <div class="headline">
                 <h3>{{$t("titles.work.flow")}}
                 </h3>
-                <ion-button v-if="!FlowLoading"  id="scrollBottomRef" color="warning" class="scroll-btn ion-hide-lg-up" @click="scrollToBottom()">
+                <!-- 
+
+                <ion-button v-if="(!FlowLoading && hideViz)"  id="scrollBottomRef" color="warning" class="scroll-btn ion-hide-lg-up" @click="scrollToBottom()">
                   <font-awesome-icon class="scroll-icon" aria-hidden="true" :icon="['fas', 'angle-down']"  />
                   <font-awesome-icon class="scroll-icon" aria-hidden="true" :icon="['fas', 'chart-area']"  />
                 </ion-button>
+
+                <ion-button v-if="(!FlowLoading && !hideViz)"  id="scrollTopRef" color="warning" class="scroll-btn ion-hide-lg-up" @click="scrollToTop()">
+                <font-awesome-icon class="scroll-icon" aria-hidden="true" :icon="['fas', 'angle-up']"  />
+                <font-awesome-icon class="scroll-icon" aria-hidden="true" :icon="['fas', 'diagram-project']"  />
+                </ion-button>
+                -->
+
                 </div>
 
                 <WorkFlowAsync msg="Flow demo" @add-viz="(e) => addViz(e)" @del-viz="(e) => delViz(e)" />
                 </section>
             </ion-col>
 
-            <ion-col  size="12" size-lg="5" sytle="overflow-y:scroll;" id="viz"  class="chartArea">
+            <ion-col  size="12" size-lg="5" sytle="overflow-y:scroll;" 
+              ref="vizArea" id="viz" class="chartArea" :class="{covered: hideViz}" >
             <section>
               <h3>{{$t("titles.work.view.title")}}</h3>
               <!-- 
@@ -129,10 +153,6 @@ const scrollToTop = () => {
               -->
               <DanfoPlot :propItems="items"/>
 
-              <ion-button v-if="!FlowLoading"  id="scrollTopRef" color="warning" expand="block" class="scroll-btn ion-hide-lg-up" @click="scrollToTop()">
-                <font-awesome-icon class="scroll-icon" aria-hidden="true" :icon="['fas', 'angle-up']"  />
-                <font-awesome-icon class="scroll-icon" aria-hidden="true" :icon="['fas', 'diagram-project']"  />
-              </ion-button>
               </section>
             </ion-col>
 
@@ -213,40 +233,25 @@ ion-col {
 }
 
 .work-container {
+  /*
   padding-left:.4rem;
   padding-right:.8rem;
+  */
   }
 
-@media only screen and (max-width: 996px) {
-  #container {
-    position: absolute;
-  }
-  .work-container {
-    /*
-    top: 50%;
-    transform: translateY(-20%)!important;
-    */
-  }
-
-  .flowArea {
-    border:solid 2px var(--ion-color-secondary-tint);
-  }
-  .chartArea {
-    border: solid 2px var(--ion-color-primary-tint);
-    height: 35%;
-  }
-
-}
 
 
 
-ion-button {
+ion-button .scoll-btn {
   font-size: 1rem;
   margin-top: 16px;
   margin-bottom: 10px;
   font-weight: 500;
   line-height: 1.2;  
+  position:relative;
+  z-index:5;
 }
+
 .scroll-icon {
   padding-left:.5rem;
   padding-right:.5rem;
@@ -258,6 +263,56 @@ ion-button {
 .headline ion-button {
   display:block;
   float:right;
+}
+
+@media only screen and (max-width: 996px) {
+  #container {
+    position: absolute;
+  }
+  .work-container {
+    /*
+    top: 50%;
+    transform: translateY(-20%)!important;
+    */
+    overflow:clip;
+  }
+
+  ion-row {
+    position: relative;
+    height: 80vh;
+    width:95vw;
+    overflow: hidden;
+  }
+
+  ion-col {
+    position: absolute;
+    top:0;
+    left:0;
+    width:100%!important;
+  }
+
+  .flowArea {
+    border:solid 2px var(--ion-color-secondary-tint);
+    height: 80vh;
+    z-index: 2;
+    background: #fff;
+  }
+
+  .chartArea {
+    border: solid 2px var(--ion-color-primary-tint);
+    height: 80vh;
+    z-index: 3;
+    background: #fff;
+  }
+
+  .covered {
+    z-index:1;
+  }
+
+  ion-button.scroll-btn {
+    position: relative;
+    z-index: 5;
+  }
 }
 
 
