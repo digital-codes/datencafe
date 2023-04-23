@@ -35,6 +35,8 @@ export interface UserInfo {
   tags?: string[];
   category?: string;
   text?: string;
+  consent?: boolean
+  fullsize?: boolean
 }
 
 const clr = {
@@ -49,6 +51,8 @@ const clr = {
   tags: [] as string[],
   category: "",
   text: "",
+  consent: false,
+  fullsize: true
 };
 
 export const UserStore = defineStore({
@@ -72,7 +76,6 @@ export const UserStore = defineStore({
       this.category = clr.category;
       this.tags = clr.tags;
       this.text = clr.text;
-
     },
     setToken(tok?: string) {
       if (tok === undefined) {
@@ -110,6 +113,12 @@ export const UserStore = defineStore({
     setDate(dt = "") {
       this.date = dt;
     },
+    setConsent(c:boolean) {
+      this.consent = c;
+    },
+    setFullsize(f:boolean) {
+      this.fullsize = f;
+    },
   },
   getters: {
     getToken: (state) => () => {
@@ -120,6 +129,12 @@ export const UserStore = defineStore({
     },
     getLang: (state) => () => {
       return state.lang;
+    },
+    getConsent: (state) => () => {
+      return state.consent;
+    },
+    getFullsize: (state) => () => {
+      return state.fullsize;
     },
     getStory: (state) => () => {
       return {

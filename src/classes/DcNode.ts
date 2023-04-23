@@ -52,6 +52,7 @@ export class DcNode {
   static debug = true; // false;
   // store/messaging
   // static part
+  static readonly consent = false // normally not needed
   static readonly providers = PubStore();
   static readonly signals = Signals;
   static readonly pre = PreFixes;
@@ -224,5 +225,8 @@ export class DcNode {
   }
   get messaging() {
     return this._messaging;
+  }
+  get consent() {
+    return DcNode.consent;
   }
 }

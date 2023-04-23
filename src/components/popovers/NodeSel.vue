@@ -5,7 +5,9 @@
         <ion-thumbnail slot="start">
             <img :alt='option.type' :src="option.thumb" />
         </ion-thumbnail>
-        <ion-checkbox slot="start" v-model="chk[idx]" @ionChange="clk(idx)"></ion-checkbox>
+        <ion-checkbox slot="start" 
+        :disabled="(option.consent && !consentOk)"
+        v-model="chk[idx]" @ionChange="clk(idx)"></ion-checkbox>
         <ion-label class="label ion-hide-sm-down">
           {{ nodeItem(option.type,"label") }}
         </ion-label>
@@ -23,6 +25,9 @@ import { IonItem, IonLabel, IonList, IonCheckbox } from '@ionic/vue';
 import { IonNote, IonThumbnail } from '@ionic/vue';
 
 import { ref, onMounted } from "vue"
+import { UserStore, UserInfo } from '@/services/UserStore'
+const userStore = UserStore();
+
 
 import eventBus from '@/services/eventBus';
 
@@ -51,14 +56,18 @@ const clk = async (n:number) => {
   }
 }
 
-onMounted(() => {
+const consentOk = ref(false)
+
+onMounted(async () => {
+  consentOk.value = await userStore.getConsent()
   Object.keys(nodeTypes).forEach((e,i) => {
     chk.value[i] = false
     options.value[i] = {
       type: e, 
       icon: nodeTypes[e].icon, 
       thumb:nodeTypes[e].thumb,
-      implemented:nodeTypes[e].implemented
+      implemented:nodeTypes[e].implemented,
+      consent:nodeTypes[e].consent
      }
   })
 })

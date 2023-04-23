@@ -1,0 +1,9 @@
+https://github.com/miso-belica/sumy
+
+
+[kugel@tux2 temp]$ sumy text-rank --length=15% --language=de --file=info.txt 
+Data Literacy ist eine Fähigkeit, die jeder haben sollte, da Daten in vielen Bereichen unseres Lebens eine wichtige Rolle spielen.
+Durch Datenkompetenz können Sie Daten nutzen, um informierte Entscheidungen zu treffen.
+
+
+cgt:

@@ -1,3 +1,5 @@
+// create nodes
+
 import { RandomGen } from "@/classes/RandomGen";
 import { LinePlot } from "@/classes/LinePlot";
 import { DataInfo } from "@/classes/DataInfo";

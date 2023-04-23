@@ -49,6 +49,7 @@ import ImportPopover from "@/components/popovers/ImportPopover.vue";
 import InputselPopover from "@/components/popovers/InputselPopover.vue";
 import NodesPopover from "@/components/popovers/NodesPopover.vue";
 import CtxPopover from "@/components/popovers/CtxPopover.vue";
+import SettingsPopover from "@/components/popovers/SettingsPopover.vue";
 
 // config popups
 import CfgValuePop from "@/components/popovers/CfgValuePopover.vue";
@@ -839,8 +840,12 @@ const mdDocs = async () => {
     name: "PrintPage",
   });
 };
-
+const useMd = false
 const makePdf = async () => {
+  if (useMd) {
+    await mdDocs()
+  return
+  } 
   console.log("Make PDF");
   alert("Preparing PDF. Click OK then wait a moment ...");
   // pdf init
@@ -960,6 +965,32 @@ const openStoryPop = async () => {
     size: "cover",
     side: "left",
     cssClass: "storyPop",
+    alignment: "start",
+    showBackdrop: true,
+    backdropDismiss: true,
+    dismissOnSelect: false,
+    reference: "trigger", // event or trigger
+    componentProps: {
+      // Popover props
+      signal: "popUp",
+    },
+  });
+  await popover.value.present();
+  popover.value.open = true;
+  const x = await popover.value.onDidDismiss();
+  console.log("Dismiss: ", x);
+  popover.value.open = false;
+};
+
+// setings popover
+const openSettingsPop = async () => {
+  console.log("Open Pop");
+  popover.value = await popoverController.create({
+    component: SettingsPopover,
+    //event: ev,
+    size: "cover",
+    side: "left",
+    cssClass: "settingsPop",
     alignment: "start",
     showBackdrop: true,
     backdropDismiss: true,
@@ -1688,6 +1719,7 @@ async function newNode() {
     // create class instance
     try {
       const instance = await nodeFactory(newId, nodeTypes[nodeType]);
+      // check consent here
       /*
       console.log("Instance:",instance,instance.class)
       console.log(nodeTypes["lineplot"])
@@ -1758,6 +1790,7 @@ async function newNode() {
       nodeList.value.push(instance);
     } catch (err) {
       alert("Invalid instance:" + err.message);
+      clearFlow()
       return;
     }
   } else {
@@ -1791,7 +1824,10 @@ async function handleFlowUpload(event) {
     //dataframe.value = df;
     const design = JSON.parse(text);
     console.log("design loaded:", design);
-    await initFlow(design);
+    const flow = await initFlow(design);
+    if (flow == false) {
+      clearFlow()
+    }
   };
   await reader.readAsText(files[0]);
 }
@@ -1830,15 +1866,16 @@ async function initFlow(design: any) {
     await cy.value.fit();
   } catch (e) {
     console.log("Setting flow failed:", e.message);
-    return;
+    return false;
   }
   try {
     await providers.init(design.data);
     console.log("Setting data OK");
   } catch (e) {
     console.log("Setting data failed:", e.message);
-    return;
+    return false;
   }
+  const consentOk = await userStore.getConsent()
   try {
     for (const n of design.nodes) {
       // design.nodes.forEach(async (n) => {
@@ -1846,6 +1883,11 @@ async function initFlow(design: any) {
       // create the class instance
       try {
         const instance = await nodeFactory(n.id, nodeTypes[n.classname]);
+        console.log("instance:",instance)
+        if (instance.consent && !consentOk) {
+          alert ("Flow needs GDPR/DSGVO consent. Go to settings!")
+          return false
+        }
         if (instance.display) {
           await emit("addViz", {
             id: instance.id,
@@ -1883,12 +1925,12 @@ async function initFlow(design: any) {
           n.id,
           n.classname
         );
-        return;
+        return false;
       }
     }
   } catch (e) {
     console.log("Setting nodes failed:", e.message);
-    return;
+    return false;
   }
   // finally trigger updates on root nodes
   // FIXME we should wait until all nodes are processed ... might need a watch item
@@ -1901,6 +1943,7 @@ async function initFlow(design: any) {
     await eventBus.emit(signal);
     await DelayTimer(50);
   });
+  return true;
 }
 
 /*
@@ -2174,13 +2217,18 @@ const openIframe = async (url) => {
   return   
 }
 
+// settings 
+const openSettings = () => {
+  console.log("Settings")
+}
+
 </script>
 
 <template>
   <!-- upload button -->
     <div style="display:none!important">
     <input ref="dataFileInput" type="file" style="display:none" @change="handleDataUpload" />
-    <button @click="startFileUpload">Upload File</button>
+    <button >Upload File</button>
   </div>
   <!-- download link -->
   <div style="display:none!important">
@@ -2220,6 +2268,15 @@ const openIframe = async (url) => {
         <ion-button @click="toggleTooltips">
           <font-awesome-icon
             :icon="['fas', 'question']"
+            size="2x"
+            class="toolbtn"
+          ></font-awesome-icon>
+        </ion-button>
+      </ion-buttons>
+      <ion-buttons class="ion-hide-sm-down question" slot="start">
+        <ion-button id="settingsRef" @click="openSettingsPop">
+          <font-awesome-icon
+            :icon="['fas', 'gear']"
             size="2x"
             class="toolbtn"
           ></font-awesome-icon>
@@ -2277,7 +2334,9 @@ const openIframe = async (url) => {
         </ion-button>
       </ion-buttons>
       <ion-buttons slot="start">
-        <ion-button id="pdfRef" @click="makePdf">
+        <ion-button id="pdfRef" 
+        :disabled="true"
+        @click="makePdf">
           <font-awesome-icon
             :icon="['fas', 'file-pdf']"
             size="2x"
@@ -2312,7 +2371,7 @@ const openIframe = async (url) => {
         </ion-button>
       </ion-buttons>
       <ion-buttons slot="end">
-        <ion-button
+        <ion-button id="downRef"
           :disabled="nodeList.length == 0"
           @click="generateFlowUrl"
         >
@@ -2356,11 +2415,22 @@ const openIframe = async (url) => {
       </ion-buttons>
     </ion-toolbar>
     <ion-toolbar v-if="smallScreen" class="toolbar-sm">
+
       <ion-buttons slot="start" class="question">
         <ion-button id="helpRef" @click="toggleTooltips">
           <font-awesome-icon
             :icon="['fas', 'question']"
             size="sm"
+            class="toolbtn"
+          ></font-awesome-icon>
+        </ion-button>
+      </ion-buttons>
+
+      <ion-buttons slot="start">
+        <ion-button id="settingsRef" @click="openSettingsPop">
+          <font-awesome-icon
+            :icon="['fas', 'gear']"
+            size="1x"
             class="toolbtn"
           ></font-awesome-icon>
         </ion-button>
@@ -2387,7 +2457,9 @@ const openIframe = async (url) => {
       </ion-buttons>
 
       <ion-buttons slot="start">
-        <ion-button id="pdfRef" @click="makePdf">
+        <ion-button id="pdfRef" 
+        :disabled="true"
+        @click="makePdf">
           <font-awesome-icon
             :icon="['fas', 'file-pdf']"
             size="sm"
@@ -2423,7 +2495,7 @@ const openIframe = async (url) => {
         </ion-button>
       </ion-buttons>
       <ion-buttons slot="end">
-        <ion-button
+        <ion-button id="downRef"
           :disabled="nodeList.length == 0"
           @click="generateFlowUrl"
         >
@@ -2488,6 +2560,18 @@ const openIframe = async (url) => {
   <ion-popover
     cssClass="my-custom-popover-class pop1 popLeft"
     :isOpen="tooltipsOpen"
+    trigger="settingsRef"
+    trigger-action="context-menu"
+    show-backdrop="false"
+    size="auto"
+    side="bottom"
+    alignment="start"
+  >
+  <ion-content class="ion-padding">{{ $t("flow.tooltip.settings") }}</ion-content>
+  </ion-popover>
+  <ion-popover
+    cssClass="my-custom-popover-class pop2 popLeft"
+    :isOpen="tooltipsOpen"
     trigger="fitRef"
     trigger-action="context-menu"
     show-backdrop="false"
@@ -2498,7 +2582,7 @@ const openIframe = async (url) => {
     <ion-content class="ion-padding">{{ $t("flow.tooltip.fit") }}</ion-content>
   </ion-popover>
   <ion-popover
-    cssClass="my-custom-popover-class pop2 popLeft"
+    cssClass="my-custom-popover-class pop3 popLeft"
     :isOpen="tooltipsOpen"
     trigger="storyRef"
     trigger-action="context-menu"
@@ -2511,8 +2595,9 @@ const openIframe = async (url) => {
       $t("flow.tooltip.story")
     }}</ion-content>
   </ion-popover>
+
   <ion-popover
-    cssClass="my-custom-popover-class pop3 popLeft"
+    cssClass="my-custom-popover-class pop4 popLeft"
     :isOpen="tooltipsOpen"
     trigger="pdfRef"
     trigger-action="context-menu"
@@ -2524,7 +2609,7 @@ const openIframe = async (url) => {
     <ion-content class="ion-padding">{{ $t("flow.tooltip.pdf") }}</ion-content>
   </ion-popover>
   <ion-popover
-    cssClass="my-custom-popover-class pop4 popLeft"
+    cssClass="my-custom-popover-class pop5 popLeft"
     :isOpen="tooltipsOpen"
     trigger="captureRef"
     trigger-action="context-menu"
@@ -2613,8 +2698,12 @@ const openIframe = async (url) => {
   --offset-y: 220px;
 }
 
+.my-custom-popover-class.pop5 {
+  --offset-y: 290px;
+}
+
 .popLeft {
-  --offset-x: -50px;
+  --offset-x: -60px;
 }
 
 .my-custom-popover-class ion-content {
@@ -2646,7 +2735,7 @@ const openIframe = async (url) => {
   top: 0;
   left: 0;
   z-index: 10;
-  max-width: 20rem;
+  max-width: 22rem;
   border: 3px solid var(--ion-color-dark-shade);
 }
 

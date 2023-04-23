@@ -197,6 +197,11 @@ export class PointMap extends DcNode {
     this.signals = sigs;
     DcNode.print("Signals now: " + JSON.stringify(this.signals));
   }
+  // overwrite consent
+  get consent() {
+    return true;
+  }
+
 }
 
 

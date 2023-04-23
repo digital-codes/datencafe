@@ -1,4 +1,6 @@
 {
+  "yes":"Ja",
+  "no":"Nein",
   "welcome": "Hallo",
   "greeting": "Hallo, {name}!",
   "light":"Hell",
@@ -48,7 +50,8 @@
       "panleft":"Pan link",
       "panright":"Pan rechts",
       "panup":"Pan hoch",
-      "pandown":"Pan runter"
+      "pandown":"Pan runter",
+      "settings":"Einstellungen"
     },
     "ctx":{
       "actions":"Aktionen",
@@ -64,7 +67,13 @@
       "close":"Schliessen",
       "ops":"Operatoren",
       "sel":"Auswahl"
-
+    },
+    "settings":{
+      "header":"Einstellungen",
+      "consent":"Bin einverstanden mit Komponenten, die nicht DSGVO entsprechen",
+      "gdpr":"Mehr Infos zu DSGVO",
+      "fullsize":"Flows mit allen Daten speichern",
+      "conflict":"Brauche DSGVO Zustimmung. Einstellungen ändern!"
     }
   },
   "login": {

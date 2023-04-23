@@ -1,4 +1,6 @@
 {
+  "yes":"Yes",
+  "no":"No",
   "welcome": "Hello",
   "greeting": "Hello, {name}!",
   "light":"Light",
@@ -48,7 +50,9 @@
       "panleft":"Pan left",
       "panright":"Pan right",
       "panup":"Pan up",
-      "pandown":"Pan donw"
+      "pandown":"Pan donw",
+      "settings":"Settings"
+
     },
     "ctx":{
       "actions":"Actions",
@@ -64,6 +68,13 @@
       "close":"Close",
       "ops":"Operators",
       "sel":"Selection"
+    },
+    "settings":{
+      "header":"Settings",
+      "consent":"Agree to use components not conforming to GDPR",
+      "gdpr":"More on GDPR",
+      "fullsize":"Save flow with all data (might be large!)",
+      "conflict":"Import requires consent. Adjust settings!"
     }
   },
   "login": {
