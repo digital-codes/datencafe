@@ -1,31 +1,93 @@
 {
-  "version": "0.3",
+  "version": "0.4",
   "flow": {
     "elements": {
       "nodes": [
         {
           "data": {
+            "id": "N1",
+            "name": "N1",
+            "ports": {},
+            "instance": {
+              "id": "N1",
+              "name": "N1",
+              "type": "gen",
+              "display": 0
+            },
+            "type": {
+              "name": "randomgen",
+              "shp": "round-octagon",
+              "bd": "#00f",
+              "img": "url('/img/widgets/RandomData.png')"
+            }
+          },
+          "position": {
+            "x": 239.35969738651988,
+            "y": 221.94039431453461
+          },
+          "group": "nodes",
+          "removed": false,
+          "selected": true,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": false,
+          "classes": ""
+        },
+        {
+          "data": {
             "id": "N2",
             "name": "N2",
+            "ports": {},
+            "instance": {
+              "id": "N2",
+              "name": "N2",
+              "type": "gen",
+              "display": 0
+            },
+            "type": {
+              "name": "randomgen",
+              "shp": "round-octagon",
+              "bd": "#00f",
+              "img": "url('/img/widgets/RandomData.png')"
+            }
+          },
+          "position": {
+            "x": 241.35602934433746,
+            "y": 405.01971572673085
+          },
+          "group": "nodes",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": false,
+          "classes": ""
+        },
+        {
+          "data": {
+            "id": "N3",
+            "name": "N3",
             "ports": {
               "A": true
             },
             "instance": {
-              "id": "N2",
-              "name": "N2",
-              "type": "chart",
+              "id": "N3",
+              "name": "N3",
+              "type": "table",
               "display": 1
             },
             "type": {
-              "name": "lineplot",
+              "name": "tableplot",
               "shp": "rectangle",
               "bd": "#0f0",
-              "img": "url('/img/widgets/LineChart.png')"
+              "img": "url('/img/widgets/Table.png')"
             }
           },
           "position": {
-            "x": 453.68376116158674,
-            "y": 298.1551372473521
+            "x": 557.4963319578175,
+            "y": 174.9096744612563
           },
           "group": "nodes",
           "removed": false,
@@ -40,23 +102,25 @@
           "data": {
             "id": "N4",
             "name": "N4",
-            "ports": {},
+            "ports": {
+              "A": true
+            },
             "instance": {
               "id": "N4",
               "name": "N4",
-              "type": "gen",
-              "display": 0
+              "type": "chart",
+              "display": 1
             },
             "type": {
-              "name": "randomgen",
-              "shp": "round-octagon",
-              "bd": "#00f",
-              "img": "url('/img/widgets/RandomData.png')"
+              "name": "lineplot",
+              "shp": "rectangle",
+              "bd": "#0f0",
+              "img": "url('/img/widgets/LineChart.png')"
             }
           },
           "position": {
-            "x": 208.17502950406907,
-            "y": 378.87580177651404
+            "x": 559.4926639156351,
+            "y": 285.95598349381015
           },
           "group": "nodes",
           "removed": false,
@@ -71,23 +135,25 @@
           "data": {
             "id": "N5",
             "name": "N5",
-            "ports": {},
+            "ports": {
+              "A": true
+            },
             "instance": {
               "id": "N5",
               "name": "N5",
-              "type": "gen",
-              "display": 0
+              "type": "chart",
+              "display": 1
             },
             "type": {
-              "name": "randomgen",
-              "shp": "round-octagon",
-              "bd": "#00f",
-              "img": "url('/img/widgets/RandomData.png')"
+              "name": "barplot",
+              "shp": "rectangle",
+              "bd": "#0f0",
+              "img": "url('/img/widgets/BarPlot.png')"
             }
           },
           "position": {
-            "x": 213.916022795948,
-            "y": 264.634230857265
+            "x": 560.4885373681797,
+            "y": 381.99541494727185
           },
           "group": "nodes",
           "removed": false,
@@ -119,8 +185,8 @@
             }
           },
           "position": {
-            "x": 454.40129817206804,
-            "y": 234.3879695359102
+            "x": 554.4812012838147,
+            "y": 478.0348464007336
           },
           "group": "nodes",
           "removed": false,
@@ -136,24 +202,25 @@
             "id": "N7",
             "name": "N7",
             "ports": {
-              "A": true
+              "A": true,
+              "B": true
             },
             "instance": {
               "id": "N7",
               "name": "N7",
-              "type": "chart",
-              "display": 1
+              "type": "proc",
+              "display": 0
             },
             "type": {
-              "name": "barplot",
-              "shp": "rectangle",
-              "bd": "#0f0",
-              "img": "url('/img/widgets/BarPlot.png')"
+              "name": "addrows",
+              "shp": "roundrectangle",
+              "bd": "#000",
+              "img": "url('/img/widgets/Concatenate.png')"
             }
           },
           "position": {
-            "x": 452.2440646617428,
-            "y": 362.9209962615807
+            "x": 405.4082989454378,
+            "y": 425.0059605685465
           },
           "group": "nodes",
           "removed": false,
@@ -179,73 +246,6 @@
               "display": 0
             },
             "type": {
-              "name": "addrows",
-              "shp": "roundrectangle",
-              "bd": "#000",
-              "img": "url('/img/widgets/Concatenate.png')"
-            }
-          },
-          "position": {
-            "x": 324.39184732843984,
-            "y": 412.76845814541423
-          },
-          "group": "nodes",
-          "removed": false,
-          "selected": false,
-          "selectable": true,
-          "locked": false,
-          "grabbable": true,
-          "pannable": false,
-          "classes": ""
-        },
-        {
-          "data": {
-            "id": "N9",
-            "name": "N9",
-            "ports": {
-              "A": true
-            },
-            "instance": {
-              "id": "N9",
-              "name": "N9",
-              "type": "table",
-              "display": 1
-            },
-            "type": {
-              "name": "tableplot",
-              "shp": "rectangle",
-              "bd": "#0f0",
-              "img": "url('/img/widgets/Table.png')"
-            }
-          },
-          "position": {
-            "x": 452.6239782089404,
-            "y": 428.8367784340595
-          },
-          "group": "nodes",
-          "removed": false,
-          "selected": false,
-          "selectable": true,
-          "locked": false,
-          "grabbable": true,
-          "pannable": false,
-          "classes": ""
-        },
-        {
-          "data": {
-            "id": "N10",
-            "name": "N10",
-            "ports": {
-              "A": true,
-              "B": true
-            },
-            "instance": {
-              "id": "N10",
-              "name": "N10",
-              "type": "proc",
-              "display": 0
-            },
-            "type": {
               "name": "addcols",
               "shp": "roundrectangle",
               "bd": "#000",
@@ -253,8 +253,8 @@
             }
           },
           "position": {
-            "x": 333.96302249183657,
-            "y": 296.165382913245
+            "x": 380.39225126088945,
+            "y": 227.9110499770747
           },
           "group": "nodes",
           "removed": false,
@@ -269,9 +269,9 @@
       "edges": [
         {
           "data": {
-            "source": "N5",
+            "source": "N1",
             "target": "N8",
-            "id": "f445b7b2-7912-45be-bee1-134def4ddfc8",
+            "id": "b1954619-d807-49a1-b8a3-aee98aab3dc6",
             "type": "e1-A",
             "port": "A"
           },
@@ -290,9 +290,51 @@
         },
         {
           "data": {
-            "source": "N4",
+            "source": "N1",
+            "target": "N7",
+            "id": "e62442b7-065d-44e6-919c-c97f0190bf3a",
+            "type": "e1-A",
+            "port": "A"
+          },
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "group": "edges",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": true,
+          "classes": ""
+        },
+        {
+          "data": {
+            "source": "N2",
             "target": "N8",
-            "id": "92fc061c-42ef-483e-9fea-3f30bc6dfbdc",
+            "id": "ac084608-e92e-4912-a2e7-1f7d5fd35bde",
+            "type": "e1-B",
+            "port": "B"
+          },
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "group": "edges",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": true,
+          "classes": ""
+        },
+        {
+          "data": {
+            "source": "N2",
+            "target": "N7",
+            "id": "bb9b4f9e-51cb-4d7c-9cec-05558bf9286d",
             "type": "e1-B",
             "port": "B"
           },
@@ -312,8 +354,8 @@
         {
           "data": {
             "source": "N8",
-            "target": "N9",
-            "id": "93cc1929-d8e1-433d-851c-53818edebe42",
+            "target": "N3",
+            "id": "16cd8acf-b68d-426f-9825-332eeaa92994",
             "type": "e1-A",
             "port": "A"
           },
@@ -332,30 +374,9 @@
         },
         {
           "data": {
-            "source": "N5",
-            "target": "N10",
-            "id": "76a10472-5dc1-4163-be2c-a4e7dd4f88a4",
-            "type": "e1-B",
-            "port": "B"
-          },
-          "position": {
-            "x": 0,
-            "y": 0
-          },
-          "group": "edges",
-          "removed": false,
-          "selected": false,
-          "selectable": true,
-          "locked": false,
-          "grabbable": true,
-          "pannable": true,
-          "classes": ""
-        },
-        {
-          "data": {
-            "source": "N4",
-            "target": "N10",
-            "id": "b39f09c2-395e-495d-96e0-6d629ace7493",
+            "source": "N8",
+            "target": "N4",
+            "id": "5e8feb97-ed7c-49dd-b378-70b9c99d8ead",
             "type": "e1-A",
             "port": "A"
           },
@@ -374,51 +395,30 @@
         },
         {
           "data": {
-            "source": "N10",
+            "source": "N8",
+            "target": "N5",
+            "id": "62db4fc6-b68a-4c08-91b5-0f996b5859dd",
+            "type": "e1-A",
+            "port": "A"
+          },
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "group": "edges",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": true,
+          "classes": ""
+        },
+        {
+          "data": {
+            "source": "N7",
             "target": "N6",
-            "id": "2f4af8da-7390-43fb-9932-a5c4d358950f",
-            "type": "e1-A",
-            "port": "A"
-          },
-          "position": {
-            "x": 0,
-            "y": 0
-          },
-          "group": "edges",
-          "removed": false,
-          "selected": false,
-          "selectable": true,
-          "locked": false,
-          "grabbable": true,
-          "pannable": true,
-          "classes": ""
-        },
-        {
-          "data": {
-            "source": "N10",
-            "target": "N2",
-            "id": "279c8f39-2a72-49b7-b73c-0df7a8112eb7",
-            "type": "e1-A",
-            "port": "A"
-          },
-          "position": {
-            "x": 0,
-            "y": 0
-          },
-          "group": "edges",
-          "removed": false,
-          "selected": false,
-          "selectable": true,
-          "locked": false,
-          "grabbable": true,
-          "pannable": true,
-          "classes": ""
-        },
-        {
-          "data": {
-            "source": "N10",
-            "target": "N7",
-            "id": "dd2a404b-67db-44ec-98b8-e20d18e4cf45",
+            "id": "745400ee-f606-4ceb-9686-1261010ea85f",
             "type": "e1-A",
             "port": "A"
           },
@@ -535,14 +535,14 @@
     "data": {},
     "zoomingEnabled": true,
     "userZoomingEnabled": true,
-    "zoom": 2.8084447747916403,
+    "zoom": 1,
     "minZoom": 1,
     "maxZoom": 10,
     "panningEnabled": true,
     "userPanningEnabled": true,
     "pan": {
-      "x": -558.9031153984964,
-      "y": -603.1871371243938
+      "x": 0,
+      "y": 0
     },
     "boxSelectionEnabled": true,
     "renderer": {
@@ -552,8 +552,8 @@
   },
   "nodes": [
     {
-      "id": "N4",
-      "name": "N4",
+      "id": "N1",
+      "name": "N1",
       "classname": "randomgen",
       "config": {
         "pop": "value",
@@ -561,66 +561,15 @@
           {
             "id": "cols",
             "type": "number",
-            "label": "Numeric Columns",
-            "value": "2",
-            "min": "1",
-            "max": "5"
-          },
-          {
-            "id": "text",
-            "type": "number",
-            "label": "Text Columns",
-            "value": "0",
-            "min": "0",
-            "max": "1"
-          },
-          {
-            "id": "rows",
-            "type": "number",
-            "label": "Rows",
-            "value": "10",
-            "min": "1",
-            "max": "30"
-          },
-          {
-            "id": "period",
-            "type": "number",
-            "label": "Period (s)",
-            "value": "3",
-            "min": "1",
-            "max": "60"
-          },
-          {
-            "id": "run",
-            "type": "number",
-            "label": "Run",
+            "label": "Numeric",
             "value": "1",
-            "min": "0",
-            "max": "1"
-          }
-        ]
-      },
-      "sigs": []
-    },
-    {
-      "id": "N5",
-      "name": "N5",
-      "classname": "randomgen",
-      "config": {
-        "pop": "value",
-        "options": [
-          {
-            "id": "cols",
-            "type": "number",
-            "label": "Numeric Columns",
-            "value": "3",
             "min": "1",
             "max": "5"
           },
           {
             "id": "text",
             "type": "number",
-            "label": "Text Columns",
+            "label": "Text",
             "value": "0",
             "min": "0",
             "max": "1"
@@ -656,11 +605,86 @@
     {
       "id": "N2",
       "name": "N2",
+      "classname": "randomgen",
+      "config": {
+        "pop": "value",
+        "options": [
+          {
+            "id": "cols",
+            "type": "number",
+            "label": "Numeric",
+            "value": "1",
+            "min": "1",
+            "max": "5"
+          },
+          {
+            "id": "text",
+            "type": "number",
+            "label": "Text",
+            "value": "1",
+            "min": "0",
+            "max": "1"
+          },
+          {
+            "id": "rows",
+            "type": "number",
+            "label": "Rows",
+            "value": "10",
+            "min": "1",
+            "max": "30"
+          },
+          {
+            "id": "period",
+            "type": "number",
+            "label": "Period (s)",
+            "value": "4",
+            "min": "1",
+            "max": "60"
+          },
+          {
+            "id": "run",
+            "type": "number",
+            "label": "Run",
+            "value": "1",
+            "min": "0",
+            "max": "1"
+          }
+        ]
+      },
+      "sigs": []
+    },
+    {
+      "id": "N3",
+      "name": "N3",
+      "classname": "tableplot",
+      "config": {},
+      "sigs": [
+        {
+          "signal": "UPD-N8",
+          "port": "A"
+        }
+      ]
+    },
+    {
+      "id": "N4",
+      "name": "N4",
       "classname": "lineplot",
       "config": {},
       "sigs": [
         {
-          "signal": "UPD-N10",
+          "signal": "UPD-N8",
+          "port": "A"
+        }
+      ]
+    },
+    {
+      "id": "N5",
+      "name": "N5",
+      "classname": "barplot",
+      "config": {},
+      "sigs": [
+        {
+          "signal": "UPD-N8",
           "port": "A"
         }
       ]
@@ -672,7 +696,7 @@
       "config": {},
       "sigs": [
         {
-          "signal": "UPD-N10",
+          "signal": "UPD-N7",
           "port": "A"
         }
       ]
@@ -680,46 +704,22 @@
     {
       "id": "N7",
       "name": "N7",
-      "classname": "barplot",
+      "classname": "addrows",
       "config": {},
       "sigs": [
         {
-          "signal": "UPD-N10",
+          "signal": "UPD-N1",
           "port": "A"
+        },
+        {
+          "signal": "UPD-N2",
+          "port": "B"
         }
       ]
     },
     {
       "id": "N8",
       "name": "N8",
-      "classname": "addrows",
-      "config": {},
-      "sigs": [
-        {
-          "signal": "UPD-N5",
-          "port": "A"
-        },
-        {
-          "signal": "UPD-N4",
-          "port": "B"
-        }
-      ]
-    },
-    {
-      "id": "N9",
-      "name": "N9",
-      "classname": "tableplot",
-      "config": {},
-      "sigs": [
-        {
-          "signal": "UPD-N8",
-          "port": "A"
-        }
-      ]
-    },
-    {
-      "id": "N10",
-      "name": "N10",
       "classname": "addcols",
       "config": {
         "pop": "mixed",
@@ -737,491 +737,249 @@
               "Mul",
               "Div"
             ],
-            "current": "Add"
+            "current": "Sub"
           }
         ]
       },
       "sigs": [
         {
-          "signal": "UPD-N5",
-          "port": "B"
+          "signal": "UPD-N1",
+          "port": "A"
         },
         {
-          "signal": "UPD-N4",
-          "port": "A"
+          "signal": "UPD-N2",
+          "port": "B"
         }
       ]
     }
   ],
   "data": [
     {
-      "id": "N3",
+      "id": "N7",
       "data": [
         {
-          "COL1": 2022.0218505859375,
-          "COL2": 3965.11669921875
+          "COL1": 69.07810666576442,
+          "TCOL1": null
         },
         {
-          "COL1": 109.70218658447266,
-          "COL2": 3550.229248046875
+          "COL1": 1.74016561592365,
+          "TCOL1": null
         },
         {
-          "COL1": 537.0720825195312,
-          "COL2": 1052.1976318359375
+          "COL1": 92.44593159067284,
+          "TCOL1": null
         },
         {
-          "COL1": 5518.47607421875,
-          "COL2": 5130.67041015625
+          "COL1": 58.19205554005642,
+          "TCOL1": null
         },
         {
-          "COL1": 2826.191162109375,
-          "COL2": 1354.8431396484375
+          "COL1": 96.6588980391764,
+          "TCOL1": null
         },
         {
-          "COL1": 3034.350341796875,
-          "COL2": 724.5545654296875
+          "COL1": 32.3120082588198,
+          "TCOL1": null
         },
         {
-          "COL1": 7425.5830078125,
-          "COL2": 2886.407470703125
+          "COL1": 41.48646976805378,
+          "TCOL1": null
         },
         {
-          "COL1": 1702.3924560546875,
-          "COL2": 23.148462295532227
+          "COL1": 79.87150460879946,
+          "TCOL1": null
         },
         {
-          "COL1": 1719.5770263671875,
-          "COL2": 3268.52978515625
+          "COL1": 68.57593418616835,
+          "TCOL1": null
         },
         {
-          "COL1": 3369.106689453125,
-          "COL2": 148.36727905273438
+          "COL1": 33.811374116521705,
+          "TCOL1": null
+        },
+        {
+          "COL1": 97.28133920101214,
+          "TCOL1": "FBHAX"
+        },
+        {
+          "COL1": 94.66660972655359,
+          "TCOL1": "XWXSY"
+        },
+        {
+          "COL1": 66.52091519983911,
+          "TCOL1": "XUMDF"
+        },
+        {
+          "COL1": 63.72881554384225,
+          "TCOL1": "VBMUK"
+        },
+        {
+          "COL1": 90.67913406562242,
+          "TCOL1": "FJNYH"
+        },
+        {
+          "COL1": 81.72716014948813,
+          "TCOL1": "ZJQHQ"
+        },
+        {
+          "COL1": 94.66749189422947,
+          "TCOL1": "CMPUR"
+        },
+        {
+          "COL1": 16.323685652218256,
+          "TCOL1": "IDIAN"
+        },
+        {
+          "COL1": 54.65483578205277,
+          "TCOL1": "NQLFV"
+        },
+        {
+          "COL1": 38.365772990362444,
+          "TCOL1": "TYKID"
         }
       ],
       "root": false,
-      "loaded": true
+      "loaded": true,
+      "meta": {}
+    },
+    {
+      "id": "N8",
+      "data": [
+        {
+          "COL1": -28.203231811523438
+        },
+        {
+          "COL1": -92.92644500732422
+        },
+        {
+          "COL1": 25.925018310546875
+        },
+        {
+          "COL1": -5.536762237548828
+        },
+        {
+          "COL1": 5.979766845703125
+        },
+        {
+          "COL1": -49.4151496887207
+        },
+        {
+          "COL1": -53.1810188293457
+        },
+        {
+          "COL1": 63.547821044921875
+        },
+        {
+          "COL1": 13.921100616455078
+        },
+        {
+          "COL1": -4.5543975830078125
+        }
+      ],
+      "root": false,
+      "loaded": true,
+      "meta": {}
+    },
+    {
+      "id": "N2",
+      "data": [
+        {
+          "COL1": 97.28133920101214,
+          "TCOL1": "FBHAX"
+        },
+        {
+          "COL1": 94.66660972655359,
+          "TCOL1": "XWXSY"
+        },
+        {
+          "COL1": 66.52091519983911,
+          "TCOL1": "XUMDF"
+        },
+        {
+          "COL1": 63.72881554384225,
+          "TCOL1": "VBMUK"
+        },
+        {
+          "COL1": 90.67913406562242,
+          "TCOL1": "FJNYH"
+        },
+        {
+          "COL1": 81.72716014948813,
+          "TCOL1": "ZJQHQ"
+        },
+        {
+          "COL1": 94.66749189422947,
+          "TCOL1": "CMPUR"
+        },
+        {
+          "COL1": 16.323685652218256,
+          "TCOL1": "IDIAN"
+        },
+        {
+          "COL1": 54.65483578205277,
+          "TCOL1": "NQLFV"
+        },
+        {
+          "COL1": 38.365772990362444,
+          "TCOL1": "TYKID"
+        }
+      ],
+      "root": true,
+      "loaded": true,
+      "meta": {
+        "generator": "random"
+      }
     },
     {
       "id": "N1",
       "data": [
         {
-          "year": 2017,
-          "value": 135.98
+          "COL1": 69.07810666576442
         },
         {
-          "year": 2018,
-          "value": 147.49
+          "COL1": 1.74016561592365
         },
         {
-          "year": 2019,
-          "value": 146.93
+          "COL1": 92.44593159067284
         },
         {
-          "year": 2020,
-          "value": 139.89
+          "COL1": 58.19205554005642
         },
         {
-          "year": 2021,
-          "value": 125.6
+          "COL1": 96.6588980391764
         },
         {
-          "year": 2022,
-          "value": 108.13
+          "COL1": 32.3120082588198
+        },
+        {
+          "COL1": 41.48646976805378
+        },
+        {
+          "COL1": 79.87150460879946
+        },
+        {
+          "COL1": 68.57593418616835
+        },
+        {
+          "COL1": 33.811374116521705
         }
       ],
       "root": true,
-      "loaded": true
-    },
-    {
-      "id": "N4",
-      "data": [
-        {
-          "COL1": 47.23401419204309,
-          "COL2": 97.9007411944004
-        },
-        {
-          "COL1": 15.864448958319944,
-          "COL2": 87.15619362905525
-        },
-        {
-          "COL1": 97.89395272715939,
-          "COL2": 80.92231063692599
-        },
-        {
-          "COL1": 32.82324268355118,
-          "COL2": 12.215138089381716
-        },
-        {
-          "COL1": 67.11928728468189,
-          "COL2": 98.68900632448174
-        },
-        {
-          "COL1": 19.512680731586563,
-          "COL2": 92.25438554839825
-        },
-        {
-          "COL1": 10.812085123976523,
-          "COL2": 81.99029788208667
-        },
-        {
-          "COL1": 9.18272735464627,
-          "COL2": 25.272740363413238
-        },
-        {
-          "COL1": 29.30933604734144,
-          "COL2": 74.57836085401667
-        },
-        {
-          "COL1": 20.080898183979624,
-          "COL2": 36.888251798413364
-        }
-      ],
-      "root": false,
-      "loaded": true
-    },
-    {
-      "id": "N3",
-      "data": {},
-      "root": false,
-      "loaded": false
-    },
-    {
-      "id": "N4",
-      "data": {},
-      "root": false,
-      "loaded": false
-    },
-    {
-      "id": "N5",
-      "data": [
-        {
-          "COL1": 89.87533027298466,
-          "COL2": 68.14425369918537,
-          "COL3": 2.8689443705945394
-        },
-        {
-          "COL1": 1.1159560547555958,
-          "COL2": 29.29104701062831,
-          "COL3": 59.13454206403659
-        },
-        {
-          "COL1": 93.41784032291048,
-          "COL2": 91.0573474534069,
-          "COL3": 6.169289466686612
-        },
-        {
-          "COL1": 87.370339831834,
-          "COL2": 47.96573884623455,
-          "COL3": 54.498838144790504
-        },
-        {
-          "COL1": 26.799907789431497,
-          "COL2": 63.253872160710415,
-          "COL3": 99.56774381314388
-        },
-        {
-          "COL1": 57.756606569902324,
-          "COL2": 32.94273089610053,
-          "COL3": 53.01492403260439
-        },
-        {
-          "COL1": 51.30006309499009,
-          "COL2": 7.3860589745297744,
-          "COL3": 75.17126627992495
-        },
-        {
-          "COL1": 62.039053334427955,
-          "COL2": 23.193793906210345,
-          "COL3": 57.68694405882595
-        },
-        {
-          "COL1": 66.66490193451936,
-          "COL2": 69.28008678909983,
-          "COL3": 68.62533436655993
-        },
-        {
-          "COL1": 8.80074113997934,
-          "COL2": 88.72039826917903,
-          "COL3": 0.1782120859580405
-        }
-      ],
-      "root": false,
-      "loaded": true
-    },
-    {
-      "id": "N3",
-      "data": {},
-      "root": false,
-      "loaded": false
-    },
-    {
-      "id": "N4",
-      "data": {},
-      "root": false,
-      "loaded": false
-    },
-    {
-      "id": "N5",
-      "data": {},
-      "root": false,
-      "loaded": false
-    },
-    {
-      "id": "N3",
-      "data": {},
-      "root": false,
-      "loaded": false
-    },
-    {
-      "id": "N4",
-      "data": {},
-      "root": false,
-      "loaded": false
-    },
-    {
-      "id": "N5",
-      "data": {},
-      "root": false,
-      "loaded": false
-    },
-    {
-      "id": "N8",
-      "data": [
-        {
-          "COL1": 89.87533027298466,
-          "COL2": 68.14425369918537,
-          "COL3": 2.8689443705945394
-        },
-        {
-          "COL1": 1.1159560547555958,
-          "COL2": 29.29104701062831,
-          "COL3": 59.13454206403659
-        },
-        {
-          "COL1": 93.41784032291048,
-          "COL2": 91.0573474534069,
-          "COL3": 6.169289466686612
-        },
-        {
-          "COL1": 87.370339831834,
-          "COL2": 47.96573884623455,
-          "COL3": 54.498838144790504
-        },
-        {
-          "COL1": 26.799907789431497,
-          "COL2": 63.253872160710415,
-          "COL3": 99.56774381314388
-        },
-        {
-          "COL1": 57.756606569902324,
-          "COL2": 32.94273089610053,
-          "COL3": 53.01492403260439
-        },
-        {
-          "COL1": 51.30006309499009,
-          "COL2": 7.3860589745297744,
-          "COL3": 75.17126627992495
-        },
-        {
-          "COL1": 62.039053334427955,
-          "COL2": 23.193793906210345,
-          "COL3": 57.68694405882595
-        },
-        {
-          "COL1": 66.66490193451936,
-          "COL2": 69.28008678909983,
-          "COL3": 68.62533436655993
-        },
-        {
-          "COL1": 8.80074113997934,
-          "COL2": 88.72039826917903,
-          "COL3": 0.1782120859580405
-        },
-        {
-          "COL1": 47.23401419204309,
-          "COL2": 97.9007411944004,
-          "COL3": null
-        },
-        {
-          "COL1": 15.864448958319944,
-          "COL2": 87.15619362905525,
-          "COL3": null
-        },
-        {
-          "COL1": 97.89395272715939,
-          "COL2": 80.92231063692599,
-          "COL3": null
-        },
-        {
-          "COL1": 32.82324268355118,
-          "COL2": 12.215138089381716,
-          "COL3": null
-        },
-        {
-          "COL1": 67.11928728468189,
-          "COL2": 98.68900632448174,
-          "COL3": null
-        },
-        {
-          "COL1": 19.512680731586563,
-          "COL2": 92.25438554839825,
-          "COL3": null
-        },
-        {
-          "COL1": 10.812085123976523,
-          "COL2": 81.99029788208667,
-          "COL3": null
-        },
-        {
-          "COL1": 9.18272735464627,
-          "COL2": 25.272740363413238,
-          "COL3": null
-        },
-        {
-          "COL1": 29.30933604734144,
-          "COL2": 74.57836085401667,
-          "COL3": null
-        },
-        {
-          "COL1": 20.080898183979624,
-          "COL2": 36.888251798413364,
-          "COL3": null
-        }
-      ],
-      "root": false,
-      "loaded": true
-    },
-    {
-      "id": "N3",
-      "data": {},
-      "root": false,
-      "loaded": false
-    },
-    {
-      "id": "N4",
-      "data": {},
-      "root": false,
-      "loaded": false
-    },
-    {
-      "id": "N5",
-      "data": {},
-      "root": false,
-      "loaded": false
-    },
-    {
-      "id": "N8",
-      "data": {},
-      "root": false,
-      "loaded": false
-    },
-    {
-      "id": "N10",
-      "data": [
-        {
-          "COL1": 137.10934448242188,
-          "COL2": 166.0449981689453
-        },
-        {
-          "COL1": 16.980403900146484,
-          "COL2": 116.4472427368164
-        },
-        {
-          "COL1": 191.31179809570312,
-          "COL2": 171.9796600341797
-        },
-        {
-          "COL1": 120.1935806274414,
-          "COL2": 60.180877685546875
-        },
-        {
-          "COL1": 93.919189453125,
-          "COL2": 161.94287109375
-        },
-        {
-          "COL1": 77.269287109375,
-          "COL2": 125.19711303710938
-        },
-        {
-          "COL1": 62.11214828491211,
-          "COL2": 89.37635803222656
-        },
-        {
-          "COL1": 71.22178649902344,
-          "COL2": 48.46653366088867
-        },
-        {
-          "COL1": 95.97423553466797,
-          "COL2": 143.85845947265625
-        },
-        {
-          "COL1": 28.88163948059082,
-          "COL2": 125.60865020751953
-        }
-      ],
-      "root": false,
-      "loaded": true
-    },
-    {
-      "id": "N4",
-      "data": {},
-      "root": false,
-      "loaded": false
-    },
-    {
-      "id": "N5",
-      "data": {},
-      "root": false,
-      "loaded": false
-    },
-    {
-      "id": "N8",
-      "data": {},
-      "root": false,
-      "loaded": false
-    },
-    {
-      "id": "N10",
-      "data": {},
-      "root": false,
-      "loaded": false
-    },
-    {
-      "id": "N4",
-      "data": {},
-      "root": false,
-      "loaded": false
-    },
-    {
-      "id": "N5",
-      "data": {},
-      "root": false,
-      "loaded": false
-    },
-    {
-      "id": "N8",
-      "data": {},
-      "root": false,
-      "loaded": false
-    },
-    {
-      "id": "N10",
-      "data": {},
-      "root": false,
-      "loaded": false
+      "loaded": true,
+      "meta": {
+        "generator": "random"
+      }
     }
   ],
-  "next": 11,
+  "next": 9,
   "story": {
-    "title": "Test für einfache Kombination von Daten",
-    "author": "AK",
-    "date": "2023-04-17 12:00:00",
-    "email": "andreas.kugel@ok-lab-karlsruhe.de",
+    "title": "",
+    "author": "",
+    "date": "",
+    "email": "",
     "link": "",
-    "tags": [
-      "Nachhaltige Produktion"
-    ],
-    "category": "Allgemeines Leben",
-    "text": "Darstellung von einfachen Datenverknüpfungen mit folgender Operationen: Add,Sub,Mul,Div sowie Anfügen von Zeilen und Spalten und einfacher Join über die erste Spalte"
+    "tags": [],
+    "category": "",
+    "text": ""
   }
 }
