@@ -88,6 +88,11 @@ echo("tok:" . $tok->toString() . PHP_EOL);
 
 // ---------
 
+// parse
+$uid =$tok->claims()->get('uid'); 
+echo ( "uid: ". $uid . PHP_EOL);
+
+// ---------
 
 // Create a key object from the public key
 $check = InMemory::plainText($publicKey);
@@ -98,9 +103,9 @@ $algorithm    = new Sha256();
 
 $isValid = $validator->validate($tok, new SignedWith($algorithm,$check));
 if ($isValid) 
-	echo ("Valid:" . PHP_EOL);
+	echo ("Token Valid" . PHP_EOL);
 else {
-	echo ("Not Valid:" . PHP_EOL);
+	echo ("Token Not Valid" . PHP_EOL);
 	die();
 }
 
