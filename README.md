@@ -11,7 +11,7 @@ Protoype running at [Daten.Cafe](https://daten.cafe)
 Instruction page should get you started. There is one example data-story available. Note: actions on nodes are started with a LONG click. 
 Works on mobile too but less fun. You need to toggle between flow and charts with, yellow button. 
 
-Daten.Cafe aims to provide basic knowledge in data literacy in a simple way. Free access to the application and sharable results are essential concepts. The application is not mobile-first, but at least mobile-compatiple, allowing learning and practicing of concepts on (modern) smartphones. 
+Daten.Cafe aims to provide basic knowledge in data literacy in a simple way. Free access to the application and sharable results are essential concepts. The application is not mobile-first, but at least mobile-compatible, allowing learning and practicing of concepts on (modern) smartphones. 
 
 Visit the prototye to get more information on idea and current implementation status.
 
@@ -31,7 +31,7 @@ Orange3 [widget symbols](https://orangedatamining.com/widget-catalog/) are used 
 
 #### Node Types
 
-To date (April 2023, tag 0.3x), the following elements are considered to be implmented. Only all (small but usefull) subset is available yet.
+To date (April 2023, tag 0.3x), the following elements are considered to be implmented. Only a (small but usefull) subset is available yet.
 
   * Data Access
     * Load from Server
