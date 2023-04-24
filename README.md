@@ -21,6 +21,9 @@ Flow editor is [cytoscape](https://js.cytoscape.org/). Potential lightweight alt
 
 Data processing library is [Danfo.js](https://danfo.jsdata.org/) providing "Pandas"-like dataframes. Some Tensor functions available as well, nit tested yet.
 
+Orange3 [widget symbols](https://orangedatamining.com/widget-catalog/) are used when possible.
+
+
 ### Data Processing 
 
 #### Node Types
@@ -55,10 +58,11 @@ To date (April 2023, tag 0.3x), the following elements are considered to be impl
       * Add/Sub
       * Multiply
       * Divide (Ratio)
+    * Correlation
 
   * Geo Ops
     * Extract properties from features
-    * Create properties from features
+    * Create properties from features => color for Chropleth maps
 
   * Utilities
     * Load flow
