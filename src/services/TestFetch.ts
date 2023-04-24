@@ -20,7 +20,8 @@ export default async (
   let options: any;
   if (proxy) {
     if (userStore.exists()) {
-      hdrs.append("Authorization", "Bearer " + userStore.getToken());
+      const token = await userStore.getToken()
+      hdrs.append("Authorization", "Bearer " + token);
       hdrs.append("Content-Type", "application/json");
       options = {
         method: "POST",

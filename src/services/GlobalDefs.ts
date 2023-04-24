@@ -1,8 +1,11 @@
 // gloabl definitions of types, const, enums
-export const Version = "0.4"
+export const Version = "0.5"
 
 export enum PreFixes {
   PLOTPREFIX = "DFPLOT-",
+  LSTOKPREFIX = "DCTOK",
+  LSKEYPREFIX = "DCKEY",
+  LSLOCPREFIX = "DCLOC",
 
 }
 

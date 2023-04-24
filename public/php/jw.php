@@ -12,7 +12,8 @@ use Lcobucci\JWT\ValidationData;
 use Lcobucci\JWT\Encoding\ChainedFormatter;
 use Lcobucci\JWT\Encoding\JoseEncoder;
 use Lcobucci\JWT\Signer\Key\InMemory;
-use Lcobucci\JWT\Signer\Hmac\Sha256;
+//use Lcobucci\JWT\Signer\Hmac\Sha256;
+use Lcobucci\JWT\Signer\Rsa\Sha256;
 use Lcobucci\JWT\Token\Builder;
 // for validation
 use Lcobucci\JWT\Token\Parser;
@@ -44,8 +45,14 @@ echo( "Private:" . $privateKey . PHP_EOL);
 
 $tokenBuilder = (new Builder(new JoseEncoder(), ChainedFormatter::default()));
 $algorithm    = new Sha256();
+echo("sign" . $publicKey . PHP_EOL);
+echo("vfy" . $privateKey . PHP_EOL);
 $verifyKey = InMemory::plainText($privateKey);
 $signKey = InMemory::plainText($publicKey);
+/*
+echo("sign" . $signKey . PHP_EOL);
+echo("vfy" . $verifyKey . PHP_EOL);
+*/
 /*
 public static function forAsymmetricSigner(
         Signer $signer,
@@ -75,7 +82,9 @@ $token = $tokenBuilder
   //->withHeader('foo', 'bar')
   // Builds a new token
   //->getToken($algorithm, $signingKey, $verifyKey);
-  ->getToken($algorithm, $signKey,$verifyKey);
+  ->getToken($algorithm, $verifyKey); //,$verifyKey);
+  //->getToken($algorithm,$signKey);
+
 
 $tokStr = $token->toString();
 echo (PHP_EOL . $tokStr . PHP_EOL);
@@ -95,13 +104,14 @@ echo ( "uid: ". $uid . PHP_EOL);
 // ---------
 
 // Create a key object from the public key
-$check = InMemory::plainText($publicKey);
+//$check = InMemory::plainText($publicKey);
+//$signKey = InMemory::plainText($publicKey);
 
 // Verify the signature using the SHA-256 algorithm and the public key
 $validator = new Validator();
 $algorithm    = new Sha256();
 
-$isValid = $validator->validate($tok, new SignedWith($algorithm,$check));
+$isValid = $validator->validate($tok, new SignedWith($algorithm,$signKey));
 if ($isValid) 
 	echo ("Token Valid" . PHP_EOL);
 else {

@@ -2437,7 +2437,7 @@ const openSettings = () => {
           -->
       </ion-buttons>
     </ion-toolbar>
-    <ion-toolbar v-if="smallScreen" class="toolbar-sm">
+    <ion-toolbar color="#fff" v-if="smallScreen" class="toolbar-sm">
 
       <ion-buttons slot="start" class="question">
         <ion-button id="helpRef" @click="toggleTooltips">
@@ -2743,6 +2743,7 @@ const openSettings = () => {
   height:100%;
 }
 
+   
 .toolbar {
   background: var(--ion-color-light);
   position: absolute;
@@ -2753,7 +2754,7 @@ const openSettings = () => {
   border: 3px solid var(--ion-color-dark-shade);
 }
 
-.toolbar-sm {
+ion-toolbar.toolbar-sm {
   background: #fff;
   color: #000;
   position: absolute;

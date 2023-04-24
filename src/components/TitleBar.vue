@@ -220,6 +220,8 @@ import { Signals } from "../services/GlobalDefs";
 // event bus
 import eventBus from "@/services/eventBus";
 
+
+
 import { useRoute } from "vue-router";
 const route = useRoute();
 
@@ -233,6 +235,8 @@ watch(
       console.log("Send resize");
       eventBus.emit(Signals.RESIZE);
     }
+    // check token
+    userStore.isTokenValid().then(()=>console.log("token checked"))
   }
 );
 

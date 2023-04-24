@@ -19,6 +19,9 @@ use Lcobucci\JWT\Token\InvalidTokenStructure;
 use Lcobucci\JWT\Token\UnsupportedHeaderFound;
 use Lcobucci\JWT\UnencryptedToken;
 use Lcobucci\Clock\SystemClock;
+use Lcobucci\JWT\Signer\Key\InMemory;
+use Lcobucci\JWT\Signer\Rsa\Sha256;
+use Lcobucci\JWT\Validation\Constraint\SignedWith;
 
 //
 
@@ -28,9 +31,16 @@ require 'vendor/autoload.php';
 // Define the jti claim for JWT
 $jti_claim = "Ureiz5Koqua8ied5ook0";
 
+$public_file = "/home/akugel/files/datencafe/public.pem";
+if (($_SERVER === null) || ($_SERVER['SERVER_NAME'] === 'localhost') || ($_SERVER['REMOTE_ADDR'] === '127.0.0.1')) {
+    $public_file = "./public.pem";
+}
+$publicKey = file_get_contents($public_file);
+
 function parseToken($token)
 {
-    checkToken($token);
+    global $publicKey;
+    checkToken($token,$publicKey); // throws on error here 
     $parser = new Parser(new JoseEncoder());
 
     try {
@@ -46,28 +56,32 @@ function parseToken($token)
     return $user;
 }
 
-function checkToken($token)
-{
+function checkToken($token,$publicKey) {
     global $jti_claim;
     $parser = new Parser(new JoseEncoder());
     $tok = $parser->parse($token);
-    //echo("tok:" . $tok->toString() . PHP_EOL);
+  
+    // Create a key object from the public key
+    $check = InMemory::plainText($publicKey);
+  
+    // Verify the signature using the SHA-256 algorithm and the public key
     $validator = new Validator();
-
-    if (! $validator->validate($tok, new IdentifiedBy($jti_claim))) {
+    $algorithm    = new Sha256();
+  
+    if (! $validator->validate($tok,  new SignedWith($algorithm,$check))) {
         http_response_code(401);
         echo json_encode(array("error" => "Invalid username or password"));
         die();
     }
-
+  
     $clock = new SystemClock(new DateTimeZone(date_default_timezone_get()));
     if (! $validator->validate($tok, new LooseValidAt($clock))) {
         http_response_code(401);
         echo json_encode(array("error" => "Invalid username or password"));
         die();
     }
-}
-
+  }
+  
 
 function sanitizeUrl($url)
 {

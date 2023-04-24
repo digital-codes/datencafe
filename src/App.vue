@@ -18,6 +18,8 @@ import { onMounted, ref } from "vue";
 import { UserStore, Modes } from "@/services/UserStore";
 const userStore = UserStore();
 
+import { PreFixes } from "@/services/GlobalDefs";
+
 import { useI18n } from "vue-i18n";
 const { locale } = useI18n({ useScope: "global" });
 
@@ -49,22 +51,24 @@ onMounted(async () => {
 // check if we have a token in localstorage for this domain
 const checkLSToken = async () => {
   try {
-    const tok = localStorage.getItem('dctok')
-    const loc = localStorage.getItem('dcloc')
-    if ((tok === null) || (loc === null)){
+    const tok = await localStorage.getItem(PreFixes.LSTOKPREFIX)
+    const key = await localStorage.getItem(PreFixes.LSKEYPREFIX)
+    const loc = await localStorage.getItem(PreFixes.LSLOCPREFIX)
+    if ((tok === null) || (key === null) || (loc === null)){
       console.log("LS empty")
       return
     } 
     const current = window.location.hostname
     if (current != loc) {
       console.log("LS wrong")
+      await userStore.setToken("") // clear
       return
     }
-    await userStore.setToken(tok)
+    await userStore.setToken(tok,key)
     console.log("Token set")
-
   } catch (e) {
     console.log("LS error",e)
+    await userStore.setToken("") // clear
     return
   }
 

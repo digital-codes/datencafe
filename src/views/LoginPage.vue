@@ -33,9 +33,17 @@
               <ion-button type="submit" expand="block">{{ $t("login.submit") }}</ion-button>
             </form>
           </div>
+          <p v-if="loggedIn" class="loginGood">{{ $t("login.good") }}</p>
+          <p v-if="loginFailed" class="loginBad">{{ $t("login.bad") }}</p>
+          <!-- 
+          <p v-if="checkLogin" class="loginGood">{{ $t("login.good") }}</p>
+          <p v-else class="loginBad">{{ $t("login.bad") }}</p>
 
+          -->          
+          <!-- 
           <p v-if="loginGood" class="loginGood">{{ $t("login.good") }}</p>
           <p v-if="loginBad" class="loginBad">{{ $t("login.bad") }}</p>
+          --> 
           </ion-card-content>
         </article>
         </ion-card>
@@ -51,20 +59,27 @@ import { IonButton, IonContent, IonHeader, IonButtons, IonMenuButton, IonPage, I
 import { IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent } from '@ionic/vue'
 import { IonInput, IonItem, IonLabel, IonTextarea } from '@ionic/vue';
 import TitleBar from "@/components/TitleBar.vue"
-import { ref, computed } from 'vue';
+import { ref, onMounted } from 'vue';
 
 // user store
 import { UserStore } from '@/services/UserStore'
 const userStore = UserStore()
 
-const loginGood = computed(() => userStore.getToken() > "")
-const loginBad = computed(() => userStore.getToken() == "")
+import { PreFixes } from "@/services/GlobalDefs";
+
+const loggedIn = ref(false)
+const loginFailed = ref(false)
+
+//const checkLogin = computed(async () => await userStore.isTokenValid())
 
 const form = ref({
   username: '',
   password: '',
 });
 
+onMounted ( async () => {
+  loggedIn.value = await userStore.isTokenValid()
+} )
 
 const submitForm = async () => {
   const requestOptions = {
@@ -82,28 +97,22 @@ const submitForm = async () => {
         const data = await rsp.json()
         //console.log(data);
         const token = data.token //JSON.parse(data)
-        //console.log(token)
-        //loginGood.value = true
-        //loginBad.value = false
-        await userStore.setToken(token)
-        await localStorage.setItem('dctok',token)
-        const loc = window.location.hostname
-        await localStorage.setItem('dcloc',loc)
-        console.log("LS set")
+        const key = data.key || "" //JSON.parse(data)
+        await userStore.setToken(token,key)
+        loggedIn.value = await userStore.isTokenValid()
+        loginFailed.value = !loggedIn.value
         break;
       } else {
         await userStore.setToken("")
-        await localStorage.removeItem('dctok')
-        await localStorage.removeItem('dcloc')
-        console.log("LS clear1")
+        loggedIn.value = false
+        loginFailed.value = true
         throw (new Error("Request failed: " + String(rsp.status)))
       }
     } catch (e) {
       console.log("Error: ",e.message)
+      loggedIn.value = false
+      // no change to loggedIn yet
       await userStore.setToken("")
-      await localStorage.removeItem('dctok')
-      await localStorage.removeItem('dcloc')
-      console.log("LS clear2")
       //loginBad.value = true
       //loginGood.value = false
     }

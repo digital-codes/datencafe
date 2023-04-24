@@ -30,8 +30,9 @@
           </div>
 
         </ion-card-content>
-        <ion-card-header>
-            <ion-button v-if="item.link > ''" _target="blank" :download="item.link.split('/')[3]" :href="item.link">{{$t('download')}}</ion-button>
+        <ion-card-header v-if="item.link > ''">
+          <ion-button _target="blank" :download="item.link.split('/')[3]" :href="item.link">{{$t('download')}}</ion-button>
+          <ion-button  @click="startStory(i)">{{$t('startStory')}}</ion-button>
             <!-- 
             <ion-button v-if="s.link == ''" @click="clicked(i)">{{$t('download')}}</ion-button>
             -->
@@ -83,6 +84,9 @@ import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, Io
 import { IonButton, IonItem, IonThumbail, IonNote } from '@ionic/vue';
 import { IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent } from '@ionic/vue'
 import TitleBar from "@/components/TitleBar.vue"
+// user store
+import { UserStore } from '@/services/UserStore'
+const userStore = UserStore()
 
 
 // https://lokalise.com/blog/vue-i18n/
@@ -106,6 +110,11 @@ const getItem = (idx,id) => {
   return text
 }
 
+const startStory = (idx) => {
+  console.log("Start " ,idx)
+  // set starter link
+  userStore.setStarter(items[locale.value][idx]["link"])
+}
 
 </script>
 

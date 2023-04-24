@@ -1,6 +1,8 @@
 // store for source node items
 
 import { defineStore } from "pinia";
+import * as jose from 'jose'
+import { PreFixes } from "@/services/GlobalDefs";
 
 // -------- language
 enum Langs {
@@ -25,6 +27,7 @@ export interface Theme {
 // all together 
 export interface UserInfo {
   token: string; // token
+  key: string; // public key
   dark?: Modes;
   lang?: Langs;
   title?: string;
@@ -37,10 +40,12 @@ export interface UserInfo {
   text?: string;
   consent?: boolean
   fullsize?: boolean
+  starter?: string // calling a story
 }
 
 const clr = {
   token: "",
+  key: "",
   dark: Modes.Light,
   lang: Langs.DE,
   title: "",
@@ -52,7 +57,8 @@ const clr = {
   category: "",
   text: "",
   consent: false,
-  fullsize: true
+  fullsize: true,
+  starter: ""
 };
 
 export const UserStore = defineStore({
@@ -62,6 +68,7 @@ export const UserStore = defineStore({
     clear() {
       console.log("clear user");
       this.token = clr.token;
+      this.key = clr.key;
       this.dark = clr.dark;
       this.lang = clr.lang;
       this.clearStory()
@@ -77,11 +84,18 @@ export const UserStore = defineStore({
       this.tags = clr.tags;
       this.text = clr.text;
     },
-    setToken(tok?: string) {
-      if (tok === undefined) {
-        throw new Error("Missing token on add()");
+    async setToken(tok = clr.token, key = clr.key) {
+      console.log("set tok",tok,key)
+      const ok = await this.jwtVerify(tok,key)
+      if (ok) {
+        this.token = tok
+        this.key = key
+        await localStorage.setItem(PreFixes.LSTOKPREFIX,tok)
+        await localStorage.setItem(PreFixes.LSKEYPREFIX,key)
+        const loc = window.location.hostname
+        await localStorage.setItem(PreFixes.LSLOCPREFIX,loc)
+        console.log("LS set")
       }
-      this.token = tok;
     },
     setLang(lang = clr.lang) {
       this.lang = lang;
@@ -119,9 +133,91 @@ export const UserStore = defineStore({
     setFullsize(f:boolean) {
       this.fullsize = f;
     },
+    setStarter(s:string) {
+      this.starter = s;
+    },
+    clrStarter() {
+      this.starter = "";
+    },
+    // jwt verify ...
+    async jwtVerify(token:string,key:string) {
+      const alg = 'RS256'
+      console.log("verify tok,key",token,key)
+      if ((token == clr.token) || (key == clr.key) ) {
+        console.log("Invalid Token")
+        this.token = clr.token
+        this.key = clr.key
+        await localStorage.removeItem(PreFixes.LSTOKPREFIX)
+        await localStorage.removeItem(PreFixes.LSKEYPREFIX)
+        await localStorage.removeItem(PreFixes.LSLOCPREFIX)
+        console.log("LS clear")
+        return false
+      }
+      let publicKey:any
+      try {
+        console.log("verify tok,key",token,key)
+        publicKey = await jose.importSPKI(key, alg)
+        console.log("pubkey",publicKey)
+      } catch (e) {
+        console.log("spki failes",e)
+        await localStorage.removeItem(PreFixes.LSTOKPREFIX)
+        await localStorage.removeItem(PreFixes.LSKEYPREFIX)
+        await localStorage.removeItem(PreFixes.LSLOCPREFIX)
+        console.log("LS clear")
+        return false
+      }
+      try {
+        const { payload, protectedHeader } = await jose.jwtVerify(token, publicKey, {
+          issuer: 'https://daten.cafe',
+          audience: 'https://daten.cafe',
+        })
+        console.log(protectedHeader)
+        console.log(payload)    //
+        return true
+      } catch (e) {
+        // clear the token
+        console.log("Token failed",e)
+        this.token = clr.token
+        this.key = clr.key
+        await localStorage.removeItem(PreFixes.LSTOKPREFIX)
+        await localStorage.removeItem(PreFixes.LSKEYPREFIX)
+        await localStorage.removeItem(PreFixes.LSLOCPREFIX)
+        console.log("LS clear")
+        return false
+      }
+    }
+    /*
+    const alg = 'RS256'
+    const spki = `-----BEGIN PUBLIC KEY-----
+    MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAwhYOFK2Ocbbpb/zVypi9
+    SeKiNUqKQH0zTKN1+6fpCTu6ZalGI82s7XK3tan4dJt90ptUPKD2zvxqTzFNfx4H
+    HHsrYCf2+FMLn1VTJfQazA2BvJqAwcpW1bqRUEty8tS/Yv4hRvWfQPcc2Gc3+/fQ
+    OOW57zVy+rNoJc744kb30NjQxdGp03J2S3GLQu7oKtSDDPooQHD38PEMNnITf0pj
+    +KgDPjymkMGoJlO3aKppsjfbt/AH6GGdRghYRLOUwQU+h+ofWHR3lbYiKtXPn5dN
+    24kiHy61e3VAQ9/YAZlwXC/99GGtw/NpghFAuM4P1JDn0DppJldy3PGFC0GfBCZA
+    SwIDAQAB
+    -----END PUBLIC KEY-----`
+    const publicKey = await jose.importSPKI(spki, alg)
+    const jwt =
+      'eyJhbGciOiJSUzI1NiJ9.eyJ1cm46ZXhhbXBsZTpjbGFpbSI6dHJ1ZSwiaWF0IjoxNjY5MDU2NDg4LCJpc3MiOiJ1cm46ZXhhbXBsZTppc3N1ZXIiLCJhdWQiOiJ1cm46ZXhhbXBsZTphdWRpZW5jZSJ9.gXrPZ3yM_60dMXGE69dusbpzYASNA-XIOwsb5D5xYnSxyj6_D6OR_uR_1vqhUm4AxZxcrH1_-XJAve9HCw8az_QzHcN-nETt-v6stCsYrn6Bv1YOc-mSJRZ8ll57KVqLbCIbjKwerNX5r2_Qg2TwmJzQdRs-AQDhy-s_DlJd8ql6wR4n-kDZpar-pwIvz4fFIN0Fj57SXpAbLrV6Eo4Byzl0xFD8qEYEpBwjrMMfxCZXTlAVhAq6KCoGlDTwWuExps342-0UErEtyIqDnDGcrfNWiUsoo8j-29IpKd-w9-C388u-ChCxoHz--H8WmMSZzx3zTXsZ5lXLZ9IKfanDKg'
+    
+    const { payload, protectedHeader } = await jose.jwtVerify(jwt, publicKey, {
+      issuer: 'urn:example:issuer',
+      audience: 'urn:example:audience',
+    })
+    
+    console.log(protectedHeader)
+    console.log(payload)    //
+    */
   },
   getters: {
-    getToken: (state) => () => {
+    isTokenValid: (state) => async () => {
+      const ok = await state.jwtVerify(state.token,state.key)
+      console.log("Token valid? ",ok)
+      return ok
+    },
+    getToken: (state) => async () => {
+      await state.isTokenValid()
       return state.token;
     },
     getDark: (state) => () => {
@@ -135,6 +231,12 @@ export const UserStore = defineStore({
     },
     getFullsize: (state) => () => {
       return state.fullsize;
+    },
+    getStarter: (state) => () => {
+      return state.starter;
+    },
+    hasStarter: (state) => () => {
+      return state.starter != "";
     },
     getStory: (state) => () => {
       return {

@@ -32,4 +32,5 @@ npm-debug.log*
 /www
 /public/php/users.csv
 /public/php/vendor
+public/php/private.pem
 
