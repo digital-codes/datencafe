@@ -4,6 +4,7 @@ import {DcNode} from "./DcNode"
 import {SigPort} from "./DcNode"
 import { NodeSpec } from '@/services/GlobalDefs';
 import { DelayTimer } from "@/services/DelayTimer"
+import { PlotConfigObject } from "danfojs/dist/danfojs-base/shared/types";
 
 export class LinePlot extends DcNode {
   // properties
@@ -36,7 +37,26 @@ export class LinePlot extends DcNode {
     if ((target === undefined) || (target == null) ) {
       throw (new Error("Invalid ID: " + String(divId)))
     }
-    await df.plot(divId).line()
+    //const layout = {}
+    /* plotly customconfig
+    interface CustomConfig extends Config {
+      x: string;
+      y: string;
+      values: string;
+      labels: string;
+      rowPositions: number[];
+      columnPositions: number[];
+      grid: {
+          rows: number;
+          columns: number;
+      };
+      tableHeaderStyle: any;
+      tableCellStyle: any;
+      columns: string[];
+    }
+    */  
+    const plotConfig: PlotConfigObject = {config:{}, layout:{}}
+    await df.plot(divId).line(plotConfig)
     await this.messaging.emit(DcNode.signals.NODEANIMATE, this.id)
     //await super.messaging.emit(divId) // div used for signalling ..
     /*
