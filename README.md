@@ -9,7 +9,7 @@ The goal of Daten.Cafe is to provide a (more or less) intuitive way to learn fun
 Protoype running at [Daten.Cafe](https://daten.cafe)
 
 Instruction page should get you started. There is one example data-story available. Note: actions on nodes are started with a LONG click. 
-Works on mobile too but less fun. You need togle between flow and charts with, yellow button. 
+Works on mobile too but less fun. You need to toggle between flow and charts with, yellow button. 
 
 Daten.Cafe aims to provide basic knowledge in data literacy in a simple way. Free access to the application and sharable results are essential concepts. The application is not mobile-first, but at least mobile-compatiple, allowing learning and practicing of concepts on (modern) smartphones. 
 
