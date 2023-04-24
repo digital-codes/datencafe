@@ -19,7 +19,7 @@ Framework is [Ionic](https://ionicframework.com/docs) version 6 with [Vue](https
 
 Flow editor is [cytoscape](https://js.cytoscape.org/). Potential lightweight alternative  [vue-flow](https://vueflow.dev/). Custom/simple solution should be possible, we don't need much magic here.
 
-Data processing library is [Danfo.js](https://danfo.jsdata.org/) providing "Pandas"-like dataframes. Some Tensor functions available as well, nit tested yet.
+Data processing library is [Danfo.js](https://danfo.jsdata.org/) providing "Pandas"-like dataframes. Some Tensor functions available as well, not tested yet.
 
 Orange3 [widget symbols](https://orangedatamining.com/widget-catalog/) are used when possible.
 
@@ -33,7 +33,7 @@ To date (April 2023, tag 0.3x), the following elements are considered to be impl
   * Data Access
     * Load from Server
     * Load local
-    * Start download via Iframe
+    * Start download via link (cord workaround) 
     * Save local
 
   * Single Item Operations
@@ -70,7 +70,7 @@ To date (April 2023, tag 0.3x), the following elements are considered to be impl
     * Export flow (png, pdf)
 
   * Visualizations
-    * Preview table
+    * Distribution /Histogramm 
     * Table
     * Line chart
     * Bar chart
@@ -90,7 +90,7 @@ Danfo has built-in plotting for dataframes using {Plotly](https://plotly.com/jav
 
 Maps will probably use [Leaflet](https://leafletjs.com/)
 
-Migration to [Apache Echarts](https://echarts.apache.org/en/index.html) to be considered.
+Migration to [Apache Echarts](https://echarts.apache.org/en/index.html) to be considered. Might be more lightweight and flexible 
 
 
 ### Icons
