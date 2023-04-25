@@ -5,6 +5,10 @@
   "greeting": "Hallo, {name}!",
   "light":"Hell",
   "dark":"Dunkel",
+  "download": "Herunterladen",
+  "downloadHint": "Lade die Geschichte im Arbeitsbereich hoch, nachdem Du sie hier heruntergeladen hast",
+  "startStory": "Loslegen",
+  "notimplemented":"Noch nicht verfügbar",
   "titles": {
     "about": "Über Daten.Cafe",
     "tutorial":"Anleitungen",
@@ -85,11 +89,7 @@
     "good":"Sie sind angemeldet",
     "bad":"Anmeldung fehlgeschlagen"
 
-  },
-  "download": "Herunterladen",
-  "downloadHint": "Lade die Geschichte im Arbeitsbereich hoch, nachdem Du sie hier heruntergeladen hast",
-  "startStory": "Geschichten aufrufen",
-  "notimplemented":"Noch nicht verfügbar"
+  }
 }
 
 

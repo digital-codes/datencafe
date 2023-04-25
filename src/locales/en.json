@@ -5,6 +5,10 @@
   "greeting": "Hello, {name}!",
   "light":"Light",
   "dark":"Dark",
+  "download": "Download",
+  "downloadHint": "After download here, upload the file in the workspace",
+  "startStory": "Start story",
+  "notimplemented":"Not implemented yet",
   "titles": {
     "about": "About Daten.Cafe",
     "tutorial":"Tutorials",
@@ -85,11 +89,7 @@
     "submit":"Submit",
     "good":"You are logged in",
     "bad":"Login failed"
-  },
-  "download": "Download",
-  "downloadHint": "After download here, upload the file in the workspace",
-  "startStory": "Start story",
-  "notimplemented":"Not implemented yet"
+  }
 }
 
 

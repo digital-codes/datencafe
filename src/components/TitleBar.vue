@@ -228,7 +228,7 @@ const route = useRoute();
 watch(
   () => route.name,
   (name) => {
-    console.log(`route is now : ${name}`);
+    console.log(`TB: route is now : ${name}`);
     language.value = userStore.getLang();
     // trigger resize on workpane
     if (route.name == "Workspace") {

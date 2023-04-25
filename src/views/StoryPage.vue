@@ -87,6 +87,8 @@ import TitleBar from "@/components/TitleBar.vue"
 // user store
 import { UserStore } from '@/services/UserStore'
 const userStore = UserStore()
+//
+import router from "@/router";
 
 
 // https://lokalise.com/blog/vue-i18n/
@@ -110,10 +112,14 @@ const getItem = (idx,id) => {
   return text
 }
 
-const startStory = (idx) => {
+const startStory = async (idx) => {
   console.log("Start " ,idx)
   // set starter link
-  userStore.setStarter(items[locale.value][idx]["link"])
+  await userStore.setStarter(items[locale.value][idx]["link"])
+  router.push({
+    name: "Workspace",
+  });
+
 }
 
 </script>

@@ -91,8 +91,8 @@ const route = useRoute();
 
 watch(
   () => route.name,
-  (name) => {
-    console.log(`route is now : ${name}`);
+  async (name) => {
+    console.log(`WF: route is now : ${name}`);
     if (name == "Workspace") {
       ww.value = window.innerWidth;
       wh.value = window.innerHeight;
@@ -107,10 +107,34 @@ watch(
       const hf = smallScreen.value?FlowSpec.SHEIGHT:FlowSpec.LHEIGHT
       console.log("HF:",hf)
       flowWrap.value.style.height = String(wh.value * hf) + "px";
+      // check starter story
+      console.log("Checking starter")
+      // some cosmetics required as we cannot make computed async
+      if (!userStore.getStarting() && userStore.hasStarter()) {
+        userStore.setStarting(true)
+        startStory()
+      }
     }
   }
 );
 
+const startStory = async () => {
+  const story = await userStore.getStarter()
+  console.log("Prepare for story ...",story)
+  await userStore.setStarter("")
+  await DelayTimer(50)
+  try {
+    await clearFlow()
+    const r = await fetch(story)
+    const design = await r.json()
+    userStore.setStarting(false) // might be ok to do it right here ...
+    console.log("Story:",design)
+    await initFlow(design);
+  } catch (e) {
+    console.log("Story start failed")
+    await clearFlow()
+  }
+}
 // -------------------------------
 
 const props = defineProps<{ msg: string }>();
@@ -1061,7 +1085,7 @@ onMounted(() => {
       setTimeout(resetShp(id,oldShp),1000)
       
     } catch (e) {
-      console.log("Node no there ..." , id)
+      console.log("Node not there ..." , id)
     }
 
   });
@@ -2113,13 +2137,17 @@ const generateFlowUrl = async () => {
     const newUrl = await window.URL.createObjectURL(blob);
     await DelayTimer(50)
     downUrl.value = newUrl
-    console.log("downurl updated");
+    console.log("downurl updated",downUrl.value);
     // Simulate a click on the download link
     await DelayTimer(100)
-    if (!smallScreen.value) 
-      document.getElementById("downRef-lg").click()
-    else 
-      document.getElementById("downRef-sm").click()
+    
+    if (!smallScreen.value) {
+      console.log("Click Large")
+      document.getElementById("downRefLg").click()
+    } else {
+      console.log("Click Small")
+      document.getElementById("downRefSm").click()
+    } 
     //flowLink.value.click();
 
   } catch (e) {
@@ -2405,7 +2433,7 @@ const openSettings = () => {
           ></font-awesome-icon>
         </ion-button>
         <a style="display:none!important"
-          id="downRef-lg"
+          id="downRefLg"
           ref = "flowLink"
           download="flow.json"
           :href="downUrl">
@@ -2529,7 +2557,7 @@ const openSettings = () => {
           ></font-awesome-icon>
         </ion-button>
         <a style="display:none!important"
-          id="downRef-sm"
+          id="downRefSm"
           ref = "flowLink"
           download="flow.json"
           :href="downUrl">
