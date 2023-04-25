@@ -88,6 +88,11 @@ import TitleBar from "@/components/TitleBar.vue"
 import { UserStore } from '@/services/UserStore'
 const userStore = UserStore()
 //
+// globals
+import { Signals } from "@/services/GlobalDefs";
+import eventBus from "@/services/eventBus";
+
+//
 import router from "@/router";
 
 
@@ -112,10 +117,19 @@ const getItem = (idx,id) => {
   return text
 }
 
+const triggerStory = () => {
+  console.log("trigger")
+  eventBus.emit(Signals.TRIGGERSTORY);
+}
+
 const startStory = async (idx) => {
   console.log("Start " ,idx)
   // set starter link
   await userStore.setStarter(items[locale.value][idx]["link"])
+  // when to workpane has been loaded, we can use a short delay.
+  // otherwise, we need to wait longer 
+  const rdy = await userStore.getFlowrdy()
+  setTimeout(triggerStory,rdy?500:5000)
   router.push({
     name: "Workspace",
   });

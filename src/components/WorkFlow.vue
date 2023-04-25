@@ -107,13 +107,6 @@ watch(
       const hf = smallScreen.value?FlowSpec.SHEIGHT:FlowSpec.LHEIGHT
       console.log("HF:",hf)
       flowWrap.value.style.height = String(wh.value * hf) + "px";
-      // check starter story
-      console.log("Checking starter")
-      // some cosmetics required as we cannot make computed async
-      if (!userStore.getStarting() && userStore.hasStarter()) {
-        userStore.setStarting(true)
-        startStory()
-      }
     }
   }
 );
@@ -127,9 +120,16 @@ const startStory = async () => {
     await clearFlow()
     const r = await fetch(story)
     const design = await r.json()
-    userStore.setStarting(false) // might be ok to do it right here ...
-    console.log("Story:",design)
-    await initFlow(design);
+    // copy
+    const designCopy = await JSON.parse(await JSON.stringify(design))
+    console.log("Story:",designCopy)
+    const flow = await initFlow(designCopy);
+    if (!flow) {
+      console.log("Story load failed")
+      await clearFlow()
+    } else {
+      console.log("cy,nl",cy.value.json(),nodeList.value.length)
+    }
   } catch (e) {
     console.log("Story start failed")
     await clearFlow()
@@ -791,6 +791,8 @@ async function flowInit() {
       await nodeList.value[dstIdx].msgOff(signal);
     });
   }
+  // finally set init 
+  userStore.setFlowrdy(true) 
 }
 
 const mdDocs = async () => {
@@ -992,6 +994,7 @@ const makePdf = async () => {
 // story popover
 const openStoryPop = async () => {
   console.log("Open Pop");
+  console.log("cy,nl:",cy.value.json(),nodeList.value.length)
   popover.value = await popoverController.create({
     component: StoryPop,
     //event: ev,
@@ -1057,6 +1060,12 @@ onMounted(() => {
         String(wh.value * hf) + "px";
 
   flowLoaded.value = true;
+
+  // subscribe on triggerstory
+  eventBus.on(Signals.TRIGGERSTORY, async () => {
+    console.log("trigger story")
+    startStory()
+  });
 
   // subscribe on iframe loading signal
   eventBus.on(Signals.URLOADPREFIX, async (data) => {
@@ -1901,8 +1910,12 @@ async function initFlow(design: any) {
   await userStore.setText(design.story.text);
   // set flow
   try {
+    const oldFlow = await cy.value.json()
+    console.log("Old:",JSON.stringify(oldFlow))
     await cy.value.json(design.flow);
     console.log("Setting flow OK");
+    const newFlow = await cy.value.json()
+    console.log("New:",JSON.stringify(newFlow))
     await cy.value.fit();
     await cy.value.minZoom( FlowSpec.MINZOOM)
     await cy.value.maxZoom( FlowSpec.MAXZOOM)
@@ -1970,6 +1983,7 @@ async function initFlow(design: any) {
         return false;
       }
     }
+    console.log("Nodes created: ",nodeList.value.length)
   } catch (e) {
     console.log("Setting nodes failed:", e.message);
     return false;
@@ -2093,6 +2107,8 @@ const downUrl = computed(() => {
 
 const urlComplete = ref(false)
 const flowLink = ref ()
+const flowLinkSm = ref ()
+const flowLinkLg = ref ()
 const generateFlowUrl = async () => {
   if (nodeList.value.length == 0) {
     console.log("Flow empty");
@@ -2137,18 +2153,20 @@ const generateFlowUrl = async () => {
     const newUrl = await window.URL.createObjectURL(blob);
     await DelayTimer(50)
     downUrl.value = newUrl
-    console.log("downurl updated",downUrl.value);
+    //console.log("downurl updated");
     // Simulate a click on the download link
     await DelayTimer(100)
     
     if (!smallScreen.value) {
-      console.log("Click Large")
-      document.getElementById("downRefLg").click()
+      //console.log("Click Large")
+      // document.getElementById("downRefLg").click()
+      flowLinkLg.value.click();
     } else {
-      console.log("Click Small")
-      document.getElementById("downRefSm").click()
+      //console.log("Click Small")
+      // document.getElementById("downRefSm").click()
+      flowLinkSm.value.click();
     } 
-    //flowLink.value.click();
+    // flowLink.value.click();
 
   } catch (e) {
     console.log("Failed: ", e.message);
@@ -2314,6 +2332,7 @@ const openSettings = () => {
       :href="scrotData"
       download="flow.png"
     ></a>
+
     <ion-toolbar v-if="!smallScreen" class="toolbar">
       <ion-buttons id="helpRef" class="ion-hide-sm-down question" slot="start">
         <ion-button @click="toggleTooltips">
@@ -2434,7 +2453,7 @@ const openSettings = () => {
         </ion-button>
         <a style="display:none!important"
           id="downRefLg"
-          ref = "flowLink"
+          ref = "flowLinkLg"
           download="flow.json"
           :href="downUrl">
         </a>
@@ -2558,7 +2577,7 @@ const openSettings = () => {
         </ion-button>
         <a style="display:none!important"
           id="downRefSm"
-          ref = "flowLink"
+          ref = "flowLinkSm"
           download="flow.json"
           :href="downUrl">
         </a>
