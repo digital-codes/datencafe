@@ -23,6 +23,7 @@ export const PubStore = defineStore({
         },
         init(items:DataSrc[]) {
             if (this.items.length > 0) {
+                console.log("Init store:",this.items)
                 throw (new Error("Can only init empty store!"))
             }
             this.items = JSON.parse(JSON.stringify(items)) as DataSrc[]

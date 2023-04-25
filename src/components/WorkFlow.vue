@@ -112,20 +112,29 @@ watch(
 );
 
 const startStory = async () => {
+  if (cyLoading.value != 1) {
+    //alert("Hazard")
+    console.log("hazard")
+    return
+  }
   const story = await userStore.getStarter()
   console.log("Prepare for story ...",story)
   await userStore.setStarter("")
   await DelayTimer(50)
   try {
     await clearFlow()
+    await DelayTimer(100)
     const r = await fetch(story)
     const design = await r.json()
+    /*
     // copy
     const designCopy = await JSON.parse(await JSON.stringify(design))
     console.log("Story:",designCopy)
-    const flow = await initFlow(designCopy);
+    */
+    const flow = await initFlow(design);
     if (!flow) {
       console.log("Story load failed")
+      alert("ERROR")
       await clearFlow()
     } else {
       console.log("cy,nl",cy.value.json(),nodeList.value.length)
@@ -134,6 +143,9 @@ const startStory = async () => {
     console.log("Story start failed")
     await clearFlow()
   }
+  // reset semaphore
+  cyLoading.value = 0
+
 }
 // -------------------------------
 
@@ -144,6 +156,7 @@ const emit = defineEmits(["addViz", "delViz", "pdf"]);
 const count = ref(0);
 const theFlow = ref(null);
 const cy = ref();
+const cyLoading = ref(0); // protection for story load ?
 
 const ww = ref(800);
 const wh = ref(400);
@@ -1063,7 +1076,9 @@ onMounted(() => {
 
   // subscribe on triggerstory
   eventBus.on(Signals.TRIGGERSTORY, async () => {
-    console.log("trigger story")
+    if (cyLoading.value > 0) return // block parallel request
+    cyLoading.value ++
+    console.log("trigger story", cyLoading.value)
     startStory()
   });
 
@@ -1991,14 +2006,14 @@ async function initFlow(design: any) {
   // finally trigger updates on root nodes
   // FIXME we should wait until all nodes are processed ... might need a watch item
   await DelayTimer(1000);
-  const roots = providers.getLoadedRoots();
+  const roots = await providers.getLoadedRoots();
   //console.log("Roots:",roots)
-  roots.forEach(async (n) => {
+  for (const n of roots) {
     //console.log("Root id:",n.id)
     const signal = Signals.UPDPREFIX + n.id;
     await eventBus.emit(signal);
     await DelayTimer(50);
-  });
+  }
   return true;
 }
 
@@ -2024,7 +2039,7 @@ async function clearFlow() {
   providers.clear();
   // remove node messaging
   console.log("also remove charts");
-  nodeList.value.forEach((n) => {
+  for ( const n of nodeList.value) {
     // remove listeners
     n.signals.forEach((s) => n.msgOff(s.signal));
     // remove charts
@@ -2041,7 +2056,7 @@ async function clearFlow() {
         n.stop();
       }
     }
-  });
+  }
   // remove all nodes
   nodeList.value = [];
   // clear story
