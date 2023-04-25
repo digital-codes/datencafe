@@ -18,7 +18,7 @@ Visit the prototye to get more information on idea and current implementation st
 
 ## Framework and Libraries
 
-Framework is [Ionic](https://ionicframework.com/docs) version 6 with [Vue](https://vuejs.org/) version 3. Upgrade to Ionic v/ requires Typescript migration on several files. Initial tests promising but not complete yet,
+Framework is [Ionic](https://ionicframework.com/docs) version 6 with [Vue](https://vuejs.org/) version 3. Upgrade to Ionic v7 requires Typescript migration on several files. Initial tests promising but not complete yet,
 
 Flow editor is [cytoscape](https://js.cytoscape.org/). Potential lightweight alternative  [vue-flow](https://vueflow.dev/). Custom/simple solution should be possible, we don't need much magic here.
 
