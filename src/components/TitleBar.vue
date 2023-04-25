@@ -1,77 +1,82 @@
 <template>
-    <div  class="swipeWrap" ref="swipe">
-  <ion-header :translucent="false" >
-    <ion-toolbar class="toolbar">
-      <ion-buttons slot="start">
-        <ion-menu-button :auto-hide="true" color="primary"></ion-menu-button>
-      </ion-buttons>
+  <div class="swipeWrap" ref="swipe">
+    <ion-header :translucent="false">
+      <ion-toolbar class="toolbar">
+        <ion-buttons slot="start">
+          <ion-menu-button :auto-hide="true" color="primary"></ion-menu-button>
+        </ion-buttons>
 
-      <ion-buttons slot="start">
-        <div class="title">
-          <!-- 
+        <ion-buttons slot="start">
+          <div class="title">
+            <!-- 
             <font-awesome-icon class="logo" icon="fa-solid fa-mug-hot" size="2x" :style="{ color: 'red' }" />
             -->
-          <ion-thumbnail class="logo" button router-link="/">
-            <img alt="Daten.Cafe Logo" src="/img/logo/datencafe.svg" />
-          </ion-thumbnail>
-          <!-- 
+            <ion-thumbnail class="logo" button router-link="/">
+              <img alt="Daten.Cafe Logo" src="/img/logo/datencafe.svg" />
+            </ion-thumbnail>
+            <!-- 
             <font-awesome-icon :icon="thumb" size="1x" class="ion-hide-md-up"/>
             <font-awesome-icon :icon="thumb" size="xl" class="ion-hide-md-down"/>
             -->
-          <div>
-            <span class="headline ion-hide-sm-down">Daten.Cafe</span>
-            <span class="version ion-hide-sm-down">{{ Version }}</span>
-            <span>
-              <font-awesome-icon class="ion-hide-sm-down" :icon="routeInfo.thumb" size="1x" />
-          </span>
-            <!-- 
+            <div>
+              <span class="headline ion-hide-sm-down">Daten.Cafe</span>
+              <span class="version ion-hide-sm-down">{{ Version }}</span>
+              <span>
+                <font-awesome-icon
+                  class="ion-hide-sm-down"
+                  :icon="routeInfo.thumb"
+                  size="1x"
+                />
+              </span>
+              <!-- 
           <font-awesome-icon icon="fa-solid fa-caret-right" size="2x" class="ion-hide-sm-down"/>
           <span class="version ion-hide-sm-down">{{ $t(routeInfo.title) }}</span>
-          --></div>
-        </div>
-      </ion-buttons>
+          -->
+            </div>
+          </div>
+        </ion-buttons>
 
-      <ion-buttons slot="end">
-        <div>
-          <!-- 
+        <ion-buttons slot="end">
+          <div>
+            <!-- 
               <ion-item id="modeRef" >
                 <font-awesome-icon :icon="['fas', 'sun']" size="1x" class="modeLbl left"/>
                 <ion-toggle @ionChange="changeMode" :checked="dark1"></ion-toggle>
                 <font-awesome-icon :icon="['fas', 'moon']" size="1x" class="modeLbl right"/>
               </ion-item>
             -->
-          <ion-item id="modeRef">
-            <font-awesome-icon
-              v-if="isDark"
-              button
-              @click="changeMode"
-              :icon="['fas', 'sun']"
-              size="1x"
-              class="modeLbl"
-            />
-            <font-awesome-icon
-              v-if="!isDark"
-              button
-              @click="changeMode"
-              :icon="['fas', 'moon']"
-              size="1x"
-              class="modeLbl"
-            />
-          </ion-item>
-        </div>
-      </ion-buttons>
+            <ion-item id="modeRef">
+              <font-awesome-icon
+                v-if="isDark"
+                button
+                @click="changeMode"
+                :icon="['fas', 'sun']"
+                size="1x"
+                class="modeLbl"
+              />
+              <font-awesome-icon
+                v-if="!isDark"
+                button
+                @click="changeMode"
+                :icon="['fas', 'moon']"
+                size="1x"
+                class="modeLbl"
+              />
+            </ion-item>
+          </div>
+        </ion-buttons>
 
-      <ion-buttons slot="end" id="langRef">
-        <div>
-          <font-awesome-icon :icon="['fas', 'globe']" size="xl" />
-          <!-- 
+        <ion-buttons slot="end" id="langRef">
+          <div>
+            <font-awesome-icon :icon="['fas', 'globe']" size="xl" />
+            <!-- 
               <ion-button @click="changeLanguage('en')">EN</ion-button>
               <ion-button @click="changeLanguage('de')">DE</ion-button>
               -->
-        </div>
+          </div>
 
-        <ion-list>
-          <!-- 
+          <ion-list>
+            <!-- 
               <ion-item>
                 <ion-select placeholder="Lang" interface="popover" @ionChange="selectLanguage" v-model="langSel">
                   <ion-select-option v-for="(l,idx) in availableLocales" :key="idx" :value="langSel">{{upper(l)}}</ion-select-option>
@@ -79,57 +84,57 @@
               </ion-item>
 
               -->
-          <ion-item>
-            <ion-select
-              :placeholder="language"
-              interface="popover"
-              @ionChange="selectLanguage"
-              v-model="language"
-            >
-              <ion-select-option
-                v-for="(l, idx) in availableLocales"
-                :key="idx"
-                :value="l"
-                >{{ l }}</ion-select-option
+            <ion-item>
+              <ion-select
+                :placeholder="language"
+                interface="popover"
+                @ionChange="selectLanguage"
+                v-model="language"
               >
-            </ion-select>
-          </ion-item>
-        </ion-list>
-      </ion-buttons>
+                <ion-select-option
+                  v-for="(l, idx) in availableLocales"
+                  :key="idx"
+                  :value="l"
+                  >{{ l }}</ion-select-option
+                >
+              </ion-select>
+            </ion-item>
+          </ion-list>
+        </ion-buttons>
 
-      <ion-buttons slot="end" class="lastItem" id="userRef" @click="userPop">
-        <font-awesome-icon
-          v-if="hasToken"
-          :icon="['fas', 'user']"
-          size="1x"
-          class="tok"
-        />
-        <font-awesome-icon
-          v-else
-          :icon="['fas', 'user-slash']"
-          size="1x"
-          class="notok"
-        />
-      </ion-buttons>
-      <!-- 
+        <ion-buttons slot="end" class="lastItem" id="userRef" @click="userPop">
+          <font-awesome-icon
+            v-if="hasToken"
+            :icon="['fas', 'user']"
+            size="1x"
+            class="tok"
+          />
+          <font-awesome-icon
+            v-else
+            :icon="['fas', 'user-slash']"
+            size="1x"
+            class="notok"
+          />
+        </ion-buttons>
+        <!-- 
           <ion-buttons slot="end">
             <ion-menu-button :auto-hide="true" color="primary"></ion-menu-button>
           </ion-buttons>
 
             -->
-    </ion-toolbar>
-    <ion-toolbar class="ion-hide-sm-up toolbar-secondary">
-      <div class="smallheader">
-        <span class="headline-secondary">Daten.Cafe </span>
-        <span>
-          <font-awesome-icon :icon="routeInfo.thumb" size="sm" />
-        </span>
-      </div>
-    </ion-toolbar>
-  </ion-header>
+      </ion-toolbar>
+      <ion-toolbar class="ion-hide-sm-up toolbar-secondary">
+        <div class="smallheader">
+          <span class="headline-secondary">Daten.Cafe </span>
+          <span>
+            <font-awesome-icon :icon="routeInfo.thumb" size="sm" />
+          </span>
+        </div>
+      </ion-toolbar>
+    </ion-header>
 
-  <!-- tooltips not working together with buttons -->
-  <!--
+    <!-- tooltips not working together with buttons -->
+    <!--
       <ion-popover trigger="modeRef" trigger-action="hover" show-backdrop="false" size="auto" side="bottom" alignment="start">
               <ion-content class="ion-padding">{{ $t("tooltip.mode") }}</ion-content>
       </ion-popover>
@@ -137,13 +142,13 @@
               <ion-content class="ion-padding">{{ $t("tooltip.lang") }}</ion-content>
       </ion-popover>
       -->
-  <!-- 
+    <!-- 
       <ion-popover cssClass="custom-popover-class" trigger="userRef" trigger-action="click" show-backdrop="false" size="auto" side="bottom" alignment="start">
         <ion-content class="ion-padding">{{ $t(userText) }}</ion-content>
       </ion-popover>
 
       -->
-    </div>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -211,10 +216,9 @@ const { locale, availableLocales } = useI18n({ useScope: "global" });
 
 // globals
 import { Version } from "@/services/GlobalDefs";
-import { Signals } from "../services/GlobalDefs"
+import { Signals } from "../services/GlobalDefs";
 // event bus
 import eventBus from "@/services/eventBus";
-
 
 import { useRoute } from "vue-router";
 const route = useRoute();
@@ -226,8 +230,8 @@ watch(
     language.value = userStore.getLang();
     // trigger resize on workpane
     if (route.name == "Workspace") {
-      console.log("Send resize")
-      eventBus.emit(Signals.RESIZE)
+      console.log("Send resize");
+      eventBus.emit(Signals.RESIZE);
     }
   }
 );
@@ -453,3 +457,4 @@ ion-toolbar {
   --color: var(--ion-color-dark);
 }
 </style>
+

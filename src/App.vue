@@ -1,9 +1,15 @@
 <template>
   <ion-app>
+    <div class="print">
+      <ion-router-outlet id="main-content" animated="false"></ion-router-outlet>
+  </div>
+
+  <div class="screen">
     <ion-split-pane when="(min-width: 4000px)" content-id="main-content">
       <MainMenu />
       <ion-router-outlet id="main-content" animated="false"></ion-router-outlet>
     </ion-split-pane>
+    </div>
   </ion-app>
 </template>
 
@@ -165,16 +171,6 @@ const onMove = (detail) => {
 // --------------
 </script>
 
-<style>
-@media print {
-  article {
-    page-break-after: always;
-  }
-  ion-card {
-    page-break-after: always;
-  }
-}
-</style>
 
 <style scoped>
 ion-menu ion-content {
@@ -295,5 +291,44 @@ ion-note {
 
 ion-item.selected {
   --color: var(--ion-color-primary);
+}
+</style>
+
+<style scoped>
+@media only print {
+  article {
+    page-break-after: always;
+  }
+  ion-card {
+    page-break-after: always;
+  }
+}
+
+@media only screen {
+  .screen {
+    display: block;
+  }
+  .print {
+    display: none;
+    height:0;
+    width:0;
+  }
+}
+@media only print {
+@page {
+  size: A4 portrait;
+}
+
+  .screen {
+    display: none;
+  }
+  .print {
+    display: block;
+    color: #000;
+    background: #fff;
+  }
+  h2 {
+    page-break-before: always;
+  }
 }
 </style>

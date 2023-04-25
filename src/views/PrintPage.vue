@@ -1,10 +1,6 @@
 <template>
   <ion-page>
-    <main>
-      <article>
-      <div v-html="parms.content" class="content">
-      </div>
-    </article>
+    <main v-html="parms.content" class="content">
     </main>
   </ion-page>
 </template>
@@ -69,6 +65,7 @@ h2 {
 </style>
 
 <style scoped>
+
 @media print {
   @page {
     size: A4 portrait; /* change to desired paper size and orientation */

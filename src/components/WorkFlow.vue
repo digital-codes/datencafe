@@ -780,6 +780,10 @@ const mdDocs = async () => {
   // we actually start with markdown
   let md = "# Daten.Cafe\n";
   md += "<img class='doclogo' src='/img/logo/datencafe.png'/>\n\n";
+  /*
+  md += "<article>\n"
+  md += "</article>\n"
+  */
   md += "## Story\n";
   md += "kmkfweklf \n kkwdkwnqd \n";
   md += "## Workflow\n\n";
@@ -833,6 +837,7 @@ const mdDocs = async () => {
     md += "### " + divName + "\n\n";
     md += "<img class='docimg' src='" + dataURL + "'>\n\n";
     md += "kmkfweklf \n kkwdkwnqd \n\n";
+
   }
 
   const html = await marked.parse(md);
@@ -844,7 +849,7 @@ const mdDocs = async () => {
     name: "PrintPage",
   });
 };
-const useMd = false
+const useMd = true
 const makePdf = async () => {
   if (useMd) {
     await mdDocs()
