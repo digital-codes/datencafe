@@ -16,7 +16,17 @@ const FlowLoading = ref(true)
 
 const loaderPop = ref()
 
+const pageId = ref(0)
+
 onMounted(async () => {
+  pageId.value = Math.random()
+  console.log("ID:", pageId.value)
+  await userStore.addFlowid(pageId.value)
+  const ids = await userStore.getFlowids()
+  if (pageId.value == ids[0]) {
+    console.log("Blocking at ", pageId.value)
+    return // block parallel request
+  }
   loaderPop.value = await loadingController.create({
     message: 'Loading Flow ...',
     duration: 0,

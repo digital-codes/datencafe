@@ -491,15 +491,27 @@ const extraItem = {
   disabled: false,
 };
 
-watch(flowLoaded, (a) => {
+// FIXME maybe the reason we need this is the duplicate mounting ...
+watch(flowLoaded, async (a) => {
   console.log("loaded:", a);
   if (a) {
-    console.log("Next");
+    const ids = await userStore.getFlowids()
+    if (pageId.value == ids[0]) {
+      console.log("Blocking at ", pageId.value)
+      return // block parallel request
+    }
+    console.log("Loading flow for ",pageId.value);
     /* 
        await nextTick() // not enough
       flowInit()
       */
-    setTimeout(flowInit, 100);
+    // setTimeout(flowInit, 100);
+    await nextTick() // not enough
+    await DelayTimer(100)
+    await flowInit()
+    if (userStore.hasStarter()) {
+      startStory()
+    }
   }
 });
 
@@ -1084,6 +1096,12 @@ onMounted(async () => {
   pageId.value = Math.random()
   console.log("ID:", pageId.value)
   await userStore.addFlowid(pageId.value)
+  const ids = await userStore.getFlowids()
+  console.log("Page ids: ",ids)
+  if (ids.length == 1) {
+    console.log("Ignoring initial instance")
+    return
+  }
   //
   ww.value = window.innerWidth;
   wh.value = window.innerHeight;
@@ -1110,10 +1128,9 @@ onMounted(async () => {
       console.log("Blocking at ", pageId.value)
       return // block parallel request
     }
-    console.log("Processing at ", pageId.value)
-    await DelayTimer(50)
-    if (userStore.hasStarter())
+    if (userStore.hasStarter()) {
       startStory()
+    }
   });
 
   // subscribe on iframe loading signal
@@ -1132,7 +1149,7 @@ onMounted(async () => {
 
   // subscribe to nodeanimate
   eventBus.on(Signals.NODEANIMATE, async (id) => {
-    console.log("animate",id)
+    console.log("animate",id,pageId.value)
     try {
       const node = await cy.value.getElementById(id)
       const data = await node.data()
@@ -1141,9 +1158,9 @@ onMounted(async () => {
 
       await DelayTimer(100)
       setTimeout(resetShp(id,oldShp),1000)
-      
+      console.log("Animated")
     } catch (e) {
-      console.log("Node not there ..." , id)
+      console.log("Node not there ..." , id,pageId.value)
     }
 
   });

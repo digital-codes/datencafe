@@ -117,7 +117,7 @@ const getItem = (idx,id) => {
 }
 
 const triggerStory = () => {
-  console.log("trigger")
+  console.log("trigger story")
   eventBus.emit(Signals.TRIGGERSTORY);
 }
 
@@ -125,15 +125,15 @@ const startStory = async (idx) => {
   console.log("Start " ,idx)
   // set starter link
   await userStore.setStarter(items[locale.value][idx]["link"])
-  // when to workpane has been loaded, we can use a short delay.
-  // otherwise, we need to wait longer 
+  // when to workspace has been loaded, we send the signal after a short delay
+  // otherwise, workspace will check in onmounted, so no signal
   const rdy = await userStore.getFlowrdy()
-  //setTimeout(triggerStory,rdy?5000:7000)
   await router.push({
     name: "Workspace",
   });
-  //if (rdy) triggerStory()
-
+  if (rdy) {
+    setTimeout(triggerStory,500)
+  }
 }
 
 </script>

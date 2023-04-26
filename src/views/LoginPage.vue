@@ -76,18 +76,12 @@ const form = ref({
   password: '',
 });
 
-const pageId = ref(0)
-
 onMounted ( async () => {
   loggedIn.value = await userStore.isTokenValid()
-  pageId.value = Math.random()
-  console.log("ID:", pageId.value)
 
 } )
 
 const submitForm = async () => {
-  console.log("ID:", pageId.value)
-  console.log("stores:", await userStore.getFlowids())
   const requestOptions = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },

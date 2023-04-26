@@ -66,6 +66,7 @@ const router = createRouter({
   routes
 })
 
+/*
 router.afterEach((to, from) => {
   console.log("from-to",from.name,to.name)
   if ((from.name == "Stories") && (to.name == "Workspace")) {
@@ -77,5 +78,6 @@ router.afterEach((to, from) => {
     setTimeout(st, 1000)
   }
 })
+*/
 
 export default router
