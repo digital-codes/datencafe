@@ -129,7 +129,7 @@ const startStory = async (idx) => {
   // when to workpane has been loaded, we can use a short delay.
   // otherwise, we need to wait longer 
   const rdy = await userStore.getFlowrdy()
-  setTimeout(triggerStory,rdy?500:7000)
+  setTimeout(triggerStory,rdy?5000:7000)
   router.push({
     name: "Workspace",
   });

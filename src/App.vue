@@ -7,7 +7,9 @@
   <div class="screen">
     <ion-split-pane when="(min-width: 4000px)" content-id="main-content">
       <MainMenu />
+      <keep-alive>
       <ion-router-outlet id="main-content" animated="false"></ion-router-outlet>
+      </keep-alive>
     </ion-split-pane>
     </div>
   </ion-app>

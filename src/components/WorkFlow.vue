@@ -83,6 +83,27 @@ import router from "@/router";
 import { PrintStore } from "@/services/PrintStore";
 const printStore = PrintStore();
 
+// activation
+import { onActivated, onDeactivated, onUpdated } from 'vue'
+
+onUpdated(() => {
+console.log("Updated")
+  // called on initial mount
+  // and every time it is re-inserted from the cache
+})
+
+onActivated(() => {
+console.log("Activated")
+  // called on initial mount
+  // and every time it is re-inserted from the cache
+})
+
+onDeactivated(() => {
+console.log("DeActivated")
+  // called when removed from the DOM into the cache
+  // and also when unmounted
+})
+
 // --------------------
 // page change on ios modfiy layout. maybe due to animation
 // try to restore when entering workspace
@@ -110,7 +131,7 @@ watch(
     }
   }
 );
-
+const blockStory = true
 const startStory = async () => {
   if (cyLoading.value != 1) {
     //alert("Hazard")
@@ -121,6 +142,7 @@ const startStory = async () => {
   console.log("Prepare for story ...",story)
   await userStore.setStarter("")
   await DelayTimer(50)
+  if (blockStory) return
   try {
     await clearFlow()
     await DelayTimer(100)

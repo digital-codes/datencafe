@@ -41,6 +41,7 @@ export interface UserInfo {
   consent?: boolean
   fullsize?: boolean
   starter?: string // calling a story
+  storyLoading?: boolean
   flowrdy?: boolean // flow has been loaded
 }
 
@@ -60,6 +61,7 @@ const clr = {
   consent: false,
   fullsize: true,
   starter: "",
+  storyLoading: false,
   flowrdy: false
 };
 
@@ -77,6 +79,7 @@ export const UserStore = defineStore({
       this.fullsize = clr.fullsize;
       this.starter = clr.starter;
       this.flowrdy = clr.flowrdy;
+      this.storyLoading = clr.storyLoading;
       this.clearStory()
     },
     clearStory() {
@@ -141,6 +144,9 @@ export const UserStore = defineStore({
     },
     setStarter(s:string) {
       this.starter = s;
+    },
+    setStoryLoading(s = false) {
+      this.storyLoading = s;
     },
     setFlowrdy(s = false) {
       this.flowrdy = s
@@ -243,6 +249,9 @@ export const UserStore = defineStore({
     },
     hasStarter: (state) => () => {
       return state.starter != "";
+    },
+    isStoryLoading: (state) => () => {
+      return state.storyLoading
     },
     getFlowrdy: (state) => () => {
       return state.flowrdy
