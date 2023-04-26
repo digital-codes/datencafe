@@ -495,12 +495,6 @@ const extraItem = {
 watch(flowLoaded, async (a) => {
   console.log("loaded:", a);
   if (a) {
-    const ids = await userStore.getFlowids()
-    if (pageId.value == ids[0]) {
-      console.log("Blocking at ", pageId.value)
-      return // block parallel request
-    }
-    console.log("Loading flow for ",pageId.value);
     /* 
        await nextTick() // not enough
       flowInit()
@@ -515,11 +509,9 @@ watch(flowLoaded, async (a) => {
   }
 });
 
-const pageId = ref(0)
 //onMounted(async () => {
 async function flowInit() {
   console.log("CTR:", theFlow.value);
-  console.log("ID:", pageId.value)
   cy.value = await cytoscape({
     container: theFlow.value,
     layout: layout,
@@ -1093,15 +1085,6 @@ const openSettingsPop = async () => {
 };
 
 onMounted(async () => {
-  pageId.value = Math.random()
-  console.log("ID:", pageId.value)
-  await userStore.addFlowid(pageId.value)
-  const ids = await userStore.getFlowids()
-  console.log("Page ids: ",ids)
-  if (ids.length == 1) {
-    console.log("Ignoring initial instance")
-    return
-  }
   //
   ww.value = window.innerWidth;
   wh.value = window.innerHeight;
@@ -1123,11 +1106,6 @@ onMounted(async () => {
   eventBus.on(Signals.TRIGGERSTORY, async () => {
     const ids = await userStore.getFlowids()
     console.log("Stored ids:",ids)
-    // ignore first id
-    if (pageId.value == ids[0]) {
-      console.log("Blocking at ", pageId.value)
-      return // block parallel request
-    }
     if (userStore.hasStarter()) {
       startStory()
     }
@@ -1149,7 +1127,7 @@ onMounted(async () => {
 
   // subscribe to nodeanimate
   eventBus.on(Signals.NODEANIMATE, async (id) => {
-    console.log("animate",id,pageId.value)
+    console.log("animate",id)
     try {
       const node = await cy.value.getElementById(id)
       const data = await node.data()
@@ -1160,7 +1138,7 @@ onMounted(async () => {
       setTimeout(resetShp(id,oldShp),1000)
       console.log("Animated")
     } catch (e) {
-      console.log("Node not there ..." , id,pageId.value)
+      console.log("Node not there ..." , id)
     }
 
   });
