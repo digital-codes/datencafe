@@ -1,6 +1,5 @@
 <template>
   <ion-page>
-    <TitleBar :title='$t("titles.advanced")' thumb="rocket"/>
 
     <ion-content :fullscreen="true">
       <div id="container">

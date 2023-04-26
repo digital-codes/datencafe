@@ -104,7 +104,6 @@ const scrollToTop = () => {
 
 <template>
   <ion-page >
-    <TitleBar :title='$t("titles.work.tab")'  thumb="wand-magic-sparkles"/>
 
     <ion-content :fullscreen="true" ref="content">
     <div id="container" class="container work-container">

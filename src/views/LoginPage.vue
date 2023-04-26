@@ -1,6 +1,5 @@
 <template>
   <ion-page>
-    <TitleBar :title='$t("titles.login")' thumb="user-secret"/>
 
     <ion-content :fullscreen="true">
 

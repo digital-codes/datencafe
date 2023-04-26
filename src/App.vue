@@ -2,15 +2,26 @@
   <ion-app>
     <div class="print">
       <ion-router-outlet id="main-content" animated="false"></ion-router-outlet>
-  </div>
+    </div>
 
-  <div class="screen">
-    <ion-split-pane when="(min-width: 4000px)" content-id="main-content">
-      <MainMenu />
-      <keep-alive>
-      <ion-router-outlet id="main-content" animated="false"></ion-router-outlet>
-      </keep-alive>
-    </ion-split-pane>
+    <div class="screen">
+      <ion-split-pane when="(min-width: 4000px)" content-id="main-content">
+        <MainMenu />
+        <!-- 
+
+         <ion-header>
+    <ion-toolbar>
+      <ion-title>Header Toolbar</ion-title>
+    </ion-toolbar>
+  </ion-header>
+    -->
+    <TitleBar2></TitleBar2>
+          <ion-router-outlet
+            id="main-content"
+            animated="false"
+          ></ion-router-outlet>
+
+      </ion-split-pane>
     </div>
   </ion-app>
 </template>
@@ -24,6 +35,8 @@ import { PreFixes } from "@/services/GlobalDefs";
 
 import { useI18n } from "vue-i18n";
 const { locale } = useI18n({ useScope: "global" });
+ 
+ import { IonHeader, IonTitle, IonToolbar } from '@ionic/vue';
 
 import {
   IonApp,
@@ -34,14 +47,14 @@ import {
 } from "@ionic/vue";
 
 import MainMenu from "@/components/MainMenu.vue";
-import TitleBar from "@/components/TitleBar.vue";
+import TitleBar2 from "@/components/TitleBar2.vue";
 
 // do not track ...
 onMounted(async () => {
   console.log("DNT:", navigator.doNotTrack);
   await userStore.clear();
   await userStore.setLang(locale.value);
-  await checkLSToken()
+  await checkLSToken();
   const mediaQueryObj = window.matchMedia("(prefers-color-scheme: dark)");
   const isDarkMode = mediaQueryObj.matches;
   if (isDarkMode) {
@@ -53,28 +66,27 @@ onMounted(async () => {
 // check if we have a token in localstorage for this domain
 const checkLSToken = async () => {
   try {
-    const tok = await localStorage.getItem(PreFixes.LSTOKPREFIX)
-    const key = await localStorage.getItem(PreFixes.LSKEYPREFIX)
-    const loc = await localStorage.getItem(PreFixes.LSLOCPREFIX)
-    if ((tok === null) || (key === null) || (loc === null)){
-      console.log("LS empty")
-      return
-    } 
-    const current = window.location.hostname
-    if (current != loc) {
-      console.log("LS wrong")
-      await userStore.setToken("") // clear
-      return
+    const tok = await localStorage.getItem(PreFixes.LSTOKPREFIX);
+    const key = await localStorage.getItem(PreFixes.LSKEYPREFIX);
+    const loc = await localStorage.getItem(PreFixes.LSLOCPREFIX);
+    if (tok === null || key === null || loc === null) {
+      console.log("LS empty");
+      return;
     }
-    await userStore.setToken(tok,key)
-    console.log("Token set")
+    const current = window.location.hostname;
+    if (current != loc) {
+      console.log("LS wrong");
+      await userStore.setToken(""); // clear
+      return;
+    }
+    await userStore.setToken(tok, key);
+    console.log("Token set");
   } catch (e) {
-    console.log("LS error",e)
-    await userStore.setToken("") // clear
-    return
+    console.log("LS error", e);
+    await userStore.setToken(""); // clear
+    return;
   }
-
-}
+};
 
 // test swiping. works. move to app ...
 import { createGesture } from "@ionic/vue";
@@ -83,10 +95,11 @@ import router from "@/router";
 const route = useRoute();
 
 const gesture = ref();
-const forceMobile = true
-const debounce = ref(false)
+const forceMobile = true;
+const debounce = ref(false);
 onMounted(() => {
-  if (forceMobile || 
+  if (
+    forceMobile ||
     /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
       navigator.userAgent
     )
@@ -114,9 +127,11 @@ const onMove = (detail) => {
   //const velocityX = detail.velocityX;
   const current = route.name;
   // debounce. first
-  if (debounce.value) return
-  debounce.value = true
-  setTimeout(()=>{debounce.value = false},250)
+  if (debounce.value) return;
+  debounce.value = true;
+  setTimeout(() => {
+    debounce.value = false;
+  }, 250);
   //
   console.log("Swiped:", current, detail);
 
@@ -176,7 +191,6 @@ const onMove = (detail) => {
 };
 // --------------
 </script>
-
 
 <style scoped>
 ion-menu ion-content {
@@ -316,14 +330,14 @@ ion-item.selected {
   }
   .print {
     display: none;
-    height:0;
-    width:0;
+    height: 0;
+    width: 0;
   }
 }
 @media only print {
-@page {
-  size: A4 portrait;
-}
+  @page {
+    size: A4 portrait;
+  }
 
   .screen {
     display: none;

@@ -1,6 +1,6 @@
 <template>
+    <ion-header :translucent="false" style="height:64px">
   <div class="swipeWrap" ref="swipe">
-    <ion-header :translucent="false">
       <ion-toolbar class="toolbar">
         <ion-buttons slot="start">
           <ion-menu-button :auto-hide="true" color="primary"></ion-menu-button>
@@ -131,28 +131,15 @@
           </span>
         </div>
       </ion-toolbar>
+  </div>
     </ion-header>
 
-    <!-- tooltips not working together with buttons -->
-    <!--
-      <ion-popover trigger="modeRef" trigger-action="hover" show-backdrop="false" size="auto" side="bottom" alignment="start">
-              <ion-content class="ion-padding">{{ $t("tooltip.mode") }}</ion-content>
-      </ion-popover>
-      <ion-popover trigger="langRef" trigger-action="hover" show-backdrop="false" size="auto" side="bottom" alignment="start">
-              <ion-content class="ion-padding">{{ $t("tooltip.lang") }}</ion-content>
-      </ion-popover>
-      -->
-    <!-- 
-      <ion-popover cssClass="custom-popover-class" trigger="userRef" trigger-action="click" show-backdrop="false" size="auto" side="bottom" alignment="start">
-        <ion-content class="ion-padding">{{ $t(userText) }}</ion-content>
-      </ion-popover>
-
-      -->
-  </div>
 </template>
 
 <script setup lang="ts">
 import {
+    IonMenu,
+    IonMenuToggle,
   IonButtons,
   IonHeader,
   IonMenuButton,

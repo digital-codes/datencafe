@@ -1,6 +1,5 @@
 <template>
     <ion-page>
-    <TitleBar :title='$t("titles.data")' thumb="book-atlas"/>
 
     <ion-content :fullscreen="true">
 
