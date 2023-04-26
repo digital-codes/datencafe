@@ -1,21 +1,13 @@
 <template>
   <ion-app>
+    <!-- DONT use a second router-outlete here. Ever! -->
     <div class="print">
-      <ion-router-outlet id="main-content" animated="false"></ion-router-outlet>
+      <PrintPage></PrintPage>
     </div>
-
     <div class="screen">
       <ion-split-pane when="(min-width: 4000px)" content-id="main-content">
         <MainMenu />
-        <!-- 
-
-         <ion-header>
-    <ion-toolbar>
-      <ion-title>Header Toolbar</ion-title>
-    </ion-toolbar>
-  </ion-header>
-    -->
-    <TitleBar2></TitleBar2>
+        <TitleBar2></TitleBar2>
           <ion-router-outlet
             id="main-content"
             animated="false"
@@ -42,12 +34,11 @@ import {
   IonApp,
   IonRouterOutlet,
   IonSplitPane,
-  IonList,
-  IonPage,
 } from "@ionic/vue";
 
 import MainMenu from "@/components/MainMenu.vue";
 import TitleBar2 from "@/components/TitleBar2.vue";
+import PrintPage from "@/views/PrintPage.vue";
 
 // do not track ...
 onMounted(async () => {

@@ -20,30 +20,17 @@ const FlowLoading = ref(true)
 
 const loaderPop = ref()
 
-const pageId = ref(0)
-
-const loadId = ref(0)
-
 onMounted(async () => {
-  pageId.value = Math.random()
-  console.log("ID:", pageId.value)
-  await userStore.addFlowid(pageId.value)
-  const ids = await userStore.getFlowids()
   loaderPop.value = await loadingController.create({
     message: 'Loading Flow ...',
     duration: 0,
   });
-  if (pageId.value == ids[0]) {
-    console.log("Blocking at ", pageId.value)
-    return // block parallel request
-  }
   loaderPop.value.present();
 })
 
 const WorkFlowAsync = defineAsyncComponent({
   // A factory function that returns a Promise that resolves to
   // the component definition.
-  /*
   loader: () => import('../components/WorkFlow.vue').then((module) => {
     console.log('Cyto loaded');
     // Update the ref when the async loading is complete
@@ -51,31 +38,8 @@ const WorkFlowAsync = defineAsyncComponent({
     loaderPop.value.dismiss()
     return module;
   })
-  */
-  loader: () => {
-    console.log("loading")
-    const x = import('../components/WorkFlow.vue')
-    x.then((module) => {
-      console.log('Cyto loaded');
-      // Update the ref when the async loading is complete
-      FlowLoading.value = false
-      loaderPop.value.dismiss()
-      return module;
-    })
-  }
-  /*
-  loader: () => {
-      console.log("Loading",loadId.value++)
-      import('../components/WorkFlow.vue').then((module) => {
-      console.log('Cyto loaded');
-      // Update the ref when the async loading is complete
-      FlowLoading.value = false
-      loaderPop.value.dismiss()
-      return module;
-    })
-  }
-  */
 });
+
 //import WorkFlow from '../components/WorkFlow.vue'
 
 const addViz = (event) => {
