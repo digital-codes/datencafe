@@ -1,6 +1,6 @@
 <template>
   <ion-page>
-
+    <ion-header :translucent="true" class="hdr"></ion-header>
     <ion-content :fullscreen="true">
       <div id="container">
         <ion-card color="light" v-for="(item,i) in items.en" :key="i">
@@ -44,6 +44,15 @@ const getItem = (idx,id) => {
 </script>
 
 <style scoped>
+
+
+ion-header {
+  height: 96px;
+  z-index: -10;
+
+}
+
+
 #container {
   text-align: center;
   margin:10px;
@@ -78,7 +87,6 @@ ion-card {
   max-width: 996px;
 
 }
-
 
 </style>
 

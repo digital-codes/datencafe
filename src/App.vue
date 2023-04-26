@@ -1,10 +1,10 @@
 <template>
   <ion-app>
     <!-- DONT use a second router-outlete here. Ever! -->
-    <div class="print">
+    <div v-if='route.name == "PrintPage"' class="print">
       <PrintPage></PrintPage>
     </div>
-    <div class="screen">
+    <div v-else class="screen">
       <ion-split-pane when="(min-width: 4000px)" content-id="main-content">
         <MainMenu />
         <TitleBar2></TitleBar2>

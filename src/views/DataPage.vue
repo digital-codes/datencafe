@@ -1,5 +1,6 @@
 <template>
     <ion-page>
+      <ion-header :translucent="true" class="hdr"></ion-header>
 
     <ion-content :fullscreen="true">
 
@@ -61,6 +62,14 @@ const getItem = (idx,id) => {
 </script>
 
 <style scoped>
+
+ion-header {
+  height: 96px;
+  z-index: -10;
+
+}
+
+
 #container {
   text-align: center;
   margin:10px;

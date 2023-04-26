@@ -343,7 +343,7 @@ const openPop = async (message: string) => {
 
 <style scoped>
 .titlebar {
-  height:64px;
+  height:96px;
 }
 
 
