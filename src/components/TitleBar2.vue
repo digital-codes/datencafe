@@ -1,5 +1,5 @@
 <template>
-    <ion-header :translucent="false" style="height:64px">
+    <ion-header :translucent="false" class="titlebar">
   <div class="swipeWrap" ref="swipe">
       <ion-toolbar class="toolbar">
         <ion-buttons slot="start">
@@ -342,10 +342,10 @@ const openPop = async (message: string) => {
 </script>
 
 <style scoped>
-.navbar {
-  padding-left: 1rem;
-  padding-right: 1rem;
+.titlebar {
+  height:64px;
 }
+
 
 .title {
   padding: 0;
@@ -366,6 +366,13 @@ ion-thumbnail.logo {
 }
 
 /* sm is 576, md is 768 */
+@media only screen and (max-width: 996px) {
+  .titlebar {
+  height:96px;
+}
+}
+
+/* sm is 576, md is 768 */
 @media only screen and (max-width: 768px) {
   .title {
     padding-left: 0;
@@ -380,6 +387,7 @@ ion-thumbnail.logo {
     --offset-y: 30px;
   }
 }
+
 
 .hamburger {
   margin: 0;

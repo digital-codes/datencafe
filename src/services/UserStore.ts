@@ -43,6 +43,7 @@ export interface UserInfo {
   starter?: string // calling a story
   storyLoading?: boolean
   flowrdy?: boolean // flow has been loaded
+  flowIds?: string[] // flow ids
 }
 
 const clr = {
@@ -62,7 +63,8 @@ const clr = {
   fullsize: true,
   starter: "",
   storyLoading: false,
-  flowrdy: false
+  flowrdy: false,
+  flowIds: [] as string[]
 };
 
 export const UserStore = defineStore({
@@ -71,27 +73,30 @@ export const UserStore = defineStore({
   actions: {
     clear() {
       console.log("clear user");
-      this.token = clr.token;
-      this.key = clr.key;
-      this.dark = clr.dark;
-      this.lang = clr.lang;
-      this.consent = clr.consent;
-      this.fullsize = clr.fullsize;
-      this.starter = clr.starter;
-      this.flowrdy = clr.flowrdy;
-      this.storyLoading = clr.storyLoading;
+      const clr1 = JSON.parse(JSON.stringify(clr)) // copy
+      this.token = clr1.token;
+      this.key = clr1.key;
+      this.dark = clr1.dark;
+      this.lang = clr1.lang;
+      this.consent = clr1.consent;
+      this.fullsize = clr1.fullsize;
+      this.starter = clr1.starter;
+      this.flowrdy = clr1.flowrdy;
+      this.flowIds = clr1.flowIds;
+      this.storyLoading = clr1.storyLoading;
       this.clearStory()
     },
     clearStory() {
       console.log("clear story");
-      this.title = clr.title;
-      this.author = clr.author;
-      this.email = clr.email;
-      this.link = clr.link;
-      this.date = clr.date;
-      this.category = clr.category;
-      this.tags = clr.tags;
-      this.text = clr.text;
+      const clr1 = JSON.parse(JSON.stringify(clr)) // copy
+      this.title = clr1.title;
+      this.author = clr1.author;
+      this.email = clr1.email;
+      this.link = clr1.link;
+      this.date = clr1.date;
+      this.category = clr1.category;
+      this.tags = clr1.tags;
+      this.text = clr1.text;
     },
     async setToken(tok = clr.token, key = clr.key) {
       console.log("set tok",tok,key)
@@ -150,6 +155,12 @@ export const UserStore = defineStore({
     },
     setFlowrdy(s = false) {
       this.flowrdy = s
+    },
+    addFlowid(s = "") {
+      this.flowIds.push(s)
+    },
+    clrFlowid(s = "") {
+      this.flowIds = [] as string[]
     },
     // jwt verify ...
     async jwtVerify(token:string,key:string) {
@@ -255,6 +266,9 @@ export const UserStore = defineStore({
     },
     getFlowrdy: (state) => () => {
       return state.flowrdy
+    },
+    getFlowids: (state) => () => {
+      return state.flowIds
     },
     getStory: (state) => () => {
       return {

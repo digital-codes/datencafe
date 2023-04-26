@@ -110,11 +110,14 @@ console.log("DeActivated")
 import { useRoute } from "vue-router";
 const route = useRoute();
 
+onUpdated(() => console.log("updated"))
+
 watch(
   () => route.name,
   async (name) => {
     console.log(`WF: route is now : ${name}`);
     if (name == "Workspace") {
+      await nextTick()
       ww.value = window.innerWidth;
       wh.value = window.innerHeight;
       console.log("ww,wh", ww.value, wh.value);
@@ -131,13 +134,8 @@ watch(
     }
   }
 );
-const blockStory = true
+const blockStory = false
 const startStory = async () => {
-  if (cyLoading.value != 1) {
-    //alert("Hazard")
-    console.log("hazard")
-    return
-  }
   const story = await userStore.getStarter()
   console.log("Prepare for story ...",story)
   await userStore.setStarter("")
@@ -167,6 +165,7 @@ const startStory = async () => {
   }
   // reset semaphore
   cyLoading.value = 0
+  await nextTick()
 
 }
 // -------------------------------
@@ -504,9 +503,11 @@ watch(flowLoaded, (a) => {
   }
 });
 
+const pageId = ref(0)
 //onMounted(async () => {
 async function flowInit() {
   console.log("CTR:", theFlow.value);
+  console.log("ID:", pageId.value)
   cy.value = await cytoscape({
     container: theFlow.value,
     layout: layout,
@@ -1079,7 +1080,11 @@ const openSettingsPop = async () => {
   popover.value.open = false;
 };
 
-onMounted(() => {
+onMounted(async () => {
+  pageId.value = Math.random()
+  console.log("ID:", pageId.value)
+  await userStore.addFlowid(pageId.value)
+  //
   ww.value = window.innerWidth;
   wh.value = window.innerHeight;
   console.log("ww,wh", ww.value, wh.value);
@@ -1098,10 +1103,17 @@ onMounted(() => {
 
   // subscribe on triggerstory
   eventBus.on(Signals.TRIGGERSTORY, async () => {
-    if (cyLoading.value > 0) return // block parallel request
-    cyLoading.value ++
-    console.log("trigger story", cyLoading.value)
-    startStory()
+    const ids = await userStore.getFlowids()
+    console.log("Stored ids:",ids)
+    // ignore first id
+    if (pageId.value == ids[0]) {
+      console.log("Blocking at ", pageId.value)
+      return // block parallel request
+    }
+    console.log("Processing at ", pageId.value)
+    await DelayTimer(50)
+    if (userStore.hasStarter())
+      startStory()
   });
 
   // subscribe on iframe loading signal

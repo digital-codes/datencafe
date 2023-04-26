@@ -1,5 +1,9 @@
 import { createRouter, createWebHistory } from '@ionic/vue-router';
 import { RouteRecordRaw } from 'vue-router';
+// globals
+import { Signals } from "@/services/GlobalDefs";
+import eventBus from "@/services/eventBus";
+
 
 import Home from '@/views/InfoPage.vue';
 // maybe this helps with printing
@@ -62,5 +66,16 @@ const router = createRouter({
   routes
 })
 
+router.afterEach((to, from) => {
+  console.log("from-to",from.name,to.name)
+  if ((from.name == "Stories") && (to.name == "Workspace")) {
+    console.log("check story condition")
+    const st = () => {
+      console.log("Story trigger from router")
+        eventBus.emit(Signals.TRIGGERSTORY);
+    }
+    setTimeout(st, 1000)
+  }
+})
 
 export default router

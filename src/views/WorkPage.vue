@@ -124,9 +124,10 @@ const scrollToTop = () => {
                 <div class="headline">
                 <h3>{{$t("titles.work.flow")}}</h3>
                 </div>
-
+                <keep-alive>
                 <WorkFlowAsync msg="Flow demo" @add-viz="(e) => addViz(e)" @del-viz="(e) => delViz(e)" />
-                </section>
+                </keep-alive>
+              </section>
             </ion-col>
 
             <ion-col  size="12" size-lg="5" sytle="overflow-y:scroll;" 
