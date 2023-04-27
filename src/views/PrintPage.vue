@@ -128,6 +128,13 @@ h2 {
     text-justify: inter-word;
   }
 
+  .content  > span {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    text-justify: inter-word;
+    border: solid 2px #888;
+  }
+
   img {
     display: block;
     margin-left: auto;
@@ -154,8 +161,9 @@ h2 {
   }
 
   .docimg {
-    width: 80%;
+    width: 70%;
     border-radius: 30px;
+    page-break-inside: avoid;
   }
 
 }

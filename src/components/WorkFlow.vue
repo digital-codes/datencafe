@@ -848,13 +848,15 @@ const htmlDocs = async () => {
 
     const imgWidth = 160;
 
-    htm += "<article>\n";
+    // h1 braks article. don't put inside!
+    htm = "\n\n<!-- datencafe -->\n\n"
     htm = "<h1>Daten.Cafe</h1>\n";
     htm += "<img class='doclogo' src='/img/logo/datencafe.png'/>\n\n";
     /*
     htm += "<article>\n"
     htm += "</article>\n"
     */
+    htm += "<article> \n";
     htm += "<h2>Story</h2>\n";
     if (story.title > "") {
       htm += "<h3>" + story.title + "</h3>\n";
@@ -870,7 +872,7 @@ const htmlDocs = async () => {
 
     htm += "<article>\n"
 
-    htm += "<h2>Workflow</h2>\n";
+    htm += "<h2>Workflow</h2>\n"
     // get flow image
     // extent:  { x1, y1, x2, y2, w, h }.
     await cy.value.fit();
