@@ -73,7 +73,7 @@ The toolbar provides you with all required utilities, in particular:
 On your first visit you might want to start with an example story from the [story page](/stories). 
 Download a story to your computer and upload it to the Workspace with the toolbar *upload*
 
-This is how story1 flow looks like: ![](/stories/story1.png)
+This is how story1 flow looks like: ![](/assets/stories/story1.png)
 
 You can inspect and modify the example or start an entirely new flow. (Click the *trash* button for a fresh start.) 
 

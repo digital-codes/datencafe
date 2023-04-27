@@ -78,7 +78,7 @@ IN der Werkzeugleiste finden Sie alles Nötige, insbesondere:
 
 Bei Ihrem ersten Besuch möchten Sie möglicherweise mit einer Beispielgeschichte von der Story-Seite beginnen. Laden Sie eine Geschichte auf Ihren Computer herunter und laden Sie sie mit der Symbolleiste hochladen in den Workspace hoch.
 
-So sieht der Flow von Geschichte 1 aus: ![](/stories/story1.png)
+So sieht der Flow von Geschichte 1 aus: ![](/assets/stories/story1.png)
 
 Sie können das Beispiel überprüfen und ändern oder einen vollständig neuen Flow starten. (Klicken Sie auf *Löschen* für einen Neuanfang.)
 
