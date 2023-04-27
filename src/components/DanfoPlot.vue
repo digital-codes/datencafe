@@ -7,7 +7,7 @@
   <!-- 
   <div v-for="(item,index) in items" :key="index" class="chartItem">
   -->
-  <div v-for="(item,idx) in items" :key="item.id" :id="itemPrefix + item.id"  :class="locked[idx]?'focus':'free'" >
+  <div v-for="(item,idx) in items" :key="item.id" :id="itemPrefix + item.id"  class="chartItem" :class="locked[idx]?'focus':'free'" >
     <h3 class="dftitle">{{ item.name }}
     <ion-button v-if="!locked[idx]" class="lock" @click="lock(idx,1)">
           <font-awesome-icon
@@ -35,7 +35,7 @@
 </template>
   
 <script setup>
-import { ref, reactive, onMounted, watchEffect, computed } from "vue"
+import { ref, reactive, onMounted, watchEffect, computed, nextTick } from "vue"
 import { IonButton } from "@ionic/vue";
 // globals
 import { PreFixes } from "../services/GlobalDefs"
@@ -84,8 +84,8 @@ const chartClass = (idx) => {
     }
     console.log("Index",idx,items.value)
     return {
-      dfTable: items.value[idx].type == "table",
-      dfChart: items.value[idx].type != "table",
+      dftable: items.value[idx].type == "table",
+      dfchart: items.value[idx].type != "table",
       chartFocus: locked.value[idx]
     }
   }
@@ -106,10 +106,57 @@ watchEffect(() => {
   }
 });
 
-const lock = (idx,state) => {
+const lock = async (idx,state) => {
   console.log("lock:",idx,state)
   locked.value[idx] = state
+  await nextTick()
+  const item = document.getElementById(itemPrefix + items.value[idx].id)
+  const offset = item.offsetTop
+  console.log("Offset:",offset)
+  /*
+  if (!item.style) item.style = {}
+  if (state) {
+    item.style.transform = "translate(0px,-" + String(offset - 100) + "px)" 
+  } else {
+    item.style.transform = ""
+  }
+  */
+  items.value.forEach((xi,xidx) => {
+    const xitem = document.getElementById(itemPrefix + items.value[xidx].id)
+    if (!xitem.style) xitem.style = {}
+    if (state) {
+      // lock one, hide others
+      if (idx == xidx) {
+        console.log("Locking item ",xitem.id)
+        xitem.style.transform = "translate(0px,-" + String(offset - 60) + "px)" 
+        xitem.style.visibility = "visible"
+        plotWrap.value.style.overflow = "clip"
+      } else {
+        console.log("Hiding item ",xitem.id)
+        xitem.style.transform = ""
+        xitem.style.visibility = "hidden"
+      }
+    } else {
+      // unhide all     
+      console.log("Free item ",xitem.id)
+      xitem.style.transform = ""
+      xitem.style.visibility = "visible"
+      plotWrap.value.style.overflow = "scroll"
+    }
+  })
 }
+
+/*
+alternative
+set container overflow to clip
+transform translate item to top 
+set visibility of others to hidden
+
+const element = document.getElementById("myDIV");
+let pos = element.offsetTop;
+
+
+*/
 
 </script>
   
@@ -119,12 +166,12 @@ ion-button.lock {
   vertical-align: middle;
 }
 
-.focus {
+.focus1 {
   position: fixed;
   top: 150px;
-  z-index: 10;
+  z-index: 1000;
   background: #fff;
-  height:70%;
+  height:calc(60vh);
 }
 
 .chartFocus {
@@ -161,7 +208,9 @@ h3 {
 }
 
   .chartItem {
+    /*
     overflow-x: scroll;
+    */
   }
   /* compute table width from number of columns in display class
   and set width via item prop. Scrolling-X handled via chartitem  */
@@ -169,12 +218,21 @@ h3 {
     color:#000;
     background-color:#ccf;
     height:350px;
+    width: calc(38vw);
   }
 
   .dfchart {
     color:#000;
     background-color:#cfc;
     height:350px;
+    width: calc(38vw);
+  }
+
+  .dfmap {
+    color:#000;
+    background-color:#cfc;
+    height:350px;
+    width: calc(38vw);
   }
 
   

@@ -319,20 +319,23 @@ ion-item.selected {
   .screen {
     display: block;
   }
+  /*
   .print {
     display: none;
     height: 0;
     width: 0;
   }
+  */
 }
 @media only print {
   @page {
     size: A4 portrait;
   }
-
+/*
   .screen {
     display: none;
   }
+  */
   .print {
     display: block;
     color: #000;

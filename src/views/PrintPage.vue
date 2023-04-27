@@ -64,21 +64,38 @@ h2 {
 
 </style>
 
-<style scoped>
+<style>
 
 @media print {
+  body {
+    overflow:scroll!important;
+    position: static!important;
+  }
+  
   @page {
     size: A4 portrait; /* change to desired paper size and orientation */
     margin: 1cm; /* change to desired margin size */
   }  
 
-  h2 {
-    page-break-before: always;
+  article {
+    page-break-after: always;
+  }
+
+  img {
+    page-break-inside: avoid;
   }
 
   .ion-page {
-    overflow: auto;
-    display: block;
+    overflow: auto!important;
+    display: block!important;
+    left: unset!important;
+    right: unset!important;
+    top: unset!important;
+    bottom: unset!important;
+    position: unset!important;
+    flex-direction: unset!important;
+    contain: unset!important;
+    overflow: scroll!important;
   }
 
   .doclogo {

@@ -86,6 +86,9 @@ const printStore = PrintStore();
 // activation
 import { onActivated, onDeactivated, onUpdated } from 'vue'
 
+// print test
+import html from "@/assets/print/html.json"
+
 onUpdated(() => {
 console.log("Updated")
   // called on initial mount
@@ -833,6 +836,17 @@ async function flowInit() {
   }
   // finally set init 
   userStore.setFlowrdy(true) 
+}
+
+const htmlDocs = async () => {
+  console.log("Make PDF via HTML");
+  alert("Preparing (fake) Print Page. Click OK then wait a moment ...");
+  // fake 
+  await printStore.set(html.part);
+  // push to print page
+  await router.push({
+    name: "PrintPage",
+  });
 }
 
 const mdDocs = async () => {
@@ -2449,8 +2463,8 @@ const openSettings = () => {
       </ion-buttons>
       <ion-buttons slot="start">
         <ion-button id="pdfRef" 
-        :disabled="true"
-        @click="makePdf">
+        :disabled="false"
+        @click="htmlDocs">
           <font-awesome-icon
             :icon="['fas', 'file-pdf']"
             size="2x"
@@ -2572,8 +2586,8 @@ const openSettings = () => {
 
       <ion-buttons slot="start">
         <ion-button id="pdfRef" 
-        :disabled="true"
-        @click="makePdf">
+        :disabled="false"
+        @click="htmlDocs">
           <font-awesome-icon
             :icon="['fas', 'file-pdf']"
             size="sm"

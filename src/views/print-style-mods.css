@@ -1,0 +1,22 @@
+
+/* In Webseite enthaltenes Stil-Dokument #20 | file:///home/kugel/temp/js/dataTools/datencafe/src/assets/print/copyTest.html */
+
+body {
+  /* position: fixed; */
+  /* overflow: hidden; */
+  position: static;
+  overflow: scroll !important;
+}
+
+/* In Webseite enthaltenes Stil-Dokument #18 | file:///home/kugel/temp/js/dataTools/datencafe/src/assets/print/copyTest.html */
+
+.ion-page {
+  /* left: 0; */
+  /* right: 0; */
+  /* top: 0; */
+  /* bottom: 0; */
+  /* position: absolute; */
+  /* flex-direction: column; */
+  /* contain: layout size style; */
+  /* overflow: hidden; */
+}
