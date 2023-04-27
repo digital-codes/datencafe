@@ -111,7 +111,27 @@ h2 {
     page-break-after: always;
   }
 
+  .content  {
+    width: 100%;
+    position: relative;
+    display: block;
+  }
+
+
+  h1, h2, h3 {
+    text-align: center;
+    padding-bottom: 1rem;
+  }
+
+  .content  > p {
+    padding: 1rem;
+    text-justify: inter-word;
+  }
+
   img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
     page-break-inside: avoid;
   }
 
@@ -129,13 +149,13 @@ h2 {
   }
 
   .doclogo {
-    width: 50%;
-    margin-left:auto;
-    margin-right:auto;
+    width: 20%;
+    padding-bottom: 2rem;
   }
 
   .docimg {
-    width: 20%;
+    width: 80%;
+    border-radius: 30px;
   }
 
 }

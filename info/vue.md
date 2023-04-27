@@ -17,3 +17,12 @@ change, total messages is 14, once all pages have been visited
 
 number grows when more menu items have been actuvated, up to 7
 
+# Lock Chart
+
+position: fixed;
+z-index: 100;
+top: 150px;
+background: red;
+
+icons: lock, lock-open
+

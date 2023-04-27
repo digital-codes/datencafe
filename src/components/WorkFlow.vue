@@ -67,8 +67,7 @@ import NodeSel from "@/components/popovers/NodeSel.vue";
 import nodeTypes from "@/assets/nodes/nodeTypes.json";
 import { nodeFactory } from "@/services/NodeFactory";
 import { NodeSpec } from "@/services/GlobalDefs";
-import {DcNode} from "@/classes/DcNode" // base class of nodes
-
+import { DcNode } from "@/classes/DcNode"; // base class of nodes
 
 import { IonButtons, IonToolbar } from "@ionic/vue";
 
@@ -84,28 +83,28 @@ import { PrintStore } from "@/services/PrintStore";
 const printStore = PrintStore();
 
 // activation
-import { onActivated, onDeactivated, onUpdated } from 'vue'
+import { onActivated, onDeactivated, onUpdated } from "vue";
 
 // print test
-import html from "@/assets/print/html.json"
+import html from "@/assets/print/html.json";
 
 onUpdated(() => {
-console.log("Updated")
+  console.log("Updated");
   // called on initial mount
   // and every time it is re-inserted from the cache
-})
+});
 
 onActivated(() => {
-console.log("Activated")
+  console.log("Activated");
   // called on initial mount
   // and every time it is re-inserted from the cache
-})
+});
 
 onDeactivated(() => {
-console.log("DeActivated")
+  console.log("DeActivated");
   // called when removed from the DOM into the cache
   // and also when unmounted
-})
+});
 
 // --------------------
 // page change on ios modfiy layout. maybe due to animation
@@ -113,14 +112,14 @@ console.log("DeActivated")
 import { useRoute } from "vue-router";
 const route = useRoute();
 
-onUpdated(() => console.log("updated"))
+onUpdated(() => console.log("updated"));
 
 watch(
   () => route.name,
   async (name) => {
     console.log(`WF: route is now : ${name}`);
     if (name == "Workspace") {
-      await nextTick()
+      await nextTick();
       ww.value = window.innerWidth;
       wh.value = window.innerHeight;
       console.log("ww,wh", ww.value, wh.value);
@@ -131,24 +130,24 @@ watch(
       /*
       flowWrap.value.style.width = "100%"; //String(ww.value) + "px"
       */
-      const hf = smallScreen.value?FlowSpec.SHEIGHT:FlowSpec.LHEIGHT
-      console.log("HF:",hf)
+      const hf = smallScreen.value ? FlowSpec.SHEIGHT : FlowSpec.LHEIGHT;
+      console.log("HF:", hf);
       flowWrap.value.style.height = String(wh.value * hf) + "px";
     }
   }
 );
-const blockStory = false
+const blockStory = false;
 const startStory = async () => {
-  const story = await userStore.getStarter()
-  console.log("Prepare for story ...",story)
-  await userStore.setStarter("")
-  await DelayTimer(50)
-  if (blockStory) return
+  const story = await userStore.getStarter();
+  console.log("Prepare for story ...", story);
+  await userStore.setStarter("");
+  await DelayTimer(50);
+  if (blockStory) return;
   try {
-    await clearFlow()
-    await DelayTimer(100)
-    const r = await fetch(story)
-    const design = await r.json()
+    await clearFlow();
+    await DelayTimer(100);
+    const r = await fetch(story);
+    const design = await r.json();
     /*
     // copy
     const designCopy = await JSON.parse(await JSON.stringify(design))
@@ -156,21 +155,20 @@ const startStory = async () => {
     */
     const flow = await initFlow(design);
     if (!flow) {
-      console.log("Story load failed")
-      alert("ERROR")
-      await clearFlow()
+      console.log("Story load failed");
+      alert("ERROR");
+      await clearFlow();
     } else {
-      console.log("cy,nl",cy.value.json(),nodeList.value.length)
+      console.log("cy,nl", cy.value.json(), nodeList.value.length);
     }
   } catch (e) {
-    console.log("Story start failed")
-    await clearFlow()
+    console.log("Story start failed");
+    await clearFlow();
   }
   // reset semaphore
-  cyLoading.value = 0
-  await nextTick()
-
-}
+  cyLoading.value = 0;
+  await nextTick();
+};
 // -------------------------------
 
 const props = defineProps<{ msg: string }>();
@@ -204,7 +202,7 @@ const nextInsertedX = ref(0);
 
 const smallScreen = ref(false);
 
-const animationStyled = ref(false)
+const animationStyled = ref(false);
 
 const elements: ElementDefinition[] = [
   // list of graph elements to start with
@@ -503,11 +501,11 @@ watch(flowLoaded, async (a) => {
       flowInit()
       */
     // setTimeout(flowInit, 100);
-    await nextTick() // not enough
-    await DelayTimer(100)
-    await flowInit()
+    await nextTick(); // not enough
+    await DelayTimer(100);
+    await flowInit();
     if (userStore.hasStarter()) {
-      startStory()
+      startStory();
     }
   }
 });
@@ -536,7 +534,6 @@ async function flowInit() {
   if (!cy.value) {
     console.log("cy falied");
   } else {
-
     await cy.value.center();
     await cy.value.fit();
     // edge handles
@@ -742,16 +739,16 @@ async function flowInit() {
           console.log("Config");
           await configNode(instance);
           break;
-          case "upload":
+        case "upload":
           console.log("Upload");
           // set target
-          dataFileTarget.value = instance
-          dataFileInput.value.click()
+          dataFileTarget.value = instance;
+          dataFileInput.value.click();
           break;
-          case "download":
+        case "download":
           console.log("Download");
           // we need the instance here to find sources
-          downloadData(instance)
+          downloadData(instance);
           break;
         case "connect":
           console.log("Connect");
@@ -834,107 +831,99 @@ async function flowInit() {
       await nodeList.value[dstIdx].msgOff(signal);
     });
   }
-  // finally set init 
-  userStore.setFlowrdy(true) 
+  // finally set init
+  userStore.setFlowrdy(true);
 }
 
+const fakePrint = false;
 const htmlDocs = async () => {
   console.log("Make PDF via HTML");
   alert("Preparing (fake) Print Page. Click OK then wait a moment ...");
-  // fake 
-  await printStore.set(html.part);
+  // fake
+  let htm;
+  if (fakePrint) htm = html.part;
+  else {
+    // -----------------------------
+    const story = userStore.getStory();
+
+    const imgWidth = 160;
+
+    htm += "<article>\n";
+    htm = "<h1>Daten.Cafe</h1>\n";
+    htm += "<img class='doclogo' src='/img/logo/datencafe.png'/>\n\n";
+    /*
+    htm += "<article>\n"
+    htm += "</article>\n"
+    */
+    htm += "<h2>Story</h2>\n";
+    if (story.title > "") {
+      htm += "<h3>" + story.title + "</h3>\n";
+      htm += "<p>Author: " + story.author + "</p>\n";
+      htm += "<span>Date: " + story.date + "<br>\n";
+      htm += "Link: " + story.link + "</span>\n";
+      htm += "<p>" + story.text + "</p>\n";
+    } else {
+      htm += "<h2>Empty Story</h2>\n";
+    }
+    htm += "</article>\n\n"
+
+
+    htm += "<article>\n"
+
+    htm += "<h2>Workflow</h2>\n";
+    // get flow image
+    // extent:  { x1, y1, x2, y2, w, h }.
+    await cy.value.fit();
+    const flowWidth = await cy.value.extent().w;
+    const flowHeight = await cy.value.extent().h;
+    const flowAspect = flowWidth / flowHeight;
+    //console.log("Flow aspect:",flowWidth, flowHeight, flowAspect)
+    const wf = await cy.value.png({
+      output: "base64uri",
+      bg: "#ffffff",
+      full: false,
+      scale: 1,
+      maxWidth: 1280,
+    });
+
+    htm += "<img class='docimg' src='" + wf + "'>\n\n";
+
+    htm += "</article>\n\n";
+
+    htm += "<h2>Display</h2>\n";
+
+    // get display nodes
+    const displayNodes = nodeList.value.filter((i) => i.display);
+    for (const instance of displayNodes) {
+      htm += "<article>\n";
+      const divName = instance.id.toUpperCase();
+      const elem = await document.getElementById("DFPLOT-" + divName);
+      // seems to work but is too slow ...
+      const viz = await html2canvas(elem, { logging: false }); //, options)
+      const width = viz.width;
+      const height = viz.height;
+      const aspect = width / height;
+      const h = Math.round(imgWidth / aspect);
+      const dataURL = await viz.toDataURL();
+
+      htm += "<h3>" + divName + "</h3>\n";
+      htm += "<img class='docimg' src='" + dataURL + "'>\n\n";
+
+      htm += "</article>\n";
+    }
+    // -----------------------------
+    console.log(htm);
+  }
+
   // push to print page
+  await printStore.set(htm);
   await router.push({
     name: "PrintPage",
   });
-}
-
-const mdDocs = async () => {
-  console.log("Make PDF via MD");
-  alert("Preparing PDF. Click OK then wait a moment ...");
-  // pdf init
-  // get story
-  const story = userStore.getStory();
-
-  const imgWidth = 160;
-  // we actually start with markdown
-  let md = "# Daten.Cafe\n";
-  md += "<img class='doclogo' src='/img/logo/datencafe.png'/>\n\n";
-  /*
-  md += "<article>\n"
-  md += "</article>\n"
-  */
-  md += "## Story\n";
-  md += "kmkfweklf \n kkwdkwnqd \n";
-  md += "## Workflow\n\n";
-
-  if (story.title > "") {
-    md += "## Title: " + story.title + "\n\n";
-    md += "Author: " + story.author + "\n\n";
-    md += "Date: " + story.date + "\n\n";
-    md += "Link: " + story.link + "\n\n";
-    md += story.text + "\n\n";
-  } else {
-    md += "## Title: Story... \n\n";
-    md += "Author: xyz\n\n";
-    md += "Date: 2023-01-01\n\n";
-    md += "Link: \n\n";
-  }
-
-  // get flow image
-  // extent:  { x1, y1, x2, y2, w, h }.
-  await cy.value.fit();
-  const flowWidth = await cy.value.extent().w;
-  const flowHeight = await cy.value.extent().h;
-  const flowAspect = flowWidth / flowHeight;
-  //console.log("Flow aspect:",flowWidth, flowHeight, flowAspect)
-  const wf = await cy.value.png({
-    output: "base64uri",
-    bg: "#ffffff",
-    full: false,
-    scale: 1,
-    maxWidth: 1280,
-  });
-
-  md += "<img class='docimg' src='" + wf + "'>\n\n";
-  md += "kmkfweklf \n kkwdkwnqd \n";
-  md += "## Output\n\n";
-  md += "kmkfweklf \n kkwdkwnqd \n";
-
-  // get display nodes
-  const displayNodes = nodeList.value.filter((i) => i.display);
-  for (const instance of displayNodes) {
-    const divName = instance.id.toUpperCase();
-    const elem = await document.getElementById("DFPLOT-" + divName);
-    // seems to work but is too slow ...
-    const viz = await html2canvas(elem, { logging: false }); //, options)
-    const width = viz.width;
-    const height = viz.height;
-    const aspect = width / height;
-    const h = Math.round(imgWidth / aspect);
-    const dataURL = await viz.toDataURL();
-
-    md += "### " + divName + "\n\n";
-    md += "<img class='docimg' src='" + dataURL + "'>\n\n";
-    md += "kmkfweklf \n kkwdkwnqd \n\n";
-
-  }
-
-  const html = await marked.parse(md);
-  const htmlClean = await DOMPurify.sanitize(html);
-  // insert html
-  await printStore.set(htmlClean);
-  // push to print page
-  router.push({
-    name: "PrintPage",
-  });
 };
-const useMd = true
+
+
 const makePdf = async () => {
-  if (useMd) {
-    await mdDocs()
-  return
-  } 
   console.log("Make PDF");
   alert("Preparing PDF. Click OK then wait a moment ...");
   // pdf init
@@ -1048,7 +1037,7 @@ const makePdf = async () => {
 // story popover
 const openStoryPop = async () => {
   console.log("Open Pop");
-  console.log("cy,nl:",cy.value.json(),nodeList.value.length)
+  console.log("cy,nl:", cy.value.json(), nodeList.value.length);
   popover.value = await popoverController.create({
     component: StoryPop,
     //event: ev,
@@ -1109,57 +1098,55 @@ onMounted(async () => {
   /*
   flowWrap.value.style.width = "100%"; //String(ww.value) + "px"
   */
-  const hf = smallScreen.value?FlowSpec.SHEIGHT:FlowSpec.LHEIGHT
-  console.log("HF:",hf)
-  flowWrap.value.style.height = 
-        String(wh.value * hf) + "px";
+  const hf = smallScreen.value ? FlowSpec.SHEIGHT : FlowSpec.LHEIGHT;
+  console.log("HF:", hf);
+  flowWrap.value.style.height = String(wh.value * hf) + "px";
 
   flowLoaded.value = true;
 
   // subscribe on triggerstory
   eventBus.on(Signals.TRIGGERSTORY, async () => {
-    const ids = await userStore.getFlowids()
-    console.log("Stored ids:",ids)
+    const ids = await userStore.getFlowids();
+    console.log("Stored ids:", ids);
     if (userStore.hasStarter()) {
-      startStory()
+      startStory();
     }
   });
 
   // subscribe on iframe loading signal
   eventBus.on(Signals.URLOADPREFIX, async (data) => {
-    console.log("on iframe:",data)
-    await openIframe(data)
-    setTimeout(closeIframe,1000)
+    console.log("on iframe:", data);
+    await openIframe(data);
+    setTimeout(closeIframe, 1000);
   });
 
   // subscribe to resize
   eventBus.on(Signals.RESIZE, async () => {
-    console.log("resize")
-    await DelayTimer(200)
-    await cy.value.resize()
+    console.log("resize");
+    await DelayTimer(200);
+    await cy.value.resize();
   });
 
   // subscribe to nodeanimate
   eventBus.on(Signals.NODEANIMATE, async (id) => {
-    console.log("animate",id)
+    console.log("animate", id);
     try {
-      const node = await cy.value.getElementById(id)
-      const data = await node.data()
-      const oldShp = data.type.shp
-      node.style("shape","star")
+      const node = await cy.value.getElementById(id);
+      const data = await node.data();
+      const oldShp = data.type.shp;
+      node.style("shape", "star");
 
-      await DelayTimer(100)
-      setTimeout(resetShp(id,oldShp),1000)
-      console.log("Animated")
+      await DelayTimer(100);
+      setTimeout(resetShp(id, oldShp), 1000);
+      console.log("Animated");
     } catch (e) {
-      console.log("Node not there ..." , id)
+      console.log("Node not there ...", id);
     }
-
   });
-  const resetShp = (id,shp) => {
-      const node = cy.value.getElementById(id)
-      node.style("shape",shp)
-    }
+  const resetShp = (id, shp) => {
+    const node = cy.value.getElementById(id);
+    node.style("shape", shp);
+  };
 
   //flowWrap.value.addEventListener("sel",()=>{console.log("sel")})
   //addEventListener("sel",flowWrap.value,(e)=>{console.log("sel",e)})
@@ -1704,7 +1691,6 @@ function panUp() {
   return cy.value.pan();
 }
 
-
 function zoomIn() {
   // get panning position first
   const p = cy.value.pan();
@@ -1716,7 +1702,8 @@ function zoomIn() {
 }
 function zoomOut() {
   const z = cy.value.zoom();
-  if (z > FlowSpec.MINZOOM) cy.value.zoom(Math.max(Math.floor(z - 1),FlowSpec.MINZOOM));
+  if (z > FlowSpec.MINZOOM)
+    cy.value.zoom(Math.max(Math.floor(z - 1), FlowSpec.MINZOOM));
   else cy.value.zoom(FlowSpec.MINZOOM);
   console.log("Extent:", cy.value.extent());
   return cy.value.zoom();
@@ -1897,7 +1884,7 @@ async function newNode() {
       nodeList.value.push(instance);
     } catch (err) {
       alert("Invalid instance:" + err.message);
-      clearFlow()
+      clearFlow();
       return;
     }
   } else {
@@ -1933,7 +1920,7 @@ async function handleFlowUpload(event) {
     console.log("design loaded:", design);
     const flow = await initFlow(design);
     if (flow == false) {
-      clearFlow()
+      clearFlow();
     }
   };
   await reader.readAsText(files[0]);
@@ -1968,15 +1955,15 @@ async function initFlow(design: any) {
   await userStore.setText(design.story.text);
   // set flow
   try {
-    const oldFlow = await cy.value.json()
-    console.log("Old:",JSON.stringify(oldFlow))
+    const oldFlow = await cy.value.json();
+    console.log("Old:", JSON.stringify(oldFlow));
     await cy.value.json(design.flow);
     console.log("Setting flow OK");
-    const newFlow = await cy.value.json()
-    console.log("New:",JSON.stringify(newFlow))
+    const newFlow = await cy.value.json();
+    console.log("New:", JSON.stringify(newFlow));
     await cy.value.fit();
-    await cy.value.minZoom( FlowSpec.MINZOOM)
-    await cy.value.maxZoom( FlowSpec.MAXZOOM)
+    await cy.value.minZoom(FlowSpec.MINZOOM);
+    await cy.value.maxZoom(FlowSpec.MAXZOOM);
   } catch (e) {
     console.log("Setting flow failed:", e.message);
     return false;
@@ -1988,7 +1975,7 @@ async function initFlow(design: any) {
     console.log("Setting data failed:", e.message);
     return false;
   }
-  const consentOk = await userStore.getConsent()
+  const consentOk = await userStore.getConsent();
   try {
     for (const n of design.nodes) {
       // design.nodes.forEach(async (n) => {
@@ -1996,10 +1983,10 @@ async function initFlow(design: any) {
       // create the class instance
       try {
         const instance = await nodeFactory(n.id, nodeTypes[n.classname]);
-        console.log("instance:",instance)
+        console.log("instance:", instance);
         if (instance.consent && !consentOk) {
-          alert ("Flow needs GDPR/DSGVO consent. Go to settings!")
-          return false
+          alert("Flow needs GDPR/DSGVO consent. Go to settings!");
+          return false;
         }
         if (instance.display) {
           await emit("addViz", {
@@ -2041,7 +2028,7 @@ async function initFlow(design: any) {
         return false;
       }
     }
-    console.log("Nodes created: ",nodeList.value.length)
+    console.log("Nodes created: ", nodeList.value.length);
   } catch (e) {
     console.log("Setting nodes failed:", e.message);
     return false;
@@ -2082,7 +2069,7 @@ async function clearFlow() {
   providers.clear();
   // remove node messaging
   console.log("also remove charts");
-  for ( const n of nodeList.value) {
+  for (const n of nodeList.value) {
     // remove listeners
     n.signals.forEach((s) => n.msgOff(s.signal));
     // remove charts
@@ -2120,7 +2107,7 @@ async function screenShot() {
 
 // this way the computation is repeated always.
 // compute only after button click
-const downUrl = ref()
+const downUrl = ref();
 /*
 const downUrl = computed(() => {
   console.log("Save flow");
@@ -2163,17 +2150,17 @@ const downUrl = computed(() => {
 });
 */
 
-const urlComplete = ref(false)
-const flowLink = ref ()
-const flowLinkSm = ref ()
-const flowLinkLg = ref ()
+const urlComplete = ref(false);
+const flowLink = ref();
+const flowLinkSm = ref();
+const flowLinkLg = ref();
 const generateFlowUrl = async () => {
   if (nodeList.value.length == 0) {
     console.log("Flow empty");
     return "/#";
   }
-  urlComplete.value = false
-  await DelayTimer(50)
+  urlComplete.value = false;
+  await DelayTimer(50);
   console.log("Save flow");
 
   const flow = await cy.value.json();
@@ -2183,11 +2170,11 @@ const generateFlowUrl = async () => {
     nodes.push(await n.json());
   }
   //console.log("Nodes",nodes)
-  const fullSize = await userStore.getFullsize()
-  const data = await providers.json()
+  const fullSize = await userStore.getFullsize();
+  const data = await providers.json();
   if (!fullSize) {
-    // probably delete all data 
-    console.log("Sparse saving not implemented ...") 
+    // probably delete all data
+    console.log("Sparse saving not implemented ...");
   }
   //console.log("Data:",data)
   // https://stackoverflow.com/questions/72997146/how-to-push-data-to-local-json-file-on-button-click-using-javascript
@@ -2209,12 +2196,12 @@ const generateFlowUrl = async () => {
     );
     const blob = await new Blob([flowData], { type: contentType });
     const newUrl = await window.URL.createObjectURL(blob);
-    await DelayTimer(50)
-    downUrl.value = newUrl
+    await DelayTimer(50);
+    downUrl.value = newUrl;
     //console.log("downurl updated");
     // Simulate a click on the download link
-    await DelayTimer(100)
-    
+    await DelayTimer(100);
+
     if (!smallScreen.value) {
       //console.log("Click Large")
       // document.getElementById("downRefLg").click()
@@ -2223,15 +2210,13 @@ const generateFlowUrl = async () => {
       //console.log("Click Small")
       // document.getElementById("downRefSm").click()
       flowLinkSm.value.click();
-    } 
+    }
     // flowLink.value.click();
-
   } catch (e) {
     console.log("Failed: ", e.message);
     return "/";
   }
-}
-
+};
 
 /*
 async function saveFlow() {
@@ -2274,42 +2259,44 @@ const toggleTooltips = () => {
 };
 
 // data upload
-const dataFileInput = ref(null) // button id
-const dataFileTarget = ref(null) // instance
+const dataFileInput = ref(null); // button id
+const dataFileTarget = ref(null); // instance
 
 async function handleDataUpload(event) {
-  const files = await event.target.files
+  const files = await event.target.files;
   // call upload function
-  await dataFileTarget.value.upload(files)
+  await dataFileTarget.value.upload(files);
 }
 
-// data download 
-const dataDownLoad = ref()
+// data download
+const dataDownLoad = ref();
 
 async function downloadData(instance) {
-  // find source node via port A. assume we are on display node 
+  // find source node via port A. assume we are on display node
   // with single input
-  const src = instance.signals
+  const src = instance.signals;
   if (src.length == 0) {
-    alert("No data available")
-    return
+    alert("No data available");
+    return;
   }
   // get first src
-  const srcId = src[0].signal.split("-")[1]
+  const srcId = src[0].signal.split("-")[1];
   // read data
-  if (!providers.exists(srcId)) throw (new Error("Invalid ID"))
-  const dt = providers.getDataById(srcId) 
-  const df = await new DcNode.dfd.DataFrame(dt)
+  if (!providers.exists(srcId)) throw new Error("Invalid ID");
+  const dt = providers.getDataById(srcId);
+  const df = await new DcNode.dfd.DataFrame(dt);
 
   // df.print()
   // we can send csv or json
   try {
     // use selected node for filename
-    await DcNode.dfd.toCSV(df, { fileName: "datencafe-" + String(instance.id) + ".csv", download: true});
-
+    await DcNode.dfd.toCSV(df, {
+      fileName: "datencafe-" + String(instance.id) + ".csv",
+      download: true,
+    });
   } catch (e) {
-    alert("Sorry, download failed")
-    return
+    alert("Sorry, download failed");
+    return;
   }
   /*
   try {
@@ -2322,55 +2309,62 @@ async function downloadData(instance) {
 }
 
 // download ifram stuff
-const wrapIframe = ref()
-const iframeUrl = ref()
-const showIframe = ref(false)
-const linkIframe = ref()
-const closeIframe = () => { 
-  showIframe.value = false 
-  iframeUrl.value = ""
-}
+const wrapIframe = ref();
+const iframeUrl = ref();
+const showIframe = ref(false);
+const linkIframe = ref();
+const closeIframe = () => {
+  showIframe.value = false;
+  iframeUrl.value = "";
+};
 const openIframe = async (url) => {
-  console.log("Toggle iframe, ", url)
+  console.log("Toggle iframe, ", url);
   if (url == "") {
-    showIframe.value = false 
+    showIframe.value = false;
   } else {
-    iframeUrl.value = url 
-    showIframe.value = true
-    await DelayTimer(200)
-    linkIframe.value.click()
+    iframeUrl.value = url;
+    showIframe.value = true;
+    await DelayTimer(200);
+    linkIframe.value.click();
   }
-  await DelayTimer(500)
-  return   
-}
+  await DelayTimer(500);
+  return;
+};
 
-// settings 
+// settings
 const openSettings = () => {
-  console.log("Settings")
-}
-
+  console.log("Settings");
+};
 </script>
 
 <template>
   <!-- upload button -->
-    <div style="display:none!important">
-    <input ref="dataFileInput" type="file" style="display:none" @change="handleDataUpload" />
-    <button >Upload File</button>
+  <div style="display: none !important">
+    <input
+      ref="dataFileInput"
+      type="file"
+      style="display: none"
+      @change="handleDataUpload"
+    />
+    <button>Upload File</button>
   </div>
   <!-- download link -->
-  <div style="display:none!important">
-    <a ref="dataDownLoad" href="#" download="datencafe.csv" style="display: none;"></a>
+  <div style="display: none !important">
+    <a
+      ref="dataDownLoad"
+      href="#"
+      download="datencafe.csv"
+      style="display: none"
+    ></a>
   </div>
   <!-- download iframe -->
-  <div ref="wrapIframe" style="display:none!important" >
+  <div ref="wrapIframe" style="display: none !important">
     <div v-if="showIframe">
       <!-- 
       <iframe :src="iframeUrl" class="iframe"/>
       -->
       <a :href="iframeUrl" download target="_blank" ref="linkIframe"></a>
-
     </div>
-
   </div>
   <!-- pdf wrap for markdown version -->
   <div ref="pdfWrap" v-if="pdfWindow">
@@ -2462,9 +2456,7 @@ const openSettings = () => {
         </ion-button>
       </ion-buttons>
       <ion-buttons slot="start">
-        <ion-button id="pdfRef" 
-        :disabled="false"
-        @click="htmlDocs">
+        <ion-button id="pdfRef" :disabled="false" @click="htmlDocs">
           <font-awesome-icon
             :icon="['fas', 'file-pdf']"
             size="2x"
@@ -2499,7 +2491,8 @@ const openSettings = () => {
         </ion-button>
       </ion-buttons>
       <ion-buttons slot="end">
-        <ion-button id="downRef"
+        <ion-button
+          id="downRef"
           :disabled="nodeList.length == 0"
           @click="generateFlowUrl"
         >
@@ -2509,11 +2502,13 @@ const openSettings = () => {
             class="toolbtn"
           ></font-awesome-icon>
         </ion-button>
-        <a style="display:none!important"
+        <a
+          style="display: none !important"
           id="downRefLg"
-          ref = "flowLinkLg"
+          ref="flowLinkLg"
           download="flow.json"
-          :href="downUrl">
+          :href="downUrl"
+        >
         </a>
       </ion-buttons>
       <ion-buttons slot="end">
@@ -2543,7 +2538,6 @@ const openSettings = () => {
       </ion-buttons>
     </ion-toolbar>
     <ion-toolbar color="#fff" v-if="smallScreen" class="toolbar-sm">
-
       <ion-buttons slot="start" class="question">
         <ion-button id="helpRef" @click="toggleTooltips">
           <font-awesome-icon
@@ -2585,9 +2579,7 @@ const openSettings = () => {
       </ion-buttons>
 
       <ion-buttons slot="start">
-        <ion-button id="pdfRef" 
-        :disabled="false"
-        @click="htmlDocs">
+        <ion-button id="pdfRef" :disabled="false" @click="htmlDocs">
           <font-awesome-icon
             :icon="['fas', 'file-pdf']"
             size="sm"
@@ -2623,7 +2615,8 @@ const openSettings = () => {
         </ion-button>
       </ion-buttons>
       <ion-buttons slot="end">
-        <ion-button id="downRef"
+        <ion-button
+          id="downRef"
           :disabled="nodeList.length == 0"
           @click="generateFlowUrl"
         >
@@ -2633,11 +2626,13 @@ const openSettings = () => {
             class="toolbtn"
           ></font-awesome-icon>
         </ion-button>
-        <a style="display:none!important"
+        <a
+          style="display: none !important"
           id="downRefSm"
-          ref = "flowLinkSm"
+          ref="flowLinkSm"
           download="flow.json"
-          :href="downUrl">
+          :href="downUrl"
+        >
         </a>
       </ion-buttons>
       <ion-buttons slot="end">
@@ -2695,7 +2690,9 @@ const openSettings = () => {
     side="bottom"
     alignment="start"
   >
-  <ion-content class="ion-padding">{{ $t("flow.tooltip.settings") }}</ion-content>
+    <ion-content class="ion-padding">{{
+      $t("flow.tooltip.settings")
+    }}</ion-content>
   </ion-popover>
   <ion-popover
     cssClass="my-custom-popover-class pop2 popLeft"
@@ -2845,10 +2842,9 @@ const openSettings = () => {
   position: relative;
   /* dark mode not working yet, set light BG */
   background-color: --var(--ion-color-light);
-  height:100%;
+  height: 100%;
 }
 
-   
 .toolbar {
   background: var(--ion-color-light);
   position: absolute;
@@ -2869,7 +2865,7 @@ ion-toolbar.toolbar-sm {
   max-width: 22rem;
   border: 3px solid #000;
 }
-.toolbar-sm>div {
+.toolbar-sm > div {
   background: #fff;
 }
 
