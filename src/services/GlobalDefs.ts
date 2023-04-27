@@ -22,6 +22,8 @@ export enum Signals {
 export enum NodeSpec {
   CHART = "chart",
   TABLE = "table",
+  MAP = "map",
+  LEAFLET = "leaflet",
   PROC = "proc",
   GEN = "gen",
   INPUT = "input",

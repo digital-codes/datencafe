@@ -1,5 +1,5 @@
 <template>
-<div ref="plotWrap" class="container" >
+<div ref="plotWrap" class="container" :class="locking?'wrapLocked':'wrapFree'">
   <div v-if="items.length==0" >
     <p>{{$t("titles.work.view.placeholder")}}</p>
 
@@ -9,7 +9,7 @@
   -->
   <div v-for="(item,idx) in items" :key="item.id" :id="itemPrefix + item.id"  class="chartItem" :class="locked[idx]?'focus':'free'" >
     <h3 class="dftitle">{{ item.name }}
-    <ion-button v-if="!locked[idx]" class="lock" @click="lock(idx,1)">
+    <ion-button v-if="!locked[idx]" class="lock" @click="lock(idx,1)" :disabled="item.type == NodeSpec.LEAFLET">
           <font-awesome-icon
             :icon="['fas', 'lock']"
             size="sm"
@@ -41,6 +41,8 @@ import { IonButton } from "@ionic/vue";
 import { PreFixes } from "../services/GlobalDefs"
 import { Signals } from "../services/GlobalDefs"
 import eventBus from '../services/eventBus';
+
+import { NodeSpec } from "@/services/GlobalDefs";
 
 // items
 const props = defineProps({
@@ -84,8 +86,8 @@ const chartClass = (idx) => {
     }
     console.log("Index",idx,items.value)
     return {
-      dftable: items.value[idx].type == "table",
-      dfchart: items.value[idx].type != "table",
+      dftable: items.value[idx].type == NodeSpec.TABLE,
+      dfchart: items.value[idx].type != NodeSpec.TABLE,
       chartFocus: locked.value[idx]
     }
   }
@@ -106,6 +108,8 @@ watchEffect(() => {
   }
 });
 
+const locking = ref(false)
+
 const lock = async (idx,state) => {
   console.log("lock:",idx,state)
   locked.value[idx] = state
@@ -125,6 +129,7 @@ const lock = async (idx,state) => {
     const xitem = document.getElementById(itemPrefix + items.value[xidx].id)
     if (!xitem.style) xitem.style = {}
     if (state) {
+      locking.value = true
       // lock one, hide others
       if (idx == xidx) {
         console.log("Locking item ",xitem.id)
@@ -138,6 +143,7 @@ const lock = async (idx,state) => {
       }
     } else {
       // unhide all     
+      locking.value = false
       console.log("Free item ",xitem.id)
       xitem.style.transform = ""
       xitem.style.visibility = "visible"
@@ -184,21 +190,24 @@ ion-button.lock {
 
 }
 
+
   .container {
     /*
     max-height: 600px;
     */
     height: calc(70vh);
-    overflow: scroll;
     padding-right: 20px;
     background:#fff;
   }
-  @media only screen and (max-width: 996px) {
-    .container {
-      height: calc(60vh);
-      padding-right: 10px;
-    }
+
+  .wrapLocked {
+    overflow:clip;
   }
+
+  .wrapFree {
+    overflow:scroll;
+  }
+
 
 /* must fix h3 color */
 h3 {
@@ -259,6 +268,34 @@ h3 {
     margin-left: 10px;
   }
 
+  @media only screen and (max-width: 996px) {
+    .container {
+      height: calc(60vh);
+      padding-right: 10px;
+    }
+
+    .dftable {
+    color:#000;
+    background-color:#ccf;
+    height:350px;
+    width: calc(85vw);
+  }
+
+  .dfchart {
+    color:#000;
+    background-color:#cfc;
+    height:350px;
+    width: calc(85vw);
+  }
+
+  .dfmap {
+    color:#000;
+    background-color:#cfc;
+    height:350px;
+    width: calc(85vw);
+  }
+
+  }
 
 
   </style>

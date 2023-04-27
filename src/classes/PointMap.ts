@@ -31,7 +31,7 @@ Marker.prototype.options.icon = iconDefault;
 export class PointMap extends DcNode {
   // properties
   static _display = true;
-  static _type = NodeSpec.CHART;
+  static _type = NodeSpec.LEAFLET;
   private updCnt = 0;
   private map: any = null;
   private layer: any = null;
