@@ -914,9 +914,22 @@ const htmlDocs = async () => {
       htm += "</article>\n";
     }
     // -----------------------------
-    console.log(htm);
   }
 
+  /*
+  const options = {
+    format: "a4",
+    orientation: "portrait",
+    unit: "mm",
+  };
+  const doc = new jsPDF(options);
+
+  doc.html(htm, {
+    callback: function (doc) {
+      doc.save();
+    }
+  });  
+  */
   // push to print page
   await printStore.set(htm);
   await router.push({
