@@ -210,7 +210,9 @@ function login() {
         if ($data[0] === $username && password_verify($password, $data[1])) {
         //  if ($data[0] === $username && ($password === $data[1])) {
             $token = makeToken($username); //JWT::encode($payload, $secret_key);
-            echo json_encode(array("token" => $token));
+            $publicKey = file_get_contents($public_file);
+            checkToken($token,$publicKey); // throws on error here 
+            echo json_encode(array("token" => $token,"key" => $publicKey));
             return;
         }
         }
