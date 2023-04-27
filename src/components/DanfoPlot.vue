@@ -7,16 +7,36 @@
   <!-- 
   <div v-for="(item,index) in items" :key="index" class="chartItem">
   -->
-  <div v-for="item in items" :key="item.id" class="chartItem">
-    <h3 class="dftitle">{{ item.name }}</h3>
-    <div :id="prefix + item.id" :class="item.type == 'table'?'dftable':'dfchart'">
-    </div>
+  <div v-for="(item,idx) in items" :key="item.id" :id="itemPrefix + item.id"  :class="locked[idx]?'focus':'free'" >
+    <h3 class="dftitle">{{ item.name }}
+    <ion-button v-if="!locked[idx]" class="lock" @click="lock(idx,1)">
+          <font-awesome-icon
+            :icon="['fas', 'lock']"
+            size="sm"
+            class="toolbtn"
+          ></font-awesome-icon>
+        </ion-button>
+        <ion-button v-if="locked[idx]" class="lock"  @click="lock(idx,0)">
+          <font-awesome-icon
+            :icon="['fas', 'lock-open']"
+            size="sm"
+            class="toolbtn"
+          ></font-awesome-icon>
+        </ion-button>
+      </h3>
+      <!-- 
+      <div :id="prefix + item.id" :class="item.type == 'table'?'dftable':'dfchart' locked[idx]?'focus':'free'" >
+      </div>
+      -->
+      <div :id="prefix + item.id" :class="chartClass(idx)" >
+      </div>
   </div>
 </div>
 </template>
   
 <script setup>
 import { ref, reactive, onMounted, watchEffect, computed } from "vue"
+import { IonButton } from "@ionic/vue";
 // globals
 import { PreFixes } from "../services/GlobalDefs"
 import { Signals } from "../services/GlobalDefs"
@@ -33,6 +53,8 @@ const props = defineProps({
 const loaded = ref(false)
 const items = ref([])
 const prefix = PreFixes.PLOTPREFIX
+const itemPrefix = "CHARTITEM-"
+const locked = ref([])
 
 // same as for flowWrap ...
 const ww = ref(800)
@@ -51,14 +73,29 @@ onMounted(() => {
   // here, we just initialize items. With initial value, watcheffect 
   // will stilll be triggered ...
   items.value = [] //props.propItems
+  locked.value = [] //props.propItems
   console.log("DanfoPlot Mounted:",items.value)
   loaded.value = true
 })
 
+const chartClass = (idx) => {
+    if (!loaded.value || !items.value) {
+      return {}
+    }
+    console.log("Index",idx,items.value)
+    return {
+      dfTable: items.value[idx].type == "table",
+      dfChart: items.value[idx].type != "table",
+      chartFocus: locked.value[idx]
+    }
+  }
+
 watchEffect(() => {
-  if (props.propItems) {
+  if (loaded.value && props.propItems) {
     console.log("Danfo data update:", props.propItems)
     items.value = JSON.parse(JSON.stringify(props.propItems))
+    locked.value = []
+    props.propItems.forEach(() => locked.value.push(false))
     /*
     items.value = [] // props.propItems
     props.propItems.forEach(e => {
@@ -69,10 +106,36 @@ watchEffect(() => {
   }
 });
 
+const lock = (idx,state) => {
+  console.log("lock:",idx,state)
+  locked.value[idx] = state
+}
 
 </script>
   
   <style scoped>
+
+ion-button.lock {
+  vertical-align: middle;
+}
+
+.focus {
+  position: fixed;
+  top: 150px;
+  z-index: 10;
+  background: #fff;
+  height:70%;
+}
+
+.chartFocus {
+  /*
+  height:70%;
+  */
+}
+
+.free {
+
+}
 
   .container {
     /*
@@ -105,13 +168,13 @@ h3 {
   .dftable {
     color:#000;
     background-color:#ccf;
-    height:300px;
+    height:350px;
   }
 
   .dfchart {
     color:#000;
     background-color:#cfc;
-    height:300px;
+    height:350px;
   }
 
   
