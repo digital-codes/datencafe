@@ -1,5 +1,6 @@
 <template>
   <ion-page>
+    <ion-header :translucent="true" class="hdr"></ion-header>
 
     <ion-content :fullscreen="true">
 
@@ -172,6 +173,12 @@ const getItem = (idx,id) => {
 </style>
 
 <style scoped>
+
+ion-header {
+  height: 96px;
+  z-index: -10;
+
+}
 
 ion-card {
   margin-left: auto;

@@ -109,6 +109,7 @@ const scrollToTop = () => {
 
 <template>
   <ion-page >
+    <ion-header :translucent="true" class="hdr"></ion-header>
 
     <ion-content :fullscreen="true" ref="content">
     <div id="container" class="container work-container">
@@ -167,6 +168,12 @@ const scrollToTop = () => {
 </template>
 
 <style scoped>
+
+ion-header {
+  height: 96px;
+  z-index: -10;
+
+}
 
 #container {
   text-align: center;
