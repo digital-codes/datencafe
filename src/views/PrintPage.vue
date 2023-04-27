@@ -67,6 +67,36 @@ h2 {
 <style>
 
 @media print {
+  /*
+
+img {
+  margin-left: auto;
+  margin: ;
+  margin-right: auto;
+  display: block;
+  width: 80%;
+  border-radius: 30px;
+}
+
+.content  {
+  width: 100%;
+  position: relative;
+  display: block;
+}
+
+
+h2 {
+  text-align: center;
+  padding-bottom: 1rem;
+}
+
+.content  > p
+  padding: 4rem;
+  text-justify: inter-word;
+}
+
+  */
+
   body {
     overflow:scroll!important;
     position: static!important;
