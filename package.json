@@ -37,7 +37,6 @@
     "html2canvas": "^1.4.1",
     "ionicons": "^6.0.3",
     "jose": "^4.14.1",
-    "jspdf": "^2.5.1",
     "leaflet": "^1.9.3",
     "marked": "^4.3.0",
     "mitt": "^3.0.0",
