@@ -838,41 +838,36 @@ async function flowInit() {
 const fakePrint = false;
 const htmlDocs = async () => {
   console.log("Make PDF via HTML");
-  alert("Preparing (fake) Print Page. Click OK then wait a moment ...");
+  alert("Preparing PDF. Current flow will be lost (sorry). Click OK then wait a moment ...");
   // fake
   let htm;
   if (fakePrint) htm = html.part;
   else {
     // -----------------------------
     const story = userStore.getStory();
-
     const imgWidth = 160;
 
     // h1 braks article. don't put inside!
-    htm = "\n\n<!-- datencafe -->\n\n"
-    htm = "<h1>Daten.Cafe</h1>\n";
-    htm += "<img class='doclogo' src='/img/logo/datencafe.png'/>\n\n";
-    /*
-    htm += "<article>\n"
-    htm += "</article>\n"
-    */
-    htm += "<article> \n";
-    htm += "<h2>Story</h2>\n";
-    if (story.title > "") {
-      htm += "<h3>" + story.title + "</h3>\n";
-      htm += "<p>Author: " + story.author + "</p>\n";
-      htm += "<span>Date: " + story.date + "<br>\n";
-      htm += "Link: " + story.link + "</span>\n";
-      htm += "<p>" + story.text + "</p>\n";
-    } else {
-      htm += "<h2>Empty Story</h2>\n";
-    }
+    htm = "<style '" + html.style.page + "'></style>\n";
+    htm += "<div style='" + html.style.div + "'>\n";
+    htm += "<h1 style='" + html.style.h1 + "'>Daten.Cafe</h1>\n";
+    htm += "<img  style='" + html.style.logoimg + "' src='/img/logo/datencafe.png'/>\n\n";
+
+    htm += "<article style='" + html.style.article + "'> \n";
+    htm += "<h2 style='" + html.style.h2 + "'>Story</h2>\n";
+    htm += "<h3 style='" + html.style.h3 + "'>" + story.title + "</h3>\n";
+    htm += "<ul style='" + html.style.ul + "'>\n";
+    htm += "<li style='" + html.style.li + "'>Author: " + story.author + "</li>\n";
+    htm += "<li style='" + html.style.li + "'>Date: " + story.date + "</li>\n";
+    htm += "<li style='" + html.style.li + "'>Category: " + story.category + "</li>\n";
+    htm += "</ul>\n";
+    htm += "</p style='" + html.style.p + "'>" + story.text + "</>\n";
     htm += "</article>\n\n"
 
 
-    htm += "<article>\n"
+    htm += "<article style='" + html.style.article + "'>\n"
 
-    htm += "<h2>Workflow</h2>\n"
+    htm += "<h2 style='" + html.style.h2 + "'>Workflow</h2>\n"
     // get flow image
     // extent:  { x1, y1, x2, y2, w, h }.
     await cy.value.fit();
@@ -888,16 +883,16 @@ const htmlDocs = async () => {
       maxWidth: 1280,
     });
 
-    htm += "<img class='docimg' src='" + wf + "'>\n\n";
+    htm += "<img  style='" + html.style.docimg + "'class='docimg' src='" + wf + "'>\n\n";
 
     htm += "</article>\n\n";
 
-    htm += "<h2>Display</h2>\n";
+    htm += "<h2 style='" + html.style.h2 + "'>Display</h2>\n";
 
     // get display nodes
     const displayNodes = nodeList.value.filter((i) => i.display);
     for (const instance of displayNodes) {
-      htm += "<article>\n";
+      htm += "<article style='" + html.style.article + "'>\n";
       const divName = instance.id.toUpperCase();
       const elem = await document.getElementById("DFPLOT-" + divName);
       // seems to work but is too slow ...
@@ -908,145 +903,23 @@ const htmlDocs = async () => {
       const h = Math.round(imgWidth / aspect);
       const dataURL = await viz.toDataURL();
 
-      htm += "<h3>" + divName + "</h3>\n";
-      htm += "<img class='docimg' src='" + dataURL + "'>\n\n";
+      htm += "<h3 style='" + html.style.h3 + "'>" + divName + "</h3>\n";
+      htm += "<img  style='" + html.style.docimg + "' src='" + dataURL + "'>\n\n";
 
       htm += "</article>\n";
+      htm += "</div>\n"
     }
     // -----------------------------
   }
 
-  /*
-  const options = {
-    format: "a4",
-    orientation: "portrait",
-    unit: "mm",
-  };
-  const doc = new jsPDF(options);
+  // console.log(htm)
 
-  doc.html(htm, {
-    callback: function (doc) {
-      doc.save();
-    }
-  });  
-  */
   // push to print page
   await printStore.set(htm);
   await router.push({
     name: "PrintPage",
   });
-};
 
-
-const makePdf = async () => {
-  console.log("Make PDF");
-  alert("Preparing PDF. Click OK then wait a moment ...");
-  // pdf init
-  // Default export is a4 paper, portrait, using millimeters for units
-  const options = {
-    format: "a4",
-    orientation: "portrait",
-    unit: "mm",
-  };
-  const doc = new jsPDF(options);
-  // Set the font and font size
-  /*
-  base 14 fonts:
-    Courier
-    Courier-Bold
-    Courier-BoldOblique
-    Courier-Oblique
-    Helvetica
-    Helvetica-Bold
-    Helvetica-BoldOblique
-    Helvetica-Oblique
-    Times-Roman
-    Times-Bold
-    Times-Italic
-    Times-BoldItalic
-    Symbol
-    ZapfDingbats
-  */
-  doc.setFont("Helvetica");
-  doc.setFontSize(12);
-
-  const imgWidth = 160;
-
-  // get story
-  const story = userStore.getStory();
-
-  // start document
-  doc.text("Daten.Cafe", 10, 10);
-  const img = new Image();
-  img.src = "/img/logo/datencafe.png";
-  await doc.addImage(img, "PNG", 50, 20, imgWidth / 2, imgWidth / 2);
-
-  if (story.title > "") {
-    doc.text("Title: " + story.title, 10, 150);
-    doc.text("Author: " + story.author, 10, 160);
-    doc.text("Date: " + story.date, 10, 170);
-    doc.text("Link: " + story.link, 10, 180);
-
-    // Define the text block and split it into lines using splitTextToSize method
-    const text = story.text;
-    const lines = doc.splitTextToSize(text, imgWidth);
-    // Add the lines to the PDF document
-    doc.text(10, 200, lines);
-  } else {
-    doc.text("Story", 10, 150);
-    doc.text("Bla ...", 10, 160);
-    doc.text("... bla", 10, 170);
-  }
-  await doc.addPage(options);
-
-  // get flow image
-  // extent:  { x1, y1, x2, y2, w, h }.
-  await cy.value.fit();
-  const flowWidth = await cy.value.extent().w;
-  const flowHeight = await cy.value.extent().h;
-  const flowAspect = flowWidth / flowHeight;
-  console.log("Flow aspect:", flowWidth, flowHeight, flowAspect);
-  const wf = await cy.value.png({
-    output: "base64uri",
-    bg: "#ffffff",
-    full: false,
-    scale: 1,
-    maxWidth: 1280,
-  });
-
-  doc.text("Flow", 10, 10);
-  await doc.addImage(
-    wf,
-    "PNG",
-    10,
-    20,
-    imgWidth,
-    Math.round(flowHeight / flowAspect)
-  );
-
-  console.log("Nodes:", nodeList.value.length);
-  // get display nodes
-  const displayNodes = nodeList.value.filter((i) => i.display);
-  for (const instance of displayNodes) {
-    //nodeList.value.forEach(async (instance) => {
-    //console.log(instance)
-    const divName = instance.id.toUpperCase();
-    const elem = await document.getElementById("DFPLOT-" + divName);
-    // seems to work but is too slow ...
-    const viz = await html2canvas(elem, { logging: false }); //, options)
-    const width = viz.width;
-    const height = viz.height;
-    const aspect = width / height;
-    const h = Math.round(imgWidth / aspect);
-    console.log("w,h,a:", width, height, h, aspect);
-    const dataURL = await viz.toDataURL();
-
-    await doc.addPage(options);
-    doc.text(divName, 10, 10);
-    await doc.addImage(dataURL, "PNG", 10, 30, imgWidth, h);
-  }
-
-  doc.save("datencafe-story.pdf");
 };
 
 // story popover

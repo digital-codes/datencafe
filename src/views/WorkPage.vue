@@ -130,7 +130,9 @@ const scrollToTop = () => {
                 <div class="headline">
                 <h3>{{$t("titles.work.flow")}}</h3>
                 </div>
-                <WorkFlowAsync msg="Flow demo" @add-viz="(e) => addViz(e)" @del-viz="(e) => delViz(e)" />
+                <KeepAlive>
+                  <WorkFlowAsync msg="Flow demo" @add-viz="(e) => addViz(e)" @del-viz="(e) => delViz(e)" />
+                </KeepAlive>
               </section>
             </ion-col>
 
@@ -144,7 +146,9 @@ const scrollToTop = () => {
               <!-- 
               <DanfoPlotAsync :propItems="items"/>
               -->
+              <KeepAlive>
               <DanfoPlot :propItems="items"/>
+              </KeepAlive>
 
               </section>
             </ion-col>
