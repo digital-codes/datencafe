@@ -1,5 +1,6 @@
+# test cars response
+import sys
 import requests
-
 import pandas as pd
 
 portals = pd.read_csv("../public/data/opendataportals-de.csv")
@@ -44,9 +45,12 @@ def checkCors(url):
         print("Error")
         return -1
 
-portals["cors"] = portals.url.apply(checkCors)
-
-print(portals.cors.value_counts())
-
-portals[["url","cors","api","type"]].to_json("../public/data/portals.json")
+if len(sys.argv) > 1:
+    urls = [x for x in sys.argv[1:]]
+    for u in urls:
+        print(u,": cors = ",checkCors(u))
+else:
+    portals["cors"] = portals.url.apply(checkCors)
+    print(portals.cors.value_counts())
+    portals[["url","cors","api","type"]].to_json("../public/data/portals.json")
 
