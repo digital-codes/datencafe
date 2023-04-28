@@ -1,5 +1,7 @@
 <template>
   <ion-page>
+    <ion-button class="noprint" @click="back">Back</ion-button>
+
     <main v-html="parms.content" class="content">
     </main>
   </ion-page>
@@ -9,11 +11,14 @@
 
 import { IonButton, IonContent, IonHeader, IonButtons, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
 import { IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent } from '@ionic/vue'
-import { IonInput, IonItem, IonLabel, IonTextarea } from '@ionic/vue';
-import { ref, computed, watch, onMounted } from 'vue';
+import { ref, computed, watch, onMounted, onActivated } from 'vue';
+// delay timer
+import { DelayTimer } from "@/services/DelayTimer";
+
 
 import { useRoute } from 'vue-router';
 const route = useRoute()
+import router from "@/router";
 
 import { PrintStore } from "@/services/PrintStore"
 const printStore = PrintStore()
@@ -22,26 +27,50 @@ const props = defineProps(
   ["title","content"]
 )
 
+const parms = ref ({})
+const rdy = ref(false)
 
+onMounted(async () => {
+   parms.value = {content: await printStore.get()}
+   console.log("Print mounted + loaded")
+  rdy.value = true
+  if (print) {
+    await DelayTimer(100)
+    print()
+  }
+})
+
+onActivated(async () => {
+  console.log("PP activated")
+})
+
+
+const back = async () => {
+  await router.push({name: 'Workspace'})
+}
+/*
 const parms = computed(() => {
   const c = printStore.get()
-  console.log("content", c.length)
+  //console.log("content", c.length)
   return {
     content:c
   }
 })
+*/
 
+/*
 watch(
       () => printStore.get,
       (content) => {
         console.log("content", content.length)
       }
     )
-
+*/
 
 </script>
 
 <style scoped>
+
 
 h2 {
   page-break-before: always;
@@ -96,6 +125,10 @@ h2 {
 }
 
   */
+
+  .noprint {
+    display: none;
+}
 
   body {
     overflow:scroll!important;
@@ -167,5 +200,8 @@ h2 {
   }
 
 }
+
+
+
 
 </style>

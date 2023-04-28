@@ -95,13 +95,13 @@ onUpdated(() => {
 });
 
 onActivated(() => {
-  console.log("Activated");
+  console.log("WF Activated");
   // called on initial mount
   // and every time it is re-inserted from the cache
 });
 
 onDeactivated(() => {
-  console.log("DeActivated");
+  console.log("WF DeActivated");
   // called when removed from the DOM into the cache
   // and also when unmounted
 });
@@ -912,10 +912,11 @@ const htmlDocs = async () => {
     // -----------------------------
   }
 
-  // console.log(htm)
+  //console.log(htm)
 
   // push to print page
   await printStore.set(htm);
+  await nextTick()
   await router.push({
     name: "PrintPage",
   });

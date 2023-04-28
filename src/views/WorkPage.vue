@@ -2,10 +2,13 @@
 <script setup lang="ts">
 import { IonButton, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
 import { IonCol, IonGrid, IonRow, IonPopup } from '@ionic/vue';
-import { ref, onMounted } from "vue"
+import { ref, onMounted,nextTick } from "vue"
 import { createAnimation } from '@ionic/vue';
 import { defineAsyncComponent } from 'vue';
 import { loadingController } from '@ionic/vue';
+// activation
+import { onActivated, onDeactivated, onUpdated } from "vue";
+
 
 // user store
 import { UserStore, UserInfo } from "@/services/UserStore";
@@ -20,12 +23,27 @@ const FlowLoading = ref(true)
 
 const loaderPop = ref()
 
+onActivated(() => {
+  console.log("WP Activated");
+  // called on initial mount
+  // and every time it is re-inserted from the cache
+});
+
+onDeactivated(() => {
+  console.log("WP DeActivated");
+  // called when removed from the DOM into the cache
+  // and also when unmounted
+});
+
+
+
 onMounted(async () => {
+  console.log("WP mounted")
   loaderPop.value = await loadingController.create({
     message: 'Loading Flow ...',
     duration: 0,
   });
-  loaderPop.value.present();
+  await loaderPop.value.present();
 })
 
 const WorkFlowAsync = defineAsyncComponent({
@@ -35,7 +53,12 @@ const WorkFlowAsync = defineAsyncComponent({
     console.log('Cyto loaded');
     // Update the ref when the async loading is complete
     FlowLoading.value = false
-    loaderPop.value.dismiss()
+    if (loaderPop.value) {
+      loaderPop.value.dismiss()
+    } else {
+      console.log("loader not defined")
+    }
+    
     return module;
   })
 });

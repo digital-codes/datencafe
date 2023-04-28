@@ -5,9 +5,24 @@
       <PrintPage></PrintPage>
     </div>
     <div v-else class="screen">
-      <ion-split-pane when="(min-width: 4000px)" content-id="main-content">
-        <MainMenu />
-        <TitleBar2></TitleBar2>
+
+    <!-- 
+    <div>
+      <ion-split-pane when="(min-width: 4000px)" content-id="main-content" :class='route.name != "PrintPage"?"screen":"print"'>
+        <MainMenu v-if='route.name != "PrintPage"'/>
+        <TitleBar2 v-if='route.name != "PrintPage"'/>
+          <ion-router-outlet
+            id="main-content"
+            animated="false"
+          ></ion-router-outlet>
+
+      </ion-split-pane>
+    </div>
+
+    -->
+      <ion-split-pane when="(min-width: 4000px)" content-id="main-content" :class='route.name != "PrintPage"?"screen":"print"'>
+        <MainMenu v-if='route.name != "PrintPage"'/>
+        <TitleBar2 v-if='route.name != "PrintPage"'/>
           <ion-router-outlet
             id="main-content"
             animated="false"
