@@ -44,7 +44,7 @@ ion-popover {
 
 ion-popover ion-content {
   max-height: calc(80vh - 100px);
-  max-width: calc(100vw - 200px);
+  max-width: calc(100vw - 100px);
   --min-width: 280px;
   overflow: clip;
 }
@@ -52,7 +52,7 @@ ion-popover ion-content {
 @media only screen and (max-width: 768px) {
   ion-popover ion-content {
     max-height: calc(80vh - 1rem);
-    max-width: calc(100vw - 1rem);
+    max-width: calc(100vw - 1rem)!important;
   }
 }
 

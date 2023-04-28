@@ -286,7 +286,7 @@ ion-button .scoll-btn {
   ion-row {
     position: relative;
     height: 77vh;
-    width:95vw;
+    width:94vw;
     overflow: hidden;
   }
 
@@ -299,7 +299,7 @@ ion-button .scoll-btn {
 
   .flowArea {
     border:solid 2px var(--ion-color-secondary-tint);
-    height: 75vh;
+    height: 74vh;
     z-index: 2;
     background: #fff;
     color: #000;
@@ -307,7 +307,7 @@ ion-button .scoll-btn {
 
   .chartArea {
     border: solid 2px var(--ion-color-primary-tint);
-    height: 75vh;
+    height: 74vh;
     z-index: 3;
     background: #fff;
     color: #000;

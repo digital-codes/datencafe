@@ -1,97 +1,97 @@
 {
-  "yes":"Yes",
-  "no":"No",
+  "yes": "Yes",
+  "no": "No",
   "welcome": "Hello",
   "greeting": "Hello, {name}!",
-  "light":"Light",
-  "dark":"Dark",
+  "light": "Light",
+  "dark": "Dark",
   "download": "Download",
   "downloadHint": "After download here, upload the file in the workspace",
   "startStory": "Start story",
-  "notimplemented":"Not implemented yet",
+  "notimplemented": "Not implemented yet",
   "titles": {
     "about": "About Daten.Cafe",
-    "tutorial":"Tutorials",
-    "advanced":"Advanced",
-    "work":{
-      "tab":"Workspace",
-      "flow":"Workflow",
-      "view":{
-        "title":"Visualization",
-        "placeholder":"Create a flow with display ..."
+    "tutorial": "Tutorials",
+    "advanced": "Advanced",
+    "work": {
+      "tab": "Workspace",
+      "flow": "Workflow",
+      "view": {
+        "title": "Visualization",
+        "placeholder": "Create a flow with display ..."
       },
       "loading": {
-        "flow":"Loading workflow pane ...",
-        "view":"Loading visualization pane ..."
+        "flow": "Loading workflow pane ...",
+        "view": "Loading visualization pane ..."
       }
     },
-    "data":"Open Data",
-    "stories":"Stories",
-    "login":"Login"
+    "data": "Open Data",
+    "stories": "Stories",
+    "login": "Login"
   },
-  "tooltip":{
-    "mode":"Dark/Light",
-    "lang":"LANGUAGE",
-    "user":"Account",
-    "signedin":"Signed-in",
-    "signedout":"Signed-out",
-    "scrollup":"Flow",
-    "scrolldown":"Vizualisations"
+  "tooltip": {
+    "mode": "Dark/Light",
+    "lang": "LANGUAGE",
+    "user": "Account",
+    "signedin": "Signed-in",
+    "signedout": "Signed-out",
+    "scrollup": "Flow",
+    "scrolldown": "Vizualisations"
   },
-  "flow":{
-    "tooltip":{
-      "fit":"Zoom fit",
-      "help":"Help",
-      "story":"Your Data Story",
-      "pdf":"Save all as PDF",
-      "capture":"Flow Screenshot",
-      "trash":"Delete all",
-      "up":"Upload Flow",
-      "down":"Download Flow",
-      "new":"New Item",
-      "zoomin":"Zoom in",
-      "zoomout":"Zoom out",
-      "panleft":"Pan left",
-      "panright":"Pan right",
-      "panup":"Pan up",
-      "pandown":"Pan donw",
-      "settings":"Settings"
-
+  "flow": {
+    "tooltip": {
+      "fit": "Zoom fit",
+      "help": "Help",
+      "story": "Your Data Story",
+      "pdf": "Save all as PDF",
+      "capture": "Flow Screenshot",
+      "trash": "Delete all",
+      "up": "Upload Flow",
+      "down": "Download Flow",
+      "new": "New Item",
+      "zoomin": "Zoom in",
+      "zoomout": "Zoom out",
+      "panleft": "Pan left",
+      "panright": "Pan right",
+      "panup": "Pan up",
+      "pandown": "Pan donw",
+      "settings": "Settings"
     },
-    "ctx":{
-      "actions":"Actions",
-      "config":"Configure",
-      "connect":"Connect",
-      "download":"Download",
-      "upload":"Upload",
-      "remove":"Delete",
-      "rename":"Rename"
+    "select": {
+      "grpsource": "Sources",
+      "grpdisplay": "Visualizations",
+      "grpprocessing": "Processing"
     },
-    "cfg":{
-      "params":"Settings",
-      "close":"Close",
-      "ops":"Operators",
-      "sel":"Selection"
+    "ctx": {
+      "actions": "Actions",
+      "config": "Configure",
+      "connect": "Connect",
+      "download": "Download",
+      "upload": "Upload",
+      "remove": "Delete",
+      "rename": "Rename"
     },
-    "settings":{
-      "header":"Settings",
-      "consent":"Agree to use components not conforming to GDPR",
-      "gdpr":"More on GDPR",
-      "fullsize":"Save flow with all data (might be large!)",
-      "conflict":"Import requires consent. Adjust settings!"
+    "cfg": {
+      "params": "Settings",
+      "close": "Close",
+      "ops": "Operators",
+      "sel": "Selection"
+    },
+    "settings": {
+      "header": "Settings",
+      "consent": "Agree to use components not conforming to GDPR",
+      "gdpr": "More on GDPR",
+      "fullsize": "Save flow with all data (might be large!)",
+      "conflict": "Import requires consent. Adjust settings!"
     }
   },
   "login": {
-    "titel":"Login",
-    "register":"Registration by invitation only",
-    "email":"E-Mail",
-    "pwd":"Password",
-    "submit":"Submit",
-    "good":"You are logged in",
-    "bad":"Login failed"
+    "titel": "Login",
+    "register": "Registration by invitation only",
+    "email": "E-Mail",
+    "pwd": "Password",
+    "submit": "Submit",
+    "good": "You are logged in",
+    "bad": "Login failed"
   }
 }
-
-
-
-

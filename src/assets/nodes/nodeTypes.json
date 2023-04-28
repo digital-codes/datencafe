@@ -1,6 +1,7 @@
 {
     "loadcsv": {
         "name": "loadcsv",
+        "group":"source",
         "implemented": true,
         "thumb": "/img/widgets/CSVFile.png",
         "consent": false,
@@ -15,6 +16,7 @@
     },
     "loadjson": {
         "name": "loadjson",
+        "group":"source",
         "implemented": true,
         "thumb": "/img/widgets/JSONFile.png",
         "consent": false,
@@ -29,6 +31,7 @@
     },
     "loadgeo": {
         "name": "loadgeo",
+        "group":"source",
         "implemented": true,
         "thumb": "/img/widgets/GEOFile.png",
         "consent": false,
@@ -43,6 +46,7 @@
     },
     "loadexcel": {
         "name": "loadexcel",
+        "group":"source",
         "implemented": true,
         "thumb": "/img/widgets/XLSFile.png",
         "consent": false,
@@ -57,6 +61,7 @@
     },
     "datainfo": {
         "name": "datainfo",
+        "group":"processing",
         "implemented": true,
         "thumb": "/img/widgets/DataInfo.png",
         "consent": false,
@@ -71,6 +76,7 @@
     },
     "tableplot": {
         "name": "tableplot",
+        "group":"display",
         "implemented": true,
         "thumb": "/img/widgets/Table.png",
         "consent": false,
@@ -85,6 +91,7 @@
     },
     "lineplot": {
         "name": "lineplot",
+        "group":"display",
         "implemented": true,
         "thumb": "/img/widgets/LineChart.png",
         "consent": false,
@@ -99,6 +106,7 @@
     },
     "barplot": {
         "name": "barplot",
+        "group":"display",
         "implemented": true,
         "thumb": "/img/widgets/BarPlot.png",
         "consent": false,
@@ -113,6 +121,7 @@
     },
     "pointmap": {
         "name": "pointmap",
+        "group":"display",
         "implemented": true,
         "thumb": "/img/widgets/GeoMap.png",
         "consent": true,
@@ -127,6 +136,7 @@
     },
     "choromap": {
         "name": "choromap",
+        "group":"display",
         "implemented": false,
         "thumb": "/img/widgets/Choropleth.png",
         "consent": true,
@@ -141,6 +151,7 @@
     },
     "scatter": {
         "name": "scatterplot",
+        "group":"display",
         "implemented": false,
         "thumb": "/img/widgets/ScatterPlot.png",
         "consent": false,
@@ -155,6 +166,7 @@
     },
     "treemap": {
         "name": "treemap",
+        "group":"display",
         "implemented": false,
         "thumb": "/img/widgets/MosaicDisplay.png",
         "consent": false,
@@ -169,6 +181,7 @@
     },
     "histo": {
         "name": "histo",
+        "group":"display",
         "implemented": false,
         "thumb": "/img/widgets/Distribution.png",
         "consent": false,
@@ -183,6 +196,7 @@
     },
     "addrows": {
         "name": "addrows",
+        "group":"processing",
         "implemented": true,
         "thumb": "/img/widgets/Concatenate.png",
         "consent": false,
@@ -197,6 +211,7 @@
     },
     "addcols": {
         "name": "addcols",
+        "group":"processing",
         "implemented": true,
         "thumb": "/img/widgets/MergeData.png",
         "consent": false,
@@ -211,6 +226,7 @@
     },
     "join": {
         "name": "join",
+        "group":"processing",
         "implemented": false,
         "thumb": "/img/widgets/Join.png",
         "consent": false,
@@ -225,6 +241,7 @@
     },
     "selcell": {
         "name": "selcell",
+        "group":"processing",
         "implemented": false,
         "thumb": "/img/widgets/SelectCell.png",
         "consent": false,
@@ -239,6 +256,7 @@
     },
     "selcols": {
         "name": "selcols",
+        "group":"processing",
         "implemented": false,
         "thumb": "/img/widgets/SelectColumns.png",
         "consent": false,
@@ -253,6 +271,7 @@
     },
     "selrows": {
         "name": "selrows",
+        "group":"processing",
         "implemented": false,
         "thumb": "/img/widgets/SelectRows.png",
         "consent": false,
@@ -267,6 +286,7 @@
     },
     "scalarmath": {
         "name": "scalarmath",
+        "group":"processing",
         "implemented": false,
         "thumb": "/img/widgets/Preprocess-1D.png",
         "consent": false,
@@ -281,6 +301,7 @@
     },
     "dfmath": {
         "name": "dfmath",
+        "group":"processing",
         "implemented": false,
         "thumb": "/img/widgets/Preprocess-2D.png",
         "consent": false,
@@ -295,6 +316,7 @@
     },
     "group": {
         "name": "group",
+        "group":"processing",
         "implemented": false,
         "thumb": "/img/widgets/GroupBy.png",
         "consent": false,
@@ -309,6 +331,7 @@
     },
     "pool": {
         "name": "pool",
+        "group":"source",
         "implemented": false,
         "thumb": "/img/widgets/Melt.png",
         "consent": false,
@@ -323,6 +346,7 @@
     },
     "correlate": {
         "name": "correlate",
+        "group":"processing",
         "implemented": false,
         "thumb": "/img/widgets/Correlation.png",
         "consent": false,
@@ -337,6 +361,7 @@
     },
     "number": {
         "name": "number",
+        "group":"processing",
         "implemented": false,
         "thumb": "/img/widgets/Number.png",
         "consent": false,
@@ -351,6 +376,7 @@
     },
     "text": {
         "name": "text",
+        "group":"processing",
         "implemented": false,
         "thumb": "/img/widgets/Text.png",
         "consent": false,
@@ -365,6 +391,7 @@
     },
     "loop": {
         "name": "loop",
+        "group":"processing",
         "implemented": false,
         "thumb": "/img/widgets/Loop.png",
         "consent": false,
@@ -379,6 +406,7 @@
     },
     "counter": {
         "name": "counter",
+        "group":"processing",
         "implemented": false,
         "thumb": "/img/widgets/Counter.png",
         "consent": false,
@@ -393,6 +421,7 @@
     },
     "randomgen": {
         "name": "randomgen",
+        "group":"source",
         "implemented": true,
         "thumb": "/img/widgets/RandomData.png",
         "consent": false,

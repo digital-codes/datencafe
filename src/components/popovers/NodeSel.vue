@@ -1,4 +1,85 @@
 <template>
+
+<ion-accordion-group class="popcontent">
+  <ion-accordion value="source">
+      <ion-item slot="header" color="light">
+        <ion-label>{{$t("flow.select.grpsource")}}</ion-label>
+      </ion-item>
+      <div class="ion-no-padding" slot="content">
+        <ion-list class="list" lines="none">
+      <div class="item" slot="content" v-for="(option,idx) in options" :key="option.type">
+      <ion-item v-if="option.implemented && (option.group == 'source')">
+        <ion-thumbnail slot="start">
+            <img :alt='option.type' :src="option.thumb" />
+        </ion-thumbnail>
+        <ion-checkbox slot="start" 
+        :disabled="(option.consent && !consentOk)"
+        v-model="chk[idx]" @ionChange="clk(idx)"></ion-checkbox>
+        <ion-label class="label ion-hide-sm-down">
+          {{ nodeItem(option.type,"label") }}
+        </ion-label>
+        <ion-note class="tooltip ion-hide-sm-down">
+          {{ nodeItem(option.type,"info") }}
+        </ion-note>
+      </ion-item>
+    </div>
+    </ion-list>
+  </div>
+    </ion-accordion>
+    <ion-accordion value="processing">
+      <ion-item slot="header" color="light">
+        <ion-label>{{$t("flow.select.grpprocessing")}}</ion-label>
+      </ion-item>
+      <div class="ion-no-padding" slot="content">
+        <ion-list class="list" lines="none">
+      <div class="item" slot="content" v-for="(option,idx) in options" :key="option.type">
+      <ion-item v-if="option.implemented && (option.group == 'processing')">
+        <ion-thumbnail slot="start">
+            <img :alt='option.type' :src="option.thumb" />
+        </ion-thumbnail>
+        <ion-checkbox slot="start" 
+        :disabled="(option.consent && !consentOk)"
+        v-model="chk[idx]" @ionChange="clk(idx)"></ion-checkbox>
+        <ion-label class="label ion-hide-sm-down">
+          {{ nodeItem(option.type,"label") }}
+        </ion-label>
+        <ion-note class="tooltip ion-hide-sm-down">
+          {{ nodeItem(option.type,"info") }}
+        </ion-note>
+      </ion-item>
+    </div>
+    </ion-list>
+      </div>
+    </ion-accordion>
+    <ion-accordion value="display">
+      <ion-item slot="header" color="light">
+        <ion-label>{{$t("flow.select.grpdisplay")}}</ion-label>
+      </ion-item>
+      <div class="ion-no-padding" slot="content">
+        <ion-list class="list" lines="none">
+      <div class="item" slot="content" v-for="(option,idx) in options" :key="option.type">
+      <ion-item v-if="option.implemented && (option.group == 'display')">
+        <ion-thumbnail slot="start">
+            <img :alt='option.type' :src="option.thumb" />
+        </ion-thumbnail>
+        <ion-checkbox slot="start" 
+        :disabled="(option.consent && !consentOk)"
+        v-model="chk[idx]" @ionChange="clk(idx)"></ion-checkbox>
+        <ion-label class="label ion-hide-sm-down">
+          {{ nodeItem(option.type,"label") }}
+        </ion-label>
+        <ion-note class="tooltip ion-hide-sm-down">
+          {{ nodeItem(option.type,"info") }}
+        </ion-note>
+      </ion-item>
+    </div>
+    </ion-list>
+      </div>
+    </ion-accordion>
+  </ion-accordion-group>
+
+  <!-- 
+
     <ion-list class="list" lines="none">
       <div v-for="(option,idx) in options" :key="option.type" class="item">
       <ion-item v-if="option.implemented">
@@ -17,12 +98,17 @@
       </ion-item>
     </div>
     </ion-list>
+  -->
+
+
 </template>
 
 <script lang="ts" setup>
 import { IonContent, IonButton } from '@ionic/vue';
 import { IonItem, IonLabel, IonList, IonCheckbox } from '@ionic/vue';
 import { IonNote, IonThumbnail } from '@ionic/vue';
+import { IonAccordion,IonAccordionGroup, } from '@ionic/vue';
+
 
 import { ref, onMounted } from "vue"
 import { UserStore, UserInfo } from '@/services/UserStore'
@@ -67,6 +153,7 @@ onMounted(async () => {
       icon: nodeTypes[e].icon, 
       thumb:nodeTypes[e].thumb,
       implemented:nodeTypes[e].implemented,
+      group:nodeTypes[e].group,
       consent:nodeTypes[e].consent
      }
   })
@@ -74,8 +161,19 @@ onMounted(async () => {
 
 </script>
 
+<style>
+.popover-viewport {
+  min-width: calc(80vw);
+}
+
+</style>
 
 <style scoped>
+.popcontent {
+  /*
+  min-width: calc(60vw);
+  */
+}
 
 ion-buttons {
   /*

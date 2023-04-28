@@ -1,95 +1,97 @@
 {
-  "yes":"Ja",
-  "no":"Nein",
+  "yes": "Ja",
+  "no": "Nein",
   "welcome": "Hallo",
   "greeting": "Hallo, {name}!",
-  "light":"Hell",
-  "dark":"Dunkel",
+  "light": "Hell",
+  "dark": "Dunkel",
   "download": "Herunterladen",
   "downloadHint": "Lade die Geschichte im Arbeitsbereich hoch, nachdem Du sie hier heruntergeladen hast",
   "startStory": "Loslegen",
-  "notimplemented":"Noch nicht verfügbar",
+  "notimplemented": "Noch nicht verfügbar",
   "titles": {
     "about": "Über Daten.Cafe",
-    "tutorial":"Anleitungen",
-    "advanced":"Fortgeschritten",
-    "work":{
-      "tab":"Arbeitsbereich",
-      "flow":"Vorgänge",
-      "view":{
-        "title":"Darstellungen",
-        "placeholder":"Erstelle ein Konzept mit Anzeige ..."
+    "tutorial": "Anleitungen",
+    "advanced": "Fortgeschritten",
+    "work": {
+      "tab": "Arbeitsbereich",
+      "flow": "Vorgänge",
+      "view": {
+        "title": "Darstellungen",
+        "placeholder": "Erstelle ein Konzept mit Anzeige ..."
       },
       "loading": {
-        "flow":"Loading workflow pane ...",
-        "view":"Loading visualization pane ..."
+        "flow": "Loading workflow pane ...",
+        "view": "Loading visualization pane ..."
       }
     },
-    "data":"Offene Daten",
-    "stories":"Geschichten",
-    "login":"Anmelden"
+    "data": "Offene Daten",
+    "stories": "Geschichten",
+    "login": "Anmelden"
   },
-  "tooltip":{
-    "mode":"Hell/Dunkel",
-    "lang":"Sprache",
-    "user":"Anmeldung",
-    "signedin":"Angemeldet",
-    "signedout":"Abgemeldet",
-    "scrollup":"Zum Flow",
-    "scrolldown":"Zu den Ansichten"
+  "tooltip": {
+    "mode": "Hell/Dunkel",
+    "lang": "Sprache",
+    "user": "Anmeldung",
+    "signedin": "Angemeldet",
+    "signedout": "Abgemeldet",
+    "scrollup": "Zum Flow",
+    "scrolldown": "Zu den Ansichten"
   },
-  "flow":{
-    "tooltip":{
-      "fit":"Zoom auf alles",
-      "help":"Hilfe",
-      "story":"Deine Geschichte",
-      "pdf":"PDF von Allem",
-      "capture":"Flow Foto",
-      "trash":"Alles Löschen",
-      "up":"Flow Laden",
-      "down":"Flow Speichern",
-      "new":"Neues Element",
-      "zoomin":"Zoom in",
-      "zoomout":"Zoom out",
-      "panleft":"Pan link",
-      "panright":"Pan rechts",
-      "panup":"Pan hoch",
-      "pandown":"Pan runter",
-      "settings":"Einstellungen"
+  "flow": {
+    "tooltip": {
+      "fit": "Zoom auf alles",
+      "help": "Hilfe",
+      "story": "Deine Geschichte",
+      "pdf": "PDF von Allem",
+      "capture": "Flow Foto",
+      "trash": "Alles Löschen",
+      "up": "Flow Laden",
+      "down": "Flow Speichern",
+      "new": "Neues Element",
+      "zoomin": "Zoom in",
+      "zoomout": "Zoom out",
+      "panleft": "Pan link",
+      "panright": "Pan rechts",
+      "panup": "Pan hoch",
+      "pandown": "Pan runter",
+      "settings": "Einstellungen"
     },
-    "ctx":{
-      "actions":"Aktionen",
-      "config":"Einstellen",
-      "connect":"Verbinden",
-      "download":"Herunterladen",
-      "upload":"Hochladen",
-      "remove":"Löschen",
-      "rename":"Umbenennen"
+    "select": {
+      "grpsource": "Quellen",
+      "grpdisplay": "Visualisierungen",
+      "grpprocessing": "Verarbeitung"
     },
-    "cfg":{
-      "params":"Einstellungen",
-      "close":"Schliessen",
-      "ops":"Operatoren",
-      "sel":"Auswahl"
+    "ctx": {
+      "actions": "Aktionen",
+      "config": "Einstellen",
+      "connect": "Verbinden",
+      "download": "Herunterladen",
+      "upload": "Hochladen",
+      "remove": "Löschen",
+      "rename": "Umbenennen"
     },
-    "settings":{
-      "header":"Einstellungen",
-      "consent":"Bin einverstanden mit Komponenten, die nicht DSGVO entsprechen",
-      "gdpr":"Mehr Infos zu DSGVO",
-      "fullsize":"Flows mit allen Daten speichern",
-      "conflict":"Brauche DSGVO Zustimmung. Einstellungen ändern!"
+    "cfg": {
+      "params": "Einstellungen",
+      "close": "Schliessen",
+      "ops": "Operatoren",
+      "sel": "Auswahl"
+    },
+    "settings": {
+      "header": "Einstellungen",
+      "consent": "Bin einverstanden mit Komponenten, die nicht DSGVO entsprechen",
+      "gdpr": "Mehr Infos zu DSGVO",
+      "fullsize": "Flows mit allen Daten speichern",
+      "conflict": "Brauche DSGVO Zustimmung. Einstellungen ändern!"
     }
   },
   "login": {
-    "titel":"Anmelden",
-    "register":"Registrierung nur mit Einladung",
-    "email":"E-Mail",
-    "pwd":"Passwort",
-    "submit":"Absenden",
-    "good":"Sie sind angemeldet",
-    "bad":"Anmeldung fehlgeschlagen"
-
+    "titel": "Anmelden",
+    "register": "Registrierung nur mit Einladung",
+    "email": "E-Mail",
+    "pwd": "Passwort",
+    "submit": "Absenden",
+    "good": "Sie sind angemeldet",
+    "bad": "Anmeldung fehlgeschlagen"
   }
 }
-
-
