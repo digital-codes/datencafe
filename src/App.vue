@@ -1,10 +1,13 @@
 <template>
   <ion-app>
     <!-- DONT use a second router-outlete here. Ever! -->
+    <!-- 
     <div v-if='route.name == "PrintPage"' class="print">
       <PrintPage></PrintPage>
     </div>
     <div v-else class="screen">
+
+    -->
 
     <!-- 
     <div>
@@ -20,6 +23,7 @@
     </div>
 
     -->
+    <!-- with split pane
       <ion-split-pane when="(min-width: 4000px)" content-id="main-content" :class='route.name != "PrintPage"?"screen":"print"'>
         <MainMenu v-if='route.name != "PrintPage"'/>
         <TitleBar2 v-if='route.name != "PrintPage"'/>
@@ -29,6 +33,14 @@
           ></ion-router-outlet>
 
       </ion-split-pane>
+    -->
+    <div :class='route.name != "PrintPage"?"screen":"print"'>
+        <MainMenu v-if='route.name != "PrintPage"'/>
+        <TitleBar2 v-if='route.name != "PrintPage"'/>
+          <ion-router-outlet :class='route.name != "PrintPage"?"screen":"print"'
+            id="main-content"
+            animated="false"
+          ></ion-router-outlet>
     </div>
   </ion-app>
 </template>

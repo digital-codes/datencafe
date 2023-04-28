@@ -199,6 +199,18 @@ h2 {
     page-break-inside: avoid;
   }
 
+
+  ion-router-outlet {
+    position:static;
+    contain:unset;
+    overflow:scroll;
+  }
+  :host {
+    position:static;
+    contain:unset;
+    overflow:scroll;
+  }
+
 }
 
 
