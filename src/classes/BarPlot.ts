@@ -69,10 +69,7 @@ export class BarPlot extends DcNode {
     };
 
     this.plot = await DcNode.Plotly.newPlot(divId, traces as any, layout as any)
-    /* toImg not included in danfo plotly distribution
-    const img = await Plotly.toImage(plot,{height:300,width:300})
-    console.log(img)
-    */
+
     await this.messaging.emit(DcNode.signals.NODEANIMATE, this.id)
     //await super.messaging.emit(divId) // div used for signalling ..
     /*
@@ -109,8 +106,8 @@ export class BarPlot extends DcNode {
     }
     const png = await DcNode.Plotly.toImage(this.plot, {
       format: "png",
-      width: 800,
-      height: 400,
+      width: 1280,
+      height: 720,
     });
     return png
   }

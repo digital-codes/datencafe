@@ -36,6 +36,7 @@ export class PointMap extends DcNode {
   private map: any = null;
   private layer: any = null;
   private geoData: any = {};
+  private plot: any = null
   // constructor
   constructor(id: string, typeInfo: any) {
     // although we need to call this first,
@@ -221,6 +222,18 @@ export class PointMap extends DcNode {
   // overwrite consent
   get consent() {
     return true;
+  }
+  async getImage() {
+    if (this.plot == null) {
+      console.log("Empty plot")
+      return ""
+    }
+    const png = await DcNode.Plotly.toImage(this.plot, {
+      format: "png",
+      width: 1280,
+      height: 720,
+    });
+    return png
   }
 
 }

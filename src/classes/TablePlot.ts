@@ -45,7 +45,7 @@ export class TablePlot extends DcNode {
     const header = []
     const values = []
     const fmt = []
-    for (const c in cols) {
+    for (const c in cols) { // "in" returns index, "of" returns value
       header.push(new Array(cols[c]))
       values.push(df[cols[c]].values)
       if (ctypes[c] == "string") {
@@ -130,8 +130,8 @@ export class TablePlot extends DcNode {
     }
     const png = await DcNode.Plotly.toImage(this.plot, {
       format: "png",
-      width: 800,
-      height: 400,
+      width: 1280,
+      height: 720,
     });
     return png
   }
