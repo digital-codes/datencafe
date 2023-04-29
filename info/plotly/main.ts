@@ -6,38 +6,38 @@ import { setupCounter } from "./counter.ts";
 //import * as dfd from 'danfojs/dist/danfojs-browser/src';
 import * as dfd from "danfojs/dist/danfojs-browser/src";
 
-import Plotly from "plotly.js-dist-min";
+import Plotly from "plotly.js-dist-min"; // v2.8
+//import Plotly from "plotly.js-dist"; // v2.22
+
+
+console.log(Plotly.version);
 
 document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
   <div>
 
-  <div id="histogram-plot" style="width:100%;height:400px;"></div>
-  <div id="scatter-plot" style="width:100%;height:400px;"></div>
-  <div id="lp" style="width:100%;height:400px;"></div>
-  <div id="bp" style="width:100%;height:400px;"></div>
-  <div id="sp" style="width:100%;height:400px;"></div>
-  <div id="hp" style="width:100%;height:400px;"></div>
-  <div id="tp" style="width:100%;height:400px;"></div>
-  <div id="plotly-line" style="width:100%;height:400px;"></div>
+  <div class="chart" id="histogram-plot" style="width:100%;height:400px;"></div>
+  <div class="chart"  id="scatter-plot" style="width:100%;height:400px;"></div>
+  <div class="chart"  id="lp" style="width:100%;height:400px;"></div>
+  <div class="chart"  id="bp" style="width:100%;height:400px;"></div>
+  <div class="chart"  id="sp" style="width:100%;height:400px;"></div>
+  <div class="chart"  id="hp" style="width:100%;height:400px;"></div>
+  <div class="chart"  id="tp" style="width:100%;height:400px;"></div>
+  <div class="chart"  id="plotly-line" style="width:100%;height:400px;"></div>
 
-  <div id="plotly-map" style="width:100%;height:400px;"></div>
-  <div id="plotly-heat" style="width:100%;height:400px;"></div>
-  <div id="plotly-tree" style="width:100%;height:400px;"></div>
+  <div class="chart"  id="plotly-map" style="width:100%;height:400px;"></div>
+  <div class="chart"  id="plotly-heat" style="width:100%;height:400px;"></div>
+  <div class="chart"  id="plotly-tree" style="width:100%;height:400px;"></div>
+  <div class="chart"  id="plotly-reg" style="width:100%;height:400px;"></div>
+  <div class="chart"  id="plotly-splom" style="width:100%;height:400px;"></div>
+  <div class="chart"  id="plotly-splom2" style="width:100%;height:400px;"></div>
+  <div class="chart"  id="plotly-cross" style="width:100%;height:400px;"></div>
 
-  <div id="line-png" style="width:100%;height:400px;"></div>
-  <div id="table-png" style="width:100%;height:400px;"></div>
-  <div id="map-png" style="width:100%;height:400px;"></div>
+  <div class="img"  id="line-png" style="width:100%;height:400px;"></div>
+  <div class="img"  id="table-png" style="width:100%;height:400px;"></div>
+  <div class="img"  id="map-png" style="width:100%;height:400px;"></div>
 
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite and TypeScript logos to learn more
-    </p>
   </div>
 `;
-
-setupCounter(document.querySelector<HTMLButtonElement>("#counter")!);
 
 const setupPlot = async () => {
   // Sample data
@@ -50,7 +50,7 @@ const setupPlot = async () => {
   const df = new dfd.DataFrame(data);
 
   // Histogram plot
-  df.plot("histogram-plot").hist();
+  df.plot("histogram-plot").hist({ x: "A", y: "B", width: 800, height: 400 });
 
   // Scatter plot
   df.plot("scatter-plot").scatter();
@@ -138,7 +138,7 @@ const setupPlot = async () => {
     name: "Bar 2",
   };
 
-  layout.title = "Barplot"
+  layout.title = "Barplot";
   var barData = [trace3, trace4];
   Plotly.newPlot("bp", barData, layout);
 
@@ -156,7 +156,7 @@ const setupPlot = async () => {
     mode: "markers",
     name: "Scatter 2",
   };
-  layout.title = "scatter"
+  layout.title = "scatter";
   var scatterData = [trace5, trace6];
   Plotly.newPlot("sp", scatterData, layout);
 
@@ -173,7 +173,7 @@ const setupPlot = async () => {
       name: "Histogram 2",
     },
   ];
-  layout.title = "Histo"
+  layout.title = "Histo";
   Plotly.newPlot("hp", histData, layout);
 
   // Table
@@ -197,8 +197,8 @@ const setupPlot = async () => {
       },
     },
   ];
-  layout.title="Table"
-  Plotly.newPlot("tp", tableData,layout)
+  layout.title = "Table";
+  Plotly.newPlot("tp", tableData, layout)
     .then(function (gd) {
       // Use Plotly's image export function to export the chart as a PNG
       return Plotly.toImage(gd, { format: "png", width: 800, height: 600 });
@@ -231,33 +231,28 @@ var mapLayout = {
 */
 
   const osmStyle = {
-      "id": "osm",
-      "version": 8,
-      "sources": {
-        "simple-tiles": {
-          "type": "raster",
-          "tiles": [
-            "https://tile.openstreetmap.org/{z}/{x}/{y}.png"
-          ],
-          "tileSize": 256,
-          "attribution": "© OpenStreetMap contributors",
-          "minzoom": 0,
-          "maxzoom": 18
-
-        }
+    id: "osm",
+    version: 8,
+    sources: {
+      "simple-tiles": {
+        type: "raster",
+        tiles: ["https://tile.openstreetmap.org/{z}/{x}/{y}.png"],
+        tileSize: 256,
+        attribution: "© OpenStreetMap contributors",
+        minzoom: 0,
+        maxzoom: 18,
       },
-      "layers": [
-        {
-          "id": "simple-tiles",
-          "type": "raster",
-          "source": "simple-tiles",
-          "minzoom": 0,
-          "maxzoom": 22
-        }
-      ]
-  }
-  
-
+    },
+    layers: [
+      {
+        id: "simple-tiles",
+        type: "raster",
+        source: "simple-tiles",
+        minzoom: 0,
+        maxzoom: 22,
+      },
+    ],
+  };
 
   var mapLayout = {
     title: "My Map",
@@ -265,7 +260,7 @@ var mapLayout = {
       center: center,
       zoom: zoomLevel,
       style: osmStyle, //"open-street-map",
-      requestHeaders: {'Authorization': 'Bearer mytoken'},
+      requestHeaders: { Authorization: "Bearer mytoken" },
       bearing: 0,
       pitch: 0,
       layers: [
@@ -304,129 +299,368 @@ var mapLayout = {
     borderwidth: 1,
   };
 
-  console.log(mapLayout.mapbox.style)
+  console.log(mapLayout.mapbox.style);
   // Create the map trace
 
   // more markers and polygons
   var marker1 = {
-    type: 'scattermapbox',
+    type: "scattermapbox",
     lat: [51.5074],
     lon: [-0.1278],
-    mode: 'markers',
+    mode: "markers",
     marker: {
       size: 20,
-      color: 'red'
+      color: "red",
     },
-    text: 'More Marker 1',
-    name: 'More Marker 1',
-    hoverinfo: 'text',
-    showlegend: false      
+    text: "More Marker 1",
+    name: "More Marker 1",
+    hoverinfo: "text",
+    showlegend: false,
   };
 
   // Define the second marker
   var marker2 = {
-    type: 'scattermapbox',
+    type: "scattermapbox",
     lat: [51.5133],
-    lon: [-0.0860],
-    mode: 'markers',
+    lon: [-0.086],
+    mode: "markers",
     marker: {
       size: 20,
-      color: 'blue'
+      color: "blue",
     },
-    text: 'More Marker 2',
-    name: 'More Marker 2',
-    hoverinfo: 'text',
-    showlegend: false      
+    text: "More Marker 2",
+    name: "More Marker 2",
+    hoverinfo: "text",
+    showlegend: false,
   };
   // Define the first polygon
-var polygon1 = {
-  type: 'scattermapbox',
-  lat: [51.5074, 51.5074, 51.5225, 51.5225],
-  lon: [-0.1278, -0.1778, -0.1778, -0.1278],
-  mode: 'lines',
-  fill: 'toself',
-  fillcolor: 'rgba(255, 0, 0, 0.5)',
-  name: 'Polygon 1',
-  text: "Poly1",
-  // hover at vertices by default.
-  // costom settings not working
-  // hovering not working prperly ...
-  //hoverinfo: 'text+name',
-  //customdata: [['My Polygon', 'This is my polygon'], ['My Polygon', 'It has some text']],
-  //hovertemplate: '%{customdata[0]}<br>%{customdata[1]}', // display name and text on hover
-  //hovertemplate: '%{name}<br>%{text}',
-  showlegend: false      
-};
+  var polygon1 = {
+    type: "scattermapbox",
+    lat: [51.5074, 51.5074, 51.5225, 51.5225],
+    lon: [-0.1278, -0.1778, -0.1778, -0.1278],
+    mode: "lines",
+    fill: "toself",
+    fillcolor: "rgba(255, 0, 0, 0.5)",
+    name: "Polygon 1",
+    text: "Poly1",
+    // hover at vertices by default.
+    // costom settings not working
+    // hovering not working prperly ...
+    //hoverinfo: 'text+name',
+    //customdata: [['My Polygon', 'This is my polygon'], ['My Polygon', 'It has some text']],
+    //hovertemplate: '%{customdata[0]}<br>%{customdata[1]}', // display name and text on hover
+    //hovertemplate: '%{name}<br>%{text}',
+    showlegend: false,
+  };
 
-// Define the second polygon
-var polygon2 = {
-  type: 'scattermapbox',
-  lat: [51.5158, 51.5237, 51.5158],
-  lon: [-0.0984, -0.0916, -0.0850],
-  mode: 'lines',
-  fill: 'toself',
-  fillcolor: 'rgba(0, 0, 255, 0.5)',
-  name: 'Polygon 2',
-  text: "Poly2",
-  // hoverinfo: 'text+name',
-  showlegend: false      
-};
-
-
+  // Define the second polygon
+  var polygon2 = {
+    type: "scattermapbox",
+    lat: [51.5158, 51.5237, 51.5158],
+    lon: [-0.0984, -0.0916, -0.085],
+    mode: "lines",
+    fill: "toself",
+    fillcolor: "rgba(0, 0, 255, 0.5)",
+    name: "Polygon 2",
+    text: "Poly2",
+    // hoverinfo: 'text+name',
+    showlegend: false,
+  };
 
   // Create the data array
-  var mapData = [marker1,marker2,polygon1,polygon2];
+  var mapData = [marker1, marker2, polygon1, polygon2];
 
   // Create the map
-  const map1 = await Plotly.newPlot("plotly-map", mapData as any, mapLayout as any);
-  const map1png = await Plotly.toImage(map1, { format: "png", width: 800, height: 400 });
-  const map1img = document.createElement("img")
-  map1img.src = map1png
+  const map1 = await Plotly.newPlot(
+    "plotly-map",
+    mapData as any,
+    mapLayout as any
+  );
+  const map1png = await Plotly.toImage(map1, {
+    format: "png",
+    width: 800,
+    height: 400,
+  });
+  const map1img = document.createElement("img");
+  map1img.src = map1png;
   //document.body.appendChild(img);
   document.getElementById("map-png").appendChild(map1img);
 
   // --------
-  var heatData = [  {    type: 'heatmap',    z: [[1, 2, 3], [4, 5, 6], [7, 8, 9]],
-    x: ['A', 'B', 'C'],
-    y: ['X', 'Y', 'Z'],
-    colorscale: 'Viridis'
-  }
-];
+  var heatData = [
+    {
+      type: "heatmap",
+      z: [
+        [1, 2, 3],
+        [4, 5, 6],
+        [7, 8, 9],
+      ],
+      x: ["A", "B", "C"],
+      y: ["X", "Y", "Z"],
+      colorscale: "Viridis",
+    },
+  ];
 
-var heatLayout = {
-  title: 'My Heatmap',
-  height: 400,
-  width: 800,
-xaxis: {title: 'X Axis'},
-  yaxis: {title: 'Y Axis'}
+  var heatLayout = {
+    title: "My Heatmap",
+    height: 400,
+    width: 800,
+    xaxis: { title: "X Axis" },
+    yaxis: { title: "Y Axis" },
+  };
+
+  Plotly.newPlot("plotly-heat", heatData as any, heatLayout);
+
+  var treeData = [
+    {
+      type: "treemap",
+      ids: ["A", "B", "C", "D", "E", "F"],
+      labels: ["A", "B", "C", "D", "E", "F"],
+      parents: ["", "A", "A", "B", "B", "C"],
+      values: [1, 2, 3, 4, 5, 6],
+      textposition: "middle center",
+      marker: {
+        colorscale: "Blues",
+        reversescale: true,
+      },
+    },
+  ];
+
+  var treeLayout = {
+    title: "My Treemap",
+    height: 400,
+    width: 800,
+    autosize: true,
+    margin: { l: 20, r: 20, t: 40, b: 20 },
+  };
+
+  Plotly.newPlot("plotly-tree", treeData as any, treeLayout);
+
+  //
+
+  regressionPlot();
+  splom1();
+  splom2();
+  cross();
+
 };
 
-Plotly.newPlot('plotly-heat', heatData as any, heatLayout);
+async function regressionPlot() {
+  // regression
+  // Define sample data
+  var x = [1, 2, 3, 4, 5];
+  var y = [2, 3, 5, 6, 7];
 
+  // Calculate regression line
+  var regression = linearRegression(x, y);
 
-  var treeData = [  {    type: 'treemap',    ids: ['A', 'B', 'C', 'D', 'E', 'F'],
-  labels: ['A', 'B', 'C', 'D', 'E', 'F'],
-  parents: ['', 'A', 'A', 'B', 'B', 'C'],
-  values: [1, 2, 3, 4, 5, 6],
-  textposition: 'middle center',
-  marker: {
-    colorscale: 'Blues',
-    reversescale: true
+  // Define trace for data points
+  var trace1 = {
+    x: x,
+    y: y,
+    mode: "markers",
+    type: "scatter",
+    name: "Data Points",
+  };
+
+  // Define trace for regression line
+  var trace2 = {
+    x: x,
+    y: regression.predict(x),
+    mode: "lines",
+    type: "scatter",
+    name: "Regression Line",
+  };
+
+  // Define layout
+  var layout = {
+    title: "Scatter Plot with Linear Regression Line",
+    xaxis: { title: "X Axis" },
+    yaxis: { title: "Y Axis" },
+  };
+
+  // Create plot
+  Plotly.newPlot("plotly-reg", [trace1, trace2], layout);
+
+  // Function to calculate linear regression
+  function linearRegression(x, y) {
+    var n = x.length;
+    var sx = 0,
+      sy = 0,
+      sxy = 0,
+      sxx = 0,
+      syy = 0;
+    for (var i = 0; i < n; i++) {
+      sx += x[i];
+      sy += y[i];
+      sxy += x[i] * y[i];
+      sxx += x[i] * x[i];
+      syy += y[i] * y[i];
+    }
+    var slope = (n * sxy - sx * sy) / (n * sxx - sx * sx);
+    var intercept = (sy - slope * sx) / n;
+    return {
+      slope: slope,
+      intercept: intercept,
+      predict: function (x) {
+        return this.intercept + x * this.slope;
+      },
+      r2: Math.pow(
+        (n * sxy - sx * sy) /
+          Math.sqrt((n * sxx - sx * sx) * (n * syy - sy * sy)),
+        2
+      ),
+    };
   }
 }
-];
 
-var treeLayout = {
-title: 'My Treemap',
-height: 400,
-width: 800,
-autosize: true,
-margin: {l: 20, r: 20, t: 40, b: 20}
-};
+async function splom1() {
+  // ------------ splom ----------------
 
-Plotly.newPlot('plotly-tree', treeData as any, treeLayout);
+  // Create a Danfo.js DataFrame
+  var splom_data = {
+    col1: [1, 2, 3, 4, 5],
+    col2: [5, 4, 3, 2, 1],
+    col3: [2, 3, 4, 5, 1],
+    col4: [4, 5, 1, 2, 3],
+  };
 
+  const splom_df = new dfd.DataFrame(splom_data);
 
-};
+  // Create an array of traces for the scatterplot matrix
+  var splom_traces = [];
+  var splom_cols = splom_df.columns;
+
+  let idx = 1;
+  for (var i = 0; i < splom_cols.length; i++) {
+    var x = splom_df[splom_cols[i]].values;
+
+    for (var j = 0; j < splom_cols.length; j++) {
+      var y = splom_df[splom_cols[j]].values;
+
+      var splom_trace = {
+        x: x,
+        y: y,
+        xaxis: "x" + String(idx),
+        yaxis: "y" + String(idx++),
+      };
+
+      if (i == j) {
+        // Set diagonal plots to histogram
+        splom_trace.type = "histogram";
+      } else {
+        // Set off-diagonal plots to scatter
+        splom_trace.marker = { size: 5, opacity: 0.5 };
+        splom_trace.mode = "markers";
+        splom_trace.type = "scatter";
+      }
+      splom_traces.push(splom_trace);
+    }
+  }
+
+  // Create the scatterplot matrix
+  var splom_layout = {
+    title: "Scatterplot Matrix",
+    width: 800,
+    height: 400,
+    grid: {
+      rows: splom_cols.length,
+      columns: splom_cols.length,
+      pattern: "independent",
+    },
+  };
+
+  Plotly.newPlot("plotly-splom", splom_traces as any, splom_layout as any);
+}
+
+async function splom2() {
+  var trace1 = {
+    x: [1, 2, 3],
+    y: [4, 5, 6],
+    type: "histogram",
+  };
+
+  var trace2 = {
+    x: [20, 30, 40],
+    y: [50, 60, 70],
+    xaxis: "x2",
+    yaxis: "y2",
+    type: "scatter",
+  };
+
+  var trace3 = {
+    x: [300, 400, 500],
+    y: [600, 700, 800],
+    xaxis: "x3",
+    yaxis: "y3",
+    type: "scatter",
+    mode: "markers",
+  };
+
+  var trace4 = {
+    x: [4000, 5000, 6000],
+    y: [7000, 8000, 9000],
+    xaxis: "x4",
+    yaxis: "y4",
+    type: "scatter",
+  };
+
+  var data = [trace1, trace2, trace3, trace4];
+
+  var layout = {
+    title: "Splom 3",
+    width: 800,
+    height: 400,
+    grid: { rows: 2, columns: 2, pattern: "independent" },
+  };
+
+  Plotly.newPlot("plotly-splom2", data, layout);
+}
+
+function cross() {
+  // Define the two signals
+  var x = [1, 2, 3, 4, 5];
+  var y = [2, 3, 5, 6, 7];
+
+  // Compute the cross-correlation between x and y
+  var corr = crossCorrelation(x, y);
+
+  // Create a scatter plot with a line connecting the data points
+  var trace1 = {
+    x: corr.lags,
+    y: corr.values,
+    mode: "lines+markers",
+    type: "scatter",
+    name: "Cross-correlation",
+  };
+
+  // Define layout
+  var layout = {
+    title: "Cross-correlation Plot",
+    xaxis: { title: "Lag" },
+    yaxis: { title: "Correlation" },
+  };
+
+  // Create plot
+  Plotly.newPlot("plotly-cross", [trace1], layout);
+
+  // Function to compute cross-correlation
+  function crossCorrelation(x, y) {
+    var n = x.length;
+    var lags = Array.from({ length: n }, (_, i) => i - Math.floor(n / 2));
+    var values = [];
+    for (var lag of lags) {
+      var sum = 0;
+      for (var i = 0; i < n; i++) {
+        var j = i - lag;
+        if (j >= 0 && j < n) {
+          sum += x[i] * y[j];
+        }
+      }
+      values.push(sum);
+    }
+    return { lags: lags, values: values };
+  }
+}
 
 setupPlot();
