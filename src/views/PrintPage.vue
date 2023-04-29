@@ -78,9 +78,16 @@ h2 {
   page-break-before: always;
 }
 
-.ion-page {
+.ion-page, .ion-page.dark {
   overflow: auto;
   display: block;
+  color:#000;
+    background:#fff;
+    --ion-background-color: #fff;
+    --ion-background-color-rgb: 255,255,255;
+    --ion-text-color: #000;
+    --ion-text-color-rgb: 0,0,0;
+    --ion-border-color: #ccc;
 }
 
 .doclogo {
@@ -92,6 +99,8 @@ h2 {
 .docimg {
   width: 20%;
 }
+
+
 </style>
 
 <style>
@@ -134,6 +143,17 @@ h2 {
     overflow: scroll !important;
     position: static !important;
   }
+
+  body.dark {
+    color:#000;
+    background:#fff;
+    --ion-background-color: #fff;
+    --ion-background-color-rgb: 255,255,255;
+    --ion-text-color: #000;
+    --ion-text-color-rgb: 0,0,0;
+    --ion-border-color: #ccc;
+  }
+
 
   @page {
     size: A4 portrait; /* change to desired paper size and orientation */
