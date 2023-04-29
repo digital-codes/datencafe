@@ -73,12 +73,9 @@ import { DcNode } from "@/classes/DcNode"; // base class of nodes
 import { IonButtons, IonToolbar } from "@ionic/vue";
 
 // documentation stuff
+// html2canvas while we cannot get the pngs from the plots directly
 import html2canvas from "html2canvas";
-// ... for pdf
-import { jsPDF } from "jspdf";
-// ... for markdown
-import { marked } from "marked";
-import * as DOMPurify from "dompurify";
+//
 import router from "@/router";
 import { PrintStore } from "@/services/PrintStore";
 const printStore = PrintStore();
@@ -880,9 +877,6 @@ const htmlDocs = async () => {
     // get flow image
     // extent:  { x1, y1, x2, y2, w, h }.
     await cy.value.fit();
-    const flowWidth = await cy.value.extent().w;
-    const flowHeight = await cy.value.extent().h;
-    const flowAspect = flowWidth / flowHeight;
     //console.log("Flow aspect:",flowWidth, flowHeight, flowAspect)
     const wf = await cy.value.png({
       output: "base64uri",
@@ -906,10 +900,6 @@ const htmlDocs = async () => {
       const elem = await document.getElementById("DFPLOT-" + divName);
       // seems to work but is too slow ...
       const viz = await html2canvas(elem, { logging: false }); //, options)
-      const width = viz.width;
-      const height = viz.height;
-      const aspect = width / height;
-      const h = Math.round(imgWidth / aspect);
       const dataURL = await viz.toDataURL();
 
       htm += "<h3 style='" + html.style.h3 + "'>" + divName + "</h3>\n";
@@ -2265,10 +2255,6 @@ const openSettings = () => {
       -->
       <a :href="iframeUrl" download target="_blank" ref="linkIframe"></a>
     </div>
-  </div>
-  <!-- pdf wrap for markdown version -->
-  <div ref="pdfWrap" v-if="pdfWindow">
-    <div v-html="pdfContent"></div>
   </div>
   <!-- regular start -->
   <div ref="flowWrap" class="wrap">
