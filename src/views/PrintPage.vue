@@ -1,77 +1,79 @@
 <template>
   <ion-page>
     <ion-button class="noprint" @click="back">Back</ion-button>
+    <ion-button class="noprint" :disabled="noprint" @click="printFunc">Print</ion-button>
 
-    <main v-html="parms.content" class="content">
-    </main>
+    <main v-html="parms.content" class="content"></main>
   </ion-page>
 </template>
 
 <script setup lang="ts">
-
-import { IonButton, IonContent, IonHeader, IonButtons, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
-import { IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent } from '@ionic/vue'
-import { ref, computed, watch, onMounted, onActivated } from 'vue';
+import {
+  IonButton,
+  IonContent,
+  IonHeader,
+  IonButtons,
+  IonMenuButton,
+  IonPage,
+  IonTitle,
+  IonToolbar,
+} from "@ionic/vue";
+import {
+  IonCard,
+  IonCardHeader,
+  IonCardTitle,
+  IonCardSubtitle,
+  IonCardContent,
+} from "@ionic/vue";
+import { ref, computed, watch, onMounted, onActivated } from "vue";
 // delay timer
 import { DelayTimer } from "@/services/DelayTimer";
 
-
-import { useRoute } from 'vue-router';
-const route = useRoute()
+import { useRoute } from "vue-router";
 import router from "@/router";
 
-import { PrintStore } from "@/services/PrintStore"
-const printStore = PrintStore()
+import { PrintStore } from "@/services/PrintStore";
+const printStore = PrintStore();
 
-const props = defineProps(
-  ["title","content"]
-)
+const noprint = ref(true)
 
-const parms = ref ({})
-const rdy = ref(false)
-
-onMounted(async () => {
-   parms.value = {content: await printStore.get()}
-   console.log("Print mounted + loaded")
-  rdy.value = true
-  if (print) {
-    await DelayTimer(100)
-    print()
-  }
+onMounted(() => {
+  if (print) 
+    noprint.value = false
 })
 
-onActivated(async () => {
-  console.log("PP activated")
-})
-
-
-const back = async () => {
-  await router.push({name: 'Workspace'})
+const printFunc = async () => {
+  await DelayTimer(100)
+  print()
 }
-/*
+
 const parms = computed(() => {
   const c = printStore.get()
-  //console.log("content", c.length)
+  console.log("content", c.length)
   return {
     content:c
   }
 })
+
+/* NO
+const parms = ref({});
+watch(
+  () => printStore.get,
+  (content) => {
+    parms.value = { content: printStore.get() };
+    console.log("content", content.length);
+  }
+);
 */
 
-/*
-watch(
-      () => printStore.get,
-      (content) => {
-        console.log("content", content.length)
-      }
-    )
-*/
+const back = async () => {
+  await router.push({ name: "Workspace" });
+};
+
 
 </script>
 
 <style scoped>
-
-
 h2 {
   page-break-before: always;
 }
@@ -83,18 +85,16 @@ h2 {
 
 .doclogo {
   width: 50%;
-  margin-left:auto;
-  margin-right:auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .docimg {
   width: 20%;
 }
-
 </style>
 
 <style>
-
 @media print {
   /*
 
@@ -128,40 +128,41 @@ h2 {
 
   .noprint {
     display: none;
-}
+  }
 
   body {
-    overflow:scroll!important;
-    position: static!important;
+    overflow: scroll !important;
+    position: static !important;
   }
-  
+
   @page {
     size: A4 portrait; /* change to desired paper size and orientation */
     margin: 1cm; /* change to desired margin size */
-  }  
+  }
 
   article {
     page-break-after: always;
   }
 
-  .content  {
+  .content {
     width: 100%;
     position: relative;
     display: block;
   }
 
-
-  h1, h2, h3 {
+  h1,
+  h2,
+  h3 {
     text-align: center;
     padding-bottom: 1rem;
   }
 
-  .content  > p {
+  .content > p {
     padding: 1rem;
     text-justify: inter-word;
   }
 
-  .content  > span {
+  .content > span {
     padding-left: 1rem;
     padding-right: 1rem;
     text-justify: inter-word;
@@ -176,16 +177,16 @@ h2 {
   }
 
   .ion-page {
-    overflow: auto!important;
-    display: block!important;
-    left: unset!important;
-    right: unset!important;
-    top: unset!important;
-    bottom: unset!important;
-    position: unset!important;
-    flex-direction: unset!important;
-    contain: unset!important;
-    overflow: scroll!important;
+    overflow: auto !important;
+    display: block !important;
+    left: unset !important;
+    right: unset !important;
+    top: unset !important;
+    bottom: unset !important;
+    position: unset !important;
+    flex-direction: unset !important;
+    contain: unset !important;
+    overflow: scroll !important;
   }
 
   .doclogo {
@@ -199,21 +200,15 @@ h2 {
     page-break-inside: avoid;
   }
 
-
   ion-router-outlet {
-    position:static;
-    contain:unset;
-    overflow:scroll;
+    position: static;
+    contain: unset;
+    overflow: scroll;
   }
   :host {
-    position:static;
-    contain:unset;
-    overflow:scroll;
+    position: static;
+    contain: unset;
+    overflow: scroll;
   }
-
 }
-
-
-
-
 </style>
