@@ -11,6 +11,7 @@ export class LinePlot extends DcNode {
   private updCnt = 0
   static _display = true
   static _type = NodeSpec.CHART //"chart"
+  private plot: any = null
   // constructor
   constructor(id:string,typeInfo:any) {
     // although we need to call this first,
@@ -37,26 +38,44 @@ export class LinePlot extends DcNode {
     if ((target === undefined) || (target == null) ) {
       throw (new Error("Invalid ID: " + String(divId)))
     }
-    //const layout = {}
-    /* plotly customconfig
-    interface CustomConfig extends Config {
-      x: string;
-      y: string;
-      values: string;
-      labels: string;
-      rowPositions: number[];
-      columnPositions: number[];
-      grid: {
-          rows: number;
-          columns: number;
-      };
-      tableHeaderStyle: any;
-      tableCellStyle: any;
-      columns: string[];
+    // new plot
+    // Define layout and trace
+    // pick first column as x
+    const cols = df.columns
+    const xCol = cols[cols.length-1] // will become variable
+    const xIdx = cols.findIndex(name => name == xCol)
+    console.log("X index:",xIdx)
+    const X = df[cols[xIdx]].values
+    //console.log("X",X)
+    const traces = []
+    const mode = "stack" //"stack" // relative, group, empty
+    for (let i = 0; i < cols.length; i++ ) {
+      if (i == xIdx) continue
+      const trace = {
+        x: X,
+        y: df[cols[i]].values,
+        mode: 'lines',
+        line: {
+          //color: 'rgb(55, 128, 191)',
+          width: 3
+        }
+      }
+      traces.push(trace)
     }
-    */  
-    const plotConfig: PlotConfigObject = {config:{}, layout:{}}
-    await df.plot(divId).line(plotConfig)
+  
+    const layout = {
+      title: "Line Chart",
+      barmode: mode,
+      xaxis: {title: cols[xIdx]},
+      yaxis: {title: 'Y axis'},
+      /*
+      height: 400,
+      width: 800,
+      */
+    };
+
+    this.plot = await DcNode.Plotly.newPlot(divId, traces as any, layout as any)
+
     await this.messaging.emit(DcNode.signals.NODEANIMATE, this.id)
     //await super.messaging.emit(divId) // div used for signalling ..
     /*
@@ -85,6 +104,18 @@ export class LinePlot extends DcNode {
     sigs.splice(idx,1)
     this.signals = sigs
     DcNode.print("Signals now: " + JSON.stringify(this.signals))
+  }
+  async getImage() {
+    if (this.plot == null) {
+      console.log("Empty plot")
+      return ""
+    }
+    const png = await DcNode.Plotly.toImage(this.plot, {
+      format: "png",
+      width: 800,
+      height: 400,
+    });
+    return png
   }
 } 
 
