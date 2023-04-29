@@ -23,6 +23,7 @@ import type { NodeSingular, EdgeSingular } from "cytoscape";
 import type { MenuOptions } from "cytoscape-context-menus";
 
 import { IonButton } from "@ionic/vue";
+import { loadingController } from '@ionic/vue';
 
 import { DataFrame, toJSON } from "danfojs/dist/danfojs-browser/src";
 
@@ -835,11 +836,19 @@ async function flowInit() {
   userStore.setFlowrdy(true);
 }
 
+
+const loaderPop = ref(null)
 const fakePrint = false;
 const htmlDocs = async () => {
   console.log("Make PDF via HTML");
-  alert("Preparing PDF. Current flow will be lost (sorry). Click OK then wait a moment ...");
+  //alert("Preparing PDF. Current flow will be lost (sorry). Click OK then wait a moment ...");
   // fake
+  loaderPop.value = await loadingController.create({
+    message: 'Preparing PDF ...',
+    duration: 0,
+  });
+  await loaderPop.value.present();
+  await nextTick()
   let htm;
   if (fakePrint) htm = html.part;
   else {
@@ -920,6 +929,8 @@ const htmlDocs = async () => {
   await router.push({
     name: "PrintPage",
   });
+  await loaderPop.value.dismiss();
+
 
 };
 
