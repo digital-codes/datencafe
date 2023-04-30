@@ -40,7 +40,7 @@ export class LoadJson extends DcNode {
         {
           id: "attribution",
           type: "text",
-          label: "Source",
+          label: "Attrib.",
           value: ""
         }
       ],
@@ -112,7 +112,10 @@ export class LoadJson extends DcNode {
       // create item in pubstore if not exists
       await DcNode.providers.add(super.id, true); // file loaders are root nodes
     }
-    await DcNode.providers.update(super.id, toJSON(this.df));
+    const meta = await DcNode.providers.getMeta(this.id)
+    const dt = await new Date().toISOString()
+    meta.date = dt
+    await DcNode.providers.update(this.id, toJSON(this.df),meta);
     await this.messaging.emit(DcNode.signals.NODEANIMATE, this.id)
     await super.messaging.emit((DcNode.signals.UPDPREFIX as string) + super.id);
   }

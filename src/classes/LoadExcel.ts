@@ -49,7 +49,7 @@ export class LoadExcel extends DcNode {
         {
           id: "attribution",
           type: "text",
-          label: "Source",
+          label: "Attrib.",
           value: ""
         }
       ],
@@ -202,7 +202,10 @@ export class LoadExcel extends DcNode {
       await DcNode.providers.add(this.id, true); // file loaders are root nodes
     }
 
-    await DcNode.providers.update(this.id, toJSON(this.df));
+    const meta = await DcNode.providers.getMeta(this.id)
+    const dt = await new Date().toISOString()
+    meta.date = dt
+    await DcNode.providers.update(this.id, DcNode.dfd.toJSON(this.df),meta)
     await this.messaging.emit(DcNode.signals.NODEANIMATE, this.id)
     await super.messaging.emit((DcNode.signals.UPDPREFIX as string) + this.id);
   }

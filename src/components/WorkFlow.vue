@@ -877,7 +877,7 @@ const htmlDocs = async () => {
       // not only at input nodes
       if (providers.exists(node.id)) {
         const meta = providers.getMeta(node.id) 
-        for (const item of ["url","license","attribution"]){
+        for (const item of ["url","date","license","attribution"]){
           if (meta[item] !== undefined){
             htm += "<li style='" + html.style.li + "'>" + item + ": " + meta[item] + "</li>\n";
           }

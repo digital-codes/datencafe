@@ -40,7 +40,7 @@ export class LoadGeo extends DcNode {
         {
           id: "attribution",
           type: "text",
-          label: "Source",
+          label: "Attrib.",
           value: ""
         }
       ],
@@ -130,7 +130,10 @@ export class LoadGeo extends DcNode {
       await DcNode.providers.add(this.id, true); // file loaders are root nodes
     }
     //await DcNode.providers.update(super.id, JSON.stringify(data));
-    await DcNode.providers.update(super.id, data);
+    const meta = await DcNode.providers.getMeta(this.id)
+    const dt = await new Date().toISOString()
+    meta.date = dt
+    await DcNode.providers.update(this.id, data,meta);
     await this.messaging.emit(DcNode.signals.NODEANIMATE, this.id)
     await super.messaging.emit((DcNode.signals.UPDPREFIX as string) + super.id);
 
