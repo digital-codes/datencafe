@@ -35,7 +35,7 @@ const osmStyleDefault = {
 const mapLayoutDefault = {
   title: "My Map",
   mapbox: {
-    center: { lat: 51.5074, lon: -0.1278 }, // center,
+    center: { lat: 49.0, lon: 8.4 }, // center,
     zoom: 12, // zoomLevel,
     style: osmStyleDefault, //"open-street-map",
     bearing: 0,
@@ -76,6 +76,8 @@ export class PointMap extends DcNode {
   private layer: any = null;
   private geoData: any = {};
   private plot: any = null
+  private markers: any[] = []
+  private polies: any[] = []
   // constructor
   constructor(id: string, typeInfo: any) {
     // although we need to call this first,
@@ -155,44 +157,68 @@ export class PointMap extends DcNode {
 
       await this.layer.addTo(this.map);
     }
+    */
     // clear if required
     if (this.geoData.type && this.geoData.type == "FeatureCollection") {
-      console.log("Clear layer");
-      await this.layer.clearLayers();
+      console.log("Clear markers and polies");
+      this.markers = []
+      this.polies = []
     }
     // copy data
     this.geoData = dt;
     // check data for points
     let hasPoints = false;
-    const polies = [];
     for (let idx = 0; idx < this.geoData.features.length; idx++) {
       const element = await this.geoData.features[idx];
-      //console.log("e:",element)
+      console.log("e:",element)
       //console.log("geo type:",element.geometry.type)
       if (element.geometry.type.toLowerCase() == "point") {
+        console.log("point")
         hasPoints = true;
+        const point = {
+          type: "scattermapbox",
+          lat: element.geometry.coordinates[1],
+          lon: element.geometry.coordinates[0],
+          mode: "markers",
+          marker: {
+            text: "Marker",
+            name: "Marker",
+            size: 20,
+            color: "red",
+          },
+          hoverinfo: "text",
+          showlegend: false,
+          id:""
+        }
         // we can add the popupcontent here ...
         if (element.properties.popupContent) {
-          element.properties.popupContent = String(
-            element.properties.popupContent
-          );
+          point.marker.text = String(element.properties.popupContent)
+          point.marker.name = String(element.properties.popupContent)
         } else {
-          if (element.properties.NAME)
-            element.properties.popupContent = element.properties.NAME;
+          if (element.properties.NAME) {
+            point.marker.text = String(element.properties.NAME)
+            point.marker.name = String(element.properties.NAME)
+          }
         }
         // add an id
-        if (!element.properties.id) {
-          element.properties.id = idx;
+        if (element.properties.id) {
+          point.id = String(element.properties.id)
+        } else {
+          point.id = String(idx);
         }
+        this.markers.push(point)
       }
       if (element.geometry.type.toLowerCase() == "polygon") {
         //console.log("Poly",element)
-        polies.push(element.geometry.coordinates);
+        this.polies.push(element.geometry.coordinates);
         //const pl = L.geoJSON(element);
         //pl.addTo(this.map);
       }
     }
-    console.log("haspoints:", hasPoints, ", polies:", polies.length);
+    console.log("Points:",this.markers)
+    console.log("Polies:",this.polies)
+    /*
+    console.log("haspoints:", hasPoints, ", polies:", this.polies.length);
     if (hasPoints) {
       console.log("Options1:", this.layer.options);
       if (this.layer.options) {
@@ -232,9 +258,13 @@ export class PointMap extends DcNode {
   };
 
 
-    const mapData: any = [marker1] // marker1, marker2, polygon1, polygon2];
-
-    this.plot = await DcNode.Plotly.newPlot(divId, mapData as any, layout as any)
+    const mapData: any = this.markers // [marker1] // marker1, marker2, polygon1, polygon2];
+    if (this.plot == null) {
+      this.plot = await DcNode.Plotly.newPlot(divId, mapData as any, layout as any)
+    } else {
+      this.plot = await DcNode.Plotly.newPlot(divId, mapData as any, layout as any)
+      //await this.plot.update(divId, mapData as any, layout as any)
+    }
 
     await this.messaging.emit(DcNode.signals.NODEANIMATE, this.id);
   }
