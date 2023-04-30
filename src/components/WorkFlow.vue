@@ -897,13 +897,17 @@ const htmlDocs = async () => {
     for (const instance of displayNodes) {
       htm += "<article style='" + html.style.article + "'>\n";
       const divName = instance.id.toUpperCase();
+      htm += "<h3 style='" + html.style.h3 + "'>" + divName + "</h3>\n";
+      /*
       const elem = await document.getElementById("DFPLOT-" + divName);
       // seems to work but is too slow ...
       const viz = await html2canvas(elem, { logging: false }); //, options)
       const dataURL = await viz.toDataURL();
-
-      htm += "<h3 style='" + html.style.h3 + "'>" + divName + "</h3>\n";
       htm += "<img  style='" + html.style.docimg + "' src='" + dataURL + "'>\n\n";
+      */
+      //console.log("Instance:",instance,instance.getImage)
+      const png = await instance.getImage()
+      htm += "<img  style='" + html.style.docimg + "' src='" + png + "'>\n\n";
 
       htm += "</article>\n";
       htm += "</div>\n"

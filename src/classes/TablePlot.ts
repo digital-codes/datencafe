@@ -1,5 +1,6 @@
 // csv node class, extends DcNode
 
+import { format } from "path";
 import {DcNode} from "./DcNode"
 import {SigPort} from "./DcNode"
 import { NodeSpec } from '@/services/GlobalDefs';
@@ -10,6 +11,7 @@ export class TablePlot extends DcNode {
   static _display = true
   static _type = NodeSpec.TABLE
   private updCnt = 0
+  private plot: any = null
   // constructor
   constructor(id:string,typeInfo:any) {
     // although we need to call this first,
@@ -36,7 +38,67 @@ export class TablePlot extends DcNode {
     if ((target === undefined) || (target == null) ) {
       throw (new Error("Invalid ID: " + String(divId)))
     }
-    await df.plot(divId).table()
+    // new plot
+    const cols = df.columns
+    const ctypes = df.ctypes.values
+    console.log("cols:",cols)
+    const header = []
+    const values = []
+    const fmt = []
+    for (const c in cols) { // "in" returns index, "of" returns value
+      header.push(new Array(cols[c]))
+      values.push(df[cols[c]].values)
+      if (ctypes[c] == "string") {
+        fmt.push([])
+      } else {
+        fmt.push(['.3f'])
+      }
+    }
+    console.log("header",header)
+
+
+    const data = [{
+
+      type: 'table',
+    
+      header: {
+    
+        values: header, // [df.columns],
+    
+        align: ["left", "center"],
+    
+        line: {width: 2, color: '#444'},
+    
+        // fill: {color: '#119DFF'},
+    
+        font: {family: "Arial", size: 14, weight: "bold", color: "#000"}
+    
+      },
+    
+      cells: {
+    
+        values: values, // df.values,
+    
+        align: ["left", "center"],
+    
+        line: {color: "#444", width: 1},
+    
+        // fill: {color: ['#25FEFD', 'white']},
+    
+        font: {family: "Arial", size: 11, color: ["#000"]},
+        format: fmt
+    
+      }
+    
+    }]
+
+    const  layout = {
+      title: "Table chart"
+    }
+    
+
+    this.plot = await DcNode.Plotly.newPlot(divId, data as any, layout as any)
+
     await this.messaging.emit(DcNode.signals.NODEANIMATE, this.id)
   }
   msgOn(x: string, y: string) {
@@ -60,6 +122,18 @@ export class TablePlot extends DcNode {
     sigs.splice(idx,1)
     this.signals = sigs
     DcNode.print("Signals now: " + JSON.stringify(this.signals))
+  }
+  async getImage() {
+    if (this.plot == null) {
+      console.log("Empty plot")
+      return ""
+    }
+    const png = await DcNode.Plotly.toImage(this.plot, {
+      format: "png",
+      width: 1280,
+      height: 720,
+    });
+    return png
   }
 
 } 

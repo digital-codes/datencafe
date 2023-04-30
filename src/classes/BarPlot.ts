@@ -9,6 +9,7 @@ export class BarPlot extends DcNode {
   static _display = true
   static _type = NodeSpec.CHART 
   private updCnt = 0
+  private plot: any = null
   // constructor
   constructor(id:string,typeInfo:any) {
     // although we need to call this first,
@@ -35,11 +36,40 @@ export class BarPlot extends DcNode {
     if ((target === undefined) || (target == null) ) {
       throw (new Error("Invalid ID: " + String(divId)))
     }
-    const plot = await df.plot(divId).bar()
-    /* toImg not included in danfo plotly distribution
-    const img = await Plotly.toImage(plot,{height:300,width:300})
-    console.log(img)
-    */
+    // this.plot = await df.plot(divId).bar()
+    // Define layout and trace
+    // pick first column as x
+    const cols = df.columns
+    const xCol = cols[cols.length-1] // will become variable
+    const xIdx = cols.findIndex(name => name == xCol)
+    console.log("X index:",xIdx)
+    const X = df[cols[xIdx]].values
+    //console.log("X",X)
+    const traces = []
+    const mode = "stack" //"stack" // relative, group, empty
+    for (let i = 0; i < cols.length; i++ ) {
+      if (i == xIdx) continue
+      const trace = {
+        x: X,
+        y: df[cols[i]].values,
+        type: "bar",
+      }
+      traces.push(trace)
+    }
+  
+    const layout = {
+      title: "Bar Chart",
+      barmode: mode,
+      xaxis: {title: cols[xIdx]},
+      yaxis: {title: 'Y axis'},
+      /*
+      height: 400,
+      width: 800,
+      */
+    };
+
+    this.plot = await DcNode.Plotly.newPlot(divId, traces as any, layout as any)
+
     await this.messaging.emit(DcNode.signals.NODEANIMATE, this.id)
     //await super.messaging.emit(divId) // div used for signalling ..
     /*
@@ -68,6 +98,18 @@ export class BarPlot extends DcNode {
     sigs.splice(idx,1)
     this.signals = sigs
     DcNode.print("Signals now: " + JSON.stringify(this.signals))
+  }
+  async getImage() {
+    if (this.plot == null) {
+      console.log("Empty plot")
+      return ""
+    }
+    const png = await DcNode.Plotly.toImage(this.plot, {
+      format: "png",
+      width: 1280,
+      height: 720,
+    });
+    return png
   }
 
 } 

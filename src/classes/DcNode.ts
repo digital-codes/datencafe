@@ -10,6 +10,9 @@ import { PubStore } from "@/services/PubStore";
 import testFetch from "@/services/TestFetch";
 import { UserStore } from "@/services/UserStore";
 const userStore = UserStore();
+// plotly
+import Plotly from "plotly.js-dist-min"; // v2.8
+
 
 // dataframe
 //import * as dfd from 'danfojs/dist/danfojs-browser/src';
@@ -56,6 +59,7 @@ export class DcNode {
   static readonly providers = PubStore();
   static readonly signals = Signals;
   static readonly pre = PreFixes;
+  static readonly Plotly = Plotly
   static readonly dfd = {
     DataFrame: DataFrame,
     toJSON: toJSON,
