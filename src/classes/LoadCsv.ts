@@ -42,6 +42,18 @@ export class LoadCsv extends DcNode {
           type: "url",
           label: "URL",
           value: ""
+        },
+        {
+          id: "license",
+          type: "text",
+          label: "License",
+          value: ""
+        },
+        {
+          id: "attribution",
+          type: "text",
+          label: "Source",
+          value: ""
         }
       ]
     }

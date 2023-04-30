@@ -23,7 +23,6 @@ export const PubStore = defineStore({
         },
         init(items:DataSrc[]) {
             if (this.items.length > 0) {
-                console.log("Init store:",this.items)
                 throw (new Error("Can only init empty store!"))
             }
             this.items = JSON.parse(JSON.stringify(items)) as DataSrc[]
@@ -32,44 +31,37 @@ export const PubStore = defineStore({
             if (id === undefined) {
                 throw (new Error("Missing id on add()"))
             }
-            console.log("Add:", id)
             const item = {
                 id: id,
                 data: {},
+                meta: {},
                 root: root,
                 loaded: false
             }
             this.items.push(item as DataSrc)
-            console.log("sources:", this.items.length)
         },
         remove(id?: string) {
             if (id === undefined) {
                 throw (new Error("Missing id on remove()"))
             }
-            console.log("Remove:", id)
             // maybe disconnect all destinations first ...
             const sidx = this.items.findIndex((item: DataSrc) => item.id === id)
             if (sidx === -1) {
                 throw new Error("Source doesn't exist")
             }
             this.items.splice(sidx, 1)
-            console.log("Removed")
-            console.log("sources:", this.items.length)
         },
         update(id?: string, data?: any, meta?:any) {
             if (id === undefined) {
                 throw (new Error("Missing id on update"))
             }
-            console.log("Update:", id)
             // find item
             const sidx = this.items.findIndex((item: DataSrc) => item.id === id)
             if (sidx === -1) {
                 throw new Error("Source doesn't exist")
             }
-            console.log("Src found:", sidx, this.items[sidx].id)
             // set data, if provided
             if (data !== undefined) {
-                console.log("Setting data")
                 this.items[sidx].data = data
                 // also set loaded
                 this.items[sidx].loaded = true
@@ -78,28 +70,41 @@ export const PubStore = defineStore({
                 if (!this.items[sidx].loaded) {
                     throw new Error("Update without loaded data")
                 }
-                console.log("Reusing data")
                 // reuse exisiting data
             }
             if (meta !== undefined) {
-                console.log("Setting meta")
                 this.items[sidx].meta = meta
             } else {
                 this.items[sidx].meta = {}
             }
         },
+        setMetaById(id?: string, meta?:any) {
+            if (id === undefined) {
+                throw (new Error("Missing id on update"))
+            }
+            // find item
+            const sidx = this.items.findIndex((item: DataSrc) => item.id === id)
+            if (sidx === -1) {
+                throw new Error("Source doesn't exist")
+            }
+            // set data, if provided
+            if (meta !== undefined) {
+                this.items[sidx].meta = meta
+            } else {
+                this.items[sidx].meta = {}
+            }
+        },
+
     },
     getters: {
         json: state => () => { return state.items },
         jsonString: state => () => { return JSON.stringify(state.items) },
         exists: state => (id: string) => {
-            console.log("exists?:", id)
             // find item 
             const idx = state.items.findIndex((item: DataSrc) => (item.id === id))
             return (idx === -1) ? false : true
         },
         hasData: state => (id: string) => {
-            console.log("has data?:", id)
             // find item 
             const s = state.items.find((item: DataSrc) => item.id === id)
             if (s === undefined) {
@@ -108,7 +113,6 @@ export const PubStore = defineStore({
             return (s.loaded)
         },
         isLoadedRoot: state => (id: string) => {
-            console.log("loaded root?:", id)
             const s = state.items.find((item: DataSrc) => item.id === id)
             if (s === undefined) {
                 throw new Error("Invalid item id")
@@ -120,7 +124,6 @@ export const PubStore = defineStore({
             if (s === undefined) {
                 throw new Error("Invalid item id")
             }
-            console.log("Getting data for:", s.id)
             return s.data
         },
         getMetaById: state => (id: string) => {
@@ -128,8 +131,8 @@ export const PubStore = defineStore({
             if (s === undefined) {
                 throw new Error("Invalid item id")
             }
-            console.log("Getting meta for:", s.id)
-            return s.meta
+            const meta = s.meta
+            return meta
         },
         getLoadedRoots: state => () => {
             const rts = state.items.filter((item) => (item.root && item.loaded))

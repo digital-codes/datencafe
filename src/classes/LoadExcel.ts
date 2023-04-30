@@ -9,6 +9,7 @@ import { UserStore } from "@/services/UserStore";
 const userStore = UserStore();
 
 import { read, utils } from "xlsx";
+import { threadId } from "worker_threads";
 
 export class LoadExcel extends DcNode {
   // properties
@@ -39,6 +40,18 @@ export class LoadExcel extends DcNode {
           label: "Sheet",
           value: "",
         },
+        {
+          id: "license",
+          type: "text",
+          label: "License",
+          value: ""
+        },
+        {
+          id: "attribution",
+          type: "text",
+          label: "Source",
+          value: ""
+        }
       ],
     };
     super(id, "loadexcel", ports, edges, cfg as any);
@@ -57,6 +70,28 @@ export class LoadExcel extends DcNode {
     if (options[0] != "") {
       await this.load(options[0]);
     }
+    // check license and attribution
+    // get old meta
+    // without url, id has not been added yet ...
+    const exists = await DcNode.providers.exists(this.id)
+    if (!exists) {
+      // create item in pubstore if not exists
+      await DcNode.providers.add(this.id, true); // file loaders are root nodes
+    }
+    const meta = await DcNode.providers.getMetaById(this.id)
+    console.log("Oldmeta",meta)
+    for (const m of ["license","attribution"]) {
+      const idx = this.config.options.findIndex((o: any) => o.id == m)
+      console.log(m,idx)
+      const val = this.config.options[idx].value
+      if (val != "") {
+        console.log("Meta:",m,val)
+        meta[m] = val // set meta
+      }
+    }
+    console.log("Meta",meta)
+    //await DcNode.providers.setMetaById(this.id,meta)
+
   }
   async load(url: string) {
     DcNode.print("Load on " + String(this.name));
