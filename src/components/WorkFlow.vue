@@ -868,6 +868,23 @@ const htmlDocs = async () => {
     htm += "<li style='" + html.style.li + "'>Category: " + story.category + "</li>\n";
     htm += "</ul>\n";
     htm += "</p style='" + html.style.p + "'>" + story.text + "</>\n";
+
+    // add meta rsources
+    htm += "<h2 style='" + html.style.h2 + "'>Resouce Information</h2>\n";
+    htm += "<ul style='" + html.style.ul + "'>\n";
+    for (const node of nodeList.value) {
+      // we read all nodes as meta might be introduces at later stages as well
+      // not only at input nodes
+      if (providers.exists(node.id)) {
+        const meta = providers.getMeta(node.id) 
+        for (const item of ["url","license","attribution"]){
+          if (meta[item] !== undefined){
+            htm += "<li style='" + html.style.li + "'>" + item + ": " + meta[item] + "</li>\n";
+          }
+        }
+      }
+    }
+    htm += "</ul>\n";
     htm += "</article>\n\n"
 
 
@@ -2067,10 +2084,12 @@ const generateFlowUrl = async () => {
   const fullSize = await userStore.getFullsize();
   const data = await providers.json();
   if (!fullSize) {
-    // probably delete all data
-    console.log("Sparse saving not implemented ...");
+    // delete all data
+    for (const i in data) {
+      data[i].data = {}
+      data[i].loaded = false
+    }
   }
-  //console.log("Data:",data)
   // https://stackoverflow.com/questions/72997146/how-to-push-data-to-local-json-file-on-button-click-using-javascript
   try {
     const contentType = "application/json";

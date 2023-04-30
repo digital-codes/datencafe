@@ -78,7 +78,7 @@ export const PubStore = defineStore({
                 this.items[sidx].meta = {}
             }
         },
-        setMetaById(id?: string, meta?:any) {
+        setMeta(id?: string, meta?:any) {
             if (id === undefined) {
                 throw (new Error("Missing id on update"))
             }
@@ -126,10 +126,10 @@ export const PubStore = defineStore({
             }
             return s.data
         },
-        getMetaById: state => (id: string) => {
+        getMeta: state => (id: string) => {
             const s = state.items.find((item: DataSrc) => item.id === id)
             if (s === undefined) {
-                throw new Error("Invalid item id")
+                throw new Error("Invalid item id" + String(id))
             }
             const meta = s.meta
             return meta

@@ -78,9 +78,9 @@ export class LoadExcel extends DcNode {
       // create item in pubstore if not exists
       await DcNode.providers.add(this.id, true); // file loaders are root nodes
     }
-    const meta = await DcNode.providers.getMetaById(this.id)
+    const meta = await DcNode.providers.getMeta(this.id)
     console.log("Oldmeta",meta)
-    for (const m of ["license","attribution"]) {
+    for (const m of ["url","license","attribution"]) {
       const idx = this.config.options.findIndex((o: any) => o.id == m)
       console.log(m,idx)
       const val = this.config.options[idx].value
@@ -89,10 +89,10 @@ export class LoadExcel extends DcNode {
         meta[m] = val // set meta
       }
     }
-    console.log("Meta",meta)
-    //await DcNode.providers.setMetaById(this.id,meta)
+    await DcNode.providers.setMeta(this.id,meta)
 
   }
+  // ----------------------------  
   async load(url: string) {
     DcNode.print("Load on " + String(this.name));
     if (url === undefined) throw new Error("Invalid URL");

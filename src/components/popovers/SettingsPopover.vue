@@ -12,7 +12,7 @@
       <ion-text color="primary">{{ $t("flow.settings.fullsize") }} </ion-text>
       <ion-item  lines="none">
         <ion-label slot="start">{{ $t("no") }}  </ion-label>
-        <ion-toggle disabled slot="start" v-model="fullsize"></ion-toggle>
+        <ion-toggle slot="start" v-model="fullsize"></ion-toggle>
         <ion-label slot="start">{{ $t("yes") }} </ion-label>
       </ion-item>      
       <ion-button @click="close">{{$t("flow.cfg.close")}}</ion-button>

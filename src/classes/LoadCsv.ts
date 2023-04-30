@@ -64,14 +64,32 @@ export class LoadCsv extends DcNode {
   // methods
   async configure(options: any[]) {
     // we know the config structure here, so can just use the index
-    if (options[0] != "") {
-      const url = options[0]
-      const config = this.config
-      // set the config value(s)
-      config.options[0].value = url
-      this.config = config // update config
-      await this.load(url)
+    const config = this.config;
+    for (let i = 0; i < options.length; i++) {
+      config.options[i].value = options[i];
     }
+    // update
+    this.config = config; // update config
+    if (options[0] != "") {
+      await this.load(options[0]);
+    }
+    // check license and attribution
+    // get old meta
+    // without url, id has not been added yet ...
+    const exists = await DcNode.providers.exists(this.id)
+    if (!exists) {
+      // create item in pubstore if not exists
+      await DcNode.providers.add(this.id, true); // file loaders are root nodes
+    }
+    const meta = await DcNode.providers.getMeta(this.id)
+    for (const m of ["url","license","attribution"]) {
+      const idx = this.config.options.findIndex((o: any) => o.id == m)
+      const val = this.config.options[idx].value
+      if (val != "") {
+        meta[m] = val // set meta
+      }
+    }
+    await DcNode.providers.setMeta(this.id,meta)
   }
   async load(url: string) {
     DcNode.print("Load on " + String(this.name))
