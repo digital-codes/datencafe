@@ -7,7 +7,11 @@ import { NodeSpec } from "@/services/GlobalDefs";
 // user store
 import { UserStore } from "@/services/UserStore";
 const userStore = UserStore();
-
+/*
+import chroma from "chroma-js"
+const cs = chroma.scale(['ff000020', '00ff0020']).domain([0,20]);
+console.log(cs)
+*/
 const osmStyleDefault = {
   id: "osm",
   version: 8,
