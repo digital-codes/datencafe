@@ -9,6 +9,7 @@ import * as dfd from "danfojs/dist/danfojs-browser/src";
 import Plotly from "plotly.js-dist-min"; // v2.8
 //import Plotly from "plotly.js-dist"; // v2.22
 
+//import * as tf from "danfojs-tf";
 
 console.log(Plotly.version);
 
@@ -28,6 +29,11 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
   <div class="chart"  id="plotly-heat" style="width:100%;height:400px;"></div>
   <div class="chart"  id="plotly-tree" style="width:100%;height:400px;"></div>
   <div class="chart"  id="plotly-reg" style="width:100%;height:400px;"></div>
+  <div class="chart"  id="plotly-tfregress" style="width:100%;height:400px;"></div>
+  <!-- 
+  <div class="chart"  id="plotly-kmeans" style="width:100%;height:400px;"></div>
+  -->
+
   <div class="chart"  id="plotly-splom" style="width:100%;height:400px;"></div>
   <div class="chart"  id="plotly-splom2" style="width:100%;height:400px;"></div>
   <div class="chart"  id="plotly-cross" style="width:100%;height:400px;"></div>
@@ -376,6 +382,10 @@ var mapLayout = {
     mapData as any,
     mapLayout as any
   );
+
+    // maybe we can update the map with 
+    // Plotly.update('myDiv', newData, newLayout);
+
   const map1png = await Plotly.toImage(map1, {
     format: "png",
     width: 800,
@@ -438,10 +448,12 @@ var mapLayout = {
 
   //
 
-  regressionPlot();
-  splom1();
-  splom2();
-  cross();
+  await regressionPlot();
+  await dfRegression()
+  //await kmeans()
+  await splom1();
+  await splom2();
+  await cross();
 
 };
 
@@ -662,5 +674,100 @@ function cross() {
     return { lags: lags, values: values };
   }
 }
+
+async function dfRegression () {
+
+// Define data
+const data = {
+  "x":[1, 2, 3, 4, 5],
+  "y":[2, 3, 5, 6, 8],
+}
+
+// Create a DataFrame from the data
+const df = new dfd.DataFrame(data) //, { columns: ["x", "y", "err"] });
+df.print()
+console.log("Shape:",df.shape)
+const tf = dfd.tensorflow
+
+// see also https://medium.com/@roushanakrahmat/tensorflow-js-tutorial-to-build-a-simple-linear-regression-model-cb30c501d2f8
+const model = await tf.sequential();
+await model.add(tf.layers.dense({units: 1, inputShape: [1]}))  // 1. important
+await model.compile({loss: 'meanSquaredError', optimizer: 'sgd'});
+
+// Train the model
+const x = await tf.tensor2d(df["x"].values, [df.shape[0], 1]);
+const y = await tf.tensor2d(df["y"].values, [df.shape[0], 1]);
+console.log("Starting fit ...")
+await model.fit(x,y, { epochs: 100 });
+console.log("Fit done")
+
+// Compute the predicted y values
+const y_pred = await model.predict(x);
+console.log("Predict done")
+
+// Compute the residuals
+const residuals = await tf.sub(y, y_pred).arraySync().flat();
+
+// Create the plot data
+const plotData = [
+  {
+    x: df["x"].values,
+    y: df["y"].values,
+    mode: "markers",
+    name: "Data",
+    error_y: {
+      type: "data",
+      array: residuals,
+      visible: true,
+    },
+  },
+  {
+    x: df["x"].values,
+    y: y_pred.arraySync().flat(),
+    mode: "lines",
+    name: "Linear Regression",
+  },
+];
+
+// Create the layout
+const layout = {
+  title: "Line Plot with Linear Regression and Error Bars",
+  xaxis: {
+    title: "X",
+  },
+  yaxis: {
+    title: "Y",
+  },
+  yaxis2: {
+    title: "Residuals",
+    overlaying: "y",
+    side: "right",
+  },
+};
+
+// Create the plot
+Plotly.newPlot("plotly-tfregress", plotData, layout);
+
+}
+
+async function kmeans() {
+
+
+  // Create the layout
+const layout = {
+  title: "K-means Clustering with 3 Clusters",
+  xaxis: {
+    title: "X",
+  },
+  yaxis: {
+    title: "Y",
+  },
+};
+
+// Create the plot
+Plotly.newPlot("plotly-kmeans", plotData, layout);
+
+}
+
 
 setupPlot();
