@@ -59,7 +59,7 @@ const mapLayoutDefault = {
     l: 10,
     r: 10,
     b: 10,
-    t: 10,
+    t: 30,
   },
   bordercolor: "black",
   borderwidth: 1,
@@ -76,8 +76,7 @@ export class PointMap extends DcNode {
   private layer: any = null;
   private geoData: any = {};
   private plot: any = null
-  private markers: any[] = []
-  private polies: any[] = []
+  private features: any[] = []
   // constructor
   constructor(id: string, typeInfo: any) {
     // although we need to call this first,
@@ -161,13 +160,13 @@ export class PointMap extends DcNode {
     // clear if required
     if (this.geoData.type && this.geoData.type == "FeatureCollection") {
       console.log("Clear markers and polies");
-      this.markers = []
-      this.polies = []
+      this.features = []
     }
     // copy data
     this.geoData = dt;
     // check data for points
     let hasPoints = false;
+    const numFeatures = this.geoData.features.length
     for (let idx = 0; idx < this.geoData.features.length; idx++) {
       const element = await this.geoData.features[idx];
       console.log("e:",element)
@@ -177,27 +176,27 @@ export class PointMap extends DcNode {
         hasPoints = true;
         const point = {
           type: "scattermapbox",
-          lat: element.geometry.coordinates[1],
-          lon: element.geometry.coordinates[0],
+          lat: [element.geometry.coordinates[1]],
+          lon: [element.geometry.coordinates[0]],
           mode: "markers",
           marker: {
-            text: "Marker",
-            name: "Marker",
             size: 20,
             color: "red",
           },
+          text: "Marker",
+          name: "Marker",
           hoverinfo: "text",
           showlegend: false,
           id:""
         }
         // we can add the popupcontent here ...
         if (element.properties.popupContent) {
-          point.marker.text = String(element.properties.popupContent)
-          point.marker.name = String(element.properties.popupContent)
+          point.text = String(element.properties.popupContent)
+          point.name = String(element.properties.popupContent)
         } else {
           if (element.properties.NAME) {
-            point.marker.text = String(element.properties.NAME)
-            point.marker.name = String(element.properties.NAME)
+            point.text = String(element.properties.NAME)
+            point.name = String(element.properties.NAME)
           }
         }
         // add an id
@@ -206,17 +205,57 @@ export class PointMap extends DcNode {
         } else {
           point.id = String(idx);
         }
-        this.markers.push(point)
+        this.features.push(point)
       }
       if (element.geometry.type.toLowerCase() == "polygon") {
-        //console.log("Poly",element)
-        this.polies.push(element.geometry.coordinates);
+        console.log("Poly",element)
+        // Define the first polygon
+        if (element.geometry.coordinates.length > 1) {
+          alert("Multiploygon")
+        }
+        const lats: number[] = []
+        const lons: number[] = []
+        element.geometry.coordinates[0].forEach((c:number[]) => { 
+          lats.push(c[1])
+          lons.push(c[0])
+        })
+        let id = "0"
+        if (element.properties.id !== undefined) {
+          id = String(element.properties.id)
+        } else {
+          id = String(idx)
+        }
+        let name = "Polygon"
+        if (element.properties.name !== undefined) {
+          name = element.properties.name
+        }
+        const fillColor = "rgba(255, 0, 0, 0.5)"
+        const polygon = {
+          type: "scattermapbox",
+          lat: lats,
+          lon: lons,
+          mode: "lines",
+          fill: "toself",
+          fillcolor: fillColor, // "rgba(255, 0, 0, 0.5)",
+          name: name,
+          text: name,
+          // hover at vertices by default.
+          // costom settings not working
+          // hovering not working prperly ...
+          //hoverinfo: 'text+name',
+          //customdata: [['My Polygon', 'This is my polygon'], ['My Polygon', 'It has some text']],
+          //hovertemplate: '%{customdata[0]}<br>%{customdata[1]}', // display name and text on hover
+          //hovertemplate: '%{name}<br>%{text}',
+          showlegend: false,
+          id: id
+        };
+        //polygon
+        this.features.push(polygon) //element.geometry.coordinates);
         //const pl = L.geoJSON(element);
         //pl.addTo(this.map);
       }
     }
-    console.log("Points:",this.markers)
-    console.log("Polies:",this.polies)
+    console.log("Features:",this.features)
     /*
     console.log("haspoints:", hasPoints, ", polies:", this.polies.length);
     if (hasPoints) {
@@ -244,8 +283,8 @@ export class PointMap extends DcNode {
   // more markers and polygons
   const marker1 = {
     type: "scattermapbox",
-    lat: [51.5074],
-    lon: [-0.1278],
+    lat: [49.01],
+    lon: [8.41],
     mode: "markers",
     marker: {
       size: 20,
@@ -255,11 +294,13 @@ export class PointMap extends DcNode {
     name: "More Marker 1",
     hoverinfo: "text",
     showlegend: false,
+    id:"1"
   };
 
 
-    const mapData: any = this.markers // [marker1] // marker1, marker2, polygon1, polygon2];
-    if (this.plot == null) {
+    const mapData: any = this.features // [marker1] // marker1, marker2, polygon1, polygon2];
+    //const mapData: any = [marker1] // marker1, marker2, polygon1, polygon2];
+  if (this.plot == null) {
       this.plot = await DcNode.Plotly.newPlot(divId, mapData as any, layout as any)
     } else {
       this.plot = await DcNode.Plotly.newPlot(divId, mapData as any, layout as any)
