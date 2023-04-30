@@ -3,30 +3,69 @@
 import { DcNode } from "./DcNode";
 import { SigPort } from "./DcNode";
 import { NodeSpec } from "@/services/GlobalDefs";
-import L from "leaflet";
-import "leaflet/dist/leaflet.css";
 
 // user store
 import { UserStore } from "@/services/UserStore";
 const userStore = UserStore();
 
+const osmStyleDefault = {
+  id: "osm",
+  version: 8,
+  sources: {
+    "simple-tiles": {
+      type: "raster",
+      tiles: ["https://tile.openstreetmap.org/{z}/{x}/{y}.png"],
+      tileSize: 256,
+      attribution: "© OpenStreetMap contributors",
+      minzoom: 0,
+      maxzoom: 18,
+    },
+  },
+  layers: [
+    {
+      id: "simple-tiles",
+      type: "raster",
+      source: "simple-tiles",
+      minzoom: 0,
+      maxzoom: 22,
+    },
+  ],
+};
 
-// fix missing marker icon on build
-import { icon, Marker } from "leaflet";
-const iconRetinaUrl = "img/geo/marker-icon-2x.png";
-const iconUrl = "img/geo/marker-icon.png";
-const shadowUrl = "img/geo/marker-shadow.png";
-const iconDefault = icon({
-  iconRetinaUrl,
-  iconUrl,
-  shadowUrl,
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-  popupAnchor: [1, -34],
-  tooltipAnchor: [16, -28],
-  shadowSize: [41, 41],
-});
-Marker.prototype.options.icon = iconDefault;
+const mapLayoutDefault = {
+  title: "My Map",
+  mapbox: {
+    center: { lat: 51.5074, lon: -0.1278 }, // center,
+    zoom: 12, // zoomLevel,
+    style: osmStyleDefault, //"open-street-map",
+    bearing: 0,
+    pitch: 0,
+    layers: [
+      {
+        sourcetype: "raster",
+        type: "raster",
+        opacity: 0.7,
+      },
+    ],
+  },
+  /*
+  height: 400,
+  width: 800,
+  */
+  // Add padding and border to map
+  paper_bgcolor: "#f8f8f8",
+  plot_bgcolor: "#f8f8f8",
+  margin: {
+    l: 10,
+    r: 10,
+    b: 10,
+    t: 10,
+  },
+  bordercolor: "black",
+  borderwidth: 1,
+};
+
+
 
 export class PointMap extends DcNode {
   // properties
@@ -76,6 +115,22 @@ export class PointMap extends DcNode {
 
     // init
     // check if should use the cors proxy ...
+    const style = osmStyleDefault
+    const layout = mapLayoutDefault
+    if (userStore.exists()) {
+      const token = await userStore.getToken()
+      const parms = "?token=" + token + "&z={z}&x={x}&y={y}"
+      let url
+      if (window.location.hostname.includes("localhost")) {
+        url = "http://localhost:9000/php/tileProxy.php" + parms
+      } else {
+        url = "/php/tileProxy.php" + parms;
+      }
+      style.sources["simple-tiles"].tiles = [url]
+      // maybe alos set center and zoom here ...
+    }
+
+    /*
     if (!this.map) {
       this.map = await L.map(divId);
       // check token. use proxy if existing
@@ -157,9 +212,33 @@ export class PointMap extends DcNode {
     await this.map.fitBounds(bounds);
     await this.map.invalidateSize();
     //
+    */
+    // Create the map
+
+  // more markers and polygons
+  const marker1 = {
+    type: "scattermapbox",
+    lat: [51.5074],
+    lon: [-0.1278],
+    mode: "markers",
+    marker: {
+      size: 20,
+      color: "red",
+    },
+    text: "More Marker 1",
+    name: "More Marker 1",
+    hoverinfo: "text",
+    showlegend: false,
+  };
+
+
+    const mapData: any = [marker1] // marker1, marker2, polygon1, polygon2];
+
+    this.plot = await DcNode.Plotly.newPlot(divId, mapData as any, layout as any)
+
     await this.messaging.emit(DcNode.signals.NODEANIMATE, this.id);
   }
-  
+
   // map functions
   // for popup: https://leafletjs.com/examples/geojson/
   static setPopups(feature: any, layer: any) {
@@ -174,12 +253,12 @@ export class PointMap extends DcNode {
     return d > 20
       ? "#800026"
       : d > 15
-      ? "#BD0026"
-      : d > 10
-      ? "#E31A1C"
-      : d > 5
-      ? "#FC4E2A"
-      : "FD8D3C";
+        ? "#BD0026"
+        : d > 10
+          ? "#E31A1C"
+          : d > 5
+            ? "#FC4E2A"
+            : "FD8D3C";
   }
 
   // poly styling
