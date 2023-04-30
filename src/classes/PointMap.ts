@@ -65,8 +65,6 @@ const mapLayoutDefault = {
   borderwidth: 1,
 };
 
-
-
 export class PointMap extends DcNode {
   // properties
   static _display = true;
@@ -75,8 +73,8 @@ export class PointMap extends DcNode {
   private map: any = null;
   private layer: any = null;
   private geoData: any = {};
-  private plot: any = null
-  private features: any[] = []
+  private plot: any = null;
+  private features: any[] = [];
   // constructor
   constructor(id: string, typeInfo: any) {
     // although we need to call this first,
@@ -116,63 +114,39 @@ export class PointMap extends DcNode {
 
     // init
     // check if should use the cors proxy ...
-    const style = osmStyleDefault
-    const layout = mapLayoutDefault
+    const style = osmStyleDefault;
+    const layout = mapLayoutDefault;
     if (userStore.exists()) {
-      const token = await userStore.getToken()
-      const parms = "?token=" + token + "&z={z}&x={x}&y={y}"
-      let url
+      const token = await userStore.getToken();
+      const parms = "?token=" + token + "&z={z}&x={x}&y={y}";
+      let url;
       if (window.location.hostname.includes("localhost")) {
-        url = "http://localhost:9000/php/tileProxy.php" + parms
+        url = "http://localhost:9000/php/tileProxy.php" + parms;
       } else {
         url = "/php/tileProxy.php" + parms;
       }
-      style.sources["simple-tiles"].tiles = [url]
-      // maybe alos set center and zoom here ...
+      style.sources["simple-tiles"].tiles = [url];
     }
 
-    /*
-    if (!this.map) {
-      this.map = await L.map(divId);
-      // check token. use proxy if existing
-      // we could maybe use the normal way if we have consent?
-      // or use a proxy setting ....
-      if (userStore.exists()) {
-        const token = await userStore.getToken()
-        const parms = "?token=" + token + "&z={z}&x={x}&y={y}"
-        let url
-        if (window.location.hostname.includes("localhost"))
-          url = "http://localhost:9000/php/tileProxy.php" + parms
-        else 
-          url = "/php/tileProxy.php" + parms;
-        await L.tileLayer(url).addTo(this.map);
-      } else {
-        await L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-          attribution: "Map data &copy; OpenStreetMap contributors",
-        }).addTo(this.map);
-      }
-
-      this.layer = await L.geoJSON(undefined);
-
-      await this.layer.addTo(this.map);
-    }
-    */
     // clear if required
     if (this.geoData.type && this.geoData.type == "FeatureCollection") {
       console.log("Clear markers and polies");
-      this.features = []
+      this.features = [];
     }
     // copy data
     this.geoData = dt;
     // check data for points
     let hasPoints = false;
-    const numFeatures = this.geoData.features.length
+    const numFeatures = this.geoData.features.length;
+    const colorscale = [
+      [0, "rgba(255,0,0,.01)"],
+      [0.5, "rgba(0,255,0,.01)"],
+      [1, "rgba(0,0,255,.01)"],
+    ];
     for (let idx = 0; idx < this.geoData.features.length; idx++) {
       const element = await this.geoData.features[idx];
-      console.log("e:",element)
-      //console.log("geo type:",element.geometry.type)
+      // console.log("e:", element);
       if (element.geometry.type.toLowerCase() == "point") {
-        console.log("point")
         hasPoints = true;
         const point = {
           type: "scattermapbox",
@@ -187,58 +161,61 @@ export class PointMap extends DcNode {
           name: "Marker",
           hoverinfo: "text",
           showlegend: false,
-          id:""
-        }
+          id: "",
+        };
         // we can add the popupcontent here ...
         if (element.properties.popupContent) {
-          point.text = String(element.properties.popupContent)
-          point.name = String(element.properties.popupContent)
+          point.text = String(element.properties.popupContent);
+          point.name = String(element.properties.popupContent);
         } else {
           if (element.properties.NAME) {
-            point.text = String(element.properties.NAME)
-            point.name = String(element.properties.NAME)
+            point.text = String(element.properties.NAME);
+            point.name = String(element.properties.NAME);
           }
         }
         // add an id
         if (element.properties.id) {
-          point.id = String(element.properties.id)
+          point.id = String(element.properties.id);
         } else {
           point.id = String(idx);
         }
-        this.features.push(point)
+        this.features.push(point);
       }
       if (element.geometry.type.toLowerCase() == "polygon") {
-        console.log("Poly",element)
         // Define the first polygon
         if (element.geometry.coordinates.length > 1) {
-          alert("Multiploygon")
+          alert("Multiploygon. Read only first set");
         }
-        const lats: number[] = []
-        const lons: number[] = []
-        element.geometry.coordinates[0].forEach((c:number[]) => { 
-          lats.push(c[1])
-          lons.push(c[0])
-        })
-        let id = "0"
+        const lats: number[] = [];
+        const lons: number[] = [];
+        element.geometry.coordinates[0].forEach((c: number[]) => {
+          lats.push(c[1]);
+          lons.push(c[0]);
+        });
+        let id = "0";
         if (element.properties.id !== undefined) {
-          id = String(element.properties.id)
+          id = String(element.properties.id);
         } else {
-          id = String(idx)
+          id = String(idx);
         }
-        let name = "Polygon"
+        let name = "Polygon";
         if (element.properties.name !== undefined) {
-          name = element.properties.name
+          name = element.properties.name;
         }
-        const fillColor = "rgba(255, 0, 0, 0.5)"
         const polygon = {
           type: "scattermapbox",
           lat: lats,
           lon: lons,
           mode: "lines",
           fill: "toself",
-          fillcolor: fillColor, // "rgba(255, 0, 0, 0.5)",
+          color: idx / numFeatures, // 0..1 range of colorscale
+          fillcolor: idx / numFeatures, // fillColor, // "rgba(255, 0, 0, 0.5)",
+          colorscale: colorscale,
+          cmin: 0,
+          cmax: 1,
           name: name,
           text: name,
+          hoverinfo: 'text',
           // hover at vertices by default.
           // costom settings not working
           // hovering not working prperly ...
@@ -247,103 +224,25 @@ export class PointMap extends DcNode {
           //hovertemplate: '%{customdata[0]}<br>%{customdata[1]}', // display name and text on hover
           //hovertemplate: '%{name}<br>%{text}',
           showlegend: false,
-          id: id
+          id: id,
         };
         //polygon
-        this.features.push(polygon) //element.geometry.coordinates);
+        this.features.push(polygon); //element.geometry.coordinates);
         //const pl = L.geoJSON(element);
         //pl.addTo(this.map);
       }
     }
-    console.log("Features:",this.features)
-    /*
-    console.log("haspoints:", hasPoints, ", polies:", this.polies.length);
-    if (hasPoints) {
-      console.log("Options1:", this.layer.options);
-      if (this.layer.options) {
-        console.log("Modify options");
-        this.layer.options.onEachFeature = PointMap.setPopups;
-      } else {
-        console.log("Add options");
-        this.layer.options = { onEachFeature: PointMap.setPopups };
-      }
-      console.log("Options2:", this.layer.options);
-    } else {
-      //if (polies.length) {
-      console.log("No points");
-    }
-    await this.layer.addData(this.geoData);
-    const bounds = await this.layer.getBounds();
-    await this.map.fitBounds(bounds);
-    await this.map.invalidateSize();
-    //
-    */
     // Create the map
-
-  // more markers and polygons
-  const marker1 = {
-    type: "scattermapbox",
-    lat: [49.01],
-    lon: [8.41],
-    mode: "markers",
-    marker: {
-      size: 20,
-      color: "red",
-    },
-    text: "More Marker 1",
-    name: "More Marker 1",
-    hoverinfo: "text",
-    showlegend: false,
-    id:"1"
-  };
-
-
-    const mapData: any = this.features // [marker1] // marker1, marker2, polygon1, polygon2];
+    const mapData: any = this.features; // [marker1] // marker1, marker2, polygon1, polygon2];
     //const mapData: any = [marker1] // marker1, marker2, polygon1, polygon2];
-  if (this.plot == null) {
-      this.plot = await DcNode.Plotly.newPlot(divId, mapData as any, layout as any)
-    } else {
-      this.plot = await DcNode.Plotly.newPlot(divId, mapData as any, layout as any)
-      //await this.plot.update(divId, mapData as any, layout as any)
-    }
-
+    this.plot = await DcNode.Plotly.newPlot(
+      divId,
+      mapData as any,
+      layout as any
+    );
     await this.messaging.emit(DcNode.signals.NODEANIMATE, this.id);
   }
 
-  // map functions
-  // for popup: https://leafletjs.com/examples/geojson/
-  static setPopups(feature: any, layer: any) {
-    // does this feature have a property named popupContent?
-    if (feature.properties && feature.properties.popupContent) {
-      layer.bindPopup(feature.properties.popupContent);
-    }
-  }
-  // for some reasone, creating click marker function does not work here ...
-
-  static getColor(d: number) {
-    return d > 20
-      ? "#800026"
-      : d > 15
-        ? "#BD0026"
-        : d > 10
-          ? "#E31A1C"
-          : d > 5
-            ? "#FC4E2A"
-            : "FD8D3C";
-  }
-
-  // poly styling
-  static polyStyle(feature: any) {
-    console.log("Style");
-    return {
-      fillColor: PointMap.getColor(feature.properties.id),
-      weight: 2,
-      opacity: 0.8,
-      color: "white",
-      dashArray: "3",
-      fillOpacity: 0.4,
-    };
-  }
   // rest
   msgOn(x: string, y: string) {
     // set event listener for signal
@@ -375,42 +274,15 @@ export class PointMap extends DcNode {
   }
   async getImage() {
     if (this.plot == null) {
-      console.log("Empty plot")
-      return ""
+      console.log("Empty plot");
+      return "";
     }
     const png = await DcNode.Plotly.toImage(this.plot, {
       format: "png",
       width: 1280,
       height: 720,
     });
-    return png
+    return png;
   }
-
 }
 
-
-/*
-In this example, we first create a Leaflet map object and add some layers to it. We then use the L.leafletImage method to export a PNG image of the map. This method takes two parameters: the Leaflet map object, and a callback function that will be called when the image has been generated. Inside the callback function, we create an img element and set its src attribute to the PNG image that was generated by the L.leafletImage method.
-
-The generated PNG image will be a snapshot of the current state of the Leaflet map. Note that the generated PNG image will have the same dimensions as the current size of the Leaflet map, so you may need to adjust the size of the img element to ensure that the PNG image is displayed correctly.
-
-// Get the Leaflet map object
-const map = L.map('map');
-
-// Add some layers to the map
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  attribution: 'Map data © OpenStreetMap contributors'
-}).addTo(map);
-L.marker([51.5, -0.09]).addTo(map);
-
-// Use the leafletImage plugin to export a PNG image of the map
-L.leafletImage(map, function(err, canvas) {
-  const img = document.createElement('img');
-  const dimensions = map.getSize();
-  img.width = dimensions.x;
-  img.height = dimensions.y;
-  img.src = canvas.toDataURL();
-  document.body.appendChild(img);
-});
-
-*/
