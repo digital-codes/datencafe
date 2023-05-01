@@ -4,7 +4,7 @@ import { DcNode } from "./DcNode";
 import { SigPort } from "./DcNode";
 import { NodeSpec } from "@/services/GlobalDefs";
 
-export class LinePlot extends DcNode {
+export class HistoPlot extends DcNode {
   // properties
   private updCnt = 0;
   static _display = true;
@@ -18,15 +18,15 @@ export class LinePlot extends DcNode {
     // may result in "undefined" ...
     const ports: string[] = ["A"];
     const edges: string[] = ["d"];
-    super(id, "lineplot", ports, edges);
-    DcNode.print(LinePlot._type + " created"); // no access to super._id etc here
+    super(id, "histoplot", ports, edges);
+    DcNode.print(HistoPlot._type + " created"); // no access to super._id etc here
   }
   // getters/setters
   get type() {
-    return LinePlot._type;
+    return HistoPlot._type;
   }
   get display() {
-    return LinePlot._display;
+    return HistoPlot._display;
   }
   // methods
   // --------------------------------------------------
@@ -101,26 +101,18 @@ export class LinePlot extends DcNode {
     }
     const xIdx = cols.findIndex((name) => name == xCol);
     const X = df[cols[xIdx]].values;
-    const traces = [];
-    for (let i = 0; i < cols.length; i++) {
-      if (i == xIdx) continue;
-      const trace = {
+    const traces = [
+      {
         x: X,
-        y: df[cols[i]].values,
-        mode: "lines",
-        line: {
-          //color: 'rgb(55, 128, 191)',
-          width: 3,
-        },
-        name: cols[i],
-      };
-      traces.push(trace);
-    }
+        type: "histogram",
+        name: cols[xIdx],
+      }
+    ]
 
     const layout = {
-      title: "Line Chart",
+      title: "Histogram",
       xaxis: { title: cols[xIdx] },
-      yaxis: { title: "Y axis" },
+      yaxis: { title: "Frequency" },
       /*
       height: 400,
       width: 800,

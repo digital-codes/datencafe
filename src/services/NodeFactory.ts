@@ -5,6 +5,8 @@ import { LinePlot } from "@/classes/LinePlot";
 import { DataInfo } from "@/classes/DataInfo";
 import { BarPlot } from "@/classes/BarPlot";
 import { TablePlot } from "@/classes/TablePlot";
+import { ScatterPlot } from "@/classes/ScatterPlot";
+import { HistoPlot } from "@/classes/HistoPlot";
 import { LoadExcel } from "@/classes/LoadExcel";
 import { LoadCsv } from "@/classes/LoadCsv";
 import { LoadJson } from "@/classes/LoadJson";
@@ -31,6 +33,10 @@ export const nodeFactory = async (id: string, type: any) => {
       return await new BarPlot(id, type);
     case "tableplot":
       return await new TablePlot(id, type);
+    case "scatterplot":
+      return await new ScatterPlot(id, type);
+    case "histoplot":
+      return await new HistoPlot(id, type);
     case "pointmap":
       return await new PointMap(id, type);
     case "addrows":

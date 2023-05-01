@@ -119,6 +119,36 @@
             "info": "Mehr Text f\u00fcr den Tooltip"
         }
     },
+    "scatterplot": {
+        "name": "scatterplot",
+        "group":"display",
+        "implemented": true,
+        "thumb": "/img/widgets/ScatterPlot.png",
+        "consent": false,
+        "en": {
+            "label": "Scatter Plot",
+            "info": "More text for a popup or tooltip"
+        },
+        "de": {
+            "label": "Punktwolke",
+            "info": "Mehr Text f\u00fcr den Tooltip"
+        }
+    },
+    "histoplot": {
+        "name": "histoplot",
+        "group":"display",
+        "implemented": true,
+        "thumb": "/img/widgets/Distribution.png",
+        "consent": false,
+        "en": {
+            "label": "Histogram",
+            "info": "More text for a popup or tooltip"
+        },
+        "de": {
+            "label": "Histogramm",
+            "info": "Mehr Text f\u00fcr den Tooltip"
+        }
+    },
     "pointmap": {
         "name": "pointmap",
         "group":"display",

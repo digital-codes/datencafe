@@ -4,7 +4,7 @@ import { DcNode } from "./DcNode";
 import { SigPort } from "./DcNode";
 import { NodeSpec } from "@/services/GlobalDefs";
 
-export class LinePlot extends DcNode {
+export class ScatterPlot extends DcNode {
   // properties
   private updCnt = 0;
   static _display = true;
@@ -18,15 +18,15 @@ export class LinePlot extends DcNode {
     // may result in "undefined" ...
     const ports: string[] = ["A"];
     const edges: string[] = ["d"];
-    super(id, "lineplot", ports, edges);
-    DcNode.print(LinePlot._type + " created"); // no access to super._id etc here
+    super(id, "scatterplot", ports, edges);
+    DcNode.print(ScatterPlot._type + " created"); // no access to super._id etc here
   }
   // getters/setters
   get type() {
-    return LinePlot._type;
+    return ScatterPlot._type;
   }
   get display() {
-    return LinePlot._display;
+    return ScatterPlot._display;
   }
   // methods
   // --------------------------------------------------
@@ -107,18 +107,21 @@ export class LinePlot extends DcNode {
       const trace = {
         x: X,
         y: df[cols[i]].values,
-        mode: "lines",
+        mode: "markers",
+        type: "scatter",
+        /*
         line: {
           //color: 'rgb(55, 128, 191)',
           width: 3,
         },
+        */
         name: cols[i],
       };
       traces.push(trace);
     }
 
     const layout = {
-      title: "Line Chart",
+      title: "Scatter Plot",
       xaxis: { title: cols[xIdx] },
       yaxis: { title: "Y axis" },
       /*
