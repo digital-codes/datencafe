@@ -1867,11 +1867,11 @@ async function initFlow(design: any) {
   // set flow
   try {
     const oldFlow = await cy.value.json();
-    console.log("Old:", JSON.stringify(oldFlow));
+    //console.log("Old:", JSON.stringify(oldFlow));
     await cy.value.json(design.flow);
     console.log("Setting flow OK");
     const newFlow = await cy.value.json();
-    console.log("New:", JSON.stringify(newFlow));
+    // console.log("New:", JSON.stringify(newFlow));
     await cy.value.fit();
     await cy.value.minZoom(FlowSpec.MINZOOM);
     await cy.value.maxZoom(FlowSpec.MAXZOOM);
@@ -1907,7 +1907,7 @@ async function initFlow(design: any) {
           });
         }
         // configure
-        console.log("Config:", n.config);
+        //console.log("Config:", n.config);
         instance.config = n.config;
         // FIXME check running state on generator
         if (instance.type == NodeSpec.GEN) {
@@ -1916,15 +1916,15 @@ async function initFlow(design: any) {
           });
           if (runIdx == -1) throw new Error("Invalid config at run");
           if (parseInt(instance.config.options[runIdx].value) != 0) {
-            console.log("Starting generator on ", instance.id);
+            //console.log("Starting generator on ", instance.id);
             instance.run();
           }
         }
         // signalling
-        console.log("Signals:", n.sigs);
+        //console.log("Signals:", n.sigs);
         for (const s of n.sigs) {
           //n.sigs.forEach(async (s) => {
-          console.log("Signal on for ", s);
+          //console.log("Signal on for ", s);
           await instance.msgOn(s.signal, s.port);
         }
         // add to list

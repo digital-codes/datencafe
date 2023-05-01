@@ -7,11 +7,9 @@ import { NodeSpec } from "@/services/GlobalDefs";
 // user store
 import { UserStore } from "@/services/UserStore";
 const userStore = UserStore();
-/*
+
 import chroma from "chroma-js"
-const cs = chroma.scale(['ff000020', '00ff0020']).domain([0,20]);
-console.log(cs)
-*/
+
 const osmStyleDefault = {
   id: "osm",
   version: 8,
@@ -67,7 +65,17 @@ const mapLayoutDefault = {
   },
   bordercolor: "black",
   borderwidth: 1,
-};
+  //
+  hovermode: 'closest',
+  hoverlabel: {
+    bgcolor: 'white',
+    bordercolor: 'black',
+    font: {
+      color: 'black'
+    }
+  },
+  //renderer: 'canvas'
+}
 
 export class PointMap extends DcNode {
   // properties
@@ -142,11 +150,15 @@ export class PointMap extends DcNode {
     // check data for points
     let hasPoints = false;
     const numFeatures = this.geoData.features.length;
+    const cs = chroma.scale(['#ff0000', '#0000ff']).domain([0,numFeatures]);
+    console.log(cs(0).hex(),cs(5).hex())
+    /*
     const colorscale = [
       [0, "rgba(255,0,0,.01)"],
       [0.5, "rgba(0,255,0,.01)"],
       [1, "rgba(0,0,255,.01)"],
     ];
+    */
     for (let idx = 0; idx < this.geoData.features.length; idx++) {
       const element = await this.geoData.features[idx];
       // console.log("e:", element);
@@ -206,17 +218,22 @@ export class PointMap extends DcNode {
         if (element.properties.name !== undefined) {
           name = element.properties.name;
         }
+        const fillColor = cs(idx).alpha(.1)
+        //console.log(fillColor)
         const polygon = {
           type: "scattermapbox",
           lat: lats,
           lon: lons,
           mode: "lines",
+          line: {
+            color: fillColor, // 'rgb(255,255,255)',
+            width: 2
+          },
           fill: "toself",
-          color: idx / numFeatures, // 0..1 range of colorscale
-          fillcolor: idx / numFeatures, // fillColor, // "rgba(255, 0, 0, 0.5)",
-          colorscale: colorscale,
-          cmin: 0,
-          cmax: 1,
+          fillcolor: fillColor, //  / numFeatures, // fillColor, // "rgba(255, 0, 0, 0.5)",
+          //colorscale: colorscale,
+          //fillColor: "rgb(255,255,0)",
+          opacity: 1, // important to make fillcolor alfa channel work
           name: name,
           text: name,
           hoverinfo: 'text',

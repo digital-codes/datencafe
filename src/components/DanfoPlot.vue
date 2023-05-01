@@ -9,7 +9,8 @@
   -->
   <div v-for="(item,idx) in items" :key="item.id" :id="itemPrefix + item.id"  class="chartItem" :class="locked[idx]?'focus':'free'" >
     <h3 class="dftitle">{{ item.name }}
-    <ion-button v-if="!locked[idx]" class="lock" @click="lock(idx,1)" :disabled="item.type == NodeSpec.LEAFLET">
+      <!-- :disabled="item.type == NodeSpec.LEAFLET" -->
+    <ion-button v-if="!locked[idx]" class="lock" @click="lock(idx,1)" >
           <font-awesome-icon
             :icon="['fas', 'lock']"
             size="sm"
