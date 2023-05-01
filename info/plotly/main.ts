@@ -451,8 +451,8 @@ var mapLayout = {
 
   await regressionPlot();
   await dfRegression()
-  await glsRegress()
-  //await kmeans()
+  await univarRegress()
+  await kmeans()
   await splom1();
   await splom2();
   await cross();
@@ -709,6 +709,7 @@ console.log("Predict done")
 
 // Compute the residuals
 const residuals = await tf.sub(y, y_pred).arraySync().flat();
+console.log("tf residuals",residuals)
 
 // Create the plot data
 const plotData = [
@@ -754,99 +755,161 @@ Plotly.newPlot("plotly-tfregress", plotData, layout);
 
 async function kmeans() {
 
+// Load the data into a DataFrame
+const data = [[1, 2], [3, 4], [5, 6], [7, 8], [9, 10]];
+const df = new dfd.DataFrame(data, { columns: ["x", "y"] });
 
-  // Create the layout
+// Define the number of clusters and maximum number of iterations
+const k = 2;
+const maxIterations = 100;
+
+// Initialize the centroids randomly
+let centroids = (await df.sample(k)).values // .values;
+//centroids.print()
+console.log("Centorids:",centroids)
+
+// Iterate until convergence or maximum number of iterations is reached
+for (let i = 0; i < maxIterations; i++) {
+  // Assign each point to the closest centroid
+  const distances = await df.apply((row:any) => {
+    return centroids.map((centroid:any) => {
+      return Math.sqrt((row.x - centroid[0]) ** 2 + (row.y - centroid[1]) ** 2);
+    });
+  }, { axis: 1 });
+  distances.print()
+  //const closestCentroids = distances.values.map((row) => row.values.indexOf(Math.min(...row)));
+
+  const closestCentroids = distances.apply((row:any) => {
+    console.log(i," - row:",row)
+    const sr = new dfd.Series(row)
+    sr.print()
+    return sr.argMin()
+    });
+
+    // Update the centroids based on the assigned points
+  const assignedPoints = df.assign({ centroid: closestCentroids });
+  centroids = assignedPoints.groupby("centroid").mean().values;
+  
+  // Check for convergence
+  if (assignedPoints.shape[0] === assignedPoints.groupby("centroid").count().values.sum()) {
+    break;
+  }
+}
+
+// Plot the results using Plotly.js
+const trace1 = {
+  x: df.column("x").values,
+  y: df.column("y").values,
+  mode: "markers",
+  marker: {
+    color: assignedPoints.column("centroid").values,
+    size: 10,
+    opacity: 0.8
+  }
+};
+
+const trace2 = {
+  x: centroids.map((centroid) => centroid[0]),
+  y: centroids.map((centroid) => centroid[1]),
+  mode: "markers",
+  marker: {
+    color: "red",
+    size: 15,
+    symbol: "cross"
+  }
+};
+
 const layout = {
-  title: "K-means Clustering with 3 Clusters",
+  title: "K-Means Clustering",
   xaxis: {
-    title: "X",
+    title: "X"
   },
   yaxis: {
-    title: "Y",
-  },
+    title: "Y"
+  }
 };
+
+const plotData = [trace1, trace2];
 
 // Create the plot
 Plotly.newPlot("plotly-kmeans", plotData, layout);
 
 }
 
-async function glsRegress() {
+async function univarRegress() {
 
-// Define the GLS function
-function GLS(df, y_col, x_cols) {
-  // Convert data to arrays
-  const y = df[y_col].values;
-  const X = df[x_cols].values;
-
-  // Calculate residuals
-  const e = y - X.dot(X.transpose().dot(y)).div(X.transpose().dot(X));
-
-  // Calculate covariance matrix
-  const S = e.transpose().dot(e).div(X.shape[0] - X.shape[1]);
-
-  // Calculate GLS estimator
-  const beta_hat = X.transpose().dot(X).inv().dot(X.transpose().dot(y));
-
-  // Calculate GLS estimator variance
-  const beta_var = S.mul(X.transpose().dot(X).inv());
-
-  // Calculate GLS estimator standard error
-  const beta_se = beta_var.diag().sqrt();
-
-  // Calculate t-statistic
-  const t_stat = beta_hat.div(beta_se);
-
-  return { beta_hat, beta_var, beta_se, t_stat };
-}
 
 // Load the data
 const data = {
-  x: [1, 2, 3, 4, 5],
-  y: [1.1, 1.9, 3.2, 4.1, 5.2],
-};
+  "x":[1, 2, 3, 4, 5],
+  "y":[2, 3, 5, 6, 8],
+}
 const df = new dfd.DataFrame(data);
 
-// Run the GLS function
-const result = GLS(df, "y", ["x"]);
-
-// Print the result
-console.log("Beta hat:", result.beta_hat);
-console.log("Beta var:", result.beta_var);
-console.log("Beta se:", result.beta_se);
-console.log("t-stat:", result.t_stat);
+const xMean = df['x'].mean();
+const yMean = df['y'].mean();
+const numerator = df['x'].sub(xMean).mul(df['y'].sub(yMean)).sum();
+const denominator = df['x'].sub(xMean).pow(2).sum();
+const slope = numerator / denominator;
+const intercept = yMean - slope * xMean;
+console.log("slope,intercept",slope, intercept);
 
 // Format the equation of the regression line
-const equation = `y = ${result.beta_hat.get(1).toFixed(2)}x + ${result.beta_hat.get(0).toFixed(2)}`;
+const equation = `y = ${slope.toFixed(2)}x + ${intercept.toFixed(2)}`;
+console.log(equation)
 
-// Display the result using Plotly.js
-const trace = {
-  x: df.x.values,
-  y: df.y.values,
-  mode: "markers",
-  type: "scatter",
-};
-const line = {
-  x: df.x.values,
-  y: result.beta_hat.get(0) + result.beta_hat.get(1) * df.x.values,
-  mode: "lines",
-  type: "scatter",
-  name: "Regression Line",
-  text: [equation],
+const prediction = df['x'].mul(slope).add(intercept)
+const residuals = df["y"].sub(prediction)
+console.log(prediction.values,residuals.values)
+
+const trace1 = {
+  x: df['x'].values,
+  y: df['y'].values,
+  mode: 'markers',
+  name: 'Data',
+  error_y: {
+    type: "data",
+    array: residuals.values,
+    visible: true,
+  },
+}
+
+const trace2 = {
+  x: df['x'].values,
+  y: prediction.values,
+  mode: 'lines',
+  name: 'Linear Regression',
+  text: equation,
   hoverinfo: "text",
-};
+}
 
 const layout = {
-  title: "GLS Linear Regression",
+  title: 'Univariate Linear Regression',
   xaxis: {
-    title: "X",
+    title: 'Independent Variable'
   },
   yaxis: {
-    title: "Y",
+    title: 'Dependent Variable'
   },
-};
+  annotations: [
+    {
+      x: df["x"].min() + 0.5, // x-coordinate of the text
+      y: df["y"].mean(), // y-coordinate of the text
+      xref: 'x',
+      yref: 'y',
+      layer: "above",
+      text: equation,
+      showarrow: false,
+      font: {
+        family: 'Arial, sans-serif',
+        size: 14,
+        color: '#000000'
+      }
+    }
+  ]
+}
 
-Plotly.newPlot("plotly-gls", [trace, line], layout);
+Plotly.newPlot("plotly-gls", [trace1, trace2], layout as any);
 
 }
 
