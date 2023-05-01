@@ -1,7 +1,7 @@
 {
     "loadcsv": {
         "name": "loadcsv",
-        "group":"source",
+        "group": "source",
         "implemented": true,
         "thumb": "/img/widgets/CSVFile.png",
         "consent": false,
@@ -16,7 +16,7 @@
     },
     "loadjson": {
         "name": "loadjson",
-        "group":"source",
+        "group": "source",
         "implemented": true,
         "thumb": "/img/widgets/JSONFile.png",
         "consent": false,
@@ -31,7 +31,7 @@
     },
     "loadgeo": {
         "name": "loadgeo",
-        "group":"source",
+        "group": "source",
         "implemented": true,
         "thumb": "/img/widgets/GEOFile.png",
         "consent": false,
@@ -46,7 +46,7 @@
     },
     "loadexcel": {
         "name": "loadexcel",
-        "group":"source",
+        "group": "source",
         "implemented": true,
         "thumb": "/img/widgets/XLSFile.png",
         "consent": false,
@@ -61,7 +61,7 @@
     },
     "datainfo": {
         "name": "datainfo",
-        "group":"processing",
+        "group": "processing",
         "implemented": true,
         "thumb": "/img/widgets/DataInfo.png",
         "consent": false,
@@ -76,7 +76,7 @@
     },
     "tableplot": {
         "name": "tableplot",
-        "group":"display",
+        "group": "display",
         "implemented": true,
         "thumb": "/img/widgets/Table.png",
         "consent": false,
@@ -91,7 +91,7 @@
     },
     "lineplot": {
         "name": "lineplot",
-        "group":"display",
+        "group": "display",
         "implemented": true,
         "thumb": "/img/widgets/LineChart.png",
         "consent": false,
@@ -106,7 +106,7 @@
     },
     "barplot": {
         "name": "barplot",
-        "group":"display",
+        "group": "display",
         "implemented": true,
         "thumb": "/img/widgets/BarPlot.png",
         "consent": false,
@@ -121,7 +121,7 @@
     },
     "scatterplot": {
         "name": "scatterplot",
-        "group":"display",
+        "group": "display",
         "implemented": true,
         "thumb": "/img/widgets/ScatterPlot.png",
         "consent": false,
@@ -136,7 +136,7 @@
     },
     "histoplot": {
         "name": "histoplot",
-        "group":"display",
+        "group": "display",
         "implemented": true,
         "thumb": "/img/widgets/Distribution.png",
         "consent": false,
@@ -149,9 +149,39 @@
             "info": "Mehr Text f\u00fcr den Tooltip"
         }
     },
+    "linregress": {
+        "name": "linregress",
+        "group": "display",
+        "implemented": true,
+        "thumb": "/img/widgets/LinearRegression.png",
+        "consent": false,
+        "en": {
+            "label": "Trendline",
+            "info": "More text for a popup or tooltip"
+        },
+        "de": {
+            "label": "Trendlinie",
+            "info": "Mehr Text f\u00fcr den Tooltip"
+        }
+    },
+    "kmeanscluster": {
+        "name": "kmeanscluster",
+        "group": "display",
+        "implemented": true,
+        "thumb": "/img/widgets/Category-Visualize.png",
+        "consent": false,
+        "en": {
+            "label": "Clustering (K-Means)",
+            "info": "More text for a popup or tooltip"
+        },
+        "de": {
+            "label": "Klassifzierung (K-Means)",
+            "info": "Mehr Text f\u00fcr den Tooltip"
+        }
+    },
     "pointmap": {
         "name": "pointmap",
-        "group":"display",
+        "group": "display",
         "implemented": true,
         "thumb": "/img/widgets/GeoMap.png",
         "consent": true,
@@ -166,7 +196,7 @@
     },
     "choromap": {
         "name": "choromap",
-        "group":"display",
+        "group": "display",
         "implemented": false,
         "thumb": "/img/widgets/Choropleth.png",
         "consent": true,
@@ -181,7 +211,7 @@
     },
     "scatter": {
         "name": "scatterplot",
-        "group":"display",
+        "group": "display",
         "implemented": false,
         "thumb": "/img/widgets/ScatterPlot.png",
         "consent": false,
@@ -196,7 +226,7 @@
     },
     "treemap": {
         "name": "treemap",
-        "group":"display",
+        "group": "display",
         "implemented": false,
         "thumb": "/img/widgets/MosaicDisplay.png",
         "consent": false,
@@ -211,7 +241,7 @@
     },
     "histo": {
         "name": "histo",
-        "group":"display",
+        "group": "display",
         "implemented": false,
         "thumb": "/img/widgets/Distribution.png",
         "consent": false,
@@ -226,7 +256,7 @@
     },
     "addrows": {
         "name": "addrows",
-        "group":"processing",
+        "group": "processing",
         "implemented": true,
         "thumb": "/img/widgets/Concatenate.png",
         "consent": false,
@@ -241,7 +271,7 @@
     },
     "addcols": {
         "name": "addcols",
-        "group":"processing",
+        "group": "processing",
         "implemented": true,
         "thumb": "/img/widgets/MergeData.png",
         "consent": false,
@@ -256,7 +286,7 @@
     },
     "join": {
         "name": "join",
-        "group":"processing",
+        "group": "processing",
         "implemented": false,
         "thumb": "/img/widgets/Join.png",
         "consent": false,
@@ -271,7 +301,7 @@
     },
     "selcell": {
         "name": "selcell",
-        "group":"processing",
+        "group": "processing",
         "implemented": false,
         "thumb": "/img/widgets/SelectCell.png",
         "consent": false,
@@ -286,7 +316,7 @@
     },
     "selcols": {
         "name": "selcols",
-        "group":"processing",
+        "group": "processing",
         "implemented": false,
         "thumb": "/img/widgets/SelectColumns.png",
         "consent": false,
@@ -301,7 +331,7 @@
     },
     "selrows": {
         "name": "selrows",
-        "group":"processing",
+        "group": "processing",
         "implemented": false,
         "thumb": "/img/widgets/SelectRows.png",
         "consent": false,
@@ -316,7 +346,7 @@
     },
     "scalarmath": {
         "name": "scalarmath",
-        "group":"processing",
+        "group": "processing",
         "implemented": false,
         "thumb": "/img/widgets/Preprocess-1D.png",
         "consent": false,
@@ -331,7 +361,7 @@
     },
     "dfmath": {
         "name": "dfmath",
-        "group":"processing",
+        "group": "processing",
         "implemented": false,
         "thumb": "/img/widgets/Preprocess-2D.png",
         "consent": false,
@@ -346,7 +376,7 @@
     },
     "group": {
         "name": "group",
-        "group":"processing",
+        "group": "processing",
         "implemented": false,
         "thumb": "/img/widgets/GroupBy.png",
         "consent": false,
@@ -361,7 +391,7 @@
     },
     "pool": {
         "name": "pool",
-        "group":"source",
+        "group": "source",
         "implemented": false,
         "thumb": "/img/widgets/Melt.png",
         "consent": false,
@@ -376,7 +406,7 @@
     },
     "correlate": {
         "name": "correlate",
-        "group":"processing",
+        "group": "processing",
         "implemented": false,
         "thumb": "/img/widgets/Correlation.png",
         "consent": false,
@@ -391,7 +421,7 @@
     },
     "number": {
         "name": "number",
-        "group":"processing",
+        "group": "processing",
         "implemented": false,
         "thumb": "/img/widgets/Number.png",
         "consent": false,
@@ -406,7 +436,7 @@
     },
     "text": {
         "name": "text",
-        "group":"processing",
+        "group": "processing",
         "implemented": false,
         "thumb": "/img/widgets/Text.png",
         "consent": false,
@@ -421,7 +451,7 @@
     },
     "loop": {
         "name": "loop",
-        "group":"processing",
+        "group": "processing",
         "implemented": false,
         "thumb": "/img/widgets/Loop.png",
         "consent": false,
@@ -436,7 +466,7 @@
     },
     "counter": {
         "name": "counter",
-        "group":"processing",
+        "group": "processing",
         "implemented": false,
         "thumb": "/img/widgets/Counter.png",
         "consent": false,
@@ -451,7 +481,7 @@
     },
     "randomgen": {
         "name": "randomgen",
-        "group":"source",
+        "group": "source",
         "implemented": true,
         "thumb": "/img/widgets/RandomData.png",
         "consent": false,

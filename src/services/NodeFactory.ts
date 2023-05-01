@@ -7,6 +7,8 @@ import { BarPlot } from "@/classes/BarPlot";
 import { TablePlot } from "@/classes/TablePlot";
 import { ScatterPlot } from "@/classes/ScatterPlot";
 import { HistoPlot } from "@/classes/HistoPlot";
+import { KmeansCluster } from "@/classes/KmeansCluster";
+import { LinRegress } from "@/classes/LinRegress";
 import { LoadExcel } from "@/classes/LoadExcel";
 import { LoadCsv } from "@/classes/LoadCsv";
 import { LoadJson } from "@/classes/LoadJson";
@@ -37,8 +39,12 @@ export const nodeFactory = async (id: string, type: any) => {
       return await new ScatterPlot(id, type);
     case "histoplot":
       return await new HistoPlot(id, type);
+    case "kmeanscluster":
+      return await new KmeansCluster(id, type);
     case "pointmap":
       return await new PointMap(id, type);
+    case "linregress":
+      return await new LinRegress(id, type);
     case "addrows":
       return await new AddRows(id, type);
     case "addcols":
