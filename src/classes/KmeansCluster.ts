@@ -43,7 +43,7 @@ export class KmeansCluster extends DcNode {
     // just use first signal to trigger an update
     const src = this.signals[0].signal.split("-")[1];
     DcNode.print("Updating from:" + src);
-    await this.draw(src)
+    await this.draw(src);
   }
   // --------------------------------------------------
   async updated(msg: string, y?: any) {
@@ -51,12 +51,12 @@ export class KmeansCluster extends DcNode {
     const src = msg.split("-")[1];
     DcNode.print(
       src +
-      " updated " +
-      this.id +
-      ": " +
-      String(this.updCnt) +
-      "..." +
-      String(y)
+        " updated " +
+        this.id +
+        ": " +
+        String(this.updCnt) +
+        "..." +
+        String(y)
     );
     const dt = DcNode.providers.getDataById(src);
     const df = new DcNode.dfd.DataFrame(dt);
@@ -70,10 +70,26 @@ export class KmeansCluster extends DcNode {
       {
         id: "xaxis",
         type: "string",
-        label: "X-Axis",
+        label: "Independent Var",
         select: true,
         value: cols,
         current: cols[cols.length - 1],
+      },
+      {
+        id: "yaxis",
+        type: "string",
+        label: "Dependent Var",
+        select: true,
+        value: cols,
+        current: cols[0],
+      },
+      {
+        id: "clusters",
+        type: "number",
+        label: "Clusters",
+        select: true,
+        value: [2,3,4,5],
+        current: 3,
       },
     ];
     this.config = config;
@@ -90,33 +106,153 @@ export class KmeansCluster extends DcNode {
     }
     // new plot
     // Define layout and trace
-    // check if we have the xaxis configured
+    // check if we have the xaxis + yaxis configured
     const xConfig = this.config.options.find(
       (option: any) => option.id == "xaxis"
     );
+    const yConfig = this.config.options.find(
+      (option: any) => option.id == "yaxis"
+    );
+    const cConfig = this.config.options.find(
+      (option: any) => option.id == "clusters"
+    );
+
     const cols = df.columns;
     let xCol = cols[cols.length - 1]; // will become variable
     if (xConfig !== undefined && xConfig.current != "") {
       xCol = xConfig.current;
     }
+    let yCol = cols[0]; // will become variable
+    if (yConfig !== undefined && yConfig.current != "") {
+      yCol = yConfig.current;
+    }
+    let nClusters = 3
+    if (cConfig !== undefined && cConfig.current != "") {
+      nClusters = cConfig.current;
+    }
+
     const xIdx = cols.findIndex((name) => name == xCol);
-    const X = df[cols[xIdx]].values;
-    const traces = [
-      {
-        x: X,
-        type: "histogram",
-        name: cols[xIdx],
+    const yIdx = cols.findIndex((name) => name == yCol);
+    const XY = df.loc({ columns: [cols[xIdx], cols[yIdx]] });
+
+    const data:any = XY.values.map((r:any) => {
+      return { x: r[0], y: r[1] };
+    });
+
+    // -----------------------------
+
+    // Define a function to calculate the distance between two points
+    function distance(p1:any, p2:any) {
+      const dx = p1.x - p2.x;
+      const dy = p1.y - p2.y;
+      return Math.sqrt(dx * dx + dy * dy);
+    }
+
+    // Define a function to assign each data point to a cluster
+    function assignClusters(data:any, centroids:any) {
+      const clusters = new Array(nClusters);
+      for (let i = 0; i < nClusters; i++) {
+        clusters[i] = [];
       }
-    ]
+      for (let i = 0; i < data.length; i++) {
+        let closestCentroidIndex = 0;
+        let closestDistance = Infinity;
+        for (let j = 0; j < nClusters; j++) {
+          const d = distance(data[i], centroids[j]);
+          if (d < closestDistance) {
+            closestCentroidIndex = j;
+            closestDistance = d;
+          }
+        }
+        clusters[closestCentroidIndex].push(data[i]);
+      }
+      return clusters;
+    }
+
+    // Define a function to calculate the mean of a set of points
+    function mean(points:any) {
+      let sumX = 0;
+      let sumY = 0;
+      for (let i = 0; i < points.length; i++) {
+        sumX += points[i].x;
+        sumY += points[i].y;
+      }
+      const meanX = sumX / points.length;
+      const meanY = sumY / points.length;
+      return {
+        x: meanX,
+        y: meanY,
+      };
+    }
+
+    // Define a function to update the centroids of each cluster
+    function updateCentroids(clusters:any) {
+      const centroids = new Array(nClusters);
+      for (let i = 0; i < nClusters; i++) {
+        centroids[i] = mean(clusters[i]);
+      }
+      return centroids;
+    }
+
+    // Define the initial centroids as random points
+    let centroids = [];
+    for (let i = 0; i < nClusters; i++) {
+      centroids.push(data[Math.floor(Math.random() * data.length)]);
+    }
+
+    // Iterate until convergence
+    let clusters = [];
+    for (let i = 0; i < 10; i++) {
+      clusters = assignClusters(data, centroids);
+      centroids = updateCentroids(clusters);
+    }
+
+    // we get an array with centrods, size K
+    // and clusters = an array size K with arrays of points
+
+    console.log(clusters);
+
+    const traces = [];
+    // clusters
+    for (const i in clusters) {
+      const X = clusters[i].map((item:any) => item.x);
+      const Y = clusters[i].map((item:any) => item.y);
+      const trace = {
+        x: X,
+        y: Y,
+        mode: "markers",
+        name: "Cluster" + String(i),
+        marker: {
+          //color: assignedPoints.column("centroid").values,
+          size: 10,
+          opacity: 0.8,
+        },
+      };
+      traces.push(trace);
+    }
+
+    // centroids
+    const ctrace = {
+      x: centroids.map((centroid) => centroid.x),
+      y: centroids.map((centroid) => centroid.y),
+      mode: "markers",
+      name: "Centroids",
+      marker: {
+        color: "black",
+        size: 15,
+        symbol: "cross",
+      },
+    };
+    traces.push(ctrace);
 
     const layout = {
-      title: "Histogram",
-      xaxis: { title: cols[xIdx] },
-      yaxis: { title: "Frequency" },
-      /*
-      height: 400,
-      width: 800,
-      */
+      title: "K-Means Clustering",
+      xaxis: {
+        title: "X",
+      },
+      yaxis: {
+        title: "Y",
+      },
     };
 
     this.plot = await DcNode.Plotly.newPlot(
@@ -169,7 +305,6 @@ export class KmeansCluster extends DcNode {
     return png;
   }
 }
-
 
 /*
 refresh maybe like so
