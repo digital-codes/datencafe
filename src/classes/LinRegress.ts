@@ -70,10 +70,18 @@ export class LinRegress extends DcNode {
       {
         id: "xaxis",
         type: "string",
-        label: "X-Axis",
+        label: "Independent Var",
         select: true,
         value: cols,
         current: cols[cols.length - 1],
+      },
+      {
+        id: "yaxis",
+        type: "string",
+        label: "Dependent Var",
+        select: true,
+        value: cols,
+        current: cols[0],
       },
     ];
     this.config = config;
@@ -90,38 +98,109 @@ export class LinRegress extends DcNode {
     }
     // new plot
     // Define layout and trace
-    // check if we have the xaxis configured
+    // check if we have the xaxis + yaxis configured
     const xConfig = this.config.options.find(
       (option: any) => option.id == "xaxis"
     );
+    const yConfig = this.config.options.find(
+      (option: any) => option.id == "yaxis"
+    );
+
     const cols = df.columns;
     let xCol = cols[cols.length - 1]; // will become variable
     if (xConfig !== undefined && xConfig.current != "") {
       xCol = xConfig.current;
     }
+    let yCol = cols[0]; // will become variable
+    if (yConfig !== undefined && yConfig.current != "") {
+      yCol = yConfig.current;
+    }
+
     const xIdx = cols.findIndex((name) => name == xCol);
-    const X = df[cols[xIdx]].values;
-    const traces = [
-      {
-        x: X,
-        type: "histogram",
-        name: cols[xIdx],
-      }
-    ]
+    const yIdx = cols.findIndex((name) => name == yCol);
+    const X = df[cols[xIdx]];
+    const Y = df[cols[yIdx]];
+
+    // ---------------------
+    let slope = 0
+    let intercept = 0
+    try {
+      const xMean = X.mean();
+      const yMean = Y.mean();
+      const numerator = X.sub(xMean).mul(Y.sub(yMean)).sum();
+      const denominator = X.sub(xMean).pow(2).sum();
+      slope = numerator / denominator;
+      intercept = yMean - slope * xMean;
+    } catch (e) {
+      console.log("Invalid column. Configure!", e)
+      return
+    }
+
+    // Format the equation of the regression line
+    const equation = `y = ${slope.toFixed(2)}x + ${intercept.toFixed(2)}`;
+
+    const prediction = X.mul(slope).add(intercept)
+    const residuals = Y.sub(prediction)
+
+    const trace1 = {
+      x: X.values,
+      y: Y.values,
+      mode: 'markers',
+      name: yCol,
+      error_y: {
+        type: "data",
+        array: residuals.values,
+        visible: true,
+      },
+      showlegend: false
+    }
+
+    const trace2 = {
+      x: X.values,
+      y: prediction.values,
+      mode: 'lines',
+      name: 'Trend',
+      text: equation,
+      hoverinfo: "text",
+      showlegend: false
+    }
 
     const layout = {
-      title: "Histogram",
-      xaxis: { title: cols[xIdx] },
-      yaxis: { title: "Frequency" },
-      /*
-      height: 400,
-      width: 800,
-      */
-    };
+      title: 'Univariate Linear Regression',
+      xaxis: {
+        title: xCol
+      },
+      yaxis: {
+        title: yCol
+      },
+      annotations: [
+        {
+          x: X.min() + 0.5, // x-coordinate of the text
+          y: 1.1, // Y.max() * 1.1, // Y.mean(), // y-coordinate of the text
+          xref: 'x',
+          yref: 'paper',
+          layer: "above",
+          text: equation,
+          showarrow: false,
+          font: {
+            family: 'Courier, sans-serif',
+            size: 14,
+            color: '#000000',
+          },
+          bgcolor: '#FFFFFF', // background color of the text
+          bordercolor: '#000000', // border color of the text background
+          borderwidth: 1, // border width of the text background
+          borderpad: 4 // padding between the text and the border          
+      }
+      ],
+      showlegend: false      
+    }
+
+    // ----------------------
 
     this.plot = await DcNode.Plotly.newPlot(
       divId,
-      traces as any,
+      [trace1, trace2] as any,
       layout as any
     );
 

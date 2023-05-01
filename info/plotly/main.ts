@@ -29,6 +29,7 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
   <div class="chart"  id="plotly-heat" style="width:100%;height:400px;"></div>
   <div class="chart"  id="plotly-tree" style="width:100%;height:400px;"></div>
   <div class="chart"  id="plotly-reg" style="width:100%;height:400px;"></div>
+  <div class="chart"  id="plotly-gls" style="width:100%;height:400px;"></div>
   <div class="chart"  id="plotly-tfregress" style="width:100%;height:400px;"></div>
   <!-- 
   <div class="chart"  id="plotly-kmeans" style="width:100%;height:400px;"></div>
@@ -450,6 +451,7 @@ var mapLayout = {
 
   await regressionPlot();
   await dfRegression()
+  await glsRegress()
   //await kmeans()
   await splom1();
   await splom2();
@@ -769,5 +771,83 @@ Plotly.newPlot("plotly-kmeans", plotData, layout);
 
 }
 
+async function glsRegress() {
+
+// Define the GLS function
+function GLS(df, y_col, x_cols) {
+  // Convert data to arrays
+  const y = df[y_col].values;
+  const X = df[x_cols].values;
+
+  // Calculate residuals
+  const e = y - X.dot(X.transpose().dot(y)).div(X.transpose().dot(X));
+
+  // Calculate covariance matrix
+  const S = e.transpose().dot(e).div(X.shape[0] - X.shape[1]);
+
+  // Calculate GLS estimator
+  const beta_hat = X.transpose().dot(X).inv().dot(X.transpose().dot(y));
+
+  // Calculate GLS estimator variance
+  const beta_var = S.mul(X.transpose().dot(X).inv());
+
+  // Calculate GLS estimator standard error
+  const beta_se = beta_var.diag().sqrt();
+
+  // Calculate t-statistic
+  const t_stat = beta_hat.div(beta_se);
+
+  return { beta_hat, beta_var, beta_se, t_stat };
+}
+
+// Load the data
+const data = {
+  x: [1, 2, 3, 4, 5],
+  y: [1.1, 1.9, 3.2, 4.1, 5.2],
+};
+const df = new dfd.DataFrame(data);
+
+// Run the GLS function
+const result = GLS(df, "y", ["x"]);
+
+// Print the result
+console.log("Beta hat:", result.beta_hat);
+console.log("Beta var:", result.beta_var);
+console.log("Beta se:", result.beta_se);
+console.log("t-stat:", result.t_stat);
+
+// Format the equation of the regression line
+const equation = `y = ${result.beta_hat.get(1).toFixed(2)}x + ${result.beta_hat.get(0).toFixed(2)}`;
+
+// Display the result using Plotly.js
+const trace = {
+  x: df.x.values,
+  y: df.y.values,
+  mode: "markers",
+  type: "scatter",
+};
+const line = {
+  x: df.x.values,
+  y: result.beta_hat.get(0) + result.beta_hat.get(1) * df.x.values,
+  mode: "lines",
+  type: "scatter",
+  name: "Regression Line",
+  text: [equation],
+  hoverinfo: "text",
+};
+
+const layout = {
+  title: "GLS Linear Regression",
+  xaxis: {
+    title: "X",
+  },
+  yaxis: {
+    title: "Y",
+  },
+};
+
+Plotly.newPlot("plotly-gls", [trace, line], layout);
+
+}
 
 setupPlot();
