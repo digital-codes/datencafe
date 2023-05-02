@@ -88,7 +88,7 @@ export class KmeansCluster extends DcNode {
         type: "number",
         label: "Clusters",
         select: true,
-        value: [2,3,4,5],
+        value: [2, 3, 4, 5],
         current: 3,
       },
     ];
@@ -126,7 +126,7 @@ export class KmeansCluster extends DcNode {
     if (yConfig !== undefined && yConfig.current != "") {
       yCol = yConfig.current;
     }
-    let nClusters = 3
+    let nClusters = 3;
     if (cConfig !== undefined && cConfig.current != "") {
       nClusters = cConfig.current;
     }
@@ -135,21 +135,21 @@ export class KmeansCluster extends DcNode {
     const yIdx = cols.findIndex((name) => name == yCol);
     const XY = df.loc({ columns: [cols[xIdx], cols[yIdx]] });
 
-    const data:any = XY.values.map((r:any) => {
+    const data: any = XY.values.map((r: any) => {
       return { x: r[0], y: r[1] };
     });
 
     // -----------------------------
 
     // Define a function to calculate the distance between two points
-    function distance(p1:any, p2:any) {
+    function distance(p1: any, p2: any) {
       const dx = p1.x - p2.x;
       const dy = p1.y - p2.y;
       return Math.sqrt(dx * dx + dy * dy);
     }
 
     // Define a function to assign each data point to a cluster
-    function assignClusters(data:any, centroids:any) {
+    function assignClusters(data: any, centroids: any) {
       const clusters = new Array(nClusters);
       for (let i = 0; i < nClusters; i++) {
         clusters[i] = [];
@@ -170,7 +170,7 @@ export class KmeansCluster extends DcNode {
     }
 
     // Define a function to calculate the mean of a set of points
-    function mean(points:any) {
+    function mean(points: any) {
       let sumX = 0;
       let sumY = 0;
       for (let i = 0; i < points.length; i++) {
@@ -186,7 +186,7 @@ export class KmeansCluster extends DcNode {
     }
 
     // Define a function to update the centroids of each cluster
-    function updateCentroids(clusters:any) {
+    function updateCentroids(clusters: any) {
       const centroids = new Array(nClusters);
       for (let i = 0; i < nClusters; i++) {
         centroids[i] = mean(clusters[i]);
@@ -211,12 +211,16 @@ export class KmeansCluster extends DcNode {
     // and clusters = an array size K with arrays of points
 
     console.log(clusters);
+    // create dataframe for centroids and clusters
+    const kmDf = await this.createdDf(centroids, clusters);
+    kmDf.print()
+    // add to datastore ...
 
     const traces = [];
     // clusters
     for (const i in clusters) {
-      const X = clusters[i].map((item:any) => item.x);
-      const Y = clusters[i].map((item:any) => item.y);
+      const X = clusters[i].map((item: any) => item.x);
+      const Y = clusters[i].map((item: any) => item.y);
       const trace = {
         x: X,
         y: Y,
@@ -268,6 +272,43 @@ export class KmeansCluster extends DcNode {
     df.print()
     */
   }
+  // ------------------------------
+  private async createdDf(centroids: any, clusters: any) {
+    // compute max length
+    const kmSizes = [];
+    kmSizes.push(centroids.length);
+    for (const i of clusters) {
+      kmSizes.push(i.length);
+    }
+    const kmLength = Math.max(...kmSizes);
+
+    let fl: any, dx: any, dy: any;
+    let nx: string, ny: string;
+    fl = new Array(kmLength - centroids.length).fill(NaN);
+    dx = centroids.map((c: any) => c.x);
+    dx.push(...fl);
+    dy = centroids.map((c: any) => c.y);
+    dy.push(...fl);
+    const kmData: any = {
+      centroids_x: dx,
+      centroids_y: dy,
+    };
+
+    for (const i in clusters) {
+      nx = "Clust" + String(i) + "_x";
+      ny = "Clust" + String(i) + "_y";
+      fl = new Array(kmLength - clusters[i].length).fill(NaN);
+      dx = clusters[i].map((c: any) => c.x);
+      dx.push(...fl);
+      dy = clusters[i].map((c: any) => c.y);
+      dy.push(...fl);
+      kmData[nx as keyof typeof kmData] = dx;
+      kmData[ny as keyof typeof kmData] = dy;
+    }
+    const km = new DcNode.dfd.DataFrame(kmData);
+    return km;
+  }
+  // --------------------
   msgOn(x: string, y: string) {
     // set event listener for signal
     DcNode.print("msg ON for " + x + " on port " + y);
