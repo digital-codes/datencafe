@@ -31,9 +31,7 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
   <div class="chart"  id="plotly-reg" style="width:100%;height:400px;"></div>
   <div class="chart"  id="plotly-gls" style="width:100%;height:400px;"></div>
   <div class="chart"  id="plotly-tfregress" style="width:100%;height:400px;"></div>
-  <!-- 
   <div class="chart"  id="plotly-kmeans" style="width:100%;height:400px;"></div>
-  -->
 
   <div class="chart"  id="plotly-splom" style="width:100%;height:400px;"></div>
   <div class="chart"  id="plotly-splom2" style="width:100%;height:400px;"></div>
@@ -47,6 +45,9 @@ document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
 `;
 
 const setupPlot = async () => {
+
+  await mnist()
+
   // Sample data
   const data = {
     A: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
@@ -755,84 +756,127 @@ Plotly.newPlot("plotly-tfregress", plotData, layout);
 
 async function kmeans() {
 
-// Load the data into a DataFrame
-const data = [[1, 2], [3, 4], [5, 6], [7, 8], [9, 10]];
-const df = new dfd.DataFrame(data, { columns: ["x", "y"] });
+  // Load the data into a DataFrame
+  const data = [[1, 2], [3, 4], [5, 6], [7, 8], [9, 10]];
 
-// Define the number of clusters and maximum number of iterations
-const k = 2;
-const maxIterations = 100;
+    const nClusters = 3
 
-// Initialize the centroids randomly
-let centroids = (await df.sample(k)).values // .values;
-//centroids.print()
-console.log("Centorids:",centroids)
+    // Define a function to calculate the distance between two points
+    function distance(p1:any, p2:any) {
+      const dx = p1.x - p2.x;
+      const dy = p1.y - p2.y;
+      return Math.sqrt(dx * dx + dy * dy);
+    }
 
-// Iterate until convergence or maximum number of iterations is reached
-for (let i = 0; i < maxIterations; i++) {
-  // Assign each point to the closest centroid
-  const distances = await df.apply((row:any) => {
-    return centroids.map((centroid:any) => {
-      return Math.sqrt((row.x - centroid[0]) ** 2 + (row.y - centroid[1]) ** 2);
-    });
-  }, { axis: 1 });
-  distances.print()
-  //const closestCentroids = distances.values.map((row) => row.values.indexOf(Math.min(...row)));
+    // Define a function to assign each data point to a cluster
+    function assignClusters(data:any, centroids:any) {
+      const clusters = new Array(nClusters);
+      for (let i = 0; i < nClusters; i++) {
+        clusters[i] = [];
+      }
+      for (let i = 0; i < data.length; i++) {
+        let closestCentroidIndex = 0;
+        let closestDistance = Infinity;
+        for (let j = 0; j < nClusters; j++) {
+          const d = distance(data[i], centroids[j]);
+          if (d < closestDistance) {
+            closestCentroidIndex = j;
+            closestDistance = d;
+          }
+        }
+        clusters[closestCentroidIndex].push(data[i]);
+      }
+      return clusters;
+    }
 
-  const closestCentroids = distances.apply((row:any) => {
-    console.log(i," - row:",row)
-    const sr = new dfd.Series(row)
-    sr.print()
-    return sr.argMin()
-    });
+    // Define a function to calculate the mean of a set of points
+    function mean(points:any) {
+      let sumX = 0;
+      let sumY = 0;
+      for (let i = 0; i < points.length; i++) {
+        sumX += points[i].x;
+        sumY += points[i].y;
+      }
+      const meanX = sumX / points.length;
+      const meanY = sumY / points.length;
+      return {
+        x: meanX,
+        y: meanY,
+      };
+    }
 
-    // Update the centroids based on the assigned points
-  const assignedPoints = df.assign({ centroid: closestCentroids });
-  centroids = assignedPoints.groupby("centroid").mean().values;
-  
-  // Check for convergence
-  if (assignedPoints.shape[0] === assignedPoints.groupby("centroid").count().values.sum()) {
-    break;
-  }
-}
+    // Define a function to update the centroids of each cluster
+    function updateCentroids(clusters:any) {
+      const centroids = new Array(nClusters);
+      for (let i = 0; i < nClusters; i++) {
+        centroids[i] = mean(clusters[i]);
+      }
+      return centroids;
+    }
 
-// Plot the results using Plotly.js
-const trace1 = {
-  x: df.column("x").values,
-  y: df.column("y").values,
-  mode: "markers",
-  marker: {
-    color: assignedPoints.column("centroid").values,
-    size: 10,
-    opacity: 0.8
-  }
-};
+    // Define the initial centroids as random points
+    let centroids = [];
+    for (let i = 0; i < nClusters; i++) {
+      centroids.push(data[Math.floor(Math.random() * data.length)]);
+    }
 
-const trace2 = {
-  x: centroids.map((centroid) => centroid[0]),
-  y: centroids.map((centroid) => centroid[1]),
-  mode: "markers",
-  marker: {
-    color: "red",
-    size: 15,
-    symbol: "cross"
-  }
-};
+    // Iterate until convergence
+    let clusters = [];
+    for (let i = 0; i < 10; i++) {
+      clusters = assignClusters(data, centroids);
+      centroids = updateCentroids(clusters);
+    }
 
-const layout = {
-  title: "K-Means Clustering",
-  xaxis: {
-    title: "X"
-  },
-  yaxis: {
-    title: "Y"
-  }
-};
+    // we get an array with centrods, size K
+    // and clusters = an array size K with arrays of points
 
-const plotData = [trace1, trace2];
+    console.log(clusters);
+
+    const traces = [];
+    // clusters
+    for (const i in clusters) {
+      const X = clusters[i].map((item:any) => item.x);
+      const Y = clusters[i].map((item:any) => item.y);
+      const trace = {
+        x: X,
+        y: Y,
+        mode: "markers",
+        name: "Cluster" + String(i),
+        marker: {
+          //color: assignedPoints.column("centroid").values,
+          size: 10,
+          opacity: 0.8,
+        },
+      };
+      traces.push(trace);
+    }
+
+    // centroids
+    const ctrace = {
+      x: centroids.map((centroid) => centroid.x),
+      y: centroids.map((centroid) => centroid.y),
+      mode: "markers",
+      name: "Centroids",
+      marker: {
+        color: "black",
+        size: 15,
+        symbol: "cross",
+      },
+    };
+    traces.push(ctrace);
+
+    const layout = {
+      title: "K-Means Clustering",
+      xaxis: {
+        title: "X",
+      },
+      yaxis: {
+        title: "Y",
+      },
+    };
 
 // Create the plot
-Plotly.newPlot("plotly-kmeans", plotData, layout);
+Plotly.newPlot("plotly-kmeans", traces, layout);
 
 }
 
@@ -910,6 +954,42 @@ const layout = {
 }
 
 Plotly.newPlot("plotly-gls", [trace1, trace2], layout as any);
+
+}
+
+import * as tfdata from "tensorflow/tfjs-data"
+
+async function mnist () {
+// Load the MNIST dataset
+//const mnist = require('tfjs-data').mnist;
+const { data, labels } = mnist.getTrainData();
+
+// Define the model architecture
+const model = tf.sequential();
+model.add(tf.layers.flatten({ inputShape: [28, 28] }));
+model.add(tf.layers.dense({ units: 128, activation: 'relu' }));
+model.add(tf.layers.dropout({ rate: 0.2 }));
+model.add(tf.layers.dense({ units: 10, activation: 'softmax' }));
+
+// Compile the model
+model.compile({ optimizer: 'adam', loss: 'categoricalCrossentropy', metrics: ['accuracy'] });
+
+// Train the model
+const batchSize = 32;
+const epochs = 10;
+model.fit(data, labels, {
+  batchSize,
+  epochs,
+  callbacks: tf.callbacks.earlyStopping({ monitor: 'val_loss', patience: 2 }),
+  validationSplit: 0.1,
+});
+
+// Evaluate the model
+const { data: testData, labels: testLabels } = mnist.getTestData();
+const evalOutput = model.evaluate(testData, testLabels);
+
+console.log(`Test set loss: ${evalOutput[0].dataSync()[0].toFixed(4)}`);
+console.log(`Test set accuracy: ${evalOutput[1].dataSync()[0].toFixed(4)}`);
 
 }
 
