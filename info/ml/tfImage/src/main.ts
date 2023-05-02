@@ -144,7 +144,7 @@ async function setupModel() {
 
 
   const batchSize = numImgs/4;
-  const epochs = 100
+  const epochs = 200
 
   // Define a callback function to monitor the progress of the training
   const monitorCallback = async (epoch, logs) => {
@@ -154,13 +154,13 @@ async function setupModel() {
       )}, accuracy = ${logs.acc.toFixed(4)}`
     );
     // Access the weights of the first layer
-    const weights = await model.layers[1].getWeights();
-    await showWeights(weights)
+    //const weights = await model.layers[1].getWeights();
+    //await showWeights(weights)
   };
 
   console.log("STart training");
   // Assume that you have loaded the training and test data into TensorFlow tensors called trainXs, trainYs, testXs, and testYs, and defined a model called "model"
-
+  //
   await model.fit(trainXs, trainYs, {
     batchSize: batchSize,
     epochs: epochs,
@@ -171,6 +171,28 @@ async function setupModel() {
   const result = await model.evaluate(testXs, testYs);
   console.log(`Test loss: ${result[0]}`);
   console.log(`Test accuracy: ${result[1]}`);
+
+  //
+  /*
+  for (let i=0;i<epochs;i++){
+
+    await model.fit(trainXs, trainYs, {
+      batchSize: batchSize,
+      epochs: 1,
+      callbacks: { onEpochEnd: monitorCallback },
+      validationData: [testXs, testYs],
+    });
+    console.log("Start eval");
+    const result = await model.evaluate(testXs, testYs);
+    console.log(`Test loss: ${result[0]}`);
+    console.log(`Test accuracy: ${result[1]}`);
+
+    const weights = await model.layers[1].getWeights();
+    await showWeights(weights)
+    await new Promise((resolve) => setTimeout(resolve, 500));
+      
+  }
+  */
 
   return model;
 }
@@ -196,6 +218,7 @@ for (let i = 0; i < numElements; i++) {
   const col = i % squareSize;
   reshapedArray[row][col] = weightsArray[Math.floor(i / numCols)][i % numCols];
 }
+//console.log("reshaped:",reshapedArray)
 
 // Create a new canvas element to display the weights
 const canvas = document.getElementById('cvw');
@@ -236,6 +259,7 @@ for (let i = 0; i < squareSize; i++) {
     const normalizedValue = (value - minValue) / (maxValue - minValue);
     const red = Math.round(normalizedValue * 255);
     const blue = Math.round((1 - normalizedValue) * 255);
+    //console.log(red,blue)
 
     data[index] = red;
     data[index + 1] = 0;
@@ -313,17 +337,17 @@ async function mkSingleImg() {
   // Define shape properties
   const shapeSize = Math.floor((Math.random() * imgSize) / 4) + imgSize / 6; // random size between 10 and 30
   const shapeStrokeWidth = Math.floor(Math.random() * 4) + 3; // random stroke width between 1 and 4
-  const shapeRotation = Math.random() * Math.PI; // random rotation between 0 and pi
+  const shapeRotation = Math.random() * 2*Math.PI; // random rotation between 0 and pi
 
   // Set shape position to center of canvas
   /* */
-  const shapeX = canvas.width / 2;
-  const shapeY = canvas.height / 2;
+  //const shapeX = canvas.width / 2;
+  //const shapeY = canvas.height / 2;
   /* */
-  /*
-    const shapeX = Math.floor(Math.random() * (canvas.width - shapeSize/2)) + shapeSize / 4;
-    const shapeY = Math.floor(Math.random() * (canvas.height - shapeSize/2)) + shapeSize / 4;
-    */
+  //
+    const shapeX = (imgSize / 2) + Math.floor((Math.random() -.5) * shapeSize/4)
+    const shapeY =  (imgSize / 2) + Math.floor((Math.random() -.5) * shapeSize/4)
+    //
 
   // Draw shape based on type and add label
   let label;
