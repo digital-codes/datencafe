@@ -122,4 +122,10 @@ Sure! Here are five examples of API calls you can use to retrieve climate, finan
 
  # Eurostat
  https://ec.europa.eu/eurostat/de/
- 
+
+https://ec.europa.eu/eurostat/web/education-corner/overview
+
+
+ # Govdata
+ https://www.govdata.de/
+
