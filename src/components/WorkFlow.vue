@@ -63,6 +63,9 @@ import CfgMixedParms from "@/components/popovers/CfgMixedPopover.vue";
 // story pop
 import StoryPop from "@/components/popovers/StoryPopover.vue";
 
+// sketc pop
+import SketchPop from "@/components/popovers/SketchPop.vue";
+
 // --------------------
 import NodeSel from "@/components/popovers/NodeSel.vue";
 import nodeTypes from "@/assets/nodes/nodeTypes.json";
@@ -944,6 +947,34 @@ const htmlDocs = async () => {
 
 
 };
+
+// FIXME ---------------------------------
+// test: sketch popover popover
+const openSketchPop = async () => {
+  console.log("Open Pop");
+  popover.value = await popoverController.create({
+    component: SketchPop,
+    //event: ev,
+    size: "cover",
+    side: "left",
+    cssClass: "storyPop",
+    alignment: "start",
+    showBackdrop: true,
+    backdropDismiss: true,
+    dismissOnSelect: false,
+    reference: "trigger", // event or trigger
+    componentProps: {
+      // Popover props
+      signal: "popUp",
+    },
+  });
+  await popover.value.present();
+  popover.value.open = true;
+  const x = await popover.value.onDidDismiss();
+  console.log("Dismiss: ", x);
+  popover.value.open = false;
+};
+// -------------------------------------------------
 
 // story popover
 const openStoryPop = async () => {
@@ -2313,40 +2344,19 @@ const openSettings = () => {
           ></font-awesome-icon>
         </ion-button>
       </ion-buttons>
-      <!-- 
-        <ion-buttons class="ion-hide-sm-down"  slot="start">
-          <ion-button @click="zoomIn">
-          <font-awesome-icon :icon="['fas', 'magnifying-glass-plus']" size="2x" class="toolbtn"></font-awesome-icon>
-        </ion-button>
-        </ion-buttons>
-        <ion-buttons class="ion-hide-sm-down"  slot="start" >
-          <ion-button @click="zoomOut">
-          <font-awesome-icon :icon="['fas', 'magnifying-glass-minus']" size="2x" class="toolbtn"></font-awesome-icon>
-        </ion-button>
-        </ion-buttons>
-        <ion-buttons class="ion-hide-sm-down" slot="start">
-          <ion-button @click="panLeft">
-          <font-awesome-icon :icon="['fas', 'arrow-left']" size="2x" class="toolbtn"></font-awesome-icon>
-        </ion-button>
-        </ion-buttons>
-        <ion-buttons class="ion-hide-sm-down"  slot="start">
-          <ion-button @click="panRight">
-          <font-awesome-icon :icon="['fas', 'arrow-right']" size="2x" class="toolbtn"></font-awesome-icon>
-        </ion-button>
-        </ion-buttons>
-        <ion-buttons class="ion-hide-sm-down"  slot="start">
-          <ion-button @click="panUp">
-          <font-awesome-icon :icon="['fas', 'arrow-up']" size="2x" class="toolbtn"></font-awesome-icon>
-        </ion-button>
-        </ion-buttons>
-        <ion-buttons class="ion-hide-sm-down"  slot="start">
-          <ion-button @click="panDown">
-          <font-awesome-icon :icon="['fas', 'arrow-down']" size="2x" class="toolbtn"></font-awesome-icon>
-        </ion-button>
-        </ion-buttons>
 
-        -->
-      <ion-buttons slot="start">
+        <ion-buttons slot="start">
+        <ion-button id="fitRef" @click="openSketchPop">
+          <font-awesome-icon
+            :icon="['fas', 'expand']"
+            size="2x"
+            class="toolbtn"
+          ></font-awesome-icon>
+        </ion-button>
+      </ion-buttons>
+
+
+        <ion-buttons slot="start">
         <ion-button id="fitRef" @click="zoomFit">
           <font-awesome-icon
             :icon="['fas', 'expand']"
@@ -2355,7 +2365,10 @@ const openSettings = () => {
           ></font-awesome-icon>
         </ion-button>
       </ion-buttons>
+
+
       <ion-buttons slot="start">
+
         <ion-button id="storyRef" @click="openStoryPop">
           <font-awesome-icon
             :icon="['fas', 'pen-to-square']"
