@@ -89,6 +89,7 @@ const clearDrawing = () => {
   const canvas = cv.value
   const context = canvas.getContext('2d');
   context.clearRect(0, 0, canvas.width, canvas.height)
+  saveImage()
 };
 
 const saveImage = async () => {
@@ -99,9 +100,18 @@ const saveImage = async () => {
   const context = await canvas.getContext('2d');
   const imgData = await context.getImageData(0, 0, canvas.width, canvas.height);
   // Create a Tensor from the image data
-  const tensor = await tf.browser.fromPixels(imgData,4); // include alpha with 4 channels
+  const tensor = await tf.browser.fromPixelsAsync(imgData,4); // include alpha with 4 channels
   // Print the shape of the Tensor
-  console.log("input",tensor.shape);
+  // console.log("input",tensor.shape);
+
+  /* works, but not needed
+  // Slice the tensor to extract the alpha channel
+  const alpha = await tf.slice(tensor, [0, 0, 3], [-1, -1, 1]);
+  console.log("alfa",alpha.shape);
+
+  const rgbTensor = await tf.image.grayscaleToRGB(alpha)
+  console.log("rgb",rgbTensor.shape);
+  */
 
   /*
   // Load an image from a URL
@@ -114,21 +124,12 @@ const saveImage = async () => {
   const outputSize = [96,64];
 
   // Resample the tensor to the desired output size
-  const resampled = await tf.image.resizeBilinear(tensor, outputSize,false);
-  console.log("resampled",resampled.shape);
+  // NB: size is height first!
+  const resampled = await tf.image.resizeBilinear(tensor, [outputSize[1],outputSize[0]],true);
   // Normalize the tensor
   const normalized = await resampled.div(tf.scalar(255));
-
-  /*
-  // Reshape the tensor to a 4D tensor with a batch size of 1
-  const reshaped = await normalized.expandDims();
-
-  // Scale the tensor to the range [-1, 1]
-  const scaled = await normalized.sub(tf.scalar(0.5)).mul(tf.scalar(1.99));
-  */
-  
+ 
   // Convert the tensor to a 2D array and create an image data object
-
   const data = await tf.browser.toPixels(normalized);
   const imageData = new ImageData(data, outputSize[0], outputSize[1]);
 
@@ -169,6 +170,12 @@ onMounted(() => {
 
 
 <style scoped>
+canvas {
+  border: 2px solid var(--ion-color-primary);
+}
+img {
+  border: 2px solid var(--ion-color-secondary);
+}
 
 ion-buttons {
   /*
