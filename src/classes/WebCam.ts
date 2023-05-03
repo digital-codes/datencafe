@@ -128,8 +128,7 @@ export class WebCam extends DcNode {
     this.df.print()
     //await DcNode.providers.update(super.id,toJSON(this.df))
     const meta = {
-        storagetype: StorageTypes.DATAFRAME,
-        generator:"random"
+        storagetype: StorageTypes.IMAGE,
     }
     await DcNode.providers.update(this.id,toJSON(this.df),meta)
     //await subscribers.update(d.id,d.ep)

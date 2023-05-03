@@ -4,6 +4,7 @@ import {DcNode} from "./DcNode"
 import {SigPort} from "./DcNode"
 import { NodeSpec } from '@/services/GlobalDefs';
 import { DelayTimer } from "@/services/DelayTimer"
+import { StorageTypes } from "@/services/GlobalDefs";
 
 export class AddRows extends DcNode {
   // properties

@@ -3,6 +3,7 @@
 
 import {DcNode} from "./DcNode"
 import { NodeSpec } from '@/services/GlobalDefs';
+import { StorageTypes } from "@/services/GlobalDefs";
 
 export class JoinData extends DcNode {
   // properties
