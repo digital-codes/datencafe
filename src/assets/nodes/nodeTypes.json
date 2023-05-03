@@ -482,8 +482,8 @@
     "webcam": {
         "name": "webcam",
         "group": "source",
-        "implemented": true,
-        "thumb": "/img/widgets/video.svg",
+        "implemented": false,
+        "thumb": "/img/widgets/WebCam.png",
         "consent": false,
         "en": {
             "label": "Webcam",
@@ -491,6 +491,21 @@
         },
         "de": {
             "label": "Webcam",
+            "info": "Mehr Text f\u00fcr den Tooltip"
+        }
+    },
+    "sketch": {
+        "name": "sketch",
+        "group": "source",
+        "implemented": false,
+        "thumb": "/img/widgets/Sketch.png",
+        "consent": false,
+        "en": {
+            "label": "Sketch",
+            "info": "More text for a popup or tooltip"
+        },
+        "de": {
+            "label": "Zeichnung",
             "info": "Mehr Text f\u00fcr den Tooltip"
         }
     },

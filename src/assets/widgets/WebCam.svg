@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: Adobe Illustrator 16.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+
+<svg
+   version="1.1"
+   id="Layer_1"
+   x="0px"
+   y="0px"
+   width="48px"
+   height="48px"
+   viewBox="0 0 48 48"
+   enable-background="new 0 0 48 48"
+   xml:space="preserve"
+   sodipodi:docname="WebCam.svg"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"><defs
+   id="defs9" /><sodipodi:namedview
+   id="namedview7"
+   pagecolor="#ffffff"
+   bordercolor="#666666"
+   borderopacity="1.0"
+   inkscape:showpageshadow="2"
+   inkscape:pageopacity="0.0"
+   inkscape:pagecheckerboard="0"
+   inkscape:deskcolor="#d1d1d1"
+   showgrid="false"
+   inkscape:zoom="9.8333333"
+   inkscape:cx="14.949153"
+   inkscape:cy="23.694915"
+   inkscape:window-width="1920"
+   inkscape:window-height="1141"
+   inkscape:window-x="0"
+   inkscape:window-y="0"
+   inkscape:window-maximized="1"
+   inkscape:current-layer="Layer_1" />
+<path
+   fill="#FFFFFF"
+   d="M25,8H13v32h22V17c0-4.123-8-1-8-1C28,12,27,8,25,8z"
+   id="path2" />
+
+<path
+   sodipodi:type="star"
+   style="fill:#ffffff;fill-opacity:0.2;stroke:#000000;stroke-width:6.98477;stroke-dasharray:none;stroke-opacity:1"
+   id="path2004"
+   inkscape:flatsided="true"
+   sodipodi:sides="6"
+   sodipodi:cx="11.764588"
+   sodipodi:cy="34.22274"
+   sodipodi:r1="16.243645"
+   sodipodi:r2="14.892272"
+   sodipodi:arg1="0.51312219"
+   sodipodi:arg2="1.036721"
+   inkscape:rounded="0.5"
+   inkscape:randomized="0"
+   d="m 25.916313,42.196741 c -3.987001,7.075862 -5.860173,8.183665 -13.98155,8.268752 -8.1213765,0.08509 -10.017348,-0.983226 -14.1517242,-7.974 -4.1343762,-6.990775 -4.1571753,-9.166892 -0.1701748,-16.242754 3.9870004,-7.075862 5.8601729,-8.183665 13.98155,-8.268752 8.121376,-0.08509 10.017348,0.983226 14.151724,7.974001 4.134376,6.990775 4.157175,9.166891 0.170175,16.242753 z"
+   transform="matrix(0.96998324,0,0,0.30207114,12.575046,26.625298)" /><g
+   id="g1942"
+   transform="translate(-0.8245945,0.58750534)"><circle
+     style="fill:#ffffff;fill-opacity:0.2;stroke:#000000;stroke-width:4;stroke-dasharray:none;stroke-opacity:1"
+     id="path344"
+     cy="18.412495"
+     cx="24.824594"
+     r="12" /><ellipse
+     style="fill:#ffffff;fill-opacity:0.2;stroke:#000000;stroke-width:6;stroke-dasharray:none;stroke-opacity:1"
+     id="path344-3"
+     cy="18.008146"
+     cx="25.008144"
+     rx="3.0081453"
+     ry="3.0081465" /><ellipse
+     style="fill:#ffffff;fill-opacity:0.2;stroke:#ffffff;stroke-width:2;stroke-dasharray:none;stroke-opacity:1"
+     id="path344-3-6"
+     cy="14.91014"
+     cx="22.716105"
+     rx="1.0013558"
+     ry="1.0013561" /></g></svg>

@@ -2437,6 +2437,7 @@ const openSettings = () => {
         </ion-button>
       </ion-buttons>
       -->
+      <!-- 
       <ion-buttons slot="start">
         <ion-button id="fitRef" @click="openCamPop">
           <font-awesome-icon
@@ -2446,6 +2447,8 @@ const openSettings = () => {
           ></font-awesome-icon>
         </ion-button>
       </ion-buttons>
+
+      -->
 
       <ion-buttons slot="start">
         <ion-button id="fitRef" @click="zoomFit">

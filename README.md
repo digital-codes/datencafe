@@ -1,5 +1,7 @@
 # Daten.Cafe
 
+**Prototype - Pre-Alpha!!!**
+
 Simple *No-Code* Browser-based Data Processing and Visualisation Tool
 
 Daten.Cafe draws heavily from other low/no-code open-source tools, in particular [Knime](https://www.knime.com/) and [Orange3](https://orangedatamining.com/). We adopted most of the element icon from Orange3. However, Daten.Cafe doesn't aim to be a full-blown data-processing plattform. 

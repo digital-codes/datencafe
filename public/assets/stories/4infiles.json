@@ -1,0 +1,3952 @@
+{
+  "version": "0.5",
+  "flow": {
+    "elements": {
+      "nodes": [
+        {
+          "data": {
+            "id": "N1",
+            "name": "N1",
+            "ports": {},
+            "instance": {
+              "id": "N1",
+              "name": "N1",
+              "type": "input",
+              "display": 0
+            },
+            "type": {
+              "name": "loadcsv",
+              "shp": "round-octagon",
+              "bd": "#00f",
+              "img": "url('/img/widgets/CSVFile.png')"
+            }
+          },
+          "position": {
+            "x": 230.3555708390647,
+            "y": 189.9142595139844
+          },
+          "group": "nodes",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": false,
+          "classes": ""
+        },
+        {
+          "data": {
+            "id": "N2",
+            "name": "N2",
+            "ports": {},
+            "instance": {
+              "id": "N2",
+              "name": "N2",
+              "type": "input",
+              "display": 0
+            },
+            "type": {
+              "name": "loadjson",
+              "shp": "round-octagon",
+              "bd": "#00f",
+              "img": "url('/img/widgets/JSONFile.png')"
+            }
+          },
+          "position": {
+            "x": 236.35373681797336,
+            "y": 278.95048143053646
+          },
+          "group": "nodes",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": false,
+          "classes": ""
+        },
+        {
+          "data": {
+            "id": "N3",
+            "name": "N3",
+            "ports": {},
+            "instance": {
+              "id": "N3",
+              "name": "N3",
+              "type": "input",
+              "display": 0
+            },
+            "type": {
+              "name": "loadgeo",
+              "shp": "round-octagon",
+              "bd": "#00f",
+              "img": "url('/img/widgets/GEOFile.png')"
+            }
+          },
+          "position": {
+            "x": 230.34640073360848,
+            "y": 434.0169646950939
+          },
+          "group": "nodes",
+          "removed": false,
+          "selected": true,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": false,
+          "classes": ""
+        },
+        {
+          "data": {
+            "id": "N4",
+            "name": "N4",
+            "ports": {},
+            "instance": {
+              "id": "N4",
+              "name": "N4",
+              "type": "input",
+              "display": 0
+            },
+            "type": {
+              "name": "loadexcel",
+              "shp": "round-octagon",
+              "bd": "#00f",
+              "img": "url('/img/widgets/XLSFile.png')"
+            }
+          },
+          "position": {
+            "x": 234.34364970197154,
+            "y": 355.97661623108667
+          },
+          "group": "nodes",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": false,
+          "classes": ""
+        },
+        {
+          "data": {
+            "id": "N5",
+            "name": "N5",
+            "ports": {
+              "A": true
+            },
+            "instance": {
+              "id": "N5",
+              "name": "N5",
+              "type": "table",
+              "display": 1
+            },
+            "type": {
+              "name": "tableplot",
+              "shp": "rectangle",
+              "bd": "#0f0",
+              "img": "url('/img/widgets/Table.png')"
+            }
+          },
+          "position": {
+            "x": 533.4761577258139,
+            "y": 179.89133425034385
+          },
+          "group": "nodes",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": false,
+          "classes": ""
+        },
+        {
+          "data": {
+            "id": "N6",
+            "name": "N6",
+            "ports": {
+              "A": true
+            },
+            "instance": {
+              "id": "N6",
+              "name": "N6",
+              "type": "table",
+              "display": 1
+            },
+            "type": {
+              "name": "tableplot",
+              "shp": "rectangle",
+              "bd": "#0f0",
+              "img": "url('/img/widgets/Table.png')"
+            }
+          },
+          "position": {
+            "x": 531.4706556625401,
+            "y": 276.93122420907844
+          },
+          "group": "nodes",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": false,
+          "classes": ""
+        },
+        {
+          "data": {
+            "id": "N8",
+            "name": "N8",
+            "ports": {
+              "A": true
+            },
+            "instance": {
+              "id": "N8",
+              "name": "N8",
+              "type": "table",
+              "display": 1
+            },
+            "type": {
+              "name": "tableplot",
+              "shp": "rectangle",
+              "bd": "#0f0",
+              "img": "url('/img/widgets/Table.png')"
+            }
+          },
+          "position": {
+            "x": 536.463778083448,
+            "y": 357.95919303071986
+          },
+          "group": "nodes",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": false,
+          "classes": ""
+        },
+        {
+          "data": {
+            "id": "N9",
+            "name": "N9",
+            "ports": {
+              "A": true
+            },
+            "instance": {
+              "id": "N9",
+              "name": "N9",
+              "type": "map",
+              "display": 1
+            },
+            "type": {
+              "name": "pointmap",
+              "shp": "ellipse",
+              "bd": "#f00",
+              "img": "url('/img/widgets/GeoMap.png')"
+            }
+          },
+          "position": {
+            "x": 543.4624025676295,
+            "y": 430.98807886290695
+          },
+          "group": "nodes",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": false,
+          "classes": ""
+        }
+      ],
+      "edges": [
+        {
+          "data": {
+            "source": "N1",
+            "target": "N5",
+            "id": "d0b41db9-21fe-4a00-8442-015323b77639",
+            "type": "e1-A",
+            "port": "A"
+          },
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "group": "edges",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": true,
+          "classes": ""
+        },
+        {
+          "data": {
+            "source": "N2",
+            "target": "N6",
+            "id": "0fb42073-e95d-4f87-b2ce-25dcb95999d3",
+            "type": "e1-A",
+            "port": "A"
+          },
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "group": "edges",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": true,
+          "classes": ""
+        },
+        {
+          "data": {
+            "source": "N4",
+            "target": "N8",
+            "id": "053e3b5e-403c-4fa4-b300-a0ecb340c379",
+            "type": "e1-A",
+            "port": "A"
+          },
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "group": "edges",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": true,
+          "classes": ""
+        },
+        {
+          "data": {
+            "source": "N3",
+            "target": "N9",
+            "id": "99360e19-d3ca-44bf-b463-ab459962c3fd",
+            "type": "e1-A",
+            "port": "A"
+          },
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "group": "edges",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": true,
+          "classes": ""
+        }
+      ]
+    },
+    "style": [
+      {
+        "selector": "node[name]",
+        "style": {
+          "label": "data(name)",
+          "text-valign": "bottom",
+          "text-halign": "center",
+          "background-fit": "contain",
+          "background-color": "rgb(255,255,255)",
+          "shape": "rectangle",
+          "width": "30px",
+          "height": "30px",
+          "border-width": "2px"
+        }
+      },
+      {
+        "selector": "node[type.shp]",
+        "style": {
+          "shape": "data(type.shp)"
+        }
+      },
+      {
+        "selector": "node[type.bd]",
+        "style": {
+          "border-color": "data(type.bd)"
+        }
+      },
+      {
+        "selector": "node[type.img]",
+        "style": {
+          "background-image": "data(type.img)"
+        }
+      },
+      {
+        "selector": "edge",
+        "style": {
+          "width": "3px",
+          "line-color": "rgb(204,204,204)",
+          "target-arrow-color": "rgb(204,204,204)",
+          "target-arrow-shape": "triangle",
+          "curve-style": "bezier"
+        }
+      },
+      {
+        "selector": "edge[type]",
+        "style": {
+          "label": "data(type)",
+          "font-size": "10px",
+          "text-rotation": "autorotate",
+          "text-margin-x": "0px",
+          "text-margin-y": "0px"
+        }
+      },
+      {
+        "selector": "edge[dark]",
+        "style": {
+          "color": "rgb(255,136,136)",
+          "background-color": "rgb(0,0,0)"
+        }
+      },
+      {
+        "selector": ".eh-preview",
+        "style": {
+          "opacity": "1",
+          "background-color": "rgb(255,0,0)",
+          "line-color": "rgb(255,0,0)",
+          "target-arrow-color": "rgb(0,0,255)",
+          "source-arrow-color": "rgb(255,0,0)"
+        }
+      },
+      {
+        "selector": ".eh-ghost-edge",
+        "style": {
+          "opacity": "0",
+          "background-color": "rgb(0,128,0)",
+          "line-color": "rgb(0,128,0)",
+          "target-arrow-color": "rgb(0,0,255)",
+          "source-arrow-color": "rgb(255,0,0)"
+        }
+      },
+      {
+        "selector": ".eh-source",
+        "style": {
+          "border-width": "2px",
+          "border-color": "rgb(255,0,0)"
+        }
+      },
+      {
+        "selector": ".eh-target",
+        "style": {
+          "border-width": "2px",
+          "border-color": "rgb(0,0,255)"
+        }
+      }
+    ],
+    "data": {},
+    "zoomingEnabled": true,
+    "userZoomingEnabled": true,
+    "zoom": 1,
+    "minZoom": 0.5,
+    "maxZoom": 10,
+    "panningEnabled": true,
+    "userPanningEnabled": true,
+    "pan": {
+      "x": 0,
+      "y": 0
+    },
+    "boxSelectionEnabled": true,
+    "renderer": {
+      "name": "canvas"
+    },
+    "wheelSensitivity": 0.2
+  },
+  "nodes": [
+    {
+      "id": "N1",
+      "name": "N1",
+      "classname": "loadcsv",
+      "config": {
+        "pop": "value",
+        "options": [
+          {
+            "id": "url",
+            "type": "url",
+            "label": "URL",
+            "value": "/data/simple.csv"
+          },
+          {
+            "id": "license",
+            "type": "text",
+            "label": "License",
+            "value": ""
+          },
+          {
+            "id": "attribution",
+            "type": "text",
+            "label": "Attrib.",
+            "value": ""
+          }
+        ]
+      },
+      "sigs": []
+    },
+    {
+      "id": "N2",
+      "name": "N2",
+      "classname": "loadjson",
+      "config": {
+        "pop": "value",
+        "options": [
+          {
+            "id": "url",
+            "type": "url",
+            "label": "URL",
+            "value": "/data/good.json"
+          },
+          {
+            "id": "license",
+            "type": "text",
+            "label": "License",
+            "value": ""
+          },
+          {
+            "id": "attribution",
+            "type": "text",
+            "label": "Attrib.",
+            "value": ""
+          }
+        ]
+      },
+      "sigs": []
+    },
+    {
+      "id": "N3",
+      "name": "N3",
+      "classname": "loadgeo",
+      "config": {
+        "pop": "value",
+        "options": [
+          {
+            "id": "url",
+            "type": "url",
+            "label": "URL",
+            "value": "/data/geoPoint.json"
+          },
+          {
+            "id": "license",
+            "type": "text",
+            "label": "License",
+            "value": ""
+          },
+          {
+            "id": "attribution",
+            "type": "text",
+            "label": "Attrib.",
+            "value": ""
+          }
+        ]
+      },
+      "sigs": []
+    },
+    {
+      "id": "N4",
+      "name": "N4",
+      "classname": "loadexcel",
+      "config": {
+        "pop": "value",
+        "options": [
+          {
+            "id": "url",
+            "type": "url",
+            "label": "URL",
+            "value": "/data/good.xlsx"
+          },
+          {
+            "id": "sheet",
+            "type": "text",
+            "label": "Sheet",
+            "value": ""
+          },
+          {
+            "id": "license",
+            "type": "text",
+            "label": "License",
+            "value": ""
+          },
+          {
+            "id": "attribution",
+            "type": "text",
+            "label": "Attrib.",
+            "value": ""
+          }
+        ]
+      },
+      "sigs": []
+    },
+    {
+      "id": "N5",
+      "name": "N5",
+      "classname": "tableplot",
+      "config": {},
+      "sigs": [
+        {
+          "signal": "UPD-N1",
+          "port": "A"
+        }
+      ]
+    },
+    {
+      "id": "N6",
+      "name": "N6",
+      "classname": "tableplot",
+      "config": {},
+      "sigs": [
+        {
+          "signal": "UPD-N2",
+          "port": "A"
+        }
+      ]
+    },
+    {
+      "id": "N8",
+      "name": "N8",
+      "classname": "tableplot",
+      "config": {},
+      "sigs": [
+        {
+          "signal": "UPD-N4",
+          "port": "A"
+        }
+      ]
+    },
+    {
+      "id": "N9",
+      "name": "N9",
+      "classname": "pointmap",
+      "config": {},
+      "sigs": [
+        {
+          "signal": "UPD-N3",
+          "port": "A"
+        }
+      ]
+    }
+  ],
+  "data": [
+    {
+      "id": "N1",
+      "data": [
+        {
+          "year": 2017,
+          "value": 135.98
+        },
+        {
+          "year": 2018,
+          "value": 147.49
+        },
+        {
+          "year": 2019,
+          "value": 146.93
+        },
+        {
+          "year": 2020,
+          "value": 139.89
+        },
+        {
+          "year": 2021,
+          "value": 125.6
+        },
+        {
+          "year": 2022,
+          "value": 108.13
+        }
+      ],
+      "meta": {
+        "date": "2023-05-03T19:10:25.281Z",
+        "storagetype": "dataframe",
+        "url": "/data/simple.csv"
+      },
+      "root": true,
+      "loaded": true
+    },
+    {
+      "id": "N2",
+      "data": [
+        {
+          "type": "csv",
+          "url": "/data/altersstruktur-der-bevolkerung-unter-3-jahrige-nach-geschlecht.csv"
+        },
+        {
+          "type": "csv",
+          "url": "/data/altersstruktur-der-bevolkerung-3-bis-unter-6-jahrige-nach-geschlecht.csv"
+        },
+        {
+          "type": "json",
+          "url": "/data/geoPoly.json"
+        },
+        {
+          "type": "csv",
+          "url": "/data/opendataportals-ch.csv"
+        },
+        {
+          "type": "csv",
+          "url": "/data/opendataportals-de.csv"
+        },
+        {
+          "type": "csv",
+          "url": "/data/spielflachenversorgung-bespielbare-flache.csv"
+        },
+        {
+          "type": "csv",
+          "url": "/data/d3-sample.csv"
+        },
+        {
+          "type": "csv",
+          "url": "/data/us-comma.csv"
+        },
+        {
+          "type": "csv",
+          "url": "/data/d3-date-sample.csv"
+        },
+        {
+          "type": "json",
+          "url": "/data/geoPoint.json"
+        },
+        {
+          "type": "csv",
+          "url": "/data/opendataportals-at.csv"
+        },
+        {
+          "type": "csv",
+          "url": "/data/andere_Portale_mit_API.csv"
+        },
+        {
+          "type": "csv",
+          "url": "/data/countries.csv"
+        },
+        {
+          "type": "csv",
+          "url": "/data/altersstruktur-der-bevolkerung-15-bis-unter-18-jahrige-nach-geschlecht.csv"
+        },
+        {
+          "type": "csv",
+          "url": "/data/altersstruktur-der-bevolkerung-6-bis-unter-15-jahrige-nach-geschlecht.csv"
+        },
+        {
+          "type": "csv",
+          "url": "/data/titanic.csv"
+        }
+      ],
+      "meta": {
+        "date": "2023-05-03T19:10:50.979Z",
+        "storagetype": "dataframe",
+        "url": "/data/good.json"
+      },
+      "root": true,
+      "loaded": true
+    },
+    {
+      "id": "N4",
+      "data": [
+        {
+          "Stadtteil": "Innenstadt-Ost",
+          "Jahr": 2007,
+          "Personen": 115,
+          "männlich": 52,
+          "weiblich": 63
+        },
+        {
+          "Stadtteil": "Innenstadt-Ost",
+          "Jahr": 2008,
+          "Personen": 123,
+          "männlich": 62,
+          "weiblich": 61
+        },
+        {
+          "Stadtteil": "Innenstadt-Ost",
+          "Jahr": 2009,
+          "Personen": 124,
+          "männlich": 64,
+          "weiblich": 60
+        },
+        {
+          "Stadtteil": "Innenstadt-Ost",
+          "Jahr": 2010,
+          "Personen": 139,
+          "männlich": 77,
+          "weiblich": 62
+        },
+        {
+          "Stadtteil": "Innenstadt-Ost",
+          "Jahr": 2011,
+          "Personen": 140,
+          "männlich": 75,
+          "weiblich": 65
+        },
+        {
+          "Stadtteil": "Innenstadt-Ost",
+          "Jahr": 2012,
+          "Personen": 129,
+          "männlich": 73,
+          "weiblich": 56
+        },
+        {
+          "Stadtteil": "Innenstadt-Ost",
+          "Jahr": 2013,
+          "Personen": 127,
+          "männlich": 67,
+          "weiblich": 60
+        },
+        {
+          "Stadtteil": "Innenstadt-Ost",
+          "Jahr": 2014,
+          "Personen": 107,
+          "männlich": 61,
+          "weiblich": 46
+        },
+        {
+          "Stadtteil": "Innenstadt-Ost",
+          "Jahr": 2015,
+          "Personen": 123,
+          "männlich": 54,
+          "weiblich": 69
+        },
+        {
+          "Stadtteil": "Innenstadt-Ost",
+          "Jahr": 2016,
+          "Personen": 152,
+          "männlich": 68,
+          "weiblich": 84
+        },
+        {
+          "Stadtteil": "Innenstadt-Ost",
+          "Jahr": 2017,
+          "Personen": 141,
+          "männlich": 74,
+          "weiblich": 67
+        },
+        {
+          "Stadtteil": "Innenstadt-Ost",
+          "Jahr": 2018,
+          "Personen": 131,
+          "männlich": 69,
+          "weiblich": 62
+        },
+        {
+          "Stadtteil": "Innenstadt-Ost",
+          "Jahr": 2019,
+          "Personen": 111,
+          "männlich": 64,
+          "weiblich": 47
+        },
+        {
+          "Stadtteil": "Innenstadt-Ost",
+          "Jahr": 2020,
+          "Personen": 114,
+          "männlich": 59,
+          "weiblich": 55
+        },
+        {
+          "Stadtteil": "Innenstadt-Ost",
+          "Jahr": 2021,
+          "Personen": 121,
+          "männlich": 53,
+          "weiblich": 68
+        },
+        {
+          "Stadtteil": "Innenstadt-West",
+          "Jahr": 2007,
+          "Personen": 194,
+          "männlich": 103,
+          "weiblich": 91
+        },
+        {
+          "Stadtteil": "Innenstadt-West",
+          "Jahr": 2008,
+          "Personen": 205,
+          "männlich": 106,
+          "weiblich": 99
+        },
+        {
+          "Stadtteil": "Innenstadt-West",
+          "Jahr": 2009,
+          "Personen": 205,
+          "männlich": 119,
+          "weiblich": 86
+        },
+        {
+          "Stadtteil": "Innenstadt-West",
+          "Jahr": 2010,
+          "Personen": 188,
+          "männlich": 99,
+          "weiblich": 89
+        },
+        {
+          "Stadtteil": "Innenstadt-West",
+          "Jahr": 2011,
+          "Personen": 199,
+          "männlich": 96,
+          "weiblich": 103
+        },
+        {
+          "Stadtteil": "Innenstadt-West",
+          "Jahr": 2012,
+          "Personen": 207,
+          "männlich": 105,
+          "weiblich": 102
+        },
+        {
+          "Stadtteil": "Innenstadt-West",
+          "Jahr": 2013,
+          "Personen": 212,
+          "männlich": 117,
+          "weiblich": 95
+        },
+        {
+          "Stadtteil": "Innenstadt-West",
+          "Jahr": 2014,
+          "Personen": 216,
+          "männlich": 115,
+          "weiblich": 101
+        },
+        {
+          "Stadtteil": "Innenstadt-West",
+          "Jahr": 2015,
+          "Personen": 221,
+          "männlich": 118,
+          "weiblich": 103
+        },
+        {
+          "Stadtteil": "Innenstadt-West",
+          "Jahr": 2016,
+          "Personen": 207,
+          "männlich": 97,
+          "weiblich": 110
+        },
+        {
+          "Stadtteil": "Innenstadt-West",
+          "Jahr": 2017,
+          "Personen": 187,
+          "männlich": 81,
+          "weiblich": 106
+        },
+        {
+          "Stadtteil": "Innenstadt-West",
+          "Jahr": 2018,
+          "Personen": 177,
+          "männlich": 88,
+          "weiblich": 89
+        },
+        {
+          "Stadtteil": "Innenstadt-West",
+          "Jahr": 2019,
+          "Personen": 188,
+          "männlich": 86,
+          "weiblich": 102
+        },
+        {
+          "Stadtteil": "Innenstadt-West",
+          "Jahr": 2020,
+          "Personen": 181,
+          "männlich": 93,
+          "weiblich": 88
+        },
+        {
+          "Stadtteil": "Innenstadt-West",
+          "Jahr": 2021,
+          "Personen": 192,
+          "männlich": 111,
+          "weiblich": 81
+        },
+        {
+          "Stadtteil": "Südstadt",
+          "Jahr": 2007,
+          "Personen": 415,
+          "männlich": 200,
+          "weiblich": 215
+        },
+        {
+          "Stadtteil": "Südstadt",
+          "Jahr": 2008,
+          "Personen": 462,
+          "männlich": 225,
+          "weiblich": 237
+        },
+        {
+          "Stadtteil": "Südstadt",
+          "Jahr": 2009,
+          "Personen": 477,
+          "männlich": 246,
+          "weiblich": 231
+        },
+        {
+          "Stadtteil": "Südstadt",
+          "Jahr": 2010,
+          "Personen": 509,
+          "männlich": 261,
+          "weiblich": 248
+        },
+        {
+          "Stadtteil": "Südstadt",
+          "Jahr": 2011,
+          "Personen": 526,
+          "männlich": 273,
+          "weiblich": 253
+        },
+        {
+          "Stadtteil": "Südstadt",
+          "Jahr": 2012,
+          "Personen": 525,
+          "männlich": 252,
+          "weiblich": 273
+        },
+        {
+          "Stadtteil": "Südstadt",
+          "Jahr": 2013,
+          "Personen": 560,
+          "männlich": 277,
+          "weiblich": 283
+        },
+        {
+          "Stadtteil": "Südstadt",
+          "Jahr": 2014,
+          "Personen": 551,
+          "männlich": 285,
+          "weiblich": 266
+        },
+        {
+          "Stadtteil": "Südstadt",
+          "Jahr": 2015,
+          "Personen": 612,
+          "männlich": 307,
+          "weiblich": 305
+        },
+        {
+          "Stadtteil": "Südstadt",
+          "Jahr": 2016,
+          "Personen": 667,
+          "männlich": 350,
+          "weiblich": 317
+        },
+        {
+          "Stadtteil": "Südstadt",
+          "Jahr": 2017,
+          "Personen": 692,
+          "männlich": 349,
+          "weiblich": 343
+        },
+        {
+          "Stadtteil": "Südstadt",
+          "Jahr": 2018,
+          "Personen": 673,
+          "männlich": 334,
+          "weiblich": 339
+        },
+        {
+          "Stadtteil": "Südstadt",
+          "Jahr": 2019,
+          "Personen": 638,
+          "männlich": 317,
+          "weiblich": 321
+        },
+        {
+          "Stadtteil": "Südstadt",
+          "Jahr": 2020,
+          "Personen": 620,
+          "männlich": 324,
+          "weiblich": 296
+        },
+        {
+          "Stadtteil": "Südstadt",
+          "Jahr": 2021,
+          "Personen": 584,
+          "männlich": 313,
+          "weiblich": 271
+        },
+        {
+          "Stadtteil": "Südweststadt",
+          "Jahr": 2007,
+          "Personen": 625,
+          "männlich": 320,
+          "weiblich": 305
+        },
+        {
+          "Stadtteil": "Südweststadt",
+          "Jahr": 2008,
+          "Personen": 629,
+          "männlich": 340,
+          "weiblich": 289
+        },
+        {
+          "Stadtteil": "Südweststadt",
+          "Jahr": 2009,
+          "Personen": 651,
+          "männlich": 363,
+          "weiblich": 288
+        },
+        {
+          "Stadtteil": "Südweststadt",
+          "Jahr": 2010,
+          "Personen": 661,
+          "männlich": 349,
+          "weiblich": 312
+        },
+        {
+          "Stadtteil": "Südweststadt",
+          "Jahr": 2011,
+          "Personen": 644,
+          "männlich": 325,
+          "weiblich": 319
+        },
+        {
+          "Stadtteil": "Südweststadt",
+          "Jahr": 2012,
+          "Personen": 621,
+          "männlich": 321,
+          "weiblich": 300
+        },
+        {
+          "Stadtteil": "Südweststadt",
+          "Jahr": 2013,
+          "Personen": 644,
+          "männlich": 327,
+          "weiblich": 317
+        },
+        {
+          "Stadtteil": "Südweststadt",
+          "Jahr": 2014,
+          "Personen": 668,
+          "männlich": 347,
+          "weiblich": 321
+        },
+        {
+          "Stadtteil": "Südweststadt",
+          "Jahr": 2015,
+          "Personen": 697,
+          "männlich": 351,
+          "weiblich": 346
+        },
+        {
+          "Stadtteil": "Südweststadt",
+          "Jahr": 2016,
+          "Personen": 674,
+          "männlich": 346,
+          "weiblich": 328
+        },
+        {
+          "Stadtteil": "Südweststadt",
+          "Jahr": 2017,
+          "Personen": 656,
+          "männlich": 336,
+          "weiblich": 320
+        },
+        {
+          "Stadtteil": "Südweststadt",
+          "Jahr": 2018,
+          "Personen": 684,
+          "männlich": 355,
+          "weiblich": 329
+        },
+        {
+          "Stadtteil": "Südweststadt",
+          "Jahr": 2019,
+          "Personen": 663,
+          "männlich": 345,
+          "weiblich": 318
+        },
+        {
+          "Stadtteil": "Südweststadt",
+          "Jahr": 2020,
+          "Personen": 617,
+          "männlich": 325,
+          "weiblich": 292
+        },
+        {
+          "Stadtteil": "Südweststadt",
+          "Jahr": 2021,
+          "Personen": 595,
+          "männlich": 315,
+          "weiblich": 280
+        },
+        {
+          "Stadtteil": "Weststadt",
+          "Jahr": 2007,
+          "Personen": 630,
+          "männlich": 314,
+          "weiblich": 316
+        },
+        {
+          "Stadtteil": "Weststadt",
+          "Jahr": 2008,
+          "Personen": 654,
+          "männlich": 323,
+          "weiblich": 331
+        },
+        {
+          "Stadtteil": "Weststadt",
+          "Jahr": 2009,
+          "Personen": 637,
+          "männlich": 321,
+          "weiblich": 316
+        },
+        {
+          "Stadtteil": "Weststadt",
+          "Jahr": 2010,
+          "Personen": 627,
+          "männlich": 317,
+          "weiblich": 310
+        },
+        {
+          "Stadtteil": "Weststadt",
+          "Jahr": 2011,
+          "Personen": 621,
+          "männlich": 334,
+          "weiblich": 287
+        },
+        {
+          "Stadtteil": "Weststadt",
+          "Jahr": 2012,
+          "Personen": 638,
+          "männlich": 359,
+          "weiblich": 279
+        },
+        {
+          "Stadtteil": "Weststadt",
+          "Jahr": 2013,
+          "Personen": 655,
+          "männlich": 351,
+          "weiblich": 304
+        },
+        {
+          "Stadtteil": "Weststadt",
+          "Jahr": 2014,
+          "Personen": 651,
+          "männlich": 339,
+          "weiblich": 312
+        },
+        {
+          "Stadtteil": "Weststadt",
+          "Jahr": 2015,
+          "Personen": 639,
+          "männlich": 345,
+          "weiblich": 294
+        },
+        {
+          "Stadtteil": "Weststadt",
+          "Jahr": 2016,
+          "Personen": 627,
+          "männlich": 337,
+          "weiblich": 290
+        },
+        {
+          "Stadtteil": "Weststadt",
+          "Jahr": 2017,
+          "Personen": 617,
+          "männlich": 329,
+          "weiblich": 288
+        },
+        {
+          "Stadtteil": "Weststadt",
+          "Jahr": 2018,
+          "Personen": 596,
+          "männlich": 302,
+          "weiblich": 294
+        },
+        {
+          "Stadtteil": "Weststadt",
+          "Jahr": 2019,
+          "Personen": 564,
+          "männlich": 278,
+          "weiblich": 286
+        },
+        {
+          "Stadtteil": "Weststadt",
+          "Jahr": 2020,
+          "Personen": 525,
+          "männlich": 257,
+          "weiblich": 268
+        },
+        {
+          "Stadtteil": "Weststadt",
+          "Jahr": 2021,
+          "Personen": 558,
+          "männlich": 295,
+          "weiblich": 263
+        },
+        {
+          "Stadtteil": "Nordweststadt",
+          "Jahr": 2007,
+          "Personen": 222,
+          "männlich": 112,
+          "weiblich": 110
+        },
+        {
+          "Stadtteil": "Nordweststadt",
+          "Jahr": 2008,
+          "Personen": 240,
+          "männlich": 123,
+          "weiblich": 117
+        },
+        {
+          "Stadtteil": "Nordweststadt",
+          "Jahr": 2009,
+          "Personen": 222,
+          "männlich": 115,
+          "weiblich": 107
+        },
+        {
+          "Stadtteil": "Nordweststadt",
+          "Jahr": 2010,
+          "Personen": 243,
+          "männlich": 123,
+          "weiblich": 120
+        },
+        {
+          "Stadtteil": "Nordweststadt",
+          "Jahr": 2011,
+          "Personen": 218,
+          "männlich": 116,
+          "weiblich": 102
+        },
+        {
+          "Stadtteil": "Nordweststadt",
+          "Jahr": 2012,
+          "Personen": 257,
+          "männlich": 145,
+          "weiblich": 112
+        },
+        {
+          "Stadtteil": "Nordweststadt",
+          "Jahr": 2013,
+          "Personen": 255,
+          "männlich": 141,
+          "weiblich": 114
+        },
+        {
+          "Stadtteil": "Nordweststadt",
+          "Jahr": 2014,
+          "Personen": 263,
+          "männlich": 146,
+          "weiblich": 117
+        },
+        {
+          "Stadtteil": "Nordweststadt",
+          "Jahr": 2015,
+          "Personen": 254,
+          "männlich": 134,
+          "weiblich": 120
+        },
+        {
+          "Stadtteil": "Nordweststadt",
+          "Jahr": 2016,
+          "Personen": 282,
+          "männlich": 135,
+          "weiblich": 147
+        },
+        {
+          "Stadtteil": "Nordweststadt",
+          "Jahr": 2017,
+          "Personen": 309,
+          "männlich": 145,
+          "weiblich": 164
+        },
+        {
+          "Stadtteil": "Nordweststadt",
+          "Jahr": 2018,
+          "Personen": 309,
+          "männlich": 156,
+          "weiblich": 153
+        },
+        {
+          "Stadtteil": "Nordweststadt",
+          "Jahr": 2019,
+          "Personen": 271,
+          "männlich": 148,
+          "weiblich": 123
+        },
+        {
+          "Stadtteil": "Nordweststadt",
+          "Jahr": 2020,
+          "Personen": 275,
+          "männlich": 156,
+          "weiblich": 119
+        },
+        {
+          "Stadtteil": "Nordweststadt",
+          "Jahr": 2021,
+          "Personen": 297,
+          "männlich": 154,
+          "weiblich": 143
+        },
+        {
+          "Stadtteil": "Oststadt",
+          "Jahr": 2007,
+          "Personen": 423,
+          "männlich": 223,
+          "weiblich": 200
+        },
+        {
+          "Stadtteil": "Oststadt",
+          "Jahr": 2008,
+          "Personen": 430,
+          "männlich": 225,
+          "weiblich": 205
+        },
+        {
+          "Stadtteil": "Oststadt",
+          "Jahr": 2009,
+          "Personen": 428,
+          "männlich": 210,
+          "weiblich": 218
+        },
+        {
+          "Stadtteil": "Oststadt",
+          "Jahr": 2010,
+          "Personen": 461,
+          "männlich": 236,
+          "weiblich": 225
+        },
+        {
+          "Stadtteil": "Oststadt",
+          "Jahr": 2011,
+          "Personen": 440,
+          "männlich": 221,
+          "weiblich": 219
+        },
+        {
+          "Stadtteil": "Oststadt",
+          "Jahr": 2012,
+          "Personen": 470,
+          "männlich": 231,
+          "weiblich": 239
+        },
+        {
+          "Stadtteil": "Oststadt",
+          "Jahr": 2013,
+          "Personen": 502,
+          "männlich": 264,
+          "weiblich": 238
+        },
+        {
+          "Stadtteil": "Oststadt",
+          "Jahr": 2014,
+          "Personen": 756,
+          "männlich": 376,
+          "weiblich": 380
+        },
+        {
+          "Stadtteil": "Oststadt",
+          "Jahr": 2015,
+          "Personen": 969,
+          "männlich": 482,
+          "weiblich": 487
+        },
+        {
+          "Stadtteil": "Oststadt",
+          "Jahr": 2016,
+          "Personen": 568,
+          "männlich": 300,
+          "weiblich": 268
+        },
+        {
+          "Stadtteil": "Oststadt",
+          "Jahr": 2017,
+          "Personen": 533,
+          "männlich": 291,
+          "weiblich": 242
+        },
+        {
+          "Stadtteil": "Oststadt",
+          "Jahr": 2018,
+          "Personen": 482,
+          "männlich": 246,
+          "weiblich": 236
+        },
+        {
+          "Stadtteil": "Oststadt",
+          "Jahr": 2019,
+          "Personen": 487,
+          "männlich": 243,
+          "weiblich": 244
+        },
+        {
+          "Stadtteil": "Oststadt",
+          "Jahr": 2020,
+          "Personen": 440,
+          "männlich": 225,
+          "weiblich": 215
+        },
+        {
+          "Stadtteil": "Oststadt",
+          "Jahr": 2021,
+          "Personen": 455,
+          "männlich": 237,
+          "weiblich": 218
+        },
+        {
+          "Stadtteil": "Mühlburg",
+          "Jahr": 2007,
+          "Personen": 403,
+          "männlich": 197,
+          "weiblich": 206
+        },
+        {
+          "Stadtteil": "Mühlburg",
+          "Jahr": 2008,
+          "Personen": 400,
+          "männlich": 186,
+          "weiblich": 214
+        },
+        {
+          "Stadtteil": "Mühlburg",
+          "Jahr": 2009,
+          "Personen": 391,
+          "männlich": 212,
+          "weiblich": 179
+        },
+        {
+          "Stadtteil": "Mühlburg",
+          "Jahr": 2010,
+          "Personen": 427,
+          "männlich": 216,
+          "weiblich": 211
+        },
+        {
+          "Stadtteil": "Mühlburg",
+          "Jahr": 2011,
+          "Personen": 433,
+          "männlich": 224,
+          "weiblich": 209
+        },
+        {
+          "Stadtteil": "Mühlburg",
+          "Jahr": 2012,
+          "Personen": 437,
+          "männlich": 232,
+          "weiblich": 205
+        },
+        {
+          "Stadtteil": "Mühlburg",
+          "Jahr": 2013,
+          "Personen": 423,
+          "männlich": 221,
+          "weiblich": 202
+        },
+        {
+          "Stadtteil": "Mühlburg",
+          "Jahr": 2014,
+          "Personen": 453,
+          "männlich": 235,
+          "weiblich": 218
+        },
+        {
+          "Stadtteil": "Mühlburg",
+          "Jahr": 2015,
+          "Personen": 432,
+          "männlich": 213,
+          "weiblich": 219
+        },
+        {
+          "Stadtteil": "Mühlburg",
+          "Jahr": 2016,
+          "Personen": 474,
+          "männlich": 239,
+          "weiblich": 235
+        },
+        {
+          "Stadtteil": "Mühlburg",
+          "Jahr": 2017,
+          "Personen": 500,
+          "männlich": 239,
+          "weiblich": 261
+        },
+        {
+          "Stadtteil": "Mühlburg",
+          "Jahr": 2018,
+          "Personen": 560,
+          "männlich": 275,
+          "weiblich": 285
+        },
+        {
+          "Stadtteil": "Mühlburg",
+          "Jahr": 2019,
+          "Personen": 491,
+          "männlich": 248,
+          "weiblich": 243
+        },
+        {
+          "Stadtteil": "Mühlburg",
+          "Jahr": 2020,
+          "Personen": 447,
+          "männlich": 241,
+          "weiblich": 206
+        },
+        {
+          "Stadtteil": "Mühlburg",
+          "Jahr": 2021,
+          "Personen": 466,
+          "männlich": 241,
+          "weiblich": 225
+        },
+        {
+          "Stadtteil": "Daxlanden",
+          "Jahr": 2007,
+          "Personen": 255,
+          "männlich": 120,
+          "weiblich": 135
+        },
+        {
+          "Stadtteil": "Daxlanden",
+          "Jahr": 2008,
+          "Personen": 248,
+          "männlich": 121,
+          "weiblich": 127
+        },
+        {
+          "Stadtteil": "Daxlanden",
+          "Jahr": 2009,
+          "Personen": 243,
+          "männlich": 121,
+          "weiblich": 122
+        },
+        {
+          "Stadtteil": "Daxlanden",
+          "Jahr": 2010,
+          "Personen": 242,
+          "männlich": 138,
+          "weiblich": 104
+        },
+        {
+          "Stadtteil": "Daxlanden",
+          "Jahr": 2011,
+          "Personen": 234,
+          "männlich": 135,
+          "weiblich": 99
+        },
+        {
+          "Stadtteil": "Daxlanden",
+          "Jahr": 2012,
+          "Personen": 252,
+          "männlich": 137,
+          "weiblich": 115
+        },
+        {
+          "Stadtteil": "Daxlanden",
+          "Jahr": 2013,
+          "Personen": 240,
+          "männlich": 122,
+          "weiblich": 118
+        },
+        {
+          "Stadtteil": "Daxlanden",
+          "Jahr": 2014,
+          "Personen": 216,
+          "männlich": 118,
+          "weiblich": 98
+        },
+        {
+          "Stadtteil": "Daxlanden",
+          "Jahr": 2015,
+          "Personen": 230,
+          "männlich": 122,
+          "weiblich": 108
+        },
+        {
+          "Stadtteil": "Daxlanden",
+          "Jahr": 2016,
+          "Personen": 243,
+          "männlich": 127,
+          "weiblich": 116
+        },
+        {
+          "Stadtteil": "Daxlanden",
+          "Jahr": 2017,
+          "Personen": 268,
+          "männlich": 135,
+          "weiblich": 133
+        },
+        {
+          "Stadtteil": "Daxlanden",
+          "Jahr": 2018,
+          "Personen": 251,
+          "männlich": 125,
+          "weiblich": 126
+        },
+        {
+          "Stadtteil": "Daxlanden",
+          "Jahr": 2019,
+          "Personen": 262,
+          "männlich": 135,
+          "weiblich": 127
+        },
+        {
+          "Stadtteil": "Daxlanden",
+          "Jahr": 2020,
+          "Personen": 254,
+          "männlich": 124,
+          "weiblich": 130
+        },
+        {
+          "Stadtteil": "Daxlanden",
+          "Jahr": 2021,
+          "Personen": 261,
+          "männlich": 127,
+          "weiblich": 134
+        },
+        {
+          "Stadtteil": "Knielingen",
+          "Jahr": 2007,
+          "Personen": 215,
+          "männlich": 111,
+          "weiblich": 104
+        },
+        {
+          "Stadtteil": "Knielingen",
+          "Jahr": 2008,
+          "Personen": 219,
+          "männlich": 110,
+          "weiblich": 109
+        },
+        {
+          "Stadtteil": "Knielingen",
+          "Jahr": 2009,
+          "Personen": 223,
+          "männlich": 122,
+          "weiblich": 101
+        },
+        {
+          "Stadtteil": "Knielingen",
+          "Jahr": 2010,
+          "Personen": 224,
+          "männlich": 118,
+          "weiblich": 106
+        },
+        {
+          "Stadtteil": "Knielingen",
+          "Jahr": 2011,
+          "Personen": 234,
+          "männlich": 116,
+          "weiblich": 118
+        },
+        {
+          "Stadtteil": "Knielingen",
+          "Jahr": 2012,
+          "Personen": 264,
+          "männlich": 129,
+          "weiblich": 135
+        },
+        {
+          "Stadtteil": "Knielingen",
+          "Jahr": 2013,
+          "Personen": 285,
+          "männlich": 137,
+          "weiblich": 148
+        },
+        {
+          "Stadtteil": "Knielingen",
+          "Jahr": 2014,
+          "Personen": 277,
+          "männlich": 130,
+          "weiblich": 147
+        },
+        {
+          "Stadtteil": "Knielingen",
+          "Jahr": 2015,
+          "Personen": 265,
+          "männlich": 130,
+          "weiblich": 135
+        },
+        {
+          "Stadtteil": "Knielingen",
+          "Jahr": 2016,
+          "Personen": 289,
+          "männlich": 149,
+          "weiblich": 140
+        },
+        {
+          "Stadtteil": "Knielingen",
+          "Jahr": 2017,
+          "Personen": 320,
+          "männlich": 154,
+          "weiblich": 166
+        },
+        {
+          "Stadtteil": "Knielingen",
+          "Jahr": 2018,
+          "Personen": 357,
+          "männlich": 165,
+          "weiblich": 192
+        },
+        {
+          "Stadtteil": "Knielingen",
+          "Jahr": 2019,
+          "Personen": 366,
+          "männlich": 175,
+          "weiblich": 191
+        },
+        {
+          "Stadtteil": "Knielingen",
+          "Jahr": 2020,
+          "Personen": 393,
+          "männlich": 202,
+          "weiblich": 191
+        },
+        {
+          "Stadtteil": "Knielingen",
+          "Jahr": 2021,
+          "Personen": 380,
+          "männlich": 204,
+          "weiblich": 176
+        },
+        {
+          "Stadtteil": "Grünwinkel",
+          "Jahr": 2007,
+          "Personen": 246,
+          "männlich": 113,
+          "weiblich": 133
+        },
+        {
+          "Stadtteil": "Grünwinkel",
+          "Jahr": 2008,
+          "Personen": 227,
+          "männlich": 116,
+          "weiblich": 111
+        },
+        {
+          "Stadtteil": "Grünwinkel",
+          "Jahr": 2009,
+          "Personen": 243,
+          "männlich": 126,
+          "weiblich": 117
+        },
+        {
+          "Stadtteil": "Grünwinkel",
+          "Jahr": 2010,
+          "Personen": 251,
+          "männlich": 137,
+          "weiblich": 114
+        },
+        {
+          "Stadtteil": "Grünwinkel",
+          "Jahr": 2011,
+          "Personen": 258,
+          "männlich": 130,
+          "weiblich": 128
+        },
+        {
+          "Stadtteil": "Grünwinkel",
+          "Jahr": 2012,
+          "Personen": 258,
+          "männlich": 133,
+          "weiblich": 125
+        },
+        {
+          "Stadtteil": "Grünwinkel",
+          "Jahr": 2013,
+          "Personen": 263,
+          "männlich": 143,
+          "weiblich": 120
+        },
+        {
+          "Stadtteil": "Grünwinkel",
+          "Jahr": 2014,
+          "Personen": 244,
+          "männlich": 134,
+          "weiblich": 110
+        },
+        {
+          "Stadtteil": "Grünwinkel",
+          "Jahr": 2015,
+          "Personen": 263,
+          "männlich": 129,
+          "weiblich": 134
+        },
+        {
+          "Stadtteil": "Grünwinkel",
+          "Jahr": 2016,
+          "Personen": 269,
+          "männlich": 134,
+          "weiblich": 135
+        },
+        {
+          "Stadtteil": "Grünwinkel",
+          "Jahr": 2017,
+          "Personen": 299,
+          "männlich": 159,
+          "weiblich": 140
+        },
+        {
+          "Stadtteil": "Grünwinkel",
+          "Jahr": 2018,
+          "Personen": 323,
+          "männlich": 173,
+          "weiblich": 150
+        },
+        {
+          "Stadtteil": "Grünwinkel",
+          "Jahr": 2019,
+          "Personen": 293,
+          "männlich": 156,
+          "weiblich": 137
+        },
+        {
+          "Stadtteil": "Grünwinkel",
+          "Jahr": 2020,
+          "Personen": 279,
+          "männlich": 142,
+          "weiblich": 137
+        },
+        {
+          "Stadtteil": "Grünwinkel",
+          "Jahr": 2021,
+          "Personen": 271,
+          "männlich": 145,
+          "weiblich": 126
+        },
+        {
+          "Stadtteil": "Oberreut",
+          "Jahr": 2007,
+          "Personen": 281,
+          "männlich": 148,
+          "weiblich": 133
+        },
+        {
+          "Stadtteil": "Oberreut",
+          "Jahr": 2008,
+          "Personen": 271,
+          "männlich": 140,
+          "weiblich": 131
+        },
+        {
+          "Stadtteil": "Oberreut",
+          "Jahr": 2009,
+          "Personen": 278,
+          "männlich": 136,
+          "weiblich": 142
+        },
+        {
+          "Stadtteil": "Oberreut",
+          "Jahr": 2010,
+          "Personen": 269,
+          "männlich": 135,
+          "weiblich": 134
+        },
+        {
+          "Stadtteil": "Oberreut",
+          "Jahr": 2011,
+          "Personen": 262,
+          "männlich": 133,
+          "weiblich": 129
+        },
+        {
+          "Stadtteil": "Oberreut",
+          "Jahr": 2012,
+          "Personen": 249,
+          "männlich": 131,
+          "weiblich": 118
+        },
+        {
+          "Stadtteil": "Oberreut",
+          "Jahr": 2013,
+          "Personen": 246,
+          "männlich": 135,
+          "weiblich": 111
+        },
+        {
+          "Stadtteil": "Oberreut",
+          "Jahr": 2014,
+          "Personen": 243,
+          "männlich": 132,
+          "weiblich": 111
+        },
+        {
+          "Stadtteil": "Oberreut",
+          "Jahr": 2015,
+          "Personen": 249,
+          "männlich": 128,
+          "weiblich": 121
+        },
+        {
+          "Stadtteil": "Oberreut",
+          "Jahr": 2016,
+          "Personen": 251,
+          "männlich": 127,
+          "weiblich": 124
+        },
+        {
+          "Stadtteil": "Oberreut",
+          "Jahr": 2017,
+          "Personen": 252,
+          "männlich": 120,
+          "weiblich": 132
+        },
+        {
+          "Stadtteil": "Oberreut",
+          "Jahr": 2018,
+          "Personen": 308,
+          "männlich": 155,
+          "weiblich": 153
+        },
+        {
+          "Stadtteil": "Oberreut",
+          "Jahr": 2019,
+          "Personen": 339,
+          "männlich": 182,
+          "weiblich": 157
+        },
+        {
+          "Stadtteil": "Oberreut",
+          "Jahr": 2020,
+          "Personen": 310,
+          "männlich": 161,
+          "weiblich": 149
+        },
+        {
+          "Stadtteil": "Oberreut",
+          "Jahr": 2021,
+          "Personen": 271,
+          "männlich": 139,
+          "weiblich": 132
+        },
+        {
+          "Stadtteil": "Beiertheim-Bulach",
+          "Jahr": 2007,
+          "Personen": 190,
+          "männlich": 101,
+          "weiblich": 89
+        },
+        {
+          "Stadtteil": "Beiertheim-Bulach",
+          "Jahr": 2008,
+          "Personen": 206,
+          "männlich": 107,
+          "weiblich": 99
+        },
+        {
+          "Stadtteil": "Beiertheim-Bulach",
+          "Jahr": 2009,
+          "Personen": 199,
+          "männlich": 94,
+          "weiblich": 105
+        },
+        {
+          "Stadtteil": "Beiertheim-Bulach",
+          "Jahr": 2010,
+          "Personen": 189,
+          "männlich": 96,
+          "weiblich": 93
+        },
+        {
+          "Stadtteil": "Beiertheim-Bulach",
+          "Jahr": 2011,
+          "Personen": 182,
+          "männlich": 100,
+          "weiblich": 82
+        },
+        {
+          "Stadtteil": "Beiertheim-Bulach",
+          "Jahr": 2012,
+          "Personen": 185,
+          "männlich": 98,
+          "weiblich": 87
+        },
+        {
+          "Stadtteil": "Beiertheim-Bulach",
+          "Jahr": 2013,
+          "Personen": 187,
+          "männlich": 111,
+          "weiblich": 76
+        },
+        {
+          "Stadtteil": "Beiertheim-Bulach",
+          "Jahr": 2014,
+          "Personen": 184,
+          "männlich": 104,
+          "weiblich": 80
+        },
+        {
+          "Stadtteil": "Beiertheim-Bulach",
+          "Jahr": 2015,
+          "Personen": 185,
+          "männlich": 102,
+          "weiblich": 83
+        },
+        {
+          "Stadtteil": "Beiertheim-Bulach",
+          "Jahr": 2016,
+          "Personen": 185,
+          "männlich": 82,
+          "weiblich": 103
+        },
+        {
+          "Stadtteil": "Beiertheim-Bulach",
+          "Jahr": 2017,
+          "Personen": 176,
+          "männlich": 82,
+          "weiblich": 94
+        },
+        {
+          "Stadtteil": "Beiertheim-Bulach",
+          "Jahr": 2018,
+          "Personen": 184,
+          "männlich": 92,
+          "weiblich": 92
+        },
+        {
+          "Stadtteil": "Beiertheim-Bulach",
+          "Jahr": 2019,
+          "Personen": 195,
+          "männlich": 101,
+          "weiblich": 94
+        },
+        {
+          "Stadtteil": "Beiertheim-Bulach",
+          "Jahr": 2020,
+          "Personen": 206,
+          "männlich": 105,
+          "weiblich": 101
+        },
+        {
+          "Stadtteil": "Beiertheim-Bulach",
+          "Jahr": 2021,
+          "Personen": 190,
+          "männlich": 105,
+          "weiblich": 85
+        },
+        {
+          "Stadtteil": "Weiherfeld-Dammerstock",
+          "Jahr": 2007,
+          "Personen": 164,
+          "männlich": 99,
+          "weiblich": 65
+        },
+        {
+          "Stadtteil": "Weiherfeld-Dammerstock",
+          "Jahr": 2008,
+          "Personen": 168,
+          "männlich": 94,
+          "weiblich": 74
+        },
+        {
+          "Stadtteil": "Weiherfeld-Dammerstock",
+          "Jahr": 2009,
+          "Personen": 164,
+          "männlich": 80,
+          "weiblich": 84
+        },
+        {
+          "Stadtteil": "Weiherfeld-Dammerstock",
+          "Jahr": 2010,
+          "Personen": 148,
+          "männlich": 69,
+          "weiblich": 79
+        },
+        {
+          "Stadtteil": "Weiherfeld-Dammerstock",
+          "Jahr": 2011,
+          "Personen": 131,
+          "männlich": 59,
+          "weiblich": 72
+        },
+        {
+          "Stadtteil": "Weiherfeld-Dammerstock",
+          "Jahr": 2012,
+          "Personen": 139,
+          "männlich": 67,
+          "weiblich": 72
+        },
+        {
+          "Stadtteil": "Weiherfeld-Dammerstock",
+          "Jahr": 2013,
+          "Personen": 145,
+          "männlich": 68,
+          "weiblich": 77
+        },
+        {
+          "Stadtteil": "Weiherfeld-Dammerstock",
+          "Jahr": 2014,
+          "Personen": 154,
+          "männlich": 75,
+          "weiblich": 79
+        },
+        {
+          "Stadtteil": "Weiherfeld-Dammerstock",
+          "Jahr": 2015,
+          "Personen": 162,
+          "männlich": 80,
+          "weiblich": 82
+        },
+        {
+          "Stadtteil": "Weiherfeld-Dammerstock",
+          "Jahr": 2016,
+          "Personen": 161,
+          "männlich": 81,
+          "weiblich": 80
+        },
+        {
+          "Stadtteil": "Weiherfeld-Dammerstock",
+          "Jahr": 2017,
+          "Personen": 175,
+          "männlich": 89,
+          "weiblich": 86
+        },
+        {
+          "Stadtteil": "Weiherfeld-Dammerstock",
+          "Jahr": 2018,
+          "Personen": 167,
+          "männlich": 85,
+          "weiblich": 82
+        },
+        {
+          "Stadtteil": "Weiherfeld-Dammerstock",
+          "Jahr": 2019,
+          "Personen": 160,
+          "männlich": 90,
+          "weiblich": 70
+        },
+        {
+          "Stadtteil": "Weiherfeld-Dammerstock",
+          "Jahr": 2020,
+          "Personen": 140,
+          "männlich": 69,
+          "weiblich": 71
+        },
+        {
+          "Stadtteil": "Weiherfeld-Dammerstock",
+          "Jahr": 2021,
+          "Personen": 145,
+          "männlich": 72,
+          "weiblich": 73
+        },
+        {
+          "Stadtteil": "Rüppurr",
+          "Jahr": 2007,
+          "Personen": 268,
+          "männlich": 134,
+          "weiblich": 134
+        },
+        {
+          "Stadtteil": "Rüppurr",
+          "Jahr": 2008,
+          "Personen": 264,
+          "männlich": 125,
+          "weiblich": 139
+        },
+        {
+          "Stadtteil": "Rüppurr",
+          "Jahr": 2009,
+          "Personen": 257,
+          "männlich": 118,
+          "weiblich": 139
+        },
+        {
+          "Stadtteil": "Rüppurr",
+          "Jahr": 2010,
+          "Personen": 234,
+          "männlich": 113,
+          "weiblich": 121
+        },
+        {
+          "Stadtteil": "Rüppurr",
+          "Jahr": 2011,
+          "Personen": 237,
+          "männlich": 122,
+          "weiblich": 115
+        },
+        {
+          "Stadtteil": "Rüppurr",
+          "Jahr": 2012,
+          "Personen": 252,
+          "männlich": 144,
+          "weiblich": 108
+        },
+        {
+          "Stadtteil": "Rüppurr",
+          "Jahr": 2013,
+          "Personen": 241,
+          "männlich": 136,
+          "weiblich": 105
+        },
+        {
+          "Stadtteil": "Rüppurr",
+          "Jahr": 2014,
+          "Personen": 247,
+          "männlich": 136,
+          "weiblich": 111
+        },
+        {
+          "Stadtteil": "Rüppurr",
+          "Jahr": 2015,
+          "Personen": 258,
+          "männlich": 144,
+          "weiblich": 114
+        },
+        {
+          "Stadtteil": "Rüppurr",
+          "Jahr": 2016,
+          "Personen": 253,
+          "männlich": 135,
+          "weiblich": 118
+        },
+        {
+          "Stadtteil": "Rüppurr",
+          "Jahr": 2017,
+          "Personen": 273,
+          "männlich": 142,
+          "weiblich": 131
+        },
+        {
+          "Stadtteil": "Rüppurr",
+          "Jahr": 2018,
+          "Personen": 279,
+          "männlich": 142,
+          "weiblich": 137
+        },
+        {
+          "Stadtteil": "Rüppurr",
+          "Jahr": 2019,
+          "Personen": 277,
+          "männlich": 135,
+          "weiblich": 142
+        },
+        {
+          "Stadtteil": "Rüppurr",
+          "Jahr": 2020,
+          "Personen": 269,
+          "männlich": 145,
+          "weiblich": 124
+        },
+        {
+          "Stadtteil": "Rüppurr",
+          "Jahr": 2021,
+          "Personen": 264,
+          "männlich": 147,
+          "weiblich": 117
+        },
+        {
+          "Stadtteil": "Waldstadt",
+          "Jahr": 2007,
+          "Personen": 290,
+          "männlich": 153,
+          "weiblich": 137
+        },
+        {
+          "Stadtteil": "Waldstadt",
+          "Jahr": 2008,
+          "Personen": 294,
+          "männlich": 146,
+          "weiblich": 148
+        },
+        {
+          "Stadtteil": "Waldstadt",
+          "Jahr": 2009,
+          "Personen": 297,
+          "männlich": 161,
+          "weiblich": 136
+        },
+        {
+          "Stadtteil": "Waldstadt",
+          "Jahr": 2010,
+          "Personen": 336,
+          "männlich": 177,
+          "weiblich": 159
+        },
+        {
+          "Stadtteil": "Waldstadt",
+          "Jahr": 2011,
+          "Personen": 349,
+          "männlich": 180,
+          "weiblich": 169
+        },
+        {
+          "Stadtteil": "Waldstadt",
+          "Jahr": 2012,
+          "Personen": 318,
+          "männlich": 164,
+          "weiblich": 154
+        },
+        {
+          "Stadtteil": "Waldstadt",
+          "Jahr": 2013,
+          "Personen": 332,
+          "männlich": 180,
+          "weiblich": 152
+        },
+        {
+          "Stadtteil": "Waldstadt",
+          "Jahr": 2014,
+          "Personen": 345,
+          "männlich": 189,
+          "weiblich": 156
+        },
+        {
+          "Stadtteil": "Waldstadt",
+          "Jahr": 2015,
+          "Personen": 349,
+          "männlich": 182,
+          "weiblich": 167
+        },
+        {
+          "Stadtteil": "Waldstadt",
+          "Jahr": 2016,
+          "Personen": 342,
+          "männlich": 172,
+          "weiblich": 170
+        },
+        {
+          "Stadtteil": "Waldstadt",
+          "Jahr": 2017,
+          "Personen": 317,
+          "männlich": 159,
+          "weiblich": 158
+        },
+        {
+          "Stadtteil": "Waldstadt",
+          "Jahr": 2018,
+          "Personen": 325,
+          "männlich": 162,
+          "weiblich": 163
+        },
+        {
+          "Stadtteil": "Waldstadt",
+          "Jahr": 2019,
+          "Personen": 295,
+          "männlich": 152,
+          "weiblich": 143
+        },
+        {
+          "Stadtteil": "Waldstadt",
+          "Jahr": 2020,
+          "Personen": 303,
+          "männlich": 167,
+          "weiblich": 136
+        },
+        {
+          "Stadtteil": "Waldstadt",
+          "Jahr": 2021,
+          "Personen": 302,
+          "männlich": 171,
+          "weiblich": 131
+        },
+        {
+          "Stadtteil": "Rintheim",
+          "Jahr": 2007,
+          "Personen": 161,
+          "männlich": 78,
+          "weiblich": 83
+        },
+        {
+          "Stadtteil": "Rintheim",
+          "Jahr": 2008,
+          "Personen": 156,
+          "männlich": 76,
+          "weiblich": 80
+        },
+        {
+          "Stadtteil": "Rintheim",
+          "Jahr": 2009,
+          "Personen": 147,
+          "männlich": 77,
+          "weiblich": 70
+        },
+        {
+          "Stadtteil": "Rintheim",
+          "Jahr": 2010,
+          "Personen": 143,
+          "männlich": 78,
+          "weiblich": 65
+        },
+        {
+          "Stadtteil": "Rintheim",
+          "Jahr": 2011,
+          "Personen": 125,
+          "männlich": 67,
+          "weiblich": 58
+        },
+        {
+          "Stadtteil": "Rintheim",
+          "Jahr": 2012,
+          "Personen": 120,
+          "männlich": 64,
+          "weiblich": 56
+        },
+        {
+          "Stadtteil": "Rintheim",
+          "Jahr": 2013,
+          "Personen": 131,
+          "männlich": 75,
+          "weiblich": 56
+        },
+        {
+          "Stadtteil": "Rintheim",
+          "Jahr": 2014,
+          "Personen": 146,
+          "männlich": 81,
+          "weiblich": 65
+        },
+        {
+          "Stadtteil": "Rintheim",
+          "Jahr": 2015,
+          "Personen": 156,
+          "männlich": 86,
+          "weiblich": 70
+        },
+        {
+          "Stadtteil": "Rintheim",
+          "Jahr": 2016,
+          "Personen": 151,
+          "männlich": 80,
+          "weiblich": 71
+        },
+        {
+          "Stadtteil": "Rintheim",
+          "Jahr": 2017,
+          "Personen": 179,
+          "männlich": 90,
+          "weiblich": 89
+        },
+        {
+          "Stadtteil": "Rintheim",
+          "Jahr": 2018,
+          "Personen": 183,
+          "männlich": 94,
+          "weiblich": 89
+        },
+        {
+          "Stadtteil": "Rintheim",
+          "Jahr": 2019,
+          "Personen": 179,
+          "männlich": 90,
+          "weiblich": 89
+        },
+        {
+          "Stadtteil": "Rintheim",
+          "Jahr": 2020,
+          "Personen": 165,
+          "männlich": 73,
+          "weiblich": 92
+        },
+        {
+          "Stadtteil": "Rintheim",
+          "Jahr": 2021,
+          "Personen": 148,
+          "männlich": 69,
+          "weiblich": 79
+        },
+        {
+          "Stadtteil": "Hagsfeld",
+          "Jahr": 2007,
+          "Personen": 206,
+          "männlich": 108,
+          "weiblich": 98
+        },
+        {
+          "Stadtteil": "Hagsfeld",
+          "Jahr": 2008,
+          "Personen": 166,
+          "männlich": 81,
+          "weiblich": 85
+        },
+        {
+          "Stadtteil": "Hagsfeld",
+          "Jahr": 2009,
+          "Personen": 172,
+          "männlich": 90,
+          "weiblich": 82
+        },
+        {
+          "Stadtteil": "Hagsfeld",
+          "Jahr": 2010,
+          "Personen": 166,
+          "männlich": 85,
+          "weiblich": 81
+        },
+        {
+          "Stadtteil": "Hagsfeld",
+          "Jahr": 2011,
+          "Personen": 180,
+          "männlich": 99,
+          "weiblich": 81
+        },
+        {
+          "Stadtteil": "Hagsfeld",
+          "Jahr": 2012,
+          "Personen": 181,
+          "männlich": 93,
+          "weiblich": 88
+        },
+        {
+          "Stadtteil": "Hagsfeld",
+          "Jahr": 2013,
+          "Personen": 176,
+          "männlich": 87,
+          "weiblich": 89
+        },
+        {
+          "Stadtteil": "Hagsfeld",
+          "Jahr": 2014,
+          "Personen": 171,
+          "männlich": 91,
+          "weiblich": 80
+        },
+        {
+          "Stadtteil": "Hagsfeld",
+          "Jahr": 2015,
+          "Personen": 190,
+          "männlich": 115,
+          "weiblich": 75
+        },
+        {
+          "Stadtteil": "Hagsfeld",
+          "Jahr": 2016,
+          "Personen": 203,
+          "männlich": 112,
+          "weiblich": 91
+        },
+        {
+          "Stadtteil": "Hagsfeld",
+          "Jahr": 2017,
+          "Personen": 203,
+          "männlich": 109,
+          "weiblich": 94
+        },
+        {
+          "Stadtteil": "Hagsfeld",
+          "Jahr": 2018,
+          "Personen": 210,
+          "männlich": 111,
+          "weiblich": 99
+        },
+        {
+          "Stadtteil": "Hagsfeld",
+          "Jahr": 2019,
+          "Personen": 201,
+          "männlich": 104,
+          "weiblich": 97
+        },
+        {
+          "Stadtteil": "Hagsfeld",
+          "Jahr": 2020,
+          "Personen": 182,
+          "männlich": 83,
+          "weiblich": 99
+        },
+        {
+          "Stadtteil": "Hagsfeld",
+          "Jahr": 2021,
+          "Personen": 182,
+          "männlich": 88,
+          "weiblich": 94
+        },
+        {
+          "Stadtteil": "Durlach",
+          "Jahr": 2007,
+          "Personen": 767,
+          "männlich": 383,
+          "weiblich": 384
+        },
+        {
+          "Stadtteil": "Durlach",
+          "Jahr": 2008,
+          "Personen": 757,
+          "männlich": 378,
+          "weiblich": 379
+        },
+        {
+          "Stadtteil": "Durlach",
+          "Jahr": 2009,
+          "Personen": 742,
+          "männlich": 373,
+          "weiblich": 369
+        },
+        {
+          "Stadtteil": "Durlach",
+          "Jahr": 2010,
+          "Personen": 709,
+          "männlich": 358,
+          "weiblich": 351
+        },
+        {
+          "Stadtteil": "Durlach",
+          "Jahr": 2011,
+          "Personen": 719,
+          "männlich": 354,
+          "weiblich": 365
+        },
+        {
+          "Stadtteil": "Durlach",
+          "Jahr": 2012,
+          "Personen": 719,
+          "männlich": 374,
+          "weiblich": 345
+        },
+        {
+          "Stadtteil": "Durlach",
+          "Jahr": 2013,
+          "Personen": 768,
+          "männlich": 401,
+          "weiblich": 367
+        },
+        {
+          "Stadtteil": "Durlach",
+          "Jahr": 2014,
+          "Personen": 773,
+          "männlich": 396,
+          "weiblich": 377
+        },
+        {
+          "Stadtteil": "Durlach",
+          "Jahr": 2015,
+          "Personen": 844,
+          "männlich": 446,
+          "weiblich": 398
+        },
+        {
+          "Stadtteil": "Durlach",
+          "Jahr": 2016,
+          "Personen": 819,
+          "männlich": 422,
+          "weiblich": 397
+        },
+        {
+          "Stadtteil": "Durlach",
+          "Jahr": 2017,
+          "Personen": 802,
+          "männlich": 407,
+          "weiblich": 395
+        },
+        {
+          "Stadtteil": "Durlach",
+          "Jahr": 2018,
+          "Personen": 815,
+          "männlich": 394,
+          "weiblich": 421
+        },
+        {
+          "Stadtteil": "Durlach",
+          "Jahr": 2019,
+          "Personen": 823,
+          "männlich": 407,
+          "weiblich": 416
+        },
+        {
+          "Stadtteil": "Durlach",
+          "Jahr": 2020,
+          "Personen": 824,
+          "männlich": 414,
+          "weiblich": 410
+        },
+        {
+          "Stadtteil": "Durlach",
+          "Jahr": 2021,
+          "Personen": 843,
+          "männlich": 429,
+          "weiblich": 414
+        },
+        {
+          "Stadtteil": "Grötzingen",
+          "Jahr": 2007,
+          "Personen": 198,
+          "männlich": 100,
+          "weiblich": 98
+        },
+        {
+          "Stadtteil": "Grötzingen",
+          "Jahr": 2008,
+          "Personen": 207,
+          "männlich": 103,
+          "weiblich": 104
+        },
+        {
+          "Stadtteil": "Grötzingen",
+          "Jahr": 2009,
+          "Personen": 223,
+          "männlich": 114,
+          "weiblich": 109
+        },
+        {
+          "Stadtteil": "Grötzingen",
+          "Jahr": 2010,
+          "Personen": 235,
+          "männlich": 121,
+          "weiblich": 114
+        },
+        {
+          "Stadtteil": "Grötzingen",
+          "Jahr": 2011,
+          "Personen": 228,
+          "männlich": 116,
+          "weiblich": 112
+        },
+        {
+          "Stadtteil": "Grötzingen",
+          "Jahr": 2012,
+          "Personen": 221,
+          "männlich": 112,
+          "weiblich": 109
+        },
+        {
+          "Stadtteil": "Grötzingen",
+          "Jahr": 2013,
+          "Personen": 196,
+          "männlich": 105,
+          "weiblich": 91
+        },
+        {
+          "Stadtteil": "Grötzingen",
+          "Jahr": 2014,
+          "Personen": 195,
+          "männlich": 98,
+          "weiblich": 97
+        },
+        {
+          "Stadtteil": "Grötzingen",
+          "Jahr": 2015,
+          "Personen": 217,
+          "männlich": 108,
+          "weiblich": 109
+        },
+        {
+          "Stadtteil": "Grötzingen",
+          "Jahr": 2016,
+          "Personen": 206,
+          "männlich": 101,
+          "weiblich": 105
+        },
+        {
+          "Stadtteil": "Grötzingen",
+          "Jahr": 2017,
+          "Personen": 205,
+          "männlich": 98,
+          "weiblich": 107
+        },
+        {
+          "Stadtteil": "Grötzingen",
+          "Jahr": 2018,
+          "Personen": 214,
+          "männlich": 108,
+          "weiblich": 106
+        },
+        {
+          "Stadtteil": "Grötzingen",
+          "Jahr": 2019,
+          "Personen": 225,
+          "männlich": 116,
+          "weiblich": 109
+        },
+        {
+          "Stadtteil": "Grötzingen",
+          "Jahr": 2020,
+          "Personen": 236,
+          "männlich": 122,
+          "weiblich": 114
+        },
+        {
+          "Stadtteil": "Grötzingen",
+          "Jahr": 2021,
+          "Personen": 241,
+          "männlich": 121,
+          "weiblich": 120
+        },
+        {
+          "Stadtteil": "Stupferich",
+          "Jahr": 2007,
+          "Personen": 68,
+          "männlich": 37,
+          "weiblich": 31
+        },
+        {
+          "Stadtteil": "Stupferich",
+          "Jahr": 2008,
+          "Personen": 55,
+          "männlich": 32,
+          "weiblich": 23
+        },
+        {
+          "Stadtteil": "Stupferich",
+          "Jahr": 2009,
+          "Personen": 45,
+          "männlich": 28,
+          "weiblich": 17
+        },
+        {
+          "Stadtteil": "Stupferich",
+          "Jahr": 2010,
+          "Personen": 53,
+          "männlich": 27,
+          "weiblich": 26
+        },
+        {
+          "Stadtteil": "Stupferich",
+          "Jahr": 2011,
+          "Personen": 57,
+          "männlich": 25,
+          "weiblich": 32
+        },
+        {
+          "Stadtteil": "Stupferich",
+          "Jahr": 2012,
+          "Personen": 66,
+          "männlich": 26,
+          "weiblich": 40
+        },
+        {
+          "Stadtteil": "Stupferich",
+          "Jahr": 2013,
+          "Personen": 67,
+          "männlich": 27,
+          "weiblich": 40
+        },
+        {
+          "Stadtteil": "Stupferich",
+          "Jahr": 2014,
+          "Personen": 75,
+          "männlich": 40,
+          "weiblich": 35
+        },
+        {
+          "Stadtteil": "Stupferich",
+          "Jahr": 2015,
+          "Personen": 76,
+          "männlich": 43,
+          "weiblich": 33
+        },
+        {
+          "Stadtteil": "Stupferich",
+          "Jahr": 2016,
+          "Personen": 81,
+          "männlich": 47,
+          "weiblich": 34
+        },
+        {
+          "Stadtteil": "Stupferich",
+          "Jahr": 2017,
+          "Personen": 72,
+          "männlich": 38,
+          "weiblich": 34
+        },
+        {
+          "Stadtteil": "Stupferich",
+          "Jahr": 2018,
+          "Personen": 90,
+          "männlich": 45,
+          "weiblich": 45
+        },
+        {
+          "Stadtteil": "Stupferich",
+          "Jahr": 2019,
+          "Personen": 103,
+          "männlich": 54,
+          "weiblich": 49
+        },
+        {
+          "Stadtteil": "Stupferich",
+          "Jahr": 2020,
+          "Personen": 105,
+          "männlich": 57,
+          "weiblich": 48
+        },
+        {
+          "Stadtteil": "Stupferich",
+          "Jahr": 2021,
+          "Personen": 79,
+          "männlich": 48,
+          "weiblich": 31
+        },
+        {
+          "Stadtteil": "Hohenwettersbach",
+          "Jahr": 2007,
+          "Personen": 102,
+          "männlich": 51,
+          "weiblich": 51
+        },
+        {
+          "Stadtteil": "Hohenwettersbach",
+          "Jahr": 2008,
+          "Personen": 102,
+          "männlich": 51,
+          "weiblich": 51
+        },
+        {
+          "Stadtteil": "Hohenwettersbach",
+          "Jahr": 2009,
+          "Personen": 90,
+          "männlich": 52,
+          "weiblich": 38
+        },
+        {
+          "Stadtteil": "Hohenwettersbach",
+          "Jahr": 2010,
+          "Personen": 86,
+          "männlich": 50,
+          "weiblich": 36
+        },
+        {
+          "Stadtteil": "Hohenwettersbach",
+          "Jahr": 2011,
+          "Personen": 80,
+          "männlich": 37,
+          "weiblich": 43
+        },
+        {
+          "Stadtteil": "Hohenwettersbach",
+          "Jahr": 2012,
+          "Personen": 73,
+          "männlich": 35,
+          "weiblich": 38
+        },
+        {
+          "Stadtteil": "Hohenwettersbach",
+          "Jahr": 2013,
+          "Personen": 76,
+          "männlich": 43,
+          "weiblich": 33
+        },
+        {
+          "Stadtteil": "Hohenwettersbach",
+          "Jahr": 2014,
+          "Personen": 78,
+          "männlich": 49,
+          "weiblich": 29
+        },
+        {
+          "Stadtteil": "Hohenwettersbach",
+          "Jahr": 2015,
+          "Personen": 87,
+          "männlich": 50,
+          "weiblich": 37
+        },
+        {
+          "Stadtteil": "Hohenwettersbach",
+          "Jahr": 2016,
+          "Personen": 83,
+          "männlich": 42,
+          "weiblich": 41
+        },
+        {
+          "Stadtteil": "Hohenwettersbach",
+          "Jahr": 2017,
+          "Personen": 78,
+          "männlich": 37,
+          "weiblich": 41
+        },
+        {
+          "Stadtteil": "Hohenwettersbach",
+          "Jahr": 2018,
+          "Personen": 75,
+          "männlich": 35,
+          "weiblich": 40
+        },
+        {
+          "Stadtteil": "Hohenwettersbach",
+          "Jahr": 2019,
+          "Personen": 69,
+          "männlich": 36,
+          "weiblich": 33
+        },
+        {
+          "Stadtteil": "Hohenwettersbach",
+          "Jahr": 2020,
+          "Personen": 69,
+          "männlich": 32,
+          "weiblich": 37
+        },
+        {
+          "Stadtteil": "Hohenwettersbach",
+          "Jahr": 2021,
+          "Personen": 66,
+          "männlich": 33,
+          "weiblich": 33
+        },
+        {
+          "Stadtteil": "Wolfartsweier",
+          "Jahr": 2007,
+          "Personen": 99,
+          "männlich": 57,
+          "weiblich": 42
+        },
+        {
+          "Stadtteil": "Wolfartsweier",
+          "Jahr": 2008,
+          "Personen": 81,
+          "männlich": 46,
+          "weiblich": 35
+        },
+        {
+          "Stadtteil": "Wolfartsweier",
+          "Jahr": 2009,
+          "Personen": 84,
+          "männlich": 46,
+          "weiblich": 38
+        },
+        {
+          "Stadtteil": "Wolfartsweier",
+          "Jahr": 2010,
+          "Personen": 73,
+          "männlich": 35,
+          "weiblich": 38
+        },
+        {
+          "Stadtteil": "Wolfartsweier",
+          "Jahr": 2011,
+          "Personen": 81,
+          "männlich": 41,
+          "weiblich": 40
+        },
+        {
+          "Stadtteil": "Wolfartsweier",
+          "Jahr": 2012,
+          "Personen": 72,
+          "männlich": 36,
+          "weiblich": 36
+        },
+        {
+          "Stadtteil": "Wolfartsweier",
+          "Jahr": 2013,
+          "Personen": 77,
+          "männlich": 45,
+          "weiblich": 32
+        },
+        {
+          "Stadtteil": "Wolfartsweier",
+          "Jahr": 2014,
+          "Personen": 71,
+          "männlich": 43,
+          "weiblich": 28
+        },
+        {
+          "Stadtteil": "Wolfartsweier",
+          "Jahr": 2015,
+          "Personen": 68,
+          "männlich": 47,
+          "weiblich": 21
+        },
+        {
+          "Stadtteil": "Wolfartsweier",
+          "Jahr": 2016,
+          "Personen": 73,
+          "männlich": 42,
+          "weiblich": 31
+        },
+        {
+          "Stadtteil": "Wolfartsweier",
+          "Jahr": 2017,
+          "Personen": 75,
+          "männlich": 38,
+          "weiblich": 37
+        },
+        {
+          "Stadtteil": "Wolfartsweier",
+          "Jahr": 2018,
+          "Personen": 84,
+          "männlich": 40,
+          "weiblich": 44
+        },
+        {
+          "Stadtteil": "Wolfartsweier",
+          "Jahr": 2019,
+          "Personen": 75,
+          "männlich": 35,
+          "weiblich": 40
+        },
+        {
+          "Stadtteil": "Wolfartsweier",
+          "Jahr": 2020,
+          "Personen": 71,
+          "männlich": 34,
+          "weiblich": 37
+        },
+        {
+          "Stadtteil": "Wolfartsweier",
+          "Jahr": 2021,
+          "Personen": 72,
+          "männlich": 37,
+          "weiblich": 35
+        },
+        {
+          "Stadtteil": "Grünwettersbach",
+          "Jahr": 2007,
+          "Personen": 82,
+          "männlich": 45,
+          "weiblich": 37
+        },
+        {
+          "Stadtteil": "Grünwettersbach",
+          "Jahr": 2008,
+          "Personen": 85,
+          "männlich": 47,
+          "weiblich": 38
+        },
+        {
+          "Stadtteil": "Grünwettersbach",
+          "Jahr": 2009,
+          "Personen": 93,
+          "männlich": 50,
+          "weiblich": 43
+        },
+        {
+          "Stadtteil": "Grünwettersbach",
+          "Jahr": 2010,
+          "Personen": 113,
+          "männlich": 61,
+          "weiblich": 52
+        },
+        {
+          "Stadtteil": "Grünwettersbach",
+          "Jahr": 2011,
+          "Personen": 96,
+          "männlich": 53,
+          "weiblich": 43
+        },
+        {
+          "Stadtteil": "Grünwettersbach",
+          "Jahr": 2012,
+          "Personen": 105,
+          "männlich": 56,
+          "weiblich": 49
+        },
+        {
+          "Stadtteil": "Grünwettersbach",
+          "Jahr": 2013,
+          "Personen": 95,
+          "männlich": 45,
+          "weiblich": 50
+        },
+        {
+          "Stadtteil": "Grünwettersbach",
+          "Jahr": 2014,
+          "Personen": 104,
+          "männlich": 53,
+          "weiblich": 51
+        },
+        {
+          "Stadtteil": "Grünwettersbach",
+          "Jahr": 2015,
+          "Personen": 91,
+          "männlich": 46,
+          "weiblich": 45
+        },
+        {
+          "Stadtteil": "Grünwettersbach",
+          "Jahr": 2016,
+          "Personen": 114,
+          "männlich": 61,
+          "weiblich": 53
+        },
+        {
+          "Stadtteil": "Grünwettersbach",
+          "Jahr": 2017,
+          "Personen": 102,
+          "männlich": 49,
+          "weiblich": 53
+        },
+        {
+          "Stadtteil": "Grünwettersbach",
+          "Jahr": 2018,
+          "Personen": 104,
+          "männlich": 52,
+          "weiblich": 52
+        },
+        {
+          "Stadtteil": "Grünwettersbach",
+          "Jahr": 2019,
+          "Personen": 112,
+          "männlich": 58,
+          "weiblich": 54
+        },
+        {
+          "Stadtteil": "Grünwettersbach",
+          "Jahr": 2020,
+          "Personen": 105,
+          "männlich": 60,
+          "weiblich": 45
+        },
+        {
+          "Stadtteil": "Grünwettersbach",
+          "Jahr": 2021,
+          "Personen": 109,
+          "männlich": 62,
+          "weiblich": 47
+        },
+        {
+          "Stadtteil": "Palmbach",
+          "Jahr": 2007,
+          "Personen": 42,
+          "männlich": 17,
+          "weiblich": 25
+        },
+        {
+          "Stadtteil": "Palmbach",
+          "Jahr": 2008,
+          "Personen": 42,
+          "männlich": 18,
+          "weiblich": 24
+        },
+        {
+          "Stadtteil": "Palmbach",
+          "Jahr": 2009,
+          "Personen": 36,
+          "männlich": 18,
+          "weiblich": 18
+        },
+        {
+          "Stadtteil": "Palmbach",
+          "Jahr": 2010,
+          "Personen": 36,
+          "männlich": 14,
+          "weiblich": 22
+        },
+        {
+          "Stadtteil": "Palmbach",
+          "Jahr": 2011,
+          "Personen": 57,
+          "männlich": 25,
+          "weiblich": 32
+        },
+        {
+          "Stadtteil": "Palmbach",
+          "Jahr": 2012,
+          "Personen": 62,
+          "männlich": 28,
+          "weiblich": 34
+        },
+        {
+          "Stadtteil": "Palmbach",
+          "Jahr": 2013,
+          "Personen": 64,
+          "männlich": 30,
+          "weiblich": 34
+        },
+        {
+          "Stadtteil": "Palmbach",
+          "Jahr": 2014,
+          "Personen": 74,
+          "männlich": 37,
+          "weiblich": 37
+        },
+        {
+          "Stadtteil": "Palmbach",
+          "Jahr": 2015,
+          "Personen": 68,
+          "männlich": 39,
+          "weiblich": 29
+        },
+        {
+          "Stadtteil": "Palmbach",
+          "Jahr": 2016,
+          "Personen": 65,
+          "männlich": 32,
+          "weiblich": 33
+        },
+        {
+          "Stadtteil": "Palmbach",
+          "Jahr": 2017,
+          "Personen": 64,
+          "männlich": 28,
+          "weiblich": 36
+        },
+        {
+          "Stadtteil": "Palmbach",
+          "Jahr": 2018,
+          "Personen": 65,
+          "männlich": 29,
+          "weiblich": 36
+        },
+        {
+          "Stadtteil": "Palmbach",
+          "Jahr": 2019,
+          "Personen": 60,
+          "männlich": 27,
+          "weiblich": 33
+        },
+        {
+          "Stadtteil": "Palmbach",
+          "Jahr": 2020,
+          "Personen": 52,
+          "männlich": 26,
+          "weiblich": 26
+        },
+        {
+          "Stadtteil": "Palmbach",
+          "Jahr": 2021,
+          "Personen": 59,
+          "männlich": 31,
+          "weiblich": 28
+        },
+        {
+          "Stadtteil": "Neureut",
+          "Jahr": 2007,
+          "Personen": 403,
+          "männlich": 198,
+          "weiblich": 205
+        },
+        {
+          "Stadtteil": "Neureut",
+          "Jahr": 2008,
+          "Personen": 401,
+          "männlich": 197,
+          "weiblich": 204
+        },
+        {
+          "Stadtteil": "Neureut",
+          "Jahr": 2009,
+          "Personen": 388,
+          "männlich": 197,
+          "weiblich": 191
+        },
+        {
+          "Stadtteil": "Neureut",
+          "Jahr": 2010,
+          "Personen": 449,
+          "männlich": 214,
+          "weiblich": 235
+        },
+        {
+          "Stadtteil": "Neureut",
+          "Jahr": 2011,
+          "Personen": 445,
+          "männlich": 227,
+          "weiblich": 218
+        },
+        {
+          "Stadtteil": "Neureut",
+          "Jahr": 2012,
+          "Personen": 476,
+          "männlich": 235,
+          "weiblich": 241
+        },
+        {
+          "Stadtteil": "Neureut",
+          "Jahr": 2013,
+          "Personen": 484,
+          "männlich": 239,
+          "weiblich": 245
+        },
+        {
+          "Stadtteil": "Neureut",
+          "Jahr": 2014,
+          "Personen": 493,
+          "männlich": 262,
+          "weiblich": 231
+        },
+        {
+          "Stadtteil": "Neureut",
+          "Jahr": 2015,
+          "Personen": 507,
+          "männlich": 281,
+          "weiblich": 226
+        },
+        {
+          "Stadtteil": "Neureut",
+          "Jahr": 2016,
+          "Personen": 514,
+          "männlich": 280,
+          "weiblich": 234
+        },
+        {
+          "Stadtteil": "Neureut",
+          "Jahr": 2017,
+          "Personen": 485,
+          "männlich": 249,
+          "weiblich": 236
+        },
+        {
+          "Stadtteil": "Neureut",
+          "Jahr": 2018,
+          "Personen": 524,
+          "männlich": 262,
+          "weiblich": 262
+        },
+        {
+          "Stadtteil": "Neureut",
+          "Jahr": 2019,
+          "Personen": 481,
+          "männlich": 246,
+          "weiblich": 235
+        },
+        {
+          "Stadtteil": "Neureut",
+          "Jahr": 2020,
+          "Personen": 470,
+          "männlich": 255,
+          "weiblich": 215
+        },
+        {
+          "Stadtteil": "Neureut",
+          "Jahr": 2021,
+          "Personen": 464,
+          "männlich": 248,
+          "weiblich": 216
+        },
+        {
+          "Stadtteil": "Nordstadt",
+          "Jahr": 2007,
+          "Personen": 315,
+          "männlich": 166,
+          "weiblich": 149
+        },
+        {
+          "Stadtteil": "Nordstadt",
+          "Jahr": 2008,
+          "Personen": 308,
+          "männlich": 164,
+          "weiblich": 144
+        },
+        {
+          "Stadtteil": "Nordstadt",
+          "Jahr": 2009,
+          "Personen": 301,
+          "männlich": 153,
+          "weiblich": 148
+        },
+        {
+          "Stadtteil": "Nordstadt",
+          "Jahr": 2010,
+          "Personen": 288,
+          "männlich": 143,
+          "weiblich": 145
+        },
+        {
+          "Stadtteil": "Nordstadt",
+          "Jahr": 2011,
+          "Personen": 269,
+          "männlich": 138,
+          "weiblich": 131
+        },
+        {
+          "Stadtteil": "Nordstadt",
+          "Jahr": 2012,
+          "Personen": 264,
+          "männlich": 136,
+          "weiblich": 128
+        },
+        {
+          "Stadtteil": "Nordstadt",
+          "Jahr": 2013,
+          "Personen": 249,
+          "männlich": 131,
+          "weiblich": 118
+        },
+        {
+          "Stadtteil": "Nordstadt",
+          "Jahr": 2014,
+          "Personen": 246,
+          "männlich": 133,
+          "weiblich": 113
+        },
+        {
+          "Stadtteil": "Nordstadt",
+          "Jahr": 2015,
+          "Personen": 216,
+          "männlich": 114,
+          "weiblich": 102
+        },
+        {
+          "Stadtteil": "Nordstadt",
+          "Jahr": 2016,
+          "Personen": 219,
+          "männlich": 116,
+          "weiblich": 103
+        },
+        {
+          "Stadtteil": "Nordstadt",
+          "Jahr": 2017,
+          "Personen": 211,
+          "männlich": 106,
+          "weiblich": 105
+        },
+        {
+          "Stadtteil": "Nordstadt",
+          "Jahr": 2018,
+          "Personen": 205,
+          "männlich": 115,
+          "weiblich": 90
+        },
+        {
+          "Stadtteil": "Nordstadt",
+          "Jahr": 2019,
+          "Personen": 206,
+          "männlich": 116,
+          "weiblich": 90
+        },
+        {
+          "Stadtteil": "Nordstadt",
+          "Jahr": 2020,
+          "Personen": 211,
+          "männlich": 123,
+          "weiblich": 88
+        },
+        {
+          "Stadtteil": "Nordstadt",
+          "Jahr": 2021,
+          "Personen": 197,
+          "männlich": 101,
+          "weiblich": 96
+        }
+      ],
+      "meta": {
+        "date": "2023-05-03T19:11:36.308Z",
+        "storagetype": "dataframe",
+        "url": "/data/good.xlsx"
+      },
+      "root": true,
+      "loaded": true
+    },
+    {
+      "id": "N3",
+      "data": {
+        "type": "FeatureCollection",
+        "features": [
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                8.487036280596149,
+                49.001341982931024
+              ]
+            },
+            "properties": {
+              "NAME": "Bergfriedhof Durlach",
+              "GRUPPENNAME_DE": "Friedhöfe",
+              "UPDATED": 1415059200000
+            }
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                8.361932493283083,
+                49.03313461379192
+              ]
+            },
+            "properties": {
+              "NAME": "Friedhof Nordwest",
+              "GRUPPENNAME_DE": "Friedhöfe",
+              "UPDATED": 1415059200000
+            }
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                8.431760077335127,
+                49.016369611099776
+              ]
+            },
+            "properties": {
+              "NAME": "Hauptfriedhof",
+              "GRUPPENNAME_DE": "Friedhöfe",
+              "UPDATED": 1415059200000
+            }
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                8.386979328119738,
+                49.05819633156732
+              ]
+            },
+            "properties": {
+              "NAME": "Nordfriedhof Neureut",
+              "GRUPPENNAME_DE": "Friedhöfe",
+              "UPDATED": 1415059200000
+            }
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                8.471867417641706,
+                48.95723016243072
+              ]
+            },
+            "properties": {
+              "NAME": "Stadtteilfriedhof  Grünwettersbach",
+              "GRUPPENNAME_DE": "Friedhöfe",
+              "UPDATED": 1415059200000
+            }
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                8.472501223990413,
+                48.96446274823237
+              ]
+            },
+            "properties": {
+              "NAME": "Stadtteilfriedhof  Hohenwettersbach",
+              "GRUPPENNAME_DE": "Friedhöfe",
+              "UPDATED": 1415059200000
+            }
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                8.479920276072976,
+                48.94837350107346
+              ]
+            },
+            "properties": {
+              "NAME": "Stadtteilfriedhof  Palmbach",
+              "GRUPPENNAME_DE": "Friedhöfe",
+              "UPDATED": 1415059200000
+            }
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                8.50998818759636,
+                48.950636275699125
+              ]
+            },
+            "properties": {
+              "NAME": "Stadtteilfriedhof  Stupferich",
+              "GRUPPENNAME_DE": "Friedhöfe",
+              "UPDATED": 1415059200000
+            }
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                8.455037296639087,
+                48.986727022238384
+              ]
+            },
+            "properties": {
+              "NAME": "Stadtteilfriedhof Aue",
+              "GRUPPENNAME_DE": "Friedhöfe",
+              "UPDATED": 1415059200000
+            }
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                8.386407943005175,
+                48.99452935509681
+              ]
+            },
+            "properties": {
+              "NAME": "Stadtteilfriedhof Beiertheim",
+              "GRUPPENNAME_DE": "Friedhöfe",
+              "UPDATED": 1415059200000
+            }
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                8.373900238468627,
+                48.98395036917059
+              ]
+            },
+            "properties": {
+              "NAME": "Stadtteilfriedhof Bulach",
+              "GRUPPENNAME_DE": "Friedhöfe",
+              "UPDATED": 1415059200000
+            }
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                8.338143032146228,
+                49.00687857398495
+              ]
+            },
+            "properties": {
+              "NAME": "Stadtteilfriedhof Daxlanden",
+              "GRUPPENNAME_DE": "Friedhöfe",
+              "UPDATED": 1415059200000
+            }
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                8.510800442479649,
+                49.003009795724374
+              ]
+            },
+            "properties": {
+              "NAME": "Stadtteilfriedhof Grötzingen",
+              "GRUPPENNAME_DE": "Friedhöfe",
+              "UPDATED": 1415059200000
+            }
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                8.354158756681942,
+                49.00611506736944
+              ]
+            },
+            "properties": {
+              "NAME": "Stadtteilfriedhof Grünwinkel",
+              "GRUPPENNAME_DE": "Friedhöfe",
+              "UPDATED": 1415059200000
+            }
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                8.461379002794663,
+                49.02709530537446
+              ]
+            },
+            "properties": {
+              "NAME": "Stadtteilfriedhof Hagsfeld",
+              "GRUPPENNAME_DE": "Friedhöfe",
+              "UPDATED": 1415059200000
+            }
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                8.339210555893885,
+                49.035695396088016
+              ]
+            },
+            "properties": {
+              "NAME": "Stadtteilfriedhof Knielingen",
+              "GRUPPENNAME_DE": "Friedhöfe",
+              "UPDATED": 1415059200000
+            }
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                8.35595669699385,
+                49.01508126339843
+              ]
+            },
+            "properties": {
+              "NAME": "Stadtteilfriedhof Mühlburg",
+              "GRUPPENNAME_DE": "Friedhöfe",
+              "UPDATED": 1415059200000
+            }
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                8.368190014720103,
+                48.98822647611368
+              ]
+            },
+            "properties": {
+              "NAME": "Stadtteilfriedhof Oberreut",
+              "GRUPPENNAME_DE": "Friedhöfe",
+              "UPDATED": 1415059200000
+            }
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                8.44645571588274,
+                49.016441029490636
+              ]
+            },
+            "properties": {
+              "NAME": "Stadtteilfriedhof Rintheim",
+              "GRUPPENNAME_DE": "Friedhöfe",
+              "UPDATED": 1415059200000
+            }
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                8.398655537656229,
+                48.97037801701521
+              ]
+            },
+            "properties": {
+              "NAME": "Stadtteilfriedhof Rüppurr",
+              "GRUPPENNAME_DE": "Friedhöfe",
+              "UPDATED": 1415059200000
+            }
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                8.448871252444064,
+                48.97346133193131
+              ]
+            },
+            "properties": {
+              "NAME": "Stadtteilfriedhof Wolfartsweier",
+              "GRUPPENNAME_DE": "Friedhöfe",
+              "UPDATED": 1415059200000
+            }
+          },
+          {
+            "type": "Feature",
+            "geometry": {
+              "type": "Point",
+              "coordinates": [
+                8.371998596640323,
+                49.04611142331121
+              ]
+            },
+            "properties": {
+              "NAME": "Südfriedhof Neureut",
+              "GRUPPENNAME_DE": "Friedhöfe",
+              "UPDATED": 1415059200000
+            }
+          }
+        ]
+      },
+      "meta": {
+        "date": "2023-05-03T19:11:53.470Z",
+        "storagetype": "featureset",
+        "url": "/data/geoPoint.json"
+      },
+      "root": true,
+      "loaded": true
+    }
+  ],
+  "next": 10,
+  "story": {
+    "title": "",
+    "author": "",
+    "date": "",
+    "email": "",
+    "link": "",
+    "tags": [],
+    "category": "",
+    "text": ""
+  }
+}
