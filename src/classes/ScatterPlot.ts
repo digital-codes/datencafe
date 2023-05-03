@@ -175,7 +175,7 @@ export class ScatterPlot extends DcNode {
     const png = await DcNode.Plotly.toImage(this.plot, {
       format: "png",
       width: 1280,
-      height: 720,
+      height: 720*1,
     });
     return png;
   }
