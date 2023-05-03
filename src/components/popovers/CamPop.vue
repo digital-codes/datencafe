@@ -63,7 +63,9 @@ const capture = async () => {
   console.log("capture")
   const img = await cam.value.capture();
 
-  const outputSize = [96,64];
+  console.log(img.shape)
+  
+  const outputSize = [128,128];
 
   // Resample the tensor to the desired output size
   // NB: size is height first!
