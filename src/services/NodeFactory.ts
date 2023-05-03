@@ -21,10 +21,13 @@ import { ScalarMath } from "@/classes/ScalarMath";
 import { AddRows } from "@/classes/AddRows";
 import { AddCols } from "@/classes/AddCols";
 import { PointMap } from "@/classes/PointMap";
+import { WebCam } from "@/classes/WebCam";
 
 // instance generator
 export const nodeFactory = async (id: string, type: any) => {
   switch (type.name) {
+    case "webcam":
+      return await new WebCam(id, type);
     case "randomgen":
       return await new RandomGen(id, type);
     case "datainfo":

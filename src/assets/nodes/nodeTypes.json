@@ -479,6 +479,21 @@
             "info": "Mehr Text f\u00fcr den Tooltip"
         }
     },
+    "webcam": {
+        "name": "webcam",
+        "group": "source",
+        "implemented": true,
+        "thumb": "/img/widgets/video.svg",
+        "consent": false,
+        "en": {
+            "label": "Webcam",
+            "info": "More text for a popup or tooltip"
+        },
+        "de": {
+            "label": "Webcam",
+            "info": "Mehr Text f\u00fcr den Tooltip"
+        }
+    },
     "randomgen": {
         "name": "randomgen",
         "group": "source",

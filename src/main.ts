@@ -90,6 +90,8 @@ import { faLeaf } from '@fortawesome/free-solid-svg-icons'
 import { faGear } from '@fortawesome/free-solid-svg-icons'
 import { faLock } from '@fortawesome/free-solid-svg-icons'
 import { faLockOpen } from '@fortawesome/free-solid-svg-icons'
+import { faVideo } from '@fortawesome/free-solid-svg-icons'
+import { faPencil } from '@fortawesome/free-solid-svg-icons'
 
 
 
@@ -104,7 +106,7 @@ library.add(faMagnifyingGlassPlus, faMagnifyingGlassMinus, faExpand,faImage,faQu
 library.add(faList, faListCheck, faTag, faTags, faHeading, faTimeline, faNewspaper)
 library.add(faPenToSquare, faInfo, faMessage,faComment,faFilePdf)
 library.add(faRecycle,faPeopleRoof,faCloudSunRain,faMicroscope,faBookMedical,faLeaf)
-library.add(faGear, faLock, faLockOpen)
+library.add(faGear, faLock, faLockOpen,faVideo,faPencil)
 
 
 // ----------------
