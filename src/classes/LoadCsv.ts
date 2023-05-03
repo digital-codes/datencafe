@@ -3,6 +3,7 @@
 import { DcNode } from "./DcNode"
 //import { DataFrame, toJSON } from 'danfojs/dist/danfojs-browser/src';
 import { NodeSpec } from '@/services/GlobalDefs';
+import { StorageTypes } from "@/services/GlobalDefs";
 
 import { readCSVBrowser } from "danfojs/dist/danfojs-base/io/browser"
 //import { CsvInputOptionsBrowser } from "danfojs/dist/danfojs-base/shared/types";
@@ -119,6 +120,8 @@ export class LoadCsv extends DcNode {
       const meta = await DcNode.providers.getMeta(this.id)
       const dt = await new Date().toISOString()
       meta.date = dt
+      // set storage type of this class
+      meta.storagetype = StorageTypes.DATAFRAME
       await DcNode.providers.update(this.id, DcNode.dfd.toJSON(this.df),meta)
       await this.messaging.emit(DcNode.signals.NODEANIMATE, this.id)
       await super.messaging.emit(DcNode.signals.UPDPREFIX as string + this.id)

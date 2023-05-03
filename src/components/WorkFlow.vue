@@ -23,13 +23,14 @@ import type { NodeSingular, EdgeSingular } from "cytoscape";
 import type { MenuOptions } from "cytoscape-context-menus";
 
 import { IonButton } from "@ionic/vue";
-import { loadingController } from '@ionic/vue';
+import { loadingController } from "@ionic/vue";
 
 import { DataFrame, toJSON } from "danfojs/dist/danfojs-browser/src";
 
 // globals
 import { Signals, Version, FlowSpec } from "@/services/GlobalDefs";
 import eventBus from "@/services/eventBus";
+import { StorageTypes } from "@/services/GlobalDefs";
 
 // provider/subscriber
 import { PubStore } from "@/services/PubStore";
@@ -722,6 +723,7 @@ async function flowInit() {
       switch (instance.type) {
         case NodeSpec.CHART:
         case NodeSpec.TABLE:
+        case NodeSpec.MAP:
         case NodeSpec.OUTPUT:
           options.push("download");
           break;
@@ -839,19 +841,18 @@ async function flowInit() {
   userStore.setFlowrdy(true);
 }
 
-
-const loaderPop = ref(null)
+const loaderPop = ref(null);
 const fakePrint = false;
 const htmlDocs = async () => {
   console.log("Make PDF via HTML");
   //alert("Preparing PDF. Current flow will be lost (sorry). Click OK then wait a moment ...");
   // fake
   loaderPop.value = await loadingController.create({
-    message: 'Preparing PDF ...',
+    message: "Preparing PDF ...",
     duration: 0,
   });
   await loaderPop.value.present();
-  await nextTick()
+  await nextTick();
   let htm;
   if (fakePrint) htm = html.part;
   else {
@@ -863,15 +864,24 @@ const htmlDocs = async () => {
     htm = "<style '" + html.style.page + "'></style>\n";
     htm += "<div style='" + html.style.div + "'>\n";
     htm += "<h1 style='" + html.style.h1 + "'>Daten.Cafe</h1>\n";
-    htm += "<img  style='" + html.style.logoimg + "' src='/img/logo/datencafe.png'/>\n\n";
+    htm +=
+      "<img  style='" +
+      html.style.logoimg +
+      "' src='/img/logo/datencafe.png'/>\n\n";
 
     htm += "<article style='" + html.style.article + "'> \n";
     htm += "<h2 style='" + html.style.h2 + "'>Story</h2>\n";
     htm += "<h3 style='" + html.style.h3 + "'>" + story.title + "</h3>\n";
     htm += "<ul style='" + html.style.ul + "'>\n";
-    htm += "<li style='" + html.style.li + "'>Author: " + story.author + "</li>\n";
+    htm +=
+      "<li style='" + html.style.li + "'>Author: " + story.author + "</li>\n";
     htm += "<li style='" + html.style.li + "'>Date: " + story.date + "</li>\n";
-    htm += "<li style='" + html.style.li + "'>Category: " + story.category + "</li>\n";
+    htm +=
+      "<li style='" +
+      html.style.li +
+      "'>Category: " +
+      story.category +
+      "</li>\n";
     htm += "</ul>\n";
     htm += "</p style='" + html.style.p + "'>" + story.text + "</>\n";
 
@@ -882,21 +892,27 @@ const htmlDocs = async () => {
       // we read all nodes as meta might be introduces at later stages as well
       // not only at input nodes
       if (providers.exists(node.id)) {
-        const meta = providers.getMeta(node.id) 
-        for (const item of ["url","date","license","attribution"]){
-          if (meta[item] !== undefined){
-            htm += "<li style='" + html.style.li + "'>" + item + ": " + meta[item] + "</li>\n";
+        const meta = providers.getMeta(node.id);
+        for (const item of ["url", "date", "license", "attribution"]) {
+          if (meta[item] !== undefined) {
+            htm +=
+              "<li style='" +
+              html.style.li +
+              "'>" +
+              item +
+              ": " +
+              meta[item] +
+              "</li>\n";
           }
         }
       }
     }
     htm += "</ul>\n";
-    htm += "</article>\n\n"
+    htm += "</article>\n\n";
 
+    htm += "<article style='" + html.style.article + "'>\n";
 
-    htm += "<article style='" + html.style.article + "'>\n"
-
-    htm += "<h2 style='" + html.style.h2 + "'>Workflow</h2>\n"
+    htm += "<h2 style='" + html.style.h2 + "'>Workflow</h2>\n";
     // get flow image
     // extent:  { x1, y1, x2, y2, w, h }.
     await cy.value.fit();
@@ -909,7 +925,12 @@ const htmlDocs = async () => {
       maxWidth: 1280,
     });
 
-    htm += "<img  style='" + html.style.docimg + "'class='docimg' src='" + wf + "'>\n\n";
+    htm +=
+      "<img  style='" +
+      html.style.docimg +
+      "'class='docimg' src='" +
+      wf +
+      "'>\n\n";
 
     htm += "</article>\n\n";
 
@@ -929,11 +950,11 @@ const htmlDocs = async () => {
       htm += "<img  style='" + html.style.docimg + "' src='" + dataURL + "'>\n\n";
       */
       //console.log("Instance:",instance,instance.getImage)
-      const png = await instance.getImage()
+      const png = await instance.getImage();
       htm += "<img  style='" + html.style.docimg + "' src='" + png + "'>\n\n";
 
       htm += "</article>\n";
-      htm += "</div>\n"
+      htm += "</div>\n";
     }
     // -----------------------------
   }
@@ -942,13 +963,11 @@ const htmlDocs = async () => {
 
   // push to print page
   await printStore.set(htm);
-  await nextTick()
+  await nextTick();
   await router.push({
     name: "PrintPage",
   });
   await loaderPop.value.dismiss();
-
-
 };
 
 // FIXME ---------------------------------
@@ -2147,8 +2166,8 @@ const generateFlowUrl = async () => {
   if (!fullSize) {
     // delete all data
     for (const i in data) {
-      data[i].data = {}
-      data[i].loaded = false
+      data[i].data = {};
+      data[i].loaded = false;
     }
   }
   // https://stackoverflow.com/questions/72997146/how-to-push-data-to-local-json-file-on-button-click-using-javascript
@@ -2258,19 +2277,28 @@ async function downloadData(instance) {
   // read data
   if (!providers.exists(srcId)) throw new Error("Invalid ID");
   const dt = providers.getDataById(srcId);
-  const df = await new DcNode.dfd.DataFrame(dt);
+  const meta = providers.getMeta(srcId);
+  console.log("Meta:",meta)
+  let df
+  switch (meta.storagetype) {
+    case StorageTypes.DATAFRAME:
+      df = await new DcNode.dfd.DataFrame(dt);
+      // we can send csv or json
+      try {
+        // use selected node for filename
+        await DcNode.dfd.toCSV(df, {
+          fileName: "datencafe-" + String(instance.id) + ".csv",
+          download: true,
+        });
+      } catch (e) {
+        alert("Sorry, download failed");
+        return;
+      }
 
-  // df.print()
-  // we can send csv or json
-  try {
-    // use selected node for filename
-    await DcNode.dfd.toCSV(df, {
-      fileName: "datencafe-" + String(instance.id) + ".csv",
-      download: true,
-    });
-  } catch (e) {
-    alert("Sorry, download failed");
-    return;
+      break;
+    default:
+      alert("Storagetype not implemented for download: " + meta.storagetype);
+      return;
   }
   /*
   try {
@@ -2386,7 +2414,7 @@ const openSettings = () => {
         </ion-button>
       </ion-buttons>
       -->
-        <ion-buttons slot="start">
+      <ion-buttons slot="start">
         <ion-button id="fitRef" @click="openCamPop">
           <font-awesome-icon
             :icon="['fas', 'expand']"
@@ -2396,8 +2424,7 @@ const openSettings = () => {
         </ion-button>
       </ion-buttons>
 
-
-        <ion-buttons slot="start">
+      <ion-buttons slot="start">
         <ion-button id="fitRef" @click="zoomFit">
           <font-awesome-icon
             :icon="['fas', 'expand']"
@@ -2407,9 +2434,7 @@ const openSettings = () => {
         </ion-button>
       </ion-buttons>
 
-
       <ion-buttons slot="start">
-
         <ion-button id="storyRef" @click="openStoryPop">
           <font-awesome-icon
             :icon="['fas', 'pen-to-square']"

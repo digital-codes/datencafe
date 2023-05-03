@@ -80,7 +80,7 @@ const mapLayoutDefault = {
 export class PointMap extends DcNode {
   // properties
   static _display = true;
-  static _type = NodeSpec.LEAFLET;
+  static _type = NodeSpec.MAP;
   private updCnt = 0;
   private map: any = null;
   private layer: any = null;

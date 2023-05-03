@@ -163,7 +163,10 @@ onMounted(async () => {
 
 <style>
 .popover-viewport {
+  /*
   min-width: calc(80vw);
+  */
+  width:fit-content;
 }
 
 </style>

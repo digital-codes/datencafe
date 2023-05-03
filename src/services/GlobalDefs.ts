@@ -18,6 +18,13 @@ export enum Signals {
 
 }
 
+export enum StorageTypes {
+  DATAFRAME = "dataframe", // default
+  FEATURESET = "featureset", // maps
+  JSON = "json", // some raw json, not table-like
+  TENSOR = "tensor",
+  IMAGE = "image", // img source, b64
+}
 
 export enum NodeSpec {
   CHART = "chart",

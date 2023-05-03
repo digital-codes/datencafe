@@ -5,6 +5,7 @@ import {DcNode} from "./DcNode"
 import {DataFrame, toJSON} from 'danfojs/dist/danfojs-browser/src';
 
 import { NodeSpec } from '@/services/GlobalDefs';
+import { StorageTypes } from "@/services/GlobalDefs";
 
 
 export class RandomGen extends DcNode {
@@ -126,7 +127,11 @@ export class RandomGen extends DcNode {
     this.df = await new DataFrame(dt)
     this.df.print()
     //await DcNode.providers.update(super.id,toJSON(this.df))
-    await DcNode.providers.update(this.id,toJSON(this.df),{"generator":"random"})
+    const meta = {
+        storagetype: StorageTypes.DATAFRAME,
+        generator:"random"
+    }
+    await DcNode.providers.update(this.id,toJSON(this.df),meta)
     //await subscribers.update(d.id,d.ep)
     await this.messaging.emit(DcNode.signals.NODEANIMATE, this.id)
     await super.messaging.emit(DcNode.signals.UPDPREFIX as string + this.id,2*this.genCnt)

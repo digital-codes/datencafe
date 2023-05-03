@@ -3,6 +3,7 @@
 import { DcNode } from "./DcNode";
 import { DataFrame, toJSON } from "danfojs/dist/danfojs-browser/src";
 import { NodeSpec } from "@/services/GlobalDefs";
+import { StorageTypes } from "@/services/GlobalDefs";
 
 import { readJSONBrowser } from "danfojs/dist/danfojs-base/io/browser";
 import { JsonInputOptionsBrowser } from "danfojs/dist/danfojs-base/shared/types";
@@ -133,6 +134,8 @@ export class LoadGeo extends DcNode {
     const meta = await DcNode.providers.getMeta(this.id)
     const dt = await new Date().toISOString()
     meta.date = dt
+    // set storage type of this class
+    meta.storagetype = StorageTypes.FEATURESET
     await DcNode.providers.update(this.id, data,meta);
     await this.messaging.emit(DcNode.signals.NODEANIMATE, this.id)
     await super.messaging.emit((DcNode.signals.UPDPREFIX as string) + super.id);
