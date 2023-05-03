@@ -2099,6 +2099,8 @@ async function screenShot() {
 // this way the computation is repeated always.
 // compute only after button click
 const downUrl = ref();
+const downName = ref("")
+
 /*
 const downUrl = computed(() => {
   console.log("Save flow");
@@ -2189,6 +2191,7 @@ const generateFlowUrl = async () => {
     );
     const blob = await new Blob([flowData], { type: contentType });
     const newUrl = await window.URL.createObjectURL(blob);
+    downName.value = "flow.json" // set name for flow
     await DelayTimer(50);
     downUrl.value = newUrl;
     //console.log("downurl updated");
@@ -2280,6 +2283,7 @@ async function downloadData(instance) {
   const meta = providers.getMeta(srcId);
   console.log("Meta:",meta)
   let df
+  let contentType, dData, blob
   switch (meta.storagetype) {
     case StorageTypes.DATAFRAME:
       df = await new DcNode.dfd.DataFrame(dt);
@@ -2291,10 +2295,29 @@ async function downloadData(instance) {
           download: true,
         });
       } catch (e) {
-        alert("Sorry, download failed");
+        alert("Sorry, download failed: " + e);
         return;
       }
+      break;
 
+      case StorageTypes.FEATURESET:
+        try {
+          contentType = 'application/json'
+          dData = JSON.stringify(dt, null, 2)
+          console.log("dt:",dData)
+          blob = new Blob([dData], { type: contentType })
+          downName.value = "datencafe-" + srcId + ".geojson" // set name for download
+          downUrl.value = window.URL.createObjectURL(blob)
+          await DelayTimer(100);
+          if (!smallScreen.value) {
+            flowLinkLg.value.click();
+          } else {
+            flowLinkSm.value.click();
+          }
+        } catch (e) {
+          alert("Sorry, download failed: " + e);
+          return;
+        }
       break;
     default:
       alert("Storagetype not implemented for download: " + meta.storagetype);
@@ -2494,7 +2517,7 @@ const openSettings = () => {
           style="display: none !important"
           id="downRefLg"
           ref="flowLinkLg"
-          download="flow.json"
+          :download="downName"
           :href="downUrl"
         >
         </a>
@@ -2618,7 +2641,7 @@ const openSettings = () => {
           style="display: none !important"
           id="downRefSm"
           ref="flowLinkSm"
-          download="flow.json"
+          :download="downName"
           :href="downUrl"
         >
         </a>

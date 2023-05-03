@@ -81,7 +81,9 @@ export class DataInfo extends DcNode {
         await ds1.addColumn(c, ds.column(c), { inplace: true });
       })
       //await DcNode.providers.update(super.id,toJSON(this.df))
-      await DcNode.providers.update(this.id, DcNode.dfd.toJSON(ds1))
+      const meta = await DcNode.providers.getMeta(this.id)
+      meta.storagetype = StorageTypes.DATAFRAME
+        await DcNode.providers.update(this.id, DcNode.dfd.toJSON(ds1),meta)
       //await subscribers.update(d.id,d.ep)
       await this.messaging.emit(DcNode.signals.NODEANIMATE, this.id)
       await DelayTimer(20)

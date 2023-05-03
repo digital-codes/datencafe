@@ -62,7 +62,9 @@ export class AddRows extends DcNode {
     const df = DcNode.dfd.concat({ dfList: [dfA,dfB], axis: 0 })
 
     // put data into store then send message
-    await DcNode.providers.update(this.id, DcNode.dfd.toJSON(df))
+    const meta = await DcNode.providers.getMeta(this.id)
+    meta.storagetype = StorageTypes.DATAFRAME
+    await DcNode.providers.update(this.id, DcNode.dfd.toJSON(df),meta)
     await this.messaging.emit(DcNode.signals.NODEANIMATE, this.id)
     await DelayTimer(20)
     await this.messaging.emit(DcNode.signals.UPDPREFIX as string + this.id)
