@@ -25,7 +25,10 @@ export class AddCols extends DcNode {
         type: "string",
         label: "Operation",
         select:true,
+        /*
         value: ["Join", "Append", "Add", "Sub", "Mul", "Div"],
+        */
+        value: ["Append", "Add", "Sub", "Mul", "Div"],
         current: ""
       },
       ]
