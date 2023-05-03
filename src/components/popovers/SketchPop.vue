@@ -1,11 +1,13 @@
 <template>
   <ion-content class="ion-padding ion-popover storyPop">
     <p>Sketch</p>
-    <div>
-      <canvas ref="cv"  @mousedown="startDrawing" @mousemove="drawShape" @mouseup="stopDrawing"></canvas>      
+    <div style="padding:10px;" >
+      <canvas ref="cv" @mousedown="startDrawing" @mousemove="drawShape" @mouseup="stopDrawing"></canvas>      
     </div>
     <div>
+      <!-- 
       <img ref="img" :src="imgSrc"/>
+      -->
       <canvas ref="ocv"></canvas>      
     </div>
     <ion-button @click="saveImage">Save</ion-button>
@@ -64,8 +66,17 @@ const startDrawing = (event) => {
 
 const drawShape = (event) => {
   if (!isDrawing.value) return;
-
+  // check bounds. @blur and @onfocusout not working
   const canvas = event.target;
+  const w = canvas.width
+  const h = canvas.height
+  const x = event.offsetX
+  const y = event.offsetY
+  if ((x < 2) || (x > (w - 2)) || (y < 2) || (y > (h - 2))) {
+    stopDrawing()
+    return
+  }
+
   const context = canvas.getContext('2d');
 
   context.strokeStyle = 'black';
@@ -82,6 +93,7 @@ const drawShape = (event) => {
 
 const stopDrawing = () => {
   isDrawing.value = false;
+  saveImage()
 };
 
 const clearDrawing = () => {
@@ -94,8 +106,10 @@ const clearDrawing = () => {
 
 const saveImage = async () => {
   const canvas = cv.value
+  /* write to image. works, but not needed
   const image = canvas.toDataURL();
   imgSrc.value = await image
+  */
   // tf convert
   const context = await canvas.getContext('2d');
   const imgData = await context.getImageData(0, 0, canvas.width, canvas.height);
@@ -170,6 +184,10 @@ onMounted(() => {
 
 
 <style scoped>
+div {
+  display:block;
+  text-align:center;
+}
 canvas {
   border: 2px solid var(--ion-color-primary);
 }
@@ -199,9 +217,12 @@ ion-popover.storyPop {
 
 ion-popover.storyPop ion-content {
   height: calc(80vh - 20px);
-  width: calc(100vw - 20px);
   --height: calc(80vh - 20px);
+  /*
+  width: calc(100vw - 20px);
   --width: calc(100vw - 20px);
+  */
+  width:fit-content;
   overflow: clip;
 }
 
