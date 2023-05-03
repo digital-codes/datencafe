@@ -63,8 +63,11 @@ import CfgMixedParms from "@/components/popovers/CfgMixedPopover.vue";
 // story pop
 import StoryPop from "@/components/popovers/StoryPopover.vue";
 
-// sketc pop
+// sketch pop
 import SketchPop from "@/components/popovers/SketchPop.vue";
+
+// webcam pop
+import CamPop from "@/components/popovers/CamPop.vue";
 
 // --------------------
 import NodeSel from "@/components/popovers/NodeSel.vue";
@@ -954,6 +957,33 @@ const openSketchPop = async () => {
   console.log("Open Pop");
   popover.value = await popoverController.create({
     component: SketchPop,
+    //event: ev,
+    size: "cover",
+    side: "left",
+    cssClass: "storyPop",
+    alignment: "start",
+    showBackdrop: true,
+    backdropDismiss: true,
+    dismissOnSelect: false,
+    reference: "trigger", // event or trigger
+    componentProps: {
+      // Popover props
+      signal: "popUp",
+    },
+  });
+  await popover.value.present();
+  popover.value.open = true;
+  const x = await popover.value.onDidDismiss();
+  console.log("Dismiss: ", x);
+  popover.value.open = false;
+};
+// -------------------------------------------------
+// FIXME ---------------------------------
+// test: webcam popover popover
+const openCamPop = async () => {
+  console.log("Open Pop");
+  popover.value = await popoverController.create({
+    component: CamPop,
     //event: ev,
     size: "cover",
     side: "left",
@@ -2356,6 +2386,15 @@ const openSettings = () => {
         </ion-button>
       </ion-buttons>
       -->
+        <ion-buttons slot="start">
+        <ion-button id="fitRef" @click="openCamPop">
+          <font-awesome-icon
+            :icon="['fas', 'expand']"
+            size="2x"
+            class="toolbtn"
+          ></font-awesome-icon>
+        </ion-button>
+      </ion-buttons>
 
 
         <ion-buttons slot="start">
