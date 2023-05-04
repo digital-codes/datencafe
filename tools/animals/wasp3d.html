@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wasp 3D Model</title>
+    <script src="https://cdn.babylonjs.com/babylon.js"></script>
+    <style>
+        canvas {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="renderCanvas"></canvas>
+    <script>
+        const canvas = document.getElementById("renderCanvas");
+        const engine = new BABYLON.Engine(canvas, true);
+
+        async function createScene() {
+
+            // Create the scene
+            const scene = new BABYLON.Scene(engine);
+            // Set up the camera
+            const camDefault = [-Math.PI / 2, Math.PI / 3, 50]
+            const camera = new BABYLON.ArcRotateCamera("camera", ...camDefault, new BABYLON.Vector3(0, 0, 0), scene);
+            camera.attachControl(canvas, true);
+
+            // Set up the lighting
+            const light = new BABYLON.HemisphericLight("light", new BABYLON.Vector3(0, 1, 0), scene);
+            light.intensity = 0.7;
+
+            // Create a spot light to simulate sunlight
+            const sunLight = new BABYLON.SpotLight("sunLight", new BABYLON.Vector3(20, 40, 20), new BABYLON.Vector3(-1, -1, -1), Math.PI / 2, 10, scene);
+            sunLight.intensity = 1.1;
+            sunLight.shadowEnabled = true;
+
+            // Add user control for rotation around the Y-axis
+            canvas.addEventListener("pointermove", (event) => {
+                if (event.buttons === 1) {
+                    const deltaY = event.movementY;
+                    waspNode.rotation.y += deltaY * 0.005;
+                }
+            });
+
+
+            // Set the background color to white
+            scene.clearColor = new BABYLON.Color4(1, 1, 1, 1);
+
+            const waspMaterial = new BABYLON.StandardMaterial("waspMaterial", scene);
+            waspMaterial.diffuseColor = new BABYLON.Color3(1, 1, 0);
+
+            const head = BABYLON.MeshBuilder.CreateSphere("head", { diameter: 3 }, scene);
+            head.position.y = 1;
+            head.material = waspMaterial;
+
+            /*
+            const body = BABYLON.MeshBuilder.CreateCylinder("body", { height: 10, diameterTop: 2, diameterBottom: 4 }, scene);
+            body.position.y = -5;
+            body.material = waspMaterial;
+            */
+
+            // Create the ellipsoid body
+            const body = BABYLON.MeshBuilder.CreateSphere("body", { diameter: 4, segments: 32 }, scene);
+            body.scaling = new BABYLON.Vector3(1, 2.5, 1);
+            body.position.y = -5;
+            body.material = waspMaterial;
+
+            const legPairs = 3;
+            const legOffsets = [-1, -3, -5];
+            const legAngles = [Math.PI * .4, Math.PI * .5, -Math.PI * .4];
+
+            for (let i = 0; i < legPairs; i++) {
+                const yOffset = legOffsets[i];
+                const legAngle = legAngles[i];
+                const legLength = 7;
+
+                for (let j = 0; j < 2; j++) {
+                    const xPos = (j === 0 ? -1 : 1) * 4;
+                    const leg = BABYLON.MeshBuilder.CreateCylinder("leg" + (i * 2 + j), { height: legLength, diameter: 0.5, tessellation: 8 }, scene);
+                    leg.material = waspMaterial;
+                    leg.position.y = yOffset
+                    leg.position.x = xPos;
+                    leg.rotation.z = (j === 0 ? 1 : -1) * legAngle;
+                    console.log(i, j, xPos, legLength, legAngle, leg.rotation.z)
+                    //leg.setPivotPoint(new BABYLON.Vector3(xPos / 2, yOffset, 0));
+                    //leg.setPivotPoint(new BABYLON.Vector3(0, Math.abs(body.position.y) + legLength/2, 0));
+                }
+            }
+
+
+            // Create a transparent material for the wings
+            const wingMaterial = new BABYLON.StandardMaterial("wingMaterial", scene);
+            wingMaterial.alpha = 0.5;
+            wingMaterial.diffuseColor = new BABYLON.Color3(0.2, 0.9, 0.9);
+            /*
+            const wings = [BABYLON.MeshBuilder.CreatePlane("wing1", { width: 1, height: 8 }, scene), BABYLON.MeshBuilder.CreatePlane("wing2", { width: 1, height: 8 }, scene)];
+            wings.forEach((wing, i) => {
+                wing.position.y = -1;
+                wing.position.x = (i === 0 ? 1 : -1) * 2;
+                wing.rotation.z = (i === 0 ? 1 : -1) * Math.PI / 4;
+                wing.rotation.x = Math.PI / 2;
+            });
+            */
+
+
+            // Create and position the elliptical wings
+            const wings = [
+                BABYLON.MeshBuilder.CreateDisc("wing1", { radius: 4, arc: 0.5, sideOrientation: BABYLON.Mesh.DOUBLESIDE }, scene),
+                BABYLON.MeshBuilder.CreateDisc("wing2", { radius: 4, arc: 0.5, sideOrientation: BABYLON.Mesh.DOUBLESIDE }, scene)
+            ];
+            wings.forEach((wing, i) => {
+                wing.material = wingMaterial;
+                wing.position.y = -5;
+                wing.position.x = (i === 0 ? 1 : -1) * 4;
+                wing.position.z = 1.5;
+                wing.rotation.y = (i === 0 ? 1 : -1) * Math.PI / 16;
+            });
+
+            /*
+            // Create and position the wings
+            const wings = [BABYLON.MeshBuilder.CreatePlane("wing1", { width: 1, height: 8 }, scene), BABYLON.MeshBuilder.CreatePlane("wing2", { width: 1, height: 8 }, scene)];
+            wings.forEach((wing, i) => {
+                wing.material = wingMaterial;
+                wing.position.y = -3;
+                wing.position.x = (i === 0 ? 1 : -1) * 2;
+                wing.position.z = 2.5;
+                wing.rotation.y = (i === 0 ? 1 : -1) * Math.PI / 8;
+            });
+            */
+
+
+            console.log("adding items")
+            // Add your wasp meshes (body, wings, legs) to the scene here
+            // Create the wasp parent node
+            const waspNode = new BABYLON.TransformNode("waspNode", scene);
+
+            // Assuming body, wings, and legs are created, add them to the waspNode
+            body.parent = waspNode;
+            // Assuming body, wings, and legs are created, add them to the waspNode
+            head.parent = waspNode;
+
+
+            wings.forEach(wing => {
+                wing.parent = waspNode;
+            });
+
+            for (let i = 0; i < legPairs; i++) {
+                for (let j = 0; j < 2; j++) {
+                    const leg = scene.getMeshByName("leg" + (i * 2 + j));
+                    leg.parent = waspNode;
+                }
+            }
+
+            // Set the waspNode position, scale, or rotation if needed
+            waspNode.position.y = 10;
+            waspNode.scaling = new BABYLON.Vector3(1.5, 1.5, 1.5);
+
+
+
+            // Render loop
+            engine.runRenderLoop(() => {
+                scene.render();
+            });
+
+            // Resize the canvas when the window is resized
+            window.addEventListener('resize', function () {
+                engine.resize();
+            });
+
+            // ---------------------
+            const recordedChunks = [];
+            const frameRate = 30;
+            const duration = 10; // seconds
+            const totalFrames = frameRate * duration;
+
+            function ondataavailable(e) {
+                if (e.data.size > 0) {
+                    recordedChunks.push(e.data);
+                }
+            }
+
+            function onstop() {
+                const blob = new Blob(recordedChunks, {
+                    type: 'video/webm'
+                });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'wasp_video.webm';
+                a.click();
+            }
+
+            function recordVideo() {
+                const stream = canvas.captureStream(frameRate);
+                const options = { mimeType: 'video/webm; codecs=vp8' };
+                const mediaRecorder = new MediaRecorder(stream, options);
+
+                mediaRecorder.ondataavailable = ondataavailable;
+                mediaRecorder.onstop = onstop;
+
+                mediaRecorder.start();
+                setTimeout(() => {
+                    mediaRecorder.stop();
+                }, duration * 1000);
+            }
+
+            function animateCamera() {
+                let frame = 0;
+                engine.runRenderLoop(() => {
+                    if (frame % 5 === 0) {
+                        const randomX = camDefault[0] + Math.random() * 40 - 20;
+                        const randomY = camDefault[1] + Math.random() * 40 - 20;
+                        const randomZ = camDefault[2] + Math.random() * 50 - 25;
+                        camera.setPosition(new BABYLON.Vector3(randomX, randomY, randomZ));
+                        camera.setTarget(waspNode.position);
+                    }
+
+                    scene.render();
+                    frame++;
+
+                    if (frame > totalFrames) {
+                        engine.stopRenderLoop();
+                    }
+                });
+            }
+            /*
+            animateCamera();
+            await recordVideo();
+            */
+           
+            // ---------
+            async function takeSnapshots() {
+            const snapshots = [];
+
+            for (let i = 0; i < 10; i++) {
+                // Set random camera position
+                const randomX = camDefault[0] + Math.random() * 40 - 20;
+                const randomY = camDefault[1] + Math.random() * 40 - 20;
+                const randomZ = camDefault[2] + Math.random() * 50 - 25;
+                camera.setPosition(new BABYLON.Vector3(randomX, randomY, randomZ));
+                camera.setTarget(waspNode.position);
+
+                // Wait for the next frame to render
+                await scene.whenReadyAsync();
+
+                // Take a snapshot
+                const snapshot = new Promise((resolve) => {
+                    BABYLON.Tools.CreateScreenshotUsingRenderTarget(engine, camera, { width: 512, height: 512 }, (data) => {
+                        resolve(data);
+                    });
+                });
+
+                snapshots.push(await snapshot);
+            }
+
+            // Save snapshots as images
+            snapshots.forEach((data, index) => {
+                const link = document.createElement("a");
+                link.href = data;
+                link.download = `snapshot_${index + 1}.png`;
+                link.click();
+            });
+        }
+
+        takeSnapshots();
+
+
+        }
+
+
+        createScene()
+
+
+    </script>
+
+</body>

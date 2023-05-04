@@ -19,3 +19,13 @@ Vorteile von Linked Open Data umfassen eine höhere Zugänglichkeit und Interope
 
 5-Sterne Linked Data-Schemas ermöglichen es Datenquellen, in einer standardisierten Weise miteinander verknüpft zu werden, was die Interoperabilität erhöht. Datenquellen, die ein 5-Sterne-Schema verwenden, sind strukturiert, maschinenlesbar, verfügbar, miteinander verknüpft und sind in einem standardisierten Format verfügbar. Dies ermöglicht es Anwendungen, Daten einfacher zu finden, zu verwenden und zu verstehen.
 
+### Datenschutz
+
+  * Anonymisierung, Pseudonymisierung
+  * Verschlüsselung
+
+### KI
+
+ * Daten + KI
+ * Grundlagen maschinelles Lernen
+

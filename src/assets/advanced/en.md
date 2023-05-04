@@ -18,3 +18,16 @@ Linked Open Data (LOD) is a practice of publishing structured data using open st
 ### 5-Star LoD Schemas
 
 A 5-star linked data schema is a rating system that classifies linked data schemas based on their level of adherence to best practices and standards for linked data. A 5-star linked data schema is the highest level of adherence and signifies a fully open and accessible schema that meets all the recommended standards for linked data. A 5-star linked data schema should be designed with a clear structure and expressivity to facilitate data sharing, reuse, and interoperability across different domains and applications. Additionally, it should provide adequate documentation and support for data producers and consumers, as well as adhere to open licensing and governance models. Overall, a 5-star linked data schema provides a high level of confidence in data quality and enhances data discoverability and reuse, making it a valuable asset for data scientists and other data professionals.
+
+### Privacy
+
+  * Anonymization, Pseudonymization
+  * Encryption
+
+### AI
+
+ * Data + AI
+ * Machine learning fundamentals
+ 
+
+ 

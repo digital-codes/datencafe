@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Wasp Drawing</title>
+</head>
+<body>
+  <canvas id="canvas" width="400" height="400"></canvas>
+  <script>
+    const waspJSON = {
+      "wasp": {
+        // JSON data
+  "number_of_legs": 6,
+    "body_segments": 2,
+    "head_size": "small",
+    "body_size": "medium",
+    "color": "black and yellow",
+    "wings": true,
+    "size_range_mm": {
+      "small": "5-10 mm",
+      "medium": "10-20 mm",
+      "large": "up to 35 mm"
+    },
+    "number_of_antenna_segments": 13,
+    "wing_size_mm": {
+      "length": "up to 35 mm",
+      "width": "up to 15 mm"
+    }
+    }
+    };
+
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+
+    function drawWasp() {
+      const wasp = waspJSON.wasp;
+
+      // Set colors
+      const colors = wasp.color.split(' and ');
+
+      // Draw head
+      ctx.beginPath();
+      ctx.arc(200, 200, 5, 0, Math.PI * 2);
+      ctx.fillStyle = colors[0];
+      ctx.fill();
+
+      // Draw body segments
+      ctx.beginPath();
+      ctx.ellipse(200, 220, 10, 20, 0, 0, Math.PI * 2);
+      ctx.fillStyle = colors[1];
+      ctx.fill();
+      ctx.beginPath();
+      ctx.ellipse(200, 250, 10, 20, 0, 0, Math.PI * 2);
+      ctx.fillStyle = colors[0];
+      ctx.fill();
+
+      // Draw wings
+      ctx.beginPath();
+      ctx.ellipse(190, 220, 15, 35, Math.PI / 6, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(200, 200, 200, 0.5)';
+      ctx.fill();
+      ctx.beginPath();
+      ctx.ellipse(210, 220, 15, 35, -Math.PI / 6, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(200, 200, 200, 0.5)';
+      ctx.fill();
+
+      // Draw legs
+	// Draw legs
+	ctx.strokeStyle = colors[1];
+	ctx.lineWidth = 2;
+	const legPairs = wasp.number_of_legs / 2;
+	const legOffsets = [-10, 0, 10];
+	const legAngles = [Math.PI / 8, 0, -Math.PI /6];
+
+	for (let i = 0; i < wasp.number_of_legs; i++) {
+	  const pairIndex = Math.floor(i / 2);
+	  const yOffset = 220 + legOffsets[pairIndex];
+	  let angle = i % 2 === 0 ? (-legAngles[pairIndex] ) :  (legAngles[pairIndex] + Math.PI)
+	  ctx.beginPath();
+	  ctx.moveTo(200, yOffset);
+	  const toX = 200 + Math.cos(angle) * 25
+	  const toY = yOffset + Math.sin(angle) * 25
+	  ctx.lineTo(toX, toY);
+	  ctx.stroke();
+	}
+
+      // Draw antenna
+      ctx.strokeStyle = colors[0];
+      ctx.lineWidth = 1;
+      for (let i = 0; i < 2; i++) {
+        const angle = i === 0 ? Math.PI / 4 : -Math.PI / 4;
+        ctx.beginPath();
+        ctx.moveTo(200, 200);
+        ctx.lineTo(200 + Math.cos(angle) * 15, 200 + Math.sin(angle) * 15);
+        ctx.stroke();
+      }
+    }
+
+    drawWasp();
+  </script>
+</body>
+</html>
+

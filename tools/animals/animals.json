@@ -1,0 +1,75 @@
+{
+  "wasp": {
+    "number_of_legs": 6,
+    "body_segments": 2,
+    "head_size": "small",
+    "body_size": "medium",
+    "color": "black and yellow",
+    "wings": true,
+    "size_range_mm": {
+      "small": "5-10 mm",
+      "medium": "10-20 mm",
+      "large": "up to 35 mm"
+    },
+    "number_of_antenna_segments": 13,
+    "wing_size_mm": {
+      "length": "up to 35 mm",
+      "width": "up to 15 mm"
+    }
+  },
+  "ant": {
+    "number_of_legs": 6,
+    "body_segments": 3,
+    "head_size": "small",
+    "body_size": "small",
+    "color": "various colors including black, brown, and red",
+    "wings": "some species have wings, others do not",
+    "size_range_mm": {
+      "small": "1-3 mm",
+      "medium": "3-6 mm",
+      "large": "up to 13 mm"
+    },
+    "number_of_antenna_segments": 12,
+    "wing_size_mm": {
+      "length": "N/A",
+      "width": "N/A"
+    }
+  },
+  "spider": {
+    "number_of_legs": 8,
+    "body_segments": 2,
+    "head_size": "small",
+    "body_size": "small to large depending on species",
+    "color": "various colors including brown, black, and red",
+    "wings": "spiders do not have wings",
+    "size_range_mm": {
+      "small": "1-5 mm",
+      "medium": "5-15 mm",
+      "large": "up to 90 mm (for the Goliath birdeater spider, the largest spider by mass)"
+    },
+    "number_of_antenna_segments": 2,
+    "wing_size_mm": {
+      "length": "N/A",
+      "width": "N/A"
+    }
+  },
+  "bee": {
+    "number_of_legs": 6,
+    "body_segments": 2,
+    "head_size": "small",
+    "body_size": "small to medium depending on species",
+    "color": "various colors including black, brown, and yellow",
+    "wings": true,
+    "size_range_mm": {
+      "small": "4-6 mm",
+      "medium": "8-17 mm",
+      "large": "up to 24 mm"
+    },
+    "number_of_antenna_segments": 12,
+    "wing_size_mm": {
+      "length": "up to 20 mm",
+      "width": "up to 6 mm"
+    }
+  }
+}
+
