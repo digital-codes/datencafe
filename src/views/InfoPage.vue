@@ -52,7 +52,7 @@ import { useI18n } from 'vue-i18n'
 const { t, locale } = useI18n({ useScope: 'global' })
 
 
-import infoItems from "@/assets/info/infoItems.json"
+import infoItems from "@/assets/info/info-md.json"
 const infoItem = (idx,id) => {
   //console.log(idx,id,locale.value)
   //console.log(storyItems[locale.value])
