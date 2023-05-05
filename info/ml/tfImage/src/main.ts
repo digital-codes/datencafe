@@ -128,6 +128,40 @@ async function setupModel() {
   //console.log("img",data.images)
   console.log("Data loaded");
 
+  // download tensor
+  // there should be a more efficioent version with binary downloads ...
+  const downloadTraindata = false
+  if (downloadTraindata) {
+    const tensors = []
+    for (const t of data.images) {
+      tensors.push(await t.data())
+    }
+    const downData = {
+      labels: data.labels,
+      tensor: data.images,
+      imgdata: tensors
+    }
+    const blob = await new Blob([JSON.stringify(downData)], { type: 'application/json' });
+    const url = await URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'datencafe-traindata.json';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  
+    // should be possible to recreate tensors like so
+    // example with tensor #1
+    const loadedData = JSON.parse(JSON.stringify(downData))
+    const shape = [64,64];
+    const img: Record<number, number> = loadedData.imgdata[0]
+    // console.log(img)
+    const tensor = tf.tensor(Array.from(Object.values(img)), shape);
+    console.log(tensor); // Output: <tf.Tensor: shape: [2, 2], dtype: float32, rank: 2, values: [1, 2, 3, 4]>
+    
+  }
+
+
   // Assume that you have two arrays: images (an array of TensorFlow images) and labels (an array of integers representing the labels)
 
   // Define the training and test split ratios
