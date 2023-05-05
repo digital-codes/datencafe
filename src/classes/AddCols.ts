@@ -19,19 +19,19 @@ export class AddCols extends DcNode {
     const cfg = {
       pop: "mixed",
       options:
-      [
-      {
-        id: "op",
-        type: "string",
-        label: "Operation",
-        select:true,
-        /*
-        value: ["Join", "Append", "Add", "Sub", "Mul", "Div"],
-        */
-        value: ["Append", "Add", "Sub", "Mul", "Div"],
-        current: ""
-      },
-      ]
+        [
+          {
+            id: "op",
+            type: "string",
+            label: "Operation",
+            select: true,
+            /*
+            value: ["Join", "Append", "Add", "Sub", "Mul", "Div"],
+            */
+            value: ["Append", "Add", "Sub", "Mul", "Div"],
+            current: ""
+          },
+        ]
     }
     super(id, "addcols", ports, edges, cfg as any)
     DcNode.print(AddCols._type + " created") // no access to super._id etc here
@@ -45,7 +45,7 @@ export class AddCols extends DcNode {
   async configure(optionString: string) {
     // we know the config structure here, so can just use the index
     const options = JSON.parse(optionString)
-    for (let i=0;i<this.config.options.length;i++) {
+    for (let i = 0; i < this.config.options.length; i++) {
       this.config.options[i].current = options[i]
       DcNode.print("Set option:" + options[i])
     }
@@ -60,6 +60,7 @@ export class AddCols extends DcNode {
     DcNode.print("Updating with:" + this.signals[0].signal)
     await this.messaging.emit(this.signals[0].signal)
   }
+  // ---------------------------------------------------------
   async updated(msg: string, y?: any) {
     // update only when both ports attached
     // with 2 source we are neet to check if both are valid
@@ -70,12 +71,8 @@ export class AddCols extends DcNode {
       DcNode.print("Update. Too few sources for " + this.id)
       return
     }
-    // check mode
-    const mode = this.config.options[0].current
-    if (mode == "") {
-      DcNode.print("Mode not configured")
-      return
-    }
+
+    // both ports connected. check columns and create config
     // in this case, we need to iterate over the attached signals to find the sources
     // to be more precise, we need to find source for port a and b selectively
     const sigA = this.signals.find(s => s.port == "A")
@@ -91,6 +88,18 @@ export class AddCols extends DcNode {
       DcNode.print("No data port B")
       return
     }
+    // -------
+    // ------------------------
+    /* old
+    // check mode
+    const mode = this.config.options[0].current
+    if (mode == "") {
+      DcNode.print("Mode not configured")
+      return
+    } 
+    */
+
+
     // go ahead
     DcNode.print("Updating with input ports attached")
     this.updCnt++
@@ -108,20 +117,83 @@ export class AddCols extends DcNode {
       DcNode.print("Indices not same length")
       return
     }
+    // we have 2 ports, save type of columns, update config
+    // get A and B columns
+    const colsA = dfA.columns
+    const colsB = dfB.columns
+    const colsAB = colsA.filter(item => colsB.includes(item)).sort()
+    const colsAOnly = colsA.filter(item => !colsB.includes(item)).sort()
+    const colsBOnly = colsB.filter(item => !colsA.includes(item)).sort()
+    // rename colsA and B, in Dtaaframe and list!
+    const colMapA:any = {}
+    for (const idx in colsAOnly) {
+      colMapA[colsAOnly[idx]] = colsAOnly[idx] + "_A"
+      colsAOnly[idx] = colsAOnly[idx] + "_A"
+    }
+    dfA.rename(colMapA, {axis:1, inplace:true});
+    dfA.print()
+    const colMapB:any = {}
+    for (const idx in colsBOnly) {
+      colMapB[colsBOnly[idx]] = colsBOnly[idx] + "_B"
+      colsBOnly[idx] = colsBOnly[idx] + "_B"
+    }
+    dfB.rename(colMapB, {axis:1, inplace:true})
+    dfB.print()
+
+    const colsAll = [...colsAB, ...colsAOnly, ...colsBOnly].sort()
+    const currentCols = this.config.options.map((o:any) => o.label).sort()
+    console.log("old, new", colsAB, colsAOnly, colsBOnly, colsAll, currentCols)
+
+    const haveSameElements = currentCols.every((value:any, index:number) => value === colsAll[index]);
+    if (!haveSameElements) {
+      // redo config here ...
+      const config = this.config;
+      config.pop = "mixed";
+
+      config.options = []
+      // push common cols
+      for (const c of colsAB) {
+        config.options.push(
+          {
+            id: c,
+            type: "string",
+            label: c,
+            select: true,
+            value: ["Ignore", "Port-A", "Port-B", "Append", "Add", "Sub", "Mul", "Div"],
+            current: "Ignore",
+          }
+        )
+      }
+      // push a and b only
+      for (const c of [...colsAOnly, ...colsBOnly]) {
+        config.options.push(
+          {
+            id: c,
+            type: "string",
+            label: c,
+            select: true,
+            value: ["Ignore", "Append"],
+            current: "Ignore",
+          }
+        )
+      }
+      this.config = config;
+      // we're done
+      console.log("New config. cancel update")
+      return
+    }
+    console.log("Start update here")
+    // here comes the real update
+    /*
     // result df
     let df
     // Append mode
     if (mode == "Append") {
       DcNode.print("Append")
-      df = DcNode.dfd.concat({ dfList: [dfA,dfB], axis: 1 })
-    }
-    // join mode on index col
-    if (mode == "Join") {
-      DcNode.print("Join")
-      df = DcNode.dfd.merge({ "left": dfA, "right": dfB, "on": [dfA.columns[0]], how: "inner"})
+      df = DcNode.dfd.concat({ dfList: [dfA, dfB], axis: 1 })
     }
     // remaining ops
-    if ( df === undefined) { 
+    if (df === undefined) {
       const colsA = dfA.columns
       const colsB = dfB.columns
       // find matching columns for math ops
@@ -139,8 +211,8 @@ export class AddCols extends DcNode {
           dfB.drop({ columns: [c], inplace: true })
         }
       })
-    // DF has math operations add,sub,mul,div
-    DcNode.print("Performing operation:" + mode)
+      // DF has math operations add,sub,mul,div
+      DcNode.print("Performing operation:" + mode)
       switch (mode) {
         case "Add":
           df = dfA.selectDtypes(['float32', "int32"]).add(dfB.selectDtypes(['float32', "int32"]))
@@ -158,16 +230,17 @@ export class AddCols extends DcNode {
           throw (new Error("Invalid mode:" + mode))
       }
       // finally add string columns
-      df = DcNode.dfd.concat({ dfList: [dfA.selectDtypes(['string']),df], axis: 1 })
+      df = DcNode.dfd.concat({ dfList: [dfA.selectDtypes(['string']), df], axis: 1 })
     }
 
     // put data into store then send message
     const meta = await DcNode.providers.getMeta(this.id)
     meta.storagetype = StorageTypes.DATAFRAME
-    await DcNode.providers.update(this.id, DcNode.dfd.toJSON(df),meta)
+    await DcNode.providers.update(this.id, DcNode.dfd.toJSON(df), meta)
     await DelayTimer(20)
     await this.messaging.emit(DcNode.signals.NODEANIMATE, this.id)
     await this.messaging.emit(DcNode.signals.UPDPREFIX as string + this.id)
+    */
   }
   msgOn(x: string, y: string) {
     // set event listener for signal 

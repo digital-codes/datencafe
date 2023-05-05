@@ -31,14 +31,16 @@
 
         </ion-card-content>
         <ion-card-header v-if="item.link > ''">
+          <!-- 
           <ion-button _target="blank" :download="item.link.split('/')[3]" :href="item.link">{{$t('download')}}</ion-button>
+          -->
           <ion-button  @click="startStory(i)">{{$t('startStory')}}</ion-button>
             <!-- 
             <ion-button v-if="s.link == ''" @click="clicked(i)">{{$t('download')}}</ion-button>
             -->
           </ion-card-header>
           <ion-note v-if="item.link > ''">
-            {{$t('downloadHint')}} 
+            {{$t('startStoryHint')}} 
           </ion-note>
 
         </article>

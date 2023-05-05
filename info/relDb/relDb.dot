@@ -1,0 +1,37 @@
+digraph {
+  // Set node and edge styles
+  node [shape=none, margin=0, fontname=Arial, fontsize=10, labeltooltip="<table border='0' cellspacing='0' cellborder='1' cellpadding='4'><tr><td><b>ID</b></td><td><b>Name</b></td><td><b>Email</b></td><td><b>Courses</b></td></tr><tr><td align='center'>1</td><td>John</td><td>john@example.com</td><td align='center'>Mathematics<br/>Science</td></tr><tr><td align='center'>2</td><td>Alice</td><td>alice@example.com</td><td align='center'>Mathematics</td></tr></table>"]
+  edge [arrowhead=vee, arrowsize=0.8]
+
+  // Define nodes for each table
+  Teacher [label="Teacher"]
+  Course [label="Course"]
+  Student [label="Student"]
+  StudentProfile [label="StudentProfile"]
+  Enrollment [label="Enrollment"]
+
+  // Define edges to represent relationships between tables
+  Teacher -> Course [label="1"]
+  Course -> Student [label="*"]
+  Student -> StudentProfile [label="1"]
+  StudentProfile -> Student [label="1"]
+  Course -> Enrollment [label="*"]
+  Student -> Enrollment [label="*"]
+  Course -> Teacher [label="1"]
+
+  // Adjust spacing and hierarchy
+  rankdir=LR
+  node [width=2, height=1.5]
+  Teacher -> Course [constraint=false, dir=none]
+  { rank=same; Teacher; Course }
+  { rank=same; Student; StudentProfile }
+  Enrollment -> Course [constraint=false, dir=none]
+  { rank=same; Enrollment; Student }
+}
+
+// create png:
+// dot -Tpng relDb.dot -o relDb.png
+// svg
+// dot -Tpng relDb.dot -o relDb.svg
+
+

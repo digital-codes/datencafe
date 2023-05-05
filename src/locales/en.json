@@ -7,6 +7,7 @@
   "dark": "Dark",
   "download": "Download",
   "downloadHint": "After download here, upload the file in the workspace",
+  "startStoryHint": "Start the story in the workspace",
   "startStory": "Start story",
   "notimplemented": "Not implemented yet",
   "prototype":"Prototype",
