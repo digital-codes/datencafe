@@ -77,6 +77,13 @@ async function tfTest() {
 
     // Convert the output tensor to a JavaScript array
     const outputArray = await outputTensor.dataSync();
+    // create output dataframe
+    let dt:any = {}
+    for (const i in outputArray) {
+      dt[i] = [outputArray[i]]
+    }
+    const outDf = new dfd.DataFrame(dt)
+    outDf.print()
 
     // Get the predicted class index
     const predictedIndex = outputArray.indexOf(Math.max(...outputArray));
@@ -84,7 +91,7 @@ async function tfTest() {
       console.log("Error")
       errors++
     }
-    console.log("Expected:", evalImg.label)
+    console.log("Expected:", evalImg.label, evalImg.name)
     console.log(`The predicted class index is ${predictedIndex} - ${labelNames[predictedIndex]}.`);
 
     const r = -400 + Math.floor(i/numTests * 400)  // width
@@ -138,6 +145,7 @@ async function setupModel() {
     }
     const downData = {
       labels: data.labels,
+      names: data.names,
       tensor: data.images,
       imgdata: tensors
     }
@@ -439,8 +447,9 @@ async function showWeights(weights) {
 // --------------------------------------------------
 async function imgGen() {
   // Generate images
-  const images = [];
-  const labels = [];
+  const images = []
+  const labels = []
+  const names = []
   const bar = document.getElementById("progressbar")
   const action = document.getElementById("action")
   action.innerHTML = "Generating train/test images"
@@ -451,10 +460,11 @@ async function imgGen() {
     const data = await mkSingleImg();
     await images.push(data.image);
     await labels.push(data.label);
+    await names.push(data.name);
     await new Promise((resolve) => setTimeout(resolve, 50));
 
   }
-  return { labels: labels, images: images };
+  return { labels: labels, names: names, images: images };
 }
 // --------------------------------------------------
 // --------------------------------------------------
@@ -520,6 +530,7 @@ async function mkSingleImg() {
 
   // Draw shape based on type and add label
   let label;
+  let name
 
   // Rotate shape based on random rotation
   await ctx.save();
@@ -533,14 +544,17 @@ async function mkSingleImg() {
     case 0: // Triangle
       drawTriangle(ctx, shapeSize, shapeStrokeWidth);
       label = 0;
+      name = "Triangle"
       break;
     case 1: // Ellipse
       drawEllipse(ctx, shapeSize, shapeStrokeWidth);
       label = 1;
+      name = "Ellipse"
       break;
     case 2: // Rectangle
       drawRectangle(ctx, shapeSize, shapeStrokeWidth);
       label = 2;
+      name = "Rectangle"
       break;
   }
   await ctx.restore();
@@ -561,7 +575,7 @@ async function mkSingleImg() {
   //const tf_img = tf.tensor4d(imageDataArray, [
   const tf_img = await tf.tensor(imageDataArray).reshape([imgSize, imgSize, 1]);
   //await new Promise((resolve) => setTimeout(resolve, 100));
-  return { label: label, image: tf_img };
+  return { label: label, name: name, image: tf_img };
 }
 
 // --------------------------------------------------
