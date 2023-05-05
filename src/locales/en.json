@@ -9,6 +9,7 @@
   "downloadHint": "After download here, upload the file in the workspace",
   "startStory": "Start story",
   "notimplemented": "Not implemented yet",
+  "prototype":"Prototype",
   "titles": {
     "about": "About Daten.Cafe",
     "tutorial": "Tutorials",

@@ -33,6 +33,9 @@
           <span class="version ion-hide-sm-down">{{ $t(routeInfo.title) }}</span>
           -->
             </div>
+            <div>
+              <span class="prototype">{{$t("prototype")}}</span>
+            </div>
           </div>
         </ion-buttons>
 
@@ -365,6 +368,14 @@ ion-thumbnail.logo {
   --size: 96px;
 }
 
+.prototype {
+  display: block;
+  font-size: 130%;
+  font-weight: bold;
+  color: var(--ion-color-danger);
+  margin-left: 1rem;
+}
+
 /* sm is 576, md is 768 */
 @media only screen and (max-width: 996px) {
   .titlebar {
@@ -382,6 +393,12 @@ ion-thumbnail.logo {
   ion-thumbnail.logo {
     --size: 48px;
   }
+
+.prototype {
+  transform: rotate(-30deg);
+  font-size: 110%;
+}
+
 
   .custom-popover-class {
     --offset-y: 30px;
