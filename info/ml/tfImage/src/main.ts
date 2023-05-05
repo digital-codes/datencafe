@@ -14,8 +14,14 @@ console.log(tf.version);
 
 document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
   <div style="overflow:clip;">
+  <p id="action"></p>
+  <p id="train" style="display:none;"></p>
+  <div id="progress" style="width:400px;height:20px;overflow:clip;position:relative;border:1px solid #000;">
+  <div id="progressbar" style="width:400px;height:20px;background:#00f;transform:translate(0px,0px);">
+  </div>
+  </div>
   <div style="display:block;">
-  <canvas class="chart" id="cv" "></canvas>
+  <canvas style="border:solid 1px #f00;" id="cv"></canvas>
   </div>
   <div style="display:block;">
   <canvas class="chart" id="cvw" "></canvas>
@@ -40,6 +46,13 @@ async function tfTest() {
 
   model.summary();
 
+  const action = document.getElementById("action")
+  action.innerHTML = "Evaluating"
+  const trainStat = document.getElementById("train")
+  trainStat.style.display = "block"
+  const bar = document.getElementById("progressbar")
+
+
   let errors = 0
   let numTests = 100
   for (let i = 0; i < numTests; i++) {
@@ -62,7 +75,15 @@ async function tfTest() {
     }
     console.log("Expected:", evalImg.label)
     console.log(`The predicted class index is ${predictedIndex} - ${labelNames[predictedIndex]}.`);
-    await new Promise((resolve) => setTimeout(resolve, 100));
+
+    const r = -400 + Math.floor(i/numTests * 400)  // width
+    const tr = "translate(" + String(r) + "px,0px)"
+    bar.style.transform = tr
+
+    const status = "Error rate so far: " + String(errors / numTests * 100) +  "%"
+    trainStat.innerHTML = status 
+
+  await new Promise((resolve) => setTimeout(resolve, 100));
   }
   console.log("Totoal errors:", errors, " -> ", errors / numTests * 100, "%")
   alert("Error rate: " + String(errors / numTests * 100) + "%")
@@ -187,11 +208,17 @@ async function setupModel() {
 
   // Define a callback function to monitor the progress of the training
   const monitorCallback = async (epoch, logs) => {
-    console.log(
-      `Epoch ${epoch}: loss = ${logs.loss.toFixed(
-        4
-      )}, accuracy = ${logs.acc.toFixed(4)}`
-    );
+    const bar = document.getElementById("progressbar")
+    const r = -400 + Math.floor(epoch/epochs * 400)  // width
+      const tr = "translate(" + String(r) + "px,0px)"
+      bar.style.transform = tr
+  
+    const trainStat = document.getElementById("train")
+    const status = `Epoch ${epoch}: loss = ${logs.loss.toFixed(
+      4
+    )}, accuracy = ${logs.acc.toFixed(4)}`
+    trainStat.innerHTML = status 
+       console.log(status)
     // Access the weights of the first layer
     //const weights = await model.layers[1].getWeights();
     //await showWeights(weights)
@@ -200,6 +227,12 @@ async function setupModel() {
   console.log("STart training");
   // Assume that you have loaded the training and test data into TensorFlow tensors called trainXs, trainYs, testXs, and testYs, and defined a model called "model"
   //
+  const action = document.getElementById("action")
+  action.innerHTML = "Training Model"
+  const trainStat = document.getElementById("train")
+  trainStat.style.display = "block"
+
+
   await model.fit(trainXs, trainYs, {
     batchSize: batchSize,
     epochs: epochs,
@@ -323,10 +356,18 @@ async function imgGen() {
   // Generate images
   const images = [];
   const labels = [];
+  const bar = document.getElementById("progressbar")
+  const action = document.getElementById("action")
+  action.innerHTML = "Generating train/test images"
   for (let i = 0; i < numImgs; i++) {
+    const r = -400 + Math.floor(i/numImgs * 400)  // width
+    const tr = "translate(" + String(r) + "px,0px)"
+    bar.style.transform = tr
     const data = await mkSingleImg();
     await images.push(data.image);
     await labels.push(data.label);
+    await new Promise((resolve) => setTimeout(resolve, 100));
+
   }
   return { labels: labels, images: images };
 }
@@ -374,9 +415,13 @@ async function mkSingleImg() {
   const shapeType = Math.floor(Math.random() * 3); // 0 = triangle, 1 = ellipse, 2 = rectangle
 
   // Define shape properties
-  const shapeSize = Math.floor((Math.random() * imgSize) / 4) + imgSize / 6; // random size between 10 and 30
+  //const shapeSize = Math.floor((Math.random() * imgSize) / 3) + imgSize / 6; // random size between 10 and 30
+  let shapeSize = Math.floor((Math.random() * imgSize) / 2) + Math.floor((Math.random() - .5)*(imgSize / 6)); // random size between 10 and 30
+  shapeSize = Math.floor(Math.max(imgSize / 3,shapeSize))
   const shapeStrokeWidth = Math.floor(Math.random() * 4) + 3; // random stroke width between 1 and 4
   const shapeRotation = Math.random() * 2 * Math.PI; // random rotation between 0 and pi
+  const shapeTranslationX = (Math.random() * 2 - 1) * imgSize/12; // random rotation between 0 and pi
+  const shapeTranslationY = (Math.random() * 2 - 1) * imgSize/12; // random rotation between 0 and pi
 
   // Set shape position to center of canvas
   /* */
@@ -393,9 +438,9 @@ async function mkSingleImg() {
 
   // Rotate shape based on random rotation
   await ctx.save();
-  await ctx.translate(canvas.width / 2, canvas.height / 2);
+  await ctx.translate(canvas.width / 2 + shapeTranslationX, canvas.height / 2 + shapeTranslationY);
   await ctx.rotate(shapeRotation);
-  await ctx.translate(-canvas.width / 2, -canvas.height / 2);
+  await ctx.translate(-canvas.width / 2 - shapeTranslationX, -canvas.height / 2 - shapeTranslationY);
   await ctx.translate(shapeX, shapeY);
   //await ctx.translate(-shapeX, -shapeY);
 
