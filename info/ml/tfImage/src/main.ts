@@ -41,6 +41,17 @@ const labelNames = ["Tringle", "Ellipse", "Rectangle"]
 await tfTest();
 
 async function tfTest() {
+
+  // either create a new model and train it, or load a model like so:
+  /*
+  async function loadModel() {
+    const modelUrl = 'https://example.com/model.json';
+    const model = await tf.loadGraphModel(modelUrl);
+    return model
+  }
+  const model = loadModel();
+  */
+
   const model = await setupModel();
   console.log("Model ready");
 
@@ -80,7 +91,7 @@ async function tfTest() {
     const tr = "translate(" + String(r) + "px,0px)"
     bar.style.transform = tr
 
-    const status = "Error rate so far: " + String(errors / numTests * 100) +  "%"
+    const status = "Error rate so far: " + String(errors / i * 100) +  "%"
     trainStat.innerHTML = status 
 
   await new Promise((resolve) => setTimeout(resolve, 100));
@@ -159,14 +170,14 @@ async function setupModel() {
     // Convolutional layers
     model.add(tf.layers.conv2d({
       inputShape: [imgSize, imgSize, 1],
-      filters: 16,
-      kernelSize: 3,
+      filters: 32,
+      kernelSize: 5,
       activation: 'relu'
     }));
     model.add(tf.layers.maxPooling2d({ poolSize: 2 }));
     model.add(tf.layers.conv2d({
-      filters: 32,
-      kernelSize: 5, // 3
+      filters: 64,
+      kernelSize: 3, // 3
       activation: 'relu'
     }));
     model.add(tf.layers.maxPooling2d({ poolSize: 3 })); // 2
@@ -239,6 +250,46 @@ async function setupModel() {
     callbacks: { onEpochEnd: monitorCallback },
     validationData: [testXs, testYs],
   });
+
+  // download model
+  async function saveModel(model) {
+    const modelSavePath = "datencafe-model"
+    await model.save(`localstorage://${modelSavePath}`);
+    //const saveResults = await model.save('downloads://my-model');
+    /* 5 keys: 
+    tensorflowjs_models/datencafe-model/info
+    tensorflowjs_models/datencafe-model/model_metadata
+    tensorflowjs_models/datencafe-model/model_topology
+    tensorflowjs_models/datencafe-model/weight_data
+    tensorflowjs_models/datencafe-model/weight_specs
+    */
+   const modelData = {
+    info: await localStorage.getItem("tensorflowjs_models/" + modelSavePath + "/info"),
+    meta: await localStorage.getItem("tensorflowjs_models/" + modelSavePath + "/model_metadata"),
+    topo: await localStorage.getItem("tensorflowjs_models/" + modelSavePath + "/model_topology"),
+    wspecs: await localStorage.getItem("tensorflowjs_models/" + modelSavePath + "/weight_specs"),
+    wdata: await localStorage.getItem("tensorflowjs_models/" + modelSavePath + "/weight_data")
+   }
+   const modelBlob = new Blob([JSON.stringify(modelData)], { type: 'application/json' });
+   const modelUrl = URL.createObjectURL(modelBlob);
+   downloadFile(modelUrl);
+  }
+  
+  async function downloadFile(url) {
+    const response = await fetch(url);
+    const blob = await response.blob();
+    const filename = 'datencafe-model.json';
+    const link = document.createElement('a');
+    link.href = window.URL.createObjectURL(blob);
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }  
+
+  console.log("Saving model")
+  await saveModel(model)
+
   console.log("Start eval");
   const result = await model.evaluate(testXs, testYs);
   console.log(`Test loss: ${result[0]}`);
@@ -366,7 +417,7 @@ async function imgGen() {
     const data = await mkSingleImg();
     await images.push(data.image);
     await labels.push(data.label);
-    await new Promise((resolve) => setTimeout(resolve, 100));
+    await new Promise((resolve) => setTimeout(resolve, 50));
 
   }
   return { labels: labels, images: images };
