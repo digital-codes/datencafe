@@ -83,8 +83,17 @@ const close = async () => {
 
 </script>
 
-
 <style>
+.popover-viewport {
+  /*
+  min-width: calc(80vw);
+  */
+  width:fit-content;
+}
+
+</style>
+
+<style scoped>
 
 ion-buttons {
   /*
@@ -108,14 +117,39 @@ ion-popover {
 
 ion-popover ion-content {
   max-height: calc(80vh - 100px);
-  max-width: calc(100vw - 200px);
+  max-width: calc(100vw - 100px);
+  --min-width: 280px;
   overflow: clip;
 }
+/* sm is 576, md is 768 */
+@media only screen and (max-width: 768px) {
+  ion-popover ion-content {
+    max-height: calc(80vh - 1rem);
+    max-width: calc(100vw - 1rem)!important;
+  }
 
 ion-content.ion-popover::part(scroll) {
   overflow:clip;
   }
 
+}
+/*
+.checkbox-icon {
+  background: var(--ion-color-light);
+  border-color: var(--ion-color-dark);
+  background:#fff;
+  border-color:#000;
+  border-style: solid 2px;
+}
+*/
+.list {
+  max-height: 200px;
+  /* max-width: 400px;*/
+  width:100%;
+  overflow-x:hide;
+  overflow-y: scroll;
+  min-width: 14rem;
+}
 
 .popcheck {
     text-align:center;

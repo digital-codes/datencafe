@@ -99,7 +99,7 @@ export class BarPlot extends DcNode {
     const X = df[cols[xIdx]].values
     //console.log("X",X)
     const traces = []
-    const mode = "stack" //"stack" // relative, group, empty
+    const mode = "" // "stack" //"stack" // relative, group, empty
     for (let i = 0; i < cols.length; i++) {
       if (i == xIdx) continue
       const trace = {

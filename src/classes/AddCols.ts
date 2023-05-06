@@ -6,6 +6,7 @@ import { SigPort } from "./DcNode"
 import { NodeSpec } from '@/services/GlobalDefs';
 import { DelayTimer } from "@/services/DelayTimer"
 import { StorageTypes } from "@/services/GlobalDefs";
+import { DefaultDeserializer } from "v8";
 
 export class AddCols extends DcNode {
   // properties
@@ -16,27 +17,10 @@ export class AddCols extends DcNode {
   constructor(id: string, typeInfo: any) {
     const ports: string[] = ['A', 'B']
     const edges: string[] = ['d']
-    const cfg = {
-      pop: "mixed",
-      options:
-        [
-          {
-            id: "op",
-            type: "string",
-            label: "Operation",
-            select: true,
-            /*
-            value: ["Join", "Append", "Add", "Sub", "Mul", "Div"],
-            */
-            value: ["Append", "Add", "Sub", "Mul", "Div"],
-            current: ""
-          },
-        ]
-    }
-    super(id, "addcols", ports, edges, cfg as any)
+    super(id, "addcols", ports, edges)
     DcNode.print(AddCols._type + " created") // no access to super._id etc here
     // add to providers
-    DcNode.providers.add(super.id)
+    DcNode.providers.add(this.id)
   }
   // getters/setters
   get type() { return AddCols._type }
@@ -54,11 +38,13 @@ export class AddCols extends DcNode {
     DcNode.print("Signals attached:" + JSON.stringify(this.signals))
     // check if complete
     if (this.signals.length < 2) {
+      this.config.options = []
       return
     }
     // just use first signal to trigger an update
     DcNode.print("Updating with:" + this.signals[0].signal)
-    await this.messaging.emit(this.signals[0].signal)
+    //await this.messaging.emit(this.signals[0].signal)
+    this.updated(this.signals[0].signal)
   }
   // ---------------------------------------------------------
   async updated(msg: string, y?: any) {
@@ -69,6 +55,7 @@ export class AddCols extends DcNode {
     // check ports
     if (this.signals.length < 2) {
       DcNode.print("Update. Too few sources for " + this.id)
+      this.config.options = []
       return
     }
 
@@ -82,10 +69,12 @@ export class AddCols extends DcNode {
     // even if sources attached, data might not be available. check this first
     if (!DcNode.providers.hasData(sigA.signal.split("-")[1])) {
       DcNode.print("No data port A")
+      this.config.options = []
       return
     }
     if (!DcNode.providers.hasData(sigB.signal.split("-")[1])) {
       DcNode.print("No data port B")
+      this.config.options = []
       return
     }
     // -------
@@ -115,8 +104,10 @@ export class AddCols extends DcNode {
     // assume we need same index on both dataframes
     if (idxA.length != idxB.length) {
       DcNode.print("Indices not same length")
+      this.config.options = []
       return
     }
+    console.log("config:",this.config)
     // we have 2 ports, save type of columns, update config
     // get A and B columns
     const colsA = dfA.columns
@@ -125,41 +116,54 @@ export class AddCols extends DcNode {
     const colsAOnly = colsA.filter(item => !colsB.includes(item)).sort()
     const colsBOnly = colsB.filter(item => !colsA.includes(item)).sort()
     // rename colsA and B, in Dtaaframe and list!
-    const colMapA:any = {}
+    const colMapA: any = {}
     for (const idx in colsAOnly) {
       colMapA[colsAOnly[idx]] = colsAOnly[idx] + "_A"
       colsAOnly[idx] = colsAOnly[idx] + "_A"
     }
-    dfA.rename(colMapA, {axis:1, inplace:true});
+    dfA.rename(colMapA, { axis: 1, inplace: true });
     dfA.print()
-    const colMapB:any = {}
+    const colMapB: any = {}
     for (const idx in colsBOnly) {
       colMapB[colsBOnly[idx]] = colsBOnly[idx] + "_B"
       colsBOnly[idx] = colsBOnly[idx] + "_B"
     }
-    dfB.rename(colMapB, {axis:1, inplace:true})
+    dfB.rename(colMapB, { axis: 1, inplace: true })
     dfB.print()
 
     const colsAll = [...colsAB, ...colsAOnly, ...colsBOnly].sort()
-    const currentCols = this.config.options.map((o:any) => o.label).sort()
+    const currentCols = this.config.options.map((o: any) => o.label).sort()
     console.log("old, new", colsAB, colsAOnly, colsBOnly, colsAll, currentCols)
 
-    const haveSameElements = currentCols.every((value:any, index:number) => value === colsAll[index]);
-    if (!haveSameElements) {
+    const haveSameElements = currentCols.every((value: any, index: number) => value === colsAll[index]);
+    // console.log("No change in input. Skipping config update")
+    if (!haveSameElements || (currentCols.length == 0)) {
       // redo config here ...
       const config = this.config;
       config.pop = "mixed";
 
       config.options = []
       // push common cols
+      const typesA = dfA.ctypes.values as string[]
+      const typesB = dfB.ctypes.values as string[]
       for (const c of colsAB) {
+        // check datatype for numerics
+        const idxA = colsA.findIndex((n:string) => n == c)
+        const idxB = colsB.findIndex((n:string) => n == c)
+        const numerics = ["int32","float32"]
+        let valueList = ["Ignore", "Only-A", "Only-B", "Append"]
+        if (numerics.includes(typesA[idxA]) && numerics.includes(typesB[idxB])) {
+          valueList = [...valueList,"Add", "Sub", "Mul", "Div"]
+        }
+        console.log(c,valueList)
         config.options.push(
           {
             id: c,
             type: "string",
+            shared: true, // is on both sides
             label: c,
             select: true,
-            value: ["Ignore", "Port-A", "Port-B", "Append", "Add", "Sub", "Mul", "Div"],
+            value: valueList,
             current: "Ignore",
           }
         )
@@ -170,6 +174,7 @@ export class AddCols extends DcNode {
           {
             id: c,
             type: "string",
+            shared: false, // is on one side only
             label: c,
             select: true,
             value: ["Ignore", "Append"],
@@ -183,56 +188,125 @@ export class AddCols extends DcNode {
       return
     }
     console.log("Start update here")
+    console.log("Config now: ",this.config)
     // here comes the real update
     /*
-    // result df
+    loop over all columns and check mode
+    */
+    //         value: ["Ignore", "Only-A", "Only-B", "Append", "Add", "Sub", "Mul", "Div"],
     let df
-    // Append mode
-    if (mode == "Append") {
-      DcNode.print("Append")
-      df = DcNode.dfd.concat({ dfList: [dfA, dfB], axis: 1 })
-    }
-    // remaining ops
-    if (df === undefined) {
-      const colsA = dfA.columns
-      const colsB = dfB.columns
-      // find matching columns for math ops
-      const sharedCols: string[] = []
-      colsA.forEach((c) => { if (colsB.includes(c)) sharedCols.push(c) })
-      DcNode.print("Shared:" + JSON.stringify(sharedCols))
-      // remove non-shared columns on both DFs
-      colsA.forEach((c) => {
-        if (!sharedCols.includes(c)) {
-          dfA.drop({ columns: [c], inplace: true })
-        }
-      })
-      colsB.forEach((c) => {
-        if (!sharedCols.includes(c)) {
-          dfB.drop({ columns: [c], inplace: true })
-        }
-      })
-      // DF has math operations add,sub,mul,div
-      DcNode.print("Performing operation:" + mode)
-      switch (mode) {
+    let dfEmpty = true
+    const dataCols = this.config.options
+    for (const c of dataCols) {
+      console.log("data col ",c)
+      switch (c.current) {
+        case "Only-A":
+          DcNode.print("A only")
+          if (dfEmpty) {
+            dfEmpty = false
+            if (!c.shared && c.label.endsWith("_A")) df = dfA[c.label]
+            if (c.shared) {
+              df = dfA[c.label]
+            }
+            df.print()
+          } else {
+            if (!c.shared && c.label.endsWith("_A")) df = dfA[c.label]
+            if (c.shared) {
+              df = DcNode.dfd.concat({ dfList: [df,dfA[c.label]], axis: 1 })
+            }
+            df.print()
+          }
+          break
+        case "Only-B":
+          DcNode.print("B only")
+          if (dfEmpty) {
+            dfEmpty = false
+            if (!c.shared && c.label.endsWith("_B")) df = dfB[c.label]
+            if (c.shared) {
+              df = dfB[c.label]
+            }
+            df.print()
+          } else {
+            if (!c.shared && c.label.endsWith("_B")) df = dfB[c.label]
+            if (c.shared) {
+              df = DcNode.dfd.concat({ dfList: [df,dfB[c.label]], axis: 1 })
+            }
+            df.print()
+          }
+          break
+        case "Append":
+          DcNode.print("Append")
+          if (dfEmpty) {
+            dfEmpty = false
+            if (!c.shared && c.label.endsWith("_A")) df = dfA[c.label]
+            if (!c.shared && c.label.endsWith("_B")) df = dfB[c.label]
+            if (c.shared) {
+              df = dfA[c.label]
+              df = DcNode.dfd.concat({ dfList: [df, dfB[c.label]], axis: 1 })
+            }
+            console.log("From empty")
+            df.print()
+          } else {
+            if (!c.shared && c.label.endsWith("_A")) df = dfA[c.label]
+            if (!c.shared && c.label.endsWith("_B")) df = dfB[c.label]
+            if (c.shared) {
+              df = DcNode.dfd.concat({ dfList: [df,dfA[c.label], dfB[c.label]], axis: 1 })
+            }
+            console.log("appended")
+            df.print()
+          }
+          break
         case "Add":
-          df = dfA.selectDtypes(['float32', "int32"]).add(dfB.selectDtypes(['float32', "int32"]))
+          DcNode.print("Add")
+          if (dfEmpty) {
+            dfEmpty = false
+            df = dfA[c.label].add(dfB[c.label])
+          } else {
+            df = DcNode.dfd.concat({ dfList: [df,dfA[c.label].add(dfB[c.label])], axis: 1 })
+          }
           break
         case "Sub":
-          df = dfA.selectDtypes(['float32', "int32"]).sub(dfB.selectDtypes(['float32', "int32"]))
+          DcNode.print("Add")
+          if (dfEmpty) {
+            dfEmpty = false
+            df = dfA[c.label].sub(dfB[c.label])
+          } else {
+            df = DcNode.dfd.concat({ dfList: [df,dfA[c.label].sub(dfB[c.label])], axis: 1 })
+          }
           break
         case "Mul":
-          df = dfA.selectDtypes(['float32', "int32"]).mul(dfB.selectDtypes(['float32', "int32"]))
+          DcNode.print("Add")
+          if (dfEmpty) {
+            dfEmpty = false
+            df = dfA[c.label].mul(dfB[c.label])
+          } else {
+            df = DcNode.dfd.concat({ dfList: [df,dfA[c.label].mul(dfB[c.label])], axis: 1 })
+          }
           break
         case "Div":
-          df = dfA.selectDtypes(['float32', "int32"]).div(dfB.selectDtypes(['float32', "int32"]))
+          DcNode.print("Add")
+          if (dfEmpty) {
+            dfEmpty = false
+            df = dfA[c.label].div(dfB[c.label])
+          } else {
+            df = DcNode.dfd.concat({ dfList: [df,dfA[c.label].div(dfB[c.label])], axis: 1 })
+          }
           break
         default:
-          throw (new Error("Invalid mode:" + mode))
+          // ignore case
+          break
       }
+    }
+    if (dfEmpty){
+      DcNode.print("Nothing selected")
+      return
+    }
+    df.print()
+    /* old ...
       // finally add string columns
       df = DcNode.dfd.concat({ dfList: [dfA.selectDtypes(['string']), df], axis: 1 })
     }
-
+    */
     // put data into store then send message
     const meta = await DcNode.providers.getMeta(this.id)
     meta.storagetype = StorageTypes.DATAFRAME
@@ -240,7 +314,7 @@ export class AddCols extends DcNode {
     await DelayTimer(20)
     await this.messaging.emit(DcNode.signals.NODEANIMATE, this.id)
     await this.messaging.emit(DcNode.signals.UPDPREFIX as string + this.id)
-    */
+    
   }
   msgOn(x: string, y: string) {
     // set event listener for signal 
