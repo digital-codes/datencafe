@@ -106,6 +106,7 @@ export class BarPlot extends DcNode {
         x: X,
         y: df[cols[i]].values,
         type: "bar",
+        name: cols[i],
       }
       traces.push(trace)
     }
