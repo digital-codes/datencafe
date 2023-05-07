@@ -11,14 +11,14 @@ import { readCSVBrowser } from "danfojs/dist/danfojs-base/io/browser";
 import { UserStore } from "@/services/UserStore";
 const userStore = UserStore();
 
-import { connect, subscribe, unsubscribe } from "mqtt"; // import connect from mqtt
+import { connect } from "mqtt"; // import connect from mqtt
 
 const topic = "dcaf";
 
 export class MqttSub extends DcNode {
   // properties
   static _display = false;
-  static _type = NodeSpec.GENERATOR;
+  static _type = NodeSpec.GEN;
   private df = new DcNode.dfd.DataFrame();
   private client: any | undefined;
   // constructor
@@ -105,7 +105,7 @@ export class MqttSub extends DcNode {
 
     alert([topic, payload].join(": "));
 
-    const date = new Date();
+    const date = Date.now();
     const message = parseFloat("123");
     this.df.append([date, message], this.df.shape[0]);
 
