@@ -63,6 +63,16 @@ export class BarPlot extends DcNode {
     config.pop = "mixed";
     config.options = [
       {
+        id: "stacked",
+        type: "number",
+        label: "Stacked",
+        select: false,
+        value: 0,
+        min: 0,
+        max: 1,
+        current: 0,
+      },
+      {
         id: "xaxis",
         type: "string",
         label: "X-Axis",
@@ -89,6 +99,9 @@ export class BarPlot extends DcNode {
     const xConfig = this.config.options.find(
       (option: any) => option.id == "xaxis"
     );
+    const modeConfig = this.config.options.find(
+      (option: any) => option.id == "stacked"
+    );
     const cols = df.columns;
     let xCol = cols[cols.length - 1]; // will become variable
     if (xConfig !== undefined && xConfig.current != "") {
@@ -99,7 +112,7 @@ export class BarPlot extends DcNode {
     const X = df[cols[xIdx]].values
     //console.log("X",X)
     const traces = []
-    const mode = "" // "stack" //"stack" // relative, group, empty
+    const mode = modeConfig.current != 0  ? "stack" : ""  // "stack" //"stack" // relative, group, empty
     for (let i = 0; i < cols.length; i++) {
       if (i == xIdx) continue
       const trace = {

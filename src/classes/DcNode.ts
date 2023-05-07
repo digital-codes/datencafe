@@ -35,12 +35,19 @@ export interface SigPort {
   port: string;
 }
 
+export interface DataSpecs {
+  port:string
+  columns: string []
+  types: string[]
+}
+
 export class DcNode {
   // properties"
   // ports and edges are specific. define here
   readonly _cls: string;
   readonly _ports: string[];
   readonly _edges: string[];
+  private _specs = [] as DataSpecs [] // data specs
   _name: string;
   readonly _id: string;
   _icon: string | null = null;
@@ -97,9 +104,13 @@ export class DcNode {
     DcNode.print("Created: " + this._id + " as " + this._name);
   }
   // static methods
+  // data specs
+  
+  // debugging
   setDebug(dbg: boolean) {
     DcNode.debug = dbg;
   }
+  // 
   static print(x: string) {
     if (DcNode.debug) {
       console.log("--------------------------------");
