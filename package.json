@@ -38,6 +38,7 @@
     "marked": "^4.3.0",
     "mitt": "^3.0.0",
     "moment-timezone": "^0.5.41",
+    "mqtt": "^4.3.7",
     "pinia": "^2.0.33",
     "string-similarity": "^4.0.4",
     "vue": "^3.2.21",

@@ -1,29 +1,34 @@
 // csv node class, extends DcNode
 
-import { DcNode } from "./DcNode"
-import { SigPort } from "./DcNode"
-import { NodeSpec } from '@/services/GlobalDefs';
+import { DcNode } from "./DcNode";
+import { SigPort } from "./DcNode";
+import { DataSpecs } from "./DcNode";
+import { NodeSpec } from "@/services/GlobalDefs";
 
 export class BarPlot extends DcNode {
   // properties
-  static _display = true
-  static _type = NodeSpec.CHART
-  private updCnt = 0
-  private plot: any = null
+  static _display = true;
+  static _type = NodeSpec.CHART;
+  private updCnt = 0;
+  private plot: any = null;
   // constructor
   constructor(id: string, typeInfo: any) {
     // although we need to call this first,
     // the super elements will be initialized later
     // access to super properties in the derived constructor
     // may result in "undefined" ...
-    const ports: string[] = ["A"]
-    const edges: string[] = ["d"]
-    super(id, "barplot", ports, edges)
-    DcNode.print(BarPlot._type + " created") // no access to super._id etc here
+    const ports: string[] = ["A"];
+    const edges: string[] = ["d"];
+    super(id, "barplot", ports, edges);
+    DcNode.print(BarPlot._type + " created"); // no access to super._id etc here
   }
   // getters/setters
-  get type() { return BarPlot._type }
-  get display() { return BarPlot._display }
+  get type() {
+    return BarPlot._type;
+  }
+  get display() {
+    return BarPlot._display;
+  }
   // methods
   async configure(optionString: string) {
     // we know the config structure here, so can just use the index
@@ -38,7 +43,7 @@ export class BarPlot extends DcNode {
     // just use first signal to trigger an update
     const src = this.signals[0].signal.split("-")[1];
     DcNode.print("Updating from:" + src);
-    await this.draw(src)
+    await this.draw(src);
   }
   // --------------------------------------------------
   async updated(msg: string, y?: any) {
@@ -46,42 +51,54 @@ export class BarPlot extends DcNode {
     const src = msg.split("-")[1];
     DcNode.print(
       src +
-      " updated " +
-      this.id +
-      ": " +
-      String(this.updCnt) +
-      "..." +
-      String(y)
+        " updated " +
+        this.id +
+        ": " +
+        String(this.updCnt) +
+        "..." +
+        String(y)
     );
     const dt = DcNode.providers.getDataById(src);
     const df = new DcNode.dfd.DataFrame(dt);
-    // pick first column as x
     const cols = df.columns;
-    // -------
-    // set config from columns
-    const config = this.config;
-    config.pop = "mixed";
-    config.options = [
+    const oldSpecs = this.specs;
+    const specs: DataSpecs[] = [
       {
-        id: "stacked",
-        type: "number",
-        label: "Stacked",
-        select: false,
-        value: 0,
-        min: 0,
-        max: 1,
-        current: 0,
-      },
-      {
-        id: "xaxis",
-        type: "string",
-        label: "X-Axis",
-        select: true,
-        value: cols,
-        current: cols[cols.length - 1],
+        port: "A",
+        columns: cols,
+        types: df.ctypes.values as string[],
       },
     ];
-    this.config = config;
+    if (oldSpecs.length == 0 || this.specsChanged(specs)) {
+      this.specs = specs;
+      // set new config, default pick first column as x
+      // -------
+      // set config from columns
+      const config = this.config;
+      config.pop = "mixed";
+      config.options = [
+        {
+          id: "stacked",
+          type: "number",
+          label: "Stacked",
+          select: false,
+          value: 0,
+          min: 0,
+          max: 1,
+          current: 0,
+        },
+        {
+          id: "xaxis",
+          type: "string",
+          label: "X-Axis",
+          select: true,
+          value: cols,
+          current: cols[cols.length - 1],
+        },
+      ];
+      this.config = config;
+    }
+    // draw
     await this.draw(src);
   }
   // ------- do the drawing
@@ -108,36 +125,39 @@ export class BarPlot extends DcNode {
       xCol = xConfig.current;
     }
     const xIdx = cols.findIndex((name) => name == xCol);
-    console.log("X index:", xIdx)
-    const X = df[cols[xIdx]].values
+    const X = df[cols[xIdx]].values;
     //console.log("X",X)
-    const traces = []
-    const mode = modeConfig.current != 0  ? "stack" : ""  // "stack" //"stack" // relative, group, empty
+    const traces = [];
+    const mode = modeConfig.current != 0 ? "stack" : ""; // "stack" //"stack" // relative, group, empty
     for (let i = 0; i < cols.length; i++) {
-      if (i == xIdx) continue
+      if (i == xIdx) continue;
       const trace = {
         x: X,
         y: df[cols[i]].values,
         type: "bar",
         name: cols[i],
-      }
-      traces.push(trace)
+      };
+      traces.push(trace);
     }
 
     const layout = {
       title: "Bar Chart",
       barmode: mode,
       xaxis: { title: cols[xIdx] },
-      yaxis: { title: 'Y axis' },
+      yaxis: { title: "Y axis" },
       /*
       height: 400,
       width: 800,
       */
     };
 
-    this.plot = await DcNode.Plotly.newPlot(divId, traces as any, layout as any)
+    this.plot = await DcNode.Plotly.newPlot(
+      divId,
+      traces as any,
+      layout as any
+    );
 
-    await this.messaging.emit(DcNode.signals.NODEANIMATE, this.id)
+    await this.messaging.emit(DcNode.signals.NODEANIMATE, this.id);
     //await super.messaging.emit(divId) // div used for signalling ..
     /*
     df.describe().print()
@@ -145,41 +165,39 @@ export class BarPlot extends DcNode {
     */
   }
   msgOn(x: string, y: string) {
-    // set event listener for signal 
-    DcNode.print("msg ON for " + x + " on port " + y)
-    super.messaging.on(x, (y: any) => { this.updated(x, y) })
-    const sigs = this.signals
-    if (sigs.find(s => s.signal == x) === undefined) {
-      sigs.push({ signal: x, port: y } as SigPort)
+    // set event listener for signal
+    DcNode.print("msg ON for " + x + " on port " + y);
+    super.messaging.on(x, (y: any) => {
+      this.updated(x, y);
+    });
+    const sigs = this.signals;
+    if (sigs.find((s) => s.signal == x) === undefined) {
+      sigs.push({ signal: x, port: y } as SigPort);
     }
-    this.signals = sigs
-    DcNode.print("Signals now: " + JSON.stringify(this.signals))
+    this.signals = sigs;
+    DcNode.print("Signals now: " + JSON.stringify(this.signals));
   }
   msgOff(x: string) {
-    // set event listener for signal 
-    DcNode.print("msg OFF for " + x)
-    super.messaging.off(x)
-    const sigs = this.signals
-    const idx = sigs.findIndex(s => s.signal == x)
-    if (idx == -1) throw (new Error("Invalid signal"))
-    sigs.splice(idx, 1)
-    this.signals = sigs
-    DcNode.print("Signals now: " + JSON.stringify(this.signals))
+    // set event listener for signal
+    DcNode.print("msg OFF for " + x);
+    super.messaging.off(x);
+    const sigs = this.signals;
+    const idx = sigs.findIndex((s) => s.signal == x);
+    if (idx == -1) throw new Error("Invalid signal");
+    sigs.splice(idx, 1);
+    this.signals = sigs;
+    DcNode.print("Signals now: " + JSON.stringify(this.signals));
   }
   async getImage() {
     if (this.plot == null) {
-      console.log("Empty plot")
-      return ""
+      console.log("Empty plot");
+      return "";
     }
     const png = await DcNode.Plotly.toImage(this.plot, {
       format: "png",
       width: 1280,
-      height: 720*1,
+      height: 720 * 1,
     });
-    return png
+    return png;
   }
-
 }
-
-
-

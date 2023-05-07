@@ -47,7 +47,7 @@ export class DcNode {
   readonly _cls: string;
   readonly _ports: string[];
   readonly _edges: string[];
-  private _specs = [] as DataSpecs [] // data specs
+  private _specs: DataSpecs [] // data specs
   _name: string;
   readonly _id: string;
   _icon: string | null = null;
@@ -100,12 +100,27 @@ export class DcNode {
     this._ports = ports;
     this._edges = edges;
     this._config = cfg;
+    this._specs = [] as DataSpecs []
     this._name = id; // initialize with id as name
     DcNode.print("Created: " + this._id + " as " + this._name);
   }
   // static methods
   // data specs
-  
+  specsChanged(specs: DataSpecs[]) {
+    const changed = true
+    // number of items
+    if (this.specs.length != specs.length) return changed
+    // individuals
+    for (const s of specs) {
+      const old:DataSpecs | undefined = this.specs.find((o:DataSpecs) => o.port == s.port)
+      if (old === undefined) return changed
+      // column names
+      if (!s.columns.every((value: any, index: number) => value === old.columns[index])) return changed
+      // dtypes
+      if (!s.types.every((value: any, index: number) => value === old.types[index])) return changed
+    }
+    return !changed
+  }
   // debugging
   setDebug(dbg: boolean) {
     DcNode.debug = dbg;
@@ -185,6 +200,12 @@ export class DcNode {
   // readonly first
   get id() {
     return this._id;
+  }
+  get specs() {
+    return this._specs
+  }
+  set specs(x) {
+    this._specs = x
   }
   get classname() {
     return this._cls;
