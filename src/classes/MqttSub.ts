@@ -62,7 +62,7 @@ export class MqttSub extends DcNode {
     if (this.client.connected) return;
     // add to store
     // connect to mqtt broker
-    this.client = connect("mqtt://mqtt.daten.cafe"); // create a client
+    this.client = connect({ host: "mqtt://mqtt.daten.cafe", port: 42401 }); // create a client
     if (this.client === undefined) {
       throw new Error("MQTT connect failed");
     }
