@@ -22,10 +22,13 @@ import { AddRows } from "@/classes/AddRows";
 import { AddCols } from "@/classes/AddCols";
 import { PointMap } from "@/classes/PointMap";
 import { WebCam } from "@/classes/WebCam";
+import { MqttSub } from "@/classes/MqttSub";
 
 // instance generator
 export const nodeFactory = async (id: string, type: any) => {
   switch (type.name) {
+    case "mqttsub":
+      return await new MqttSub(id, type);
     case "webcam":
       return await new WebCam(id, type);
     case "randomgen":

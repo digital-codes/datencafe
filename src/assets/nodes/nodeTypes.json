@@ -523,5 +523,20 @@
             "label": "Zufallsdaten Generator",
             "info": "Mehr Text f\u00fcr den Tooltip"
         }
+    },
+    "mqttsub": {
+        "name": "mqttsub",
+        "group": "source",
+        "implemented": false,
+        "thumb": "/img/widgets/Mqtt.png",
+        "consent": false,
+        "en": {
+            "label": "IoT - MQTT subscriber",
+            "info": "More text for a popup or tooltip"
+        },
+        "de": {
+            "label": "IoT - MQTT Subscriber",
+            "info": "Mehr Text f\u00fcr den Tooltip"
+        }
     }
 }

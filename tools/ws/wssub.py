@@ -10,7 +10,7 @@ async def main():
         # proxy=('https://daten.cafe/ws', 443)
     ) as websocket:
         # Subscribe to topic 'test'
-        await websocket.send(json.dumps({'action': 'subscribe', 'topic': 'test'}))
+        await websocket.send(json.dumps({'action': 'subscribe', 'topic': 'dcaf'}))
 
         # Receive messages from the server
         async for message in websocket:

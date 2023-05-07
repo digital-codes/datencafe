@@ -1,3 +1,9 @@
+
+// mqtt patch ...
+import '@/services/MqttPatch'; // First import
+// Other imports as usual
+
+
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router';
@@ -21,7 +27,7 @@ import '@ionic/vue/css/flex-utils.css';
 import '@ionic/vue/css/display.css';
 
 /* Theme variables */
-import './theme/variables.css';
+import '@/theme/variables.css';
 
 /* import the fontawesome core */
 import { library } from '@fortawesome/fontawesome-svg-core'

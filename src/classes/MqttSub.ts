@@ -11,7 +11,15 @@ import { readCSVBrowser } from "danfojs/dist/danfojs-base/io/browser";
 import { UserStore } from "@/services/UserStore";
 const userStore = UserStore();
 
-import { connect } from "mqtt"; // import connect from mqtt
+// need event bus here due to static methods ...
+import eventBus from "@/services/eventBus";
+
+
+/* did not work with mqtt.js Switch to websocket */
+/*
+import * as mqtt from "mqtt"; // import connect from mqtt
+*/
+// websocket is browser native, don't install anything
 
 const topic = "dcaf";
 
@@ -19,8 +27,7 @@ export class MqttSub extends DcNode {
   // properties
   static _display = false;
   static _type = NodeSpec.GEN;
-  private df = new DcNode.dfd.DataFrame();
-  private client: any | undefined;
+  private socket: any | undefined;
   // constructor
   constructor(id: string, typeInfo: any) {
     // although we need to call this first,
@@ -55,70 +62,117 @@ export class MqttSub extends DcNode {
     // update
     this.config = config; // update config
     if (options[0] != "") {
-      this.run()
+      await this.run()
     }
   }
+  // ---------------------------
   async run() {
-    if (this.client.connected) return;
+    if (this.socket && this.socket.connected) await this.stop();
     // add to store
     // connect to mqtt broker
-    this.client = connect({ host: "mqtt://mqtt.daten.cafe", port: 42401 }); // create a client
-    if (this.client === undefined) {
-      throw new Error("MQTT connect failed");
-    }
-    // subscribe
-    this.client.subscribe(topic + "/" + this.config.device);
-    this.client.on('connect', alert("MQTT connected"))
-    this.client.on("message", this.update);
+    /*
+const socket = new WebSocket('ws://example.com/socket');
 
-    this.df = new DcNode.dfd.DataFrame({ date: [], message: [] });
+socket.addEventListener('open', (event) => {
+  console.log('WebSocket connection opened');
+});
+
+socket.addEventListener('message', (event) => {
+  console.log('Received message:', event.data);
+});
+
+socket.addEventListener('close', (event) => {
+  console.log('WebSocket connection closed');
+});
+
+    if (this.socket && (this.socket.readyState === WebSocket.OPEN)) {
+
+
+    */
+
+
+    //DcNode.providers.add(super.id)
+    if (!DcNode.providers.exists(this.id)) {
+      await DcNode.providers.add(this.id, true); // generators are root nodes too. probabyl
+    }
     const meta = {
       storagetype: StorageTypes.DATAFRAME,
       generator: "mqtt",
       topic: this.config.options[0].value,
     };
-    //DcNode.providers.add(super.id)
-    if (!DcNode.providers.exists(this.id)) {
-      await DcNode.providers.add(this.id, true); // generators are root nodes too. probabyl
+    DcNode.providers.setMeta(this.id,meta)
+
+    // finally add socket event handlers
+    this.socket = new WebSocket("wss://daten.cafe/ws") // create a socket
+    if (this.socket === undefined) {
+      throw new Error("Socket connect failed");
     }
-    await DcNode.providers.update(this.id, DcNode.dfd.toJSON(this.df), meta);
-    // start generator
+    this.socket.addEventListener('open', async (event: any) => {
+      console.log('WebSocket connection opened');
+      await this.socket.send(JSON.stringify({ 'action': 'subscribe', 'topic': 'dcaf' }))
+    });
+
+    // this.socket.addEventListener('message', this.update)
+    this.socket.addEventListener('message', async (event: any) => {
+      MqttSub.update(this.id,event.data)
+    });
+
+
+    this.socket.addEventListener('close', async () => {
+      console.log('WebSocket connection closed');
+    });
+
+
     DcNode.print("Connected ");
   }
   // -------------------------------------
-  stop() {
+  async stop() {
     // stop generator
-    if (this.client.connected) {
-      this.client.unsubscribe(topic + "/" + this.config.device);
-      this.client.end();
+    if (this.socket && (this.socket.readyState === WebSocket.OPEN)) {
+      await this.socket.send(JSON.stringify({ 'action': 'unsubscribe', 'topic': 'dcaf' }))
+      await this.socket.close()
       // remove
+      this.socket.removeEventListener('open');
+      this.socket.removeEventListener('message');
+      this.socket.removeEventListener('close');
+ 
+  
       //DcNode.providers.remove(super.id)
       if (!DcNode.providers.exists(this.id)) return;
-      DcNode.providers.remove(this.id);
-      DcNode.print("Mqtt ended ");
+      await DcNode.providers.remove(this.id);
+      await DcNode.print("Mqtt ended ");
     }
   }
   // ------------
+  // event handler looses this => static method with id
+  static async update(id: string, data: any) {
+    DcNode.print("Update on " + String(id));
 
-  async update(topic: string, payload: any) {
-    DcNode.print("Update on " + String(this.name));
-
-    alert([topic, payload].join(": "));
+    console.log('Received message:', data)
 
     const date = Date.now();
-    const message = parseFloat("123");
-    this.df.append([date, message], this.df.shape[0]);
+    const message = 123 //parseFloat(data);
 
-    this.df.print();
-    this.df.ctypes.print();
-    if (!(await DcNode.providers.exists(this.id))) {
-      // create item in pubstore if not exists
-      await DcNode.providers.add(this.id, true); // file loaders are root nodes
+
+    // check data existing
+    let df 
+    let meta
+    if (await this.providers.hasData(id)) {
+      const dt = await DcNode.providers.getDataById(id)
+      df = await new DcNode.dfd.DataFrame(dt)
+      df.print()
+      const df2 = await new DcNode.dfd.DataFrame({"date":[date],"message":[message]});
+      //await df.append(row,idx,{inplace:true});
+      df = await DcNode.dfd.concat({ dfList: [df, df2], axis: 0 });
+    } else {
+      df = await new DcNode.dfd.DataFrame({"date":[date],"message":[message]});
     }
+    df.print()
+
     //const dt = await new Date().toISOString();
-    await DcNode.providers.update(this.id, DcNode.dfd.toJSON(this.df));
-    await this.messaging.emit(DcNode.signals.NODEANIMATE, this.id);
-    await super.messaging.emit((DcNode.signals.UPDPREFIX as string) + this.id);
+    await DcNode.providers.update(id, DcNode.dfd.toJSON(df));
+    await eventBus.emit(DcNode.signals.NODEANIMATE, id);
+    await eventBus.emit((DcNode.signals.UPDPREFIX as string) + id);
   }
   // getters
   get type() {

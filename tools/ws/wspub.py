@@ -9,7 +9,7 @@ async def main():
         ssl=True) as websocket:
         # Publish a message to topic 'test'
         await websocket.send(
-			json.dumps({'action': 'publish', 'topic': 'test', 'payload': 'Hello, World!'})
+			json.dumps({'action': 'publish', 'topic': 'dcaf', 'payload': 'Hello, World!'})
 		)
 
 if __name__ == '__main__':
