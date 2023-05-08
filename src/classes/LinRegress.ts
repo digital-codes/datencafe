@@ -149,7 +149,7 @@ export class LinRegress extends DcNode {
       slope = numerator / denominator;
       intercept = yMean - slope * xMean;
     } catch (e) {
-      console.log("Invalid column. Configure!", e)
+      alert("Invalid column. Configure first!")
       return
     }
 

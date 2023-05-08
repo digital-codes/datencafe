@@ -527,7 +527,7 @@
     "mqttsub": {
         "name": "mqttsub",
         "group": "source",
-        "implemented": false,
+        "implemented": true,
         "thumb": "/img/widgets/Mqtt.png",
         "consent": false,
         "en": {

@@ -10,8 +10,8 @@ class PubSub:
         self.clients = set()
         self.subscriptions = {}
 
-    async def subscribe(self, websocket, topic):
-        print("Subscribe to ",topic,self.clients,self.subscriptions)
+    async def subscribe(self, websocket, topic,appId,device):
+        print("Subscribe to ",topic,appId,device,self.clients,self.subscriptions)
 
         self.clients.add(websocket)
         if topic in self.subscriptions and len(self.subscriptions[topic]) > 0:
@@ -21,7 +21,7 @@ class PubSub:
             print("Adding topic ",topic,self.subscriptions)
             self.subscriptions[topic] = {websocket}
 
-    async def unsubscribe(self, websocket, topic):
+    async def unsubscribe(self, websocket, topic, appId):
         print("subscriptions: ",self.subscriptions)
 
         self.clients.remove(websocket)
@@ -53,9 +53,12 @@ async def handle(websocket, path):
             print(data,action,topic,payload)
 
             if action == 'subscribe':
-                await pubsub.subscribe(websocket, topic)
+                appId = data.get("id")
+                device = data.get("device")
+                await pubsub.subscribe(websocket, topic,appId,device)
             elif action == 'unsubscribe':
-                await pubsub.unsubscribe(websocket, topic)
+                appId = data.get("id")
+                await pubsub.unsubscribe(websocket, topic,appId)
             elif action == 'publish':
                 await pubsub.publish(topic, payload)
     except websockets.exceptions.ConnectionClosed:
@@ -64,7 +67,7 @@ async def handle(websocket, path):
         print("Cleaning up")
         pubsub.clients.remove(websocket)
         for topic in pubsub.subscriptions:
-            await pubsub.unsubscribe(websocket, topic)
+            await pubsub.unsubscribe(websocket, topic,"")
 
 async def main():
     async with websockets.serve(handle, '0.0.0.0', 9000):

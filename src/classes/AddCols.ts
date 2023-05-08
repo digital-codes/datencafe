@@ -129,7 +129,6 @@ export class AddCols extends DcNode {
     const currentCols = this.config.options.map((o: any) => o.label).sort()
 
     const haveSameElements = currentCols.every((value: any, index: number) => value === colsAll[index]);
-    // console.log("No change in input. Skipping config update")
     if (!haveSameElements || (currentCols.length == 0)) {
       // redo config here ...
       const config = this.config;

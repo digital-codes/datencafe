@@ -126,7 +126,6 @@ export class BarPlot extends DcNode {
     }
     const xIdx = cols.findIndex((name) => name == xCol);
     const X = df[cols[xIdx]].values;
-    //console.log("X",X)
     const traces = [];
     const mode = modeConfig.current != 0 ? "stack" : ""; // "stack" //"stack" // relative, group, empty
     for (let i = 0; i < cols.length; i++) {
@@ -190,7 +189,6 @@ export class BarPlot extends DcNode {
   }
   async getImage() {
     if (this.plot == null) {
-      console.log("Empty plot");
       return "";
     }
     const png = await DcNode.Plotly.toImage(this.plot, {

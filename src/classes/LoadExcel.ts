@@ -80,13 +80,10 @@ export class LoadExcel extends DcNode {
       await DcNode.providers.add(this.id, true); // file loaders are root nodes
     }
     const meta = await DcNode.providers.getMeta(this.id)
-    console.log("Oldmeta",meta)
     for (const m of ["url","license","attribution"]) {
       const idx = this.config.options.findIndex((o: any) => o.id == m)
-      console.log(m,idx)
       const val = this.config.options[idx].value
       if (val != "") {
-        console.log("Meta:",m,val)
         meta[m] = val // set meta
       }
     }

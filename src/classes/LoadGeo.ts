@@ -89,7 +89,6 @@ export class LoadGeo extends DcNode {
       url = window.location.href.split(window.location.pathname)[0] + url;
     }
     const fetchResult = await DcNode.fetchFile(url, "json")
-    console.log(fetchResult,fetchResult.success)
     if (!fetchResult.success) {
       alert("URL cannot be loaded directly. Log in or load locally");
       await super.messaging.emit(DcNode.signals.URLOADPREFIX, url)

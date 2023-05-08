@@ -1,6 +1,7 @@
 import asyncio
 import json
 import websockets
+import random
 
 async def main():
     async with websockets.connect(
@@ -9,7 +10,7 @@ async def main():
         ssl=True) as websocket:
         # Publish a message to topic 'test'
         await websocket.send(
-			json.dumps({'action': 'publish', 'topic': 'dcaf', 'payload': 'Hello, World!'})
+			json.dumps({'action': 'publish', 'topic': 'dcaf', 'payload': str(random.randint(-10,10))})
 		)
 
 if __name__ == '__main__':

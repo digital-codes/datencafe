@@ -134,7 +134,6 @@ export class JoinData extends DcNode {
         )
       }
       this.config = config;
-      console.log("Config:",this.config)
       // we're done
       DcNode.print("New config. cancel update")
       return
@@ -146,7 +145,6 @@ export class JoinData extends DcNode {
     */
     const first = this.config.options.findIndex((c: any) => {return (c.column && c.current == "First")})
     const second = this.config.options.findIndex((c: any) => {return (c.column && c.current == "Second")})
-    console.log("first/second",first,second)
     //         value: ["Ignore", "Only-A", "Only-B", "Append", "Add", "Sub", "Mul", "Div"],
     /*
     */
@@ -155,7 +153,6 @@ export class JoinData extends DcNode {
     joinCols.push(this.config.options[first].label) 
     if (second !== -1) 
       joinCols.push(this.config.options[second].label)
-    console.log(joinCols) 
 
     const joinedDf = DcNode.dfd.merge(
       {

@@ -142,7 +142,6 @@ export class PointMap extends DcNode {
 
     // clear if required
     if (this.geoData.type && this.geoData.type == "FeatureCollection") {
-      console.log("Clear markers and polies");
       this.features = [];
     }
     // copy data
@@ -151,7 +150,6 @@ export class PointMap extends DcNode {
     let hasPoints = false;
     const numFeatures = this.geoData.features.length;
     const cs = chroma.scale(['#ff0000', '#0000ff']).domain([0,numFeatures]);
-    console.log(cs(0).hex(),cs(5).hex())
     /*
     const colorscale = [
       [0, "rgba(255,0,0,.01)"],
@@ -161,7 +159,6 @@ export class PointMap extends DcNode {
     */
     for (let idx = 0; idx < this.geoData.features.length; idx++) {
       const element = await this.geoData.features[idx];
-      // console.log("e:", element);
       if (element.geometry.type.toLowerCase() == "point") {
         hasPoints = true;
         const point = {
@@ -219,7 +216,6 @@ export class PointMap extends DcNode {
           name = element.properties.name;
         }
         const fillColor = cs(idx).alpha(.1)
-        //console.log(fillColor)
         const polygon = {
           type: "scattermapbox",
           lat: lats,
@@ -295,7 +291,6 @@ export class PointMap extends DcNode {
   }
   async getImage() {
     if (this.plot == null) {
-      console.log("Empty plot");
       return "";
     }
     const png = await DcNode.Plotly.toImage(this.plot, {

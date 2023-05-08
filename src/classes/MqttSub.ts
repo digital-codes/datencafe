@@ -1,4 +1,7 @@
-// csv node class, extends DcNode
+// mqtt node class, extends DcNode
+// actually uses websockets. mqtt protocol seems not to work from browser
+// https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API/Writing_WebSocket_client_applications
+
 
 import { DcNode } from "./DcNode";
 //import { DataFrame, toJSON } from 'danfojs/dist/danfojs-browser/src';
@@ -13,6 +16,7 @@ const userStore = UserStore();
 
 // need event bus here due to static methods ...
 import eventBus from "@/services/eventBus";
+import { DelayTimer } from "@/services/DelayTimer";
 
 
 /* did not work with mqtt.js Switch to websocket */
@@ -67,31 +71,13 @@ export class MqttSub extends DcNode {
   }
   // ---------------------------
   async run() {
-    if (this.socket && this.socket.connected) await this.stop();
-    // add to store
-    // connect to mqtt broker
-    /*
-const socket = new WebSocket('ws://example.com/socket');
-
-socket.addEventListener('open', (event) => {
-  console.log('WebSocket connection opened');
-});
-
-socket.addEventListener('message', (event) => {
-  console.log('Received message:', event.data);
-});
-
-socket.addEventListener('close', (event) => {
-  console.log('WebSocket connection closed');
-});
-
+    console.log("Start",this.socket)
     if (this.socket && (this.socket.readyState === WebSocket.OPEN)) {
+      DcNode.print("Already connected")
+      await this.stop();
+      await DelayTimer(500)
+    }
 
-
-    */
-
-
-    //DcNode.providers.add(super.id)
     if (!DcNode.providers.exists(this.id)) {
       await DcNode.providers.add(this.id, true); // generators are root nodes too. probabyl
     }
@@ -108,25 +94,33 @@ socket.addEventListener('close', (event) => {
     if (this.socket === undefined) {
       throw new Error("Socket connect failed");
     }
-    // get app id
-    // get  app id from user store
-    const appId = userStore.getAppId()
-    console.log("ID:",appId)
 
-    this.socket.addEventListener('open', async (event: any) => {
-      console.log('WebSocket connection opened');
-      await this.socket.send(JSON.stringify({ 'action': 'subscribe', 'topic': 'dcaf' }))
-    });
+    // this.socket.addEventListener('open', async (event: any) => {
+      this.socket.onopen = async (event: any) => {
+        console.log('WebSocket connection opened');
+      // get  app id from user store
+      const appId = userStore.getAppId()
+      const device = this.config.options[0].value
+      console.log("ID:",appId,device)
+      await this.socket.send(JSON.stringify({ 
+        'action': 'subscribe', 
+        'topic': 'dcaf', 
+        "id":appId,
+        "device": device
+       }))
+    };
 
     // this.socket.addEventListener('message', this.update)
-    this.socket.addEventListener('message', async (event: any) => {
+    
+    // this.socket.addEventListener('message', async (event: any) => {
+    this.socket.onmessage = async (event: any) => {
       MqttSub.update(this.id,event.data)
-    });
+    };
 
 
-    this.socket.addEventListener('close', async () => {
+    this.socket.onclose = async () => {
       console.log('WebSocket connection closed');
-    });
+    };
 
 
     DcNode.print("Connected ");
@@ -134,14 +128,19 @@ socket.addEventListener('close', (event) => {
   // -------------------------------------
   async stop() {
     // stop generator
+    console.log("Stop",this.socket)
     if (this.socket && (this.socket.readyState === WebSocket.OPEN)) {
-      await this.socket.send(JSON.stringify({ 'action': 'unsubscribe', 'topic': 'dcaf' }))
+      // get  app id from user store
+      const appId = await userStore.getAppId()
+      console.log("Unsubscribe ID:",appId)
+      await this.socket.send(JSON.stringify({ 'action': 'unsubscribe', 'topic': 'dcaf', "id":appId }))
       await this.socket.close()
       // remove
+      /*
       this.socket.removeEventListener('open');
       this.socket.removeEventListener('message');
       this.socket.removeEventListener('close');
- 
+      */
   
       //DcNode.providers.remove(super.id)
       if (!DcNode.providers.exists(this.id)) return;
@@ -157,12 +156,11 @@ socket.addEventListener('close', (event) => {
     console.log('Received message:', data)
 
     const date = Date.now();
-    const message = 123 //parseFloat(data);
+    const message = parseFloat(data);
 
 
     // check data existing
     let df 
-    let meta
     if (await this.providers.hasData(id)) {
       const dt = await DcNode.providers.getDataById(id)
       df = await new DcNode.dfd.DataFrame(dt)

@@ -93,7 +93,6 @@ export class LoadJson extends DcNode {
       await super.messaging.emit(DcNode.signals.URLOADPREFIX, url)
       return;
     }
-    console.log(Object.keys(fetchResult.data))
     if ((Object.keys(fetchResult.data).includes("type")) && (fetchResult.data.type.toLowerCase() == "FeatureCollection".toLowerCase() )) {
       alert("Use GeoJson loader");
       return;

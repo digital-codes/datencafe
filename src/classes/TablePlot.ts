@@ -41,7 +41,6 @@ export class TablePlot extends DcNode {
     // new plot
     const cols = df.columns
     const ctypes = df.ctypes.values
-    console.log("cols:", cols)
     const header = []
     const values = []
     const fmt = []
@@ -54,7 +53,6 @@ export class TablePlot extends DcNode {
         fmt.push(['.3f'])
       }
     }
-    console.log("header", header)
 
 
     const data = [{
@@ -109,7 +107,6 @@ export class TablePlot extends DcNode {
   }
   async getImage() {
     if (this.plot == null) {
-      console.log("Empty plot")
       return ""
     }
     const png = await DcNode.Plotly.toImage(this.plot, {

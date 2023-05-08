@@ -226,7 +226,6 @@ export class KmeansCluster extends DcNode {
     // we get an array with centrods, size K
     // and clusters = an array size K with arrays of points
 
-    console.log(clusters);
     // create dataframe for centroids and clusters
     const kmDf = await this.createdDf(centroids, clusters);
     kmDf.print()
