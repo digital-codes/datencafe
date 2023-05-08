@@ -70,7 +70,7 @@ export class RenameCols extends DcNode {
     ];
     if (oldSpecs.length == 0 || this.specsChanged(specs)) {
       this.specs = specs;
-      // set new config, default pick first column as x
+      // set new config
       // -------
       // set config from columns
       const config = this.config;

@@ -21,6 +21,7 @@ import { ScalarMath } from "@/classes/ScalarMath";
 import { AddRows } from "@/classes/AddRows";
 import { AddCols } from "@/classes/AddCols";
 import { RenameCols } from "@/classes/RenameCols";
+import { GrpItems } from "@/classes/GrpItems";
 import { PointMap } from "@/classes/PointMap";
 import { WebCam } from "@/classes/WebCam";
 import { MqttSub } from "@/classes/MqttSub";
@@ -60,6 +61,8 @@ export const nodeFactory = async (id: string, type: any) => {
       return await new RenameCols(id, type);
     case "joindata":
       return await new JoinData(id, type);
+    case "grpitems":
+      return await new GrpItems(id, type);
     case "selcell":
       return await new SelCell(id, type);
     case "selcols":

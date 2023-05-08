@@ -314,6 +314,21 @@
             "info": "Mehr Text f\u00fcr den Tooltip"
         }
     },
+    "grpitems": {
+        "name": "grpitems",
+        "group": "processing",
+        "implemented": true,
+        "thumb": "/img/widgets/GroupBy.png",
+        "consent": false,
+        "en": {
+            "label": "Get group item values",
+            "info": "Select one columns as group and retrieve unique values"
+        },
+        "de": {
+            "label": "Gruppenwerte holen",
+            "info": "Eine Spalten zum Gruppieren auswählen und die Elemente liefern"
+        }
+    },
     "selcell": {
         "name": "selcell",
         "group": "processing",
