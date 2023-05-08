@@ -40,7 +40,7 @@ export class RenameCols extends DcNode {
     // just use first signal to trigger an update
     DcNode.print("Updating with:" + this.signals[0].signal)
     //await this.messaging.emit(this.signals[0].signal)
-    this.updated(this.signals[0].signal)
+    await this.updated(this.signals[0].signal)
   }
   // ---------------------------------------------------------
   async updated(msg: string, y?: any) {
@@ -56,8 +56,8 @@ export class RenameCols extends DcNode {
     }
 
     const src = msg.split("-")[1];
-    const dt = DcNode.providers.getDataById(src);
-    const df = new DcNode.dfd.DataFrame(dt);
+    const dt = await DcNode.providers.getDataById(src);
+    const df = await new DcNode.dfd.DataFrame(dt);
     const cols = df.columns;
     console.log("Rename - Cols:",cols)
     const oldSpecs = this.specs;
@@ -111,10 +111,10 @@ export class RenameCols extends DcNode {
       }
     }
     if (drops.length > 0) {
-      df.drop({ columns: drops, inplace: true })
+      await df.drop({ columns: drops, inplace: true })
     }
-    df.rename(colMap, { axis: 1, inplace: true });
-    df.print()
+    await df.rename(colMap, { axis: 1, inplace: true });
+    await df.print()
 
     // put data into store then send message
     const meta = await DcNode.providers.getMeta(this.id)

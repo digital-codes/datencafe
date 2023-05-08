@@ -108,30 +108,32 @@ export class AddCols extends DcNode {
     // get A and B columns
     const colsA = dfA.columns
     const colsB = dfB.columns
-    const colsAB = colsA.filter(item => colsB.includes(item)).sort()
-    const colsAOnly = colsA.filter(item => !colsB.includes(item)).sort()
-    const colsBOnly = colsB.filter(item => !colsA.includes(item)).sort()
+    const colsAB = await colsA.filter(item => colsB.includes(item)).sort()
+    const colsAOnly = await colsA.filter(item => !colsB.includes(item)).sort()
+    const colsBOnly = await colsB.filter(item => !colsA.includes(item)).sort()
     // rename colsA and B, in Dtaaframe and list!
     const colMapA: any = {}
     for (const idx in colsAOnly) {
       colMapA[colsAOnly[idx]] = colsAOnly[idx] + "_A"
       colsAOnly[idx] = colsAOnly[idx] + "_A"
     }
-    dfA.rename(colMapA, { axis: 1, inplace: true });
+    await dfA.rename(colMapA, { axis: 1, inplace: true });
     const colMapB: any = {}
     for (const idx in colsBOnly) {
       colMapB[colsBOnly[idx]] = colsBOnly[idx] + "_B"
       colsBOnly[idx] = colsBOnly[idx] + "_B"
     }
-    dfB.rename(colMapB, { axis: 1, inplace: true })
+    await dfB.rename(colMapB, { axis: 1, inplace: true })
 
     const colsAll = [...colsAB, ...colsAOnly, ...colsBOnly].sort()
-    const currentCols = this.config.options.map((o: any) => o.label).sort()
+    let currentCols = []
+    if (this.config.options && (this.config.options.length > 0))
+      currentCols = this.config.options.map((o: any) => o.label).sort()
 
-    const haveSameElements = currentCols.every((value: any, index: number) => value === colsAll[index]);
+    const haveSameElements = await currentCols.every((value: any, index: number) => value === colsAll[index]);
     if (!haveSameElements || (currentCols.length == 0)) {
       // redo config here ...
-      const config = this.config;
+      const config:any = {} // this.config;
       config.pop = "mixed";
 
       config.options = []
@@ -140,8 +142,8 @@ export class AddCols extends DcNode {
       const typesB = dfB.ctypes.values as string[]
       for (const c of colsAB) {
         // check datatype for numerics
-        const idxA = colsA.findIndex((n: string) => n == c)
-        const idxB = colsB.findIndex((n: string) => n == c)
+        const idxA = await colsA.findIndex((n: string) => n == c)
+        const idxB = await colsB.findIndex((n: string) => n == c)
         const numerics = ["int32", "float32"]
         let valueList = ["Ignore", "Only-A", "Only-B", "Append"]
         if (numerics.includes(typesA[idxA]) && numerics.includes(typesB[idxB])) {
