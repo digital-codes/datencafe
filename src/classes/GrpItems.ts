@@ -65,7 +65,6 @@ export class GrpItems extends DcNode {
     const dt = await DcNode.providers.getDataById(src);
     const df = await new DcNode.dfd.DataFrame(dt);
     const cols = df.columns;
-    console.log("Rename - Cols:",cols)
     const oldSpecs = this.specs;
     const specs: DataSpecs[] = [
       {
@@ -96,15 +95,12 @@ export class GrpItems extends DcNode {
       return
     }
 
-    console.log("Config:",this.config.options)
     // get grouping column
     const groupBy = this.config.options[0].current
     const gp = df.groupby([groupBy])
     const groups = []
     for (const g of Object.keys(gp.groups)) groups.push([g])
-    console.log("Groups:",groups)
     const newDf = new DcNode.dfd.DataFrame(groups,{columns:[groupBy]})
-    newDf.print()
     // put data into store then send message
     const meta = await DcNode.providers.getMeta(this.id)
     meta.storagetype = StorageTypes.DATAFRAME

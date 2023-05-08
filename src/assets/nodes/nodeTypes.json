@@ -362,7 +362,7 @@
     "selrows": {
         "name": "selrows",
         "group": "processing",
-        "implemented": false,
+        "implemented": true,
         "thumb": "/img/widgets/SelectRows.png",
         "consent": false,
         "en": {

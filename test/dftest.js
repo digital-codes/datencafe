@@ -22,4 +22,6 @@ for (const g of Object.keys(gp.groups)) groups.push([g])
 console.log(groups)
 const newDf = new dfd.DataFrame(groups,{columns:[groupBy]})
 newDf.print()
+console.log(newDf[groupBy].values)
+console.log(newDf[newDf.columns[0]].values)
 
