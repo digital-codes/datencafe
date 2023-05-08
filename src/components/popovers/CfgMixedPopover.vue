@@ -29,7 +29,7 @@
 import { IonContent, IonButton } from '@ionic/vue';
 import { IonInput, IonLabel, IonSelect, IonSelectOption, IonCheckbox } from '@ionic/vue';
 
-import { ref, onMounted } from "vue"
+import { ref, onMounted, inject } from "vue"
 
 import eventBus from '@/services/eventBus';
 
@@ -52,12 +52,18 @@ const props = defineProps({
   options: [] as CfgMixedParms[]
 })
 
+// inject appid
+// inject static value with default
+const appId = inject('appId')
+
+
 onMounted(() => {
   props.options.forEach((e) => {
     console.log("Prop:",e.value)
     opts.value.push(e.value)
     vals.value.push(e.current)
   })
+  console.log("AppID:",appId)
 })
 
 

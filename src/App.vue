@@ -46,7 +46,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
+import { onMounted, ref, provide } from "vue";
 import { UserStore, Modes } from "@/services/UserStore";
 const userStore = UserStore();
 
@@ -112,6 +112,7 @@ import { useRoute } from "vue-router";
 import router from "@/router";
 const route = useRoute();
 
+
 const gesture = ref();
 const forceMobile = true;
 const debounce = ref(false);
@@ -136,6 +137,12 @@ onMounted(() => {
 
     gesture.value.enable();
   }
+  // create global uuid
+  const  uuid = self.crypto.randomUUID();
+  console.log(uuid); // for example "36b8f84d-df4e-4d49-b662-bcde71a8764f"
+  provide("appId", uuid)
+ 
+
 });
 
 const onMove = (detail) => {

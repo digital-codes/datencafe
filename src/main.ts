@@ -1,9 +1,4 @@
 
-// mqtt patch ...
-import '@/services/MqttPatch'; // First import
-// Other imports as usual
-
-
 import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router';
