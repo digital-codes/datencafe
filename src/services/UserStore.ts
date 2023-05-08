@@ -43,7 +43,8 @@ export interface UserInfo {
   starter?: string // calling a story
   storyLoading?: boolean
   flowrdy?: boolean // flow has been loaded
-  flowIds?: string[] // flow ids
+  flowIds?: string[] // flow ids,
+  appId?:string
 }
 
 const clr = {
@@ -64,7 +65,7 @@ const clr = {
   starter: "",
   storyLoading: false,
   flowrdy: false,
-  flowIds: [] as string[]
+  flowIds: [] as string[],
 };
 
 export const UserStore = defineStore({
@@ -83,8 +84,11 @@ export const UserStore = defineStore({
       this.starter = clr1.starter;
       this.flowrdy = clr1.flowrdy;
       this.flowIds = clr1.flowIds;
+      this.appId = self.crypto.randomUUID();
       this.storyLoading = clr1.storyLoading;
       this.clearStory()
+      //self.crypto.randomUUID().then(value => this.appId = value);
+
     },
     clearStory() {
       console.log("clear story");
@@ -234,6 +238,9 @@ export const UserStore = defineStore({
     */
   },
   getters: {
+    getAppId: (state) => () => {
+      return state.appId;
+    },
     isTokenValid: (state) => async () => {
       const ok = await state.jwtVerify(state.token,state.key)
       console.log("Token valid? ",ok)

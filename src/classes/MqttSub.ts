@@ -102,11 +102,17 @@ socket.addEventListener('close', (event) => {
     };
     DcNode.providers.setMeta(this.id,meta)
 
+    
     // finally add socket event handlers
     this.socket = new WebSocket("wss://daten.cafe/ws") // create a socket
     if (this.socket === undefined) {
       throw new Error("Socket connect failed");
     }
+    // get app id
+    // get  app id from user store
+    const appId = userStore.getAppId()
+    console.log("ID:",appId)
+
     this.socket.addEventListener('open', async (event: any) => {
       console.log('WebSocket connection opened');
       await this.socket.send(JSON.stringify({ 'action': 'subscribe', 'topic': 'dcaf' }))

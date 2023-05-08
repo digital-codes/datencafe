@@ -46,7 +46,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref, provide } from "vue";
+import { onMounted, ref } from "vue";
 import { UserStore, Modes } from "@/services/UserStore";
 const userStore = UserStore();
 
@@ -137,11 +137,9 @@ onMounted(() => {
 
     gesture.value.enable();
   }
-  // create global uuid
-  const  uuid = self.crypto.randomUUID();
-  console.log(uuid); // for example "36b8f84d-df4e-4d49-b662-bcde71a8764f"
-  provide("appId", uuid)
- 
+  // get  app id from user store
+  const appId = userStore.getAppId()
+  console.log("ID:",appId)
 
 });
 
