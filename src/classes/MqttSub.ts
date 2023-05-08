@@ -71,7 +71,6 @@ export class MqttSub extends DcNode {
   }
   // ---------------------------
   async run() {
-    console.log("Start",this.socket)
     if (this.socket && (this.socket.readyState === WebSocket.OPEN)) {
       DcNode.print("Already connected")
       await this.stop();
@@ -97,11 +96,9 @@ export class MqttSub extends DcNode {
 
     // this.socket.addEventListener('open', async (event: any) => {
       this.socket.onopen = async (event: any) => {
-        console.log('WebSocket connection opened');
       // get  app id from user store
       const appId = userStore.getAppId()
       const device = this.config.options[0].value
-      console.log("ID:",appId,device)
       await this.socket.send(JSON.stringify({ 
         'action': 'subscribe', 
         'topic': 'dcaf', 
@@ -119,7 +116,7 @@ export class MqttSub extends DcNode {
 
 
     this.socket.onclose = async () => {
-      console.log('WebSocket connection closed');
+      DcNode.print('WebSocket connection closed');
     };
 
 
@@ -128,11 +125,9 @@ export class MqttSub extends DcNode {
   // -------------------------------------
   async stop() {
     // stop generator
-    console.log("Stop",this.socket)
     if (this.socket && (this.socket.readyState === WebSocket.OPEN)) {
       // get  app id from user store
       const appId = await userStore.getAppId()
-      console.log("Unsubscribe ID:",appId)
       await this.socket.send(JSON.stringify({ 'action': 'unsubscribe', 'topic': 'dcaf', "id":appId }))
       await this.socket.close()
       // remove
@@ -153,8 +148,6 @@ export class MqttSub extends DcNode {
   static async update(id: string, data: any) {
     DcNode.print("Update on " + String(id));
 
-    console.log('Received message:', data)
-
     const date = Date.now();
     const message = parseFloat(data);
 
@@ -164,14 +157,12 @@ export class MqttSub extends DcNode {
     if (await this.providers.hasData(id)) {
       const dt = await DcNode.providers.getDataById(id)
       df = await new DcNode.dfd.DataFrame(dt)
-      df.print()
       const df2 = await new DcNode.dfd.DataFrame({"date":[date],"message":[message]});
       //await df.append(row,idx,{inplace:true});
       df = await DcNode.dfd.concat({ dfList: [df, df2], axis: 0 });
     } else {
       df = await new DcNode.dfd.DataFrame({"date":[date],"message":[message]});
     }
-    df.print()
 
     //const dt = await new Date().toISOString();
     await DcNode.providers.update(id, DcNode.dfd.toJSON(df));
