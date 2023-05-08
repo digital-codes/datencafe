@@ -284,10 +284,10 @@
             "info": "Mehr Text f\u00fcr den Tooltip"
         }
     },
-    "join": {
-        "name": "join",
+    "joindata": {
+        "name": "joindata",
         "group": "processing",
-        "implemented": false,
+        "implemented": true,
         "thumb": "/img/widgets/Join.png",
         "consent": false,
         "en": {

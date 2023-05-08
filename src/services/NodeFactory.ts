@@ -55,6 +55,8 @@ export const nodeFactory = async (id: string, type: any) => {
       return await new AddRows(id, type);
     case "addcols":
       return await new AddCols(id, type);
+    case "joindata":
+      return await new JoinData(id, type);
     case "selcell":
       return await new SelCell(id, type);
     case "selcols":

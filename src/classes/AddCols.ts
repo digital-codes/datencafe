@@ -6,7 +6,6 @@ import { SigPort } from "./DcNode"
 import { NodeSpec } from '@/services/GlobalDefs';
 import { DelayTimer } from "@/services/DelayTimer"
 import { StorageTypes } from "@/services/GlobalDefs";
-import { DefaultDeserializer } from "v8";
 
 export class AddCols extends DcNode {
   // properties
