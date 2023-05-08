@@ -27,13 +27,7 @@ export class SelRows extends DcNode {
   get display() { return SelRows._display }
   // methods
   async configure(optionString: string) {
-    // we know the config structure here, so can just use the index
-    const options = JSON.parse(optionString)
-    for (let i = 0; i < this.config.options.length; i++) {
-      this.config.options[i].current = options[i]
-      DcNode.print("Set option:" + options[i])
-    }
-    // now check the sources and make the operation
+    // check the sources first
     // both ports need to be connect, so we must have 2 signals
     DcNode.print("Signals attached:" + JSON.stringify(this.signals))
     // check if complete
@@ -41,6 +35,11 @@ export class SelRows extends DcNode {
       this.config.options = []
       this.specs = []
       return
+    }
+    const options = JSON.parse(optionString)
+    for (let i = 0; i < this.config.options.length; i++) {
+      this.config.options[i].current = options[i]
+      DcNode.print("Set option:" + options[i])
     }
     // just use first signal to trigger an update
     DcNode.print("Updating with:" + this.signals[0].signal)
@@ -107,7 +106,8 @@ export class SelRows extends DcNode {
         types: dfB.ctypes.values as string[],
       },
     ];
-    if ( oldSpecs.length == 0 || this.specsChanged(specs)) {
+    if (oldSpecs.length == 0 || this.specsChanged(specs)) {
+      alert("SelRows specs changed")
       this.specs = specs;
       // set new config, default pick first column as x
       const config = this.config;
@@ -154,9 +154,29 @@ export class SelRows extends DcNode {
     // ------------------------
     // get column and mode
     const filterCol = this.config.options.find((o: any) => o.id == "columns").current
-    const filterVal = this.config.options.find((o: any) => o.id == "filter").current
+    let filterVal = this.config.options.find((o: any) => o.id == "filter").current
     const mode = this.config.options.find((o: any) => o.id == "mode").current
     console.log("Filter on", filterCol, filterVal, mode)
+    // find index in columns
+    const colIdx = colsA.findIndex((c: string) => c == filterCol)
+    const filterType = dfA.ctypes.values[colIdx]
+    switch (filterType) {
+      case "int32":
+        if (typeof(filterVal) == "string")
+        filterVal = parseInt(filterVal)
+        break;
+      case "float32":
+        if (typeof(filterVal) == "string")
+        filterVal = parseFloat(filterVal)
+        break;
+        case "string":
+          if (typeof(filterVal) != "string")
+          filterVal = String(filterVal)
+          break;
+        default:
+        break;
+    }
+    console.log("types:", dfA.ctypes.values, filterType, typeof (filterVal))
 
     let newDf
     switch (mode) {
