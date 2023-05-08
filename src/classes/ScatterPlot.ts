@@ -2,6 +2,7 @@
 
 import { DcNode } from "./DcNode";
 import { SigPort } from "./DcNode";
+import { DataSpecs } from "./DcNode";
 import { NodeSpec } from "@/services/GlobalDefs";
 
 export class ScatterPlot extends DcNode {
@@ -62,21 +63,34 @@ export class ScatterPlot extends DcNode {
     const df = new DcNode.dfd.DataFrame(dt);
     // pick first column as x
     const cols = df.columns;
-    // -------
-    // set config from columns
-    const config = this.config;
-    config.pop = "mixed";
-    config.options = [
+    const oldSpecs = this.specs;
+    const specs: DataSpecs[] = [
       {
-        id: "xaxis",
-        type: "string",
-        label: "X-Axis",
-        select: true,
-        value: cols,
-        current: cols[cols.length - 1],
+        port: "A",
+        columns: cols,
+        types: df.ctypes.values as string[],
       },
     ];
-    this.config = config;
+    if (oldSpecs.length == 0 || this.specsChanged(specs)) {
+      this.specs = specs;
+      // set new config, default pick first column as x
+      // -------
+      // set config from columns
+      const config = this.config;
+      config.pop = "mixed";
+      config.options = [
+        {
+          id: "xaxis",
+          type: "string",
+          label: "X-Axis",
+          select: true,
+          value: cols,
+          current: cols[cols.length - 1],
+        },
+      ];
+      this.config = config;
+    }
+    // draw
     await this.draw(src);
   }
   // ------- do the drawing

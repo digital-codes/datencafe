@@ -43,7 +43,7 @@ export class BarPlot extends DcNode {
     // just use first signal to trigger an update
     const src = this.signals[0].signal.split("-")[1];
     DcNode.print("Updating from:" + src);
-    await this.draw(src);
+    await this.draw(src)
   }
   // --------------------------------------------------
   async updated(msg: string, y?: any) {

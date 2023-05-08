@@ -2,6 +2,7 @@
 
 import { DcNode } from "./DcNode";
 import { SigPort } from "./DcNode";
+import { DataSpecs } from "./DcNode";
 import { NodeSpec } from "@/services/GlobalDefs";
 
 export class KmeansCluster extends DcNode {
@@ -51,48 +52,61 @@ export class KmeansCluster extends DcNode {
     const src = msg.split("-")[1];
     DcNode.print(
       src +
-        " updated " +
-        this.id +
-        ": " +
-        String(this.updCnt) +
-        "..." +
-        String(y)
+      " updated " +
+      this.id +
+      ": " +
+      String(this.updCnt) +
+      "..." +
+      String(y)
     );
     const dt = DcNode.providers.getDataById(src);
     const df = new DcNode.dfd.DataFrame(dt);
     // pick first column as x
     const cols = df.columns;
     // -------
-    // set config from columns
-    const config = this.config;
-    config.pop = "mixed";
-    config.options = [
+    const oldSpecs = this.specs;
+    const specs: DataSpecs[] = [
       {
-        id: "xaxis",
-        type: "string",
-        label: "Independent Var",
-        select: true,
-        value: cols,
-        current: cols[cols.length - 1],
-      },
-      {
-        id: "yaxis",
-        type: "string",
-        label: "Dependent Var",
-        select: true,
-        value: cols,
-        current: cols[0],
-      },
-      {
-        id: "clusters",
-        type: "number",
-        label: "Clusters",
-        select: true,
-        value: [2, 3, 4, 5],
-        current: 3,
+        port: "A",
+        columns: cols,
+        types: df.ctypes.values as string[],
       },
     ];
-    this.config = config;
+    if (oldSpecs.length == 0 || this.specsChanged(specs)) {
+      this.specs = specs;
+      // set config from columns
+      const config = this.config;
+      config.pop = "mixed";
+      config.options = [
+        {
+          id: "xaxis",
+          type: "string",
+          label: "Independent Var",
+          select: true,
+          value: cols,
+          current: cols[cols.length - 1],
+        },
+        {
+          id: "yaxis",
+          type: "string",
+          label: "Dependent Var",
+          select: true,
+          value: cols,
+          current: cols[0],
+        },
+        {
+          id: "clusters",
+          type: "number",
+          label: "Clusters",
+          select: false,
+          value: 3, // [2, 3, 4, 5],
+          current: 3,
+          min: 2,
+          max: 5
+        },
+      ];
+      this.config = config;
+    }
     await this.draw(src);
   }
   // ------- do the drawing
@@ -133,6 +147,8 @@ export class KmeansCluster extends DcNode {
 
     const xIdx = cols.findIndex((name) => name == xCol);
     const yIdx = cols.findIndex((name) => name == yCol);
+    const xName = cols[xIdx]
+    const yName = cols[yIdx]
     const XY = df.loc({ columns: [cols[xIdx], cols[yIdx]] });
 
     const data: any = XY.values.map((r: any) => {
@@ -252,10 +268,10 @@ export class KmeansCluster extends DcNode {
     const layout = {
       title: "K-Means Clustering",
       xaxis: {
-        title: "X",
+        title: xName,
       },
       yaxis: {
-        title: "Y",
+        title: yName,
       },
     };
 
@@ -341,7 +357,7 @@ export class KmeansCluster extends DcNode {
     const png = await DcNode.Plotly.toImage(this.plot, {
       format: "png",
       width: 1280,
-      height: 720*1,
+      height: 720 * 1,
     });
     return png;
   }

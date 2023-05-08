@@ -2,6 +2,7 @@
 
 import { DcNode } from "./DcNode";
 import { SigPort } from "./DcNode";
+import { DataSpecs } from "./DcNode";
 import { NodeSpec } from "@/services/GlobalDefs";
 
 export class LinRegress extends DcNode {
@@ -62,31 +63,47 @@ export class LinRegress extends DcNode {
     const df = new DcNode.dfd.DataFrame(dt);
     // pick first column as x
     const cols = df.columns;
-    // -------
-    // set config from columns
-    const config = this.config;
-    config.pop = "mixed";
-    config.options = [
+    // check dataspecs
+    const oldSpecs = this.specs;
+    const specs: DataSpecs[] = [
       {
-        id: "xaxis",
-        type: "string",
-        label: "Independent Var",
-        select: true,
-        value: cols,
-        current: cols[cols.length - 1],
-      },
-      {
-        id: "yaxis",
-        type: "string",
-        label: "Dependent Var",
-        select: true,
-        value: cols,
-        current: cols[0],
+        port: "A",
+        columns: cols,
+        types: df.ctypes.values as string[],
       },
     ];
-    this.config = config;
+    if (oldSpecs.length == 0 || this.specsChanged(specs)) {
+      this.specs = specs;
+
+      // set new config, default pick first column as x
+      // -------
+      // set config from columns
+      const config = this.config
+      config.pop = "mixed"
+      config.options = [
+        {
+          id: "xaxis",
+          type: "string",
+          label: "Independent Var",
+          select: true,
+          value: cols,
+          current: cols[cols.length - 1],
+        },
+        {
+          id: "yaxis",
+          type: "string",
+          label: "Dependent Var",
+          select: true,
+          value: cols,
+          current: cols[0],
+        },
+      ]
+      this.config = config;
+    }
+
     await this.draw(src);
   }
+
   // ------- do the drawing
   private async draw(src: string) {
     const dt = DcNode.providers.getDataById(src);
@@ -191,9 +208,9 @@ export class LinRegress extends DcNode {
           bordercolor: '#000000', // border color of the text background
           borderwidth: 1, // border width of the text background
           borderpad: 4 // padding between the text and the border          
-      }
+        }
       ],
-      showlegend: false      
+      showlegend: false
     }
 
     // ----------------------
@@ -243,7 +260,7 @@ export class LinRegress extends DcNode {
     const png = await DcNode.Plotly.toImage(this.plot, {
       format: "png",
       width: 1280,
-      height: 720*1,
+      height: 720 * 1,
     });
     return png;
   }
