@@ -110,10 +110,10 @@ export class RenameCols extends DcNode {
         }
       }
     }
+    await df.rename(colMap, { axis: 1, inplace: true });
     if (drops.length > 0) {
       await df.drop({ columns: drops, inplace: true })
     }
-    await df.rename(colMap, { axis: 1, inplace: true });
     await df.print()
 
     // put data into store then send message

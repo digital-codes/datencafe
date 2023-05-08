@@ -1,5 +1,5 @@
 {
-  "version": "0.5",
+  "version": "0.6",
   "flow": {
     "elements": {
       "nodes": [
@@ -281,8 +281,8 @@
             }
           },
           "position": {
-            "x": 466.83307911491005,
-            "y": 150.55359303446497
+            "x": 427.467945108627,
+            "y": 123.67008688383264
           },
           "group": "nodes",
           "removed": false,
@@ -348,8 +348,8 @@
             }
           },
           "position": {
-            "x": 470.3918035456331,
-            "y": 225.35784493205435
+            "x": 491.5145583782728,
+            "y": 164.86995609313158
           },
           "group": "nodes",
           "removed": false,
@@ -381,12 +381,12 @@
             }
           },
           "position": {
-            "x": 474.2263252071544,
-            "y": 310.02863814251964
+            "x": 519.35221053143,
+            "y": 235.1388710086153
           },
           "group": "nodes",
           "removed": false,
-          "selected": true,
+          "selected": false,
           "selectable": true,
           "locked": false,
           "grabbable": true,
@@ -414,8 +414,408 @@
             }
           },
           "position": {
-            "x": 461.0171328840448,
-            "y": 472.8448386598837
+            "x": 293.17193471896815,
+            "y": 546.7662989916533
+          },
+          "group": "nodes",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": false,
+          "classes": ""
+        },
+        {
+          "data": {
+            "id": "N24",
+            "name": "N24",
+            "ports": {
+              "A": true,
+              "B": true
+            },
+            "instance": {
+              "id": "N24",
+              "name": "N24",
+              "type": "proc",
+              "display": 0
+            },
+            "type": {
+              "name": "joindata",
+              "shp": "roundrectangle",
+              "bd": "#000",
+              "img": "url('/img/widgets/Join.png')"
+            }
+          },
+          "position": {
+            "x": 357.1936304828347,
+            "y": 326.96946745775364
+          },
+          "group": "nodes",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": false,
+          "classes": ""
+        },
+        {
+          "data": {
+            "id": "N37",
+            "name": "N37",
+            "ports": {
+              "A": true
+            },
+            "instance": {
+              "id": "N37",
+              "name": "N37",
+              "type": "table",
+              "display": 1
+            },
+            "type": {
+              "name": "tableplot",
+              "shp": "rectangle",
+              "bd": "#0f0",
+              "img": "url('/img/widgets/Table.png')"
+            }
+          },
+          "position": {
+            "x": 529.0431156767187,
+            "y": 545.0854155046184
+          },
+          "group": "nodes",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": false,
+          "classes": ""
+        },
+        {
+          "data": {
+            "id": "N26",
+            "name": "N26",
+            "ports": {
+              "A": true
+            },
+            "instance": {
+              "id": "N26",
+              "name": "N26",
+              "type": "proc",
+              "display": 0
+            },
+            "type": {
+              "name": "renamecols",
+              "shp": "roundrectangle",
+              "bd": "#000",
+              "img": "url('/img/widgets/CreateClass.png')"
+            }
+          },
+          "position": {
+            "x": 441.32912312718094,
+            "y": 326.0584103271146
+          },
+          "group": "nodes",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": false,
+          "classes": ""
+        },
+        {
+          "data": {
+            "id": "N27",
+            "name": "N27",
+            "ports": {
+              "A": true
+            },
+            "instance": {
+              "id": "N27",
+              "name": "N27",
+              "type": "proc",
+              "display": 0
+            },
+            "type": {
+              "name": "renamecols",
+              "shp": "roundrectangle",
+              "bd": "#000",
+              "img": "url('/img/widgets/CreateClass.png')"
+            }
+          },
+          "position": {
+            "x": 390.56675495709806,
+            "y": 445.50834989726513
+          },
+          "group": "nodes",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": false,
+          "classes": ""
+        },
+        {
+          "data": {
+            "id": "N28",
+            "name": "N28",
+            "ports": {
+              "A": true,
+              "B": true
+            },
+            "instance": {
+              "id": "N28",
+              "name": "N28",
+              "type": "proc",
+              "display": 0
+            },
+            "type": {
+              "name": "addcols",
+              "shp": "roundrectangle",
+              "bd": "#000",
+              "img": "url('/img/widgets/MergeData.png')"
+            }
+          },
+          "position": {
+            "x": 536.427602409806,
+            "y": 369.3734009907345
+          },
+          "group": "nodes",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": false,
+          "classes": ""
+        },
+        {
+          "data": {
+            "id": "N36",
+            "name": "N36",
+            "ports": {
+              "A": true,
+              "B": true
+            },
+            "instance": {
+              "id": "N36",
+              "name": "N36",
+              "type": "proc",
+              "display": 0
+            },
+            "type": {
+              "name": "addcols",
+              "shp": "roundrectangle",
+              "bd": "#000",
+              "img": "url('/img/widgets/MergeData.png')"
+            }
+          },
+          "position": {
+            "x": 532.9765548949576,
+            "y": 456.4327741534502
+          },
+          "group": "nodes",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": false,
+          "classes": ""
+        },
+        {
+          "data": {
+            "id": "N38",
+            "name": "N38",
+            "ports": {
+              "A": true
+            },
+            "instance": {
+              "id": "N38",
+              "name": "N38",
+              "type": "proc",
+              "display": 0
+            },
+            "type": {
+              "name": "grpitems",
+              "shp": "roundrectangle",
+              "bd": "#000",
+              "img": "url('/img/widgets/GroupBy.png')"
+            }
+          },
+          "position": {
+            "x": 625.4982267497022,
+            "y": 431.0583695661458
+          },
+          "group": "nodes",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": false,
+          "classes": ""
+        },
+        {
+          "data": {
+            "id": "N39",
+            "name": "N39",
+            "ports": {
+              "A": true,
+              "B": true
+            },
+            "instance": {
+              "id": "N39",
+              "name": "N39",
+              "type": "proc",
+              "display": 0
+            },
+            "type": {
+              "name": "selrows",
+              "shp": "roundrectangle",
+              "bd": "#000",
+              "img": "url('/img/widgets/SelectRows.png')"
+            }
+          },
+          "position": {
+            "x": 623.1544884147141,
+            "y": 515.1558608796541
+          },
+          "group": "nodes",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": false,
+          "classes": ""
+        },
+        {
+          "data": {
+            "id": "N40",
+            "name": "N40",
+            "ports": {
+              "A": true
+            },
+            "instance": {
+              "id": "N40",
+              "name": "N40",
+              "type": "table",
+              "display": 1
+            },
+            "type": {
+              "name": "tableplot",
+              "shp": "rectangle",
+              "bd": "#0f0",
+              "img": "url('/img/widgets/Table.png')"
+            }
+          },
+          "position": {
+            "x": 613.2747802554873,
+            "y": 600.6514174258622
+          },
+          "group": "nodes",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": false,
+          "classes": ""
+        },
+        {
+          "data": {
+            "id": "N41",
+            "name": "N41",
+            "ports": {
+              "A": true
+            },
+            "instance": {
+              "id": "N41",
+              "name": "N41",
+              "type": "chart",
+              "display": 1
+            },
+            "type": {
+              "name": "lineplot",
+              "shp": "rectangle",
+              "bd": "#0f0",
+              "img": "url('/img/widgets/LineChart.png')"
+            }
+          },
+          "position": {
+            "x": 721.6625333900171,
+            "y": 603.3582397917236
+          },
+          "group": "nodes",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": false,
+          "classes": ""
+        },
+        {
+          "data": {
+            "id": "N42",
+            "name": "N42",
+            "ports": {
+              "A": true
+            },
+            "instance": {
+              "id": "N42",
+              "name": "N42",
+              "type": "proc",
+              "display": 0
+            },
+            "type": {
+              "name": "renamecols",
+              "shp": "roundrectangle",
+              "bd": "#000",
+              "img": "url('/img/widgets/CreateClass.png')"
+            }
+          },
+          "position": {
+            "x": 724.1121890800204,
+            "y": 507.42057769539895
+          },
+          "group": "nodes",
+          "removed": false,
+          "selected": true,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": false,
+          "classes": ""
+        },
+        {
+          "data": {
+            "id": "N45",
+            "name": "N45",
+            "ports": {
+              "A": true
+            },
+            "instance": {
+              "id": "N45",
+              "name": "N45",
+              "type": "chart",
+              "display": 1
+            },
+            "type": {
+              "name": "barplot",
+              "shp": "rectangle",
+              "bd": "#0f0",
+              "img": "url('/img/widgets/BarPlot.png')"
+            }
+          },
+          "position": {
+            "x": 800.7050381206835,
+            "y": 599.2199145101443
           },
           "group": "nodes",
           "removed": false,
@@ -428,6 +828,132 @@
         }
       ],
       "edges": [
+        {
+          "data": {
+            "source": "N24",
+            "target": "N36",
+            "id": "2ca75cae-d0be-480f-90b4-793d67d0053b",
+            "type": "e1-A",
+            "port": "A"
+          },
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "group": "edges",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": true,
+          "classes": ""
+        },
+        {
+          "data": {
+            "source": "N28",
+            "target": "N36",
+            "id": "27049f9d-0e61-4f0a-b84f-15627babb6f2",
+            "type": "e1-B",
+            "port": "B"
+          },
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "group": "edges",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": true,
+          "classes": ""
+        },
+        {
+          "data": {
+            "source": "N24",
+            "target": "N27",
+            "id": "afb10653-f042-448b-ac7e-1b77aaf9fd4c",
+            "type": "e1-A",
+            "port": "A"
+          },
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "group": "edges",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": true,
+          "classes": ""
+        },
+        {
+          "data": {
+            "source": "N27",
+            "target": "N28",
+            "id": "928606d1-82d0-4a1a-af19-720e01575bdb",
+            "type": "e1-B",
+            "port": "B"
+          },
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "group": "edges",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": true,
+          "classes": ""
+        },
+        {
+          "data": {
+            "source": "N24",
+            "target": "N26",
+            "id": "e6c9d84a-4109-4821-bb64-6aac30c096d7",
+            "type": "e1-A",
+            "port": "A"
+          },
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "group": "edges",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": true,
+          "classes": ""
+        },
+        {
+          "data": {
+            "source": "N26",
+            "target": "N28",
+            "id": "9e73a35c-dfca-4352-9508-1ec06f96f79e",
+            "type": "e1-A",
+            "port": "A"
+          },
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "group": "edges",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": true,
+          "classes": ""
+        },
         {
           "data": {
             "source": "N11",
@@ -679,6 +1205,216 @@
           "grabbable": true,
           "pannable": true,
           "classes": ""
+        },
+        {
+          "data": {
+            "source": "N20",
+            "target": "N24",
+            "id": "53a7a0b3-7004-4a22-8951-9de103c82860",
+            "type": "e1-A",
+            "port": "A"
+          },
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "group": "edges",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": true,
+          "classes": ""
+        },
+        {
+          "data": {
+            "source": "N10",
+            "target": "N24",
+            "id": "77c50cf4-abcc-4bd1-acfe-1402b181c019",
+            "type": "e1-B",
+            "port": "B"
+          },
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "group": "edges",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": true,
+          "classes": ""
+        },
+        {
+          "data": {
+            "source": "N36",
+            "target": "N37",
+            "id": "52e86885-c461-4844-8986-4e30560cc47b",
+            "type": "e1-A",
+            "port": "A"
+          },
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "group": "edges",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": true,
+          "classes": ""
+        },
+        {
+          "data": {
+            "source": "N36",
+            "target": "N38",
+            "id": "6393a8e5-ed61-4513-8049-e2fd8ff5846a",
+            "type": "e1-A",
+            "port": "A"
+          },
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "group": "edges",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": true,
+          "classes": ""
+        },
+        {
+          "data": {
+            "source": "N36",
+            "target": "N39",
+            "id": "e9f38b54-c1c8-4143-8a2c-c5d57c262ed0",
+            "type": "e1-A",
+            "port": "A"
+          },
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "group": "edges",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": true,
+          "classes": ""
+        },
+        {
+          "data": {
+            "source": "N38",
+            "target": "N39",
+            "id": "900aec1f-0b2f-491d-807d-24720db1ec68",
+            "type": "e1-B",
+            "port": "B"
+          },
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "group": "edges",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": true,
+          "classes": ""
+        },
+        {
+          "data": {
+            "source": "N39",
+            "target": "N40",
+            "id": "a267786e-6c39-4fd1-abd1-5c64e785aa2d",
+            "type": "e1-A",
+            "port": "A"
+          },
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "group": "edges",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": true,
+          "classes": ""
+        },
+        {
+          "data": {
+            "source": "N42",
+            "target": "N41",
+            "id": "7320f53b-7474-4482-a901-44b0ca9d4164",
+            "type": "e1-A",
+            "port": "A"
+          },
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "group": "edges",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": true,
+          "classes": ""
+        },
+        {
+          "data": {
+            "source": "N39",
+            "target": "N42",
+            "id": "9c2d0469-8f8e-4fea-887e-1d70dad336c0",
+            "type": "e1-A",
+            "port": "A"
+          },
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "group": "edges",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": true,
+          "classes": ""
+        },
+        {
+          "data": {
+            "source": "N42",
+            "target": "N45",
+            "id": "c52dea12-2436-41ef-9662-99edf7539d93",
+            "type": "e1-A",
+            "port": "A"
+          },
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "group": "edges",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": true,
+          "classes": ""
         }
       ]
     },
@@ -780,14 +1516,14 @@
     "data": {},
     "zoomingEnabled": true,
     "userZoomingEnabled": true,
-    "zoom": 1.9120227692191385,
+    "zoom": 1.1912630321372426,
     "minZoom": 0.5,
     "maxZoom": 10,
     "panningEnabled": true,
     "userPanningEnabled": true,
     "pan": {
-      "x": -182.36828256461183,
-      "y": -48.06263157235886
+      "x": -139.29304613768227,
+      "y": -71.16672021576096
     },
     "boxSelectionEnabled": true,
     "renderer": {
@@ -1337,6 +2073,16 @@
         "pop": "mixed",
         "options": [
           {
+            "id": "stacked",
+            "type": "number",
+            "label": "Stacked",
+            "select": false,
+            "value": 0,
+            "min": 0,
+            "max": 1,
+            "current": 0
+          },
+          {
             "id": "xaxis",
             "type": "string",
             "label": "X-Axis",
@@ -1393,6 +2139,583 @@
       "sigs": [
         {
           "signal": "UPD-N10",
+          "port": "A"
+        }
+      ]
+    },
+    {
+      "id": "N24",
+      "name": "N24",
+      "classname": "joindata",
+      "config": {
+        "pop": "mixed",
+        "options": [
+          {
+            "id": "mode",
+            "type": "string",
+            "label": "Mode",
+            "column": false,
+            "select": true,
+            "value": [
+              "inner",
+              "outer",
+              "left"
+            ],
+            "current": "inner"
+          },
+          {
+            "id": "Jahr",
+            "type": "string",
+            "label": "Jahr",
+            "column": true,
+            "select": true,
+            "value": [
+              "Ignore",
+              "First",
+              "Second"
+            ],
+            "current": "Second"
+          },
+          {
+            "id": "Personen",
+            "type": "string",
+            "label": "Personen",
+            "column": true,
+            "select": true,
+            "value": [
+              "Ignore",
+              "First",
+              "Second"
+            ],
+            "current": "Ignore"
+          },
+          {
+            "id": "Stadtteil",
+            "type": "string",
+            "label": "Stadtteil",
+            "column": true,
+            "select": true,
+            "value": [
+              "Ignore",
+              "First",
+              "Second"
+            ],
+            "current": "First"
+          }
+        ]
+      },
+      "sigs": [
+        {
+          "signal": "UPD-N20",
+          "port": "A"
+        },
+        {
+          "signal": "UPD-N10",
+          "port": "B"
+        }
+      ]
+    },
+    {
+      "id": "N26",
+      "name": "N26",
+      "classname": "renamecols",
+      "config": {
+        "pop": "mixed",
+        "options": [
+          {
+            "id": "Stadtteil",
+            "type": "string",
+            "label": "Stadtteil",
+            "select": false,
+            "value": "Stadtteil",
+            "current": "Stadtteil"
+          },
+          {
+            "id": "Jahr",
+            "type": "string",
+            "label": "Jahr",
+            "select": false,
+            "value": "Jahr",
+            "current": "Jahr"
+          },
+          {
+            "id": "Personen",
+            "type": "string",
+            "label": "Personen",
+            "select": false,
+            "value": "Personen",
+            "current": ""
+          },
+          {
+            "id": "Bespielbare Fläche (m<sup>2</sup>)",
+            "type": "string",
+            "label": "Bespielbare Fläche (m<sup>2</sup>)",
+            "select": false,
+            "value": "Bespielbare Fläche (m<sup>2</sup>)",
+            "current": "X"
+          }
+        ]
+      },
+      "sigs": [
+        {
+          "signal": "UPD-N24",
+          "port": "A"
+        }
+      ]
+    },
+    {
+      "id": "N27",
+      "name": "N27",
+      "classname": "renamecols",
+      "config": {
+        "pop": "mixed",
+        "options": [
+          {
+            "id": "Stadtteil",
+            "type": "string",
+            "label": "Stadtteil",
+            "select": false,
+            "value": "Stadtteil",
+            "current": "Stadtteil"
+          },
+          {
+            "id": "Jahr",
+            "type": "string",
+            "label": "Jahr",
+            "select": false,
+            "value": "Jahr",
+            "current": "Jahr"
+          },
+          {
+            "id": "Personen",
+            "type": "string",
+            "label": "Personen",
+            "select": false,
+            "value": "Personen",
+            "current": "X"
+          },
+          {
+            "id": "Bespielbare Fläche (m<sup>2</sup>)",
+            "type": "string",
+            "label": "Bespielbare Fläche (m<sup>2</sup>)",
+            "select": false,
+            "value": "Bespielbare Fläche (m<sup>2</sup>)",
+            "current": ""
+          }
+        ]
+      },
+      "sigs": [
+        {
+          "signal": "UPD-N24",
+          "port": "A"
+        }
+      ]
+    },
+    {
+      "id": "N28",
+      "name": "N28",
+      "classname": "addcols",
+      "config": {
+        "pop": "mixed",
+        "options": [
+          {
+            "id": "Jahr",
+            "type": "string",
+            "shared": true,
+            "label": "Jahr",
+            "select": true,
+            "value": [
+              "Ignore",
+              "Only-A",
+              "Only-B",
+              "Append",
+              "Add",
+              "Sub",
+              "Mul",
+              "Div"
+            ],
+            "current": "Only-A"
+          },
+          {
+            "id": "Stadtteil",
+            "type": "string",
+            "shared": true,
+            "label": "Stadtteil",
+            "select": true,
+            "value": [
+              "Ignore",
+              "Only-A",
+              "Only-B",
+              "Append"
+            ],
+            "current": "Only-A"
+          },
+          {
+            "id": "X",
+            "type": "string",
+            "shared": true,
+            "label": "X",
+            "select": true,
+            "value": [
+              "Ignore",
+              "Only-A",
+              "Only-B",
+              "Append",
+              "Add",
+              "Sub",
+              "Mul",
+              "Div"
+            ],
+            "current": "Div"
+          }
+        ]
+      },
+      "sigs": [
+        {
+          "signal": "UPD-N26",
+          "port": "A"
+        },
+        {
+          "signal": "UPD-N27",
+          "port": "B"
+        }
+      ]
+    },
+    {
+      "id": "N36",
+      "name": "N36",
+      "classname": "addcols",
+      "config": {
+        "pop": "mixed",
+        "options": [
+          {
+            "id": "Jahr",
+            "type": "string",
+            "shared": true,
+            "label": "Jahr",
+            "select": true,
+            "value": [
+              "Ignore",
+              "Only-A",
+              "Only-B",
+              "Append",
+              "Add",
+              "Sub",
+              "Mul",
+              "Div"
+            ],
+            "current": "Only-A"
+          },
+          {
+            "id": "Stadtteil",
+            "type": "string",
+            "shared": true,
+            "label": "Stadtteil",
+            "select": true,
+            "value": [
+              "Ignore",
+              "Only-A",
+              "Only-B",
+              "Append"
+            ],
+            "current": "Only-A"
+          },
+          {
+            "id": "Bespielbare Fläche (m<sup>2</sup>)_A",
+            "type": "string",
+            "shared": false,
+            "label": "Bespielbare Fläche (m<sup>2</sup>)_A",
+            "select": true,
+            "value": [
+              "Ignore",
+              "Append"
+            ],
+            "current": "Ignore"
+          },
+          {
+            "id": "Personen_A",
+            "type": "string",
+            "shared": false,
+            "label": "Personen_A",
+            "select": true,
+            "value": [
+              "Ignore",
+              "Append"
+            ],
+            "current": "Append"
+          },
+          {
+            "id": "X_B",
+            "type": "string",
+            "shared": false,
+            "label": "X_B",
+            "select": true,
+            "value": [
+              "Ignore",
+              "Append"
+            ],
+            "current": "Append"
+          }
+        ]
+      },
+      "sigs": [
+        {
+          "signal": "UPD-N24",
+          "port": "A"
+        },
+        {
+          "signal": "UPD-N28",
+          "port": "B"
+        }
+      ]
+    },
+    {
+      "id": "N37",
+      "name": "N37",
+      "classname": "tableplot",
+      "config": {},
+      "sigs": [
+        {
+          "signal": "UPD-N36",
+          "port": "A"
+        }
+      ]
+    },
+    {
+      "id": "N38",
+      "name": "N38",
+      "classname": "grpitems",
+      "config": {
+        "pop": "mixed",
+        "options": [
+          {
+            "id": "group",
+            "type": "string",
+            "label": "Select Group",
+            "select": true,
+            "value": [
+              "Jahr",
+              "Stadtteil",
+              "Personen_A",
+              "X_B"
+            ],
+            "current": "Stadtteil"
+          }
+        ]
+      },
+      "sigs": [
+        {
+          "signal": "UPD-N36",
+          "port": "A"
+        }
+      ]
+    },
+    {
+      "id": "N39",
+      "name": "N39",
+      "classname": "selrows",
+      "config": {
+        "options": [
+          {
+            "id": "mode",
+            "type": "string",
+            "label": "Mode",
+            "select": true,
+            "value": [
+              "equal",
+              "not equal",
+              "less",
+              "less or equal",
+              "greater",
+              "greater or equal"
+            ],
+            "current": "equal"
+          },
+          {
+            "id": "columns",
+            "type": "string",
+            "label": "Columns",
+            "select": true,
+            "value": [
+              "Jahr",
+              "Stadtteil",
+              "Personen_A",
+              "X_B"
+            ],
+            "current": "Stadtteil"
+          },
+          {
+            "id": "filter",
+            "type": "string",
+            "label": "Filter",
+            "select": true,
+            "value": [
+              "Innenstadt-Ost",
+              "Innenstadt-West",
+              "Südstadt",
+              "Südweststadt",
+              "Weststadt",
+              "Nordweststadt",
+              "Oststadt",
+              "Mühlburg",
+              "Daxlanden",
+              "Knielingen",
+              "Grünwinkel",
+              "Oberreut",
+              "Beiertheim-Bulach",
+              "Weiherfeld-Dammerstock",
+              "Rüppurr",
+              "Waldstadt",
+              "Rintheim",
+              "Hagsfeld",
+              "Durlach",
+              "Grötzingen",
+              "Stupferich",
+              "Hohenwettersbach",
+              "Wolfartsweier",
+              "Grünwettersbach",
+              "Palmbach",
+              "Neureut",
+              "Nordstadt"
+            ],
+            "current": "Südweststadt"
+          }
+        ],
+        "pop": "mixed"
+      },
+      "sigs": [
+        {
+          "signal": "UPD-N36",
+          "port": "A"
+        },
+        {
+          "signal": "UPD-N38",
+          "port": "B"
+        }
+      ]
+    },
+    {
+      "id": "N40",
+      "name": "N40",
+      "classname": "tableplot",
+      "config": {},
+      "sigs": [
+        {
+          "signal": "UPD-N39",
+          "port": "A"
+        }
+      ]
+    },
+    {
+      "id": "N41",
+      "name": "N41",
+      "classname": "lineplot",
+      "config": {
+        "pop": "mixed",
+        "options": [
+          {
+            "id": "xaxis",
+            "type": "string",
+            "label": "X-Axis",
+            "select": true,
+            "value": [
+              "Jahr",
+              "Personen_A",
+              "Fläche/Person"
+            ],
+            "current": "Jahr"
+          }
+        ]
+      },
+      "sigs": [
+        {
+          "signal": "UPD-N42",
+          "port": "A"
+        }
+      ]
+    },
+    {
+      "id": "N42",
+      "name": "N42",
+      "classname": "renamecols",
+      "config": {
+        "pop": "mixed",
+        "options": [
+          {
+            "id": "Jahr",
+            "type": "string",
+            "label": "Jahr",
+            "select": false,
+            "value": "Jahr",
+            "current": "Jahr"
+          },
+          {
+            "id": "Stadtteil",
+            "type": "string",
+            "label": "Stadtteil",
+            "select": false,
+            "value": "Stadtteil",
+            "current": ""
+          },
+          {
+            "id": "Personen_A",
+            "type": "string",
+            "label": "Personen_A",
+            "select": false,
+            "value": "Personen_A",
+            "current": "Personen_A"
+          },
+          {
+            "id": "X_B",
+            "type": "string",
+            "label": "X_B",
+            "select": false,
+            "value": "X_B",
+            "current": "Fläche/Person"
+          }
+        ]
+      },
+      "sigs": [
+        {
+          "signal": "UPD-N39",
+          "port": "A"
+        }
+      ]
+    },
+    {
+      "id": "N45",
+      "name": "N45",
+      "classname": "barplot",
+      "config": {
+        "pop": "mixed",
+        "options": [
+          {
+            "id": "stacked",
+            "type": "number",
+            "label": "Stacked",
+            "select": false,
+            "value": 0,
+            "min": 0,
+            "max": 1,
+            "current": 0
+          },
+          {
+            "id": "xaxis",
+            "type": "string",
+            "label": "X-Axis",
+            "select": true,
+            "value": [
+              "Jahr",
+              "Personen_A",
+              "Fläche/Person"
+            ],
+            "current": "Jahr"
+          }
+        ]
+      },
+      "sigs": [
+        {
+          "signal": "UPD-N42",
           "port": "A"
         }
       ]
@@ -21884,7 +23207,7 @@
         }
       ],
       "meta": {
-        "date": "2023-05-03T19:41:11.827Z",
+        "date": "2023-05-08T12:44:25.214Z",
         "storagetype": "dataframe",
         "url": "/assets/stories/tpKa1/spielen.csv"
       },
@@ -21918,9 +23241,6724 @@
       "meta": {},
       "root": false,
       "loaded": false
+    },
+    {
+      "id": "N15",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N17",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N18",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N20",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N24",
+      "data": [
+        {
+          "Stadtteil": "Innenstadt-Ost",
+          "Jahr": 2014,
+          "Personen": 712,
+          "Bespielbare Fläche (m<sup>2</sup>)": 11015
+        },
+        {
+          "Stadtteil": "Innenstadt-Ost",
+          "Jahr": 2015,
+          "Personen": 745,
+          "Bespielbare Fläche (m<sup>2</sup>)": 11015
+        },
+        {
+          "Stadtteil": "Innenstadt-Ost",
+          "Jahr": 2016,
+          "Personen": 781,
+          "Bespielbare Fläche (m<sup>2</sup>)": 11015
+        },
+        {
+          "Stadtteil": "Innenstadt-Ost",
+          "Jahr": 2017,
+          "Personen": 775,
+          "Bespielbare Fläche (m<sup>2</sup>)": 11006
+        },
+        {
+          "Stadtteil": "Innenstadt-Ost",
+          "Jahr": 2018,
+          "Personen": 742,
+          "Bespielbare Fläche (m<sup>2</sup>)": 10833
+        },
+        {
+          "Stadtteil": "Innenstadt-Ost",
+          "Jahr": 2019,
+          "Personen": 735,
+          "Bespielbare Fläche (m<sup>2</sup>)": 10833
+        },
+        {
+          "Stadtteil": "Innenstadt-Ost",
+          "Jahr": 2020,
+          "Personen": 721,
+          "Bespielbare Fläche (m<sup>2</sup>)": 10833
+        },
+        {
+          "Stadtteil": "Innenstadt-West",
+          "Jahr": 2014,
+          "Personen": 1083,
+          "Bespielbare Fläche (m<sup>2</sup>)": 6317
+        },
+        {
+          "Stadtteil": "Innenstadt-West",
+          "Jahr": 2015,
+          "Personen": 1109,
+          "Bespielbare Fläche (m<sup>2</sup>)": 9294
+        },
+        {
+          "Stadtteil": "Innenstadt-West",
+          "Jahr": 2016,
+          "Personen": 1081,
+          "Bespielbare Fläche (m<sup>2</sup>)": 9294
+        },
+        {
+          "Stadtteil": "Innenstadt-West",
+          "Jahr": 2017,
+          "Personen": 1037,
+          "Bespielbare Fläche (m<sup>2</sup>)": 9287
+        },
+        {
+          "Stadtteil": "Innenstadt-West",
+          "Jahr": 2018,
+          "Personen": 998,
+          "Bespielbare Fläche (m<sup>2</sup>)": 9665
+        },
+        {
+          "Stadtteil": "Innenstadt-West",
+          "Jahr": 2019,
+          "Personen": 1005,
+          "Bespielbare Fläche (m<sup>2</sup>)": 6341
+        },
+        {
+          "Stadtteil": "Innenstadt-West",
+          "Jahr": 2020,
+          "Personen": 922,
+          "Bespielbare Fläche (m<sup>2</sup>)": 9673
+        },
+        {
+          "Stadtteil": "Südstadt",
+          "Jahr": 2014,
+          "Personen": 2784,
+          "Bespielbare Fläche (m<sup>2</sup>)": 14762
+        },
+        {
+          "Stadtteil": "Südstadt",
+          "Jahr": 2015,
+          "Personen": 2889,
+          "Bespielbare Fläche (m<sup>2</sup>)": 14762
+        },
+        {
+          "Stadtteil": "Südstadt",
+          "Jahr": 2016,
+          "Personen": 3082,
+          "Bespielbare Fläche (m<sup>2</sup>)": 17502
+        },
+        {
+          "Stadtteil": "Südstadt",
+          "Jahr": 2017,
+          "Personen": 3142,
+          "Bespielbare Fläche (m<sup>2</sup>)": 17504
+        },
+        {
+          "Stadtteil": "Südstadt",
+          "Jahr": 2018,
+          "Personen": 3124,
+          "Bespielbare Fläche (m<sup>2</sup>)": 17716
+        },
+        {
+          "Stadtteil": "Südstadt",
+          "Jahr": 2019,
+          "Personen": 3090,
+          "Bespielbare Fläche (m<sup>2</sup>)": 17664
+        },
+        {
+          "Stadtteil": "Südstadt",
+          "Jahr": 2020,
+          "Personen": 3011,
+          "Bespielbare Fläche (m<sup>2</sup>)": 18169
+        },
+        {
+          "Stadtteil": "Südweststadt",
+          "Jahr": 2014,
+          "Personen": 3711,
+          "Bespielbare Fläche (m<sup>2</sup>)": 40297
+        },
+        {
+          "Stadtteil": "Südweststadt",
+          "Jahr": 2015,
+          "Personen": 3718,
+          "Bespielbare Fläche (m<sup>2</sup>)": 40307
+        },
+        {
+          "Stadtteil": "Südweststadt",
+          "Jahr": 2016,
+          "Personen": 3732,
+          "Bespielbare Fläche (m<sup>2</sup>)": 39968
+        },
+        {
+          "Stadtteil": "Südweststadt",
+          "Jahr": 2017,
+          "Personen": 3722,
+          "Bespielbare Fläche (m<sup>2</sup>)": 39607
+        },
+        {
+          "Stadtteil": "Südweststadt",
+          "Jahr": 2018,
+          "Personen": 3726,
+          "Bespielbare Fläche (m<sup>2</sup>)": 28096
+        },
+        {
+          "Stadtteil": "Südweststadt",
+          "Jahr": 2019,
+          "Personen": 3686,
+          "Bespielbare Fläche (m<sup>2</sup>)": 28102
+        },
+        {
+          "Stadtteil": "Südweststadt",
+          "Jahr": 2020,
+          "Personen": 3589,
+          "Bespielbare Fläche (m<sup>2</sup>)": 27767
+        },
+        {
+          "Stadtteil": "Weststadt",
+          "Jahr": 2014,
+          "Personen": 3475,
+          "Bespielbare Fläche (m<sup>2</sup>)": 18158
+        },
+        {
+          "Stadtteil": "Weststadt",
+          "Jahr": 2015,
+          "Personen": 3437,
+          "Bespielbare Fläche (m<sup>2</sup>)": 18232
+        },
+        {
+          "Stadtteil": "Weststadt",
+          "Jahr": 2016,
+          "Personen": 3465,
+          "Bespielbare Fläche (m<sup>2</sup>)": 18232
+        },
+        {
+          "Stadtteil": "Weststadt",
+          "Jahr": 2017,
+          "Personen": 3426,
+          "Bespielbare Fläche (m<sup>2</sup>)": 18217
+        },
+        {
+          "Stadtteil": "Weststadt",
+          "Jahr": 2018,
+          "Personen": 3337,
+          "Bespielbare Fläche (m<sup>2</sup>)": 18217
+        },
+        {
+          "Stadtteil": "Weststadt",
+          "Jahr": 2019,
+          "Personen": 3238,
+          "Bespielbare Fläche (m<sup>2</sup>)": 18217
+        },
+        {
+          "Stadtteil": "Weststadt",
+          "Jahr": 2020,
+          "Personen": 3164,
+          "Bespielbare Fläche (m<sup>2</sup>)": 18240
+        },
+        {
+          "Stadtteil": "Nordweststadt",
+          "Jahr": 2014,
+          "Personen": 1806,
+          "Bespielbare Fläche (m<sup>2</sup>)": 41799
+        },
+        {
+          "Stadtteil": "Nordweststadt",
+          "Jahr": 2015,
+          "Personen": 1802,
+          "Bespielbare Fläche (m<sup>2</sup>)": 41504
+        },
+        {
+          "Stadtteil": "Nordweststadt",
+          "Jahr": 2016,
+          "Personen": 1851,
+          "Bespielbare Fläche (m<sup>2</sup>)": 40505
+        },
+        {
+          "Stadtteil": "Nordweststadt",
+          "Jahr": 2017,
+          "Personen": 1935,
+          "Bespielbare Fläche (m<sup>2</sup>)": 40473
+        },
+        {
+          "Stadtteil": "Nordweststadt",
+          "Jahr": 2018,
+          "Personen": 1946,
+          "Bespielbare Fläche (m<sup>2</sup>)": 38868
+        },
+        {
+          "Stadtteil": "Nordweststadt",
+          "Jahr": 2019,
+          "Personen": 1918,
+          "Bespielbare Fläche (m<sup>2</sup>)": 38898
+        },
+        {
+          "Stadtteil": "Nordweststadt",
+          "Jahr": 2020,
+          "Personen": 1958,
+          "Bespielbare Fläche (m<sup>2</sup>)": 40407
+        },
+        {
+          "Stadtteil": "Oststadt",
+          "Jahr": 2014,
+          "Personen": 4294,
+          "Bespielbare Fläche (m<sup>2</sup>)": 29694
+        },
+        {
+          "Stadtteil": "Oststadt",
+          "Jahr": 2015,
+          "Personen": 5686,
+          "Bespielbare Fläche (m<sup>2</sup>)": 29694
+        },
+        {
+          "Stadtteil": "Oststadt",
+          "Jahr": 2016,
+          "Personen": 3179,
+          "Bespielbare Fläche (m<sup>2</sup>)": 30461
+        },
+        {
+          "Stadtteil": "Oststadt",
+          "Jahr": 2017,
+          "Personen": 2897,
+          "Bespielbare Fläche (m<sup>2</sup>)": 30438
+        },
+        {
+          "Stadtteil": "Oststadt",
+          "Jahr": 2018,
+          "Personen": 2422,
+          "Bespielbare Fläche (m<sup>2</sup>)": 28066
+        },
+        {
+          "Stadtteil": "Oststadt",
+          "Jahr": 2019,
+          "Personen": 2423,
+          "Bespielbare Fläche (m<sup>2</sup>)": 28138
+        },
+        {
+          "Stadtteil": "Oststadt",
+          "Jahr": 2020,
+          "Personen": 2291,
+          "Bespielbare Fläche (m<sup>2</sup>)": 28143
+        },
+        {
+          "Stadtteil": "Mühlburg",
+          "Jahr": 2014,
+          "Personen": 2649,
+          "Bespielbare Fläche (m<sup>2</sup>)": 9520
+        },
+        {
+          "Stadtteil": "Mühlburg",
+          "Jahr": 2015,
+          "Personen": 2710,
+          "Bespielbare Fläche (m<sup>2</sup>)": 14223
+        },
+        {
+          "Stadtteil": "Mühlburg",
+          "Jahr": 2016,
+          "Personen": 2790,
+          "Bespielbare Fläche (m<sup>2</sup>)": 14223
+        },
+        {
+          "Stadtteil": "Mühlburg",
+          "Jahr": 2017,
+          "Personen": 2735,
+          "Bespielbare Fläche (m<sup>2</sup>)": 14220
+        },
+        {
+          "Stadtteil": "Mühlburg",
+          "Jahr": 2018,
+          "Personen": 2885,
+          "Bespielbare Fläche (m<sup>2</sup>)": 14220
+        },
+        {
+          "Stadtteil": "Mühlburg",
+          "Jahr": 2019,
+          "Personen": 2740,
+          "Bespielbare Fläche (m<sup>2</sup>)": 14220
+        },
+        {
+          "Stadtteil": "Mühlburg",
+          "Jahr": 2020,
+          "Personen": 2639,
+          "Bespielbare Fläche (m<sup>2</sup>)": 14220
+        },
+        {
+          "Stadtteil": "Daxlanden",
+          "Jahr": 2014,
+          "Personen": 1861,
+          "Bespielbare Fläche (m<sup>2</sup>)": 40865
+        },
+        {
+          "Stadtteil": "Daxlanden",
+          "Jahr": 2015,
+          "Personen": 1883,
+          "Bespielbare Fläche (m<sup>2</sup>)": 41531
+        },
+        {
+          "Stadtteil": "Daxlanden",
+          "Jahr": 2016,
+          "Personen": 1897,
+          "Bespielbare Fläche (m<sup>2</sup>)": 41531
+        },
+        {
+          "Stadtteil": "Daxlanden",
+          "Jahr": 2017,
+          "Personen": 1925,
+          "Bespielbare Fläche (m<sup>2</sup>)": 41483
+        },
+        {
+          "Stadtteil": "Daxlanden",
+          "Jahr": 2018,
+          "Personen": 1907,
+          "Bespielbare Fläche (m<sup>2</sup>)": 41483
+        },
+        {
+          "Stadtteil": "Daxlanden",
+          "Jahr": 2019,
+          "Personen": 1892,
+          "Bespielbare Fläche (m<sup>2</sup>)": 42950
+        },
+        {
+          "Stadtteil": "Daxlanden",
+          "Jahr": 2020,
+          "Personen": 1856,
+          "Bespielbare Fläche (m<sup>2</sup>)": 42862
+        },
+        {
+          "Stadtteil": "Knielingen",
+          "Jahr": 2014,
+          "Personen": 1748,
+          "Bespielbare Fläche (m<sup>2</sup>)": 30397
+        },
+        {
+          "Stadtteil": "Knielingen",
+          "Jahr": 2015,
+          "Personen": 1780,
+          "Bespielbare Fläche (m<sup>2</sup>)": 30435
+        },
+        {
+          "Stadtteil": "Knielingen",
+          "Jahr": 2016,
+          "Personen": 1863,
+          "Bespielbare Fläche (m<sup>2</sup>)": 30449
+        },
+        {
+          "Stadtteil": "Knielingen",
+          "Jahr": 2017,
+          "Personen": 2013,
+          "Bespielbare Fläche (m<sup>2</sup>)": 32175
+        },
+        {
+          "Stadtteil": "Knielingen",
+          "Jahr": 2018,
+          "Personen": 2223,
+          "Bespielbare Fläche (m<sup>2</sup>)": 32203
+        },
+        {
+          "Stadtteil": "Knielingen",
+          "Jahr": 2019,
+          "Personen": 2304,
+          "Bespielbare Fläche (m<sup>2</sup>)": 32205
+        },
+        {
+          "Stadtteil": "Knielingen",
+          "Jahr": 2020,
+          "Personen": 2399,
+          "Bespielbare Fläche (m<sup>2</sup>)": 32350
+        },
+        {
+          "Stadtteil": "Grünwinkel",
+          "Jahr": 2014,
+          "Personen": 1833,
+          "Bespielbare Fläche (m<sup>2</sup>)": 21572
+        },
+        {
+          "Stadtteil": "Grünwinkel",
+          "Jahr": 2015,
+          "Personen": 1867,
+          "Bespielbare Fläche (m<sup>2</sup>)": 21579
+        },
+        {
+          "Stadtteil": "Grünwinkel",
+          "Jahr": 2016,
+          "Personen": 1895,
+          "Bespielbare Fläche (m<sup>2</sup>)": 21801
+        },
+        {
+          "Stadtteil": "Grünwinkel",
+          "Jahr": 2017,
+          "Personen": 2075,
+          "Bespielbare Fläche (m<sup>2</sup>)": 21926
+        },
+        {
+          "Stadtteil": "Grünwinkel",
+          "Jahr": 2018,
+          "Personen": 2244,
+          "Bespielbare Fläche (m<sup>2</sup>)": 21920
+        },
+        {
+          "Stadtteil": "Grünwinkel",
+          "Jahr": 2019,
+          "Personen": 2184,
+          "Bespielbare Fläche (m<sup>2</sup>)": 20094
+        },
+        {
+          "Stadtteil": "Grünwinkel",
+          "Jahr": 2020,
+          "Personen": 2033,
+          "Bespielbare Fläche (m<sup>2</sup>)": 20034
+        },
+        {
+          "Stadtteil": "Oberreut",
+          "Jahr": 2014,
+          "Personen": 1878,
+          "Bespielbare Fläche (m<sup>2</sup>)": 28707
+        },
+        {
+          "Stadtteil": "Oberreut",
+          "Jahr": 2015,
+          "Personen": 1905,
+          "Bespielbare Fläche (m<sup>2</sup>)": 30471
+        },
+        {
+          "Stadtteil": "Oberreut",
+          "Jahr": 2016,
+          "Personen": 1883,
+          "Bespielbare Fläche (m<sup>2</sup>)": 30477
+        },
+        {
+          "Stadtteil": "Oberreut",
+          "Jahr": 2017,
+          "Personen": 1856,
+          "Bespielbare Fläche (m<sup>2</sup>)": 30454
+        },
+        {
+          "Stadtteil": "Oberreut",
+          "Jahr": 2018,
+          "Personen": 1983,
+          "Bespielbare Fläche (m<sup>2</sup>)": 29960
+        },
+        {
+          "Stadtteil": "Oberreut",
+          "Jahr": 2019,
+          "Personen": 2164,
+          "Bespielbare Fläche (m<sup>2</sup>)": 29963
+        },
+        {
+          "Stadtteil": "Oberreut",
+          "Jahr": 2020,
+          "Personen": 2084,
+          "Bespielbare Fläche (m<sup>2</sup>)": 30237
+        },
+        {
+          "Stadtteil": "Beiertheim-Bulach",
+          "Jahr": 2014,
+          "Personen": 1151,
+          "Bespielbare Fläche (m<sup>2</sup>)": 6574
+        },
+        {
+          "Stadtteil": "Beiertheim-Bulach",
+          "Jahr": 2015,
+          "Personen": 1148,
+          "Bespielbare Fläche (m<sup>2</sup>)": 6579
+        },
+        {
+          "Stadtteil": "Beiertheim-Bulach",
+          "Jahr": 2016,
+          "Personen": 1184,
+          "Bespielbare Fläche (m<sup>2</sup>)": 6647
+        },
+        {
+          "Stadtteil": "Beiertheim-Bulach",
+          "Jahr": 2017,
+          "Personen": 1167,
+          "Bespielbare Fläche (m<sup>2</sup>)": 6492
+        },
+        {
+          "Stadtteil": "Beiertheim-Bulach",
+          "Jahr": 2018,
+          "Personen": 1163,
+          "Bespielbare Fläche (m<sup>2</sup>)": 6472
+        },
+        {
+          "Stadtteil": "Beiertheim-Bulach",
+          "Jahr": 2019,
+          "Personen": 1185,
+          "Bespielbare Fläche (m<sup>2</sup>)": 6472
+        },
+        {
+          "Stadtteil": "Beiertheim-Bulach",
+          "Jahr": 2020,
+          "Personen": 1187,
+          "Bespielbare Fläche (m<sup>2</sup>)": 6472
+        },
+        {
+          "Stadtteil": "Weiherfeld-Dammerstock",
+          "Jahr": 2014,
+          "Personen": 1042,
+          "Bespielbare Fläche (m<sup>2</sup>)": 9108
+        },
+        {
+          "Stadtteil": "Weiherfeld-Dammerstock",
+          "Jahr": 2015,
+          "Personen": 1033,
+          "Bespielbare Fläche (m<sup>2</sup>)": 9108
+        },
+        {
+          "Stadtteil": "Weiherfeld-Dammerstock",
+          "Jahr": 2016,
+          "Personen": 1033,
+          "Bespielbare Fläche (m<sup>2</sup>)": 9108
+        },
+        {
+          "Stadtteil": "Weiherfeld-Dammerstock",
+          "Jahr": 2017,
+          "Personen": 1062,
+          "Bespielbare Fläche (m<sup>2</sup>)": 11131
+        },
+        {
+          "Stadtteil": "Weiherfeld-Dammerstock",
+          "Jahr": 2018,
+          "Personen": 1059,
+          "Bespielbare Fläche (m<sup>2</sup>)": 11131
+        },
+        {
+          "Stadtteil": "Weiherfeld-Dammerstock",
+          "Jahr": 2019,
+          "Personen": 1051,
+          "Bespielbare Fläche (m<sup>2</sup>)": 11131
+        },
+        {
+          "Stadtteil": "Weiherfeld-Dammerstock",
+          "Jahr": 2020,
+          "Personen": 1012,
+          "Bespielbare Fläche (m<sup>2</sup>)": 11204
+        },
+        {
+          "Stadtteil": "Rüppurr",
+          "Jahr": 2014,
+          "Personen": 1916,
+          "Bespielbare Fläche (m<sup>2</sup>)": 18692
+        },
+        {
+          "Stadtteil": "Rüppurr",
+          "Jahr": 2015,
+          "Personen": 1945,
+          "Bespielbare Fläche (m<sup>2</sup>)": 19344
+        },
+        {
+          "Stadtteil": "Rüppurr",
+          "Jahr": 2016,
+          "Personen": 1927,
+          "Bespielbare Fläche (m<sup>2</sup>)": 19690
+        },
+        {
+          "Stadtteil": "Rüppurr",
+          "Jahr": 2017,
+          "Personen": 1973,
+          "Bespielbare Fläche (m<sup>2</sup>)": 19663
+        },
+        {
+          "Stadtteil": "Rüppurr",
+          "Jahr": 2018,
+          "Personen": 2005,
+          "Bespielbare Fläche (m<sup>2</sup>)": 19663
+        },
+        {
+          "Stadtteil": "Rüppurr",
+          "Jahr": 2019,
+          "Personen": 2032,
+          "Bespielbare Fläche (m<sup>2</sup>)": 19663
+        },
+        {
+          "Stadtteil": "Rüppurr",
+          "Jahr": 2020,
+          "Personen": 2023,
+          "Bespielbare Fläche (m<sup>2</sup>)": 19907
+        },
+        {
+          "Stadtteil": "Waldstadt",
+          "Jahr": 2014,
+          "Personen": 2338,
+          "Bespielbare Fläche (m<sup>2</sup>)": 33461
+        },
+        {
+          "Stadtteil": "Waldstadt",
+          "Jahr": 2015,
+          "Personen": 2369,
+          "Bespielbare Fläche (m<sup>2</sup>)": 36785
+        },
+        {
+          "Stadtteil": "Waldstadt",
+          "Jahr": 2016,
+          "Personen": 2375,
+          "Bespielbare Fläche (m<sup>2</sup>)": 37630
+        },
+        {
+          "Stadtteil": "Waldstadt",
+          "Jahr": 2017,
+          "Personen": 2324,
+          "Bespielbare Fläche (m<sup>2</sup>)": 37474
+        },
+        {
+          "Stadtteil": "Waldstadt",
+          "Jahr": 2018,
+          "Personen": 2327,
+          "Bespielbare Fläche (m<sup>2</sup>)": 37392
+        },
+        {
+          "Stadtteil": "Waldstadt",
+          "Jahr": 2019,
+          "Personen": 2304,
+          "Bespielbare Fläche (m<sup>2</sup>)": 37392
+        },
+        {
+          "Stadtteil": "Waldstadt",
+          "Jahr": 2020,
+          "Personen": 2301,
+          "Bespielbare Fläche (m<sup>2</sup>)": 37432
+        },
+        {
+          "Stadtteil": "Rintheim",
+          "Jahr": 2014,
+          "Personen": 1046,
+          "Bespielbare Fläche (m<sup>2</sup>)": 10404
+        },
+        {
+          "Stadtteil": "Rintheim",
+          "Jahr": 2015,
+          "Personen": 1092,
+          "Bespielbare Fläche (m<sup>2</sup>)": 10404
+        },
+        {
+          "Stadtteil": "Rintheim",
+          "Jahr": 2016,
+          "Personen": 1097,
+          "Bespielbare Fläche (m<sup>2</sup>)": 10445
+        },
+        {
+          "Stadtteil": "Rintheim",
+          "Jahr": 2017,
+          "Personen": 1238,
+          "Bespielbare Fläche (m<sup>2</sup>)": 10611
+        },
+        {
+          "Stadtteil": "Rintheim",
+          "Jahr": 2018,
+          "Personen": 1256,
+          "Bespielbare Fläche (m<sup>2</sup>)": 9046
+        },
+        {
+          "Stadtteil": "Rintheim",
+          "Jahr": 2019,
+          "Personen": 1265,
+          "Bespielbare Fläche (m<sup>2</sup>)": 9046
+        },
+        {
+          "Stadtteil": "Rintheim",
+          "Jahr": 2020,
+          "Personen": 1240,
+          "Bespielbare Fläche (m<sup>2</sup>)": 8815
+        },
+        {
+          "Stadtteil": "Hagsfeld",
+          "Jahr": 2014,
+          "Personen": 1321,
+          "Bespielbare Fläche (m<sup>2</sup>)": 22412
+        },
+        {
+          "Stadtteil": "Hagsfeld",
+          "Jahr": 2015,
+          "Personen": 1353,
+          "Bespielbare Fläche (m<sup>2</sup>)": 21910
+        },
+        {
+          "Stadtteil": "Hagsfeld",
+          "Jahr": 2016,
+          "Personen": 1368,
+          "Bespielbare Fläche (m<sup>2</sup>)": 22672
+        },
+        {
+          "Stadtteil": "Hagsfeld",
+          "Jahr": 2017,
+          "Personen": 1343,
+          "Bespielbare Fläche (m<sup>2</sup>)": 22654
+        },
+        {
+          "Stadtteil": "Hagsfeld",
+          "Jahr": 2018,
+          "Personen": 1375,
+          "Bespielbare Fläche (m<sup>2</sup>)": 22797
+        },
+        {
+          "Stadtteil": "Hagsfeld",
+          "Jahr": 2019,
+          "Personen": 1381,
+          "Bespielbare Fläche (m<sup>2</sup>)": 22961
+        },
+        {
+          "Stadtteil": "Hagsfeld",
+          "Jahr": 2020,
+          "Personen": 1335,
+          "Bespielbare Fläche (m<sup>2</sup>)": 19959
+        },
+        {
+          "Stadtteil": "Durlach",
+          "Jahr": 2014,
+          "Personen": 5142,
+          "Bespielbare Fläche (m<sup>2</sup>)": 45386
+        },
+        {
+          "Stadtteil": "Durlach",
+          "Jahr": 2015,
+          "Personen": 5294,
+          "Bespielbare Fläche (m<sup>2</sup>)": 41996
+        },
+        {
+          "Stadtteil": "Durlach",
+          "Jahr": 2016,
+          "Personen": 5241,
+          "Bespielbare Fläche (m<sup>2</sup>)": 42121
+        },
+        {
+          "Stadtteil": "Durlach",
+          "Jahr": 2017,
+          "Personen": 5157,
+          "Bespielbare Fläche (m<sup>2</sup>)": 40709
+        },
+        {
+          "Stadtteil": "Durlach",
+          "Jahr": 2018,
+          "Personen": 5206,
+          "Bespielbare Fläche (m<sup>2</sup>)": 44706
+        },
+        {
+          "Stadtteil": "Durlach",
+          "Jahr": 2019,
+          "Personen": 5335,
+          "Bespielbare Fläche (m<sup>2</sup>)": 44584
+        },
+        {
+          "Stadtteil": "Durlach",
+          "Jahr": 2020,
+          "Personen": 5304,
+          "Bespielbare Fläche (m<sup>2</sup>)": 45539
+        },
+        {
+          "Stadtteil": "Grötzingen",
+          "Jahr": 2014,
+          "Personen": 1623,
+          "Bespielbare Fläche (m<sup>2</sup>)": 13667
+        },
+        {
+          "Stadtteil": "Grötzingen",
+          "Jahr": 2015,
+          "Personen": 1654,
+          "Bespielbare Fläche (m<sup>2</sup>)": 15282
+        },
+        {
+          "Stadtteil": "Grötzingen",
+          "Jahr": 2016,
+          "Personen": 1620,
+          "Bespielbare Fläche (m<sup>2</sup>)": 15373
+        },
+        {
+          "Stadtteil": "Grötzingen",
+          "Jahr": 2017,
+          "Personen": 1616,
+          "Bespielbare Fläche (m<sup>2</sup>)": 15482
+        },
+        {
+          "Stadtteil": "Grötzingen",
+          "Jahr": 2018,
+          "Personen": 1607,
+          "Bespielbare Fläche (m<sup>2</sup>)": 15477
+        },
+        {
+          "Stadtteil": "Grötzingen",
+          "Jahr": 2019,
+          "Personen": 1605,
+          "Bespielbare Fläche (m<sup>2</sup>)": 15491
+        },
+        {
+          "Stadtteil": "Grötzingen",
+          "Jahr": 2020,
+          "Personen": 1612,
+          "Bespielbare Fläche (m<sup>2</sup>)": 15946
+        },
+        {
+          "Stadtteil": "Stupferich",
+          "Jahr": 2014,
+          "Personen": 473,
+          "Bespielbare Fläche (m<sup>2</sup>)": 3551
+        },
+        {
+          "Stadtteil": "Stupferich",
+          "Jahr": 2015,
+          "Personen": 493,
+          "Bespielbare Fläche (m<sup>2</sup>)": 3514
+        },
+        {
+          "Stadtteil": "Stupferich",
+          "Jahr": 2016,
+          "Personen": 519,
+          "Bespielbare Fläche (m<sup>2</sup>)": 3514
+        },
+        {
+          "Stadtteil": "Stupferich",
+          "Jahr": 2017,
+          "Personen": 522,
+          "Bespielbare Fläche (m<sup>2</sup>)": 3808
+        },
+        {
+          "Stadtteil": "Stupferich",
+          "Jahr": 2018,
+          "Personen": 568,
+          "Bespielbare Fläche (m<sup>2</sup>)": 4148
+        },
+        {
+          "Stadtteil": "Stupferich",
+          "Jahr": 2019,
+          "Personen": 610,
+          "Bespielbare Fläche (m<sup>2</sup>)": 4140
+        },
+        {
+          "Stadtteil": "Stupferich",
+          "Jahr": 2020,
+          "Personen": 639,
+          "Bespielbare Fläche (m<sup>2</sup>)": 4173
+        },
+        {
+          "Stadtteil": "Hohenwettersbach",
+          "Jahr": 2014,
+          "Personen": 771,
+          "Bespielbare Fläche (m<sup>2</sup>)": 9680
+        },
+        {
+          "Stadtteil": "Hohenwettersbach",
+          "Jahr": 2015,
+          "Personen": 780,
+          "Bespielbare Fläche (m<sup>2</sup>)": 9651
+        },
+        {
+          "Stadtteil": "Hohenwettersbach",
+          "Jahr": 2016,
+          "Personen": 782,
+          "Bespielbare Fläche (m<sup>2</sup>)": 9651
+        },
+        {
+          "Stadtteil": "Hohenwettersbach",
+          "Jahr": 2017,
+          "Personen": 760,
+          "Bespielbare Fläche (m<sup>2</sup>)": 9643
+        },
+        {
+          "Stadtteil": "Hohenwettersbach",
+          "Jahr": 2018,
+          "Personen": 740,
+          "Bespielbare Fläche (m<sup>2</sup>)": 9602
+        },
+        {
+          "Stadtteil": "Hohenwettersbach",
+          "Jahr": 2019,
+          "Personen": 715,
+          "Bespielbare Fläche (m<sup>2</sup>)": 9602
+        },
+        {
+          "Stadtteil": "Hohenwettersbach",
+          "Jahr": 2020,
+          "Personen": 712,
+          "Bespielbare Fläche (m<sup>2</sup>)": 9463
+        },
+        {
+          "Stadtteil": "Wolfartsweier",
+          "Jahr": 2014,
+          "Personen": 530,
+          "Bespielbare Fläche (m<sup>2</sup>)": 9946
+        },
+        {
+          "Stadtteil": "Wolfartsweier",
+          "Jahr": 2015,
+          "Personen": 536,
+          "Bespielbare Fläche (m<sup>2</sup>)": 10850
+        },
+        {
+          "Stadtteil": "Wolfartsweier",
+          "Jahr": 2016,
+          "Personen": 544,
+          "Bespielbare Fläche (m<sup>2</sup>)": 10850
+        },
+        {
+          "Stadtteil": "Wolfartsweier",
+          "Jahr": 2017,
+          "Personen": 533,
+          "Bespielbare Fläche (m<sup>2</sup>)": 10612
+        },
+        {
+          "Stadtteil": "Wolfartsweier",
+          "Jahr": 2018,
+          "Personen": 530,
+          "Bespielbare Fläche (m<sup>2</sup>)": 10730
+        },
+        {
+          "Stadtteil": "Wolfartsweier",
+          "Jahr": 2019,
+          "Personen": 510,
+          "Bespielbare Fläche (m<sup>2</sup>)": 10680
+        },
+        {
+          "Stadtteil": "Wolfartsweier",
+          "Jahr": 2020,
+          "Personen": 505,
+          "Bespielbare Fläche (m<sup>2</sup>)": 10612
+        },
+        {
+          "Stadtteil": "Grünwettersbach",
+          "Jahr": 2014,
+          "Personen": 789,
+          "Bespielbare Fläche (m<sup>2</sup>)": 6711
+        },
+        {
+          "Stadtteil": "Grünwettersbach",
+          "Jahr": 2015,
+          "Personen": 758,
+          "Bespielbare Fläche (m<sup>2</sup>)": 6711
+        },
+        {
+          "Stadtteil": "Grünwettersbach",
+          "Jahr": 2016,
+          "Personen": 795,
+          "Bespielbare Fläche (m<sup>2</sup>)": 6697
+        },
+        {
+          "Stadtteil": "Grünwettersbach",
+          "Jahr": 2017,
+          "Personen": 773,
+          "Bespielbare Fläche (m<sup>2</sup>)": 6692
+        },
+        {
+          "Stadtteil": "Grünwettersbach",
+          "Jahr": 2018,
+          "Personen": 773,
+          "Bespielbare Fläche (m<sup>2</sup>)": 6640
+        },
+        {
+          "Stadtteil": "Grünwettersbach",
+          "Jahr": 2019,
+          "Personen": 785,
+          "Bespielbare Fläche (m<sup>2</sup>)": 6648
+        },
+        {
+          "Stadtteil": "Grünwettersbach",
+          "Jahr": 2020,
+          "Personen": 763,
+          "Bespielbare Fläche (m<sup>2</sup>)": 6777
+        },
+        {
+          "Stadtteil": "Palmbach",
+          "Jahr": 2014,
+          "Personen": 456,
+          "Bespielbare Fläche (m<sup>2</sup>)": 4979
+        },
+        {
+          "Stadtteil": "Palmbach",
+          "Jahr": 2015,
+          "Personen": 456,
+          "Bespielbare Fläche (m<sup>2</sup>)": 4979
+        },
+        {
+          "Stadtteil": "Palmbach",
+          "Jahr": 2016,
+          "Personen": 447,
+          "Bespielbare Fläche (m<sup>2</sup>)": 5005
+        },
+        {
+          "Stadtteil": "Palmbach",
+          "Jahr": 2017,
+          "Personen": 457,
+          "Bespielbare Fläche (m<sup>2</sup>)": 5001
+        },
+        {
+          "Stadtteil": "Palmbach",
+          "Jahr": 2018,
+          "Personen": 463,
+          "Bespielbare Fläche (m<sup>2</sup>)": 5007
+        },
+        {
+          "Stadtteil": "Palmbach",
+          "Jahr": 2019,
+          "Personen": 463,
+          "Bespielbare Fläche (m<sup>2</sup>)": 5001
+        },
+        {
+          "Stadtteil": "Palmbach",
+          "Jahr": 2020,
+          "Personen": 462,
+          "Bespielbare Fläche (m<sup>2</sup>)": 5888
+        },
+        {
+          "Stadtteil": "Neureut",
+          "Jahr": 2014,
+          "Personen": 3501,
+          "Bespielbare Fläche (m<sup>2</sup>)": 36634
+        },
+        {
+          "Stadtteil": "Neureut",
+          "Jahr": 2015,
+          "Personen": 3546,
+          "Bespielbare Fläche (m<sup>2</sup>)": 36783
+        },
+        {
+          "Stadtteil": "Neureut",
+          "Jahr": 2016,
+          "Personen": 3599,
+          "Bespielbare Fläche (m<sup>2</sup>)": 36953
+        },
+        {
+          "Stadtteil": "Neureut",
+          "Jahr": 2017,
+          "Personen": 3495,
+          "Bespielbare Fläche (m<sup>2</sup>)": 36924
+        },
+        {
+          "Stadtteil": "Neureut",
+          "Jahr": 2018,
+          "Personen": 3571,
+          "Bespielbare Fläche (m<sup>2</sup>)": 36786
+        },
+        {
+          "Stadtteil": "Neureut",
+          "Jahr": 2019,
+          "Personen": 3505,
+          "Bespielbare Fläche (m<sup>2</sup>)": 38151
+        },
+        {
+          "Stadtteil": "Neureut",
+          "Jahr": 2020,
+          "Personen": 3477,
+          "Bespielbare Fläche (m<sup>2</sup>)": 40883
+        },
+        {
+          "Stadtteil": "Nordstadt",
+          "Jahr": 2014,
+          "Personen": 2419,
+          "Bespielbare Fläche (m<sup>2</sup>)": 24669
+        },
+        {
+          "Stadtteil": "Nordstadt",
+          "Jahr": 2015,
+          "Personen": 2326,
+          "Bespielbare Fläche (m<sup>2</sup>)": 24669
+        },
+        {
+          "Stadtteil": "Nordstadt",
+          "Jahr": 2016,
+          "Personen": 2254,
+          "Bespielbare Fläche (m<sup>2</sup>)": 24782
+        },
+        {
+          "Stadtteil": "Nordstadt",
+          "Jahr": 2017,
+          "Personen": 2173,
+          "Bespielbare Fläche (m<sup>2</sup>)": 24794
+        },
+        {
+          "Stadtteil": "Nordstadt",
+          "Jahr": 2018,
+          "Personen": 2061,
+          "Bespielbare Fläche (m<sup>2</sup>)": 24760
+        },
+        {
+          "Stadtteil": "Nordstadt",
+          "Jahr": 2019,
+          "Personen": 1989,
+          "Bespielbare Fläche (m<sup>2</sup>)": 24991
+        },
+        {
+          "Stadtteil": "Nordstadt",
+          "Jahr": 2020,
+          "Personen": 1902,
+          "Bespielbare Fläche (m<sup>2</sup>)": 24786
+        }
+      ],
+      "meta": {
+        "storagetype": "dataframe"
+      },
+      "root": false,
+      "loaded": true
+    },
+    {
+      "id": "N15",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N17",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N18",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N20",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N24",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N15",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N17",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N18",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N20",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N24",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N26",
+      "data": [
+        {
+          "Stadtteil": "Innenstadt-Ost",
+          "Jahr": 2014,
+          "X": 11015
+        },
+        {
+          "Stadtteil": "Innenstadt-Ost",
+          "Jahr": 2015,
+          "X": 11015
+        },
+        {
+          "Stadtteil": "Innenstadt-Ost",
+          "Jahr": 2016,
+          "X": 11015
+        },
+        {
+          "Stadtteil": "Innenstadt-Ost",
+          "Jahr": 2017,
+          "X": 11006
+        },
+        {
+          "Stadtteil": "Innenstadt-Ost",
+          "Jahr": 2018,
+          "X": 10833
+        },
+        {
+          "Stadtteil": "Innenstadt-Ost",
+          "Jahr": 2019,
+          "X": 10833
+        },
+        {
+          "Stadtteil": "Innenstadt-Ost",
+          "Jahr": 2020,
+          "X": 10833
+        },
+        {
+          "Stadtteil": "Innenstadt-West",
+          "Jahr": 2014,
+          "X": 6317
+        },
+        {
+          "Stadtteil": "Innenstadt-West",
+          "Jahr": 2015,
+          "X": 9294
+        },
+        {
+          "Stadtteil": "Innenstadt-West",
+          "Jahr": 2016,
+          "X": 9294
+        },
+        {
+          "Stadtteil": "Innenstadt-West",
+          "Jahr": 2017,
+          "X": 9287
+        },
+        {
+          "Stadtteil": "Innenstadt-West",
+          "Jahr": 2018,
+          "X": 9665
+        },
+        {
+          "Stadtteil": "Innenstadt-West",
+          "Jahr": 2019,
+          "X": 6341
+        },
+        {
+          "Stadtteil": "Innenstadt-West",
+          "Jahr": 2020,
+          "X": 9673
+        },
+        {
+          "Stadtteil": "Südstadt",
+          "Jahr": 2014,
+          "X": 14762
+        },
+        {
+          "Stadtteil": "Südstadt",
+          "Jahr": 2015,
+          "X": 14762
+        },
+        {
+          "Stadtteil": "Südstadt",
+          "Jahr": 2016,
+          "X": 17502
+        },
+        {
+          "Stadtteil": "Südstadt",
+          "Jahr": 2017,
+          "X": 17504
+        },
+        {
+          "Stadtteil": "Südstadt",
+          "Jahr": 2018,
+          "X": 17716
+        },
+        {
+          "Stadtteil": "Südstadt",
+          "Jahr": 2019,
+          "X": 17664
+        },
+        {
+          "Stadtteil": "Südstadt",
+          "Jahr": 2020,
+          "X": 18169
+        },
+        {
+          "Stadtteil": "Südweststadt",
+          "Jahr": 2014,
+          "X": 40297
+        },
+        {
+          "Stadtteil": "Südweststadt",
+          "Jahr": 2015,
+          "X": 40307
+        },
+        {
+          "Stadtteil": "Südweststadt",
+          "Jahr": 2016,
+          "X": 39968
+        },
+        {
+          "Stadtteil": "Südweststadt",
+          "Jahr": 2017,
+          "X": 39607
+        },
+        {
+          "Stadtteil": "Südweststadt",
+          "Jahr": 2018,
+          "X": 28096
+        },
+        {
+          "Stadtteil": "Südweststadt",
+          "Jahr": 2019,
+          "X": 28102
+        },
+        {
+          "Stadtteil": "Südweststadt",
+          "Jahr": 2020,
+          "X": 27767
+        },
+        {
+          "Stadtteil": "Weststadt",
+          "Jahr": 2014,
+          "X": 18158
+        },
+        {
+          "Stadtteil": "Weststadt",
+          "Jahr": 2015,
+          "X": 18232
+        },
+        {
+          "Stadtteil": "Weststadt",
+          "Jahr": 2016,
+          "X": 18232
+        },
+        {
+          "Stadtteil": "Weststadt",
+          "Jahr": 2017,
+          "X": 18217
+        },
+        {
+          "Stadtteil": "Weststadt",
+          "Jahr": 2018,
+          "X": 18217
+        },
+        {
+          "Stadtteil": "Weststadt",
+          "Jahr": 2019,
+          "X": 18217
+        },
+        {
+          "Stadtteil": "Weststadt",
+          "Jahr": 2020,
+          "X": 18240
+        },
+        {
+          "Stadtteil": "Nordweststadt",
+          "Jahr": 2014,
+          "X": 41799
+        },
+        {
+          "Stadtteil": "Nordweststadt",
+          "Jahr": 2015,
+          "X": 41504
+        },
+        {
+          "Stadtteil": "Nordweststadt",
+          "Jahr": 2016,
+          "X": 40505
+        },
+        {
+          "Stadtteil": "Nordweststadt",
+          "Jahr": 2017,
+          "X": 40473
+        },
+        {
+          "Stadtteil": "Nordweststadt",
+          "Jahr": 2018,
+          "X": 38868
+        },
+        {
+          "Stadtteil": "Nordweststadt",
+          "Jahr": 2019,
+          "X": 38898
+        },
+        {
+          "Stadtteil": "Nordweststadt",
+          "Jahr": 2020,
+          "X": 40407
+        },
+        {
+          "Stadtteil": "Oststadt",
+          "Jahr": 2014,
+          "X": 29694
+        },
+        {
+          "Stadtteil": "Oststadt",
+          "Jahr": 2015,
+          "X": 29694
+        },
+        {
+          "Stadtteil": "Oststadt",
+          "Jahr": 2016,
+          "X": 30461
+        },
+        {
+          "Stadtteil": "Oststadt",
+          "Jahr": 2017,
+          "X": 30438
+        },
+        {
+          "Stadtteil": "Oststadt",
+          "Jahr": 2018,
+          "X": 28066
+        },
+        {
+          "Stadtteil": "Oststadt",
+          "Jahr": 2019,
+          "X": 28138
+        },
+        {
+          "Stadtteil": "Oststadt",
+          "Jahr": 2020,
+          "X": 28143
+        },
+        {
+          "Stadtteil": "Mühlburg",
+          "Jahr": 2014,
+          "X": 9520
+        },
+        {
+          "Stadtteil": "Mühlburg",
+          "Jahr": 2015,
+          "X": 14223
+        },
+        {
+          "Stadtteil": "Mühlburg",
+          "Jahr": 2016,
+          "X": 14223
+        },
+        {
+          "Stadtteil": "Mühlburg",
+          "Jahr": 2017,
+          "X": 14220
+        },
+        {
+          "Stadtteil": "Mühlburg",
+          "Jahr": 2018,
+          "X": 14220
+        },
+        {
+          "Stadtteil": "Mühlburg",
+          "Jahr": 2019,
+          "X": 14220
+        },
+        {
+          "Stadtteil": "Mühlburg",
+          "Jahr": 2020,
+          "X": 14220
+        },
+        {
+          "Stadtteil": "Daxlanden",
+          "Jahr": 2014,
+          "X": 40865
+        },
+        {
+          "Stadtteil": "Daxlanden",
+          "Jahr": 2015,
+          "X": 41531
+        },
+        {
+          "Stadtteil": "Daxlanden",
+          "Jahr": 2016,
+          "X": 41531
+        },
+        {
+          "Stadtteil": "Daxlanden",
+          "Jahr": 2017,
+          "X": 41483
+        },
+        {
+          "Stadtteil": "Daxlanden",
+          "Jahr": 2018,
+          "X": 41483
+        },
+        {
+          "Stadtteil": "Daxlanden",
+          "Jahr": 2019,
+          "X": 42950
+        },
+        {
+          "Stadtteil": "Daxlanden",
+          "Jahr": 2020,
+          "X": 42862
+        },
+        {
+          "Stadtteil": "Knielingen",
+          "Jahr": 2014,
+          "X": 30397
+        },
+        {
+          "Stadtteil": "Knielingen",
+          "Jahr": 2015,
+          "X": 30435
+        },
+        {
+          "Stadtteil": "Knielingen",
+          "Jahr": 2016,
+          "X": 30449
+        },
+        {
+          "Stadtteil": "Knielingen",
+          "Jahr": 2017,
+          "X": 32175
+        },
+        {
+          "Stadtteil": "Knielingen",
+          "Jahr": 2018,
+          "X": 32203
+        },
+        {
+          "Stadtteil": "Knielingen",
+          "Jahr": 2019,
+          "X": 32205
+        },
+        {
+          "Stadtteil": "Knielingen",
+          "Jahr": 2020,
+          "X": 32350
+        },
+        {
+          "Stadtteil": "Grünwinkel",
+          "Jahr": 2014,
+          "X": 21572
+        },
+        {
+          "Stadtteil": "Grünwinkel",
+          "Jahr": 2015,
+          "X": 21579
+        },
+        {
+          "Stadtteil": "Grünwinkel",
+          "Jahr": 2016,
+          "X": 21801
+        },
+        {
+          "Stadtteil": "Grünwinkel",
+          "Jahr": 2017,
+          "X": 21926
+        },
+        {
+          "Stadtteil": "Grünwinkel",
+          "Jahr": 2018,
+          "X": 21920
+        },
+        {
+          "Stadtteil": "Grünwinkel",
+          "Jahr": 2019,
+          "X": 20094
+        },
+        {
+          "Stadtteil": "Grünwinkel",
+          "Jahr": 2020,
+          "X": 20034
+        },
+        {
+          "Stadtteil": "Oberreut",
+          "Jahr": 2014,
+          "X": 28707
+        },
+        {
+          "Stadtteil": "Oberreut",
+          "Jahr": 2015,
+          "X": 30471
+        },
+        {
+          "Stadtteil": "Oberreut",
+          "Jahr": 2016,
+          "X": 30477
+        },
+        {
+          "Stadtteil": "Oberreut",
+          "Jahr": 2017,
+          "X": 30454
+        },
+        {
+          "Stadtteil": "Oberreut",
+          "Jahr": 2018,
+          "X": 29960
+        },
+        {
+          "Stadtteil": "Oberreut",
+          "Jahr": 2019,
+          "X": 29963
+        },
+        {
+          "Stadtteil": "Oberreut",
+          "Jahr": 2020,
+          "X": 30237
+        },
+        {
+          "Stadtteil": "Beiertheim-Bulach",
+          "Jahr": 2014,
+          "X": 6574
+        },
+        {
+          "Stadtteil": "Beiertheim-Bulach",
+          "Jahr": 2015,
+          "X": 6579
+        },
+        {
+          "Stadtteil": "Beiertheim-Bulach",
+          "Jahr": 2016,
+          "X": 6647
+        },
+        {
+          "Stadtteil": "Beiertheim-Bulach",
+          "Jahr": 2017,
+          "X": 6492
+        },
+        {
+          "Stadtteil": "Beiertheim-Bulach",
+          "Jahr": 2018,
+          "X": 6472
+        },
+        {
+          "Stadtteil": "Beiertheim-Bulach",
+          "Jahr": 2019,
+          "X": 6472
+        },
+        {
+          "Stadtteil": "Beiertheim-Bulach",
+          "Jahr": 2020,
+          "X": 6472
+        },
+        {
+          "Stadtteil": "Weiherfeld-Dammerstock",
+          "Jahr": 2014,
+          "X": 9108
+        },
+        {
+          "Stadtteil": "Weiherfeld-Dammerstock",
+          "Jahr": 2015,
+          "X": 9108
+        },
+        {
+          "Stadtteil": "Weiherfeld-Dammerstock",
+          "Jahr": 2016,
+          "X": 9108
+        },
+        {
+          "Stadtteil": "Weiherfeld-Dammerstock",
+          "Jahr": 2017,
+          "X": 11131
+        },
+        {
+          "Stadtteil": "Weiherfeld-Dammerstock",
+          "Jahr": 2018,
+          "X": 11131
+        },
+        {
+          "Stadtteil": "Weiherfeld-Dammerstock",
+          "Jahr": 2019,
+          "X": 11131
+        },
+        {
+          "Stadtteil": "Weiherfeld-Dammerstock",
+          "Jahr": 2020,
+          "X": 11204
+        },
+        {
+          "Stadtteil": "Rüppurr",
+          "Jahr": 2014,
+          "X": 18692
+        },
+        {
+          "Stadtteil": "Rüppurr",
+          "Jahr": 2015,
+          "X": 19344
+        },
+        {
+          "Stadtteil": "Rüppurr",
+          "Jahr": 2016,
+          "X": 19690
+        },
+        {
+          "Stadtteil": "Rüppurr",
+          "Jahr": 2017,
+          "X": 19663
+        },
+        {
+          "Stadtteil": "Rüppurr",
+          "Jahr": 2018,
+          "X": 19663
+        },
+        {
+          "Stadtteil": "Rüppurr",
+          "Jahr": 2019,
+          "X": 19663
+        },
+        {
+          "Stadtteil": "Rüppurr",
+          "Jahr": 2020,
+          "X": 19907
+        },
+        {
+          "Stadtteil": "Waldstadt",
+          "Jahr": 2014,
+          "X": 33461
+        },
+        {
+          "Stadtteil": "Waldstadt",
+          "Jahr": 2015,
+          "X": 36785
+        },
+        {
+          "Stadtteil": "Waldstadt",
+          "Jahr": 2016,
+          "X": 37630
+        },
+        {
+          "Stadtteil": "Waldstadt",
+          "Jahr": 2017,
+          "X": 37474
+        },
+        {
+          "Stadtteil": "Waldstadt",
+          "Jahr": 2018,
+          "X": 37392
+        },
+        {
+          "Stadtteil": "Waldstadt",
+          "Jahr": 2019,
+          "X": 37392
+        },
+        {
+          "Stadtteil": "Waldstadt",
+          "Jahr": 2020,
+          "X": 37432
+        },
+        {
+          "Stadtteil": "Rintheim",
+          "Jahr": 2014,
+          "X": 10404
+        },
+        {
+          "Stadtteil": "Rintheim",
+          "Jahr": 2015,
+          "X": 10404
+        },
+        {
+          "Stadtteil": "Rintheim",
+          "Jahr": 2016,
+          "X": 10445
+        },
+        {
+          "Stadtteil": "Rintheim",
+          "Jahr": 2017,
+          "X": 10611
+        },
+        {
+          "Stadtteil": "Rintheim",
+          "Jahr": 2018,
+          "X": 9046
+        },
+        {
+          "Stadtteil": "Rintheim",
+          "Jahr": 2019,
+          "X": 9046
+        },
+        {
+          "Stadtteil": "Rintheim",
+          "Jahr": 2020,
+          "X": 8815
+        },
+        {
+          "Stadtteil": "Hagsfeld",
+          "Jahr": 2014,
+          "X": 22412
+        },
+        {
+          "Stadtteil": "Hagsfeld",
+          "Jahr": 2015,
+          "X": 21910
+        },
+        {
+          "Stadtteil": "Hagsfeld",
+          "Jahr": 2016,
+          "X": 22672
+        },
+        {
+          "Stadtteil": "Hagsfeld",
+          "Jahr": 2017,
+          "X": 22654
+        },
+        {
+          "Stadtteil": "Hagsfeld",
+          "Jahr": 2018,
+          "X": 22797
+        },
+        {
+          "Stadtteil": "Hagsfeld",
+          "Jahr": 2019,
+          "X": 22961
+        },
+        {
+          "Stadtteil": "Hagsfeld",
+          "Jahr": 2020,
+          "X": 19959
+        },
+        {
+          "Stadtteil": "Durlach",
+          "Jahr": 2014,
+          "X": 45386
+        },
+        {
+          "Stadtteil": "Durlach",
+          "Jahr": 2015,
+          "X": 41996
+        },
+        {
+          "Stadtteil": "Durlach",
+          "Jahr": 2016,
+          "X": 42121
+        },
+        {
+          "Stadtteil": "Durlach",
+          "Jahr": 2017,
+          "X": 40709
+        },
+        {
+          "Stadtteil": "Durlach",
+          "Jahr": 2018,
+          "X": 44706
+        },
+        {
+          "Stadtteil": "Durlach",
+          "Jahr": 2019,
+          "X": 44584
+        },
+        {
+          "Stadtteil": "Durlach",
+          "Jahr": 2020,
+          "X": 45539
+        },
+        {
+          "Stadtteil": "Grötzingen",
+          "Jahr": 2014,
+          "X": 13667
+        },
+        {
+          "Stadtteil": "Grötzingen",
+          "Jahr": 2015,
+          "X": 15282
+        },
+        {
+          "Stadtteil": "Grötzingen",
+          "Jahr": 2016,
+          "X": 15373
+        },
+        {
+          "Stadtteil": "Grötzingen",
+          "Jahr": 2017,
+          "X": 15482
+        },
+        {
+          "Stadtteil": "Grötzingen",
+          "Jahr": 2018,
+          "X": 15477
+        },
+        {
+          "Stadtteil": "Grötzingen",
+          "Jahr": 2019,
+          "X": 15491
+        },
+        {
+          "Stadtteil": "Grötzingen",
+          "Jahr": 2020,
+          "X": 15946
+        },
+        {
+          "Stadtteil": "Stupferich",
+          "Jahr": 2014,
+          "X": 3551
+        },
+        {
+          "Stadtteil": "Stupferich",
+          "Jahr": 2015,
+          "X": 3514
+        },
+        {
+          "Stadtteil": "Stupferich",
+          "Jahr": 2016,
+          "X": 3514
+        },
+        {
+          "Stadtteil": "Stupferich",
+          "Jahr": 2017,
+          "X": 3808
+        },
+        {
+          "Stadtteil": "Stupferich",
+          "Jahr": 2018,
+          "X": 4148
+        },
+        {
+          "Stadtteil": "Stupferich",
+          "Jahr": 2019,
+          "X": 4140
+        },
+        {
+          "Stadtteil": "Stupferich",
+          "Jahr": 2020,
+          "X": 4173
+        },
+        {
+          "Stadtteil": "Hohenwettersbach",
+          "Jahr": 2014,
+          "X": 9680
+        },
+        {
+          "Stadtteil": "Hohenwettersbach",
+          "Jahr": 2015,
+          "X": 9651
+        },
+        {
+          "Stadtteil": "Hohenwettersbach",
+          "Jahr": 2016,
+          "X": 9651
+        },
+        {
+          "Stadtteil": "Hohenwettersbach",
+          "Jahr": 2017,
+          "X": 9643
+        },
+        {
+          "Stadtteil": "Hohenwettersbach",
+          "Jahr": 2018,
+          "X": 9602
+        },
+        {
+          "Stadtteil": "Hohenwettersbach",
+          "Jahr": 2019,
+          "X": 9602
+        },
+        {
+          "Stadtteil": "Hohenwettersbach",
+          "Jahr": 2020,
+          "X": 9463
+        },
+        {
+          "Stadtteil": "Wolfartsweier",
+          "Jahr": 2014,
+          "X": 9946
+        },
+        {
+          "Stadtteil": "Wolfartsweier",
+          "Jahr": 2015,
+          "X": 10850
+        },
+        {
+          "Stadtteil": "Wolfartsweier",
+          "Jahr": 2016,
+          "X": 10850
+        },
+        {
+          "Stadtteil": "Wolfartsweier",
+          "Jahr": 2017,
+          "X": 10612
+        },
+        {
+          "Stadtteil": "Wolfartsweier",
+          "Jahr": 2018,
+          "X": 10730
+        },
+        {
+          "Stadtteil": "Wolfartsweier",
+          "Jahr": 2019,
+          "X": 10680
+        },
+        {
+          "Stadtteil": "Wolfartsweier",
+          "Jahr": 2020,
+          "X": 10612
+        },
+        {
+          "Stadtteil": "Grünwettersbach",
+          "Jahr": 2014,
+          "X": 6711
+        },
+        {
+          "Stadtteil": "Grünwettersbach",
+          "Jahr": 2015,
+          "X": 6711
+        },
+        {
+          "Stadtteil": "Grünwettersbach",
+          "Jahr": 2016,
+          "X": 6697
+        },
+        {
+          "Stadtteil": "Grünwettersbach",
+          "Jahr": 2017,
+          "X": 6692
+        },
+        {
+          "Stadtteil": "Grünwettersbach",
+          "Jahr": 2018,
+          "X": 6640
+        },
+        {
+          "Stadtteil": "Grünwettersbach",
+          "Jahr": 2019,
+          "X": 6648
+        },
+        {
+          "Stadtteil": "Grünwettersbach",
+          "Jahr": 2020,
+          "X": 6777
+        },
+        {
+          "Stadtteil": "Palmbach",
+          "Jahr": 2014,
+          "X": 4979
+        },
+        {
+          "Stadtteil": "Palmbach",
+          "Jahr": 2015,
+          "X": 4979
+        },
+        {
+          "Stadtteil": "Palmbach",
+          "Jahr": 2016,
+          "X": 5005
+        },
+        {
+          "Stadtteil": "Palmbach",
+          "Jahr": 2017,
+          "X": 5001
+        },
+        {
+          "Stadtteil": "Palmbach",
+          "Jahr": 2018,
+          "X": 5007
+        },
+        {
+          "Stadtteil": "Palmbach",
+          "Jahr": 2019,
+          "X": 5001
+        },
+        {
+          "Stadtteil": "Palmbach",
+          "Jahr": 2020,
+          "X": 5888
+        },
+        {
+          "Stadtteil": "Neureut",
+          "Jahr": 2014,
+          "X": 36634
+        },
+        {
+          "Stadtteil": "Neureut",
+          "Jahr": 2015,
+          "X": 36783
+        },
+        {
+          "Stadtteil": "Neureut",
+          "Jahr": 2016,
+          "X": 36953
+        },
+        {
+          "Stadtteil": "Neureut",
+          "Jahr": 2017,
+          "X": 36924
+        },
+        {
+          "Stadtteil": "Neureut",
+          "Jahr": 2018,
+          "X": 36786
+        },
+        {
+          "Stadtteil": "Neureut",
+          "Jahr": 2019,
+          "X": 38151
+        },
+        {
+          "Stadtteil": "Neureut",
+          "Jahr": 2020,
+          "X": 40883
+        },
+        {
+          "Stadtteil": "Nordstadt",
+          "Jahr": 2014,
+          "X": 24669
+        },
+        {
+          "Stadtteil": "Nordstadt",
+          "Jahr": 2015,
+          "X": 24669
+        },
+        {
+          "Stadtteil": "Nordstadt",
+          "Jahr": 2016,
+          "X": 24782
+        },
+        {
+          "Stadtteil": "Nordstadt",
+          "Jahr": 2017,
+          "X": 24794
+        },
+        {
+          "Stadtteil": "Nordstadt",
+          "Jahr": 2018,
+          "X": 24760
+        },
+        {
+          "Stadtteil": "Nordstadt",
+          "Jahr": 2019,
+          "X": 24991
+        },
+        {
+          "Stadtteil": "Nordstadt",
+          "Jahr": 2020,
+          "X": 24786
+        }
+      ],
+      "meta": {
+        "storagetype": "dataframe"
+      },
+      "root": false,
+      "loaded": true
+    },
+    {
+      "id": "N27",
+      "data": [
+        {
+          "Stadtteil": "Innenstadt-Ost",
+          "Jahr": 2014,
+          "X": 712
+        },
+        {
+          "Stadtteil": "Innenstadt-Ost",
+          "Jahr": 2015,
+          "X": 745
+        },
+        {
+          "Stadtteil": "Innenstadt-Ost",
+          "Jahr": 2016,
+          "X": 781
+        },
+        {
+          "Stadtteil": "Innenstadt-Ost",
+          "Jahr": 2017,
+          "X": 775
+        },
+        {
+          "Stadtteil": "Innenstadt-Ost",
+          "Jahr": 2018,
+          "X": 742
+        },
+        {
+          "Stadtteil": "Innenstadt-Ost",
+          "Jahr": 2019,
+          "X": 735
+        },
+        {
+          "Stadtteil": "Innenstadt-Ost",
+          "Jahr": 2020,
+          "X": 721
+        },
+        {
+          "Stadtteil": "Innenstadt-West",
+          "Jahr": 2014,
+          "X": 1083
+        },
+        {
+          "Stadtteil": "Innenstadt-West",
+          "Jahr": 2015,
+          "X": 1109
+        },
+        {
+          "Stadtteil": "Innenstadt-West",
+          "Jahr": 2016,
+          "X": 1081
+        },
+        {
+          "Stadtteil": "Innenstadt-West",
+          "Jahr": 2017,
+          "X": 1037
+        },
+        {
+          "Stadtteil": "Innenstadt-West",
+          "Jahr": 2018,
+          "X": 998
+        },
+        {
+          "Stadtteil": "Innenstadt-West",
+          "Jahr": 2019,
+          "X": 1005
+        },
+        {
+          "Stadtteil": "Innenstadt-West",
+          "Jahr": 2020,
+          "X": 922
+        },
+        {
+          "Stadtteil": "Südstadt",
+          "Jahr": 2014,
+          "X": 2784
+        },
+        {
+          "Stadtteil": "Südstadt",
+          "Jahr": 2015,
+          "X": 2889
+        },
+        {
+          "Stadtteil": "Südstadt",
+          "Jahr": 2016,
+          "X": 3082
+        },
+        {
+          "Stadtteil": "Südstadt",
+          "Jahr": 2017,
+          "X": 3142
+        },
+        {
+          "Stadtteil": "Südstadt",
+          "Jahr": 2018,
+          "X": 3124
+        },
+        {
+          "Stadtteil": "Südstadt",
+          "Jahr": 2019,
+          "X": 3090
+        },
+        {
+          "Stadtteil": "Südstadt",
+          "Jahr": 2020,
+          "X": 3011
+        },
+        {
+          "Stadtteil": "Südweststadt",
+          "Jahr": 2014,
+          "X": 3711
+        },
+        {
+          "Stadtteil": "Südweststadt",
+          "Jahr": 2015,
+          "X": 3718
+        },
+        {
+          "Stadtteil": "Südweststadt",
+          "Jahr": 2016,
+          "X": 3732
+        },
+        {
+          "Stadtteil": "Südweststadt",
+          "Jahr": 2017,
+          "X": 3722
+        },
+        {
+          "Stadtteil": "Südweststadt",
+          "Jahr": 2018,
+          "X": 3726
+        },
+        {
+          "Stadtteil": "Südweststadt",
+          "Jahr": 2019,
+          "X": 3686
+        },
+        {
+          "Stadtteil": "Südweststadt",
+          "Jahr": 2020,
+          "X": 3589
+        },
+        {
+          "Stadtteil": "Weststadt",
+          "Jahr": 2014,
+          "X": 3475
+        },
+        {
+          "Stadtteil": "Weststadt",
+          "Jahr": 2015,
+          "X": 3437
+        },
+        {
+          "Stadtteil": "Weststadt",
+          "Jahr": 2016,
+          "X": 3465
+        },
+        {
+          "Stadtteil": "Weststadt",
+          "Jahr": 2017,
+          "X": 3426
+        },
+        {
+          "Stadtteil": "Weststadt",
+          "Jahr": 2018,
+          "X": 3337
+        },
+        {
+          "Stadtteil": "Weststadt",
+          "Jahr": 2019,
+          "X": 3238
+        },
+        {
+          "Stadtteil": "Weststadt",
+          "Jahr": 2020,
+          "X": 3164
+        },
+        {
+          "Stadtteil": "Nordweststadt",
+          "Jahr": 2014,
+          "X": 1806
+        },
+        {
+          "Stadtteil": "Nordweststadt",
+          "Jahr": 2015,
+          "X": 1802
+        },
+        {
+          "Stadtteil": "Nordweststadt",
+          "Jahr": 2016,
+          "X": 1851
+        },
+        {
+          "Stadtteil": "Nordweststadt",
+          "Jahr": 2017,
+          "X": 1935
+        },
+        {
+          "Stadtteil": "Nordweststadt",
+          "Jahr": 2018,
+          "X": 1946
+        },
+        {
+          "Stadtteil": "Nordweststadt",
+          "Jahr": 2019,
+          "X": 1918
+        },
+        {
+          "Stadtteil": "Nordweststadt",
+          "Jahr": 2020,
+          "X": 1958
+        },
+        {
+          "Stadtteil": "Oststadt",
+          "Jahr": 2014,
+          "X": 4294
+        },
+        {
+          "Stadtteil": "Oststadt",
+          "Jahr": 2015,
+          "X": 5686
+        },
+        {
+          "Stadtteil": "Oststadt",
+          "Jahr": 2016,
+          "X": 3179
+        },
+        {
+          "Stadtteil": "Oststadt",
+          "Jahr": 2017,
+          "X": 2897
+        },
+        {
+          "Stadtteil": "Oststadt",
+          "Jahr": 2018,
+          "X": 2422
+        },
+        {
+          "Stadtteil": "Oststadt",
+          "Jahr": 2019,
+          "X": 2423
+        },
+        {
+          "Stadtteil": "Oststadt",
+          "Jahr": 2020,
+          "X": 2291
+        },
+        {
+          "Stadtteil": "Mühlburg",
+          "Jahr": 2014,
+          "X": 2649
+        },
+        {
+          "Stadtteil": "Mühlburg",
+          "Jahr": 2015,
+          "X": 2710
+        },
+        {
+          "Stadtteil": "Mühlburg",
+          "Jahr": 2016,
+          "X": 2790
+        },
+        {
+          "Stadtteil": "Mühlburg",
+          "Jahr": 2017,
+          "X": 2735
+        },
+        {
+          "Stadtteil": "Mühlburg",
+          "Jahr": 2018,
+          "X": 2885
+        },
+        {
+          "Stadtteil": "Mühlburg",
+          "Jahr": 2019,
+          "X": 2740
+        },
+        {
+          "Stadtteil": "Mühlburg",
+          "Jahr": 2020,
+          "X": 2639
+        },
+        {
+          "Stadtteil": "Daxlanden",
+          "Jahr": 2014,
+          "X": 1861
+        },
+        {
+          "Stadtteil": "Daxlanden",
+          "Jahr": 2015,
+          "X": 1883
+        },
+        {
+          "Stadtteil": "Daxlanden",
+          "Jahr": 2016,
+          "X": 1897
+        },
+        {
+          "Stadtteil": "Daxlanden",
+          "Jahr": 2017,
+          "X": 1925
+        },
+        {
+          "Stadtteil": "Daxlanden",
+          "Jahr": 2018,
+          "X": 1907
+        },
+        {
+          "Stadtteil": "Daxlanden",
+          "Jahr": 2019,
+          "X": 1892
+        },
+        {
+          "Stadtteil": "Daxlanden",
+          "Jahr": 2020,
+          "X": 1856
+        },
+        {
+          "Stadtteil": "Knielingen",
+          "Jahr": 2014,
+          "X": 1748
+        },
+        {
+          "Stadtteil": "Knielingen",
+          "Jahr": 2015,
+          "X": 1780
+        },
+        {
+          "Stadtteil": "Knielingen",
+          "Jahr": 2016,
+          "X": 1863
+        },
+        {
+          "Stadtteil": "Knielingen",
+          "Jahr": 2017,
+          "X": 2013
+        },
+        {
+          "Stadtteil": "Knielingen",
+          "Jahr": 2018,
+          "X": 2223
+        },
+        {
+          "Stadtteil": "Knielingen",
+          "Jahr": 2019,
+          "X": 2304
+        },
+        {
+          "Stadtteil": "Knielingen",
+          "Jahr": 2020,
+          "X": 2399
+        },
+        {
+          "Stadtteil": "Grünwinkel",
+          "Jahr": 2014,
+          "X": 1833
+        },
+        {
+          "Stadtteil": "Grünwinkel",
+          "Jahr": 2015,
+          "X": 1867
+        },
+        {
+          "Stadtteil": "Grünwinkel",
+          "Jahr": 2016,
+          "X": 1895
+        },
+        {
+          "Stadtteil": "Grünwinkel",
+          "Jahr": 2017,
+          "X": 2075
+        },
+        {
+          "Stadtteil": "Grünwinkel",
+          "Jahr": 2018,
+          "X": 2244
+        },
+        {
+          "Stadtteil": "Grünwinkel",
+          "Jahr": 2019,
+          "X": 2184
+        },
+        {
+          "Stadtteil": "Grünwinkel",
+          "Jahr": 2020,
+          "X": 2033
+        },
+        {
+          "Stadtteil": "Oberreut",
+          "Jahr": 2014,
+          "X": 1878
+        },
+        {
+          "Stadtteil": "Oberreut",
+          "Jahr": 2015,
+          "X": 1905
+        },
+        {
+          "Stadtteil": "Oberreut",
+          "Jahr": 2016,
+          "X": 1883
+        },
+        {
+          "Stadtteil": "Oberreut",
+          "Jahr": 2017,
+          "X": 1856
+        },
+        {
+          "Stadtteil": "Oberreut",
+          "Jahr": 2018,
+          "X": 1983
+        },
+        {
+          "Stadtteil": "Oberreut",
+          "Jahr": 2019,
+          "X": 2164
+        },
+        {
+          "Stadtteil": "Oberreut",
+          "Jahr": 2020,
+          "X": 2084
+        },
+        {
+          "Stadtteil": "Beiertheim-Bulach",
+          "Jahr": 2014,
+          "X": 1151
+        },
+        {
+          "Stadtteil": "Beiertheim-Bulach",
+          "Jahr": 2015,
+          "X": 1148
+        },
+        {
+          "Stadtteil": "Beiertheim-Bulach",
+          "Jahr": 2016,
+          "X": 1184
+        },
+        {
+          "Stadtteil": "Beiertheim-Bulach",
+          "Jahr": 2017,
+          "X": 1167
+        },
+        {
+          "Stadtteil": "Beiertheim-Bulach",
+          "Jahr": 2018,
+          "X": 1163
+        },
+        {
+          "Stadtteil": "Beiertheim-Bulach",
+          "Jahr": 2019,
+          "X": 1185
+        },
+        {
+          "Stadtteil": "Beiertheim-Bulach",
+          "Jahr": 2020,
+          "X": 1187
+        },
+        {
+          "Stadtteil": "Weiherfeld-Dammerstock",
+          "Jahr": 2014,
+          "X": 1042
+        },
+        {
+          "Stadtteil": "Weiherfeld-Dammerstock",
+          "Jahr": 2015,
+          "X": 1033
+        },
+        {
+          "Stadtteil": "Weiherfeld-Dammerstock",
+          "Jahr": 2016,
+          "X": 1033
+        },
+        {
+          "Stadtteil": "Weiherfeld-Dammerstock",
+          "Jahr": 2017,
+          "X": 1062
+        },
+        {
+          "Stadtteil": "Weiherfeld-Dammerstock",
+          "Jahr": 2018,
+          "X": 1059
+        },
+        {
+          "Stadtteil": "Weiherfeld-Dammerstock",
+          "Jahr": 2019,
+          "X": 1051
+        },
+        {
+          "Stadtteil": "Weiherfeld-Dammerstock",
+          "Jahr": 2020,
+          "X": 1012
+        },
+        {
+          "Stadtteil": "Rüppurr",
+          "Jahr": 2014,
+          "X": 1916
+        },
+        {
+          "Stadtteil": "Rüppurr",
+          "Jahr": 2015,
+          "X": 1945
+        },
+        {
+          "Stadtteil": "Rüppurr",
+          "Jahr": 2016,
+          "X": 1927
+        },
+        {
+          "Stadtteil": "Rüppurr",
+          "Jahr": 2017,
+          "X": 1973
+        },
+        {
+          "Stadtteil": "Rüppurr",
+          "Jahr": 2018,
+          "X": 2005
+        },
+        {
+          "Stadtteil": "Rüppurr",
+          "Jahr": 2019,
+          "X": 2032
+        },
+        {
+          "Stadtteil": "Rüppurr",
+          "Jahr": 2020,
+          "X": 2023
+        },
+        {
+          "Stadtteil": "Waldstadt",
+          "Jahr": 2014,
+          "X": 2338
+        },
+        {
+          "Stadtteil": "Waldstadt",
+          "Jahr": 2015,
+          "X": 2369
+        },
+        {
+          "Stadtteil": "Waldstadt",
+          "Jahr": 2016,
+          "X": 2375
+        },
+        {
+          "Stadtteil": "Waldstadt",
+          "Jahr": 2017,
+          "X": 2324
+        },
+        {
+          "Stadtteil": "Waldstadt",
+          "Jahr": 2018,
+          "X": 2327
+        },
+        {
+          "Stadtteil": "Waldstadt",
+          "Jahr": 2019,
+          "X": 2304
+        },
+        {
+          "Stadtteil": "Waldstadt",
+          "Jahr": 2020,
+          "X": 2301
+        },
+        {
+          "Stadtteil": "Rintheim",
+          "Jahr": 2014,
+          "X": 1046
+        },
+        {
+          "Stadtteil": "Rintheim",
+          "Jahr": 2015,
+          "X": 1092
+        },
+        {
+          "Stadtteil": "Rintheim",
+          "Jahr": 2016,
+          "X": 1097
+        },
+        {
+          "Stadtteil": "Rintheim",
+          "Jahr": 2017,
+          "X": 1238
+        },
+        {
+          "Stadtteil": "Rintheim",
+          "Jahr": 2018,
+          "X": 1256
+        },
+        {
+          "Stadtteil": "Rintheim",
+          "Jahr": 2019,
+          "X": 1265
+        },
+        {
+          "Stadtteil": "Rintheim",
+          "Jahr": 2020,
+          "X": 1240
+        },
+        {
+          "Stadtteil": "Hagsfeld",
+          "Jahr": 2014,
+          "X": 1321
+        },
+        {
+          "Stadtteil": "Hagsfeld",
+          "Jahr": 2015,
+          "X": 1353
+        },
+        {
+          "Stadtteil": "Hagsfeld",
+          "Jahr": 2016,
+          "X": 1368
+        },
+        {
+          "Stadtteil": "Hagsfeld",
+          "Jahr": 2017,
+          "X": 1343
+        },
+        {
+          "Stadtteil": "Hagsfeld",
+          "Jahr": 2018,
+          "X": 1375
+        },
+        {
+          "Stadtteil": "Hagsfeld",
+          "Jahr": 2019,
+          "X": 1381
+        },
+        {
+          "Stadtteil": "Hagsfeld",
+          "Jahr": 2020,
+          "X": 1335
+        },
+        {
+          "Stadtteil": "Durlach",
+          "Jahr": 2014,
+          "X": 5142
+        },
+        {
+          "Stadtteil": "Durlach",
+          "Jahr": 2015,
+          "X": 5294
+        },
+        {
+          "Stadtteil": "Durlach",
+          "Jahr": 2016,
+          "X": 5241
+        },
+        {
+          "Stadtteil": "Durlach",
+          "Jahr": 2017,
+          "X": 5157
+        },
+        {
+          "Stadtteil": "Durlach",
+          "Jahr": 2018,
+          "X": 5206
+        },
+        {
+          "Stadtteil": "Durlach",
+          "Jahr": 2019,
+          "X": 5335
+        },
+        {
+          "Stadtteil": "Durlach",
+          "Jahr": 2020,
+          "X": 5304
+        },
+        {
+          "Stadtteil": "Grötzingen",
+          "Jahr": 2014,
+          "X": 1623
+        },
+        {
+          "Stadtteil": "Grötzingen",
+          "Jahr": 2015,
+          "X": 1654
+        },
+        {
+          "Stadtteil": "Grötzingen",
+          "Jahr": 2016,
+          "X": 1620
+        },
+        {
+          "Stadtteil": "Grötzingen",
+          "Jahr": 2017,
+          "X": 1616
+        },
+        {
+          "Stadtteil": "Grötzingen",
+          "Jahr": 2018,
+          "X": 1607
+        },
+        {
+          "Stadtteil": "Grötzingen",
+          "Jahr": 2019,
+          "X": 1605
+        },
+        {
+          "Stadtteil": "Grötzingen",
+          "Jahr": 2020,
+          "X": 1612
+        },
+        {
+          "Stadtteil": "Stupferich",
+          "Jahr": 2014,
+          "X": 473
+        },
+        {
+          "Stadtteil": "Stupferich",
+          "Jahr": 2015,
+          "X": 493
+        },
+        {
+          "Stadtteil": "Stupferich",
+          "Jahr": 2016,
+          "X": 519
+        },
+        {
+          "Stadtteil": "Stupferich",
+          "Jahr": 2017,
+          "X": 522
+        },
+        {
+          "Stadtteil": "Stupferich",
+          "Jahr": 2018,
+          "X": 568
+        },
+        {
+          "Stadtteil": "Stupferich",
+          "Jahr": 2019,
+          "X": 610
+        },
+        {
+          "Stadtteil": "Stupferich",
+          "Jahr": 2020,
+          "X": 639
+        },
+        {
+          "Stadtteil": "Hohenwettersbach",
+          "Jahr": 2014,
+          "X": 771
+        },
+        {
+          "Stadtteil": "Hohenwettersbach",
+          "Jahr": 2015,
+          "X": 780
+        },
+        {
+          "Stadtteil": "Hohenwettersbach",
+          "Jahr": 2016,
+          "X": 782
+        },
+        {
+          "Stadtteil": "Hohenwettersbach",
+          "Jahr": 2017,
+          "X": 760
+        },
+        {
+          "Stadtteil": "Hohenwettersbach",
+          "Jahr": 2018,
+          "X": 740
+        },
+        {
+          "Stadtteil": "Hohenwettersbach",
+          "Jahr": 2019,
+          "X": 715
+        },
+        {
+          "Stadtteil": "Hohenwettersbach",
+          "Jahr": 2020,
+          "X": 712
+        },
+        {
+          "Stadtteil": "Wolfartsweier",
+          "Jahr": 2014,
+          "X": 530
+        },
+        {
+          "Stadtteil": "Wolfartsweier",
+          "Jahr": 2015,
+          "X": 536
+        },
+        {
+          "Stadtteil": "Wolfartsweier",
+          "Jahr": 2016,
+          "X": 544
+        },
+        {
+          "Stadtteil": "Wolfartsweier",
+          "Jahr": 2017,
+          "X": 533
+        },
+        {
+          "Stadtteil": "Wolfartsweier",
+          "Jahr": 2018,
+          "X": 530
+        },
+        {
+          "Stadtteil": "Wolfartsweier",
+          "Jahr": 2019,
+          "X": 510
+        },
+        {
+          "Stadtteil": "Wolfartsweier",
+          "Jahr": 2020,
+          "X": 505
+        },
+        {
+          "Stadtteil": "Grünwettersbach",
+          "Jahr": 2014,
+          "X": 789
+        },
+        {
+          "Stadtteil": "Grünwettersbach",
+          "Jahr": 2015,
+          "X": 758
+        },
+        {
+          "Stadtteil": "Grünwettersbach",
+          "Jahr": 2016,
+          "X": 795
+        },
+        {
+          "Stadtteil": "Grünwettersbach",
+          "Jahr": 2017,
+          "X": 773
+        },
+        {
+          "Stadtteil": "Grünwettersbach",
+          "Jahr": 2018,
+          "X": 773
+        },
+        {
+          "Stadtteil": "Grünwettersbach",
+          "Jahr": 2019,
+          "X": 785
+        },
+        {
+          "Stadtteil": "Grünwettersbach",
+          "Jahr": 2020,
+          "X": 763
+        },
+        {
+          "Stadtteil": "Palmbach",
+          "Jahr": 2014,
+          "X": 456
+        },
+        {
+          "Stadtteil": "Palmbach",
+          "Jahr": 2015,
+          "X": 456
+        },
+        {
+          "Stadtteil": "Palmbach",
+          "Jahr": 2016,
+          "X": 447
+        },
+        {
+          "Stadtteil": "Palmbach",
+          "Jahr": 2017,
+          "X": 457
+        },
+        {
+          "Stadtteil": "Palmbach",
+          "Jahr": 2018,
+          "X": 463
+        },
+        {
+          "Stadtteil": "Palmbach",
+          "Jahr": 2019,
+          "X": 463
+        },
+        {
+          "Stadtteil": "Palmbach",
+          "Jahr": 2020,
+          "X": 462
+        },
+        {
+          "Stadtteil": "Neureut",
+          "Jahr": 2014,
+          "X": 3501
+        },
+        {
+          "Stadtteil": "Neureut",
+          "Jahr": 2015,
+          "X": 3546
+        },
+        {
+          "Stadtteil": "Neureut",
+          "Jahr": 2016,
+          "X": 3599
+        },
+        {
+          "Stadtteil": "Neureut",
+          "Jahr": 2017,
+          "X": 3495
+        },
+        {
+          "Stadtteil": "Neureut",
+          "Jahr": 2018,
+          "X": 3571
+        },
+        {
+          "Stadtteil": "Neureut",
+          "Jahr": 2019,
+          "X": 3505
+        },
+        {
+          "Stadtteil": "Neureut",
+          "Jahr": 2020,
+          "X": 3477
+        },
+        {
+          "Stadtteil": "Nordstadt",
+          "Jahr": 2014,
+          "X": 2419
+        },
+        {
+          "Stadtteil": "Nordstadt",
+          "Jahr": 2015,
+          "X": 2326
+        },
+        {
+          "Stadtteil": "Nordstadt",
+          "Jahr": 2016,
+          "X": 2254
+        },
+        {
+          "Stadtteil": "Nordstadt",
+          "Jahr": 2017,
+          "X": 2173
+        },
+        {
+          "Stadtteil": "Nordstadt",
+          "Jahr": 2018,
+          "X": 2061
+        },
+        {
+          "Stadtteil": "Nordstadt",
+          "Jahr": 2019,
+          "X": 1989
+        },
+        {
+          "Stadtteil": "Nordstadt",
+          "Jahr": 2020,
+          "X": 1902
+        }
+      ],
+      "meta": {
+        "storagetype": "dataframe"
+      },
+      "root": false,
+      "loaded": true
+    },
+    {
+      "id": "N28",
+      "data": [
+        {
+          "Jahr": 2014,
+          "Stadtteil": "Innenstadt-Ost",
+          "X": 15.470505617977528
+        },
+        {
+          "Jahr": 2015,
+          "Stadtteil": "Innenstadt-Ost",
+          "X": 14.78523489932886
+        },
+        {
+          "Jahr": 2016,
+          "Stadtteil": "Innenstadt-Ost",
+          "X": 14.103713188220231
+        },
+        {
+          "Jahr": 2017,
+          "Stadtteil": "Innenstadt-Ost",
+          "X": 14.201290322580645
+        },
+        {
+          "Jahr": 2018,
+          "Stadtteil": "Innenstadt-Ost",
+          "X": 14.599730458221025
+        },
+        {
+          "Jahr": 2019,
+          "Stadtteil": "Innenstadt-Ost",
+          "X": 14.738775510204082
+        },
+        {
+          "Jahr": 2020,
+          "Stadtteil": "Innenstadt-Ost",
+          "X": 15.0249653259362
+        },
+        {
+          "Jahr": 2014,
+          "Stadtteil": "Innenstadt-West",
+          "X": 5.832871652816251
+        },
+        {
+          "Jahr": 2015,
+          "Stadtteil": "Innenstadt-West",
+          "X": 8.380522993688007
+        },
+        {
+          "Jahr": 2016,
+          "Stadtteil": "Innenstadt-West",
+          "X": 8.597594819611471
+        },
+        {
+          "Jahr": 2017,
+          "Stadtteil": "Innenstadt-West",
+          "X": 8.955641272902604
+        },
+        {
+          "Jahr": 2018,
+          "Stadtteil": "Innenstadt-West",
+          "X": 9.68436873747495
+        },
+        {
+          "Jahr": 2019,
+          "Stadtteil": "Innenstadt-West",
+          "X": 6.309452736318408
+        },
+        {
+          "Jahr": 2020,
+          "Stadtteil": "Innenstadt-West",
+          "X": 10.491323210412148
+        },
+        {
+          "Jahr": 2014,
+          "Stadtteil": "Südstadt",
+          "X": 5.302442528735632
+        },
+        {
+          "Jahr": 2015,
+          "Stadtteil": "Südstadt",
+          "X": 5.109726548978886
+        },
+        {
+          "Jahr": 2016,
+          "Stadtteil": "Südstadt",
+          "X": 5.678780012978585
+        },
+        {
+          "Jahr": 2017,
+          "Stadtteil": "Südstadt",
+          "X": 5.570973901973265
+        },
+        {
+          "Jahr": 2018,
+          "Stadtteil": "Südstadt",
+          "X": 5.6709346991037135
+        },
+        {
+          "Jahr": 2019,
+          "Stadtteil": "Südstadt",
+          "X": 5.716504854368932
+        },
+        {
+          "Jahr": 2020,
+          "Stadtteil": "Südstadt",
+          "X": 6.034207904350714
+        },
+        {
+          "Jahr": 2014,
+          "Stadtteil": "Südweststadt",
+          "X": 10.858798167609809
+        },
+        {
+          "Jahr": 2015,
+          "Stadtteil": "Südweststadt",
+          "X": 10.841043571812802
+        },
+        {
+          "Jahr": 2016,
+          "Stadtteil": "Südweststadt",
+          "X": 10.709539121114684
+        },
+        {
+          "Jahr": 2017,
+          "Stadtteil": "Südweststadt",
+          "X": 10.641321869962386
+        },
+        {
+          "Jahr": 2018,
+          "Stadtteil": "Südweststadt",
+          "X": 7.540526033279656
+        },
+        {
+          "Jahr": 2019,
+          "Stadtteil": "Südweststadt",
+          "X": 7.623982637004883
+        },
+        {
+          "Jahr": 2020,
+          "Stadtteil": "Südweststadt",
+          "X": 7.7366954583449425
+        },
+        {
+          "Jahr": 2014,
+          "Stadtteil": "Weststadt",
+          "X": 5.225323741007195
+        },
+        {
+          "Jahr": 2015,
+          "Stadtteil": "Weststadt",
+          "X": 5.304626127436718
+        },
+        {
+          "Jahr": 2016,
+          "Stadtteil": "Weststadt",
+          "X": 5.261760461760462
+        },
+        {
+          "Jahr": 2017,
+          "Stadtteil": "Weststadt",
+          "X": 5.317279626386457
+        },
+        {
+          "Jahr": 2018,
+          "Stadtteil": "Weststadt",
+          "X": 5.459094995504945
+        },
+        {
+          "Jahr": 2019,
+          "Stadtteil": "Weststadt",
+          "X": 5.626003705991352
+        },
+        {
+          "Jahr": 2020,
+          "Stadtteil": "Weststadt",
+          "X": 5.764854614412137
+        },
+        {
+          "Jahr": 2014,
+          "Stadtteil": "Nordweststadt",
+          "X": 23.14451827242525
+        },
+        {
+          "Jahr": 2015,
+          "Stadtteil": "Nordweststadt",
+          "X": 23.032186459489456
+        },
+        {
+          "Jahr": 2016,
+          "Stadtteil": "Nordweststadt",
+          "X": 21.882766072393302
+        },
+        {
+          "Jahr": 2017,
+          "Stadtteil": "Nordweststadt",
+          "X": 20.91627906976744
+        },
+        {
+          "Jahr": 2018,
+          "Stadtteil": "Nordweststadt",
+          "X": 19.97327852004111
+        },
+        {
+          "Jahr": 2019,
+          "Stadtteil": "Nordweststadt",
+          "X": 20.280500521376435
+        },
+        {
+          "Jahr": 2020,
+          "Stadtteil": "Nordweststadt",
+          "X": 20.636874361593463
+        },
+        {
+          "Jahr": 2014,
+          "Stadtteil": "Oststadt",
+          "X": 6.91523055426176
+        },
+        {
+          "Jahr": 2015,
+          "Stadtteil": "Oststadt",
+          "X": 5.22230038691523
+        },
+        {
+          "Jahr": 2016,
+          "Stadtteil": "Oststadt",
+          "X": 9.581944007549543
+        },
+        {
+          "Jahr": 2017,
+          "Stadtteil": "Oststadt",
+          "X": 10.50673110113911
+        },
+        {
+          "Jahr": 2018,
+          "Stadtteil": "Oststadt",
+          "X": 11.587943848059455
+        },
+        {
+          "Jahr": 2019,
+          "Stadtteil": "Oststadt",
+          "X": 11.612876599257119
+        },
+        {
+          "Jahr": 2020,
+          "Stadtteil": "Oststadt",
+          "X": 12.284155390659102
+        },
+        {
+          "Jahr": 2014,
+          "Stadtteil": "Mühlburg",
+          "X": 3.5938089845224614
+        },
+        {
+          "Jahr": 2015,
+          "Stadtteil": "Mühlburg",
+          "X": 5.248339483394834
+        },
+        {
+          "Jahr": 2016,
+          "Stadtteil": "Mühlburg",
+          "X": 5.097849462365591
+        },
+        {
+          "Jahr": 2017,
+          "Stadtteil": "Mühlburg",
+          "X": 5.19926873857404
+        },
+        {
+          "Jahr": 2018,
+          "Stadtteil": "Mühlburg",
+          "X": 4.92894280762565
+        },
+        {
+          "Jahr": 2019,
+          "Stadtteil": "Mühlburg",
+          "X": 5.189781021897811
+        },
+        {
+          "Jahr": 2020,
+          "Stadtteil": "Mühlburg",
+          "X": 5.388404698749526
+        },
+        {
+          "Jahr": 2014,
+          "Stadtteil": "Daxlanden",
+          "X": 21.958624395486297
+        },
+        {
+          "Jahr": 2015,
+          "Stadtteil": "Daxlanden",
+          "X": 22.055762081784387
+        },
+        {
+          "Jahr": 2016,
+          "Stadtteil": "Daxlanden",
+          "X": 21.8929889298893
+        },
+        {
+          "Jahr": 2017,
+          "Stadtteil": "Daxlanden",
+          "X": 21.54961038961039
+        },
+        {
+          "Jahr": 2018,
+          "Stadtteil": "Daxlanden",
+          "X": 21.75301520713162
+        },
+        {
+          "Jahr": 2019,
+          "Stadtteil": "Daxlanden",
+          "X": 22.700845665961946
+        },
+        {
+          "Jahr": 2020,
+          "Stadtteil": "Daxlanden",
+          "X": 23.09375
+        },
+        {
+          "Jahr": 2014,
+          "Stadtteil": "Knielingen",
+          "X": 17.3895881006865
+        },
+        {
+          "Jahr": 2015,
+          "Stadtteil": "Knielingen",
+          "X": 17.098314606741575
+        },
+        {
+          "Jahr": 2016,
+          "Stadtteil": "Knielingen",
+          "X": 16.344068706387546
+        },
+        {
+          "Jahr": 2017,
+          "Stadtteil": "Knielingen",
+          "X": 15.98360655737705
+        },
+        {
+          "Jahr": 2018,
+          "Stadtteil": "Knielingen",
+          "X": 14.486279802069276
+        },
+        {
+          "Jahr": 2019,
+          "Stadtteil": "Knielingen",
+          "X": 13.977864583333334
+        },
+        {
+          "Jahr": 2020,
+          "Stadtteil": "Knielingen",
+          "X": 13.484785327219674
+        },
+        {
+          "Jahr": 2014,
+          "Stadtteil": "Grünwinkel",
+          "X": 11.768685215493726
+        },
+        {
+          "Jahr": 2015,
+          "Stadtteil": "Grünwinkel",
+          "X": 11.558114622388858
+        },
+        {
+          "Jahr": 2016,
+          "Stadtteil": "Grünwinkel",
+          "X": 11.50448548812665
+        },
+        {
+          "Jahr": 2017,
+          "Stadtteil": "Grünwinkel",
+          "X": 10.566746987951808
+        },
+        {
+          "Jahr": 2018,
+          "Stadtteil": "Grünwinkel",
+          "X": 9.768270944741532
+        },
+        {
+          "Jahr": 2019,
+          "Stadtteil": "Grünwinkel",
+          "X": 9.20054945054945
+        },
+        {
+          "Jahr": 2020,
+          "Stadtteil": "Grünwinkel",
+          "X": 9.854402361042794
+        },
+        {
+          "Jahr": 2014,
+          "Stadtteil": "Oberreut",
+          "X": 15.28594249201278
+        },
+        {
+          "Jahr": 2015,
+          "Stadtteil": "Oberreut",
+          "X": 15.99527559055118
+        },
+        {
+          "Jahr": 2016,
+          "Stadtteil": "Oberreut",
+          "X": 16.18534253850239
+        },
+        {
+          "Jahr": 2017,
+          "Stadtteil": "Oberreut",
+          "X": 16.408405172413794
+        },
+        {
+          "Jahr": 2018,
+          "Stadtteil": "Oberreut",
+          "X": 15.108421583459405
+        },
+        {
+          "Jahr": 2019,
+          "Stadtteil": "Oberreut",
+          "X": 13.846118299445472
+        },
+        {
+          "Jahr": 2020,
+          "Stadtteil": "Oberreut",
+          "X": 14.509117082533589
+        },
+        {
+          "Jahr": 2014,
+          "Stadtteil": "Beiertheim-Bulach",
+          "X": 5.711555169417897
+        },
+        {
+          "Jahr": 2015,
+          "Stadtteil": "Beiertheim-Bulach",
+          "X": 5.730836236933798
+        },
+        {
+          "Jahr": 2016,
+          "Stadtteil": "Beiertheim-Bulach",
+          "X": 5.61402027027027
+        },
+        {
+          "Jahr": 2017,
+          "Stadtteil": "Beiertheim-Bulach",
+          "X": 5.5629820051413885
+        },
+        {
+          "Jahr": 2018,
+          "Stadtteil": "Beiertheim-Bulach",
+          "X": 5.564918314703354
+        },
+        {
+          "Jahr": 2019,
+          "Stadtteil": "Beiertheim-Bulach",
+          "X": 5.461603375527426
+        },
+        {
+          "Jahr": 2020,
+          "Stadtteil": "Beiertheim-Bulach",
+          "X": 5.45240101095198
+        },
+        {
+          "Jahr": 2014,
+          "Stadtteil": "Weiherfeld-Dammerstock",
+          "X": 8.740882917466411
+        },
+        {
+          "Jahr": 2015,
+          "Stadtteil": "Weiherfeld-Dammerstock",
+          "X": 8.81703775411423
+        },
+        {
+          "Jahr": 2016,
+          "Stadtteil": "Weiherfeld-Dammerstock",
+          "X": 8.81703775411423
+        },
+        {
+          "Jahr": 2017,
+          "Stadtteil": "Weiherfeld-Dammerstock",
+          "X": 10.481167608286253
+        },
+        {
+          "Jahr": 2018,
+          "Stadtteil": "Weiherfeld-Dammerstock",
+          "X": 10.510859301227573
+        },
+        {
+          "Jahr": 2019,
+          "Stadtteil": "Weiherfeld-Dammerstock",
+          "X": 10.590865842055186
+        },
+        {
+          "Jahr": 2020,
+          "Stadtteil": "Weiherfeld-Dammerstock",
+          "X": 11.071146245059289
+        },
+        {
+          "Jahr": 2014,
+          "Stadtteil": "Rüppurr",
+          "X": 9.755741127348642
+        },
+        {
+          "Jahr": 2015,
+          "Stadtteil": "Rüppurr",
+          "X": 9.945501285347044
+        },
+        {
+          "Jahr": 2016,
+          "Stadtteil": "Rüppurr",
+          "X": 10.217955371043072
+        },
+        {
+          "Jahr": 2017,
+          "Stadtteil": "Rüppurr",
+          "X": 9.966041561074507
+        },
+        {
+          "Jahr": 2018,
+          "Stadtteil": "Rüppurr",
+          "X": 9.806982543640897
+        },
+        {
+          "Jahr": 2019,
+          "Stadtteil": "Rüppurr",
+          "X": 9.676673228346457
+        },
+        {
+          "Jahr": 2020,
+          "Stadtteil": "Rüppurr",
+          "X": 9.840336134453782
+        },
+        {
+          "Jahr": 2014,
+          "Stadtteil": "Waldstadt",
+          "X": 14.31180496150556
+        },
+        {
+          "Jahr": 2015,
+          "Stadtteil": "Waldstadt",
+          "X": 15.527648796960744
+        },
+        {
+          "Jahr": 2016,
+          "Stadtteil": "Waldstadt",
+          "X": 15.84421052631579
+        },
+        {
+          "Jahr": 2017,
+          "Stadtteil": "Waldstadt",
+          "X": 16.124784853700515
+        },
+        {
+          "Jahr": 2018,
+          "Stadtteil": "Waldstadt",
+          "X": 16.068758057584873
+        },
+        {
+          "Jahr": 2019,
+          "Stadtteil": "Waldstadt",
+          "X": 16.229166666666668
+        },
+        {
+          "Jahr": 2020,
+          "Stadtteil": "Waldstadt",
+          "X": 16.267709691438505
+        },
+        {
+          "Jahr": 2014,
+          "Stadtteil": "Rintheim",
+          "X": 9.946462715105163
+        },
+        {
+          "Jahr": 2015,
+          "Stadtteil": "Rintheim",
+          "X": 9.527472527472527
+        },
+        {
+          "Jahr": 2016,
+          "Stadtteil": "Rintheim",
+          "X": 9.521422060164085
+        },
+        {
+          "Jahr": 2017,
+          "Stadtteil": "Rintheim",
+          "X": 8.57108239095315
+        },
+        {
+          "Jahr": 2018,
+          "Stadtteil": "Rintheim",
+          "X": 7.202229299363057
+        },
+        {
+          "Jahr": 2019,
+          "Stadtteil": "Rintheim",
+          "X": 7.15098814229249
+        },
+        {
+          "Jahr": 2020,
+          "Stadtteil": "Rintheim",
+          "X": 7.108870967741935
+        },
+        {
+          "Jahr": 2014,
+          "Stadtteil": "Hagsfeld",
+          "X": 16.965934897804694
+        },
+        {
+          "Jahr": 2015,
+          "Stadtteil": "Hagsfeld",
+          "X": 16.193643754619366
+        },
+        {
+          "Jahr": 2016,
+          "Stadtteil": "Hagsfeld",
+          "X": 16.573099415204677
+        },
+        {
+          "Jahr": 2017,
+          "Stadtteil": "Hagsfeld",
+          "X": 16.86820551005212
+        },
+        {
+          "Jahr": 2018,
+          "Stadtteil": "Hagsfeld",
+          "X": 16.579636363636364
+        },
+        {
+          "Jahr": 2019,
+          "Stadtteil": "Hagsfeld",
+          "X": 16.626357711803042
+        },
+        {
+          "Jahr": 2020,
+          "Stadtteil": "Hagsfeld",
+          "X": 14.950561797752808
+        },
+        {
+          "Jahr": 2014,
+          "Stadtteil": "Durlach",
+          "X": 8.826526643329444
+        },
+        {
+          "Jahr": 2015,
+          "Stadtteil": "Durlach",
+          "X": 7.93275406120136
+        },
+        {
+          "Jahr": 2016,
+          "Stadtteil": "Durlach",
+          "X": 8.036825033390574
+        },
+        {
+          "Jahr": 2017,
+          "Stadtteil": "Durlach",
+          "X": 7.893930579794454
+        },
+        {
+          "Jahr": 2018,
+          "Stadtteil": "Durlach",
+          "X": 8.58739915482136
+        },
+        {
+          "Jahr": 2019,
+          "Stadtteil": "Durlach",
+          "X": 8.35688847235239
+        },
+        {
+          "Jahr": 2020,
+          "Stadtteil": "Durlach",
+          "X": 8.58578431372549
+        },
+        {
+          "Jahr": 2014,
+          "Stadtteil": "Grötzingen",
+          "X": 8.420825631546519
+        },
+        {
+          "Jahr": 2015,
+          "Stadtteil": "Grötzingen",
+          "X": 9.239419588875453
+        },
+        {
+          "Jahr": 2016,
+          "Stadtteil": "Grötzingen",
+          "X": 9.489506172839507
+        },
+        {
+          "Jahr": 2017,
+          "Stadtteil": "Grötzingen",
+          "X": 9.580445544554456
+        },
+        {
+          "Jahr": 2018,
+          "Stadtteil": "Grötzingen",
+          "X": 9.630989421281893
+        },
+        {
+          "Jahr": 2019,
+          "Stadtteil": "Grötzingen",
+          "X": 9.651713395638629
+        },
+        {
+          "Jahr": 2020,
+          "Stadtteil": "Grötzingen",
+          "X": 9.892059553349876
+        },
+        {
+          "Jahr": 2014,
+          "Stadtteil": "Stupferich",
+          "X": 7.5073995771670194
+        },
+        {
+          "Jahr": 2015,
+          "Stadtteil": "Stupferich",
+          "X": 7.127789046653144
+        },
+        {
+          "Jahr": 2016,
+          "Stadtteil": "Stupferich",
+          "X": 6.770712909441233
+        },
+        {
+          "Jahr": 2017,
+          "Stadtteil": "Stupferich",
+          "X": 7.295019157088123
+        },
+        {
+          "Jahr": 2018,
+          "Stadtteil": "Stupferich",
+          "X": 7.302816901408451
+        },
+        {
+          "Jahr": 2019,
+          "Stadtteil": "Stupferich",
+          "X": 6.786885245901639
+        },
+        {
+          "Jahr": 2020,
+          "Stadtteil": "Stupferich",
+          "X": 6.530516431924883
+        },
+        {
+          "Jahr": 2014,
+          "Stadtteil": "Hohenwettersbach",
+          "X": 12.555123216601816
+        },
+        {
+          "Jahr": 2015,
+          "Stadtteil": "Hohenwettersbach",
+          "X": 12.373076923076923
+        },
+        {
+          "Jahr": 2016,
+          "Stadtteil": "Hohenwettersbach",
+          "X": 12.341432225063938
+        },
+        {
+          "Jahr": 2017,
+          "Stadtteil": "Hohenwettersbach",
+          "X": 12.688157894736841
+        },
+        {
+          "Jahr": 2018,
+          "Stadtteil": "Hohenwettersbach",
+          "X": 12.975675675675676
+        },
+        {
+          "Jahr": 2019,
+          "Stadtteil": "Hohenwettersbach",
+          "X": 13.429370629370629
+        },
+        {
+          "Jahr": 2020,
+          "Stadtteil": "Hohenwettersbach",
+          "X": 13.290730337078651
+        },
+        {
+          "Jahr": 2014,
+          "Stadtteil": "Wolfartsweier",
+          "X": 18.766037735849057
+        },
+        {
+          "Jahr": 2015,
+          "Stadtteil": "Wolfartsweier",
+          "X": 20.242537313432837
+        },
+        {
+          "Jahr": 2016,
+          "Stadtteil": "Wolfartsweier",
+          "X": 19.94485294117647
+        },
+        {
+          "Jahr": 2017,
+          "Stadtteil": "Wolfartsweier",
+          "X": 19.909943714821765
+        },
+        {
+          "Jahr": 2018,
+          "Stadtteil": "Wolfartsweier",
+          "X": 20.245283018867923
+        },
+        {
+          "Jahr": 2019,
+          "Stadtteil": "Wolfartsweier",
+          "X": 20.941176470588236
+        },
+        {
+          "Jahr": 2020,
+          "Stadtteil": "Wolfartsweier",
+          "X": 21.013861386138615
+        },
+        {
+          "Jahr": 2014,
+          "Stadtteil": "Grünwettersbach",
+          "X": 8.505703422053232
+        },
+        {
+          "Jahr": 2015,
+          "Stadtteil": "Grünwettersbach",
+          "X": 8.853562005277045
+        },
+        {
+          "Jahr": 2016,
+          "Stadtteil": "Grünwettersbach",
+          "X": 8.423899371069183
+        },
+        {
+          "Jahr": 2017,
+          "Stadtteil": "Grünwettersbach",
+          "X": 8.657179818887451
+        },
+        {
+          "Jahr": 2018,
+          "Stadtteil": "Grünwettersbach",
+          "X": 8.589909443725745
+        },
+        {
+          "Jahr": 2019,
+          "Stadtteil": "Grünwettersbach",
+          "X": 8.468789808917197
+        },
+        {
+          "Jahr": 2020,
+          "Stadtteil": "Grünwettersbach",
+          "X": 8.882044560943644
+        },
+        {
+          "Jahr": 2014,
+          "Stadtteil": "Palmbach",
+          "X": 10.918859649122806
+        },
+        {
+          "Jahr": 2015,
+          "Stadtteil": "Palmbach",
+          "X": 10.918859649122806
+        },
+        {
+          "Jahr": 2016,
+          "Stadtteil": "Palmbach",
+          "X": 11.196868008948545
+        },
+        {
+          "Jahr": 2017,
+          "Stadtteil": "Palmbach",
+          "X": 10.943107221006565
+        },
+        {
+          "Jahr": 2018,
+          "Stadtteil": "Palmbach",
+          "X": 10.81425485961123
+        },
+        {
+          "Jahr": 2019,
+          "Stadtteil": "Palmbach",
+          "X": 10.801295896328293
+        },
+        {
+          "Jahr": 2020,
+          "Stadtteil": "Palmbach",
+          "X": 12.744588744588745
+        },
+        {
+          "Jahr": 2014,
+          "Stadtteil": "Neureut",
+          "X": 10.46386746643816
+        },
+        {
+          "Jahr": 2015,
+          "Stadtteil": "Neureut",
+          "X": 10.373096446700508
+        },
+        {
+          "Jahr": 2016,
+          "Stadtteil": "Neureut",
+          "X": 10.267574326201723
+        },
+        {
+          "Jahr": 2017,
+          "Stadtteil": "Neureut",
+          "X": 10.56480686695279
+        },
+        {
+          "Jahr": 2018,
+          "Stadtteil": "Neureut",
+          "X": 10.301316157938953
+        },
+        {
+          "Jahr": 2019,
+          "Stadtteil": "Neureut",
+          "X": 10.884736091298146
+        },
+        {
+          "Jahr": 2020,
+          "Stadtteil": "Neureut",
+          "X": 11.758124820247339
+        },
+        {
+          "Jahr": 2014,
+          "Stadtteil": "Nordstadt",
+          "X": 10.19801570897065
+        },
+        {
+          "Jahr": 2015,
+          "Stadtteil": "Nordstadt",
+          "X": 10.605760963026656
+        },
+        {
+          "Jahr": 2016,
+          "Stadtteil": "Nordstadt",
+          "X": 10.994676131322095
+        },
+        {
+          "Jahr": 2017,
+          "Stadtteil": "Nordstadt",
+          "X": 11.410032213529682
+        },
+        {
+          "Jahr": 2018,
+          "Stadtteil": "Nordstadt",
+          "X": 12.013585638039787
+        },
+        {
+          "Jahr": 2019,
+          "Stadtteil": "Nordstadt",
+          "X": 12.564605329311211
+        },
+        {
+          "Jahr": 2020,
+          "Stadtteil": "Nordstadt",
+          "X": 13.031545741324921
+        }
+      ],
+      "meta": {
+        "storagetype": "dataframe"
+      },
+      "root": false,
+      "loaded": true
+    },
+    {
+      "id": "N15",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N17",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N18",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N20",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N24",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N26",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N27",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N28",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N32",
+      "data": [
+        {
+          "Type": "count",
+          "Jahr": 189,
+          "X": 189
+        },
+        {
+          "Type": "mean",
+          "Jahr": 2017,
+          "X": 20717.661375661377
+        },
+        {
+          "Type": "std",
+          "Jahr": 2.0053120943495752,
+          "X": 12467.053813937651
+        },
+        {
+          "Type": "min",
+          "Jahr": 2014,
+          "X": 3514
+        },
+        {
+          "Type": "median",
+          "Jahr": 2017,
+          "X": 18217
+        },
+        {
+          "Type": "max",
+          "Jahr": 2020,
+          "X": 45539
+        },
+        {
+          "Type": "variance",
+          "Jahr": 4.0212765957446805,
+          "X": 155427430.79961735
+        }
+      ],
+      "meta": {
+        "storagetype": "dataframe"
+      },
+      "root": false,
+      "loaded": true
+    },
+    {
+      "id": "N34",
+      "data": [
+        {
+          "Type": "count",
+          "Jahr": 189,
+          "X": 189
+        },
+        {
+          "Type": "mean",
+          "Jahr": 2017,
+          "X": 1939.5608465608466
+        },
+        {
+          "Type": "std",
+          "Jahr": 2.0053120943495752,
+          "X": 1182.4643680256686
+        },
+        {
+          "Type": "min",
+          "Jahr": 2014,
+          "X": 447
+        },
+        {
+          "Type": "median",
+          "Jahr": 2017,
+          "X": 1867
+        },
+        {
+          "Type": "max",
+          "Jahr": 2020,
+          "X": 5686
+        },
+        {
+          "Type": "variance",
+          "Jahr": 4.0212765957446805,
+          "X": 1398221.9816503439
+        }
+      ],
+      "meta": {
+        "storagetype": "dataframe"
+      },
+      "root": false,
+      "loaded": true
+    },
+    {
+      "id": "N15",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N17",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N18",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N20",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N24",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N26",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N27",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N28",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N32",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N34",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N15",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N17",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N18",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N20",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N24",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N26",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N27",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N28",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N32",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N34",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N36",
+      "data": [
+        {
+          "Jahr": 2014,
+          "Stadtteil": "Innenstadt-Ost",
+          "Personen_A": 712,
+          "X_B": 15.470505617977528
+        },
+        {
+          "Jahr": 2015,
+          "Stadtteil": "Innenstadt-Ost",
+          "Personen_A": 745,
+          "X_B": 14.78523489932886
+        },
+        {
+          "Jahr": 2016,
+          "Stadtteil": "Innenstadt-Ost",
+          "Personen_A": 781,
+          "X_B": 14.103713188220231
+        },
+        {
+          "Jahr": 2017,
+          "Stadtteil": "Innenstadt-Ost",
+          "Personen_A": 775,
+          "X_B": 14.201290322580645
+        },
+        {
+          "Jahr": 2018,
+          "Stadtteil": "Innenstadt-Ost",
+          "Personen_A": 742,
+          "X_B": 14.599730458221025
+        },
+        {
+          "Jahr": 2019,
+          "Stadtteil": "Innenstadt-Ost",
+          "Personen_A": 735,
+          "X_B": 14.738775510204082
+        },
+        {
+          "Jahr": 2020,
+          "Stadtteil": "Innenstadt-Ost",
+          "Personen_A": 721,
+          "X_B": 15.0249653259362
+        },
+        {
+          "Jahr": 2014,
+          "Stadtteil": "Innenstadt-West",
+          "Personen_A": 1083,
+          "X_B": 5.832871652816251
+        },
+        {
+          "Jahr": 2015,
+          "Stadtteil": "Innenstadt-West",
+          "Personen_A": 1109,
+          "X_B": 8.380522993688007
+        },
+        {
+          "Jahr": 2016,
+          "Stadtteil": "Innenstadt-West",
+          "Personen_A": 1081,
+          "X_B": 8.597594819611471
+        },
+        {
+          "Jahr": 2017,
+          "Stadtteil": "Innenstadt-West",
+          "Personen_A": 1037,
+          "X_B": 8.955641272902604
+        },
+        {
+          "Jahr": 2018,
+          "Stadtteil": "Innenstadt-West",
+          "Personen_A": 998,
+          "X_B": 9.68436873747495
+        },
+        {
+          "Jahr": 2019,
+          "Stadtteil": "Innenstadt-West",
+          "Personen_A": 1005,
+          "X_B": 6.309452736318408
+        },
+        {
+          "Jahr": 2020,
+          "Stadtteil": "Innenstadt-West",
+          "Personen_A": 922,
+          "X_B": 10.491323210412148
+        },
+        {
+          "Jahr": 2014,
+          "Stadtteil": "Südstadt",
+          "Personen_A": 2784,
+          "X_B": 5.302442528735632
+        },
+        {
+          "Jahr": 2015,
+          "Stadtteil": "Südstadt",
+          "Personen_A": 2889,
+          "X_B": 5.109726548978886
+        },
+        {
+          "Jahr": 2016,
+          "Stadtteil": "Südstadt",
+          "Personen_A": 3082,
+          "X_B": 5.678780012978585
+        },
+        {
+          "Jahr": 2017,
+          "Stadtteil": "Südstadt",
+          "Personen_A": 3142,
+          "X_B": 5.570973901973265
+        },
+        {
+          "Jahr": 2018,
+          "Stadtteil": "Südstadt",
+          "Personen_A": 3124,
+          "X_B": 5.6709346991037135
+        },
+        {
+          "Jahr": 2019,
+          "Stadtteil": "Südstadt",
+          "Personen_A": 3090,
+          "X_B": 5.716504854368932
+        },
+        {
+          "Jahr": 2020,
+          "Stadtteil": "Südstadt",
+          "Personen_A": 3011,
+          "X_B": 6.034207904350714
+        },
+        {
+          "Jahr": 2014,
+          "Stadtteil": "Südweststadt",
+          "Personen_A": 3711,
+          "X_B": 10.858798167609809
+        },
+        {
+          "Jahr": 2015,
+          "Stadtteil": "Südweststadt",
+          "Personen_A": 3718,
+          "X_B": 10.841043571812802
+        },
+        {
+          "Jahr": 2016,
+          "Stadtteil": "Südweststadt",
+          "Personen_A": 3732,
+          "X_B": 10.709539121114684
+        },
+        {
+          "Jahr": 2017,
+          "Stadtteil": "Südweststadt",
+          "Personen_A": 3722,
+          "X_B": 10.641321869962386
+        },
+        {
+          "Jahr": 2018,
+          "Stadtteil": "Südweststadt",
+          "Personen_A": 3726,
+          "X_B": 7.540526033279656
+        },
+        {
+          "Jahr": 2019,
+          "Stadtteil": "Südweststadt",
+          "Personen_A": 3686,
+          "X_B": 7.623982637004883
+        },
+        {
+          "Jahr": 2020,
+          "Stadtteil": "Südweststadt",
+          "Personen_A": 3589,
+          "X_B": 7.7366954583449425
+        },
+        {
+          "Jahr": 2014,
+          "Stadtteil": "Weststadt",
+          "Personen_A": 3475,
+          "X_B": 5.225323741007195
+        },
+        {
+          "Jahr": 2015,
+          "Stadtteil": "Weststadt",
+          "Personen_A": 3437,
+          "X_B": 5.304626127436718
+        },
+        {
+          "Jahr": 2016,
+          "Stadtteil": "Weststadt",
+          "Personen_A": 3465,
+          "X_B": 5.261760461760462
+        },
+        {
+          "Jahr": 2017,
+          "Stadtteil": "Weststadt",
+          "Personen_A": 3426,
+          "X_B": 5.317279626386457
+        },
+        {
+          "Jahr": 2018,
+          "Stadtteil": "Weststadt",
+          "Personen_A": 3337,
+          "X_B": 5.459094995504945
+        },
+        {
+          "Jahr": 2019,
+          "Stadtteil": "Weststadt",
+          "Personen_A": 3238,
+          "X_B": 5.626003705991352
+        },
+        {
+          "Jahr": 2020,
+          "Stadtteil": "Weststadt",
+          "Personen_A": 3164,
+          "X_B": 5.764854614412137
+        },
+        {
+          "Jahr": 2014,
+          "Stadtteil": "Nordweststadt",
+          "Personen_A": 1806,
+          "X_B": 23.14451827242525
+        },
+        {
+          "Jahr": 2015,
+          "Stadtteil": "Nordweststadt",
+          "Personen_A": 1802,
+          "X_B": 23.032186459489456
+        },
+        {
+          "Jahr": 2016,
+          "Stadtteil": "Nordweststadt",
+          "Personen_A": 1851,
+          "X_B": 21.882766072393302
+        },
+        {
+          "Jahr": 2017,
+          "Stadtteil": "Nordweststadt",
+          "Personen_A": 1935,
+          "X_B": 20.91627906976744
+        },
+        {
+          "Jahr": 2018,
+          "Stadtteil": "Nordweststadt",
+          "Personen_A": 1946,
+          "X_B": 19.97327852004111
+        },
+        {
+          "Jahr": 2019,
+          "Stadtteil": "Nordweststadt",
+          "Personen_A": 1918,
+          "X_B": 20.280500521376435
+        },
+        {
+          "Jahr": 2020,
+          "Stadtteil": "Nordweststadt",
+          "Personen_A": 1958,
+          "X_B": 20.636874361593463
+        },
+        {
+          "Jahr": 2014,
+          "Stadtteil": "Oststadt",
+          "Personen_A": 4294,
+          "X_B": 6.91523055426176
+        },
+        {
+          "Jahr": 2015,
+          "Stadtteil": "Oststadt",
+          "Personen_A": 5686,
+          "X_B": 5.22230038691523
+        },
+        {
+          "Jahr": 2016,
+          "Stadtteil": "Oststadt",
+          "Personen_A": 3179,
+          "X_B": 9.581944007549543
+        },
+        {
+          "Jahr": 2017,
+          "Stadtteil": "Oststadt",
+          "Personen_A": 2897,
+          "X_B": 10.50673110113911
+        },
+        {
+          "Jahr": 2018,
+          "Stadtteil": "Oststadt",
+          "Personen_A": 2422,
+          "X_B": 11.587943848059455
+        },
+        {
+          "Jahr": 2019,
+          "Stadtteil": "Oststadt",
+          "Personen_A": 2423,
+          "X_B": 11.612876599257119
+        },
+        {
+          "Jahr": 2020,
+          "Stadtteil": "Oststadt",
+          "Personen_A": 2291,
+          "X_B": 12.284155390659102
+        },
+        {
+          "Jahr": 2014,
+          "Stadtteil": "Mühlburg",
+          "Personen_A": 2649,
+          "X_B": 3.5938089845224614
+        },
+        {
+          "Jahr": 2015,
+          "Stadtteil": "Mühlburg",
+          "Personen_A": 2710,
+          "X_B": 5.248339483394834
+        },
+        {
+          "Jahr": 2016,
+          "Stadtteil": "Mühlburg",
+          "Personen_A": 2790,
+          "X_B": 5.097849462365591
+        },
+        {
+          "Jahr": 2017,
+          "Stadtteil": "Mühlburg",
+          "Personen_A": 2735,
+          "X_B": 5.19926873857404
+        },
+        {
+          "Jahr": 2018,
+          "Stadtteil": "Mühlburg",
+          "Personen_A": 2885,
+          "X_B": 4.92894280762565
+        },
+        {
+          "Jahr": 2019,
+          "Stadtteil": "Mühlburg",
+          "Personen_A": 2740,
+          "X_B": 5.189781021897811
+        },
+        {
+          "Jahr": 2020,
+          "Stadtteil": "Mühlburg",
+          "Personen_A": 2639,
+          "X_B": 5.388404698749526
+        },
+        {
+          "Jahr": 2014,
+          "Stadtteil": "Daxlanden",
+          "Personen_A": 1861,
+          "X_B": 21.958624395486297
+        },
+        {
+          "Jahr": 2015,
+          "Stadtteil": "Daxlanden",
+          "Personen_A": 1883,
+          "X_B": 22.055762081784387
+        },
+        {
+          "Jahr": 2016,
+          "Stadtteil": "Daxlanden",
+          "Personen_A": 1897,
+          "X_B": 21.8929889298893
+        },
+        {
+          "Jahr": 2017,
+          "Stadtteil": "Daxlanden",
+          "Personen_A": 1925,
+          "X_B": 21.54961038961039
+        },
+        {
+          "Jahr": 2018,
+          "Stadtteil": "Daxlanden",
+          "Personen_A": 1907,
+          "X_B": 21.75301520713162
+        },
+        {
+          "Jahr": 2019,
+          "Stadtteil": "Daxlanden",
+          "Personen_A": 1892,
+          "X_B": 22.700845665961946
+        },
+        {
+          "Jahr": 2020,
+          "Stadtteil": "Daxlanden",
+          "Personen_A": 1856,
+          "X_B": 23.09375
+        },
+        {
+          "Jahr": 2014,
+          "Stadtteil": "Knielingen",
+          "Personen_A": 1748,
+          "X_B": 17.3895881006865
+        },
+        {
+          "Jahr": 2015,
+          "Stadtteil": "Knielingen",
+          "Personen_A": 1780,
+          "X_B": 17.098314606741575
+        },
+        {
+          "Jahr": 2016,
+          "Stadtteil": "Knielingen",
+          "Personen_A": 1863,
+          "X_B": 16.344068706387546
+        },
+        {
+          "Jahr": 2017,
+          "Stadtteil": "Knielingen",
+          "Personen_A": 2013,
+          "X_B": 15.98360655737705
+        },
+        {
+          "Jahr": 2018,
+          "Stadtteil": "Knielingen",
+          "Personen_A": 2223,
+          "X_B": 14.486279802069276
+        },
+        {
+          "Jahr": 2019,
+          "Stadtteil": "Knielingen",
+          "Personen_A": 2304,
+          "X_B": 13.977864583333334
+        },
+        {
+          "Jahr": 2020,
+          "Stadtteil": "Knielingen",
+          "Personen_A": 2399,
+          "X_B": 13.484785327219674
+        },
+        {
+          "Jahr": 2014,
+          "Stadtteil": "Grünwinkel",
+          "Personen_A": 1833,
+          "X_B": 11.768685215493726
+        },
+        {
+          "Jahr": 2015,
+          "Stadtteil": "Grünwinkel",
+          "Personen_A": 1867,
+          "X_B": 11.558114622388858
+        },
+        {
+          "Jahr": 2016,
+          "Stadtteil": "Grünwinkel",
+          "Personen_A": 1895,
+          "X_B": 11.50448548812665
+        },
+        {
+          "Jahr": 2017,
+          "Stadtteil": "Grünwinkel",
+          "Personen_A": 2075,
+          "X_B": 10.566746987951808
+        },
+        {
+          "Jahr": 2018,
+          "Stadtteil": "Grünwinkel",
+          "Personen_A": 2244,
+          "X_B": 9.768270944741532
+        },
+        {
+          "Jahr": 2019,
+          "Stadtteil": "Grünwinkel",
+          "Personen_A": 2184,
+          "X_B": 9.20054945054945
+        },
+        {
+          "Jahr": 2020,
+          "Stadtteil": "Grünwinkel",
+          "Personen_A": 2033,
+          "X_B": 9.854402361042794
+        },
+        {
+          "Jahr": 2014,
+          "Stadtteil": "Oberreut",
+          "Personen_A": 1878,
+          "X_B": 15.28594249201278
+        },
+        {
+          "Jahr": 2015,
+          "Stadtteil": "Oberreut",
+          "Personen_A": 1905,
+          "X_B": 15.99527559055118
+        },
+        {
+          "Jahr": 2016,
+          "Stadtteil": "Oberreut",
+          "Personen_A": 1883,
+          "X_B": 16.18534253850239
+        },
+        {
+          "Jahr": 2017,
+          "Stadtteil": "Oberreut",
+          "Personen_A": 1856,
+          "X_B": 16.408405172413794
+        },
+        {
+          "Jahr": 2018,
+          "Stadtteil": "Oberreut",
+          "Personen_A": 1983,
+          "X_B": 15.108421583459405
+        },
+        {
+          "Jahr": 2019,
+          "Stadtteil": "Oberreut",
+          "Personen_A": 2164,
+          "X_B": 13.846118299445472
+        },
+        {
+          "Jahr": 2020,
+          "Stadtteil": "Oberreut",
+          "Personen_A": 2084,
+          "X_B": 14.509117082533589
+        },
+        {
+          "Jahr": 2014,
+          "Stadtteil": "Beiertheim-Bulach",
+          "Personen_A": 1151,
+          "X_B": 5.711555169417897
+        },
+        {
+          "Jahr": 2015,
+          "Stadtteil": "Beiertheim-Bulach",
+          "Personen_A": 1148,
+          "X_B": 5.730836236933798
+        },
+        {
+          "Jahr": 2016,
+          "Stadtteil": "Beiertheim-Bulach",
+          "Personen_A": 1184,
+          "X_B": 5.61402027027027
+        },
+        {
+          "Jahr": 2017,
+          "Stadtteil": "Beiertheim-Bulach",
+          "Personen_A": 1167,
+          "X_B": 5.5629820051413885
+        },
+        {
+          "Jahr": 2018,
+          "Stadtteil": "Beiertheim-Bulach",
+          "Personen_A": 1163,
+          "X_B": 5.564918314703354
+        },
+        {
+          "Jahr": 2019,
+          "Stadtteil": "Beiertheim-Bulach",
+          "Personen_A": 1185,
+          "X_B": 5.461603375527426
+        },
+        {
+          "Jahr": 2020,
+          "Stadtteil": "Beiertheim-Bulach",
+          "Personen_A": 1187,
+          "X_B": 5.45240101095198
+        },
+        {
+          "Jahr": 2014,
+          "Stadtteil": "Weiherfeld-Dammerstock",
+          "Personen_A": 1042,
+          "X_B": 8.740882917466411
+        },
+        {
+          "Jahr": 2015,
+          "Stadtteil": "Weiherfeld-Dammerstock",
+          "Personen_A": 1033,
+          "X_B": 8.81703775411423
+        },
+        {
+          "Jahr": 2016,
+          "Stadtteil": "Weiherfeld-Dammerstock",
+          "Personen_A": 1033,
+          "X_B": 8.81703775411423
+        },
+        {
+          "Jahr": 2017,
+          "Stadtteil": "Weiherfeld-Dammerstock",
+          "Personen_A": 1062,
+          "X_B": 10.481167608286253
+        },
+        {
+          "Jahr": 2018,
+          "Stadtteil": "Weiherfeld-Dammerstock",
+          "Personen_A": 1059,
+          "X_B": 10.510859301227573
+        },
+        {
+          "Jahr": 2019,
+          "Stadtteil": "Weiherfeld-Dammerstock",
+          "Personen_A": 1051,
+          "X_B": 10.590865842055186
+        },
+        {
+          "Jahr": 2020,
+          "Stadtteil": "Weiherfeld-Dammerstock",
+          "Personen_A": 1012,
+          "X_B": 11.071146245059289
+        },
+        {
+          "Jahr": 2014,
+          "Stadtteil": "Rüppurr",
+          "Personen_A": 1916,
+          "X_B": 9.755741127348642
+        },
+        {
+          "Jahr": 2015,
+          "Stadtteil": "Rüppurr",
+          "Personen_A": 1945,
+          "X_B": 9.945501285347044
+        },
+        {
+          "Jahr": 2016,
+          "Stadtteil": "Rüppurr",
+          "Personen_A": 1927,
+          "X_B": 10.217955371043072
+        },
+        {
+          "Jahr": 2017,
+          "Stadtteil": "Rüppurr",
+          "Personen_A": 1973,
+          "X_B": 9.966041561074507
+        },
+        {
+          "Jahr": 2018,
+          "Stadtteil": "Rüppurr",
+          "Personen_A": 2005,
+          "X_B": 9.806982543640897
+        },
+        {
+          "Jahr": 2019,
+          "Stadtteil": "Rüppurr",
+          "Personen_A": 2032,
+          "X_B": 9.676673228346457
+        },
+        {
+          "Jahr": 2020,
+          "Stadtteil": "Rüppurr",
+          "Personen_A": 2023,
+          "X_B": 9.840336134453782
+        },
+        {
+          "Jahr": 2014,
+          "Stadtteil": "Waldstadt",
+          "Personen_A": 2338,
+          "X_B": 14.31180496150556
+        },
+        {
+          "Jahr": 2015,
+          "Stadtteil": "Waldstadt",
+          "Personen_A": 2369,
+          "X_B": 15.527648796960744
+        },
+        {
+          "Jahr": 2016,
+          "Stadtteil": "Waldstadt",
+          "Personen_A": 2375,
+          "X_B": 15.84421052631579
+        },
+        {
+          "Jahr": 2017,
+          "Stadtteil": "Waldstadt",
+          "Personen_A": 2324,
+          "X_B": 16.124784853700515
+        },
+        {
+          "Jahr": 2018,
+          "Stadtteil": "Waldstadt",
+          "Personen_A": 2327,
+          "X_B": 16.068758057584873
+        },
+        {
+          "Jahr": 2019,
+          "Stadtteil": "Waldstadt",
+          "Personen_A": 2304,
+          "X_B": 16.229166666666668
+        },
+        {
+          "Jahr": 2020,
+          "Stadtteil": "Waldstadt",
+          "Personen_A": 2301,
+          "X_B": 16.267709691438505
+        },
+        {
+          "Jahr": 2014,
+          "Stadtteil": "Rintheim",
+          "Personen_A": 1046,
+          "X_B": 9.946462715105163
+        },
+        {
+          "Jahr": 2015,
+          "Stadtteil": "Rintheim",
+          "Personen_A": 1092,
+          "X_B": 9.527472527472527
+        },
+        {
+          "Jahr": 2016,
+          "Stadtteil": "Rintheim",
+          "Personen_A": 1097,
+          "X_B": 9.521422060164085
+        },
+        {
+          "Jahr": 2017,
+          "Stadtteil": "Rintheim",
+          "Personen_A": 1238,
+          "X_B": 8.57108239095315
+        },
+        {
+          "Jahr": 2018,
+          "Stadtteil": "Rintheim",
+          "Personen_A": 1256,
+          "X_B": 7.202229299363057
+        },
+        {
+          "Jahr": 2019,
+          "Stadtteil": "Rintheim",
+          "Personen_A": 1265,
+          "X_B": 7.15098814229249
+        },
+        {
+          "Jahr": 2020,
+          "Stadtteil": "Rintheim",
+          "Personen_A": 1240,
+          "X_B": 7.108870967741935
+        },
+        {
+          "Jahr": 2014,
+          "Stadtteil": "Hagsfeld",
+          "Personen_A": 1321,
+          "X_B": 16.965934897804694
+        },
+        {
+          "Jahr": 2015,
+          "Stadtteil": "Hagsfeld",
+          "Personen_A": 1353,
+          "X_B": 16.193643754619366
+        },
+        {
+          "Jahr": 2016,
+          "Stadtteil": "Hagsfeld",
+          "Personen_A": 1368,
+          "X_B": 16.573099415204677
+        },
+        {
+          "Jahr": 2017,
+          "Stadtteil": "Hagsfeld",
+          "Personen_A": 1343,
+          "X_B": 16.86820551005212
+        },
+        {
+          "Jahr": 2018,
+          "Stadtteil": "Hagsfeld",
+          "Personen_A": 1375,
+          "X_B": 16.579636363636364
+        },
+        {
+          "Jahr": 2019,
+          "Stadtteil": "Hagsfeld",
+          "Personen_A": 1381,
+          "X_B": 16.626357711803042
+        },
+        {
+          "Jahr": 2020,
+          "Stadtteil": "Hagsfeld",
+          "Personen_A": 1335,
+          "X_B": 14.950561797752808
+        },
+        {
+          "Jahr": 2014,
+          "Stadtteil": "Durlach",
+          "Personen_A": 5142,
+          "X_B": 8.826526643329444
+        },
+        {
+          "Jahr": 2015,
+          "Stadtteil": "Durlach",
+          "Personen_A": 5294,
+          "X_B": 7.93275406120136
+        },
+        {
+          "Jahr": 2016,
+          "Stadtteil": "Durlach",
+          "Personen_A": 5241,
+          "X_B": 8.036825033390574
+        },
+        {
+          "Jahr": 2017,
+          "Stadtteil": "Durlach",
+          "Personen_A": 5157,
+          "X_B": 7.893930579794454
+        },
+        {
+          "Jahr": 2018,
+          "Stadtteil": "Durlach",
+          "Personen_A": 5206,
+          "X_B": 8.58739915482136
+        },
+        {
+          "Jahr": 2019,
+          "Stadtteil": "Durlach",
+          "Personen_A": 5335,
+          "X_B": 8.35688847235239
+        },
+        {
+          "Jahr": 2020,
+          "Stadtteil": "Durlach",
+          "Personen_A": 5304,
+          "X_B": 8.58578431372549
+        },
+        {
+          "Jahr": 2014,
+          "Stadtteil": "Grötzingen",
+          "Personen_A": 1623,
+          "X_B": 8.420825631546519
+        },
+        {
+          "Jahr": 2015,
+          "Stadtteil": "Grötzingen",
+          "Personen_A": 1654,
+          "X_B": 9.239419588875453
+        },
+        {
+          "Jahr": 2016,
+          "Stadtteil": "Grötzingen",
+          "Personen_A": 1620,
+          "X_B": 9.489506172839507
+        },
+        {
+          "Jahr": 2017,
+          "Stadtteil": "Grötzingen",
+          "Personen_A": 1616,
+          "X_B": 9.580445544554456
+        },
+        {
+          "Jahr": 2018,
+          "Stadtteil": "Grötzingen",
+          "Personen_A": 1607,
+          "X_B": 9.630989421281893
+        },
+        {
+          "Jahr": 2019,
+          "Stadtteil": "Grötzingen",
+          "Personen_A": 1605,
+          "X_B": 9.651713395638629
+        },
+        {
+          "Jahr": 2020,
+          "Stadtteil": "Grötzingen",
+          "Personen_A": 1612,
+          "X_B": 9.892059553349876
+        },
+        {
+          "Jahr": 2014,
+          "Stadtteil": "Stupferich",
+          "Personen_A": 473,
+          "X_B": 7.5073995771670194
+        },
+        {
+          "Jahr": 2015,
+          "Stadtteil": "Stupferich",
+          "Personen_A": 493,
+          "X_B": 7.127789046653144
+        },
+        {
+          "Jahr": 2016,
+          "Stadtteil": "Stupferich",
+          "Personen_A": 519,
+          "X_B": 6.770712909441233
+        },
+        {
+          "Jahr": 2017,
+          "Stadtteil": "Stupferich",
+          "Personen_A": 522,
+          "X_B": 7.295019157088123
+        },
+        {
+          "Jahr": 2018,
+          "Stadtteil": "Stupferich",
+          "Personen_A": 568,
+          "X_B": 7.302816901408451
+        },
+        {
+          "Jahr": 2019,
+          "Stadtteil": "Stupferich",
+          "Personen_A": 610,
+          "X_B": 6.786885245901639
+        },
+        {
+          "Jahr": 2020,
+          "Stadtteil": "Stupferich",
+          "Personen_A": 639,
+          "X_B": 6.530516431924883
+        },
+        {
+          "Jahr": 2014,
+          "Stadtteil": "Hohenwettersbach",
+          "Personen_A": 771,
+          "X_B": 12.555123216601816
+        },
+        {
+          "Jahr": 2015,
+          "Stadtteil": "Hohenwettersbach",
+          "Personen_A": 780,
+          "X_B": 12.373076923076923
+        },
+        {
+          "Jahr": 2016,
+          "Stadtteil": "Hohenwettersbach",
+          "Personen_A": 782,
+          "X_B": 12.341432225063938
+        },
+        {
+          "Jahr": 2017,
+          "Stadtteil": "Hohenwettersbach",
+          "Personen_A": 760,
+          "X_B": 12.688157894736841
+        },
+        {
+          "Jahr": 2018,
+          "Stadtteil": "Hohenwettersbach",
+          "Personen_A": 740,
+          "X_B": 12.975675675675676
+        },
+        {
+          "Jahr": 2019,
+          "Stadtteil": "Hohenwettersbach",
+          "Personen_A": 715,
+          "X_B": 13.429370629370629
+        },
+        {
+          "Jahr": 2020,
+          "Stadtteil": "Hohenwettersbach",
+          "Personen_A": 712,
+          "X_B": 13.290730337078651
+        },
+        {
+          "Jahr": 2014,
+          "Stadtteil": "Wolfartsweier",
+          "Personen_A": 530,
+          "X_B": 18.766037735849057
+        },
+        {
+          "Jahr": 2015,
+          "Stadtteil": "Wolfartsweier",
+          "Personen_A": 536,
+          "X_B": 20.242537313432837
+        },
+        {
+          "Jahr": 2016,
+          "Stadtteil": "Wolfartsweier",
+          "Personen_A": 544,
+          "X_B": 19.94485294117647
+        },
+        {
+          "Jahr": 2017,
+          "Stadtteil": "Wolfartsweier",
+          "Personen_A": 533,
+          "X_B": 19.909943714821765
+        },
+        {
+          "Jahr": 2018,
+          "Stadtteil": "Wolfartsweier",
+          "Personen_A": 530,
+          "X_B": 20.245283018867923
+        },
+        {
+          "Jahr": 2019,
+          "Stadtteil": "Wolfartsweier",
+          "Personen_A": 510,
+          "X_B": 20.941176470588236
+        },
+        {
+          "Jahr": 2020,
+          "Stadtteil": "Wolfartsweier",
+          "Personen_A": 505,
+          "X_B": 21.013861386138615
+        },
+        {
+          "Jahr": 2014,
+          "Stadtteil": "Grünwettersbach",
+          "Personen_A": 789,
+          "X_B": 8.505703422053232
+        },
+        {
+          "Jahr": 2015,
+          "Stadtteil": "Grünwettersbach",
+          "Personen_A": 758,
+          "X_B": 8.853562005277045
+        },
+        {
+          "Jahr": 2016,
+          "Stadtteil": "Grünwettersbach",
+          "Personen_A": 795,
+          "X_B": 8.423899371069183
+        },
+        {
+          "Jahr": 2017,
+          "Stadtteil": "Grünwettersbach",
+          "Personen_A": 773,
+          "X_B": 8.657179818887451
+        },
+        {
+          "Jahr": 2018,
+          "Stadtteil": "Grünwettersbach",
+          "Personen_A": 773,
+          "X_B": 8.589909443725745
+        },
+        {
+          "Jahr": 2019,
+          "Stadtteil": "Grünwettersbach",
+          "Personen_A": 785,
+          "X_B": 8.468789808917197
+        },
+        {
+          "Jahr": 2020,
+          "Stadtteil": "Grünwettersbach",
+          "Personen_A": 763,
+          "X_B": 8.882044560943644
+        },
+        {
+          "Jahr": 2014,
+          "Stadtteil": "Palmbach",
+          "Personen_A": 456,
+          "X_B": 10.918859649122806
+        },
+        {
+          "Jahr": 2015,
+          "Stadtteil": "Palmbach",
+          "Personen_A": 456,
+          "X_B": 10.918859649122806
+        },
+        {
+          "Jahr": 2016,
+          "Stadtteil": "Palmbach",
+          "Personen_A": 447,
+          "X_B": 11.196868008948545
+        },
+        {
+          "Jahr": 2017,
+          "Stadtteil": "Palmbach",
+          "Personen_A": 457,
+          "X_B": 10.943107221006565
+        },
+        {
+          "Jahr": 2018,
+          "Stadtteil": "Palmbach",
+          "Personen_A": 463,
+          "X_B": 10.81425485961123
+        },
+        {
+          "Jahr": 2019,
+          "Stadtteil": "Palmbach",
+          "Personen_A": 463,
+          "X_B": 10.801295896328293
+        },
+        {
+          "Jahr": 2020,
+          "Stadtteil": "Palmbach",
+          "Personen_A": 462,
+          "X_B": 12.744588744588745
+        },
+        {
+          "Jahr": 2014,
+          "Stadtteil": "Neureut",
+          "Personen_A": 3501,
+          "X_B": 10.46386746643816
+        },
+        {
+          "Jahr": 2015,
+          "Stadtteil": "Neureut",
+          "Personen_A": 3546,
+          "X_B": 10.373096446700508
+        },
+        {
+          "Jahr": 2016,
+          "Stadtteil": "Neureut",
+          "Personen_A": 3599,
+          "X_B": 10.267574326201723
+        },
+        {
+          "Jahr": 2017,
+          "Stadtteil": "Neureut",
+          "Personen_A": 3495,
+          "X_B": 10.56480686695279
+        },
+        {
+          "Jahr": 2018,
+          "Stadtteil": "Neureut",
+          "Personen_A": 3571,
+          "X_B": 10.301316157938953
+        },
+        {
+          "Jahr": 2019,
+          "Stadtteil": "Neureut",
+          "Personen_A": 3505,
+          "X_B": 10.884736091298146
+        },
+        {
+          "Jahr": 2020,
+          "Stadtteil": "Neureut",
+          "Personen_A": 3477,
+          "X_B": 11.758124820247339
+        },
+        {
+          "Jahr": 2014,
+          "Stadtteil": "Nordstadt",
+          "Personen_A": 2419,
+          "X_B": 10.19801570897065
+        },
+        {
+          "Jahr": 2015,
+          "Stadtteil": "Nordstadt",
+          "Personen_A": 2326,
+          "X_B": 10.605760963026656
+        },
+        {
+          "Jahr": 2016,
+          "Stadtteil": "Nordstadt",
+          "Personen_A": 2254,
+          "X_B": 10.994676131322095
+        },
+        {
+          "Jahr": 2017,
+          "Stadtteil": "Nordstadt",
+          "Personen_A": 2173,
+          "X_B": 11.410032213529682
+        },
+        {
+          "Jahr": 2018,
+          "Stadtteil": "Nordstadt",
+          "Personen_A": 2061,
+          "X_B": 12.013585638039787
+        },
+        {
+          "Jahr": 2019,
+          "Stadtteil": "Nordstadt",
+          "Personen_A": 1989,
+          "X_B": 12.564605329311211
+        },
+        {
+          "Jahr": 2020,
+          "Stadtteil": "Nordstadt",
+          "Personen_A": 1902,
+          "X_B": 13.031545741324921
+        }
+      ],
+      "meta": {
+        "storagetype": "dataframe"
+      },
+      "root": false,
+      "loaded": true
+    },
+    {
+      "id": "N15",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N17",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N18",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N20",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N24",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N26",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N27",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N28",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N36",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N38",
+      "data": [
+        {
+          "Stadtteil": "Innenstadt-Ost"
+        },
+        {
+          "Stadtteil": "Innenstadt-West"
+        },
+        {
+          "Stadtteil": "Südstadt"
+        },
+        {
+          "Stadtteil": "Südweststadt"
+        },
+        {
+          "Stadtteil": "Weststadt"
+        },
+        {
+          "Stadtteil": "Nordweststadt"
+        },
+        {
+          "Stadtteil": "Oststadt"
+        },
+        {
+          "Stadtteil": "Mühlburg"
+        },
+        {
+          "Stadtteil": "Daxlanden"
+        },
+        {
+          "Stadtteil": "Knielingen"
+        },
+        {
+          "Stadtteil": "Grünwinkel"
+        },
+        {
+          "Stadtteil": "Oberreut"
+        },
+        {
+          "Stadtteil": "Beiertheim-Bulach"
+        },
+        {
+          "Stadtteil": "Weiherfeld-Dammerstock"
+        },
+        {
+          "Stadtteil": "Rüppurr"
+        },
+        {
+          "Stadtteil": "Waldstadt"
+        },
+        {
+          "Stadtteil": "Rintheim"
+        },
+        {
+          "Stadtteil": "Hagsfeld"
+        },
+        {
+          "Stadtteil": "Durlach"
+        },
+        {
+          "Stadtteil": "Grötzingen"
+        },
+        {
+          "Stadtteil": "Stupferich"
+        },
+        {
+          "Stadtteil": "Hohenwettersbach"
+        },
+        {
+          "Stadtteil": "Wolfartsweier"
+        },
+        {
+          "Stadtteil": "Grünwettersbach"
+        },
+        {
+          "Stadtteil": "Palmbach"
+        },
+        {
+          "Stadtteil": "Neureut"
+        },
+        {
+          "Stadtteil": "Nordstadt"
+        }
+      ],
+      "meta": {
+        "storagetype": "dataframe"
+      },
+      "root": false,
+      "loaded": true
+    },
+    {
+      "id": "N39",
+      "data": [
+        {
+          "Jahr": 2014,
+          "Stadtteil": "Südweststadt",
+          "Personen_A": 3711,
+          "X_B": 10.858798167609809
+        },
+        {
+          "Jahr": 2015,
+          "Stadtteil": "Südweststadt",
+          "Personen_A": 3718,
+          "X_B": 10.841043571812802
+        },
+        {
+          "Jahr": 2016,
+          "Stadtteil": "Südweststadt",
+          "Personen_A": 3732,
+          "X_B": 10.709539121114684
+        },
+        {
+          "Jahr": 2017,
+          "Stadtteil": "Südweststadt",
+          "Personen_A": 3722,
+          "X_B": 10.641321869962386
+        },
+        {
+          "Jahr": 2018,
+          "Stadtteil": "Südweststadt",
+          "Personen_A": 3726,
+          "X_B": 7.540526033279656
+        },
+        {
+          "Jahr": 2019,
+          "Stadtteil": "Südweststadt",
+          "Personen_A": 3686,
+          "X_B": 7.623982637004883
+        },
+        {
+          "Jahr": 2020,
+          "Stadtteil": "Südweststadt",
+          "Personen_A": 3589,
+          "X_B": 7.7366954583449425
+        }
+      ],
+      "meta": {
+        "storagetype": "dataframe"
+      },
+      "root": false,
+      "loaded": true
+    },
+    {
+      "id": "N15",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N17",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N18",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N20",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N24",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N26",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N27",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N28",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N36",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N38",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N39",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N42",
+      "data": [
+        {
+          "Jahr": 2014,
+          "Personen_A": 3711,
+          "Fläche/Person": 10.858798167609809
+        },
+        {
+          "Jahr": 2015,
+          "Personen_A": 3718,
+          "Fläche/Person": 10.841043571812802
+        },
+        {
+          "Jahr": 2016,
+          "Personen_A": 3732,
+          "Fläche/Person": 10.709539121114684
+        },
+        {
+          "Jahr": 2017,
+          "Personen_A": 3722,
+          "Fläche/Person": 10.641321869962386
+        },
+        {
+          "Jahr": 2018,
+          "Personen_A": 3726,
+          "Fläche/Person": 7.540526033279656
+        },
+        {
+          "Jahr": 2019,
+          "Personen_A": 3686,
+          "Fläche/Person": 7.623982637004883
+        },
+        {
+          "Jahr": 2020,
+          "Personen_A": 3589,
+          "Fläche/Person": 7.7366954583449425
+        }
+      ],
+      "meta": {
+        "storagetype": "dataframe"
+      },
+      "root": false,
+      "loaded": true
+    },
+    {
+      "id": "N43",
+      "data": [
+        {
+          "Jahr": 2014,
+          "X": 15.470505617977528
+        },
+        {
+          "Jahr": 2015,
+          "X": 14.78523489932886
+        },
+        {
+          "Jahr": 2016,
+          "X": 14.103713188220231
+        },
+        {
+          "Jahr": 2017,
+          "X": 14.201290322580645
+        },
+        {
+          "Jahr": 2018,
+          "X": 14.599730458221025
+        },
+        {
+          "Jahr": 2019,
+          "X": 14.738775510204082
+        },
+        {
+          "Jahr": 2020,
+          "X": 15.0249653259362
+        },
+        {
+          "Jahr": 2014,
+          "X": 5.832871652816251
+        },
+        {
+          "Jahr": 2015,
+          "X": 8.380522993688007
+        },
+        {
+          "Jahr": 2016,
+          "X": 8.597594819611471
+        },
+        {
+          "Jahr": 2017,
+          "X": 8.955641272902604
+        },
+        {
+          "Jahr": 2018,
+          "X": 9.68436873747495
+        },
+        {
+          "Jahr": 2019,
+          "X": 6.309452736318408
+        },
+        {
+          "Jahr": 2020,
+          "X": 10.491323210412148
+        },
+        {
+          "Jahr": 2014,
+          "X": 5.302442528735632
+        },
+        {
+          "Jahr": 2015,
+          "X": 5.109726548978886
+        },
+        {
+          "Jahr": 2016,
+          "X": 5.678780012978585
+        },
+        {
+          "Jahr": 2017,
+          "X": 5.570973901973265
+        },
+        {
+          "Jahr": 2018,
+          "X": 5.6709346991037135
+        },
+        {
+          "Jahr": 2019,
+          "X": 5.716504854368932
+        },
+        {
+          "Jahr": 2020,
+          "X": 6.034207904350714
+        },
+        {
+          "Jahr": 2014,
+          "X": 10.858798167609809
+        },
+        {
+          "Jahr": 2015,
+          "X": 10.841043571812802
+        },
+        {
+          "Jahr": 2016,
+          "X": 10.709539121114684
+        },
+        {
+          "Jahr": 2017,
+          "X": 10.641321869962386
+        },
+        {
+          "Jahr": 2018,
+          "X": 7.540526033279656
+        },
+        {
+          "Jahr": 2019,
+          "X": 7.623982637004883
+        },
+        {
+          "Jahr": 2020,
+          "X": 7.7366954583449425
+        },
+        {
+          "Jahr": 2014,
+          "X": 5.225323741007195
+        },
+        {
+          "Jahr": 2015,
+          "X": 5.304626127436718
+        },
+        {
+          "Jahr": 2016,
+          "X": 5.261760461760462
+        },
+        {
+          "Jahr": 2017,
+          "X": 5.317279626386457
+        },
+        {
+          "Jahr": 2018,
+          "X": 5.459094995504945
+        },
+        {
+          "Jahr": 2019,
+          "X": 5.626003705991352
+        },
+        {
+          "Jahr": 2020,
+          "X": 5.764854614412137
+        },
+        {
+          "Jahr": 2014,
+          "X": 23.14451827242525
+        },
+        {
+          "Jahr": 2015,
+          "X": 23.032186459489456
+        },
+        {
+          "Jahr": 2016,
+          "X": 21.882766072393302
+        },
+        {
+          "Jahr": 2017,
+          "X": 20.91627906976744
+        },
+        {
+          "Jahr": 2018,
+          "X": 19.97327852004111
+        },
+        {
+          "Jahr": 2019,
+          "X": 20.280500521376435
+        },
+        {
+          "Jahr": 2020,
+          "X": 20.636874361593463
+        },
+        {
+          "Jahr": 2014,
+          "X": 6.91523055426176
+        },
+        {
+          "Jahr": 2015,
+          "X": 5.22230038691523
+        },
+        {
+          "Jahr": 2016,
+          "X": 9.581944007549543
+        },
+        {
+          "Jahr": 2017,
+          "X": 10.50673110113911
+        },
+        {
+          "Jahr": 2018,
+          "X": 11.587943848059455
+        },
+        {
+          "Jahr": 2019,
+          "X": 11.612876599257119
+        },
+        {
+          "Jahr": 2020,
+          "X": 12.284155390659102
+        },
+        {
+          "Jahr": 2014,
+          "X": 3.5938089845224614
+        },
+        {
+          "Jahr": 2015,
+          "X": 5.248339483394834
+        },
+        {
+          "Jahr": 2016,
+          "X": 5.097849462365591
+        },
+        {
+          "Jahr": 2017,
+          "X": 5.19926873857404
+        },
+        {
+          "Jahr": 2018,
+          "X": 4.92894280762565
+        },
+        {
+          "Jahr": 2019,
+          "X": 5.189781021897811
+        },
+        {
+          "Jahr": 2020,
+          "X": 5.388404698749526
+        },
+        {
+          "Jahr": 2014,
+          "X": 21.958624395486297
+        },
+        {
+          "Jahr": 2015,
+          "X": 22.055762081784387
+        },
+        {
+          "Jahr": 2016,
+          "X": 21.8929889298893
+        },
+        {
+          "Jahr": 2017,
+          "X": 21.54961038961039
+        },
+        {
+          "Jahr": 2018,
+          "X": 21.75301520713162
+        },
+        {
+          "Jahr": 2019,
+          "X": 22.700845665961946
+        },
+        {
+          "Jahr": 2020,
+          "X": 23.09375
+        },
+        {
+          "Jahr": 2014,
+          "X": 17.3895881006865
+        },
+        {
+          "Jahr": 2015,
+          "X": 17.098314606741575
+        },
+        {
+          "Jahr": 2016,
+          "X": 16.344068706387546
+        },
+        {
+          "Jahr": 2017,
+          "X": 15.98360655737705
+        },
+        {
+          "Jahr": 2018,
+          "X": 14.486279802069276
+        },
+        {
+          "Jahr": 2019,
+          "X": 13.977864583333334
+        },
+        {
+          "Jahr": 2020,
+          "X": 13.484785327219674
+        },
+        {
+          "Jahr": 2014,
+          "X": 11.768685215493726
+        },
+        {
+          "Jahr": 2015,
+          "X": 11.558114622388858
+        },
+        {
+          "Jahr": 2016,
+          "X": 11.50448548812665
+        },
+        {
+          "Jahr": 2017,
+          "X": 10.566746987951808
+        },
+        {
+          "Jahr": 2018,
+          "X": 9.768270944741532
+        },
+        {
+          "Jahr": 2019,
+          "X": 9.20054945054945
+        },
+        {
+          "Jahr": 2020,
+          "X": 9.854402361042794
+        },
+        {
+          "Jahr": 2014,
+          "X": 15.28594249201278
+        },
+        {
+          "Jahr": 2015,
+          "X": 15.99527559055118
+        },
+        {
+          "Jahr": 2016,
+          "X": 16.18534253850239
+        },
+        {
+          "Jahr": 2017,
+          "X": 16.408405172413794
+        },
+        {
+          "Jahr": 2018,
+          "X": 15.108421583459405
+        },
+        {
+          "Jahr": 2019,
+          "X": 13.846118299445472
+        },
+        {
+          "Jahr": 2020,
+          "X": 14.509117082533589
+        },
+        {
+          "Jahr": 2014,
+          "X": 5.711555169417897
+        },
+        {
+          "Jahr": 2015,
+          "X": 5.730836236933798
+        },
+        {
+          "Jahr": 2016,
+          "X": 5.61402027027027
+        },
+        {
+          "Jahr": 2017,
+          "X": 5.5629820051413885
+        },
+        {
+          "Jahr": 2018,
+          "X": 5.564918314703354
+        },
+        {
+          "Jahr": 2019,
+          "X": 5.461603375527426
+        },
+        {
+          "Jahr": 2020,
+          "X": 5.45240101095198
+        },
+        {
+          "Jahr": 2014,
+          "X": 8.740882917466411
+        },
+        {
+          "Jahr": 2015,
+          "X": 8.81703775411423
+        },
+        {
+          "Jahr": 2016,
+          "X": 8.81703775411423
+        },
+        {
+          "Jahr": 2017,
+          "X": 10.481167608286253
+        },
+        {
+          "Jahr": 2018,
+          "X": 10.510859301227573
+        },
+        {
+          "Jahr": 2019,
+          "X": 10.590865842055186
+        },
+        {
+          "Jahr": 2020,
+          "X": 11.071146245059289
+        },
+        {
+          "Jahr": 2014,
+          "X": 9.755741127348642
+        },
+        {
+          "Jahr": 2015,
+          "X": 9.945501285347044
+        },
+        {
+          "Jahr": 2016,
+          "X": 10.217955371043072
+        },
+        {
+          "Jahr": 2017,
+          "X": 9.966041561074507
+        },
+        {
+          "Jahr": 2018,
+          "X": 9.806982543640897
+        },
+        {
+          "Jahr": 2019,
+          "X": 9.676673228346457
+        },
+        {
+          "Jahr": 2020,
+          "X": 9.840336134453782
+        },
+        {
+          "Jahr": 2014,
+          "X": 14.31180496150556
+        },
+        {
+          "Jahr": 2015,
+          "X": 15.527648796960744
+        },
+        {
+          "Jahr": 2016,
+          "X": 15.84421052631579
+        },
+        {
+          "Jahr": 2017,
+          "X": 16.124784853700515
+        },
+        {
+          "Jahr": 2018,
+          "X": 16.068758057584873
+        },
+        {
+          "Jahr": 2019,
+          "X": 16.229166666666668
+        },
+        {
+          "Jahr": 2020,
+          "X": 16.267709691438505
+        },
+        {
+          "Jahr": 2014,
+          "X": 9.946462715105163
+        },
+        {
+          "Jahr": 2015,
+          "X": 9.527472527472527
+        },
+        {
+          "Jahr": 2016,
+          "X": 9.521422060164085
+        },
+        {
+          "Jahr": 2017,
+          "X": 8.57108239095315
+        },
+        {
+          "Jahr": 2018,
+          "X": 7.202229299363057
+        },
+        {
+          "Jahr": 2019,
+          "X": 7.15098814229249
+        },
+        {
+          "Jahr": 2020,
+          "X": 7.108870967741935
+        },
+        {
+          "Jahr": 2014,
+          "X": 16.965934897804694
+        },
+        {
+          "Jahr": 2015,
+          "X": 16.193643754619366
+        },
+        {
+          "Jahr": 2016,
+          "X": 16.573099415204677
+        },
+        {
+          "Jahr": 2017,
+          "X": 16.86820551005212
+        },
+        {
+          "Jahr": 2018,
+          "X": 16.579636363636364
+        },
+        {
+          "Jahr": 2019,
+          "X": 16.626357711803042
+        },
+        {
+          "Jahr": 2020,
+          "X": 14.950561797752808
+        },
+        {
+          "Jahr": 2014,
+          "X": 8.826526643329444
+        },
+        {
+          "Jahr": 2015,
+          "X": 7.93275406120136
+        },
+        {
+          "Jahr": 2016,
+          "X": 8.036825033390574
+        },
+        {
+          "Jahr": 2017,
+          "X": 7.893930579794454
+        },
+        {
+          "Jahr": 2018,
+          "X": 8.58739915482136
+        },
+        {
+          "Jahr": 2019,
+          "X": 8.35688847235239
+        },
+        {
+          "Jahr": 2020,
+          "X": 8.58578431372549
+        },
+        {
+          "Jahr": 2014,
+          "X": 8.420825631546519
+        },
+        {
+          "Jahr": 2015,
+          "X": 9.239419588875453
+        },
+        {
+          "Jahr": 2016,
+          "X": 9.489506172839507
+        },
+        {
+          "Jahr": 2017,
+          "X": 9.580445544554456
+        },
+        {
+          "Jahr": 2018,
+          "X": 9.630989421281893
+        },
+        {
+          "Jahr": 2019,
+          "X": 9.651713395638629
+        },
+        {
+          "Jahr": 2020,
+          "X": 9.892059553349876
+        },
+        {
+          "Jahr": 2014,
+          "X": 7.5073995771670194
+        },
+        {
+          "Jahr": 2015,
+          "X": 7.127789046653144
+        },
+        {
+          "Jahr": 2016,
+          "X": 6.770712909441233
+        },
+        {
+          "Jahr": 2017,
+          "X": 7.295019157088123
+        },
+        {
+          "Jahr": 2018,
+          "X": 7.302816901408451
+        },
+        {
+          "Jahr": 2019,
+          "X": 6.786885245901639
+        },
+        {
+          "Jahr": 2020,
+          "X": 6.530516431924883
+        },
+        {
+          "Jahr": 2014,
+          "X": 12.555123216601816
+        },
+        {
+          "Jahr": 2015,
+          "X": 12.373076923076923
+        },
+        {
+          "Jahr": 2016,
+          "X": 12.341432225063938
+        },
+        {
+          "Jahr": 2017,
+          "X": 12.688157894736841
+        },
+        {
+          "Jahr": 2018,
+          "X": 12.975675675675676
+        },
+        {
+          "Jahr": 2019,
+          "X": 13.429370629370629
+        },
+        {
+          "Jahr": 2020,
+          "X": 13.290730337078651
+        },
+        {
+          "Jahr": 2014,
+          "X": 18.766037735849057
+        },
+        {
+          "Jahr": 2015,
+          "X": 20.242537313432837
+        },
+        {
+          "Jahr": 2016,
+          "X": 19.94485294117647
+        },
+        {
+          "Jahr": 2017,
+          "X": 19.909943714821765
+        },
+        {
+          "Jahr": 2018,
+          "X": 20.245283018867923
+        },
+        {
+          "Jahr": 2019,
+          "X": 20.941176470588236
+        },
+        {
+          "Jahr": 2020,
+          "X": 21.013861386138615
+        },
+        {
+          "Jahr": 2014,
+          "X": 8.505703422053232
+        },
+        {
+          "Jahr": 2015,
+          "X": 8.853562005277045
+        },
+        {
+          "Jahr": 2016,
+          "X": 8.423899371069183
+        },
+        {
+          "Jahr": 2017,
+          "X": 8.657179818887451
+        },
+        {
+          "Jahr": 2018,
+          "X": 8.589909443725745
+        },
+        {
+          "Jahr": 2019,
+          "X": 8.468789808917197
+        },
+        {
+          "Jahr": 2020,
+          "X": 8.882044560943644
+        },
+        {
+          "Jahr": 2014,
+          "X": 10.918859649122806
+        },
+        {
+          "Jahr": 2015,
+          "X": 10.918859649122806
+        },
+        {
+          "Jahr": 2016,
+          "X": 11.196868008948545
+        },
+        {
+          "Jahr": 2017,
+          "X": 10.943107221006565
+        },
+        {
+          "Jahr": 2018,
+          "X": 10.81425485961123
+        },
+        {
+          "Jahr": 2019,
+          "X": 10.801295896328293
+        },
+        {
+          "Jahr": 2020,
+          "X": 12.744588744588745
+        },
+        {
+          "Jahr": 2014,
+          "X": 10.46386746643816
+        },
+        {
+          "Jahr": 2015,
+          "X": 10.373096446700508
+        },
+        {
+          "Jahr": 2016,
+          "X": 10.267574326201723
+        },
+        {
+          "Jahr": 2017,
+          "X": 10.56480686695279
+        },
+        {
+          "Jahr": 2018,
+          "X": 10.301316157938953
+        },
+        {
+          "Jahr": 2019,
+          "X": 10.884736091298146
+        },
+        {
+          "Jahr": 2020,
+          "X": 11.758124820247339
+        },
+        {
+          "Jahr": 2014,
+          "X": 10.19801570897065
+        },
+        {
+          "Jahr": 2015,
+          "X": 10.605760963026656
+        },
+        {
+          "Jahr": 2016,
+          "X": 10.994676131322095
+        },
+        {
+          "Jahr": 2017,
+          "X": 11.410032213529682
+        },
+        {
+          "Jahr": 2018,
+          "X": 12.013585638039787
+        },
+        {
+          "Jahr": 2019,
+          "X": 12.564605329311211
+        },
+        {
+          "Jahr": 2020,
+          "X": 13.031545741324921
+        }
+      ],
+      "meta": {
+        "storagetype": "dataframe"
+      },
+      "root": false,
+      "loaded": true
+    },
+    {
+      "id": "N15",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N17",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N18",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N20",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N24",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N26",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N27",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N28",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N36",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N38",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N39",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
+    },
+    {
+      "id": "N42",
+      "data": {},
+      "meta": {},
+      "root": false,
+      "loaded": false
     }
   ],
-  "next": 24,
+  "next": 46,
   "story": {
     "title": "",
     "author": "",

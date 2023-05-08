@@ -109,6 +109,10 @@ export class LinePlot extends DcNode {
       (option: any) => option.id == "xaxis"
     );
     const cols = df.columns;
+
+    // define a formatting function
+    const formatFloat = (value:number) => {return value.toFixed(3)}
+
     let xCol = cols[cols.length - 1]; // will become variable
     if (xConfig !== undefined && xConfig.current != "") {
       xCol = xConfig.current;
@@ -120,7 +124,7 @@ export class LinePlot extends DcNode {
       if (i == xIdx) continue;
       const trace = {
         x: X,
-        y: df[cols[i]].values,
+        y: await df[cols[i]].apply(formatFloat).values, //df[cols[i]].values,
         mode: "lines",
         line: {
           //color: 'rgb(55, 128, 191)',
@@ -134,7 +138,9 @@ export class LinePlot extends DcNode {
     const layout = {
       title: "Line Chart",
       xaxis: { title: cols[xIdx] },
-      yaxis: { title: "Y axis" },
+      yaxis: { 
+        title: "Y axis"
+       },
       /*
       height: 400,
       width: 800,
