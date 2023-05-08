@@ -284,6 +284,21 @@
             "info": "Mehr Text f\u00fcr den Tooltip"
         }
     },
+    "renamecols": {
+        "name": "renamecols",
+        "group": "processing",
+        "implemented": true,
+        "thumb": "/img/widgets/CreateClass.png",
+        "consent": false,
+        "en": {
+            "label": "Rename/drop columns",
+            "info": "Clear name to drop column"
+        },
+        "de": {
+            "label": "Spalten umbenennen/löschen",
+            "info": "Namen löschen um Spalte zu löschen"
+        }
+    },
     "joindata": {
         "name": "joindata",
         "group": "processing",
