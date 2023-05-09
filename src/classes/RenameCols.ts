@@ -35,12 +35,13 @@ export class RenameCols extends DcNode {
       DcNode.print("Set option:" + options[i]);
     }
     if (this.signals.length < 1) {
+     this.config.options = []
       return;
     }
     // just use first signal to trigger an update
     DcNode.print("Updating with:" + this.signals[0].signal)
     //await this.messaging.emit(this.signals[0].signal)
-    await this.updated(this.signals[0].signal)
+    this.updated(this.signals[0].signal)
   }
   // ---------------------------------------------------------
   async updated(msg: string, y?: any) {
@@ -59,7 +60,6 @@ export class RenameCols extends DcNode {
     const dt = await DcNode.providers.getDataById(src);
     const df = await new DcNode.dfd.DataFrame(dt);
     const cols = df.columns;
-    console.log("Rename - Cols:",cols)
     const oldSpecs = this.specs;
     const specs: DataSpecs[] = [
       {
@@ -95,17 +95,14 @@ export class RenameCols extends DcNode {
       return
     }
 
-    console.log("Config:",this.config.options)
     // check if current different to label or empty
     const colMap: any = {}
     const drops = [] as string[]
     for (const o of this.config.options) {
       if (o.current == "") {
-        console.log("Drop:", o.label)
         drops.push(o.label)
       } else {
         if (o.current != o.label) {
-          console.log("Rename:", o.label, o.current)
           colMap[o.label] = o.current
         }
       }
@@ -114,7 +111,7 @@ export class RenameCols extends DcNode {
     if (drops.length > 0) {
       await df.drop({ columns: drops, inplace: true })
     }
-    await df.print()
+    // await df.print()
 
     // put data into store then send message
     const meta = await DcNode.providers.getMeta(this.id)
