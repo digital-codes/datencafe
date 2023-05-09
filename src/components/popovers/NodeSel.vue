@@ -8,7 +8,7 @@
       <div class="ion-no-padding" slot="content">
         <ion-list class="list" lines="none">
       <div class="item" slot="content" v-for="(option,idx) in options" :key="option.type">
-      <ion-item v-if="option.implemented && (option.group == 'source')">
+      <ion-item v-if="(option.implemented && (!option.expert || expertMode)) && (option.group == 'source')">
         <ion-thumbnail slot="start">
             <img :alt='option.type' :src="option.thumb" />
         </ion-thumbnail>
@@ -33,7 +33,7 @@
       <div class="ion-no-padding" slot="content">
         <ion-list class="list" lines="none">
       <div class="item" slot="content" v-for="(option,idx) in options" :key="option.type">
-      <ion-item v-if="option.implemented && (option.group == 'processing')">
+      <ion-item v-if="(option.implemented && (!option.expert || expertMode)) && (option.group == 'processing')">
         <ion-thumbnail slot="start">
             <img :alt='option.type' :src="option.thumb" />
         </ion-thumbnail>
@@ -58,7 +58,7 @@
       <div class="ion-no-padding" slot="content">
         <ion-list class="list" lines="none">
       <div class="item" slot="content" v-for="(option,idx) in options" :key="option.type">
-      <ion-item v-if="option.implemented && (option.group == 'display')">
+      <ion-item v-if="(option.implemented && (!option.expert || expertMode)) && (option.group == 'display')">
         <ion-thumbnail slot="start">
             <img :alt='option.type' :src="option.thumb" />
         </ion-thumbnail>
@@ -143,9 +143,11 @@ const clk = async (n:number) => {
 }
 
 const consentOk = ref(false)
+const expertMode = ref(true)
 
 onMounted(async () => {
   consentOk.value = await userStore.getConsent()
+  expertMode.value = await userStore.getExpert()
   Object.keys(nodeTypes).forEach((e,i) => {
     chk.value[i] = false
     options.value[i] = {
@@ -154,7 +156,8 @@ onMounted(async () => {
       thumb:nodeTypes[e].thumb,
       implemented:nodeTypes[e].implemented,
       group:nodeTypes[e].group,
-      consent:nodeTypes[e].consent
+      consent:nodeTypes[e].consent,
+      expert:nodeTypes[e].expert
      }
   })
 })

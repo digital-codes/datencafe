@@ -83,6 +83,7 @@
       "header": "Settings",
       "consent": "Agree to use components not conforming to GDPR",
       "gdpr": "More on GDPR",
+      "expert": "Enable all options",
       "fullsize": "Save flow with all data (might be large!)",
       "conflict": "Import requires consent. Adjust settings!"
     }

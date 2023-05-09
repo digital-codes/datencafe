@@ -12,7 +12,10 @@
         "de": {
             "label": "CSV Datei laden",
             "info": "Mehr Text f\u00fcr den Tooltip. ieofhiwefhwifhweihfweifh. ndqienfn eiwpf"
-        }
+        },
+        "expert": false,
+        "exturl": true,
+        "backend": false
     },
     "loadjson": {
         "name": "loadjson",
@@ -27,7 +30,10 @@
         "de": {
             "label": "JSON Datei laden",
             "info": "Mehr Text f\u00fcr den Tooltip. ieofhiwefhwifhweihfweifh. ndqienfn eiwpf"
-        }
+        },
+        "expert": false,
+        "exturl": true,
+        "backend": false
     },
     "loadgeo": {
         "name": "loadgeo",
@@ -42,7 +48,10 @@
         "de": {
             "label": "GeoJSON Datei laden",
             "info": "Mehr Text f\u00fcr den Tooltip. ieofhiwefhwifhweihfweifh. ndqienfn eiwpf"
-        }
+        },
+        "expert": false,
+        "exturl": true,
+        "backend": false
     },
     "loadexcel": {
         "name": "loadexcel",
@@ -57,7 +66,10 @@
         "de": {
             "label": "Excel Datei laden",
             "info": "Mehr Text f\u00fcr den Tooltip. ieofhiwefhwifhweihfweifh. ndqienfn eiwpf"
-        }
+        },
+        "expert": false,
+        "exturl": true,
+        "backend": false
     },
     "datainfo": {
         "name": "datainfo",
@@ -72,7 +84,10 @@
         "de": {
             "label": "Datenbeschreibung",
             "info": "Mehr Text f\u00fcr den Tooltip.Mehr Text f\u00fcr den Tooltip. ieofhiwefhwifhweihfweifh. ndqienfn eiwpf"
-        }
+        },
+        "expert": false,
+        "exturl": false,
+        "backend": false
     },
     "tableplot": {
         "name": "tableplot",
@@ -87,7 +102,10 @@
         "de": {
             "label": "Tabellenansicht",
             "info": "Mehr Text f\u00fcr den Tooltip"
-        }
+        },
+        "expert": false,
+        "exturl": false,
+        "backend": false
     },
     "lineplot": {
         "name": "lineplot",
@@ -102,7 +120,10 @@
         "de": {
             "label": "Liniendiagramm",
             "info": "Mehr Text f\u00fcr den Tooltip"
-        }
+        },
+        "expert": false,
+        "exturl": false,
+        "backend": false
     },
     "barplot": {
         "name": "barplot",
@@ -117,7 +138,10 @@
         "de": {
             "label": "Balkendiagramm",
             "info": "Mehr Text f\u00fcr den Tooltip"
-        }
+        },
+        "expert": false,
+        "exturl": false,
+        "backend": false
     },
     "scatterplot": {
         "name": "scatterplot",
@@ -132,7 +156,10 @@
         "de": {
             "label": "Punktwolke",
             "info": "Mehr Text f\u00fcr den Tooltip"
-        }
+        },
+        "expert": true,
+        "exturl": false,
+        "backend": false
     },
     "histoplot": {
         "name": "histoplot",
@@ -147,7 +174,10 @@
         "de": {
             "label": "Histogramm",
             "info": "Mehr Text f\u00fcr den Tooltip"
-        }
+        },
+        "expert": true,
+        "exturl": false,
+        "backend": false
     },
     "linregress": {
         "name": "linregress",
@@ -162,7 +192,10 @@
         "de": {
             "label": "Trendlinie",
             "info": "Mehr Text f\u00fcr den Tooltip"
-        }
+        },
+        "expert": true,
+        "exturl": false,
+        "backend": false
     },
     "kmeanscluster": {
         "name": "kmeanscluster",
@@ -177,7 +210,10 @@
         "de": {
             "label": "Klassifzierung (K-Means)",
             "info": "Mehr Text f\u00fcr den Tooltip"
-        }
+        },
+        "expert": true,
+        "exturl": false,
+        "backend": false
     },
     "pointmap": {
         "name": "pointmap",
@@ -192,7 +228,10 @@
         "de": {
             "label": "Karte",
             "info": "Mehr Text f\u00fcr den Tooltip"
-        }
+        },
+        "expert": false,
+        "exturl": false,
+        "backend": false
     },
     "choromap": {
         "name": "choromap",
@@ -207,7 +246,10 @@
         "de": {
             "label": "Farbcodierte Karte",
             "info": "Mehr Text f\u00fcr den Tooltip"
-        }
+        },
+        "expert": true,
+        "exturl": false,
+        "backend": false
     },
     "scatter": {
         "name": "scatterplot",
@@ -222,7 +264,10 @@
         "de": {
             "label": "Scatter Plot",
             "info": "Mehr Text f\u00fcr den Tooltip"
-        }
+        },
+        "expert": true,
+        "exturl": false,
+        "backend": false
     },
     "treemap": {
         "name": "treemap",
@@ -237,7 +282,10 @@
         "de": {
             "label": "Mosaik",
             "info": "Mehr Text f\u00fcr den Tooltip"
-        }
+        },
+        "expert": true,
+        "exturl": false,
+        "backend": false
     },
     "histo": {
         "name": "histo",
@@ -252,7 +300,10 @@
         "de": {
             "label": "Verteilung",
             "info": "Mehr Text f\u00fcr den Tooltip"
-        }
+        },
+        "expert": false,
+        "exturl": false,
+        "backend": false
     },
     "addrows": {
         "name": "addrows",
@@ -267,7 +318,10 @@
         "de": {
             "label": "Zeilen hinzuf\u00fcgen",
             "info": "Mehr Text f\u00fcr den Tooltip"
-        }
+        },
+        "expert": false,
+        "exturl": false,
+        "backend": false
     },
     "addcols": {
         "name": "addcols",
@@ -282,7 +336,10 @@
         "de": {
             "label": "Spalten hinzuf\u00fcgen",
             "info": "Mehr Text f\u00fcr den Tooltip"
-        }
+        },
+        "expert": false,
+        "exturl": false,
+        "backend": false
     },
     "renamecols": {
         "name": "renamecols",
@@ -295,9 +352,12 @@
             "info": "Clear name to drop column"
         },
         "de": {
-            "label": "Spalten umbenennen/löschen",
-            "info": "Namen löschen um Spalte zu löschen"
-        }
+            "label": "Spalten umbenennen/l\u00f6schen",
+            "info": "Namen l\u00f6schen um Spalte zu l\u00f6schen"
+        },
+        "expert": false,
+        "exturl": false,
+        "backend": false
     },
     "joindata": {
         "name": "joindata",
@@ -312,7 +372,10 @@
         "de": {
             "label": "Daten zusammenf\u00fchren",
             "info": "Mehr Text f\u00fcr den Tooltip"
-        }
+        },
+        "expert": true,
+        "exturl": false,
+        "backend": false
     },
     "grpitems": {
         "name": "grpitems",
@@ -326,8 +389,11 @@
         },
         "de": {
             "label": "Gruppenwerte holen",
-            "info": "Eine Spalten zum Gruppieren auswählen und die Elemente liefern"
-        }
+            "info": "Eine Spalten zum Gruppieren ausw\u00e4hlen und die Elemente liefern"
+        },
+        "expert": true,
+        "exturl": false,
+        "backend": false
     },
     "selcell": {
         "name": "selcell",
@@ -342,7 +408,10 @@
         "de": {
             "label": "Zelle ausw\u00e4hlen",
             "info": "Mehr Text f\u00fcr den Tooltip"
-        }
+        },
+        "expert": true,
+        "exturl": false,
+        "backend": false
     },
     "selcols": {
         "name": "selcols",
@@ -357,7 +426,10 @@
         "de": {
             "label": "Spalten ausw\u00e4hlen",
             "info": "Mehr Text f\u00fcr den Tooltip"
-        }
+        },
+        "expert": true,
+        "exturl": false,
+        "backend": false
     },
     "selrows": {
         "name": "selrows",
@@ -372,7 +444,10 @@
         "de": {
             "label": "Zeilen ausw\u00e4hlen",
             "info": "Mehr Text f\u00fcr den Tooltip"
-        }
+        },
+        "expert": true,
+        "exturl": false,
+        "backend": false
     },
     "scalarmath": {
         "name": "scalarmath",
@@ -387,7 +462,10 @@
         "de": {
             "label": "Skalare Operationen",
             "info": "Mehr Text f\u00fcr den Tooltip"
-        }
+        },
+        "expert": false,
+        "exturl": false,
+        "backend": false
     },
     "dfmath": {
         "name": "dfmath",
@@ -402,7 +480,10 @@
         "de": {
             "label": "Funktionen mit 2 Datens\u00e4tzen",
             "info": "Mehr Text f\u00fcr den Tooltip"
-        }
+        },
+        "expert": false,
+        "exturl": false,
+        "backend": false
     },
     "group": {
         "name": "group",
@@ -417,7 +498,10 @@
         "de": {
             "label": "Daten gruppieren",
             "info": "Mehr Text f\u00fcr den Tooltip"
-        }
+        },
+        "expert": true,
+        "exturl": false,
+        "backend": false
     },
     "pool": {
         "name": "pool",
@@ -432,7 +516,10 @@
         "de": {
             "label": "Datenpool",
             "info": "Mehr Text f\u00fcr den Tooltip"
-        }
+        },
+        "expert": true,
+        "exturl": false,
+        "backend": false
     },
     "correlate": {
         "name": "correlate",
@@ -447,7 +534,10 @@
         "de": {
             "label": "Korrelation",
             "info": "Mehr Text f\u00fcr den Tooltip"
-        }
+        },
+        "expert": true,
+        "exturl": false,
+        "backend": false
     },
     "number": {
         "name": "number",
@@ -462,7 +552,10 @@
         "de": {
             "label": "Zahl",
             "info": "Mehr Text f\u00fcr den Tooltip"
-        }
+        },
+        "expert": false,
+        "exturl": false,
+        "backend": false
     },
     "text": {
         "name": "text",
@@ -477,7 +570,10 @@
         "de": {
             "label": "Text",
             "info": "Mehr Text f\u00fcr den Tooltip"
-        }
+        },
+        "expert": false,
+        "exturl": false,
+        "backend": false
     },
     "loop": {
         "name": "loop",
@@ -492,7 +588,10 @@
         "de": {
             "label": "Wiederholung",
             "info": "Mehr Text f\u00fcr den Tooltip"
-        }
+        },
+        "expert": true,
+        "exturl": false,
+        "backend": false
     },
     "counter": {
         "name": "counter",
@@ -505,9 +604,12 @@
             "info": "More text for a popup or tooltip"
         },
         "de": {
-            "label": "Zähler",
+            "label": "Z\u00e4hler",
             "info": "Mehr Text f\u00fcr den Tooltip"
-        }
+        },
+        "expert": false,
+        "exturl": false,
+        "backend": false
     },
     "webcam": {
         "name": "webcam",
@@ -522,7 +624,10 @@
         "de": {
             "label": "Webcam",
             "info": "Mehr Text f\u00fcr den Tooltip"
-        }
+        },
+        "expert": true,
+        "exturl": false,
+        "backend": false
     },
     "sketch": {
         "name": "sketch",
@@ -537,7 +642,10 @@
         "de": {
             "label": "Zeichnung",
             "info": "Mehr Text f\u00fcr den Tooltip"
-        }
+        },
+        "expert": true,
+        "exturl": false,
+        "backend": false
     },
     "randomgen": {
         "name": "randomgen",
@@ -552,21 +660,27 @@
         "de": {
             "label": "Zufallsdaten Generator",
             "info": "Mehr Text f\u00fcr den Tooltip"
-        }
+        },
+        "expert": false,
+        "exturl": false,
+        "backend": false
     },
-    "mqttsub": {
-        "name": "mqttsub",
+    "realtime": {
+        "name": "realtime",
         "group": "source",
         "implemented": true,
         "thumb": "/img/widgets/Mqtt.png",
         "consent": false,
         "en": {
-            "label": "IoT - MQTT subscriber",
-            "info": "More text for a popup or tooltip"
+            "label": "IoT Realtime",
+            "info": "Live data from IoT server"
         },
         "de": {
-            "label": "IoT - MQTT Subscriber",
-            "info": "Mehr Text f\u00fcr den Tooltip"
-        }
+            "label": "IoT Echtzeit",
+            "info": "Echtzeit Daten vom IoT Server"
+        },
+        "expert": true,
+        "exturl": false,
+        "backend": true
     }
 }

@@ -83,6 +83,7 @@
       "header": "Einstellungen",
       "consent": "Bin einverstanden mit Komponenten, die nicht DSGVO entsprechen",
       "gdpr": "Mehr Infos zu DSGVO",
+      "expert": "Alle Möglichkeiten aktivieren",
       "fullsize": "Flows mit allen Daten speichern",
       "conflict": "Brauche DSGVO Zustimmung. Einstellungen ändern!"
     }

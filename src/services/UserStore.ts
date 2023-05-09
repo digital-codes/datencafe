@@ -40,6 +40,7 @@ export interface UserInfo {
   text?: string;
   consent?: boolean
   fullsize?: boolean
+  expert?: boolean
   starter?: string // calling a story
   storyLoading?: boolean
   flowrdy?: boolean // flow has been loaded
@@ -62,6 +63,7 @@ const clr = {
   text: "",
   consent: false,
   fullsize: true,
+  expert: false,
   starter: "",
   storyLoading: false,
   flowrdy: false,
@@ -81,6 +83,7 @@ export const UserStore = defineStore({
       this.lang = clr1.lang;
       this.consent = clr1.consent;
       this.fullsize = clr1.fullsize;
+      this.expert = clr1.expert;
       this.starter = clr1.starter;
       this.flowrdy = clr1.flowrdy;
       this.flowIds = clr1.flowIds;
@@ -150,6 +153,9 @@ export const UserStore = defineStore({
     },
     setFullsize(f:boolean) {
       this.fullsize = f;
+    },
+    setExpert(x:boolean) {
+      this.expert = x;
     },
     setStarter(s:string) {
       this.starter = s;
@@ -261,6 +267,9 @@ export const UserStore = defineStore({
     },
     getFullsize: (state) => () => {
       return state.fullsize;
+    },
+    getExpert: (state) => () => {
+      return state.expert;
     },
     getStarter: (state) => () => {
       return state.starter;

@@ -27,7 +27,7 @@ import * as mqtt from "mqtt"; // import connect from mqtt
 
 const topic = "dcaf";
 
-export class MqttSub extends DcNode {
+export class RealTime extends DcNode {
   // properties
   static _display = false;
   static _type = NodeSpec.GEN;
@@ -52,8 +52,8 @@ export class MqttSub extends DcNode {
         },
       ],
     };
-    super(id, "mqttsub", ports, edges, cfg as any);
-    DcNode.print(MqttSub._type + " created"); // no access to super._id etc here
+    super(id, "realtime", ports, edges, cfg as any);
+    DcNode.print(RealTime._type + " created"); // no access to super._id etc here
     //setTimeout(() => {this.load(url)},1000)
   }
   // methods
@@ -111,7 +111,7 @@ export class MqttSub extends DcNode {
     
     // this.socket.addEventListener('message', async (event: any) => {
     this.socket.onmessage = async (event: any) => {
-      MqttSub.update(this.id,event.data)
+      RealTime.update(this.id,event.data)
     };
 
 
@@ -171,9 +171,9 @@ export class MqttSub extends DcNode {
   }
   // getters
   get type() {
-    return MqttSub._type;
+    return RealTime._type;
   }
   get display() {
-    return MqttSub._display;
+    return RealTime._display;
   }
 }

@@ -107,7 +107,6 @@ export class SelRows extends DcNode {
       },
     ];
     if (oldSpecs.length == 0 || this.specsChanged(specs)) {
-      alert("SelRows specs changed")
       this.specs = specs;
       // set new config, default pick first column as x
       const config = this.config;
@@ -156,7 +155,6 @@ export class SelRows extends DcNode {
     const filterCol = this.config.options.find((o: any) => o.id == "columns").current
     let filterVal = this.config.options.find((o: any) => o.id == "filter").current
     const mode = this.config.options.find((o: any) => o.id == "mode").current
-    console.log("Filter on", filterCol, filterVal, mode)
     // find index in columns
     const colIdx = colsA.findIndex((c: string) => c == filterCol)
     const filterType = dfA.ctypes.values[colIdx]
@@ -176,7 +174,6 @@ export class SelRows extends DcNode {
         default:
         break;
     }
-    console.log("types:", dfA.ctypes.values, filterType, typeof (filterVal))
 
     let newDf
     switch (mode) {

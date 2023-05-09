@@ -24,13 +24,13 @@ import { RenameCols } from "@/classes/RenameCols";
 import { GrpItems } from "@/classes/GrpItems";
 import { PointMap } from "@/classes/PointMap";
 import { WebCam } from "@/classes/WebCam";
-import { MqttSub } from "@/classes/MqttSub";
+import { RealTime } from "@/classes/RealTime";
 
 // instance generator
 export const nodeFactory = async (id: string, type: any) => {
   switch (type.name) {
-    case "mqttsub":
-      return await new MqttSub(id, type);
+    case "realtime":
+      return await new RealTime(id, type);
     case "webcam":
       return await new WebCam(id, type);
     case "randomgen":

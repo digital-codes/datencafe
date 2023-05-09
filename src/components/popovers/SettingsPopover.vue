@@ -15,6 +15,12 @@
         <ion-toggle slot="start" v-model="fullsize"></ion-toggle>
         <ion-label slot="start">{{ $t("yes") }} </ion-label>
       </ion-item>      
+      <ion-text color="primary">{{ $t("flow.settings.expert") }} </ion-text>
+      <ion-item  lines="none">
+        <ion-label slot="start">{{ $t("no") }}  </ion-label>
+        <ion-toggle slot="start" v-model="expert"></ion-toggle>
+        <ion-label slot="start">{{ $t("yes") }} </ion-label>
+      </ion-item>      
       <ion-button @click="close">{{$t("flow.cfg.close")}}</ion-button>
     </div>
   </ion-content>
@@ -55,19 +61,20 @@ const conscolor = computed(() => { return consent.value ? "danger" : "primary"})
 
 const fullsize = ref()
 const consent = ref()
+const expert = ref()
 
 
 onMounted(async () => {
   // load from store
   consent.value = await userStore.getConsent()
   fullsize.value = await userStore.getFullsize()
-  console.log("Old Settings:",consent.value,fullsize.value)
+  expert.value = await userStore.getExpert()
 })
 
 const close = async () => {
-  console.log("Update with:",consent.value,fullsize.value)
   await userStore.setConsent(consent.value)
   await userStore.setFullsize(fullsize.value)
+  await userStore.setExpert(expert.value)
   await eventBus.emit(props.signal, {"id":"close"});
 }
 
