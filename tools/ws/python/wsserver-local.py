@@ -47,6 +47,8 @@ class PubSub:
 async def handle(websocket, path):
     print("handle")
     global pubsub
+    client_ip, client_port = websocket.remote_address
+    print(f"Received message from {client_ip}:{client_port}")
     # pubsub = PubSub()
     pubsub.clients.add(websocket)
 
