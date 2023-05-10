@@ -24,13 +24,21 @@ class PubSub:
     async def unsubscribe(self, websocket, topic, appId):
         print("subscriptions: ",self.subscriptions)
 
-        self.clients.remove(websocket)
+        if websocket in self.clients: 
+            self.clients.remove(websocket)
         if topic in self.subscriptions:
-            self.subscriptions[topic].remove(websocket)
+            if websocket in self.subscriptions[topic]: 
+                self.subscriptions[topic].remove(websocket)
 
 
     async def publish(self, topic, message):
         print("Publish to: ",topic)
+        try:
+            data = json.loads(message)
+            print("Json Data:",data)
+        except:
+            data = message
+            print("Text Data:",data)
         print("subscriptions: ",self.subscriptions)
         if topic in self.subscriptions:
             print("topic ok")
@@ -41,7 +49,11 @@ class PubSub:
 async def handle(websocket, path):
     print("handle")
     global pubsub
+    client_ip = websocket.remote_address[0]
+    print(f"Received message from {client_ip}")
+    # can be ::1  or 127.0.0.1
     # pubsub = PubSub()
+    # normally, publisher also subscribe
     pubsub.clients.add(websocket)
 
     try:
@@ -49,8 +61,7 @@ async def handle(websocket, path):
             data = json.loads(message)
             action = data.get('action')
             topic = data.get('topic')
-            payload = data.get('payload')
-            print(data,action,topic,payload)
+            print(data,action,topic)
 
             if action == 'subscribe':
                 appId = data.get("id")
@@ -60,6 +71,8 @@ async def handle(websocket, path):
                 appId = data.get("id")
                 await pubsub.unsubscribe(websocket, topic,appId)
             elif action == 'publish':
+                payload = data.get('payload')
+                print(payload)
                 await pubsub.publish(topic, payload)
     except websockets.exceptions.ConnectionClosed:
         pass
