@@ -62,11 +62,20 @@ The toolbar provides you with all required utilities, in particular:
 <img src="/img/tutor/toolbar-empty.png" class="wide">
 
   * ![](/img/tutor/help.png) Help
+  * ![](/img/tutor/settings.png) Settings
   * ![](/img/tutor/editStory.png) Edit story
   * ![](/img/tutor/upload.png) Upload workflow 
   * ![](/img/tutor/download.png) Download workflow 
   * ![](/img/tutor/trash.png) Clear 
   * ![](/img/tutor/newItem.png) New workflow item 
+
+#### Settings
+
+Currently, you can adjust the following settings:
+
+  * GDPR: SOme of the tools like external data access and maps might not be GDPR compliant. There is nothing we con da about unless you are logged-in. We need your consent here..
+  * Include data: the resulting flow file is smaller when you omit the data. You can even send it by email.
+  * Options: By default you see only the fundamental tools. This makes the toolbox less cluttered. 
 
 #### Flow
 

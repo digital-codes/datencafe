@@ -67,12 +67,21 @@ IN der Werkzeugleiste finden Sie alles Nötige, insbesondere:
 <img src="/img/tutor/toolbar-empty.png" class="wide">
 
   * ![](/img/tutor/help.png) Hilfe
+  * ![](/img/tutor/settings.png) Einstellungen
   * ![](/img/tutor/editStory.png) Geschichte bearbeiten
   * ![](/img/tutor/upload.png) Workflow hochladen
   * ![](/img/tutor/download.png) Workflow herunterladen 
   * ![](/img/tutor/trash.png) Alles löschen 
   * ![](/img/tutor/newItem.png) Neues Workflow Element 
 
+
+#### Einstellungen
+
+Hier kannst folgende Einstellungen festelgen:
+
+  * DSGVO: manche Werkzeuge wie der Abruf externer Daten oder die Nutzung von Karten sind evtl nicht DSGVO konform. Daran können wir nichts ändern, solange Du nicht angemeldet bist. Hier brauchen wir Deine Zustimmung.
+  * Daten mitspeichern: wenn Du beim Speichern eines Flows auf die Speicherung der Daten verzichtest, wird das erzeugte File kleiner und kann auch per EMail verschickt werden.
+  * Optionen: In der Voreinstellung siehst Du nur die grundlegenden Wekrzeuge. Das ist übersichtlicher. 
 
 #### Flow
 

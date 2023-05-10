@@ -26,6 +26,8 @@ Data literacy is important for personal and professional development. In many fi
 
 Not commercial.
 
+Comments: Send an [email](mailto:info@daten.cafe)
+
 
 
 

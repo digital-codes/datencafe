@@ -26,6 +26,7 @@ Datenkompetenz ist wichtig für die persönliche und berufliche Entwicklung. In 
 
 Nicht kommerziell.
 
+Anregungen: Schreib eine Mail an [email](mailto:info@daten.cafe) 
 
 
 

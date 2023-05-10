@@ -26,7 +26,9 @@
           </ion-card-header>
 
           <ion-card-content class="infoCard">
-            {{ infoItem(i,"body") }}
+            <div v-html="infoItem(i,'html')" class="tutor">
+            </div>
+
           </ion-card-content>
           </article>
         </ion-card>
