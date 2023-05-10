@@ -58,8 +58,7 @@ async def handle(websocket, path):
             data = json.loads(message)
             action = data.get('action')
             topic = data.get('topic')
-            payload = data.get('payload')
-            print(data,action,topic,payload)
+            print(data,action,topic)
 
             if action == 'subscribe':
                 appId = data.get("id")
@@ -69,6 +68,8 @@ async def handle(websocket, path):
                 appId = data.get("id")
                 await pubsub.unsubscribe(websocket, topic,appId)
             elif action == 'publish':
+                payload = data.get('payload')
+                print(payload)
                 await pubsub.publish(topic, payload)
     except websockets.exceptions.ConnectionClosed:
         pass
