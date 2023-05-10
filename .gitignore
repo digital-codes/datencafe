@@ -35,3 +35,6 @@ npm-debug.log*
 public/php/private.pem
 server
 
+# websockets
+tools/ws/python/potd.txt
+

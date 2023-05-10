@@ -1,13 +1,56 @@
 import asyncio
+import websockets
 from aiohttp import web
+import json
+import csv
+
+#userList = ["12345678","23456789"]
+# goodPwd = "dummy"
+
+with open('potd.txt', 'r') as f:
+        goodPwd = f.readlines()[0].strip()
+
+#print("Pwd",goodPwd)
+
+with open('sensors.csv', 'r') as f:
+        reader = csv.DictReader(f)
+        sensors = list(reader)
+        userList = [str(s["user"]) for s in sensors]
+
+#print(userList)
+
 
 async def handle_post(request):
-    data = await request.post()
+    headers = request.headers
+    user = headers.get('user')
+    pwd = headers.get('pwd')
+
+    if (not user in userList) or (pwd != goodPwd):
+        raise web.HTTPUnauthorized()
+
+    # access data
+    data = await request.json()
+    data["device"] = user
     # Process the data received from the POST request
     # ...
-    print("Data:",data)
+    # print("data:",data)
+    # print("items.",list(data.items()))
+    # for key, value in data.items():
+    #     print(f'{key}: {value}')
+
+
+    # send to ws
+    async with websockets.connect(
+        'ws://localhost:9000',
+        extra_headers={'Proxy-Authorization': 'Basic <base64-encoded-username-password>'},
+        ) as websocket:
+        # Publish a message to topic 'test'
+        await websocket.send(
+			json.dumps({'action': 'publish', 'topic': 'dcaf', 'payload': json.dumps(data)}) #data})
+		)
+
     # Return a response
-    return web.Response(text='POST request processed')
+    return web.Response(text='OK')
 
 async def main():
     app = web.Application()
