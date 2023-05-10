@@ -8,7 +8,7 @@ async def main():
         extra_headers={'Proxy-Authorization': 'Basic <base64-encoded-username-password>'},
     ) as websocket:
         # Subscribe to topic 'test'
-        await websocket.send(json.dumps({'action': 'subscribe', 'topic': 'test'}))
+        await websocket.send(json.dumps({'action': 'subscribe', 'topic': 'dcaf'}))
 
         # Receive messages from the server
         async for message in websocket:

@@ -35,8 +35,8 @@ class PubSub:
             data = json.loads(message)
             print("Json Data:",data)
         except:
-            print("Text Data:",data)
             data = message
+            print("Text Data:",data)
         print("subscriptions: ",self.subscriptions)
         if topic in self.subscriptions:
             print("topic ok")
