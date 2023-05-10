@@ -24,9 +24,11 @@ class PubSub:
     async def unsubscribe(self, websocket, topic, appId):
         print("subscriptions: ",self.subscriptions)
 
-        self.clients.remove(websocket)
+        if websocket in self.clients: 
+            self.clients.remove(websocket)
         if topic in self.subscriptions:
-            self.subscriptions[topic].remove(websocket)
+            if websocket in self.subscriptions[topic]: 
+                self.subscriptions[topic].remove(websocket)
 
 
     async def publish(self, topic, message):
@@ -51,6 +53,7 @@ async def handle(websocket, path):
     print(f"Received message from {client_ip}")
     # can be ::1  or 127.0.0.1
     # pubsub = PubSub()
+    # normally, publisher also subscribe
     pubsub.clients.add(websocket)
 
     try:
