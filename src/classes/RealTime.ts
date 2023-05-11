@@ -32,6 +32,7 @@ export class RealTime extends DcNode {
   static _display = false;
   static _type = NodeSpec.GEN;
   private socket: any | undefined;
+  private startTime = 0
   // constructor
   constructor(id: string, typeInfo: any) {
     // although we need to call this first,
@@ -74,7 +75,7 @@ export class RealTime extends DcNode {
     if (this.socket && (this.socket.readyState === WebSocket.OPEN)) {
       DcNode.print("Already connected")
       await this.stop();
-      await DelayTimer(500)
+      await DelayTimer(200)
     }
 
     if (!DcNode.providers.exists(this.id)) {
@@ -105,13 +106,16 @@ export class RealTime extends DcNode {
         "id":appId,
         "device": device
        }))
+       // store current time as reference
+       this.startTime = Date.now();
+
     };
 
     // this.socket.addEventListener('message', this.update)
     
     // this.socket.addEventListener('message', async (event: any) => {
     this.socket.onmessage = async (event: any) => {
-      RealTime.update(this.id,event.data)
+      RealTime.update(this.id,this.startTime, event.data)
     };
 
 
@@ -145,11 +149,17 @@ export class RealTime extends DcNode {
   }
   // ------------
   // event handler looses this => static method with id
-  static async update(id: string, data: any) {
+  static async update(id: string, startTime: number, data: any) {
     DcNode.print("Update on " + String(id));
 
-    const date = Date.now();
-    const message = parseFloat(data);
+    const date = (Date.now() - startTime ) / 1000 // date is in ms
+    const msg = JSON.parse(data)
+    const message = {} as any
+    for (const k of Object.keys(msg)) {
+      message[k] = [msg[k]]
+    }
+    message.timestamp = [date]
+    console.log("Msg:",message)
 
 
     // check data existing
@@ -157,11 +167,13 @@ export class RealTime extends DcNode {
     if (await this.providers.hasData(id)) {
       const dt = await DcNode.providers.getDataById(id)
       df = await new DcNode.dfd.DataFrame(dt)
-      const df2 = await new DcNode.dfd.DataFrame({"date":[date],"message":[message]});
+      //const df2 = await new DcNode.dfd.DataFrame({"date":[date],"message":[message]});
+      const df2 = await new DcNode.dfd.DataFrame(message);
       //await df.append(row,idx,{inplace:true});
       df = await DcNode.dfd.concat({ dfList: [df, df2], axis: 0 });
     } else {
-      df = await new DcNode.dfd.DataFrame({"date":[date],"message":[message]});
+      // df = await new DcNode.dfd.DataFrame({"date":[date],"message":[message]});
+      df = await new DcNode.dfd.DataFrame(message);
     }
 
     //const dt = await new Date().toISOString();

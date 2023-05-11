@@ -9,8 +9,11 @@ async def main():
         extra_headers={'Proxy-Authorization': 'Basic <base64-encoded-username-password>'},
         ssl=True) as websocket:
         # Publish a message to topic 'test'
+        testdata = {}
+        testdata["co2"] = random.randint(200,1000)
+        testdata["temp"] = random.randint(-10,30)
         await websocket.send(
-			json.dumps({'action': 'publish', 'topic': 'dcaf', 'payload': str(random.randint(-10,10))})
+			json.dumps({'action': 'publish', 'topic': 'dcaf', 'payload': json.dumps(testdata)})
 		)
 
 if __name__ == '__main__':
