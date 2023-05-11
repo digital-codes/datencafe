@@ -36,4 +36,7 @@ Comments: Send an [email](mailto:info@daten.cafe)
 No tracking cookies. Stores data in your browser (essential and you'd expect that). No proliferation. Beware: use at your own risk. Large data volumes might crash your browser.
 
 
+### Credits
+
+To be done ...
 
