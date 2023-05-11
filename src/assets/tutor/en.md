@@ -55,6 +55,15 @@ The tutorial section. Your are right here ...
 the workspace has 2 regions. The flow editor to the left or top (on mobile) and the visualization
 pane to the right or bottom. You create your workflow in the flow editor.
 
+Use the buttons 
+
+  * ![](/img/tutor/chart.png) Chart and
+  * ![](/img/tutor/flow.png) Flow
+
+to switch displays on small screens.
+
+
+
 #### Toolbar
 
 The toolbar provides you with all required utilities, in particular:

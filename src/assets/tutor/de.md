@@ -60,6 +60,15 @@ Die Tutorial-Sektion. Du bist genau hier ...
 
 Der Arbeitsbereich hat 2 Felder. Der Flow-Editor befindet sich links oder oben (auf Mobilgeräten) und das Visualisierungsfenster befindet sich rechts oder unten. Sie erstellen Ihren Workflow im Flow-Editor.
 
+Auf kleinen Bildschirmen kannst Du mit den 
+
+  * ![Chart](/img/tutor/chart.png) Chart und
+  * ![Flow](/img/tutor/flow.png) Flow
+
+Knöpfen zwischen den Ansichten wechseln.
+
+
+
 #### Werkzeugleiste
 
 IN der Werkzeugleiste finden Sie alles Nötige, insbesondere:
