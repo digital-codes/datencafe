@@ -13,6 +13,10 @@ Thumbs.db
 UserInterfaceState.xcuserstate
 $RECYCLE.BIN/
 
+vendor
+node_modules
+__pycache__
+
 *.log
 log.txt
 npm-debug.log*
