@@ -3,6 +3,22 @@ else localhost"""
 import asyncio
 import json
 import websockets
+import csv
+
+# Set the maximum number of subscribers
+MAX_SUBSCRIBERS = 20
+
+with open('potd.txt', 'r') as f:
+        goodPwd = f.readlines()[0].strip()
+
+#print("Pwd",goodPwd)
+
+with open('sensors.csv', 'r') as f:
+        reader = csv.DictReader(f)
+        sensors = list(reader)
+        userList = [str(s["user"]) for s in sensors]
+
+
 
 class PubSub:
     def __init__(self):
@@ -64,13 +80,33 @@ async def handle(websocket, path):
             print(data,action,topic)
 
             if action == 'subscribe':
+                # Check if the maximum number of subscribers has been reached
+                if len(pubsub.clients) >= MAX_SUBSCRIBERS:
+                    await websocket.send("Maximum number of subscribers reached")
+                    await websocket.close()
+                    return
                 appId = data.get("id")
                 device = data.get("device")
+                # check access via device and password
+                pwd = data.get("pwd")
+                if (not device in userList) or (pwd != goodPwd):
+                    await websocket.send("Not authorized")
+                    await websocket.close()
+                    return
+                # subscribe                
                 await pubsub.subscribe(websocket, topic,appId,device)
+
             elif action == 'unsubscribe':
                 appId = data.get("id")
                 await pubsub.unsubscribe(websocket, topic,appId)
+
             elif action == 'publish':
+                # check localhost for publish
+                if (client_ip != "localhost") and (client_ip != "127.0.0.1") and (client_ip != "::1"):
+                    await websocket.send("Not authorized")
+                    await websocket.close()
+                    return
+                    
                 payload = data.get('payload')
                 print(payload)
                 await pubsub.publish(topic, payload)

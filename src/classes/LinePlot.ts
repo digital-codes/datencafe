@@ -111,7 +111,10 @@ export class LinePlot extends DcNode {
     const cols = df.columns;
 
     // define a formatting function
-    const formatFloat = (value:number) => {return value.toFixed(3)}
+    const formatFloat = (value:number) => { return typeof(value) == "number" ?  value.toFixed(2) : value }
+
+    
+
 
     let xCol = cols[cols.length - 1]; // will become variable
     if (xConfig !== undefined && xConfig.current != "") {
@@ -122,9 +125,10 @@ export class LinePlot extends DcNode {
     const traces = [];
     for (let i = 0; i < cols.length; i++) {
       if (i == xIdx) continue;
+      console.log(i,cols[i],df[cols[i]],df.ctypes.values[i])
       const trace = {
         x: X,
-        y: await df[cols[i]].apply(formatFloat).values, //df[cols[i]].values,
+        y: df.ctypes.values[i] == "float32" ? await df[cols[i]].apply(formatFloat).values : df[cols[i]].values, //df[cols[i]].values,
         mode: "lines",
         line: {
           //color: 'rgb(55, 128, 191)',

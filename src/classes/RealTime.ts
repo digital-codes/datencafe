@@ -51,6 +51,20 @@ export class RealTime extends DcNode {
           label: "Device",
           value: "12345678",
         },
+        {
+          id: "pwd",
+          type: "string",
+          label: "Password",
+          value: "",
+        },
+        {
+          id:"run",
+          type:"number",
+          label:"Connect",
+          value:"0",
+          min:"0",
+          max:"1"
+        }
       ],
     };
     super(id, "realtime", ports, edges, cfg as any);
@@ -66,8 +80,10 @@ export class RealTime extends DcNode {
     }
     // update
     this.config = config; // update config
-    if (options[0] != "") {
+    if ((options[0] != "") && (options[2] == 1)) {
       await this.run()
+    } else {
+      await this.stop()
     }
   }
   // ---------------------------
@@ -100,11 +116,13 @@ export class RealTime extends DcNode {
       // get  app id from user store
       const appId = userStore.getAppId()
       const device = this.config.options[0].value
+      const pwd = this.config.options[1].value
       await this.socket.send(JSON.stringify({ 
         'action': 'subscribe', 
         'topic': 'dcaf', 
         "id":appId,
-        "device": device
+        "device": device,
+        "pwd": pwd
        }))
        // store current time as reference
        this.startTime = Date.now();
@@ -151,16 +169,20 @@ export class RealTime extends DcNode {
   // event handler looses this => static method with id
   static async update(id: string, startTime: number, data: any) {
     DcNode.print("Update on " + String(id));
-
-    const date = (Date.now() - startTime ) / 1000 // date is in ms
-    const msg = JSON.parse(data)
+    let msg
+    try {
+      msg = JSON.parse(data)
+    } catch (e) {
+      alert("Bad response" + e)
+      return
+    }
     const message = {} as any
     for (const k of Object.keys(msg)) {
       message[k] = [msg[k]]
     }
+    const date = (Date.now() - startTime ) / 1000 // date is in ms
     message.timestamp = [date]
     console.log("Msg:",message)
-
 
     // check data existing
     let df 
@@ -175,6 +197,8 @@ export class RealTime extends DcNode {
       // df = await new DcNode.dfd.DataFrame({"date":[date],"message":[message]});
       df = await new DcNode.dfd.DataFrame(message);
     }
+    // drop rows with NaN
+    df.dropNa({ axis: 1, inplace: true })
 
     //const dt = await new Date().toISOString();
     await DcNode.providers.update(id, DcNode.dfd.toJSON(df));
