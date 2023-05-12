@@ -46,7 +46,7 @@
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref } from "vue";
+import { onMounted, ref, provide } from "vue";
 import { UserStore, Modes } from "@/services/UserStore";
 const userStore = UserStore();
 
@@ -66,6 +66,11 @@ import {
 import MainMenu from "@/components/MainMenu.vue";
 import TitleBar2 from "@/components/TitleBar2.vue";
 import PrintPage from "@/views/PrintPage.vue";
+
+// prerelase state
+provide('prerelease', true)
+
+
 
 // do not track ...
 onMounted(async () => {
@@ -214,6 +219,24 @@ const onMove = (detail) => {
 };
 // --------------
 </script>
+
+<style>
+/* global style prerelease */
+.prerelease {
+  font-size: 90%;
+  font-weight:bold;
+  color:var(--ion-color-danger);
+  border:solid 1px var(--ion-color-primary-tint);
+  padding:.3rem;
+}
+
+@media screen and (max-width: 600px) {
+  .prerelease {
+    font-size: 70%;
+    padding:.2rem;
+  }
+}
+</style>
 
 <style scoped>
 ion-menu ion-content {

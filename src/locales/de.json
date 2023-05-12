@@ -11,6 +11,7 @@
   "startStory": "Loslegen",
   "notimplemented": "Noch nicht verfügbar",
   "prototype":"Prototyp",
+  "prerelease":"Achtung Vorabversion! Texte unvollständig oder irreführend",
   "titles": {
     "about": "Über Daten.Cafe",
     "tutorial": "Anleitungen",

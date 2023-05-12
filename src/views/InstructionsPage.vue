@@ -5,18 +5,9 @@
     <ion-content :fullscreen="true">
 
       <div id="container">
-        <!-- 
-        <ion-card color="light" v-if="mdLoaded">
-        <article>
-        <ion-card-content class="mdWrap">
-          <div v-html="getMd" class="tutor">
+        <div v-if="prerelease">
+          <span class="prerelease">{{ $t("prerelease") }}</span>
         </div>
-        </ion-card-content>
-      </article>
-      </ion-card>
-
-        -->
-
       <ion-card color="light" v-for="(item,i) in items.en" :key="i">
           <article>
             <ion-card-header>
@@ -40,6 +31,9 @@
 import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, IonToolbar } from '@ionic/vue';
 import { IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent } from '@ionic/vue'
 import TitleBar from "@/components/TitleBar.vue"
+
+import { inject } from "vue"
+const prerelease = inject("prerelease")
 
 
 /*

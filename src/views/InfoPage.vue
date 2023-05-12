@@ -5,11 +5,9 @@
     <ion-content :fullscreen="true">
 
         <div id="container">
-        <!-- use en as default to get length of storylist -->
-        <!-- 
-        <ion-button @click="f0">TF</ion-button>
-         
-        -->
+          <div v-if="prerelease">
+          <span class="prerelease">{{ $t("prerelease") }}</span>
+        </div>
 
         <ion-card color="light" v-for="(item,i) in infoItems.en" :key="i">
           <article>
@@ -45,6 +43,10 @@
 import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonLabel, IonTitle, IonToolbar } from '@ionic/vue';
 import { IonList, IonCard, IonImg, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent } from '@ionic/vue'
 import { IonButton } from '@ionic/vue'
+
+import { inject } from "vue"
+const prerelease = inject("prerelease")
+
 
 import TitleBar from "@/components/TitleBar.vue"
 

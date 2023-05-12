@@ -3,6 +3,9 @@
     <ion-header :translucent="true" class="hdr"></ion-header>
     <ion-content :fullscreen="true">
       <div id="container">
+        <div v-if="prerelease">
+          <span class="prerelease">{{ $t("prerelease") }}</span>
+        </div>
         <ion-card color="light" v-for="(item,i) in items.en" :key="i">
           <article>
             <ion-card-header>
@@ -27,6 +30,10 @@ import { IonButtons, IonContent, IonHeader, IonMenuButton, IonPage, IonTitle, Io
 import { IonButton } from '@ionic/vue';
 import { IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent } from '@ionic/vue'
 import TitleBar from "@/components/TitleBar.vue"
+
+import { inject } from "vue"
+const prerelease = inject("prerelease")
+
 
 
 // https://lokalise.com/blog/vue-i18n/

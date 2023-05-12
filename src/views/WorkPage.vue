@@ -9,6 +9,10 @@ import { loadingController } from '@ionic/vue';
 // activation
 import { onActivated, onDeactivated, onUpdated } from "vue";
 
+import { inject } from "vue"
+const prerelease = inject("prerelease")
+
+
 
 // user store
 import { UserStore, UserInfo } from "@/services/UserStore";
@@ -136,6 +140,9 @@ const scrollToTop = () => {
 
     <ion-content :fullscreen="true" ref="content">
     <div id="container" class="container work-container">
+      <div v-if="prerelease">
+          <span class="prerelease">{{ $t("prerelease") }}</span>
+        </div>
         <ion-grid fixed="true">
           <ion-row>
             <div class="switch">

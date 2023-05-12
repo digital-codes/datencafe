@@ -5,6 +5,9 @@
     <ion-content :fullscreen="true">
 
         <div id="container">
+          <div v-if="prerelease">
+          <span class="prerelease">{{ $t("prerelease") }}</span>
+        </div>
         <!-- use en as default to get length of storylist -->
         <ion-card color="light" >
           <article>
@@ -60,6 +63,10 @@ import { IonCard, IonCardHeader, IonCardTitle, IonCardSubtitle, IonCardContent }
 import { IonInput, IonItem, IonLabel, IonTextarea } from '@ionic/vue';
 import TitleBar from "@/components/TitleBar.vue"
 import { ref, onMounted } from 'vue';
+
+import { inject } from "vue"
+const prerelease = inject("prerelease")
+
 
 // user store
 import { UserStore } from '@/services/UserStore'

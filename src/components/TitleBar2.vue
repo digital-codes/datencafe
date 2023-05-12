@@ -33,9 +33,12 @@
           <span class="version ion-hide-sm-down">{{ $t(routeInfo.title) }}</span>
           -->
             </div>
+            <!-- 
             <div>
               <span class="prototype">{{$t("prototype")}}</span>
             </div>
+            -->
+
           </div>
         </ion-buttons>
 

@@ -11,6 +11,7 @@
   "startStory": "Start story",
   "notimplemented": "Not implemented yet",
   "prototype":"Prototype",
+  "prerelease":"Caution Prerelease! Text incomplete or misleading",
   "titles": {
     "about": "About Daten.Cafe",
     "tutorial": "Tutorials",
