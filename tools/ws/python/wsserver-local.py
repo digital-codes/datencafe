@@ -8,8 +8,9 @@ import csv
 # Set the maximum number of subscribers
 MAX_SUBSCRIBERS = 20
 
-with open('potd.txt', 'r') as f:
-        goodPwd = f.readlines()[0].strip()
+# need to read in the loop. will not be updated otherwise
+#with open('potd.txt', 'r') as f:
+#        goodPwd = f.readlines()[0].strip()
 
 #print("Pwd",goodPwd)
 
@@ -22,23 +23,23 @@ with open('sensors.csv', 'r') as f:
 
 class PubSub:
     def __init__(self):
-        print("Init")
+        # print("Init")
         self.clients = set()
         self.subscriptions = {}
 
     async def subscribe(self, websocket, topic,appId,device):
-        print("Subscribe to ",topic,appId,device,self.clients,self.subscriptions)
+        # print("Subscribe to ",topic,appId,device,self.clients,self.subscriptions)
 
         self.clients.add(websocket)
         if topic in self.subscriptions and len(self.subscriptions[topic]) > 0:
-            print("Existing topic ",topic,self.subscriptions)
+            # print("Existing topic ",topic,self.subscriptions)
             self.subscriptions[topic].add(websocket)
         else:
-            print("Adding topic ",topic,self.subscriptions)
+            # print("Adding topic ",topic,self.subscriptions)
             self.subscriptions[topic] = {websocket}
 
     async def unsubscribe(self, websocket, topic, appId):
-        print("subscriptions: ",self.subscriptions)
+        # print("subscriptions: ",self.subscriptions)
 
         if websocket in self.clients: 
             self.clients.remove(websocket)
@@ -48,25 +49,25 @@ class PubSub:
 
 
     async def publish(self, topic, message):
-        print("Publish to: ",topic)
+        # print("Publish to: ",topic)
         try:
             data = json.loads(message)
-            print("Json Data:",data)
+            # print("Json Data:",data)
         except:
             data = message
-            print("Text Data:",data)
-        print("subscriptions: ",self.subscriptions)
+            # print("Text Data:",data)
+        # print("subscriptions: ",self.subscriptions)
         if topic in self.subscriptions:
-            print("topic ok")
+            # print("topic ok")
             for websocket in self.subscriptions[topic]:
-                print("return message",message)
+                # print("return message",message)
                 await websocket.send(message)
 
 async def handle(websocket, path):
-    print("handle")
+    # print("handle")
     global pubsub
     client_ip = websocket.remote_address[0]
-    print(f"Received message from {client_ip}")
+    # print(f"Received message from {client_ip}")
     # can be ::1  or 127.0.0.1
     # pubsub = PubSub()
     # normally, publisher also subscribe
@@ -77,7 +78,7 @@ async def handle(websocket, path):
             data = json.loads(message)
             action = data.get('action')
             topic = data.get('topic')
-            print(data,action,topic)
+            # print(data,action,topic)
 
             if action == 'subscribe':
                 # Check if the maximum number of subscribers has been reached
@@ -88,6 +89,8 @@ async def handle(websocket, path):
                 appId = data.get("id")
                 device = data.get("device")
                 # check access via device and password
+                with open('potd.txt', 'r') as f:
+                    goodPwd = f.readlines()[0].strip()
                 pwd = data.get("pwd")
                 if (not device in userList) or (pwd != goodPwd):
                     await websocket.send("Not authorized")
@@ -108,7 +111,7 @@ async def handle(websocket, path):
                     return
                     
                 payload = data.get('payload')
-                print(payload)
+                # print(payload)
                 await pubsub.publish(topic, payload)
     except websockets.exceptions.ConnectionClosed:
         pass

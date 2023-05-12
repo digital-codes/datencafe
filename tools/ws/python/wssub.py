@@ -2,6 +2,8 @@ import asyncio
 import json
 import websockets
 
+device="12345678"
+pwd="Genge5Thoh"
 async def main():
     async with websockets.connect(
         'wss://daten.cafe:443/ws',
@@ -10,7 +12,12 @@ async def main():
         # proxy=('https://daten.cafe/ws', 443)
     ) as websocket:
         # Subscribe to topic 'test'
-        await websocket.send(json.dumps({'action': 'subscribe', 'topic': 'dcaf'}))
+        await websocket.send(json.dumps({
+            'action': 'subscribe',
+            'topic': 'dcaf',
+            "device":device,
+            "pwd":pwd
+            }))
 
         # Receive messages from the server
         async for message in websocket:

@@ -7,8 +7,10 @@ import csv
 #userList = ["12345678","23456789"]
 # goodPwd = "dummy"
 
-with open('potd.txt', 'r') as f:
-        goodPwd = f.readlines()[0].strip()
+# need to read file on each access, will remain constant in server
+# otherwise
+#with open('potd.txt', 'r') as f:
+#        goodPwd = f.readlines()[0].strip()
 
 #print("Pwd",goodPwd)
 
@@ -24,6 +26,8 @@ async def handle_post(request):
     headers = request.headers
     user = headers.get('user')
     pwd = headers.get('pwd')
+    with open('potd.txt', 'r') as f:
+        goodPwd = f.readlines()[0].strip()
 
     if (not user in userList) or (pwd != goodPwd):
         raise web.HTTPUnauthorized()
