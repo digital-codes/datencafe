@@ -56,7 +56,7 @@ def mdCompile(x):
             # get title
             title=i.split("\n")[0]
             content="\n".join(i.split("\n")[1:])
-            html=markdown.markdown(content, extensions=['legacy_attrs'])
+            html=markdown.markdown(content, extensions=['legacy_attrs','attr_list',"tables"])
             # print(html) # <p>Hello <em>World</em><p/>
             print("title", title)
             item={"title": title, "body": content, "html": html}

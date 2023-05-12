@@ -216,6 +216,20 @@ use h5 hidden with underscore
   display:block;
 }
 
+.tutor table {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+.tutor td, .tutor th {
+  padding-left: .5rem;
+  padding-right: .5rem;
+  text-align: left;
+}
+
+.tutor .caption {
+  font-size: 80%;
+}
+
 @media screen and (max-width: 996px) {
 
 .tutor img {
