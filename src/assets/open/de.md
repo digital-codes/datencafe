@@ -14,6 +14,13 @@ Wir wollen nicht nur wissen, ob auf einer Wiese Apfelbäume stehen oder nicht, s
 
 Diese Tabellenform lässt sich sehr einfach direkt einem Computer zur Verarbeitung und Darstellung eingeben.
 
+Richtig interessant wird es allerdings erst, wenn wir nicht nur eine Tabelle zu unserer eigenen Apfelwiese haben, sondern wenn wir diese 
+Daten mit anderen Daten verknüpfen können - andere Wiesen, Bodenbeschaffenheit, Regenmenge, Sonnestunden etc. Mit vielen Daten erhalten wir ein 
+komplexes Bild und unser Gehirn ist darauf ausgelegt, in komplexen Zusammenhängen Muster zu erkennen. Das kann zu wichtigen neuen Erkenntnissen führen. Und es macht Spaß.
+
+
+#### Darstellungsarten
+
 ![Apple orchard](/img/open/orchard.jpg)
 Shameela Yoosuf Ali, CC BY-SA 4.0, via Wikimedia Commons 
 {: .caption }

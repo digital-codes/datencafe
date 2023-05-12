@@ -4,7 +4,7 @@ The term *data* generally refers to descriptions of concrete circumstances, obse
 When we use the term in the context of digital technologies, we often want to *evaluate* the data, i.e., we are mostly
 interested in numerical descriptions with extensive details.
 
-We want to know not only whether there are apple trees in a meadow or not, but how many of which variety, how big, when planted, how productive ... This would give us a small data table already:
+We want to know not only whether there are apple trees in a meadow or not, but how many of which variety, how big, when planted, how productive... This would give us a small data table already:
 
 | Variety | Height [m] | Planting date | Yield [kg] |
 | --- | --- | --- | --- | 
@@ -13,6 +13,11 @@ We want to know not only whether there are apple trees in a meadow or not, but h
 | Unknown | 2 | Unknown | 6 | 
 
 It is very easy to provide this tabular form to a computer for processing and display.
+
+A single table however is not very exciting. Once we collect more data - other orchards, soil composition, rain volume, sun hours etc - we can create a 
+complex picture of the situation. Our brain loves to find patterns in complex things! So we might find important new insights. And it's fun.
+
+#### Data representations
 
 ![Apple orchard](/img/open/orchard.jpg)
 Shameela Yoosuf Ali, CC BY-SA 4.0, via Wikimedia Commons 

@@ -3,12 +3,16 @@
 
 ### Daten.Cafe - Datenkompetenz
 
-Daten.Cafe möchte auf einfache Art grundlegende Kenntnisse in Datenkompetenz vermitteln. Dafür bilden ein freier Zugang zur Anwendung und den Ergebnissen die Basis. Die Anwendung erlaubt das Erlernen und Üben der Konzepte auch auf (modernen) Smartphones und Tablets. Datenkompetenz bedeutet, dass man Daten verstehen und damit umgehen kann. Daten in verschiedenen Zusammenhängen zu nutzen hilft dabei, um informierte Entscheidungen zu treffen. Data Literacy, so der englische Begriff dafür, ist eine Fähigkeit, die jeder haben sollte, da Daten in vielen Bereichen unseres Lebens eine wichtige Rolle spielen. 
+Daten.Cafe möchte auf einfache Art grundlegende Kenntnisse in Datenkompetenz vermitteln. Dafür bilden ein freier Zugang zur Anwendung und den Ergebnissen die Basis. Die Anwendung erlaubt das Erlernen und Üben der Konzepte auch auf (modernen) Smartphones und Tablets. Datenkompetenz bedeutet, dass man Daten verstehen und damit umgehen kann. Daten aus verschiedenen Zusammenhängen zu nutzen hilft uns, informierte Entscheidungen zu treffen. 
+
+Data Literacy, so der englische Begriff dafür, ist eine Fähigkeit, die jeder haben sollte, da Daten in vielen Bereichen unseres Lebens eine wichtige Rolle spielen. 
 
 Daten beschreiben Vorgänge in unserer realen Umwelt. Wir können Daten selbst erheben, z.B. indem wir aufzeichnen, wie viele Schritte wir am Tag zurücklegen und wie viele Kalorien wir aufnehmen. Diese Daten können uns Hinweise darauf geben, wie wir unsere Gesundheit fördern können.
 Daten über unser Verhalten und unsere Tätigkeiten werden auch von anderen Stellen gesammelt - welche Musik wir hören, welche Artikel wir online bestellen, an welchen Orten wir uns aufhalten.
+
 Alle diese Daten können unterschiedlich genutzt werden, z.B. im Gesundheitswesen, für Wirtschaft und Wissenschaft.
 
+Data Literacy hilft uns, bei unseren alltäglichen Entscheidungen die richtige Wahl zu treffen. Und Data Literacy hilft uns dabei einzuschätzen, welche Daten über uns und unser Verhalten bei anderen Stellen vorhanden sind und wozu diese genutzt werden können. 
 
 
 

@@ -3,9 +3,19 @@
 
 ### Daten.Cafe - Data Literacy
 
-Daten.Cafe aims to provide basic knowledge in data literacy in a simple way. Free access to the application and sharable results are essential concepts. The application is not mobile-first, but at least mobile-compatiple, allowing learning and practicing of concepts on (modern) smartphones. Data literacy means the ability to understand and handle data. It's about how data can be used in different contexts to make informed decisions. Data literacy is a skill that everyone should have, as data plays an important role in many areas of our lives. In today's world, we generate a lot of data. This can include information on how we use our phones, how much we move, or even how much money we spend. Data is also used in many areas such as healthcare, economy, and science. Through data literacy, you can use data to make informed decisions. For example, if you're trying to lose weight, you can track your daily steps or calorie intake using an app. You can use this data to see if you're making progress towards your goal. Data literacy is also important in healthcare. Your doctor can use data such as your blood pressure or cholesterol levels to determine if you're at increased risk for certain diseases. By understanding this data, you can make lifestyle changes that may help reduce your risk.
+Daten.Cafe wants to provide basic knowledge in data literacy in a simple way. Free access to the application and the results form the basis for this. The application allows learning and practicing the concepts also on (modern) smartphones and tablets. Data literacy means being able to understand and deal with data. Using data in different contexts helps to make informed decisions. 
 
+Data literacy is a skill that everyone should have, since data plays an important role in many areas of our lives. 
 
+Data describes processes in our real environment. We can collect data ourselves, for example by recording how many steps we take in a day and how many calories we consume. These data can give us clues about how to promote our health.
+Data about our behavior and activities is also collected by other entities - what music we listen to, what items we order online, what places we go.
+
+All of this data can be used in different ways, including healthcare, business, and science.
+
+Data literacy helps us make the right choices in our everyday decisions. And data literacy helps us assess what data about us and our behavior is available to other entities and what it can be used for.
+
+Translated with www.DeepL.com/Translator (free version)
+{: .caption }
 
 
 ### Who? All of us!
