@@ -95,6 +95,7 @@ https://api.worldbank.org/v2/country/GBR/indicator/SP.POP.TOTL?format=json
 This will retrieve data for the indicator "Population, total" for the United Kingdom, in JSON format.
 User
 list of indicators or link to list
+
 ChatGPT
 
 You can find a list of all the indicators available in the World Bank's API by visiting their website at https://data.worldbank.org/indicator.
@@ -126,6 +127,27 @@ Sure! Here are five examples of API calls you can use to retrieve climate, finan
 https://ec.europa.eu/eurostat/web/education-corner/overview
 
 
+https://ec.europa.eu/eurostat/web/nuts/background
+
+The current NUTS 2021 classification is valid from 1 January 2021 and lists 92 regions at NUTS 1, 242 regions at NUTS 2 and 1166 regions at NUTS 3 level.
+
+The NUTS classification (Nomenclature of territorial units for statistics) is a hierarchical system for dividing up the economic territory of the EU and the UK for the purpose of:
+
+     The collection, development and harmonisation of European regional statistics
+     Socio-economic analyses of the regions
+         NUTS 1: major socio-economic regions
+         NUTS 2: basic regions for the application of regional policies
+         NUTS 3: small regions for specific diagnoses 
+
+
+
+
  # Govdata
  https://www.govdata.de/
 
+# europeana
+https://www.europeana.eu/de/rights/terms-of-use
+
+
+# dbpedia
+https://www.dbpedia.org/
