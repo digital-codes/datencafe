@@ -10,6 +10,8 @@ The goal of Daten.Cafe is to provide a (more or less) intuitive way to learn fun
 
 Protoype running at [Daten.Cafe](https://daten.cafe)
 
+Story at [Medium](https://medium.com/@digital_codes/daten-cafe-no-code-for-data-literacy-c08201b7f181)
+
 Instruction page should get you started. There is one example data-story available. Note: actions on nodes are started with a LONG click. 
 Works on mobile too but less fun. You need to toggle between flow and charts with, yellow button. 
 
