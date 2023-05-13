@@ -1,31 +1,31 @@
 <!-- -->
-### Test für einfache Kombination von Daten
+### Demo: Eingabe von drei Dateitypen
 
-**Dies ist bisher die einzige Beispielgeschichte. Lade sie herunter und probier sie aus!**
+CSV, XLSX und JSON als Eingabeformat.
+
+### Demo: Drei Visualisierungen
+
+Tabelle, Balkendiagramm und Liniendiagramm zur Anzeige derselben Daten. Bei der Balkendarstellung kann gestapelt (stacked) oder normal eingestellt werden. Auswahl der X-Achse bei Balken- und Liniendiagramm.
+
+Die Anzeigedaten können heruntergeladen werden.
+
+### Demo: Umbenennen/Entfernen von Spalten
+
+Unerwünschte Datenfelder aus der Ausgabe-Grafik entfernen.
+
+Knoten N9 muss nach dem Laden konfiguriert werden: "Stadtteil" löschen
+
+### Demo: Test für einfache Kombination von Daten
 
 Darstellung von einfachen Datenverknüpfungen mit folgender Operationen: Add,Sub,Mul,Div sowie Anfügen von Zeilen und Spalten und einfacher Join über die erste Spalte
 
-### Nutzung offener Daten zur Verbesserung des öffentlichen Verkehrs
 
-Erlernen, wie man öffentliche Verkehrsdatenquellen findet und darauf zugreift. 
+### Demo: Einfache Kombination mehrerer Datenquellen
 
-Verstehen, wie man Verkehrsdaten nutzt, um neue Tools und Apps für Pendler zu erstellen. 
+Zugriff auf kommunale Statistiken und Berechnung des Verhältnisses der Spielplatzfläche pro Kind. Die Entwicklung im Laufe der Zeit für auswählbare Bezirke darstellen.
 
-Erforschen, wie offene Daten genutzt werden können, um öffentliche Verkehrssysteme. effizienter und benutzerfreundlicher zu machen
+Erfordert die Konfiguration verschiedener Knoten nach dem Laden. Wenn Du soweit gekommen bist, sollte das nicht zu schwer sein...
 
-### Wie offene Daten uns geholfen haben, Umweltverschmutzung zu verfolgen
+Hinweis: Die Eingabedateien stammen vom Daten.Cafe-Server.
 
-Identifikation und Zugriff auf relevante Umweltdatenquellen erlernen. 
-
-Verstehen, wie man Umweltdaten visualisiert und analysiert, um Verschmutzungsquellen zu identifizieren.
-
- Erforschen, wie offene Daten genutzt werden können, um Umweltaktivismus und Bewusstsein zu fördern
-
-### Offene Daten und Katastrophenhilfe
-
-Identifikation und Zugriff auf relevante Katastrophen-bezogene Datenquellen erlernen. 
-
-
-
-Verstehen, wie man Daten nutzt, um Katastrophenhilfe-Planung und -Koordination durchzuführen. Erforschen, wie offene Daten genutzt werden können, um Katastrophen-Vorbereitung und -Hilfe zu verbessern
-
+Siehe auch diese [Übersicht](assets/stories/simple/simplified-playgrounds.pdf) 

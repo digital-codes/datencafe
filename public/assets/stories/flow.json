@@ -1,0 +1,183 @@
+{
+  "version": "0.5",
+  "flow": {
+    "elements": {
+      "nodes": [
+        {
+          "data": {
+            "id": "N1",
+            "name": "N1",
+            "ports": {},
+            "instance": {
+              "id": "N1",
+              "name": "N1",
+              "type": "input",
+              "display": 0
+            },
+            "type": {
+              "name": "loadcsv",
+              "shp": "round-octagon",
+              "bd": "#00f",
+              "img": "url('/img/widgets/CSVFile.png')"
+            }
+          },
+          "position": {
+            "x": 411,
+            "y": 377
+          },
+          "group": "nodes",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": false,
+          "classes": ""
+        }
+      ]
+    },
+    "style": [
+      {
+        "selector": "node[name]",
+        "style": {
+          "label": "data(name)",
+          "text-valign": "bottom",
+          "text-halign": "center",
+          "background-fit": "contain",
+          "background-color": "rgb(255,255,255)",
+          "shape": "rectangle",
+          "width": "30px",
+          "height": "30px",
+          "border-width": "2px"
+        }
+      },
+      {
+        "selector": "node[type.shp]",
+        "style": {
+          "shape": "data(type.shp)"
+        }
+      },
+      {
+        "selector": "node[type.bd]",
+        "style": {
+          "border-color": "data(type.bd)"
+        }
+      },
+      {
+        "selector": "node[type.img]",
+        "style": {
+          "background-image": "data(type.img)"
+        }
+      },
+      {
+        "selector": "edge",
+        "style": {
+          "width": "3px",
+          "line-color": "rgb(204,204,204)",
+          "target-arrow-color": "rgb(204,204,204)",
+          "target-arrow-shape": "triangle",
+          "curve-style": "bezier"
+        }
+      },
+      {
+        "selector": "edge[type]",
+        "style": {
+          "label": "data(type)",
+          "font-size": "10px",
+          "text-rotation": "autorotate",
+          "text-margin-x": "0px",
+          "text-margin-y": "0px"
+        }
+      },
+      {
+        "selector": "edge[dark]",
+        "style": {
+          "color": "rgb(255,136,136)",
+          "background-color": "rgb(0,0,0)"
+        }
+      },
+      {
+        "selector": ".eh-preview",
+        "style": {
+          "opacity": "1",
+          "background-color": "rgb(255,0,0)",
+          "line-color": "rgb(255,0,0)",
+          "target-arrow-color": "rgb(0,0,255)",
+          "source-arrow-color": "rgb(255,0,0)"
+        }
+      },
+      {
+        "selector": ".eh-ghost-edge",
+        "style": {
+          "opacity": "0",
+          "background-color": "rgb(0,128,0)",
+          "line-color": "rgb(0,128,0)",
+          "target-arrow-color": "rgb(0,0,255)",
+          "source-arrow-color": "rgb(255,0,0)"
+        }
+      },
+      {
+        "selector": ".eh-source",
+        "style": {
+          "border-width": "2px",
+          "border-color": "rgb(255,0,0)"
+        }
+      },
+      {
+        "selector": ".eh-target",
+        "style": {
+          "border-width": "2px",
+          "border-color": "rgb(0,0,255)"
+        }
+      }
+    ],
+    "data": {},
+    "zoomingEnabled": true,
+    "userZoomingEnabled": true,
+    "zoom": 1,
+    "minZoom": 0.5,
+    "maxZoom": 10,
+    "panningEnabled": true,
+    "userPanningEnabled": true,
+    "pan": {
+      "x": 0,
+      "y": 0
+    },
+    "boxSelectionEnabled": true,
+    "renderer": {
+      "name": "canvas"
+    },
+    "wheelSensitivity": 0.2
+  },
+  "nodes": [
+    {
+      "id": "N1",
+      "name": "N1",
+      "classname": "loadcsv",
+      "config": {
+        "pop": "value",
+        "options": [
+          {
+            "id": "url",
+            "type": "url",
+            "label": "URL",
+            "value": ""
+          }
+        ]
+      },
+      "sigs": []
+    }
+  ],
+  "data": [],
+  "next": 2,
+  "story": {
+    "title": "",
+    "author": "",
+    "date": "",
+    "email": "",
+    "link": "",
+    "tags": [],
+    "category": "",
+    "text": ""
+  }
+}

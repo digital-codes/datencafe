@@ -1,1 +1,42 @@
-[{"icon": "/assets/stories/story1.png", "learn": "123", "author": "AK", "email": "andreas.kugel@ok-lab-karlsruhe.de", "date": "17.04.2023", "link": "/assets/stories/story1.json"}, {"icon": "", "learn": "123", "author": "the author", "email": "123@de.de", "date": "2023/02/01", "link": ""}, {"icon": "", "learn": "123", "author": "the author", "email": "123@de.de", "date": "2023/02/01", "link": ""}, {"icon": "", "learn": "123", "author": "the author", "email": "123@de.de", "date": "2023/02/01", "link": ""}]
+[
+    {
+        "icon": "/assets/stories/simple/triple-files.png",
+        "learn": "123",
+        "author": "AK",
+        "email": "info@daten.cafe",
+        "date": "2023/05/13",
+        "link": "/assets/stories/simple/triple-files.json"
+    },
+    {
+        "icon": "/assets/stories/simple/triple-plot.png",
+        "learn": "123",
+        "author": "AK",
+        "email": "info@daten.cafe",
+        "date": "2023/05/13",
+        "link": "/assets/stories/simple/triple-plot.json"
+    },
+    {
+        "icon": "/assets/stories/simple/triple-files-rename.png",
+        "learn": "123",
+        "author": "AK",
+        "email": "info@daten.cafe",
+        "date": "2023/05/13",
+        "link": "/assets/stories/simple/triple-files-rename.json"
+    },
+    {
+        "icon": "/assets/stories/story1.png",
+        "learn": "123",
+        "author": "AK",
+        "email": "info@daten.cafe",
+        "date": "17.04.2023",
+        "link": "/assets/stories/story1.json"
+    },
+    {
+        "icon": "/assets/stories/simple/simplified-playgrounds.png",
+        "learn": "123",
+        "author": "AK",
+        "email": "info@daten.cafe",
+        "date": "2023/05/13",
+        "link": "/assets/stories/simple/simplified-playgrounds.json"
+    }
+]

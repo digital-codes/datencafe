@@ -1,0 +1,966 @@
+{
+  "version": "0.5",
+  "flow": {
+    "elements": {
+      "nodes": [
+        {
+          "data": {
+            "id": "N1",
+            "name": "N1",
+            "ports": {
+              "A": true
+            },
+            "instance": {
+              "id": "N1",
+              "name": "N1",
+              "type": "table",
+              "display": 1
+            },
+            "type": {
+              "name": "tableplot",
+              "shp": "rectangle",
+              "bd": "#0f0",
+              "img": "url('/img/widgets/Table.png')"
+            }
+          },
+          "position": {
+            "x": 463.11507422478087,
+            "y": 194.87718197606
+          },
+          "group": "nodes",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": false,
+          "classes": ""
+        },
+        {
+          "data": {
+            "id": "N2",
+            "name": "N2",
+            "ports": {
+              "A": true
+            },
+            "instance": {
+              "id": "N2",
+              "name": "N2",
+              "type": "table",
+              "display": 1
+            },
+            "type": {
+              "name": "tableplot",
+              "shp": "rectangle",
+              "bd": "#0f0",
+              "img": "url('/img/widgets/Table.png')"
+            }
+          },
+          "position": {
+            "x": 457.4207018323054,
+            "y": 423.17799334099533
+          },
+          "group": "nodes",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": false,
+          "classes": ""
+        },
+        {
+          "data": {
+            "id": "N3",
+            "name": "N3",
+            "ports": {
+              "A": true
+            },
+            "instance": {
+              "id": "N3",
+              "name": "N3",
+              "type": "proc",
+              "display": 0
+            },
+            "type": {
+              "name": "datainfo",
+              "shp": "roundrectangle",
+              "bd": "#000",
+              "img": "url('/img/widgets/DataInfo.png')"
+            }
+          },
+          "position": {
+            "x": 309.53685590666,
+            "y": 416.01319799203765
+          },
+          "group": "nodes",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": false,
+          "classes": ""
+        },
+        {
+          "data": {
+            "id": "N4",
+            "name": "N4",
+            "ports": {
+              "A": true
+            },
+            "instance": {
+              "id": "N4",
+              "name": "N4",
+              "type": "chart",
+              "display": 1
+            },
+            "type": {
+              "name": "lineplot",
+              "shp": "rectangle",
+              "bd": "#0f0",
+              "img": "url('/img/widgets/LineChart.png')"
+            }
+          },
+          "position": {
+            "x": 462.2640260379196,
+            "y": 269.9436545620619
+          },
+          "group": "nodes",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": false,
+          "classes": ""
+        },
+        {
+          "data": {
+            "id": "N5",
+            "name": "N5",
+            "ports": {
+              "A": true
+            },
+            "instance": {
+              "id": "N5",
+              "name": "N5",
+              "type": "chart",
+              "display": 1
+            },
+            "type": {
+              "name": "barplot",
+              "shp": "rectangle",
+              "bd": "#0f0",
+              "img": "url('/img/widgets/BarPlot.png')"
+            }
+          },
+          "position": {
+            "x": 464.35829397806754,
+            "y": 348.1822310870315
+          },
+          "group": "nodes",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": false,
+          "classes": ""
+        },
+        {
+          "data": {
+            "id": "N6",
+            "name": "N6",
+            "ports": {},
+            "instance": {
+              "id": "N6",
+              "name": "N6",
+              "type": "gen",
+              "display": 0
+            },
+            "type": {
+              "name": "randomgen",
+              "shp": "round-octagon",
+              "bd": "#00f",
+              "img": "url('/img/widgets/RandomData.png')"
+            }
+          },
+          "position": {
+            "x": 168.45443291443854,
+            "y": 202.2979796791052
+          },
+          "group": "nodes",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": false,
+          "classes": ""
+        },
+        {
+          "data": {
+            "id": "N7",
+            "name": "N7",
+            "ports": {},
+            "instance": {
+              "id": "N7",
+              "name": "N7",
+              "type": "gen",
+              "display": 0
+            },
+            "type": {
+              "name": "randomgen",
+              "shp": "round-octagon",
+              "bd": "#00f",
+              "img": "url('/img/widgets/RandomData.png')"
+            }
+          },
+          "position": {
+            "x": 150.07360494291913,
+            "y": 412.55981520030457
+          },
+          "group": "nodes",
+          "removed": false,
+          "selected": true,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": false,
+          "classes": ""
+        },
+        {
+          "data": {
+            "id": "N8",
+            "name": "N8",
+            "ports": {
+              "A": true,
+              "B": true
+            },
+            "instance": {
+              "id": "N8",
+              "name": "N8",
+              "type": "proc",
+              "display": 0
+            },
+            "type": {
+              "name": "addcols",
+              "shp": "roundrectangle",
+              "bd": "#000",
+              "img": "url('/img/widgets/MergeData.png')"
+            }
+          },
+          "position": {
+            "x": 314.03385777044576,
+            "y": 218.04642772115022
+          },
+          "group": "nodes",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": false,
+          "classes": ""
+        }
+      ],
+      "edges": [
+        {
+          "data": {
+            "source": "N8",
+            "target": "N1",
+            "id": "8050c1ec-2629-410c-9e94-fa4722c148f8",
+            "type": "e1-A",
+            "port": "A"
+          },
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "group": "edges",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": true,
+          "classes": ""
+        },
+        {
+          "data": {
+            "source": "N8",
+            "target": "N4",
+            "id": "57e81d20-f52b-45a6-aeb5-f52f2af9a80f",
+            "type": "e1-A",
+            "port": "A"
+          },
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "group": "edges",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": true,
+          "classes": ""
+        },
+        {
+          "data": {
+            "source": "N8",
+            "target": "N5",
+            "id": "845cc8ef-29ce-45c7-9e29-0ec3cc467ebb",
+            "type": "e1-A",
+            "port": "A"
+          },
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "group": "edges",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": true,
+          "classes": ""
+        },
+        {
+          "data": {
+            "source": "N3",
+            "target": "N2",
+            "id": "4512e242-f2b2-4e55-8894-24f8b0fb8798",
+            "type": "e1-A",
+            "port": "A"
+          },
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "group": "edges",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": true,
+          "classes": ""
+        },
+        {
+          "data": {
+            "source": "N7",
+            "target": "N3",
+            "id": "e959e54e-ce01-41fa-9b87-acbdada5630c",
+            "type": "e1-A",
+            "port": "A"
+          },
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "group": "edges",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": true,
+          "classes": ""
+        },
+        {
+          "data": {
+            "source": "N6",
+            "target": "N8",
+            "id": "6711f60e-da1d-42a0-9ff1-7cbbdacb3af2",
+            "type": "e1-A",
+            "port": "A"
+          },
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "group": "edges",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": true,
+          "classes": ""
+        },
+        {
+          "data": {
+            "source": "N7",
+            "target": "N8",
+            "id": "9ba0d485-3a03-4049-9427-1928a6b7a83a",
+            "type": "e1-B",
+            "port": "B"
+          },
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "group": "edges",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": true,
+          "classes": ""
+        }
+      ]
+    },
+    "style": [
+      {
+        "selector": "node[name]",
+        "style": {
+          "label": "data(name)",
+          "text-valign": "bottom",
+          "text-halign": "center",
+          "background-fit": "contain",
+          "background-color": "rgb(255,255,255)",
+          "shape": "rectangle",
+          "width": "30px",
+          "height": "30px",
+          "border-width": "2px"
+        }
+      },
+      {
+        "selector": "node[type.shp]",
+        "style": {
+          "shape": "data(type.shp)"
+        }
+      },
+      {
+        "selector": "node[type.bd]",
+        "style": {
+          "border-color": "data(type.bd)"
+        }
+      },
+      {
+        "selector": "node[type.img]",
+        "style": {
+          "background-image": "data(type.img)"
+        }
+      },
+      {
+        "selector": "edge",
+        "style": {
+          "width": "3px",
+          "line-color": "rgb(204,204,204)",
+          "target-arrow-color": "rgb(204,204,204)",
+          "target-arrow-shape": "triangle",
+          "curve-style": "bezier"
+        }
+      },
+      {
+        "selector": "edge[type]",
+        "style": {
+          "label": "data(type)",
+          "font-size": "10px",
+          "text-rotation": "autorotate",
+          "text-margin-x": "0px",
+          "text-margin-y": "0px"
+        }
+      },
+      {
+        "selector": "edge[dark]",
+        "style": {
+          "color": "rgb(255,136,136)",
+          "background-color": "rgb(0,0,0)"
+        }
+      },
+      {
+        "selector": ".eh-preview",
+        "style": {
+          "opacity": "1",
+          "background-color": "rgb(255,0,0)",
+          "line-color": "rgb(255,0,0)",
+          "target-arrow-color": "rgb(0,0,255)",
+          "source-arrow-color": "rgb(255,0,0)"
+        }
+      },
+      {
+        "selector": ".eh-ghost-edge",
+        "style": {
+          "opacity": "0",
+          "background-color": "rgb(0,128,0)",
+          "line-color": "rgb(0,128,0)",
+          "target-arrow-color": "rgb(0,0,255)",
+          "source-arrow-color": "rgb(255,0,0)"
+        }
+      },
+      {
+        "selector": ".eh-source",
+        "style": {
+          "border-width": "2px",
+          "border-color": "rgb(255,0,0)"
+        }
+      },
+      {
+        "selector": ".eh-target",
+        "style": {
+          "border-width": "2px",
+          "border-color": "rgb(0,0,255)"
+        }
+      }
+    ],
+    "data": {},
+    "zoomingEnabled": true,
+    "userZoomingEnabled": true,
+    "zoom": 2.163591926472473,
+    "minZoom": 0.5,
+    "maxZoom": 10,
+    "panningEnabled": true,
+    "userPanningEnabled": true,
+    "pan": {
+      "x": -274.91961291591224,
+      "y": -285.7830482671434
+    },
+    "boxSelectionEnabled": true,
+    "renderer": {
+      "name": "canvas"
+    },
+    "wheelSensitivity": 0.2
+  },
+  "nodes": [
+    {
+      "id": "N1",
+      "name": "N1",
+      "classname": "tableplot",
+      "config": {},
+      "sigs": [
+        {
+          "signal": "UPD-N8",
+          "port": "A"
+        }
+      ]
+    },
+    {
+      "id": "N2",
+      "name": "N2",
+      "classname": "tableplot",
+      "config": {},
+      "sigs": [
+        {
+          "signal": "UPD-N3",
+          "port": "A"
+        }
+      ]
+    },
+    {
+      "id": "N3",
+      "name": "N3",
+      "classname": "datainfo",
+      "config": {
+        "pop": "value",
+        "options": [
+          {
+            "id": "fillna",
+            "type": "number",
+            "label": "FILL",
+            "value": "0",
+            "min": "0",
+            "max": "1"
+          }
+        ]
+      },
+      "sigs": [
+        {
+          "signal": "UPD-N7",
+          "port": "A"
+        }
+      ]
+    },
+    {
+      "id": "N4",
+      "name": "N4",
+      "classname": "lineplot",
+      "config": {},
+      "sigs": [
+        {
+          "signal": "UPD-N8",
+          "port": "A"
+        }
+      ]
+    },
+    {
+      "id": "N5",
+      "name": "N5",
+      "classname": "barplot",
+      "config": {},
+      "sigs": [
+        {
+          "signal": "UPD-N8",
+          "port": "A"
+        }
+      ]
+    },
+    {
+      "id": "N6",
+      "name": "N6",
+      "classname": "randomgen",
+      "config": {
+        "pop": "value",
+        "options": [
+          {
+            "id": "cols",
+            "type": "number",
+            "label": "Numeric",
+            "value": "3",
+            "min": "1",
+            "max": "5"
+          },
+          {
+            "id": "text",
+            "type": "number",
+            "label": "Text",
+            "value": "0",
+            "min": "0",
+            "max": "1"
+          },
+          {
+            "id": "rows",
+            "type": "number",
+            "label": "Rows",
+            "value": "10",
+            "min": "1",
+            "max": "30"
+          },
+          {
+            "id": "period",
+            "type": "number",
+            "label": "Period (s)",
+            "value": "5",
+            "min": "1",
+            "max": "60"
+          },
+          {
+            "id": "run",
+            "type": "number",
+            "label": "Run",
+            "value": "1",
+            "min": "0",
+            "max": "1"
+          }
+        ]
+      },
+      "sigs": []
+    },
+    {
+      "id": "N7",
+      "name": "N7",
+      "classname": "randomgen",
+      "config": {
+        "pop": "value",
+        "options": [
+          {
+            "id": "cols",
+            "type": "number",
+            "label": "Numeric",
+            "value": "2",
+            "min": "1",
+            "max": "5"
+          },
+          {
+            "id": "text",
+            "type": "number",
+            "label": "Text",
+            "value": "1",
+            "min": "0",
+            "max": "1"
+          },
+          {
+            "id": "rows",
+            "type": "number",
+            "label": "Rows",
+            "value": "10",
+            "min": "1",
+            "max": "30"
+          },
+          {
+            "id": "period",
+            "type": "number",
+            "label": "Period (s)",
+            "value": "5",
+            "min": "1",
+            "max": "60"
+          },
+          {
+            "id": "run",
+            "type": "number",
+            "label": "Run",
+            "value": "1",
+            "min": "0",
+            "max": "1"
+          }
+        ]
+      },
+      "sigs": []
+    },
+    {
+      "id": "N8",
+      "name": "N8",
+      "classname": "addcols",
+      "config": {
+        "pop": "mixed",
+        "options": [
+          {
+            "id": "op",
+            "type": "string",
+            "label": "Operation",
+            "select": true,
+            "value": [
+              "Join",
+              "Append",
+              "Add",
+              "Sub",
+              "Mul",
+              "Div"
+            ],
+            "current": "Sub"
+          }
+        ]
+      },
+      "sigs": [
+        {
+          "signal": "UPD-N6",
+          "port": "A"
+        },
+        {
+          "signal": "UPD-N7",
+          "port": "B"
+        }
+      ]
+    }
+  ],
+  "data": [
+    {
+      "id": "N3",
+      "data": [
+        {
+          "Type": "count",
+          "COL1": 10,
+          "COL2": 10
+        },
+        {
+          "Type": "mean",
+          "COL1": 52.83095075715437,
+          "COL2": 57.36344335593951
+        },
+        {
+          "Type": "std",
+          "COL1": 26.823174152138392,
+          "COL2": 31.215309959656814
+        },
+        {
+          "Type": "min",
+          "COL1": 10.88539475135375,
+          "COL2": 14.447770860895936
+        },
+        {
+          "Type": "median",
+          "COL1": 47.16646547124646,
+          "COL2": 73.7113430165478
+        },
+        {
+          "Type": "max",
+          "COL1": 97.36329540439638,
+          "COL2": 93.50126391952031
+        },
+        {
+          "Type": "variance",
+          "COL1": 719.4826715959451,
+          "COL2": 974.3955758774498
+        }
+      ],
+      "root": false,
+      "loaded": true,
+      "meta": {}
+    },
+    {
+      "id": "N8",
+      "data": [
+        {
+          "COL1": -70.21907806396484,
+          "COL2": 26.717056274414062
+        },
+        {
+          "COL1": 17.529048919677734,
+          "COL2": 72.19449615478516
+        },
+        {
+          "COL1": -55.979984283447266,
+          "COL2": -58.61003112792969
+        },
+        {
+          "COL1": -27.55544662475586,
+          "COL2": -49.500274658203125
+        },
+        {
+          "COL1": 59.15280532836914,
+          "COL2": -11.024276733398438
+        },
+        {
+          "COL1": 48.325836181640625,
+          "COL2": 43.10906219482422
+        },
+        {
+          "COL1": -5.971675872802734,
+          "COL2": -25.024505615234375
+        },
+        {
+          "COL1": -6.089862823486328,
+          "COL2": -59.23664474487305
+        },
+        {
+          "COL1": -50.7114372253418,
+          "COL2": -8.104888916015625
+        },
+        {
+          "COL1": 22.288753509521484,
+          "COL2": -19.325546264648438
+        }
+      ],
+      "root": false,
+      "loaded": true,
+      "meta": {}
+    },
+    {
+      "id": "N6",
+      "data": [
+        {
+          "COL1": 8.863355348257429,
+          "COL2": 46.66850504429589,
+          "COL3": 5.035037140733345
+        },
+        {
+          "COL1": 44.87521264704901,
+          "COL2": 86.64226160784811,
+          "COL3": 36.133409662772145
+        },
+        {
+          "COL1": 24.890734797302493,
+          "COL2": 21.34227574866532,
+          "COL3": 84.08336166453805
+        },
+        {
+          "COL1": 12.953291592509764,
+          "COL2": 27.801683763213013,
+          "COL3": 57.188301621120274
+        },
+        {
+          "COL1": 94.85870952990379,
+          "COL2": 75.57770102870552,
+          "COL3": 33.50912737239443
+        },
+        {
+          "COL1": 93.18747289327985,
+          "COL2": 75.02789089836918,
+          "COL3": 43.24966331726916
+        },
+        {
+          "COL1": 56.24224436190204,
+          "COL2": 45.096221538616376,
+          "COL3": 50.25342135350485
+        },
+        {
+          "COL1": 43.38143724104001,
+          "COL2": 34.26462065829825,
+          "COL3": 34.29405638881258
+        },
+        {
+          "COL1": 46.651859540768825,
+          "COL2": 14.078838038959995,
+          "COL3": 37.540956509752675
+        },
+        {
+          "COL1": 33.17414855590288,
+          "COL2": 58.32888044096286,
+          "COL3": 7.171640374021004
+        }
+      ],
+      "root": true,
+      "loaded": true,
+      "meta": {
+        "generator": "random"
+      }
+    },
+    {
+      "id": "N7",
+      "data": [
+        {
+          "COL1": 79.08243300031982,
+          "COL2": 19.951449833449566,
+          "TCOL1": "HKJTV"
+        },
+        {
+          "COL1": 27.346165518523936,
+          "COL2": 14.447770860895936,
+          "TCOL1": "GPIEN"
+        },
+        {
+          "COL1": 80.87071977319606,
+          "COL2": 79.95230720155078,
+          "TCOL1": "NCXRP"
+        },
+        {
+          "COL1": 40.5087411366454,
+          "COL2": 77.30195781117372,
+          "TCOL1": "USTQQ"
+        },
+        {
+          "COL1": 35.705906623079265,
+          "COL2": 86.60197563532715,
+          "TCOL1": "XUIDS"
+        },
+        {
+          "COL1": 44.861631692569674,
+          "COL2": 31.918830338649585,
+          "TCOL1": "JDVUK"
+        },
+        {
+          "COL1": 62.21392042153621,
+          "COL2": 70.12072822192187,
+          "TCOL1": "AOBTB"
+        },
+        {
+          "COL1": 49.47129924992325,
+          "COL2": 93.50126391952031,
+          "TCOL1": "AFCGM"
+        },
+        {
+          "COL1": 97.36329540439638,
+          "COL2": 22.1837263822122,
+          "TCOL1": "AFRKP"
+        },
+        {
+          "COL1": 10.88539475135375,
+          "COL2": 77.65442335469402,
+          "TCOL1": "QVDMA"
+        }
+      ],
+      "root": true,
+      "loaded": true,
+      "meta": {
+        "generator": "random"
+      }
+    }
+  ],
+  "next": 9,
+  "story": {
+    "title": "",
+    "author": "",
+    "date": "",
+    "email": "",
+    "link": "",
+    "tags": [],
+    "category": "",
+    "text": ""
+  }
+}

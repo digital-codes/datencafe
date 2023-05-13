@@ -1,0 +1,332 @@
+{
+  "version": "0.6",
+  "flow": {
+    "elements": {
+      "nodes": [
+        {
+          "data": {
+            "id": "N1",
+            "name": "N1",
+            "ports": {},
+            "instance": {
+              "id": "N1",
+              "name": "N1",
+              "type": "input",
+              "display": 0
+            },
+            "type": {
+              "name": "loadcsv",
+              "shp": "round-octagon",
+              "bd": "#00f",
+              "img": "url('/img/widgets/CSVFile.png')"
+            }
+          },
+          "position": {
+            "x": 279.9240821406347,
+            "y": 266.9315494710641
+          },
+          "group": "nodes",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": false,
+          "classes": ""
+        },
+        {
+          "data": {
+            "id": "N2",
+            "name": "N2",
+            "ports": {
+              "A": true
+            },
+            "instance": {
+              "id": "N2",
+              "name": "N2",
+              "type": "chart",
+              "display": 1
+            },
+            "type": {
+              "name": "barplot",
+              "shp": "rectangle",
+              "bd": "#0f0",
+              "img": "url('/img/widgets/BarPlot.png')"
+            }
+          },
+          "position": {
+            "x": 472.03733665214685,
+            "y": 267.92594897324204
+          },
+          "group": "nodes",
+          "removed": false,
+          "selected": true,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": false,
+          "classes": ""
+        }
+      ],
+      "edges": [
+        {
+          "data": {
+            "source": "N1",
+            "target": "N2",
+            "id": "dd205430-f4a2-4874-87a6-77bba9b2a371",
+            "type": "e1-A",
+            "port": "A"
+          },
+          "position": {
+            "x": 0,
+            "y": 0
+          },
+          "group": "edges",
+          "removed": false,
+          "selected": false,
+          "selectable": true,
+          "locked": false,
+          "grabbable": true,
+          "pannable": true,
+          "classes": ""
+        }
+      ]
+    },
+    "style": [
+      {
+        "selector": "node[name]",
+        "style": {
+          "label": "data(name)",
+          "text-valign": "bottom",
+          "text-halign": "center",
+          "background-fit": "contain",
+          "background-color": "rgb(255,255,255)",
+          "shape": "rectangle",
+          "width": "30px",
+          "height": "30px",
+          "border-width": "2px"
+        }
+      },
+      {
+        "selector": "node[type.shp]",
+        "style": {
+          "shape": "data(type.shp)"
+        }
+      },
+      {
+        "selector": "node[type.bd]",
+        "style": {
+          "border-color": "data(type.bd)"
+        }
+      },
+      {
+        "selector": "node[type.img]",
+        "style": {
+          "background-image": "data(type.img)"
+        }
+      },
+      {
+        "selector": "edge",
+        "style": {
+          "width": "3px",
+          "line-color": "rgb(204,204,204)",
+          "target-arrow-color": "rgb(204,204,204)",
+          "target-arrow-shape": "triangle",
+          "curve-style": "bezier"
+        }
+      },
+      {
+        "selector": "edge[type]",
+        "style": {
+          "label": "data(type)",
+          "font-size": "10px",
+          "text-rotation": "autorotate",
+          "text-margin-x": "0px",
+          "text-margin-y": "0px"
+        }
+      },
+      {
+        "selector": "edge[dark]",
+        "style": {
+          "color": "rgb(255,136,136)",
+          "background-color": "rgb(0,0,0)"
+        }
+      },
+      {
+        "selector": ".eh-preview",
+        "style": {
+          "opacity": "1",
+          "background-color": "rgb(255,0,0)",
+          "line-color": "rgb(255,0,0)",
+          "target-arrow-color": "rgb(0,0,255)",
+          "source-arrow-color": "rgb(255,0,0)"
+        }
+      },
+      {
+        "selector": ".eh-ghost-edge",
+        "style": {
+          "opacity": "0",
+          "background-color": "rgb(0,128,0)",
+          "line-color": "rgb(0,128,0)",
+          "target-arrow-color": "rgb(0,0,255)",
+          "source-arrow-color": "rgb(255,0,0)"
+        }
+      },
+      {
+        "selector": ".eh-source",
+        "style": {
+          "border-width": "2px",
+          "border-color": "rgb(255,0,0)"
+        }
+      },
+      {
+        "selector": ".eh-target",
+        "style": {
+          "border-width": "2px",
+          "border-color": "rgb(0,0,255)"
+        }
+      }
+    ],
+    "data": {},
+    "zoomingEnabled": true,
+    "userZoomingEnabled": true,
+    "zoom": 2.7575921099227783,
+    "minZoom": 0.5,
+    "maxZoom": 10,
+    "panningEnabled": true,
+    "userPanningEnabled": true,
+    "pan": {
+      "x": -682.4674816594764,
+      "y": -499.61406175412526
+    },
+    "boxSelectionEnabled": true,
+    "renderer": {
+      "name": "canvas"
+    },
+    "wheelSensitivity": 0.2
+  },
+  "nodes": [
+    {
+      "id": "N1",
+      "name": "N1",
+      "classname": "loadcsv",
+      "config": {
+        "pop": "value",
+        "options": [
+          {
+            "id": "url",
+            "type": "url",
+            "label": "URL",
+            "value": "/data/good2.csv"
+          },
+          {
+            "id": "license",
+            "type": "text",
+            "label": "License",
+            "value": ""
+          },
+          {
+            "id": "attribution",
+            "type": "text",
+            "label": "Attrib.",
+            "value": ""
+          }
+        ]
+      },
+      "sigs": []
+    },
+    {
+      "id": "N2",
+      "name": "N2",
+      "classname": "barplot",
+      "config": {
+        "pop": "mixed",
+        "options": [
+          {
+            "id": "stacked",
+            "type": "number",
+            "label": "Stacked",
+            "select": false,
+            "value": 0,
+            "min": 0,
+            "max": 1,
+            "current": "1"
+          },
+          {
+            "id": "xaxis",
+            "type": "string",
+            "label": "X-Axis",
+            "select": true,
+            "value": [
+              "year",
+              "value1",
+              "value2"
+            ],
+            "current": "year"
+          }
+        ]
+      },
+      "sigs": [
+        {
+          "signal": "UPD-N1",
+          "port": "A"
+        }
+      ]
+    }
+  ],
+  "data": [
+    {
+      "id": "N1",
+      "data": [
+        {
+          "year": 2017,
+          "value1": 135.98,
+          "value2": -12
+        },
+        {
+          "year": 2018,
+          "value1": 147.49,
+          "value2": 23
+        },
+        {
+          "year": 2019,
+          "value1": 146.93,
+          "value2": 100.4
+        },
+        {
+          "year": 2020,
+          "value1": 139.89,
+          "value2": 95
+        },
+        {
+          "year": 2021,
+          "value1": 125.6,
+          "value2": 85
+        },
+        {
+          "year": 2022,
+          "value1": 108.13,
+          "value2": 85
+        }
+      ],
+      "meta": {
+        "url": "/data/good2.csv",
+        "date": "2023-05-13T11:16:21.808Z",
+        "storagetype": "dataframe"
+      },
+      "root": true,
+      "loaded": true
+    }
+  ],
+  "next": 3,
+  "story": {
+    "title": "",
+    "author": "",
+    "date": "",
+    "email": "",
+    "link": "",
+    "tags": [],
+    "category": "",
+    "text": ""
+  }
+}
