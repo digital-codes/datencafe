@@ -33,7 +33,7 @@
     "cross-env": "^7.0.3",
     "cytoscape": "^3.23.0",
     "cytoscape-edgehandles": "^4.0.1",
-    "danfojs": "^1.1.2",
+    "danfojs": "file:../danfojs-ak/src/danfojs-browser/danfojs-1.1.2.tgz",
     "ionicons": "^6.0.3",
     "jose": "^4.14.1",
     "marked": "^4.3.0",
