@@ -30,6 +30,10 @@ Data processing library is [Danfo.js](https://danfo.jsdata.org/) providing "Pand
 
 Orange3 [widget symbols](https://orangedatamining.com/widget-catalog/) are used when possible.
 
+**XLSX**
+
+XLSX library is used to open Excel files and a older version (0.17.2) is included in Danfojs. There are security advisories for all XLSX versions up to 0.19.2 on [Github](https://github.com/advisories/GHSA-4r6h-8v6p-xvw6) and [Sheetjs](https://cdn.sheetjs.com/advisories/CVE-2023-30533). However, the Danfojs version is not used to import files. Instead, we use a separate installation from Sheetjs, currently [version 0.19.3](https://git.sheetjs.com/sheetjs/sheetjs/src/tag/v0.19.3). This security alert can therefore be ignored, unless you use the built-in XLSX version.
+
 
 ### Data Processing 
 
