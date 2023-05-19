@@ -1,0 +1,685 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this file,
+   - You can obtain one at http://mozilla.org/MPL/2.0/. -->
+<!DOCTYPE html>
+<html platform="win" dir="ltr" lang="de"><head>
+  <title id="reader-title">Crashkurs «Datenvisualisierung»</title>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *; object-src 'none'">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReaderPocket.css" type="text/css">
+  <link rel="localization" href="toolkit/about/aboutReader.ftl">
+  <link rel="localization" href="toolkit/branding/brandings.ftl">
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"></head>
+
+<body class="light sans-serif loaded" style="--font-size: 18px; --content-width: 30em;">
+  <div class="top-anchor"></div>
+
+  <div id="toolbar" class="toolbar-container scrolled">
+    <div class="toolbar reader-toolbar">
+      <div class="reader-controls" articledir="ltr">
+        <button class="close-button toolbar-button" aria-labelledby="toolbar-close" data-telemetry-id="reader-close">
+          <span class="hover-label" id="toolbar-close" data-l10n-id="about-reader-toolbar-close">Leseansicht schließen</span>
+        </button>
+        <ul class="dropdown style-dropdown">
+          <li>
+            <button class="dropdown-toggle toolbar-button style-button" aria-labelledby="toolbar-type-controls" data-telemetry-id="reader-type-controls">
+              <span class="hover-label" id="toolbar-type-controls" data-l10n-id="about-reader-toolbar-type-controls">Schrifteinstellungen</span>
+            </button>
+          </li>
+          <li class="dropdown-popup">
+            <div class="dropdown-arrow"></div>
+            <div class="font-type-buttons radiorow"><input id="radio-itemsans-serif-button" type="radio" class="radio-button" name="font-type" checked="checked"><label for="radio-itemsans-serif-button" class="sans-serif-button" data-l10n-id="about-reader-font-type-sans-serif" checked="true">Sans-serif</label><input id="radio-itemserif-button" type="radio" class="radio-button" name="font-type"><label for="radio-itemserif-button" class="serif-button" data-l10n-id="about-reader-font-type-serif">Serif</label></div>
+            <div class="font-size-buttons buttonrow">
+              <button class="minus-button" data-l10n-id="about-reader-toolbar-minus" title="Kleinere Schrift"></button>
+              <span class="font-size-value">4</span>
+              <button class="plus-button" data-l10n-id="about-reader-toolbar-plus" title="Größere Schrift"></button>
+            </div>
+            <div class="content-width-buttons buttonrow">
+               <button class="content-width-minus-button" data-l10n-id="about-reader-toolbar-contentwidthminus" title="Schmalerer Inhalt"></button>
+               <span class="content-width-value">3</span>
+               <button class="content-width-plus-button" data-l10n-id="about-reader-toolbar-contentwidthplus" title="Breiterer Inhalt"></button>
+            </div>
+            <div class="line-height-buttons buttonrow">
+                <button class="line-height-minus-button" data-l10n-id="about-reader-toolbar-lineheightminus" title="Kleinerer Zeilenabstand"></button>
+                <span class="line-height-value">4</span>
+                <button class="line-height-plus-button" data-l10n-id="about-reader-toolbar-lineheightplus" title="Größerer Zeilenabstand"></button>
+            </div>
+            <div class="color-scheme-buttons radiorow"><input id="radio-itemlight-button" type="radio" class="radio-button" name="color-scheme" checked="checked"><label for="radio-itemlight-button" class="light-button" data-l10n-id="about-reader-color-scheme-light" checked="true" title="Helles Farbschema">Hell</label><input id="radio-itemdark-button" type="radio" class="radio-button" name="color-scheme"><label for="radio-itemdark-button" class="dark-button" data-l10n-id="about-reader-color-scheme-dark" title="Dunkles Farbschema">Dunkel</label><input id="radio-itemsepia-button" type="radio" class="radio-button" name="color-scheme"><label for="radio-itemsepia-button" class="sepia-button" data-l10n-id="about-reader-color-scheme-sepia" title="Sepia-Farbschema">Sepia</label><input id="radio-itemauto-button" type="radio" class="radio-button" name="color-scheme"><label for="radio-itemauto-button" class="auto-button" data-l10n-id="about-reader-color-scheme-auto" title="Automatisches Farbschema">Automatisch</label></div>
+          </li>
+        </ul>
+      <ul class="dropdown narrate-dropdown"><li><button class="dropdown-toggle toolbar-button narrate-toggle" data-telemetry-id="reader-listen" aria-label="Anhören (N)"><span class="hover-label">Anhören (N)</span></button></li><li class="dropdown-popup"><div class="narrate-row narrate-control"><button class="narrate-skip-previous" disabled="disabled" title="Zurück"></button><button class="narrate-start-stop" title="Wiedergeben (N)"></button><button class="narrate-skip-next" disabled="disabled" title="Vor"></button></div><div class="narrate-row narrate-rate"><input class="narrate-rate-input" value="0" step="5" max="100" min="-100" type="range" title="Geschwindigkeit"></div><div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Stimme:</span> <span class="current-voice">Standard</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox" style="max-height: 663px;"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Standard</button><button data-value="urn:moz-tts:sapi:Microsoft Hedda - German (Germany)?de-DE" class="option" tabindex="-1" role="option">Microsoft Hedda - German (Germany)</button><button data-value="urn:moz-tts:sapi:Microsoft Hedda Desktop - German?de-DE" class="option" tabindex="-1" role="option">Microsoft Hedda Desktop - German</button><button data-value="urn:moz-tts:sapi:Microsoft Katja - German (Germany)?de-DE" class="option" tabindex="-1" role="option">Microsoft Katja - German (Germany)</button><button data-value="urn:moz-tts:sapi:Microsoft Stefan - German (Germany)?de-DE" class="option" tabindex="-1" role="option">Microsoft Stefan - German (Germany)</button></div></div></div><div class="dropdown-arrow"></div></li></ul><button data-buttonid="pocket-button" data-telemetry-id="reader-save-to-pocket" class="toolbar-button pocket-button" aria-labelledby="label-pocket-button" style="background-image: url(&quot;chrome://global/skin/icons/pocket.svg&quot;);"><span class="hover-label" id="label-pocket-button" data-l10n-id="about-reader-toolbar-savetopocket">In Pocket speichern</span></button></div>
+    </div>
+  </div>
+
+  <div class="container" style="--line-height: 1.6em;" dir="ltr" lang="en-US">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="https://opendatazurich.github.io/crashkurs-dataviz/">opendatazurich.github.io</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">Einfache Datenanalyse und -visualisierung mit Excel und Datawrapper</h1>
+      <div class="credits reader-credits"></div>
+      <div class="meta-data">
+        <div class="reader-estimated-time" data-l10n-args="{&quot;range&quot;:&quot;27–32&quot;,&quot;rangePlural&quot;:&quot;other&quot;}" data-l10n-id="about-reader-estimated-read-time" dir="ltr">27–32 Minuten</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content reader-show-element"><div id="readability-page-1" class="page"><div>
+      <nav>
+        <ul><li><a href="#teil-1-daten-finden">Teil 1: Daten finden</a></li><li><a href="#teil-2-excel">Teil 2: Excel</a></li><li><a href="#csv-what">CSV… what?</a></li><li><a href="#csv-datenstze-in-excel-laden">CSV-Datensätze in Excel laden</a></li><li><a href="#datenauswertung-mit-excel">Datenauswertung mit Excel</a></li><li><a href="#anzahl-kleinkinder-nach-stadtquartier">Anzahl Kleinkinder nach Stadtquartier</a></li><li><a href="#anzahl-hunde-nach-stadtquartier">Anzahl Hunde nach Stadtquartier</a></li><li><a href="#vergleich-zur-anzahl-hunde-und-kleinkinder">Vergleich zur Anzahl Hunde und Kleinkinder</a></li><li><a href="#berrascht-vom-resultat">Überrascht vom Resultat?</a></li><li><a href="#teil-3-datawrapper">Teil 3: Datawrapper</a></li><li><a href="#daten-vorbereiten">Daten vorbereiten</a></li><li><a href="#hunde-nach-stadtquartier-und-geschlecht">Hunde nach Stadtquartier und Geschlecht</a></li><li><a href="#daten-in-datawrapper-laden">Daten in Datawrapper laden</a></li><li><a href="#diagramm-erstellen">Diagramm erstellen</a></li><li><a href="#resultat">Resultat</a></li><li><a href="#kleinkinder-hunde-koeffizient">Kleinkinder-Hunde Koeffizient</a></li><li><a href="#choroplethenkarte-erstellen">Choroplethenkarte erstellen</a></li><li><a href="#resultat">Resultat</a></li><li><a href="#anhnge">Anhänge</a></li><li><a href="#excel-datei">Excel-Datei</a></li><li><a href="#tutorials">Tutorials</a></li><li><a href="#datawrapper">Datawrapper</a></li><li><a href="#programmierung-r-python-sparql">Programmierung (R, Python, SPARQL)</a></li></ul>
+      </nav>
+      <section>
+        
+
+<p><strong>Fragestellung: «Stimmt es, dass es in Zürich in den meisten Stadtquartieren mehr Hunde als Kleinkinder gibt?»</strong></p>
+
+<p>Während dieses Kurses gehen wir dem Gerücht nach, ob in den meisten 
+Stadtquartieren tatsächlich mehr Hunde als Kleinkinder leben. Wir werden
+ mit Open Data die Fakten dazu checken und zeigen, wie wir die 
+gewonnenen Erkenntnisse darstellen und sogar als interaktive Webgrafiken
+ visualisieren können.</p>
+
+<p>Damit wir diese Fragestellung einfach und mit für alle 
+Kursteilnehmenden vorhandenen Tools beantworten können, haben wir uns 
+für Excel und <a href="https://www.datawrapper.de/">Datawrapper</a> entschieden.</p>
+
+<h2 id="teil-1-daten-finden">Teil 1: Daten finden</h2>
+<p>Zur Beantwortung der Fragestellung benötigen wir die dazu relevanten 
+Daten. Wir müssen uns zuerst auf die Suche machen, wo wir die Anzahl 
+Hunde und die Anzahl Kleinkinder pro Stadtquartier und Jahr beziehen 
+können. Wie gut also, dass es in der Stadt Zürich einen <a href="https://data.stadt-zuerich.ch/">Open Data Katalog</a>
+ gibt, auf dem alle frei verfügbaren Verwaltungsdaten aufgelistet, 
+ausführlich beschrieben und einfach durchsuchbar zum Download vorliegen 
+;)</p>
+
+<ul>
+  <li><strong>Schritt 1:</strong> Rufe den Open Data Katalog der Stadt Zürich auf unter: <a href="https://data.stadt-zuerich.ch/">https://data.stadt-zuerich.ch/</a></li>
+  <li><strong>Schritt 2:</strong> Suche nach Hundebestand pro 
+Stadtquartier und Jahr. Gebe dazu im Suchfeld beispielsweise den Begriff
+ «Hunde» und «Stadtquartier» ein. Beim Eintippen des Suchbegriffs werden
+ bereits passende Vorschläge zu auf dem Katalog vorkommenden Daten 
+angezeigt.<br>
+<img src="Crashkurs%20%C2%ABDatenvisualisierung%C2%BB-Dateien/103986721-847caf80-518b-11eb-839c-95953ead6f67.png" alt="Suchresultatvorschau"></li>
+  <li><strong>Schritt 3:</strong>
+    <ul>
+      <li>Wähle das Dataset «<a href="https://data.stadt-zuerich.ch/dataset/sid_stapo_hundebestand">Hundebestand der Stadt Zürich</a>»
+ aus und lies die Metadaten dazu. Besonders wichtig sind dabei die 
+Attributbeschreibungen, welche die Ausprägungen der Informationen im 
+Datensatz beschreiben. Hier sehen wir beispielsweise, dass es Angaben zu
+ Hundehaltenden und Hunden gibt. Bereits in der ersten 
+Attributbeschreibung zur technischen Identifikationsnummer der 
+hundehaltenden Personen (<code>HALTER_ID</code>) erfahren wir eine sehr 
+wichtige Information: ein Record (eine Zeile) im Datensatz entspricht 
+einem Hund. Wenn demnach der gleiche Hundehaltende zwei Hunde hat, so 
+kommt seine ID im Datensatz zweimal vor. Dank der Beschreibung können 
+wir ebenfalls sicher sein, dass die Stadtquartiere in den Daten 
+vorkommen. Weiterführende wichtige Informationen sind auch unter <em>Bemerkungen</em> zu finden.</li>
+      <li>Die Datensätze selber sind unter <em>Daten und Ressourcen</em> zu finden. Wähle dort den aktuellsten Datensatz (2020) aus und klicke darauf.</li>
+      <li>Dadurch öffnet sich eine neue Webseite, welche den Downloadlink und eine einfache Datenvorschau beinhaltet.</li>
+      <li>Klicke nun auf den Downloadlink, um die Daten herunter zu laden.</li>
+    </ul>
+
+    <video preload="none" poster="https://user-images.githubusercontent.com/538415/105815933-e888db80-5fb3-11eb-9074-58310dfb5f96.jpg" src="Crashkurs%20%C2%ABDatenvisualisierung%C2%BB-Dateien/105727018-ee86aa00-5f2a-11eb-8f33-90a597fd2658.mp4" controls="controls" muted="muted"><img alt="01_hundebestand_download" src="Crashkurs%20%C2%ABDatenvisualisierung%C2%BB-Dateien/103988953-3669ab00-518f-11eb-99ab-0ca362d5cb0c.gif"></video>
+  </li>
+  <li>
+    <p><strong>Schritt 4:</strong> Suche nach einem Datensatz, der die 
+Anzahl Kleinkinder pro Stadtquartier und Jahr beinhaltet. Da für die 
+Definition eines Kleinkindes das Alter relevant ist, suchen wir also 
+einen Datensatz, welcher das Alter der Bevölkerung nach Stadtquartier 
+und Jahr beinhaltet. Gib daher im Suchfeld beispielsweise die Begriffe 
+«Alter» und «Stadtquartier» ein. Als <a href="https://data.stadt-zuerich.ch/dataset?q=alter+stadtquartier&amp;sort=score+desc%2C+date_last_modified+desc">Suchresultat</a>
+ erscheinen nun aber 35 Datensätze. Wir sollte daher noch einen besseren
+ Begriff wählen. Verwende daher die Begriffe «Altersjahr» und 
+«Stadtquartier», dadurch sind es nur noch 8 <a href="https://data.stadt-zuerich.ch/dataset?q=altersjahr+stadtquartier&amp;sort=score+desc%2C+date_last_modified+desc">Resultate</a>.</p>
+  </li>
+  <li>
+    <p><strong>Schritt 5:</strong> Für unsere Fragestellung ist der Datensatz «<a href="https://data.stadt-zuerich.ch/dataset/bev_bestand_jahr_quartier_alter_herkunft_geschlecht_od3903">Bevölkerung nach Stadtquartier, Herkunft, Geschlecht und Alter, seit 1993</a>»
+ am geeignetsten. Er beinhaltet zwar mehr Informationen als wir 
+benötigen (die Herkunft oder das Geschlecht interessieren uns eigentlich
+ weniger), aber wir werden sie in einem späteren Schritt mit Excel 
+herausfiltern.</p>
+  </li>
+  <li>
+    <p><strong>Schritt 6:</strong> Lies nun auch wieder die Metadaten zum Datensatz und gehe gleich wie in <strong>Schritt 3</strong> vor, um den Datensatz auf Deinen Computer herunter zu laden.</p>
+  </li>
+  <li><strong>Schritt 7:</strong> Du hast nun die beiden für unsere Fragestellung relevanten Datensätze gefunden und heruntergeladen. Sie heissen <code>20200306_hundehalter.csv</code> (Hunde) und <code>BEV390OD3903.csv</code>(Bevölkerungsdaten).
+ Kopiere diese beiden Datensätze nun aus dem Downloadverzeichnis Deines 
+Computers und lege sie in ein Verzeichnis, wo Du an den noch folgenden 
+Schritten weiter arbeiten kannst.</li>
+</ul>
+
+<p>Damit ist unser erster Teil zum Thema «Daten finden» beendet. Solltest Du später einmal für eine andere Fragestellung auf dem <a href="https://data.stadt-zuerich.ch/">Open Data Katalog der Stadt Zürich</a> nicht fündig werden, können auch viele andere Open Data Quellen konsultiert werden. Auf nationaler Ebene werden unter <a href="https://opendata.swiss/">opendata.swiss</a> sämtliche offenen Verwaltungsdaten von verschiedenen Bundesstellen, anderen Kantonen und Städten angeboten.</p>
+
+<h2 id="teil-2-excel">Teil 2: Excel</h2>
+
+<h2 id="csv-what">CSV… what?</h2>
+<p>Eines der Grundprinzipien von Open Data ist, dass die Datensätze in <strong>nicht-proprietären Formaten</strong>
+ veröffentlicht werden sollen. Sprich, für die Verwendung der Daten 
+sollen die AnwenderInnen nicht auf kommerzielle Software angewiesen 
+sein. Damit soll allen die gleiche Möglichkeit gegeben werden, mit den 
+Daten arbeiten zu können. Das Excelformat (.xls oder .xlsx) ist ein 
+Beispiel eines proprietären Datenformats, weil es zur Verwendung Excel 
+erfordert.</p>
+
+<p>Das Standardformat für tabellarische Daten ist daher <a href="https://de.wikipedia.org/wiki/CSV_(Dateiformat)">CSV</a>. CSV steht für <strong>C</strong>omma-<strong>s</strong>eparated <strong>v</strong>alues (komma-getrennte Werte).</p>
+
+<p><strong>CSV-Beispiel:</strong></p>
+
+<p>CSV-Dateien haben meistens auf der ersten Zeile eine 
+Spaltenüberschrift und auf den nachfolgenden Zeilen dann die 
+kommaseparierten Werte.</p>
+<pre>"zeitpunkt","bruttolastgang","status"
+"2020-01-01T00:15",66546.656045,"E"
+"2020-01-01T00:30",66018.362440,"E"
+"2020-01-01T00:45",65272.630020,"E"
+"2020-01-01T01:00",64385.925397,"E"
+"2020-01-01T01:15",63578.900426,"E"
+"2020-01-01T01:30",63105.155989,"E"
+"2020-01-01T01:45",62287.860786,"E"
+"2020-01-01T02:00",61283.998490,"E"
+</pre>
+
+<p>Werte zwischen Anführungszeichen sind entweder Texte oder 
+Datumswerte. Wo keine Anführungszeichen stehen, handelt es sich um 
+numerische Werte.  Die Kodierung für Unicode-Zeichen ist dabei 
+standardmässig <a href="https://de.wikipedia.org/wiki/UTF-8">UTF-8</a>.
+Der angezeigte CSV-Auszug oben repräsentiert die folgende Tabelle:</p>
+
+<p><img src="Crashkurs%20%C2%ABDatenvisualisierung%C2%BB-Dateien/104014716-cc173180-51b3-11eb-9440-3d87d2fb6128.png" alt="DarstellungExcel" class="moz-reader-block-img"></p>
+
+<h2 id="csv-datenstze-in-excel-laden">CSV-Datensätze in Excel laden</h2>
+
+<p>Vielleicht fragst Du Dich unterdessen, wozu der ganze Exkurs über CSV
+ dienlich sein soll…(?) Leider ist es so, dass viele Datennutzende 
+bereits zu diesem Zeitpunkt scheitern, wenn sie noch nie mit CSV 
+gearbeitet haben und eine CSV-Datei in Excel öffnen wollen. Daher zeigen
+ wir Euch in diesem Abschnitt, wie man vorgehen sollte, wenn man mit 
+CSV-Datensätzen in Excel arbeiten möchte.</p>
+
+<p><strong>Wie es NICHT funktioniert:</strong>
+Ein Doppelklicken auf eine CSV-Datei - wie in unten gezeigter Animation 
+gezeigt - funktioniert leider in den meisten Fällen nicht. Obwohl man 
+gemäss des im Beispiel angezeigten Icons der Datei das Gefühl hätte, 
+dass dies so möglich sein sollte. Folgendes geschieht jedoch 
+stattdessen:</p>
+
+<video src="Crashkurs%20%C2%ABDatenvisualisierung%C2%BB-Dateien/105727214-25f55680-5f2b-11eb-8d62-e1d64c5bbd65.mp4" controls="controls" muted="muted"><img alt="02_excelissue" src="Crashkurs%20%C2%ABDatenvisualisierung%C2%BB-Dateien/104017881-32528300-51b9-11eb-8d15-39debf3c426a.gif"></video>
+
+<p>Die CSV-Datei wird zwar in Excel geöffnet, es findet dabei jedoch 
+keine Trennung der einzelnen Attribute in Spalten statt (vgl. mit der 
+oben gezeigten Tabelle). Mit der hier gezeigten Vorgehensweise sind alle
+ Werte in eine Spalte (hier Spalte A) eingefügt worden. Damit lässt sich
+ nicht bequem weiterarbeiten.
+[<em>NACHTRAG: wir wurden nach dem Crashkurs drauf aufmerksam gemacht, 
+dass das hier beschriebene Problem anstelle des gleich folgenden 
+Lösungsbeschriebs alternativ auch mit folgenden Schritten behoben werden
+ könnte: Wähle im Menu</em> <strong>Daten</strong> <em>&gt;</em> <strong>Text in Spalten</strong> <em>.</em>]</p>
+
+<p><strong>Der Clou: CSV-Datei IMPORTIERTEN</strong></p>
+
+<p>Damit ihr wie erwartet, basierend auf einem CSV-Datensatz, in Excel weiterarbeiten könnt, solltet ihr den CSV-Datensatz <strong>importieren</strong>. Dazu könnt ihr folgendermassen vorgehen:</p>
+
+<ul>
+  <li>
+    <p><strong>Schritt 1:</strong> Öffne eine neue leere Exceldatei und 
+speichere Sie in Dein Verzeichnis, wo Du bereits die beiden 
+CSV-Datensätze abgelegt hast ( <code>20200306_hundehalter.csv</code> und <code>BEV390OD3903.csv</code>). Gib dem Excelfile einen Namen, z.B. <code>Kleinkinder_und_Hunde.xlsx</code>.</p>
+  </li>
+  <li>
+    <p><strong>Schritt 2:</strong> Gehe zum Menu <strong>Daten</strong> und klicke auf <strong>Externe Daten abrufen</strong>. Wähle aus allen angezeigten Optionen <strong>Aus Text</strong> aus.</p>
+  </li>
+  <li>
+    <p><strong>Schritt 3:</strong> Mit dem Pop-Up <strong>Textdatei importieren</strong> wirst Du aufgefordert, die Textdatei auszuwählen, die Du nun ins Excelfile importieren möchtest. Wähle zuerst <code>20200306_hundehalter.csv</code> zum Import aus und klicke auf <strong>Importieren</strong>.</p>
+  </li>
+  <li><strong>Schritt 4:</strong> Nun erscheint das Pop-Up mit dem <strong>Textkonvertierungs-Assistenten</strong>, welcher dich durch drei Importschritte führt.
+    <ul>
+      <li>a) Wähle <strong>Getrennt</strong> aus, weil unsere Datensätze
+ ja durch Kommas abgetrennt sind. Der Import beginnt in Zeile 1 und das 
+CSV liegt in UTF-8 Kodierung vor. Aktiviere auch das Kästchen, dass die 
+Datei Überschriften hat. Ganz unten siehst Du eine Vorschau, wie gemäss 
+Deiner Auswahl der Import aussehen würde. Klicke nun auf <strong>Weiter</strong>.</li>
+      <li>b) Im nächsten Dialogfeld musst Du nun die Trennzeichen definieren. In unserem Fall, resp. bei CSV, sollte dies immer <strong>Komma</strong> sein. Wähle es aus und beobachte die Veränderung in der Vorschau. Wenn Du zufrieden bist, klicke auf <strong>Weiter</strong>.</li>
+      <li>c) Im letzten Dialogfeld kannst Du den Datentypen für jede 
+Spalte definieren. Dies ist in den meisten Fällen nicht notwendig. In 
+unserem Beispiel wurde noch explizit das Attribut Alter als Text 
+definiert. Dies weil gewisse Werte von Excel z.T. auch als Datum 
+interpretiert werden. Wenn Du zufrieden bist, klicke auf <strong>Weiter</strong>.</li>
+    </ul>
+  </li>
+  <li><strong>Schritt 5:</strong> Bestätige mit <strong>OK</strong> den 
+Import in das aktuelle Arbeitsblatt Deines Excelfiles. Voilà, die Daten 
+liegen nun so vor, dass Du mit den Hundedaten nun weiterarbeiten kannst.</li>
+</ul>
+
+<video preload="none" poster="https://user-images.githubusercontent.com/538415/105816084-1f5ef180-5fb4-11eb-82c0-ae741ec1fcdf.jpg" src="Crashkurs%20%C2%ABDatenvisualisierung%C2%BB-Dateien/105727303-3c9bad80-5f2b-11eb-8f49-09dbaae53c0e.mp4" controls="controls" muted="muted"><img alt="03_csv_import" src="Crashkurs%20%C2%ABDatenvisualisierung%C2%BB-Dateien/104021668-747ec300-51bf-11eb-859d-23aecceabee3.gif"></video>
+
+<ul>
+  <li>
+    <p><strong>Schritt 6:</strong> Überschreibe unten links den Arbeitsblattnamen von <em>Tabelle 1</em> auf <em>Hundebestand_2020</em>. Dies erfolgt ganz einfach, indem Du auf den Text <em>Tabelle 1</em> doppelklickst und ihn dann überschreibst.</p>
+  </li>
+  <li><strong>Schritt 7:</strong> Füge nun - mit einem Klick auf das Plus-Zeichen - ein neues Arbeitsblatt hinzu und nenne es <em>Bevölkerungsbestand</em>.</li>
+  <li><strong>Schritt 8:</strong> Importiere nun <code>BEV390OD3903.csv</code>wie ab Schritt 3 beschrieben in unser Excelfile <code>Kleinkinder_und_Hunde.xlsx</code>. Tipp: definiere beim Import die Spalte <em>AlterV05Kurz</em> als Text, weil sonst einzelne Werte als Datum interpretiert und falsch dargestellt werden.</li>
+</ul>
+
+<video preload="none" poster="https://user-images.githubusercontent.com/538415/105816256-5c2ae880-5fb4-11eb-8bc4-259f1cabf6fa.jpg" src="Crashkurs%20%C2%ABDatenvisualisierung%C2%BB-Dateien/105727511-740a5a00-5f2b-11eb-982c-da42620b0b9d.mp4" controls="controls" muted="muted"><img alt="04_csv_import_bevag" src="Crashkurs%20%C2%ABDatenvisualisierung%C2%BB-Dateien/104026534-5a94ae80-51c6-11eb-8940-1b2ffcca7f3a.gif"></video>
+
+<p>Damit sind wir fertig mit dem Datenimport. Unser Excelfile <code>Kleinkinder_und_Hunde.xlsx</code>
+ beinhaltet nun zwei Arbeitsblätter mit den Hunde- und 
+Bevölkerungsbestandsdaten, welche wir im nächsten Schritt analysieren 
+werden.</p>
+
+<h2 id="datenauswertung-mit-excel">Datenauswertung mit Excel</h2>
+<p>Excel ist bezüglich Datenanalyse selbstverständlich nicht allererste 
+Sahne. Fortgeschrittenere Datennutzende verwenden in der Regel eher 
+Statistiktools wie <strong><a href="https://www.r-project.org/">R</a></strong> (siehe dazu Ressourcen, wie <a href="https://rddj.info/">Rddj</a> oder <a href="https://education.rstudio.com/blog/2020/05/remote-roundup/">RStudio Education</a>) oder <strong><a href="https://www.python.org/">Python</a></strong> (siehe dazu Ressourcen, wie <a href="https://csmastersuh.github.io/data_analysis_with_python_2020/">Data analysis with Python</a> oder <a href="https://infovis.fh-potsdam.de/tutorials/">Information Visualization</a>).</p>
+
+<p>Excel bietet jedoch mehr und einfachere Datenanalysemöglichkeiten, 
+als man auf den ersten Blick vielleicht annehmen würde. Für diesen Kurs 
+möchten wir Euch das einfache Excel-Tool <strong><a href="https://support.microsoft.com/de-de/office/%C3%BCbersicht-%C3%BCber-pivottables-und-pivotcharts-527c8fa3-02c0-445a-a2db-7794676bce96">PivotCharts und PivotTable</a></strong> etwas näher bringen.</p>
+
+<p>Wenn ihr Euch die eben importierten Daten anschaut, dann seht ihr, 
+dass wir sie - um daraus Erkenntnisse zu gewinnen - im wesentlichen 
+filtern und entsprechend summieren können müssen. PivotTable bietet 
+diese Funktionalitäten sehr einfach, interaktiv und effizient an. 
+PivotCharts ist eine Ergänzung von PivotTables und erlaubt ebenfalls ein
+ einfaches interaktives visualisieren der Daten. Damit können auf 
+einfache Weise Muster erkannt und Vergleiche angestellt werden.</p>
+
+<h3 id="anzahl-kleinkinder-nach-stadtquartier">Anzahl Kleinkinder nach Stadtquartier</h3>
+<p>Beginnen wir zuerst einmal damit herauszufinden, wie viele Kleinkinder es pro Stadtquartier am 31.12.2019 gab.</p>
+
+<ul>
+  <li>
+    <p><strong>Schritt 1:</strong> Gehe zum Menu <strong>Einfügen</strong>, klicke aufs <strong>PivotChart-Icon</strong> und wähle <strong>PivotChart und PivotTable</strong>.</p>
+  </li>
+  <li>
+    <p><strong>Schritt 2:</strong> Mit dem Pop-Up <strong>PivotTable erstellen</strong>
+ wirst Du aufgefordert, den Tabellenbereich der analysiert werden soll 
+auszuwählen. Sofern Du alle Daten des aktiven Arbeitsblattes betrachten 
+möchtest, musst Du hier nichts anpassen. Als weitere Option kannst Du 
+auswählen, ob die PivotTable in ein bestimmtes oder in ein neues 
+Arbeitsblatt eingefügt werden soll. Klicke danach auf <strong>OK</strong>.</p>
+  </li>
+  <li><strong>Schritt 3:</strong> Im neuen Arbeitsblatt erscheinen nun 
+die noch leeren PivotTable- und PivotChart-Flächen. Auf der rechten 
+Seite siehst Du die PivotTable-Felder, welche Du <strong>interaktiv</strong> per drag &amp; drop in vier Bereiche ziehen kannst.
+    <ul>
+      <li>a) <strong>WERTE</strong>: hier werden die zu aggregierenden Wertefelder definiert. In unserem Fall ist das die <strong>Anzahl Personen</strong> aus der wirtschaftlichen Wohnbevölkerung (<code>AnzBestWir</code>) .</li>
+      <li>b) <strong>ZEILEN</strong>: hier werden die Felder eingefügt, welche als Zeilen dargestellt werden sollen. In unserem Fall also die <strong>Stadtquartiere</strong> (<code>QuartLang</code>). Die Stadtquartiere können mit ihren Namen oder mit ihren offiziellen IDs (<code>QuartSort</code>oder <code>QuartCd</code>) angezeigt werden.</li>
+      <li>c) <strong>SPALTEN</strong>: hier könnten weitere Ausprägungen
+ ausgewählt werden, wie z.B. das Geschlecht oder die Herkunft. Für 
+unsere Fragestellung sind diese Felder jedoch nicht relevant. Deshalb 
+bleibt dieser Bereich leer.</li>
+      <li>d) <strong>FILTER</strong>: hier können für Attribute gewisse Werte aus den Daten gefiltert werden. So müssen wir nun das für uns relevante <strong>Jahr</strong> (<code>StichtagDatJahr</code>), also <strong>2019</strong>, auswählen. Ausserdem betrachten wir ja lediglich die Kleinkinder. Wir definieren sie hier als jene Personen in der <strong>Alterskategorie</strong> (<code>AlterV05Kurz</code>) <strong>0-4</strong>. Also der Kinder die jünger als 5 Jahre alt sind. Man könnte die Definition selbstverständlich auch anders festlegen.</li>
+    </ul>
+
+    <video preload="none" poster="https://user-images.githubusercontent.com/538415/105816425-94cac200-5fb4-11eb-80a2-fdfe0a96d2a1.jpg" src="Crashkurs%20%C2%ABDatenvisualisierung%C2%BB-Dateien/105727578-897f8400-5f2b-11eb-952d-3d28126196c3.mp4" controls="controls" muted="muted"><img alt="05_bevbest_pivot" src="Crashkurs%20%C2%ABDatenvisualisierung%C2%BB-Dateien/104037207-ac443580-51d4-11eb-8458-4ee22822d42d.gif"></video>
+  </li>
+  <li><strong>Schritt 4:</strong> Damit haben wir nun bereits die 
+erforderliche Tabelle und eine simple Grafik der Anzahl Kleinkinder pro 
+Stadtquartier Ende 2019. Benenne das Arbeitsblatt wieder, z.B. mit <code>BevBest_Pivot</code>.</li>
+</ul>
+
+<h3 id="anzahl-hunde-nach-stadtquartier">Anzahl Hunde nach Stadtquartier</h3>
+<p>Als nächstes gehen wir analog der vorherigen Schritte vor und 
+analysieren nun, wie viele Hunde es pro Stadtquartier Anfangs März 2020 
+gab.</p>
+
+<ul>
+  <li><strong>Schritt 1:</strong> Wechsle ins Arbeitsblatt <strong>Hundebestand_2020</strong> und gehe erneut zum Menu <strong>Einfügen</strong>, klicke aufs <strong>PivotChart-Icon</strong> und wähle <strong>PivotChart und PivotTable</strong>.</li>
+  <li>
+    <p><strong>Schritt 2:</strong> Mit dem Pop-Up <strong>PivotTable erstellen</strong>
+ wirst Du wieder aufgefordert, den Tabellenbereich der analysiert werden
+ soll auszuwählen. Dieses Mal sollte sich die Tabelle auf die pivotiert 
+wird selbstverständlich auf den Hundebestand 2020 beziehen. Klicke 
+danach auf <strong>OK</strong>.</p>
+  </li>
+  <li><strong>Schritt 3:</strong> Im neuen Arbeitsblatt erscheinen 
+erneut die leeren PivotTable- und PivotChart-Flächen. Auf der rechten 
+Seite siehst Du nun die PivotTable-Felder aus dem aktuellen Datensatz 
+des Hundebestands, welche Du wieder in die vier Bereiche ziehen kannst.
+    <ul>
+      <li>a) <strong>WERTE</strong>: hier werden die zu aggregierenden Wertefelder definiert. Dieses Mal gilt es zu beachten, dass wir kein Feld wie <em>Anzahl Hunde</em> oder ähnliches vorfinden. Dies liegt daran, dass jede Zeile in den Daten einem Hund entspricht. Die <strong>Anzahl Hunde</strong> finden wir jedoch heraus, indem wir das Attribut Halter-ID (<code>HALTER_ID</code>) auswählen und in der <strong>Wertfeldeinstellung</strong> (rechte Maustaste auf <em>Summe von HALTER_ID</em>) von Wertfeld zusammenfassen als Summe auf <strong>Anzahl</strong> wechseln. Die mit der Option Summe würden alle HALTER_IDs summiert werden, was ja keinen Sinn macht.</li>
+      <li>b) <strong>ZEILEN</strong>: Dieses Mal kommen lediglich numerische Werte für die Stadtquartiere vor. Wir wählen hier daher die Stadtquartier-IDs (<code>STADTQUARTIER</code>) aus.</li>
+      <li>c) <strong>SPALTEN</strong>: auch hier könnten weitere 
+Ausprägungen ausgewählt werden, wie z.B. die Rasse, die Farbe, das 
+Geburtsjahr oder das Geschlecht des Hundes. Für unsere Fragestellung 
+sind diese Attribute jedoch nicht relevant. Deshalb bleibt dieser 
+Bereich leer.</li>
+      <li>d) <strong>FILTER</strong>: eine Filtervariable benötigen wir 
+dieses Mal nicht, weil sich die Daten ja lediglich auf ein Jahr 
+beziehen. Eine weitere Ausscheidung von Attributwerten ist auch nicht 
+notwendig. Dehalb bleibt dieser Bereich auch leer.</li>
+    </ul>
+  </li>
+</ul>
+
+<video preload="none" poster="https://user-images.githubusercontent.com/538415/105816543-baf06200-5fb4-11eb-8d23-e9556075a305.jpg" src="Crashkurs%20%C2%ABDatenvisualisierung%C2%BB-Dateien/105728095-0ad71680-5f2c-11eb-9533-ed3e6d19e3cd.mp4" controls="controls" muted="muted"><img alt="06_hundebest_pivot" src="Crashkurs%20%C2%ABDatenvisualisierung%C2%BB-Dateien/104046181-f8e13e00-51df-11eb-8c74-4f3e15db1f8f.gif"></video>
+
+<ul>
+  <li><strong>Schritt 4:</strong> Damit haben wir nun die Anzahl Hunde pro Stadtquartier als Tabelle. Benenne das Arbeitsblatt wieder, z.B. mit <code>HundeBest2020_Pivot</code>.</li>
+</ul>
+
+<h3 id="vergleich-zur-anzahl-hunde-und-kleinkinder">Vergleich zur Anzahl Hunde und Kleinkinder</h3>
+<p>Damit wir die Resultate der Anzahl Hunde und Anzahl Kleinkinder pro 
+Stadtquartier vergleichen können, kopieren wir am einfachsten die 
+Resultate der Pivot-Tabellen in ein neues Arbeitsblatt.</p>
+
+<ul>
+  <li>
+    <p><strong>Schritt 1:</strong> Füge ein neues Arbeitsblatt (mit 
+Klick auf das Plus-Zeichen unten rechts neben den anderen 
+Arbeitsblättern) hinzu. Gib ihm einen Namen. In unserem Beispiel <code>Vgl_Kleinkinder_Hunde</code>.</p>
+  </li>
+  <li>
+    <p><strong>Schritt 2:</strong> Kopiere die Werte der Anzahl Kleinkinder pro Stadtquartier und füge sie ins neue Arbeitsblatt ein.</p>
+  </li>
+  <li>
+    <p><strong>Schritt 3:</strong> Mache das gleiche mit den Werten zur 
+Anzahl Hunde pro Stadtquartier und füge sie mit etwas Abstand rechts ins
+ neue Arbeitsblatt ein.</p>
+  </li>
+</ul>
+
+<video preload="none" poster="https://user-images.githubusercontent.com/538415/105816678-e410f280-5fb4-11eb-96f2-552408ac88ca.jpg" src="Crashkurs%20%C2%ABDatenvisualisierung%C2%BB-Dateien/105728266-3f4ad280-5f2c-11eb-92e2-092bca21b723.mp4" controls="controls" muted="muted"><img alt="07_results" src="Crashkurs%20%C2%ABDatenvisualisierung%C2%BB-Dateien/104167948-86e64000-53fd-11eb-9a1a-152601170a01.gif"></video>
+
+<ul>
+  <li>
+    <p><strong>Schritt 4:</strong> Wir haben nun das Problem, dass bei 
+den Kleinkindern die Namen und bei den Hunden die IDs der Stadtquartiere
+ angegeben sind. So lassen sich die Werte nicht vergleichen. Daher 
+braucht es hier noch einen Zwischenschritt, in dem wir eine <strong>Zuordungstabelle</strong> von Stadtquartier-IDs zu den -Namen machen.</p>
+
+    <ul>
+      <li>
+        <p>a) Im Arbeitsblatt <code>Bevölkerungsbestand</code> kommen sowohl die Quartiernummer als auch der Quartiernamen vor. Erstelle daher in diesem Arbeitsblatt eine neue PivotTable.</p>
+      </li>
+      <li>
+        <p>b) Wähle das Feld <code>QuarSort</code> und ziehe es ins Feld <strong>WERTE</strong>.</p>
+      </li>
+      <li>
+        <p>c) Wähle das Feld <code>QuarLang</code> und ziehe es ins Feld <strong>ACHSE</strong>.</p>
+      </li>
+      <li>
+        <p>d) Wir wollen nicht die Summe der Quartiernummern, sondern die minimalen Werte wissen. Wähle daher mit rechte Maustaste auf <em>Summe von QuarSort</em> und wechsle über die Wertfeldeinstellungen von Wertfeld zusammenfassen als Summe auf <strong>Minimum</strong>.</p>
+      </li>
+      <li>
+        <p>e) Damit ist die Zuordnungstabelle erstellt. Jede Stadtquartier-ID hat nun einen entsprechenden Stadtquartiernamen.</p>
+      </li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Schritt 5:</strong> Kopiere die Zuordnungstabelle ins Arbeitsblatt <code>Vgl_Kleinkinder_Hunde</code>.</p>
+  </li>
+  <li>
+    <p><strong>Schritt 6:</strong> Sortiere nun (Menu Daten &gt; 
+Sortieren) wie in der Grafik angezeigt zuerst die Werte der Anzahl 
+Kleinkinder nach der Quartiernummer nach Grösse aufsteigend. Vergleiche 
+ob die Quartiernummern mit jenen der Anzahl Hunde, ebenfalls nach Grösse
+ aufsteigend sortiert, entspricht. Lösche danach die doppelt vorhandenen
+ Spalten und reihe die Attibute nach Deinem Gusto aneinander.</p>
+  </li>
+</ul>
+
+<video preload="none" poster="https://user-images.githubusercontent.com/538415/105817118-7ca77280-5fb5-11eb-8ab7-e4d1c577ad8d.jpg" src="Crashkurs%20%C2%ABDatenvisualisierung%C2%BB-Dateien/105728349-57baed00-5f2c-11eb-9f0d-0816cac0298b.mp4" controls="controls" muted="muted"><img alt="08_zuordungstab" src="Crashkurs%20%C2%ABDatenvisualisierung%C2%BB-Dateien/104171823-8badf280-5403-11eb-9dce-42cb5e4f97f9.gif"></video>
+
+<ul>
+  <li>
+    <p><strong>Schritt 7:</strong> Berechne in in einer neuen Spalte - 
+im Beispiel namens Diff_Kkinder-Hunde - die Differenz zwischen der 
+Anzahl Kleinkinder und der Anzahl Hunden. Berechne den Wert in der 
+obersten Spalte mit der Formel ‘=D2 - C2’ und ziehe den Punkt unten 
+rechts im grünen Rechteck für alle Quartiere herunter. Die Formel wird 
+so überall korrekt übernommen.</p>
+  </li>
+  <li>
+    <p><strong>Schritt 8:</strong> Sortiere die Differenzen (Spalte E) aufsteigend. Das Resultat ist nun als Tabelle ersichtlich.</p>
+  </li>
+  <li>
+    <p><strong>Schritt 9:</strong> Stelle das Resultat mit PivotChart als Balkendiagramm dar:</p>
+
+    <ul>
+      <li>a) Füge den Quartiernamen im Feld <strong>ACHSE</strong> und die Differenzwerte im Feld <strong>WERTE</strong> ein.</li>
+      <li>b) Sortiere absteigend nach den Differenzwerten. Klicke dazu in der PivotTable auf das Dropdownzeichen rechts neben <em>Zeilenbeschriftung</em>. Klicke auf <em>Weitere Sortieroptionen</em>, wähle <em>Absteigend</em> und wähle die Differenzwerte aus.</li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Schritt 10:</strong> Ändere den Diagrammtyp auf Balkendiagramm. Klicke mit der rechten Maustaste auf den PivotChart &gt; wähle <em>Diagrammtyp ändern</em> &gt; wähle <em>Balken</em> &gt; dann <em>Gruppierte Balken</em> aus. Layoute das Balkendiagramm (Titel, Höhe, Breite, Farbfüllung, etc.)</p>
+  </li>
+  <li>
+    <p><strong>Schritt 10:</strong> Falls Dir die Grafik noch zu 
+umfangreich ist, kannst Du auch einzelne Bereiche herausfiltern. Gehe 
+dazu wieder wie in Schritt 9b) vor und wähle dieses Mal <em>Wertefilter</em>
+ aus. In der Animation werden z.B. nur jene Stadtquartiere angezeigt, wo
+ die Differenz zwischen Kleinkindern und Hunden kleiner als 50 ist. Alle
+ anderen Werte werden nicht angezeigt.</p>
+  </li>
+</ul>
+
+<video preload="none" poster="https://user-images.githubusercontent.com/538415/105817265-a8c2f380-5fb5-11eb-8d02-b78a1a0cb992.jpg" src="Crashkurs%20%C2%ABDatenvisualisierung%C2%BB-Dateien/105728433-7325f800-5f2c-11eb-9517-f60f74ebbdb9.mp4" controls="controls" muted="muted"><img alt="09_diagr" src="Crashkurs%20%C2%ABDatenvisualisierung%C2%BB-Dateien/104203191-26222c00-542c-11eb-8e0a-4c3016d04406.gif"></video>
+
+<h2 id="berrascht-vom-resultat">Überrascht vom Resultat?</h2>
+<p>Nun haben wir also Gewissheit: Ende 2019 lebten nur im Stadtquartier <strong>Lindenhof</strong>
+ (Bevölkerungszahl 2019: 1’009) im Kreis 1 mehr Hunde (27) als 
+Kleinkinder (22). Bei allen Stadtquartieren im Kreis 1 war die Differenz
+ zwischen Kleinkindern und Hunden relativ klein.
+Am grössten ist die Differenz hingegen in den bevölkerungsreichsten 
+Stadtquartieren Altstetten (mit +1’133) und Affoltern (+1’115).</p>
+
+<h2 id="teil-3-datawrapper">Teil 3: Datawrapper</h2>
+<p>Für dieses Kurs verwenden wir das kostenlose Tool <a href="https://www.datawrapper.de/">Datawrapper</a>, welches <a href="https://app.datawrapper.de/chart/create">ohne Login ausprobiert werden kann</a>.
+Es wird bereits von vielen Datenjournalisten eingesetzt, da es sehr 
+benutzerfreundlich ist und sich damit ohne eigenen Code zu schreiben 
+Visualisierungen fürs Web erstellen lassen.</p>
+
+<p>Datawrapper steht hier stellvertretend für viele andere Tools, die einen ähnlichen Funktionsumfang bieten:</p>
+
+<ul>
+  <li><a href="https://www.tableau.com/">Tableau</a></li>
+  <li><a href="https://powerbi.microsoft.com/de-de/">Microsoft Power BI</a></li>
+  <li><a href="https://developers.google.com/chart">Google Charts</a></li>
+  <li><a href="https://plotly.com/">Plotly</a></li>
+</ul>
+
+<h2 id="daten-vorbereiten">Daten vorbereiten</h2>
+<p>Wie wir in <a href="#teil-2-excel">Teil 2</a> gesehen haben, müssen Daten zuerst in eine Form gebracht werden, in der sie visualisiert werden können.
+In diesem Schritt arbeiten wir also wieder mit der Excel-Datei aus dem letzten Teil.
+Es steht auch eine <a href="https://github.com/opendatazurich/crashkurs-dataviz/raw/main/files/daten_excel_crashkurs.zip">Beispiel-Exceldatei zur Verfügung</a> (inkl. den <em>verlinkten</em> CSVs).</p>
+
+<h2 id="hunde-nach-stadtquartier-und-geschlecht">Hunde nach Stadtquartier und Geschlecht</h2>
+<p>Als nächstes möchten wir eine interaktive Grafik erstellen basierend auf dem Hundebestand.
+Dazu müssen wir eine neue Pivot-Tabelle erstellen, mit der wir die Werte für die Grafik aggregieren können:</p>
+
+<ul>
+  <li><strong>Schritt 1:</strong> Wechsle ins Arbeitsblatt <code>Hundebestand_2020</code> und gehe zum Menu <strong>Einfügen</strong>, klicke auf <strong>PivotTable</strong>.</li>
+  <li><strong>Schritt 2:</strong> Mit dem Pop-Up <strong>PivotTable erstellen</strong>
+ wirst Du wieder aufgefordert, den Tabellenbereich der analysiert werden
+ soll auszuwählen. Dieses Mal sollte sich die Tabelle auf die pivotiert 
+wird selbstverständlich auf den Hundebestand 2020 beziehen. Klicke 
+danach auf <strong>OK</strong>.</li>
+  <li><strong>Schritt 3:</strong> Im neuen Arbeitsblatt erscheinen nun die noch leeren PivotTable-Flächen. Erstelle eine Pivot-Tabelle mit folgenden Angaben:
+    <ul>
+      <li>a) <strong>WERTE</strong>: Anzahl Halter-ID (<code>HALTER_ID</code>) auswählen und in der <strong>Wertfeldeinstellung</strong> (rechte Maustaste auf <em>Summe von HALTER_ID</em>) von Wertfeld zusammenfassen als Summe auf <strong>Anzahl</strong> wechseln.</li>
+      <li>b) <strong>ZEILEN</strong>: Stadtquartier-IDs (<code>STADTQUARTIER</code>)</li>
+      <li>c) <strong>SPALTEN</strong>: Geschlecht des Hundes (<code>GESCHLECHT_HUND</code>)</li>
+    </ul>
+  </li>
+</ul>
+
+<p><img src="Crashkurs%20%C2%ABDatenvisualisierung%C2%BB-Dateien/104384802-5eac2d80-5532-11eb-906d-8d5836cee961.png" alt="Pivot-Tabelle für Hunde nach Stadtquartier und Geschlecht"></p>
+
+<ul>
+  <li><strong>Schritt 4:</strong> Kopiere die Werte der Anzahl Hund pro Stadtquartier und Geschlecht und füge sie in ein neues Arbeitsblatt ein.</li>
+  <li><strong>Schritt 5:</strong> Kopiere die Zuordnungstabelle (<a href="#vergleich-zur-anzahl-hunde-und-kleinkinder">siehe weiter oben</a> zwischen Quartiernamen und -nummern ebenfalls in dieses neue Arbeitsblatt ein</li>
+  <li><strong>Schritt 6:</strong> Benenne die Spalten und Tabellenblätter aussagekräftig, z.B. männlich, weiblich und Quartier</li>
+</ul>
+
+<video preload="none" poster="https://user-images.githubusercontent.com/538415/105817456-ed4e8f00-5fb5-11eb-9c73-3d3edfdc2c9c.jpg" src="Crashkurs%20%C2%ABDatenvisualisierung%C2%BB-Dateien/105688230-a307d800-5ef9-11eb-92e1-d16ba427a912.mp4" controls="controls" muted="muted">
+<img alt="Zuordnungstabelle hinzufügen" src="Crashkurs%20%C2%ABDatenvisualisierung%C2%BB-Dateien/104387735-0a0bb100-5538-11eb-892d-a17ef0b0d17c.gif"></video>
+
+<h3 id="daten-in-datawrapper-laden">Daten in Datawrapper laden</h3>
+<p>Um die Daten von Excel zu Datawrapper zu importieren, kann der <a href="https://app.datawrapper.de/chart/create">Wizard von Datawrapper</a> verwendet werden.</p>
+
+<p><img src="Crashkurs%20%C2%ABDatenvisualisierung%C2%BB-Dateien/102371585-9e790700-3fbe-11eb-966d-58f22547fd1c.png" alt="Wizard von Datawrapper um Daten zu laden"></p>
+
+<ul>
+  <li><strong>Schritt 1:</strong> In Excel die Tabelle kopieren und bei Datawrapper im Textfeld wieder eingefügt werden.</li>
+  <li><strong>Schritt 2:</strong> Klick auf <strong>Weiter</strong> und anschliessend die Daten überprüfen (Sind alle Spalten da? Wurden die Datentypen richtig erkannt?)</li>
+  <li><strong>Schritt 3:</strong> Um männlich/weiblich als Kategorien zu
+ nutzen für jedes Quartier, sollte die Tabelle noch transponiert werden 
+(Spalten und Zeilen vertauschen)</li>
+</ul>
+
+<video preload="none" poster="https://user-images.githubusercontent.com/538415/105815616-7f08cd00-5fb3-11eb-82cd-57dc4381217c.jpg" src="Crashkurs%20%C2%ABDatenvisualisierung%C2%BB-Dateien/105729060-1e36b180-5f2d-11eb-8510-e8882f2312df.mp4" controls="controls" muted="muted">
+<img alt="Daten zu Datawrapper kopieren" src="Crashkurs%20%C2%ABDatenvisualisierung%C2%BB-Dateien/104389217-3ffe6480-553b-11eb-8b28-3d5041e2565a.gif"></video>
+
+<h3 id="diagramm-erstellen">Diagramm erstellen</h3>
+<p>Im letzten Schritt geht es jetzt noch darum, das Diagramm zu 
+definieren.
+Die vorliegenden Daten zeigen pro Quartier die Anzahl weibliche und die 
+Anzahl männliche Hunde.
+Es liegt daher nahe ein gestapeltes Säulendiagramm zu erstellen, da ein 
+Balken pro Quartier für alle Hunde steht und dieser nach Geschlecht 
+aufgeteilt ist.</p>
+
+<video preload="none" poster="https://user-images.githubusercontent.com/538415/105815234-e83c1080-5fb2-11eb-9f70-069444325f76.jpg" src="Crashkurs%20%C2%ABDatenvisualisierung%C2%BB-Dateien/105729302-5ccc6c00-5f2d-11eb-80ae-a859f9008b44.mp4" controls="controls" muted="muted">
+<img alt="Diagramm anpassen" src="Crashkurs%20%C2%ABDatenvisualisierung%C2%BB-Dateien/104390094-35dd6580-553d-11eb-9eef-a77456092750.gif"></video>
+
+<h3 id="resultat">Resultat</h3>
+<p>Voilà, hier das Resultat (ein Klick auf das Bild öffnet die interaktive Grafik):</p>
+
+<p><a href="https://datawrapper.dwcdn.net/FWDgZ/1/"><img src="Crashkurs%20%C2%ABDatenvisualisierung%C2%BB-Dateien/104390214-750bb680-553d-11eb-85b5-bb2fbe5e88e4.png" alt="Diagramm von Datawrapper"></a></p>
+
+<h2 id="kleinkinder-hunde-koeffizient">Kleinkinder-Hunde Koeffizient</h2>
+<p>Als Abschluss möchten wir das Verhältnis zwischen Kleinkindern und Hunden auf einer Karte der Stadt Zürich darstellen.
+Dazu werden wir eine sogenannte <a href="https://de.wikipedia.org/wiki/Choroplethenkarte">Choroplethenkarte (Flächenkartogramm)</a> erstellen.
+Auf solchen thematischen Karten wird das Verhältnis einer Grösse zum Gebiet dargestellt (z.B. Bevölkerungsdichte).</p>
+
+<p>Aus diesem Grund fügen wir im Excel auf dem bestehenden Arbeitsblatt <code>Vgl_Kleinkinder_Hunde</code> eine weitere Spalte hinzu.</p>
+
+<ul>
+  <li><strong>Schritt 1:</strong> Gehe zum Arbeitsblatt <code>Vgl_Kleinkinder_Hunde</code>.</li>
+  <li><strong>Schritt 2:</strong> Füge eine neue Spalte KleinkinderHundeKoeffizient hinzu</li>
+  <li><strong>Schritt 3:</strong> Berechne in dieser neuen Spalte das 
+Verhältnis zwischen der Anzahl Kleinkinder und der Anzahl Hunden. 
+Berechne den Wert in der obersten Spalte mit der Formel ‘=D2 / C2’ und 
+ziehe den Punkt unten rechts im grünen Rechteck für alle Quartiere 
+herunter. Die Formel wird so überall korrekt übernommen.</li>
+</ul>
+
+<h3 id="choroplethenkarte-erstellen">Choroplethenkarte erstellen</h3>
+<p>Neben den Diagrammen, können mit Datawrapper auch <a href="https://app.datawrapper.de/create/map">einfache Karten erstellt</a> werden.</p>
+
+<ul>
+  <li><strong>Schritt 1:</strong> Gehen zum Datawrapper Wizard und wähle <strong>Neue Karte</strong> -&gt; <strong>Choroplethen-Karte</strong></li>
+  <li><strong>Schritt 2:</strong> Suche nach “Zürich Quartier” und wähle die Standardkarte <strong>Schweiz » Zürich » Stadtquartiere</strong>
+<img src="Crashkurs%20%C2%ABDatenvisualisierung%C2%BB-Dateien/104391079-6aeab780-553f-11eb-84d8-06103ecf3a60.png" alt="Karte auswählen"></li>
+  <li><strong>Schritt 3:</strong> Klicke auf <strong>Weiter</strong> und wähle <strong>Codes</strong> als Geo-Code</li>
+  <li><strong>Schritt 3:</strong> Klicke auf <strong>Importiere deinen Datensatz</strong> und kopiere die Tabelle vom Arbeitsblatt <code>Vgl_Kleinkinder_Hunde</code>, die du dann anschliessend in Datawrapper einfügen kannst</li>
+  <li><strong>Schritt 4:</strong> Wähle die Spalte <code>Quartiernummer</code> als Code-Spalte und die Spalte <code>KleinkinderHundeKoeffizient</code> als Wert-Spalte</li>
+</ul>
+
+<p>Anschliessend können noch Anpassungen an der Karte vorgenommen werden
+ wie z.B. das verändern der Farbskala oder das einzigen der 
+Quartiernamen anstatt der Codes.</p>
+
+<h3 id="resultat">Resultat</h3>
+
+<p>Voilà, hier das Resultat (ein Klick auf das Bild öffnet die interaktive Karte):
+<a href="https://datawrapper.dwcdn.net/dq1wu/1/"><img src="Crashkurs%20%C2%ABDatenvisualisierung%C2%BB-Dateien/104439523-79fa5580-5591-11eb-8d91-8946e0d3954d.png" alt="Choroplethen-Karte" class="moz-reader-block-img" moz-reader-center="true"></a></p>
+
+<h2 id="anhnge">Anhänge</h2>
+<h2 id="excel-datei">Excel-Datei</h2>
+<p>Die Excel-Datei, auf der dieser Kurs basiert, kann von GitHub heruntergeladen werden: <a href="https://github.com/opendatazurich/crashkurs-dataviz/raw/main/files/daten_excel_crashkurs.zip">ZIP-Datei mit den verlinkten CSVs</a>.
+<a href="ttps://github.com/opendatazurich/crashkurs-dataviz/raw/main/files/daten_excel_crashkurs.zip"><img src="Crashkurs%20%C2%ABDatenvisualisierung%C2%BB-Dateien/104441265-bb8c0000-5593-11eb-91ac-daf61d617bc1.png" alt="Excel-Datei"></a></p>
+
+<p>Beim Öffnen wird Excel eine Warnung anzeigen, dass die Datei repariert werden muss.
+Dies liegt daran, dass der Pfad zu den CSV-Dateien nicht gefunden wird.
+Der Fehler kann ignoriert werden für diesen Kurs.</p>
+
+<h2 id="tutorials">Tutorials</h2>
+<h3 id="datawrapper">Datawrapper</h3>
+<p>Datawrapper hat eine Reihe von <a href="https://academy.datawrapper.de/">Tutorials</a> und <a href="https://www.datawrapper.de/training-materials/">Schulungsunterlagen</a>, die die einzelnen Diagramm- und Karten-Typen erklären und wie damit Visualisierungen erstellt werden können.</p>
+
+<p>Beispiele:</p>
+
+<ul>
+  <li><a href="https://www.datawrapper.de/training-materials/#exercise-1">Let’s build a stacked bar chart</a></li>
+  <li><a href="https://academy.datawrapper.de/article/21-how-to-create-a-grouped-column-chart">How to create a grouped column chart</a></li>
+  <li><a href="https://academy.datawrapper.de/article/117-color-palette-for-your-map">How to choose the best interpolation for your colors (choropleth map)</a></li>
+</ul>
+
+<h3 id="programmierung-r-python-sparql">Programmierung (R, Python, SPARQL)</h3>
+<ul>
+  <li><a href="https://csmastersuh.github.io/data_analysis_with_python_2020/">Data analysis with Python</a></li>
+  <li><a href="https://infovis.fh-potsdam.de/tutorials/">Information Visualization (Python)</a>.</li>
+  <li><a href="https://www.storybench.org/getting-started-data-visualization-r-using-ggplot2/">Getting started with data visualization in R using ggplot2</a></li>
+  <li><a href="https://rddj.info/">Rddj - Hand-curated, high quality resources for doing data journalism with R.</a></li>
+  <li><a href="https://www.wikidata.org/wiki/Wikidata:Tours">Einführung in Wikidata</a>, siehe dazu auch das <a href="https://github.com/opendatazurich/wikidata-training">Trainingsmaterial von Open Data Zürich zu Wikidata</a>.</li>
+  <li>Jupyter Notebooks von Open Data Zürich zu
+    <ul>
+      <li><a href="https://github.com/opendatazurich/opendatazurich.github.io/blob/master/geoportal/Geoportal-Beispiele.ipynb">Geoportal</a></li>
+      <li><a href="https://github.com/opendatazurich/quality-checks/blob/master/luftqualitaet/Luftschadstoffdaten%20(1983%20bis%20heute).ipynb">Luftqualitätsmessungen</a></li>
+      <li><a href="https://github.com/opendatazurich/opendatazurich.github.io/blob/master/csv/CSV%20mit%20Python%20verarbeiten%20(matplotlib).ipynb">Visualisierung von CSV mit Python/matplotlib</a></li>
+      <li><a href="https://github.com/opendatazurich/opendatazurich.github.io/blob/master/zt-api/ZuerichTourismusAPI-Beispiele.ipynb">Zürich Tourismus API</a></li>
+    </ul>
+  </li>
+</ul>
+
+
+      </section>
+      
+    </div></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+    <div aria-owns="toolbar"></div>
+  </div>
+
+  <div id="pocket-cta-container" hidden="">
+    <div class="pocket-cta-inner" id="pocket-cta-only">
+      <div class="pocket-cta">
+        <header class="pocket-cta-header">Save anything from across the web in Pocket, your personal library.</header>
+        <p class="pocket-cta-subhead">As part of the Firefox family, 
+Pocket provides a quiet, calm space that’s perfect for reading. It 
+strips away all the distractions of the internet so you can really 
+focus.</p>
+        <a href="https://getpocket.com/signup?utm_source=firefox_reader&amp;utm_medium=variant_cta_only" class="pocket-btn pocket-sign-up"><strong>Sign up</strong> - it’s free</a>
+        <a href="https://getpocket.com/explore?utm_source=firefox_reader&amp;utm_medium=variant_cta_only" class="pocket-btn pocket-discover-more"><strong>Discover more</strong></a>
+      </div>
+      <button class="pocket-dismiss-cta" title="Dismiss"></button>
+    </div>
+
+    <div class="pocket-cta-inner" id="pocket-cta-and-recs">
+      <div class="pocket-recs-top">
+        <div class="col">
+          <header class="pocket-cta-header">Discover the most thought-provoking stories out there, curated by Pocket.</header>
+          <p class="pocket-cta-subhead">As part of the Firefox family, 
+Pocket surfaces the best articles out there—new perspectives, intriguing
+ deep-dives, timeless classics—and we do this with the same dedication 
+to privacy you’ve come to expect from Firefox and Mozilla. </p>
+        </div>
+        <div class="col">
+          <button class="pocket-collapse-recs"></button>
+        </div>
+      </div>
+
+      <div class="pocket-recs"></div>
+
+      <div class="pocket-sign-up-wrapper">
+        <a href="https://getpocket.com/explore?utm_source=firefox_reader&amp;utm_medium=variant_cta_plus_recs" class="pocket-btn pocket-sign-up"><strong>Discover more</strong></a>
+      </div>
+    </div>
+  </div>
+
+
+
+</body></html>

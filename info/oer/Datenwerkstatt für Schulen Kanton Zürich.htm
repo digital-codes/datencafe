@@ -1,0 +1,890 @@
+<!-- This Source Code Form is subject to the terms of the Mozilla Public
+   - License, v. 2.0. If a copy of the MPL was not distributed with this file,
+   - You can obtain one at http://mozilla.org/MPL/2.0/. -->
+<!DOCTYPE html>
+<html platform="win" dir="ltr" lang="de"><head>
+  <title id="reader-title">Datenwerkstatt für Schulen | Kanton Zürich</title>
+  <meta http-equiv="Content-Security-Policy" content="default-src chrome:; img-src data: *; media-src *; object-src 'none'">
+  <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+  <meta name="viewport" content="width=device-width; user-scalable=0">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReader.css" type="text/css">
+  <link rel="stylesheet" href="chrome://global/skin/aboutReaderPocket.css" type="text/css">
+  <link rel="localization" href="toolkit/about/aboutReader.ftl">
+  <link rel="localization" href="toolkit/branding/brandings.ftl">
+<link rel="stylesheet" href="chrome://global/skin/narrate.css"></head>
+
+<body class="light sans-serif loaded" style="--font-size: 18px; --content-width: 30em;">
+  <div class="top-anchor"></div>
+
+  <div id="toolbar" class="toolbar-container scrolled">
+    <div class="toolbar reader-toolbar">
+      <div class="reader-controls" articledir="ltr">
+        <button class="close-button toolbar-button" aria-labelledby="toolbar-close" data-telemetry-id="reader-close">
+          <span class="hover-label" id="toolbar-close" data-l10n-id="about-reader-toolbar-close">Leseansicht schließen</span>
+        </button>
+        <ul class="dropdown style-dropdown">
+          <li>
+            <button class="dropdown-toggle toolbar-button style-button" aria-labelledby="toolbar-type-controls" data-telemetry-id="reader-type-controls">
+              <span class="hover-label" id="toolbar-type-controls" data-l10n-id="about-reader-toolbar-type-controls">Schrifteinstellungen</span>
+            </button>
+          </li>
+          <li class="dropdown-popup">
+            <div class="dropdown-arrow"></div>
+            <div class="font-type-buttons radiorow"><input id="radio-itemsans-serif-button" type="radio" class="radio-button" name="font-type" checked="checked"><label for="radio-itemsans-serif-button" class="sans-serif-button" data-l10n-id="about-reader-font-type-sans-serif" checked="true">Sans-serif</label><input id="radio-itemserif-button" type="radio" class="radio-button" name="font-type"><label for="radio-itemserif-button" class="serif-button" data-l10n-id="about-reader-font-type-serif">Serif</label></div>
+            <div class="font-size-buttons buttonrow">
+              <button class="minus-button" data-l10n-id="about-reader-toolbar-minus" title="Kleinere Schrift"></button>
+              <span class="font-size-value">4</span>
+              <button class="plus-button" data-l10n-id="about-reader-toolbar-plus" title="Größere Schrift"></button>
+            </div>
+            <div class="content-width-buttons buttonrow">
+               <button class="content-width-minus-button" data-l10n-id="about-reader-toolbar-contentwidthminus" title="Schmalerer Inhalt"></button>
+               <span class="content-width-value">3</span>
+               <button class="content-width-plus-button" data-l10n-id="about-reader-toolbar-contentwidthplus" title="Breiterer Inhalt"></button>
+            </div>
+            <div class="line-height-buttons buttonrow">
+                <button class="line-height-minus-button" data-l10n-id="about-reader-toolbar-lineheightminus" title="Kleinerer Zeilenabstand"></button>
+                <span class="line-height-value">4</span>
+                <button class="line-height-plus-button" data-l10n-id="about-reader-toolbar-lineheightplus" title="Größerer Zeilenabstand"></button>
+            </div>
+            <div class="color-scheme-buttons radiorow"><input id="radio-itemlight-button" type="radio" class="radio-button" name="color-scheme" checked="checked"><label for="radio-itemlight-button" class="light-button" data-l10n-id="about-reader-color-scheme-light" checked="true" title="Helles Farbschema">Hell</label><input id="radio-itemdark-button" type="radio" class="radio-button" name="color-scheme"><label for="radio-itemdark-button" class="dark-button" data-l10n-id="about-reader-color-scheme-dark" title="Dunkles Farbschema">Dunkel</label><input id="radio-itemsepia-button" type="radio" class="radio-button" name="color-scheme"><label for="radio-itemsepia-button" class="sepia-button" data-l10n-id="about-reader-color-scheme-sepia" title="Sepia-Farbschema">Sepia</label><input id="radio-itemauto-button" type="radio" class="radio-button" name="color-scheme"><label for="radio-itemauto-button" class="auto-button" data-l10n-id="about-reader-color-scheme-auto" title="Automatisches Farbschema">Automatisch</label></div>
+          </li>
+        </ul>
+      <ul class="dropdown narrate-dropdown"><li><button class="dropdown-toggle toolbar-button narrate-toggle" data-telemetry-id="reader-listen" aria-label="Anhören (N)"><span class="hover-label">Anhören (N)</span></button></li><li class="dropdown-popup"><div class="narrate-row narrate-control"><button class="narrate-skip-previous" disabled="disabled" title="Zurück"></button><button class="narrate-start-stop" title="Wiedergeben (N)"></button><button class="narrate-skip-next" disabled="disabled" title="Vor"></button></div><div class="narrate-row narrate-rate"><input class="narrate-rate-input" value="0" step="5" max="100" min="-100" type="range" title="Geschwindigkeit"></div><div class="narrate-row narrate-voices"><div class="voiceselect voice-select"><button class="select-toggle" aria-controls="voice-options">
+      <span class="label">Stimme:</span> <span class="current-voice">Standard</span>
+    </button>
+    <div class="options" id="voice-options" role="listbox"><button data-value="automatic" class="option selected" tabindex="-1" role="option" aria-selected="true">Standard</button><button data-value="urn:moz-tts:sapi:Microsoft Hedda - German (Germany)?de-DE" class="option" tabindex="-1" role="option">Microsoft Hedda - German (Germany)</button><button data-value="urn:moz-tts:sapi:Microsoft Hedda Desktop - German?de-DE" class="option" tabindex="-1" role="option">Microsoft Hedda Desktop - German</button><button data-value="urn:moz-tts:sapi:Microsoft Katja - German (Germany)?de-DE" class="option" tabindex="-1" role="option">Microsoft Katja - German (Germany)</button><button data-value="urn:moz-tts:sapi:Microsoft Stefan - German (Germany)?de-DE" class="option" tabindex="-1" role="option">Microsoft Stefan - German (Germany)</button></div></div></div><div class="dropdown-arrow"></div></li></ul><button data-buttonid="pocket-button" data-telemetry-id="reader-save-to-pocket" class="toolbar-button pocket-button" aria-labelledby="label-pocket-button" style="background-image: url(&quot;chrome://global/skin/icons/pocket.svg&quot;);"><span class="hover-label" id="label-pocket-button" data-l10n-id="about-reader-toolbar-savetopocket">In Pocket speichern</span></button></div>
+    </div>
+  </div>
+
+  <div class="container" style="--line-height: 1.6em;" dir="ltr" lang="de">
+    <div class="header reader-header reader-show-element">
+      <a class="domain reader-domain" href="https://www.zh.ch/de/politik-staat/statistik-daten/datenkompetenz/data-und-statistical-literacy.html#913244714">zh.ch</a>
+      <div class="domain-border"></div>
+      <h1 class="reader-title">Datenwerkstatt für Schulen</h1>
+      <div class="credits reader-credits"></div>
+      <div class="meta-data">
+        <div class="reader-estimated-time" data-l10n-args="{&quot;range&quot;:&quot;24–29&quot;,&quot;rangePlural&quot;:&quot;other&quot;}" data-l10n-id="about-reader-estimated-read-time" dir="ltr">24–29 Minuten</div>
+      </div>
+    </div>
+
+    <hr>
+
+    <div class="content">
+      <div class="moz-reader-content reader-show-element"><div id="readability-page-1" class="page">
+
+
+
+
+
+
+
+    <header id="header">
+        
+    
+    
+    <div data-init="skiplinks" data-skiplinks-instance="skiplinks2">
+        
+        <ul>
+            <li>
+                <a href="https://www.zh.ch/de.html" accesskey="0" data-skiplinks="link">Startseite</a>
+            </li>
+            <li>
+                <a href="#navigation" accesskey="1" data-skiplinks="link">Navigation</a>
+            </li>
+            <li>
+                <a href="#main" accesskey="2" data-skiplinks="link">Inhalt</a>
+            </li>
+            <li>
+                <a href="#contact" accesskey="3" data-skiplinks="link">Kontakt</a>
+            </li>
+            
+                <li>
+                    <a href="#toc" accesskey="4" data-skiplinks="link">Inhaltsverzeichnis</a>
+                </li>
+            
+            <li>
+                <a href="#search" accesskey="5" data-skiplinks="link">Suche</a>
+            </li>
+            
+                <li>
+                    <a href="#contentinfo" accesskey="6" data-skiplinks="link">Fussbereich</a>
+                </li>
+            
+        </ul>
+    </div>
+
+        
+    </header>
+
+
+
+    <main id="main" tabindex="-1">
+        <div>
+                
+    
+    
+        <div>
+    
+    <header data-init="pageHeader" data-page-header-instance="pageheader11">
+        <div>
+            
+    <div>
+            
+    
+
+            
+            
+            <h2>
+                Datenwerkstatt für Schulen
+            </h2>
+        </div>
+
+            
+            <div>
+                    
+    
+    <p>
+        <strong>Auf dieser Seite finden Lehrerinnen und Lehrer einen 
+Einstieg ins Thema Daten. Dieser hilft den Lehrpersonen dabei, im 
+Unterricht Data und Statistical Literacy zu vermitteln - eine 
+Schlüsselkompetenz des 21. Jahrhunderts.</strong>
+    </p>
+    
+    
+
+                    
+                    
+                    
+                </div>
+            
+            
+        </div>
+        
+    </header>
+
+</div>
+    
+
+                <div data-init="anchornav" tabindex="-1" id="toc" data-anchornav-instance="anchornav14">
+                    <h2>Inhaltsverzeichnis</h2>
+                    
+
+                    
+                    
+                </div>
+                
+                <div>
+    
+    <div>
+    <h2 id="-885577366" tabindex="-1">Grundlagen und Übungen<br> </h2>
+<p>Den Themen Daten und Statistik nähert man sich am besten über einen 
+konkreten Anwendungsfall. Dieser ermöglicht es, Daten selbst zu 
+generieren, zu verstehen, bearbeiten und auszuwerten. Die Inhalte dieser
+ Seite stehen in engem Zusammenhang mit dem Projekt «CO2 vs. CO19». Die 
+Grundlagen und Übungen sind aber auch unabhängig davon nützlich, wenn 
+Sie einen Einstieg in die Themen Daten und Statistik suchen.</p>
+</div>
+
+<div>
+    <h2 id="-968727060" tabindex="-1">Was sind Daten?<br> </h2>
+<p>Daten sind der maschinell verarbeitbare Teil einer Information. Damit
+ aus einer Information Daten werden, muss sie in kleinere Bestandteile 
+zersetzt werden. Daten sind objektiv und brauchen keinen Bezug. Dazu 
+werden die Daten, die im Zusammenhang eine Information ergeben, aus 
+ihrem Kontext genommen. Umgekehrt erhalten wir aus Daten erst eine 
+Information, wenn sie in einen Kontext gesetzt werden.<br> </p>
+<p>Ein Beispiel: Wenn Ihnen Ihre Nachbarin die Information «Morgen 
+scheint die Sonne» gibt, setzen Sie diese automatisch in einen Kontext 
+(Ort, Zeit) und verstehen sie. Um Daten jedoch objektiv und maschinell 
+nutzbar zu machen, müsste diesem Wetterdatum der Kontext in weiteren 
+Daten zur Seite gestellt werden: Ort und Zeit. Menschen verbinden diese 
+drei Datenpunkte automatisch wieder zu einer Information. Für die 
+maschinelle Verwendung der Daten hingegen ist die Unterteilung von 
+Information in einzelne, objektive und voneinander trennbare Datenpunkte
+ nötig. Der Zusammenhang von Daten, Information und Wissen wird meistens
+ hierarchisch in einer <a title="Die Wissenspyramide" href="https://derwirtschaftsinformatiker.de/2012/09/12/it-management/wissenspyramide-wiki/" target="_blank" rel="noopener">Pyramide</a> dargestellt.</p>
+<p>In einer analogen Welt müssen Daten meistens aus Information 
+heruntergebrochen werden. Digitale Dienste basieren hingegen grundlegend
+ auf Daten und generieren mit jeder Nutzung mehr davon. Wenn diese Daten
+ zueinander in Kontext gesetzt werden, erhalten wir daraus neue 
+Informationen. Damit diese Informationen zur weiteren Verwendung 
+geeignet sind, müssen also sowohl die Daten als auch die vorgenommene 
+Kontextualisierung richtig sein. Letzteres lässt sich beurteilen, indem 
+wir die Information mit anderer Information abgleichen. Doch wie 
+beurteilt man Datenqualität?<br> </p>
+</div>
+
+<div data-init="accordion" data-accordion-instance="accordion15">
+        <h4 id="main_accordion">
+            Übungen
+        </h4>
+        <p class="visuallyhidden">
+            Verwenden Sie die Akkordeon-Bedienelemente, um die 
+Sichtbarkeit der jeweiligen Panels (unterhalb der Bedienelemente) 
+umzuschalten.
+        </p>
+        
+
+
+<div>
+    
+    <div data-accordion="item">
+    <h5>
+
+        
+    </h5>
+    <div data-accordion="panel">
+    <p>Benötigte Materialien: keine</p>
+<p>Um die Wissenspyramide zu erklären, könnte man als Übung annehmen, 
+dass jemand in der Klasse ein Geburtstagsfest organisieren möchte. Wir 
+kommen praktisch von Daten zur Handlung:</p>
+<h6 id="-2110476141">Daten:</h6>
+<p>eine Liste mit Namen aller Leute, die ich kenne. Darunter Kinder, 
+Nachbarn, Grosseltern usw. Aber wen lade ich zu meinem Geburtstagsfest 
+ein?</p>
+<h6 id="-1369517913">Information:</h6>
+<p>Eine Liste mit dem Namen aller Leute, die ich einladen möchte. Zum 
+Fest möchte ich beispielsweise nur Menschen einladen, die Kinder sind 
+und ich mag. Indem ich ein Geburtstagsfest plane, werden die Daten in 
+einen Kontext gesetzt.</p>
+<h6 id="-1089030394">Wissen:</h6>
+<p>Ich überlege mir, welche der Spiele, die ich besitze, den Gästen und 
+mir am meisten Spass machen und sich für dieses Geburtstagsfest am 
+besten eignen.</p>
+<h6 id="-1545013407">Weisheit:</h6>
+<p>Ich schätze das benötigte Material in der richtigen Menge ein, um die
+ Spiele an meinem Geburtstagsfest spielen zu können und kaufe es ein 
+(Handlung).</p>
+</div>
+</div>
+<div data-accordion="item">
+    <h5>
+
+        
+    </h5>
+    <div data-accordion="panel">
+    <p>Benötigte Materialien: CO2-Ampel</p>
+<p>Mit den Schülern und Schülerinnen kann die Wissenspyramide anhand der CO2-Ampel besprochen werden.</p>
+<h6 id="-720607118">Daten:</h6>
+<p>Das Gerät misst Werte. Obwohl die Ampel uns in Farben sagt, wie es 
+mit dem CO2 im Raum steht, so misst sie in Wirklichkeit reine Werte: 
+300, 500, 700, 1000. Das sind Daten, mit denen wir ohne Kontext aber 
+nichts anfangen können.</p>
+<h6 id="-320936634">Information:</h6>
+<p>Was bedeuten diese Werte? Diese Zahlen stehen für Mikrogramm CO2 pro 
+Kilogramm Luft-Volumen. Das ist die Bedeutung dieser Rohdaten und so 
+erschliesst sich uns ein Teil der Information.</p>
+<h6 id="-952763641">Wissen:</h6>
+<p>Doch auch hier fehlt noch der Vergleich: was bedeutet nun 300, 1000 
+oder 2000 ppm (part per million) CO2 in der Luft? Wenn man draussen ist,
+ dann liegt der Anteil bei ca. 400 ppm (Anmerkung für Lehrpersonen: 
+parts per Million ist zwar eine verwirrende aber die offizielle 
+Bezeichnung dieser Grösse). Dieser kann zwar unterschiedlich sein, je 
+nachdem, ob man beispielsweise in einem Stadtzentrum oder in der 
+Peripherie ist, der Wert 400ppm ist aber ein brauchbarer Durchschnitt.<br> </p>
+<h6 id="558317346">Weisheit:</h6>
+<p>Nun hat das BAG auch Grenzwerte für die Innenluft angegeben. Man 
+sollte versuchen den Wert wenn möglich unter 2000 ppm zu behalten 
+(maximal 10% der Unterrichtszeit darüber) und generell möglichst unter 
+1400 ppm, da ansonsten die Wahrscheinlichkeit steigt müde zu werden, da 
+der CO2-Anteil in der Luft zu hoch ist. Gleichzeitig sagt das BAG, dass 
+diese höheren Werte auch zu einer schnelleren Virenübertragung führen. 
+Wenn die Ampel nun Gelb (über 1400 ppm) oder Rot (über 2000 ppm) 
+leuchtet, können wir somit schlussfolgern, dass wir lüften sollten.</p>
+</div>
+</div>
+<div data-accordion="item">
+    <h5>
+
+        
+    </h5>
+    <div data-accordion="panel">
+    
+    <div>
+    <p>Benötigte Materialien: Sensordaten</p>
+</div>
+<div>
+        
+        
+    
+    <ul>
+        <li>
+            
+    
+        <a href="https://raw.githubusercontent.com/statistikZH/co2sensoren/main/scripts/sensor_example_data.csv" target="_blank" rel="noopener">
+            <span>
+                <span>Arbeitsdatensatz mit beispielhaften Sensordaten (kann anstelle des eigenen CO2-Datensatzes genutzt werden):</span>
+            </span>
+            <svg xmlns="http://www.w3.org/2000/svg">
+                <use xlink:href="#arrow-right" xlink="http://www.w3.org/1999/xlink"></use>
+            </svg>
+        </a>
+    
+
+        </li>
+    </ul>
+
+    </div>
+<div>
+    <p>Anhand der Sensordaten kann der Aufbau eines Datensatzes 
+besprochen werden. Beispielsweise können die Bedeutung der Spalten und 
+Zeilen diskutiert werden sowie unterschiedliche Skalenniveaus im 
+Datensatz veranschaulicht werden. Skalenniveaus werden weiter unten noch
+ thematisiert.</p>
+<p>Beispielfragen zum Datensatz allgemein:</p>
+<ul> 
+ <li>Wie viele Spalten hat der Datensatz?</li> 
+ <li>Wie viele Zeilen hat der Datensatz?</li> 
+ <li>Wie sind die Spalten im Datensatz benannt?</li> 
+ <li>Warum haben die Spalten einen Namen und die Zeilen nicht?</li> 
+ <li>In welchen Zeitabständen wurden die Datenpunkte erfasst?</li> 
+ <li>Sind die Zeitabstände immer dieselben?</li> 
+</ul>
+<p>Beispielfragen zu den Spalten (= Variablen) im Datensatz:</p>
+<ul> 
+ <li>Was bedeuten die Variablennamen?</li> 
+ <li>Welche Variablen sind teilbar und welche nicht, sprich mit welchen Variablen kann man Berechnungen durchführen?</li> 
+ <li>In der Spalte `sensor` steht immer dasselbe. Warum ist das so?</li> 
+ <li>Was sind die Skalenniveaus der Variablen?</li> 
+</ul>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+
+    </div>
+<div>
+    <h3 id="1492105927">Was sind gute Daten?<br> </h3>
+<p>Die grosse Menge verfügbarer Daten («Big Data») spielt in vielen 
+Anwendungen, gerade im Bereich der künstlichen Intelligenz, eine 
+wichtige Rolle. Jedoch sind Daten auch in grosser Menge nichts wert, 
+wenn ihre Qualität nicht gut ist. Man spricht hier auch vom «garbage in,
+ garbage out»-Prinzip und meint damit: auf einer qualitativ schlechten 
+Datengrundlage lässt sich keine gute Anwendung aufbauen.</p>
+<p>In der Realität lässt die Datenqualität leider oft zu Wünschen übrig.
+ Die Qualität eines Datensatzes wird durch technische, administrative 
+und ethische Kriterien bestimmt. Die wichtigsten davon sind:</p>
+<ul> 
+ <li>Einheitlichkeit: Die Daten sind strukturiert (z.B. in 
+Tabellenform), die Struktur und ihre Benennung ist einheitlich über alle
+ Datenpunkte und im Zeitverlauf</li> 
+ <li>Zuverlässigkeit: Es ist nachvollziehbar, wie die Daten entstanden sind</li> 
+ <li>Eindeutigkeit: Der Datensatz und seine Variablen sind eindeutig und verständlich benannt</li> 
+ <li>Vollständigkeit: Alle für die Anwendung benötigten Datenpunkte sind durchgängig und in guter Genauigkeit vorhanden</li> 
+ <li>Die Daten sind aktuell und werden nachgeführt</li> 
+ <li>Korrekt (Data Veracity): Die Daten sind zutreffend und wurden nicht verfälscht.</li> 
+</ul>
+<p>Wenn die Datenqualität schlecht ist, kann aus diesen Daten keine 
+Information gezogen werden. Es ist dennoch ein häufiger Fehler 
+anzunehmen, dass eine hohe Quantität genüge. Für Big Data gibt es 
+deswegen die 5-V-Kriterien (je nach Zählweise auch 4 oder 7 V), welche 
+berücksichtigt werden müssen. Insbesondere wenn es um die Beurteilung 
+der Data Veracity (Datenwahrhaftigkeit, Vertrauenswürdigkeit) geht, ist 
+die Datenherkunft wichtig. Hier überschneidet sich die Frage der 
+Datenqualität mit der Diskussion um Fake News und Deepfakes einerseits, 
+und um jene um Datenschutz andererseits.</p>
+</div>
+<div data-init="accordion" data-accordion-instance="accordion16">
+        <h4 id="main_accordion_28954788">
+            Übungen
+        </h4>
+        <p class="visuallyhidden">
+            Verwenden Sie die Akkordeon-Bedienelemente, um die 
+Sichtbarkeit der jeweiligen Panels (unterhalb der Bedienelemente) 
+umzuschalten.
+        </p>
+        
+
+
+<div>
+    
+    <div data-accordion="item">
+    <h5>
+
+        
+    </h5>
+    <div data-accordion="panel">
+    <p>Benötigte Materialien: keine</p>
+<p>Als Grundregel sollte man sich im Umgang mit Daten und Informationen 
+stets folgende Fragen stellen: Woher stammt die Information? Wer hat 
+diese Information generiert und wieso? Mit diesen Fragen, kann man eine 
+Datenquelle gut einordnen.</p>
+<p>Es gibt viele pädagogische Beispiele zu fake news und generell zum 
+Thema Datenquellen im Internet. Einige finden Sie in den Links.</p>
+</div>
+</div>
+<div data-accordion="item">
+    <h5>
+
+        
+    </h5>
+    <div data-accordion="panel">
+    <p>Benötigte Materialien: keine</p>
+<p>Die Schüler und Schülerinnen geben an, wie viele Geschwister sie 
+haben. Die Lehrperson verkündet dass sie 25 Geschwister hat. Vermutlich 
+werden die Schüler und Schülerinnen ungläubig reagieren. Anhand dieses 
+Beispiels kann die Wichtigkeit von Datenplausibilisierung diskutiert 
+werden: was hat die Schüler und Schülerinnen dazu verleitet, ungläubig 
+zu reagieren?</p>
+<p>Wie könnte so ein Fehler im Datensatz entstehen?</p>
+<p>Ein anderes Beispiel zur Plausibiliserung: Aus einer Tabelle lesen 
+wir, dass jemand 1.78 kg schwer ist und 58 cm gross. In diesem Fall ist 
+ein Fehler passiert, der sehr häufig passiert: Variablen (das Gewicht 
+und die Grösse) wurden vertauscht.</p>
+</div>
+</div>
+<div data-accordion="item">
+    <h5>
+
+        
+    </h5>
+    <div data-accordion="panel">
+    <p>Benötigte Materialien: keine, allenfalls eine CO2-Ampel</p>
+<p>Es gibt verschiedene Störfaktoren, die dazu führen können, dass der 
+CO2-Gehalt zu hoch oder zu tief angezeigt wird. Entsprechend wird die 
+Datenqualität negativ beeinflusst. Beispielsweise sind die Messwerte 
+laut Gerätehersteller ungenauer, wenn das Gerät im Wind steht. Gemeinsam
+ mit den Schüler und Schülerinnen können solche Störfaktoren, die die 
+Datenqualität negativ beeinflussen, besprochen werden. Zum Beispiel kann
+ Folgendes ausprobiert und diskutiert werden:</p>
+<ul> 
+ <li>Was passiert, wenn man in das Gerät haucht und warum?</li> 
+ <li>Wäre die Ampel brauchbar, wenn sie den CO2-Gehalt von vor 10 
+Minuten widerspiegeln würde? Wäre sie noch brauchbar, wenn sie den 
+CO2-Gehalt von vor 12 Stunden abbildet? Was ist die maximale zeitliche 
+Verzögerung, die ihr vertretbar findet und warum?</li> 
+</ul>
+</div>
+</div>
+
+    
+</div>
+
+    </div>
+
+
+<div>
+    <h3 id="853013045">Was kann ich aus Daten lesen?<br> </h3>
+<p>Wenn wir aus Daten oder einer Datenvisualisierung etwas lesen wollen,
+ möchten wir daraus eine Information ziehen. Um von Daten zur 
+Information zu gelangen, brauchen wir Kontext zu diesen Daten. Dazu 
+müssen wir grundsätzlich verstehen, aus welchen Elementen ein Datensatz 
+besteht: Aus Datenpunkten (die erfassten Fälle oder Objekte) und aus 
+Variablen (die zu den Datenpunkten erfassten Merkmale).</p>
+<p>Es gibt mehrere Möglichkeiten, Information aus Daten zu gewinnen: 
+mithilfe von Visualisierungen, Kennwerten aus der deskriptiven Statistik
+ und mithilfe von inferentieller Statistik.</p>
+<p>Die deskriptive Statistik beinhaltet Methoden anhand derer ein 
+Datensatz mittels Visualisierungen oder Kennwerten beschrieben und 
+zusammengefasst werden kann. Häufig werden dabei mehrere Kennwerte der 
+Variablen eines Datensatzes in tabellarischer Form dargestellt. 
+Üblicherweise unterscheidet man zwischen sogenannten Lage- und 
+Streuungsmassen. Lagemasse zeigen die zentrale Lage einer Variable an 
+und Streuungsmasse die Unterschiedlichkeit. Haben wir in unserem 
+Datensatz beispielsweise die Variable «Körpergrösse», so geben Lagemasse
+ an, welche Körpergrösse unsere Stichprobe am besten beschreibt. Die 
+Streungsmasse hingegen geben Aufschluss über die Unterschiedlichkeit der
+ Personen bezüglich ihrer Körpergrösse. Zu den Lagemassen zählen 
+mitunter der Mittelwert, der Median sowie der Modus, und zu den 
+Streuungsmassen die Standardabweichung, die Varianz und die Spannweite.</p>
+<p>Mit inferenzstatistischen Methoden können anhand eines Datensatzes 
+inhaltliche Hypothesen statistisch überprüft werden. Dabei möchte man 
+idealerweise Rückschlüsse von der Stichprobe, von der die Daten stammen,
+ auf die Grundgesamtheit ziehen. Die Themen Stichprobe und 
+Grundgesamtheit werden weiter unten erläutert. Zudem finden Sie mehr 
+Ressourcen in der Linkliste.</p>
+<p>Um aus Daten mittels statistischer Methoden Information ziehen zu 
+können, müssen wir daher nicht nur wissen, wie die Datenqualität ist, 
+sondern auch, wie die Daten zueinander und zu anderen Daten stehen: wie 
+gross und aktuell ist der Datensatz? Wie hoch ist der höchste und wie 
+tief der niedrigste Wert (Streuung)? In Datenvisualisierungen lassen 
+sich diese Zusammenhänge oft sehr leicht verständlich darstellen. 
+Visualisierungen stellen Daten in einen Kontext und legen einen Fokus; 
+wenn wir keine zusätzliche Information zum gesamten Datensatz erhalten, 
+können Visualisierungen und andere Vereinfachungen daher sehr leicht in 
+die Irre führen. Die Werbung nennt dann vielleicht «14 Prozent mehr 
+Wimpernwachstum», ohne dass wir wissen, im Verhältnis wozu dieser 
+Zuwachs von 14 Prozent steht oder wie sich Wimpernwachstum definiert: 
+mehr Wimpern? Oder längere Wimpern? Oder wachsen sie einfach schneller 
+und fallen auch schneller wieder aus?</p>
+</div>
+<div data-init="accordion" data-accordion-instance="accordion17">
+        <h4 id="main_accordion_1513526363">
+            Übungen
+        </h4>
+        <p class="visuallyhidden">
+            Verwenden Sie die Akkordeon-Bedienelemente, um die 
+Sichtbarkeit der jeweiligen Panels (unterhalb der Bedienelemente) 
+umzuschalten.
+        </p>
+        
+
+
+<div>
+    
+    <div data-accordion="item">
+    <h5>
+
+        
+    </h5>
+    <div data-accordion="panel">
+    
+    <div>
+    <p>Benötigte Materialien: Sensordaten, Statistikprogramm der Wahl (zB R Studio)</p>
+</div>
+<div>
+        
+        
+    
+    <ul>
+        <li>
+            
+    
+        <a href="https://raw.githubusercontent.com/statistikZH/co2sensoren/main/data_and_statistical_literacy/RSkript_CO2vsCo19.R" target="_blank" rel="noopener">
+            <span>
+                <span>R-Skript um die Übungen mit R Studio ausführen zu können:</span>
+            </span>
+            <svg xmlns="http://www.w3.org/2000/svg">
+                <use xlink:href="#arrow-right" xlink="http://www.w3.org/1999/xlink"></use>
+            </svg>
+        </a>
+    
+
+        </li>
+    </ul>
+
+    </div>
+<div>
+    <p>Anhand des Datensatzes können Lagemasse (z. B. Mittelwert, 
+Median, Modus) und Streuungsmasse (z. B. Standardabweichung, Varianz) 
+berechnet und diskutiert werden. Für welche Variablen im Datensatz ist 
+es sinnvoll, Lage- und Streuungsmasse zu berechnen und für welche nicht?</p>
+</div>
+
+    
+</div>
+</div>
+<div data-accordion="item">
+    <h5>
+
+        
+    </h5>
+    <div data-accordion="panel">
+    
+    <div>
+    <p>Benötigte Materialien: Schreibutensilien, Sensordaten, Statistikprogramm (zB R Studio)</p>
+</div>
+<div>
+        
+        
+    
+    <ul>
+        <li>
+            
+    
+        <a href="https://github.com/statistikZH/co2sensoren/tree/main/data_and_statistical_literacy" target="_blank" rel="noopener">
+            <span>
+                <span>R-Skript um die Übungen mit R Studio ausführen zu können:</span>
+            </span>
+            <svg xmlns="http://www.w3.org/2000/svg">
+                <use xlink:href="#arrow-right" xlink="http://www.w3.org/1999/xlink"></use>
+            </svg>
+        </a>
+    
+
+        </li>
+    </ul>
+
+    </div>
+<div>
+    <p>Es wird ein Zeitraum definiert (z. B. zwei Stunden), über den die
+ Schüler und Schülerinnen festhalten, wann im Schulzimmer gelüftet wird.</p>
+<p>Im Anschluss formulieren und visualisieren die Schüler und 
+Schülerinnen ihre Erwartungen bezüglich der Entwicklung des CO2-Gehalts,
+ der relativen Luftfeuchtigkeit und der Temperatur im Schulzimmer über 
+diesen Zeitraum: Wie hoch waren die Werte vermutlich zu Beginn? Und wie 
+haben sich die Werte verändert? Hierfür kann es auch sinnvoll sein, die 
+Schüler und Schülerinnen selber recherchieren zu lassen, wie hoch der 
+CO2-Gehalt, die relative Luftfeuchtigkeit und die Temperatur in 
+Innenräumen typischerweise ist. Die Lüftungszeitpunkte sowie die 
+erwarteten Daten können beispielsweise in einer Grafik mit 
+vordefinierten Achsen ohne Inhalt eingezeichnet werden. Alternativ 
+können die Schüler und Schülerinnen die gesamte Grafik von Hand 
+aufzeichnen und dabei die x- und y- Achse selber beschriften.</p>
+<p>Zuletzt visualisieren die Schüler und Schülerinnen (oder die 
+Lehrpersonen) die erhobenen Daten über den gewählten Zeitraum (mittels 
+Colibird App oder einem Statistikprogramm), um die zuvor erarbeiteten 
+Erwartungen mit den Daten zu vergleichen. Folgende Fragen können dabei 
+diskutiert werden:</p>
+<ul> 
+ <li>Inwiefern stimmen die Erwartungen der Schüler und Schülerinnen mit den Sensordaten überein?</li> 
+ <li>Sind die Daten im Hinblick auf die Lüftungszeitpunkte plausibel? 
+Gibt es sogenannte Ausreisser (i.e., Werte, die unerwartet klein oder 
+gross sind)?</li> 
+ <li>Was ist die Beziehung zwischen dem CO2-Gehalt, der Feuchtigkeit und
+ der Temperatur? Steigen respektive sinken die Werte gemeinsam</li> 
+</ul>
+<p>Es ist absehbar, dass die Vorhersagen der Schüler und Schülerinnen 
+besser werden, wenn sie diese Übung mit neuen Daten wiederholen. Dadurch
+ wird indirekt aufgezeigt, wie wir aus Daten lernen und wie uns 
+bestehende Daten dabei helfen können, genauere Vorhersagen für 
+zukünftige Ereignisse zu machen.</p>
+</div>
+
+    
+</div>
+</div>
+
+    
+</div>
+
+    </div>
+
+
+<div>
+    <h2 id="996236982" tabindex="-1">Statistik hilft bei Ungewissheit<br> </h2>
+<p>Mittels Statistik können wir Entscheidungen datenbasiert treffen. 
+Dabei lassen sich durch statistische Verfahren sogenannte Schätzer 
+ermitteln, inklusive damit verbundene Unsicherheit. Statistik hilft uns 
+fundierte Entscheidungen zu treffen, wenn wir nur wenig Information 
+haben. Um das zu erreichen, gibt die Statistik Annäherungswerte bekannt,
+ sagt aber auch, welche Abweichungen von diesen Schätzwerten 
+wahrscheinlich sind. Damit gibt sie in unsicheren Momenten die 
+bestmöglichen Entscheidungsgrundlagen.</p>
+<p>Wenn Daten zur Grundlage wichtiger Entscheidungen werden, wird es 
+umso wichtiger, dass die Unsicherheiten klar benannt werden: die 
+Statistik weiss es selten ganz genau; aber man kann abschätzen, wie 
+unsicher die Schätzung ist (z.B mittels Konfidenzintervall und 
+Standardfehler).</p>
+</div>
+<div data-init="accordion" data-accordion-instance="accordion18">
+        <h4 id="main_accordion_1973916632">
+            Übungen
+        </h4>
+        <p class="visuallyhidden">
+            Verwenden Sie die Akkordeon-Bedienelemente, um die 
+Sichtbarkeit der jeweiligen Panels (unterhalb der Bedienelemente) 
+umzuschalten.
+        </p>
+        
+
+
+<div>
+    
+    <div data-accordion="item">
+    <h5>
+
+        
+    </h5>
+    <div data-accordion="panel">
+    <p>Benötigte Materialien: keine</p>
+<p>Statistik kann uns beispielsweise dabei helfen, eine Grösse, die wir 
+kennen möchten (die «Bevölkerung»), durch eine «Stichprobe» zu 
+ermitteln. Statistik hilft auch einzuschätzen, wie genau wir mit der 
+Stichprobe die Bevölkerung etwa abbilden können.</p>
+<p>Beispiel: Wenn man die mittlere Grösse der Fische in einem See kennen
+ möchte, dann muss man nicht alle Fische aus dem See fischen, um sie zu 
+vermessen. Man kann eine Stichprobe zu ziehen, um zu berechnen, wie 
+sicher wir uns sind, dass wir den echten Mittelwert für die 
+«Gesamtfischbevölkerung» berechnen können.</p>
+<p>Wir Menschen tendieren dazu, unsere eigenen Erfahrungen zu 
+verallgemeinern. Wenn alle in meiner Familie gern Fussball schauen, dann
+ denke ich, dass alle Familien das so machen bis ich vom Gegenteil 
+überzeugt werde. Wenn das in der Statistik geschieht, besteht die Gefahr
+ der falschen Generalisierung. Deswegen befolgt die Statistik beim 
+Ziehen einer Stichprobe gewisse Regeln: Die Zusammensetzung der 
+Bevölkerung muss bereits in der Stichprobe richtig vertreten sein: man 
+kann z.B. nicht nur Tessiner befragen und dann auf die ganze Schweiz 
+verallgemeinern.</p>
+<p>Eine weitere Variante um das Thema Stichprobe und Grundgesamtheit anhand der CO2-Ampel zu diskutieren:</p>
+<p>Was sagt die Messung der Luftqualität eines Raumes über die Schule 
+oder über alle Schulen im Land aus? Was sagen 10 Messungen in 10 
+verschiedenen Schulen aus? Und 100? Vielleicht ergeben sich Muster 
+beispielsweise bezüglich des Baustils: Sind sich Messungen von Gebäuden 
+mit Minergie-Standards ähnlich? Dabei geht es darum zu zeigen, dass man 
+sich womöglich nicht auf eine einzelne Messung verlassen kann und nicht 
+ohne weiteres auf andere Schulklassen oder Schulhäuser generalisieren 
+kann.</p>
+</div>
+</div>
+<div data-accordion="item">
+    <h5>
+
+        
+    </h5>
+    <div data-accordion="panel">
+    <p>Benötigte Materialien: Keine. Allenfalls eine CO2-Ampel zur Veranschaulichung</p>
+<p>CO2 ist für das blosse Auge nicht sichtbar. Echtzeitdaten zum 
+CO2-Gehalt in der Luft helfen dabei zu entscheiden, wann man in einem 
+Innenraum lüften sollte. In diesem Kontext können folgende Fragen mit 
+den Schüler und Schülerinnen diskutiert werden:</p>
+<ul> 
+ <li>Was ist die Bedeutung des Ampelsystems? Wann soll im Schulzimmer gelüftet werden? Wie lange soll gelüftet werden?</li> 
+ <li>Zur Info: Ab 1400 ppm (part per million) wird die Ampel gelb und ab 2000 ppm wird sie rot</li> 
+ <li>Wenn alle LED-Lampen rot leuchten, beträgt der gemessene CO2-Gehalt
+ in der Luft (mindestens) 2000 ppm. Das Gerät ist so programmiert, dass 
+der kleinstmögliche registrierte Wert 350 ist. Um wie viel ppm ist der 
+geschätzte CO2-Gehalt gestiegen, wenn eine zusätzliche Lampe 
+aufleuchtet?</li> 
+ <li>Zur Info: Dies kann folgendermassen ermittelt werden. Besteht die 
+Ampel aus 12 LED-Lampen, dann ist der Anstieg pro Lampe (2000 ppm - 350 
+ppm)/(12-1) = 150 ppm.</li> 
+ <li>Wie hoch ist die CO2-Konzentration, wenn die Hälfte der LED-Lampen leuchtet?</li> 
+ <li>Wo ist der Einsatz des Geräts am sinnvollsten, sprich wo wird es am
+ dringendsten gebraucht? Diesbezüglich können die Schüler und 
+Schülerinnen überlegen und ausprobieren, an welchem Ort im Schulhaus die
+ Luftqualität am schlechtesten ist. Gibt es Orte, wo die Ampel besonders
+ schnell gelb wird? Gibt es Orte, wo die Ampel nie grün ist/wird?</li> 
+</ul>
+</div>
+</div>
+<div data-accordion="item">
+    <h5>
+
+        
+    </h5>
+    <div data-accordion="panel">
+    <p>Benötigte Materialien: Schreibutensilien, Visualisierung der Daten über die Zeit</p>
+<p>Der Sensor misst den CO2-Gehalt nicht eins zu eins. Die Messung ist 
+eine Annäherung. Dabei gibt es eine Abweichung von +/- 40 ppm (part per 
+million). Das heisst, dass der Sensor möglicherweise einen um 40 ppm zu 
+hohen oder zu tiefen Wert anzeigt. Die Schüler und Schülerinnen können 
+diese Messungenauigkeit in einer Visualisierung der CO2-Daten 
+einzeichnen. Basierend darauf können folgende Fragen diskutiert werden:</p>
+<ul> 
+ <li>Welchen Effekt hat die Mess(un)genauigkeit auf die Visualisierung? 
+Hier kann mit den Schüler und Schülerinnen darüber gesprochen werden, 
+dass kleine Schwankungen des CO2-Werts über die Zeit nicht viel 
+Bedeutung beigemessen werden kann, da die Messung fehlerbehaftet ist.</li> 
+ <li>Was wäre, wenn der Messfehler statt +/- 40 ppm +/-400 ppm wäre. 
+Welche Implikationen hätte dies für das Lüftungsverhalten im 
+Schulzimmer?</li> 
+ <li>Ab welchem Messfehler würde der Sensor unbrauchbar?</li> 
+</ul>
+</div>
+</div>
+
+    
+</div>
+
+    </div>
+<div id="main_infobox">
+    <h4 id="326928985">Themen und Werkzeuge gesucht!<br> </h4>
+<p>Hinweis: Diese Seite ist work in progress. Über Vorschläge für 
+weitere Themenblöcke und ausgearbeitete Unterrichtsmaterialien freuen 
+wir uns sehr.</p>
+</div>
+<div>
+    <h2 id="-588081744">Weiterführende Infos</h2>
+</div>
+
+
+
+
+    
+</div>
+                
+                
+                    <div data-init="feedback" data-feedback-instance="feedback19">
+                
+                <div>
+                    <h3>Ist diese Seite verständlich?</h3>
+                    
+                </div>
+                <div>
+                        <h3>Vielen Dank für Ihr Feedback!</h3>
+                    </div>
+            </div>
+                    
+                    
+                
+                
+                
+                <div>
+                    <h2 id="responsible-location">
+                        Für dieses Thema zuständig: </h2>
+                    
+                </div>
+            </div>
+    </main>
+
+
+
+    
+    
+
+
+
+
+  
+
+  
+
+  
+  
+  
+  
+
+
+
+
+
+<div data-input="" data-topiclist="firstLayer" data-init="modal" data-topiclist-options="{&quot;url&quot;:&quot;/de/jcr:content.zhweb-organizations.json&quot;,&quot;searchUrl&quot;:&quot;/de/suche.html?q={value}&quot;}" data-topiclist-instance="topiclist8" data-organisation-navigation-instance="organisationnavigation7" role="dialog" aria-hidden="true" id="flyout-topics" data-modal-instance="modal5">
+                    
+                    <label for="input1">Filtern nach Amt, Fachstelle, Direktion</label>
+                    
+                </div><div data-init="modal" data-search-options="{&quot;url&quot;:&quot;/de/suche/_jcr_content/searchoverview.zhweb-suggestion.json&quot;,&quot;searchPageUrl&quot;:&quot;/de/suche.html&quot;}" data-search-instance="search10" role="dialog" aria-hidden="true" data-modal-options="{&quot;transitionTime&quot;:500}" id="flyout-search" data-modal-instance="modal9">
+        <h2>Meist gesucht</h2>
+        
+    </div></div></div>
+    </div>
+
+    <div>
+      <div class="reader-message"></div>
+    </div>
+    <div aria-owns="toolbar"></div>
+  </div>
+
+  <div id="pocket-cta-container" hidden="">
+    <div class="pocket-cta-inner" id="pocket-cta-only">
+      <div class="pocket-cta">
+        <header class="pocket-cta-header">Save anything from across the web in Pocket, your personal library.</header>
+        <p class="pocket-cta-subhead">As part of the Firefox family, 
+Pocket provides a quiet, calm space that’s perfect for reading. It 
+strips away all the distractions of the internet so you can really 
+focus.</p>
+        <a href="https://getpocket.com/signup?utm_source=firefox_reader&amp;utm_medium=variant_cta_only" class="pocket-btn pocket-sign-up"><strong>Sign up</strong> - it’s free</a>
+        <a href="https://getpocket.com/explore?utm_source=firefox_reader&amp;utm_medium=variant_cta_only" class="pocket-btn pocket-discover-more"><strong>Discover more</strong></a>
+      </div>
+      <button class="pocket-dismiss-cta" title="Dismiss"></button>
+    </div>
+
+    <div class="pocket-cta-inner" id="pocket-cta-and-recs">
+      <div class="pocket-recs-top">
+        <div class="col">
+          <header class="pocket-cta-header">Discover the most thought-provoking stories out there, curated by Pocket.</header>
+          <p class="pocket-cta-subhead">As part of the Firefox family, 
+Pocket surfaces the best articles out there—new perspectives, intriguing
+ deep-dives, timeless classics—and we do this with the same dedication 
+to privacy you’ve come to expect from Firefox and Mozilla. </p>
+        </div>
+        <div class="col">
+          <button class="pocket-collapse-recs"></button>
+        </div>
+      </div>
+
+      <div class="pocket-recs"></div>
+
+      <div class="pocket-sign-up-wrapper">
+        <a href="https://getpocket.com/explore?utm_source=firefox_reader&amp;utm_medium=variant_cta_plus_recs" class="pocket-btn pocket-sign-up"><strong>Discover more</strong></a>
+      </div>
+    </div>
+  </div>
+
+
+
+</body></html>
