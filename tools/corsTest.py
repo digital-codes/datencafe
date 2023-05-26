@@ -40,6 +40,7 @@ def checkCors(url):
         else:
             # The CORS request is not allowed, so print an error message
             #print("CORS request not allowed.")
+            print ("Response: ",preflight_response.headers)
             return 0
     except:
         print("Error")
