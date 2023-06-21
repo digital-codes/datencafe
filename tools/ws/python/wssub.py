@@ -3,7 +3,7 @@ import json
 import websockets
 
 device="12345678"
-pwd="Genge5Thoh"
+pwd="aigh9En7ri"
 async def main():
     async with websockets.connect(
         'wss://daten.cafe:443/ws',
