@@ -261,16 +261,13 @@ const routeInfo = computed(() => {
   }
 });
 const props = defineProps({
-  title: String,
-  thumb: String,
+  title: String
 });
 
-// thumbnail refs for popovers
-const thumbRef = ref();
-
+// thumbnail ref
 const thumb = ref(["fas", "question"]);
-// init store on mount
 
+// init store on mount
 const hasToken = computed(() => {
   return userStore.exists();
 });
@@ -285,8 +282,6 @@ onBeforeMount(async () => {
   // read mode
   dark.value = userStore.getDark();
 
-  thumb.value = props.thumb === undefined ? thumb.value : ["fas", props.thumb];
-  console.log(props, "Icon:", thumb.value);
 });
 
 const language = ref(locale.value);
