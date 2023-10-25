@@ -95,14 +95,14 @@ async function tfTest() {
     console.log("Expected:", evalImg.label, evalImg.name)
     console.log(`The predicted class index is ${predictedIndex} - ${labelNames[predictedIndex]}.`);
 
-    const r = -400 + Math.floor(i/numTests * 400)  // width
+    const r = -400 + Math.floor(i / numTests * 400)  // width
     const tr = "translate(" + String(r) + "px,0px)"
     bar.style.transform = tr
 
-    const status = "Error rate so far: " + String(errors / i * 100) +  "%"
-    trainStat.innerHTML = status 
+    const status = "Error rate so far: " + String(errors / i * 100) + "%"
+    trainStat.innerHTML = status
 
-  await new Promise((resolve) => setTimeout(resolve, 100));
+    await new Promise((resolve) => setTimeout(resolve, 100));
   }
   console.log("Totoal errors:", errors, " -> ", errors / numTests * 100, "%")
   alert("Error rate: " + String(errors / numTests * 100) + "%")
@@ -158,16 +158,16 @@ async function setupModel() {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-  
+
     // should be possible to recreate tensors like so
     // example with tensor #1
     const loadedData = JSON.parse(JSON.stringify(downData))
-    const shape = [64,64];
+    const shape = [64, 64];
     const img = loadedData.imgdata[0]
     // console.log(img)
     const tensor = tf.tensor(Array.from(Object.values(img)), shape);
     console.log(tensor); // Output: <tf.Tensor: shape: [2, 2], dtype: float32, rank: 2, values: [1, 2, 3, 4]>
-    
+
   }
 
 
@@ -201,6 +201,21 @@ async function setupModel() {
   //console.log("Trainx:",trainXs)
   //console.log("Trainy:",trainYs)
   console.log("Train/test prepared");
+
+  function printModelSummary(model) {
+    console.log('%c Model Summary', 'font-weight: bold; font-size: 16px;');
+    console.log('-------------------------');
+    model.layers.forEach(layer => {
+        const outputShape = layer.outputShape;
+        const params = layer.countParams();
+        const name = layer.name;
+        const layerType = layer.getClassName();
+        console.log(`Layer Name: ${name}, Type: ${layerType}, Output Shape: ${outputShape}, Params: ${params}`);
+    });
+    console.log('-------------------------');
+    console.log(`Total Parameters: ${model.countParams()}`);
+}
+
 
   let useCnn = true
   let model
@@ -249,13 +264,14 @@ async function setupModel() {
       ],
     });
 
-
+    model.compile({
+      optimizer: "adam",
+      loss: "categoricalCrossentropy",
+      metrics: ["accuracy"],
+    });
   }
-  model.compile({
-    optimizer: "adam",
-    loss: "categoricalCrossentropy",
-    metrics: ["accuracy"],
-  });
+
+  printModelSummary(model)
 
 
   const batchSize = numImgs / 4;
@@ -263,16 +279,16 @@ async function setupModel() {
   // Define a callback function to monitor the progress of the training
   const monitorCallback = async (epoch, logs) => {
     const bar = document.getElementById("progressbar")
-    const r = -400 + Math.floor(epoch/epochs * 400)  // width
-      const tr = "translate(" + String(r) + "px,0px)"
-      bar.style.transform = tr
-  
+    const r = -400 + Math.floor(epoch / epochs * 400)  // width
+    const tr = "translate(" + String(r) + "px,0px)"
+    bar.style.transform = tr
+
     const trainStat = document.getElementById("train")
     const status = `Epoch ${epoch}: loss = ${logs.loss.toFixed(
       4
     )}, accuracy = ${logs.acc.toFixed(4)}`
-    trainStat.innerHTML = status 
-       console.log(status)
+    trainStat.innerHTML = status
+    console.log(status)
     // Access the weights of the first layer
     //const weights = await model.layers[1].getWeights();
     //await showWeights(weights)
@@ -306,18 +322,18 @@ async function setupModel() {
     tensorflowjs_models/datencafe-model/weight_data
     tensorflowjs_models/datencafe-model/weight_specs
     */
-   const modelData = {
-    info: await localStorage.getItem("tensorflowjs_models/" + modelSavePath + "/info"),
-    meta: await localStorage.getItem("tensorflowjs_models/" + modelSavePath + "/model_metadata"),
-    topo: await localStorage.getItem("tensorflowjs_models/" + modelSavePath + "/model_topology"),
-    wspecs: await localStorage.getItem("tensorflowjs_models/" + modelSavePath + "/weight_specs"),
-    wdata: await localStorage.getItem("tensorflowjs_models/" + modelSavePath + "/weight_data")
-   }
-   const modelBlob = new Blob([JSON.stringify(modelData)], { type: 'application/json' });
-   const modelUrl = URL.createObjectURL(modelBlob);
-   downloadFile(modelUrl);
+    const modelData = {
+      info: await localStorage.getItem("tensorflowjs_models/" + modelSavePath + "/info"),
+      meta: await localStorage.getItem("tensorflowjs_models/" + modelSavePath + "/model_metadata"),
+      topo: await localStorage.getItem("tensorflowjs_models/" + modelSavePath + "/model_topology"),
+      wspecs: await localStorage.getItem("tensorflowjs_models/" + modelSavePath + "/weight_specs"),
+      wdata: await localStorage.getItem("tensorflowjs_models/" + modelSavePath + "/weight_data")
+    }
+    const modelBlob = new Blob([JSON.stringify(modelData)], { type: 'application/json' });
+    const modelUrl = URL.createObjectURL(modelBlob);
+    downloadFile(modelUrl);
   }
-  
+
   async function downloadFile(url) {
     const response = await fetch(url);
     const blob = await response.blob();
@@ -328,7 +344,7 @@ async function setupModel() {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-  }  
+  }
 
   console.log("Saving model")
   await saveModel(model)
@@ -455,7 +471,7 @@ async function imgGen() {
   const action = document.getElementById("action")
   action.innerHTML = "Generating train/test images"
   for (let i = 0; i < numImgs; i++) {
-    const r = -400 + Math.floor(i/numImgs * 400)  // width
+    const r = -400 + Math.floor(i / numImgs * 400)  // width
     const tr = "translate(" + String(r) + "px,0px)"
     bar.style.transform = tr
     const data = await mkSingleImg();
@@ -512,12 +528,12 @@ async function mkSingleImg() {
 
   // Define shape properties
   //const shapeSize = Math.floor((Math.random() * imgSize) / 3) + imgSize / 6; // random size between 10 and 30
-  let shapeSize = Math.floor((Math.random() * imgSize) / 2) + Math.floor((Math.random() - .5)*(imgSize / 6)); // random size between 10 and 30
-  shapeSize = Math.floor(Math.max(imgSize / 3,shapeSize))
+  let shapeSize = Math.floor((Math.random() * imgSize) / 2) + Math.floor((Math.random() - .5) * (imgSize / 6)); // random size between 10 and 30
+  shapeSize = Math.floor(Math.max(imgSize / 3, shapeSize))
   const shapeStrokeWidth = Math.floor(Math.random() * 4) + 3; // random stroke width between 1 and 4
   const shapeRotation = Math.random() * 2 * Math.PI; // random rotation between 0 and pi
-  const shapeTranslationX = (Math.random() * 2 - 1) * imgSize/12; // random rotation between 0 and pi
-  const shapeTranslationY = (Math.random() * 2 - 1) * imgSize/12; // random rotation between 0 and pi
+  const shapeTranslationX = (Math.random() * 2 - 1) * imgSize / 12; // random rotation between 0 and pi
+  const shapeTranslationY = (Math.random() * 2 - 1) * imgSize / 12; // random rotation between 0 and pi
 
   // Set shape position to center of canvas
   /* */
