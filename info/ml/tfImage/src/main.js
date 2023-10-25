@@ -228,11 +228,19 @@ async function setupModel() {
     // Convolutional layers
     model.add(tf.layers.conv2d({
       inputShape: [imgSize, imgSize, 1],
-      filters: 32,
-      kernelSize: 5,
+      filters: 16,
+      kernelSize: 11,
       activation: 'relu'
     }));
     model.add(tf.layers.maxPooling2d({ poolSize: 2 }));
+
+    model.add(tf.layers.conv2d({
+      filters: 32,
+      kernelSize: 7, // 3
+      activation: 'relu'
+    }));
+    model.add(tf.layers.maxPooling2d({ poolSize: 3 })); // 2
+
     model.add(tf.layers.conv2d({
       filters: 64,
       kernelSize: 3, // 3
