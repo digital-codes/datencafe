@@ -14,12 +14,23 @@ with open(fn) as f:
 model = tf.keras.models.model_from_json(mdesc["topo"])
 print(model.summary())
 
+# Save as Keras model (optional)
+model.save('model_empty.h5')
+
 print("----------")
+
 
 # load weights too
 wspecs = json.loads(mdesc["wspecs"])
 wstring = mdesc["wdata"]
 wdata = base64.b64decode(wstring)
+
+print("----------")
+print("initial weights and specs")
+weights = model.get_weights()
+for i in range(len(weights)):
+    w = np.array(weights[i]) #wspecs[i][shape])
+    print(w.shape,wspecs[i]["shape"])
 
 # parse weight data
 # Use a pointer to keep track of our position in byte_data
@@ -39,30 +50,18 @@ for spec in wspecs:
     pointer += num_bytes
 
 
-# Split parsed_weights into separate lists for kernel and bias for each layer
-weights_to_set = np.empty((len(parsed_weights)//2,2)) #[]
-for i in range(0, len(parsed_weights), 2):
-    weights_to_set[i] = (parsed_weights[i], parsed_weights[i+1])
-    #weights_to_set.append([parsed_weights[i], parsed_weights[i+1]])
-
-# Set weights to the model
-for layer, weights in zip(model.layers, weights_to_set):
-    print(layer, weights.shape)
-    layer.set_weights(weights)
-
-sys.exit()
-
-# Set weights to the model
-for layer, weights in zip(model.layers, parsed_weights):
-    print(layer, weights.shape)
-    layer.set_weights([weights])
+for i in range(len(parsed_weights)):
+    w = np.array(parsed_weights[i]) 
+    print(w.shape,wspecs[i]["shape"])
 
 
-sys.exit()
+# try lo load weights
+model.set_weights(parsed_weights)
+
 
 ########
 # Save as Keras model (optional)
-model.save('model.h5')
+model.save('model_with_weights.h5')
 
 # Use this line to plot the model architecture directly
 tf.keras.utils.plot_model(model, to_file='model.png', show_shapes=True, show_layer_names=True)
