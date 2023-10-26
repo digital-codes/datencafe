@@ -222,7 +222,8 @@ async function setupModel() {
   let epochs
   // Train and evaluate a simple neural network using the training and test data
   if (useCnn) {
-    epochs = 100
+    // with 3 cnn layers and droput error rate should be below 20% after 80 epochs. 
+    epochs = 80 // 100
     model = tf.sequential();
 
     // Convolutional layers
@@ -239,6 +240,7 @@ async function setupModel() {
       kernelSize: 7, // 3
       activation: 'relu'
     }));
+    model.add(tf.layers.dropout(0.25))
     model.add(tf.layers.maxPooling2d({ poolSize: 3 })); // 2
 
     model.add(tf.layers.conv2d({
@@ -246,6 +248,7 @@ async function setupModel() {
       kernelSize: 3, // 3
       activation: 'relu'
     }));
+    
     model.add(tf.layers.maxPooling2d({ poolSize: 3 })); // 2
 
     // Flatten layer to prepare for fully-connected layers
