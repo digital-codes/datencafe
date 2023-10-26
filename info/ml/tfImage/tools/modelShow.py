@@ -4,8 +4,10 @@ import matplotlib.pyplot as plt
 import base64
 import sys
 import numpy as np
+import os
+from PIL import Image
 
-fn = "public/datencafe-cnn-model.json"
+fn = "../public/datencafe-cnn-model.json"
 
 with open(fn) as f:
     mdesc = json.load(f)
@@ -67,6 +69,33 @@ model.save('model_with_weights.h5')
 tf.keras.utils.plot_model(model, to_file='model.png', show_shapes=True, show_layer_names=True)
 
 
+def saveFilterImages(idx):
+     # Create a directory for the layer if it doesn't exist
+    layer_dir = f'layer_{idx}'
+    if not os.path.exists(layer_dir):
+        os.makedirs(layer_dir)
+
+    # Extract weights from the desired layer
+    filters, biases = model.layers[idx].get_weights()
+
+    # Normalize filter values between 0 and 1 for visualization
+    f_min, f_max = filters.min(), filters.max()
+    filters = (filters - f_min) / (f_max - f_min)
+
+    # Save each filter as an image
+    for i in range(filters.shape[-1]):
+        f = filters[:, :, :, i]
+        # Convert the filter to a format suitable for Pillow
+        img_data = (f * 255).astype(np.uint8)
+        
+        for j in range(f.shape[-1]):
+            # Save each channel (in case of RGB) as a separate image
+            img = Image.fromarray(img_data[:, :, j])
+            # Resize the image to 64x64 pixels
+            img = img.resize((64, 64), Image.NEAREST)
+            img.save(os.path.join(layer_dir, f'filter_{i}_channel_{j}.png'))
+
+
 
 def plotLayer(idx):
     # Extract weights from the desired layer
@@ -118,4 +147,5 @@ for i in range(len(model.layers)):
         continue
     print(f"Printing layer {i}")
     plotLayer(i)
+    saveFilterImages(i)
 
