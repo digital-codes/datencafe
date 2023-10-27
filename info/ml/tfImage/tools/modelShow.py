@@ -110,7 +110,7 @@ def plotLayer(idx):
     n_channels = filters.shape[-2]
 
     # Width of the grid
-    grid_width = 10
+    grid_width = 8
     grid_height = int(n_filters * n_channels / grid_width) + (n_filters * n_channels % grid_width > 0)
 
     # Create a figure to contain the subplots
@@ -146,6 +146,6 @@ for i in range(len(model.layers)):
         print(f"Skipping layer {i}")
         continue
     print(f"Printing layer {i}")
-    plotLayer(i)
     saveFilterImages(i)
+    plotLayer(i)
 

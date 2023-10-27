@@ -11,6 +11,8 @@ import * as tf from "@tensorflow/tfjs";
 let trainingDone = false
 let generatingDone = false
 
+const statResults = new Array()
+
 console.log(Plotly.version);
 console.log(tf.version);
 
@@ -35,7 +37,7 @@ document.querySelector("#app").innerHTML = `
 
 const imgClasses = 3;
 const imgSize = 64;
-const numImgs = 256;
+const numImgs = 512
 
 const labelNames = ["Tringle", "Ellipse", "Rectangle"]
 
@@ -297,14 +299,14 @@ async function setupModel() {
   // Train and evaluate a simple neural network using the training and test data
   if (useCnn) {
     // with 3 cnn layers and droput error rate should be below 20% after 80 epochs. 
-    epochs = 120
+    epochs = 100 // with 512 images, 80 epochs might be ok, 100 is better. 120 with 256 images
     model = tf.sequential();
 
     // Convolutional layers
     model.add(tf.layers.conv2d({
       inputShape: [imgSize, imgSize, 1],
       filters: 10,
-      kernelSize: 11,
+      kernelSize: 11, //11,
       activation: 'relu'
     }));
     model.add(tf.layers.maxPooling2d({ poolSize: 2 }));
@@ -319,7 +321,7 @@ async function setupModel() {
 
     model.add(tf.layers.conv2d({
       filters: 10, // 64,
-      kernelSize: 3, // 3
+      kernelSize: 5, // 3
       activation: 'relu'
     }));
     
@@ -374,12 +376,13 @@ async function setupModel() {
     )}, accuracy = ${logs.acc.toFixed(4)}`
     trainStat.innerHTML = status
     console.log(status)
-    // Access the weights of the first layer
-    //const weights = await model.layers[1].getWeights();
-    //await showWeights(weights)
+    
+    // save results
+    statResults.push([logs.loss,logs.acc])
+
   };
 
-  console.log("STart training");
+  console.log("Start training");
   generatingDone = true
   // don't enable button here. can't download while training
   // ... document.getElementById("dataBtn").disabled = false; 
@@ -387,7 +390,7 @@ async function setupModel() {
   // Assume that you have loaded the training and test data into TensorFlow tensors called trainXs, trainYs, testXs, and testYs, and defined a model called "model"
   //
   const action = document.getElementById("action")
-  action.innerHTML = "Training Model"
+  action.innerHTML = "Training Model for " + epochs + " epochs"
   const trainStat = document.getElementById("train")
   trainStat.style.display = "block"
 
@@ -410,6 +413,15 @@ async function setupModel() {
   // enable both buttons
   document.getElementById("dataBtn").disabled = false; 
   document.getElementById("modelBtn").disabled = false; 
+
+  const rf = new dfd.DataFrame(statResults,{columns:["loss","accuracy"]})
+  rf.print(5)
+  await rf.plot("chart").line({
+    layout: {
+      title:"Training results",
+      xaxis: {title:"Epoche"}
+    }
+  })
 
 
   console.log("Start eval");
@@ -533,7 +545,7 @@ async function imgGen() {
   const names = []
   const bar = document.getElementById("progressbar")
   const action = document.getElementById("action")
-  action.innerHTML = "Generating train/test images"
+  action.innerHTML = "Generating " + numImgs + " train/test images"
   for (let i = 0; i < numImgs; i++) {
     const r = -400 + Math.floor(i / numImgs * 400)  // width
     const tr = "translate(" + String(r) + "px,0px)"

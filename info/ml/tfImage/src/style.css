@@ -47,7 +47,10 @@ h1 {
 }
 
 
-div {
+#chart {
+  min-width:50%;
+  min-height:40%;
+  border: solid 1px #eee;
 }
 
 
