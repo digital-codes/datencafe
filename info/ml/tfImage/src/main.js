@@ -8,6 +8,8 @@ import Plotly from "plotly.js-dist-min"; // v2.8
 
 import * as tf from "@tensorflow/tfjs";
 
+let trainingDone = false
+let generatingDone = false
 
 console.log(Plotly.version);
 console.log(tf.version);
@@ -37,11 +39,41 @@ const numImgs = 256;
 
 const labelNames = ["Tringle", "Ellipse", "Rectangle"]
 
+let data2save
+let model2save
+
 //await imgGen();
 
 await tfTest();
 
 async function tfTest() {
+
+  const action = document.getElementById("action")
+  action.innerHTML = "Evaluating"
+  const trainStat = document.getElementById("train")
+  trainStat.style.display = "block"
+  const bar = document.getElementById("progressbar")
+
+
+  document.getElementById('dataBtn').addEventListener('click', async () => {
+    if (generatingDone) {
+      console.log("down data")
+      await downData()
+    }  else {
+      console.log("data not ready")
+    }
+  });
+  
+  document.getElementById('modelBtn').addEventListener('click', async () => {
+    if (trainingDone) {
+      console.log("down model")
+      await saveModel(model2save)
+    }  else {
+      console.log("model not ready")
+    }
+  });
+  
+
 
   // either create a new model and train it, or load a model like so:
   /*
@@ -58,11 +90,8 @@ async function tfTest() {
 
   model.summary();
 
-  const action = document.getElementById("action")
-  action.innerHTML = "Evaluating"
-  const trainStat = document.getElementById("train")
-  trainStat.style.display = "block"
-  const bar = document.getElementById("progressbar")
+  
+  
 
 
   let errors = 0
@@ -108,6 +137,74 @@ async function tfTest() {
   alert("Error rate: " + String(errors / numTests * 100) + "%")
 }
 
+async function downData() {
+  const tensors = []
+  for (const t of data2save.images) {
+    tensors.push(await t.data())
+  }
+  const downData = {
+    labels: data2save.labels,
+    names: data2save.names,
+    tensor: data2save.images,
+    imgdata: tensors
+  }
+  const blob = await new Blob([JSON.stringify(downData)], { type: 'application/json' });
+  const url = await URL.createObjectURL(blob);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = 'datencafe-traindata.json';
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+
+  // should be possible to recreate tensors like so
+  // example with tensor #1
+  const loadedData = JSON.parse(JSON.stringify(downData))
+  const shape = [64, 64];
+  const img = loadedData.imgdata[0]
+  // console.log(img)
+  const tensor = tf.tensor(Array.from(Object.values(img)), shape);
+  console.log(tensor); // Output: <tf.Tensor: shape: [2, 2], dtype: float32, rank: 2, values: [1, 2, 3, 4]>
+
+}
+
+  // download model
+  async function saveModel(model) {
+    const modelSavePath = "datencafe-model"
+    await model.save(`localstorage://${modelSavePath}`);
+    //const saveResults = await model.save('downloads://my-model');
+    /* 5 keys: 
+    tensorflowjs_models/datencafe-model/info
+    tensorflowjs_models/datencafe-model/model_metadata
+    tensorflowjs_models/datencafe-model/model_topology
+    tensorflowjs_models/datencafe-model/weight_data
+    tensorflowjs_models/datencafe-model/weight_specs
+    */
+    const modelData = {
+      info: await localStorage.getItem("tensorflowjs_models/" + modelSavePath + "/info"),
+      meta: await localStorage.getItem("tensorflowjs_models/" + modelSavePath + "/model_metadata"),
+      topo: await localStorage.getItem("tensorflowjs_models/" + modelSavePath + "/model_topology"),
+      wspecs: await localStorage.getItem("tensorflowjs_models/" + modelSavePath + "/weight_specs"),
+      wdata: await localStorage.getItem("tensorflowjs_models/" + modelSavePath + "/weight_data")
+    }
+    const modelBlob = new Blob([JSON.stringify(modelData)], { type: 'application/json' });
+    const modelUrl = URL.createObjectURL(modelBlob);
+    downloadFile(modelUrl);
+  }
+
+  async function downloadFile(url) {
+    const response = await fetch(url);
+    const blob = await response.blob();
+    const filename = 'datencafe-model.json';
+    const link = document.createElement('a');
+    link.href = window.URL.createObjectURL(blob);
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+
+
 async function setupModel() {
   // -------------------------------
   /*
@@ -134,41 +231,16 @@ async function setupModel() {
   const data = await imgGen();
   //console.log("lbl",data.labels)
   //console.log("img",data.images)
+  data2save = data
   console.log("Data loaded");
 
   // download tensor
   // there should be a more efficioent version with binary downloads ...
   const downloadTraindata = false
   if (downloadTraindata) {
-    const tensors = []
-    for (const t of data.images) {
-      tensors.push(await t.data())
-    }
-    const downData = {
-      labels: data.labels,
-      names: data.names,
-      tensor: data.images,
-      imgdata: tensors
-    }
-    const blob = await new Blob([JSON.stringify(downData)], { type: 'application/json' });
-    const url = await URL.createObjectURL(blob);
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = 'datencafe-traindata.json';
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-
-    // should be possible to recreate tensors like so
-    // example with tensor #1
-    const loadedData = JSON.parse(JSON.stringify(downData))
-    const shape = [64, 64];
-    const img = loadedData.imgdata[0]
-    // console.log(img)
-    const tensor = tf.tensor(Array.from(Object.values(img)), shape);
-    console.log(tensor); // Output: <tf.Tensor: shape: [2, 2], dtype: float32, rank: 2, values: [1, 2, 3, 4]>
-
+    await downData()
   }
+
 
 
   // Assume that you have two arrays: images (an array of TensorFlow images) and labels (an array of integers representing the labels)
@@ -236,7 +308,7 @@ async function setupModel() {
     model.add(tf.layers.maxPooling2d({ poolSize: 2 }));
 
     model.add(tf.layers.conv2d({
-      filters: 32,
+      filters: 16, // 32,
       kernelSize: 7, // 3
       activation: 'relu'
     }));
@@ -244,7 +316,7 @@ async function setupModel() {
     model.add(tf.layers.maxPooling2d({ poolSize: 3 })); // 2
 
     model.add(tf.layers.conv2d({
-      filters: 64,
+      filters: 16, // 64,
       kernelSize: 3, // 3
       activation: 'relu'
     }));
@@ -306,6 +378,7 @@ async function setupModel() {
   };
 
   console.log("STart training");
+  generatingDone = true
   // Assume that you have loaded the training and test data into TensorFlow tensors called trainXs, trainYs, testXs, and testYs, and defined a model called "model"
   //
   const action = document.getElementById("action")
@@ -321,44 +394,14 @@ async function setupModel() {
     validationData: [testXs, testYs],
   });
 
-  // download model
-  async function saveModel(model) {
-    const modelSavePath = "datencafe-model"
-    await model.save(`localstorage://${modelSavePath}`);
-    //const saveResults = await model.save('downloads://my-model');
-    /* 5 keys: 
-    tensorflowjs_models/datencafe-model/info
-    tensorflowjs_models/datencafe-model/model_metadata
-    tensorflowjs_models/datencafe-model/model_topology
-    tensorflowjs_models/datencafe-model/weight_data
-    tensorflowjs_models/datencafe-model/weight_specs
-    */
-    const modelData = {
-      info: await localStorage.getItem("tensorflowjs_models/" + modelSavePath + "/info"),
-      meta: await localStorage.getItem("tensorflowjs_models/" + modelSavePath + "/model_metadata"),
-      topo: await localStorage.getItem("tensorflowjs_models/" + modelSavePath + "/model_topology"),
-      wspecs: await localStorage.getItem("tensorflowjs_models/" + modelSavePath + "/weight_specs"),
-      wdata: await localStorage.getItem("tensorflowjs_models/" + modelSavePath + "/weight_data")
-    }
-    const modelBlob = new Blob([JSON.stringify(modelData)], { type: 'application/json' });
-    const modelUrl = URL.createObjectURL(modelBlob);
-    downloadFile(modelUrl);
-  }
 
-  async function downloadFile(url) {
-    const response = await fetch(url);
-    const blob = await response.blob();
-    const filename = 'datencafe-model.json';
-    const link = document.createElement('a');
-    link.href = window.URL.createObjectURL(blob);
-    link.download = filename;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  }
-
+  /*
   console.log("Saving model")
   await saveModel(model)
+  */
+  console.log("Model trained")
+  model2save = model
+  trainingDone = true
 
   console.log("Start eval");
   const result = await model.evaluate(testXs, testYs);
@@ -390,6 +433,7 @@ async function setupModel() {
   return model;
 }
 // --------------------------------------------------
+
 // --------------------------------------------------
 async function showWeights(weights) {
   // Assume that you have a trained model called "model" and a dense layer called "denseLayer"

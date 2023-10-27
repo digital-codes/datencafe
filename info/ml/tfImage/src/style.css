@@ -25,10 +25,13 @@ a:hover {
 
 body {
   margin: 0;
-  display: flex;
+  display: block;
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
 }
 
 h1 {
@@ -47,15 +50,6 @@ h1 {
 div {
 }
 
-div.chart {
-  padding-bottom: 20px;
-  width:800px;
-  height:400px;
-}
-
-.read-the-docs {
-  color: #888;
-}
 
 button {
   border-radius: 8px;
@@ -75,6 +69,21 @@ button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
+
+#app {
+  height: 100%;
+  width: 100%;
+  display:block;
+}
+
+#ctl {
+  margin-left:10%;
+  margin-top:10px;
+  display:block;
+}
+
+
+
 
 @media (prefers-color-scheme: light) {
   :root {
