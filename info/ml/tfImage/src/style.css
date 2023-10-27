@@ -82,6 +82,16 @@ button:focus-visible {
   display:block;
 }
 
+button {
+  color:#0f8;
+  background: #888;
+  border: 2px solid #0c4;
+}
+
+button[disabled=disabled], button:disabled {
+  color:#ccc;
+  border: 1px solid #888;
+}
 
 
 

@@ -55,6 +55,7 @@ async function tfTest() {
   const bar = document.getElementById("progressbar")
 
 
+  document.getElementById("dataBtn").disabled = true; 
   document.getElementById('dataBtn').addEventListener('click', async () => {
     if (generatingDone) {
       console.log("down data")
@@ -64,6 +65,7 @@ async function tfTest() {
     }
   });
   
+  document.getElementById("modelBtn").disabled = true; 
   document.getElementById('modelBtn').addEventListener('click', async () => {
     if (trainingDone) {
       console.log("down model")
@@ -295,20 +297,20 @@ async function setupModel() {
   // Train and evaluate a simple neural network using the training and test data
   if (useCnn) {
     // with 3 cnn layers and droput error rate should be below 20% after 80 epochs. 
-    epochs = 80 // 100
+    epochs = 120
     model = tf.sequential();
 
     // Convolutional layers
     model.add(tf.layers.conv2d({
       inputShape: [imgSize, imgSize, 1],
-      filters: 16,
+      filters: 10,
       kernelSize: 11,
       activation: 'relu'
     }));
     model.add(tf.layers.maxPooling2d({ poolSize: 2 }));
 
     model.add(tf.layers.conv2d({
-      filters: 16, // 32,
+      filters: 10, // 32,
       kernelSize: 7, // 3
       activation: 'relu'
     }));
@@ -316,7 +318,7 @@ async function setupModel() {
     model.add(tf.layers.maxPooling2d({ poolSize: 3 })); // 2
 
     model.add(tf.layers.conv2d({
-      filters: 16, // 64,
+      filters: 10, // 64,
       kernelSize: 3, // 3
       activation: 'relu'
     }));
@@ -379,6 +381,9 @@ async function setupModel() {
 
   console.log("STart training");
   generatingDone = true
+  // don't enable button here. can't download while training
+  // ... document.getElementById("dataBtn").disabled = false; 
+
   // Assume that you have loaded the training and test data into TensorFlow tensors called trainXs, trainYs, testXs, and testYs, and defined a model called "model"
   //
   const action = document.getElementById("action")
@@ -402,6 +407,10 @@ async function setupModel() {
   console.log("Model trained")
   model2save = model
   trainingDone = true
+  // enable both buttons
+  document.getElementById("dataBtn").disabled = false; 
+  document.getElementById("modelBtn").disabled = false; 
+
 
   console.log("Start eval");
   const result = await model.evaluate(testXs, testYs);
