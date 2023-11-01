@@ -15,6 +15,7 @@
   "dependencies": {
     "@types/plotly.js-dist-min": "^2.3.1",
     "danfojs": "^1.1.2",
-    "echarts": "^5.4.2"
+    "echarts": "^5.4.2",
+    "sketch-js": "^1.1.3"
   }
 }

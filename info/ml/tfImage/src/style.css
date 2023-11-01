@@ -96,6 +96,19 @@ button[disabled=disabled], button:disabled {
   border: 1px solid #888;
 }
 
+#sketch {
+  display: inline-block;
+  margin-left:auto;
+  border: solid 2px #00f;
+}
+
+#sketch canvas {
+}
+
+#result {
+  border: solid 2px #00f;
+  margin-right:auto;
+}
 
 
 @media (prefers-color-scheme: light) {

@@ -8,6 +8,8 @@ import Plotly from "plotly.js-dist-min"; // v2.8
 
 import * as tf from "@tensorflow/tfjs";
 
+import Sketch from "sketch-js"
+
 let trainingDone = false
 let generatingDone = false
 
@@ -37,7 +39,16 @@ document.querySelector("#app").innerHTML = `
 
 const imgClasses = 3;
 const imgSize = 64;
-const numImgs = 512
+
+let  numImgs = 512
+let epochs = 100
+
+const quick = true 
+if (quick) {
+  numImgs = 64
+  epochs = 10
+}
+
 
 const labelNames = ["Tringle", "Ellipse", "Rectangle"]
 
@@ -99,7 +110,7 @@ async function tfTest() {
 
 
   let errors = 0
-  let numTests = 100
+  let numTests = 10 // 0
   for (let i = 0; i < numTests; i++) {
     const evalImg = await mkSingleImg();
     console.log("Eavl img rdy");
@@ -295,11 +306,9 @@ async function setupModel() {
 
   let useCnn = true
   let model
-  let epochs
   // Train and evaluate a simple neural network using the training and test data
   if (useCnn) {
     // with 3 cnn layers and droput error rate should be below 20% after 80 epochs. 
-    epochs = 100 // with 512 images, 80 epochs might be ok, 100 is better. 120 with 256 images
     model = tf.sequential();
 
     // Convolutional layers
@@ -429,6 +438,49 @@ async function setupModel() {
   console.log(`Test loss: ${result[0]}`);
   console.log(`Test accuracy: ${result[1]}`);
 
+
+  // enable user testing
+  const sketchContainer = document.getElementById("sketch")
+  const ctx = Sketch.create({"container":sketchContainer, 
+  "fullscreen":false, 
+  "width":"200",
+  "height":"200"
+});
+
+
+  ctx.down = false;
+  ctx.lineWidth = 15;
+  ctx.mousedown = function (e) {
+    ctx.down = true
+    ctx.beginPath();
+    ctx.moveTo( e.x, e.y );
+  }
+  ctx.mouseup = function (e) {
+    ctx.down = false
+    ctx.lineTo( e.x, e.y );
+    ctx.stroke(); // Render the path
+    console.log("ctx",ctx)
+    const cvImg = new Image()
+    cvImg.src = ctx.canvas.toDataURL();
+    console.log(cvImg)
+  }
+
+  ctx.draw = function() {
+    if (this.down) {
+      console.log("draw")
+      ctx.stroke(); // Render the path
+    }
+  }  
+
+
+  ctx.mousemove = function( e ) {
+    if (this.down) {
+      console.log("move",e)
+      ctx.lineTo( e.x, e.y );
+      ctx.stroke(); // Render the path
+    }
+  }
+  
   //
   /*
   for (let i=0;i<epochs;i++){
