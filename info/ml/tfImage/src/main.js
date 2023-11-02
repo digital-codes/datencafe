@@ -154,39 +154,43 @@ async function tfTest() {
   document.getElementById("testBtn").addEventListener("click", async () => {
     console.log("test")
     const imageData = await testUi.getImage()
-  // NOTE: we have black+white data. color channels are all 0, alpha channel is 0 or 255
-  const imageDataArray = await new Float32Array(imageData.data.length / 4);
-  for (let i = 0; i < imageData.data.length; i += 4) {
-    const gray = imageData.data[i + 3]
-    const gv = gray / 255
-    imageDataArray[i / 4] = gv
-  }
-  //console.log(imageDataArray)
-  // Convert grayscale image data to TensorFlow data and store in image array
-  //const tf_img = tf.tensor4d(imageDataArray, [
-  const tf_img = await tf.tensor(imageDataArray).reshape([imgSize, imgSize, 1]);
+    // NOTE: we have black+white data. color channels are all 0, alpha channel is 0 or 255
+    const imageDataArray = await new Float32Array(imageData.data.length / 4);
+    for (let i = 0; i < imageData.data.length; i += 4) {
+      const gray = imageData.data[i + 3]
+      const gv = gray / 255
+      imageDataArray[i / 4] = gv
+    }
+    //console.log(imageDataArray)
+    // Convert grayscale image data to TensorFlow data and store in image array
+    //const tf_img = tf.tensor4d(imageDataArray, [
+    const tf_img = await tf.tensor(imageDataArray).reshape([imgSize, imgSize, 1]);
 
-  // Convert the input image to a TensorFlow tensor
-  const inputTensor = tf_img.reshape([1, imgSize, imgSize, 1]);
-  // Run the model on the input tensor
-  const outputTensor = await model.predict(inputTensor);
+    // Convert the input image to a TensorFlow tensor
+    const inputTensor = tf_img.reshape([1, imgSize, imgSize, 1]);
+    // Run the model on the input tensor
+    const outputTensor = await model.predict(inputTensor);
 
-  // Convert the output tensor to a JavaScript array
-  const outputArray = await outputTensor.dataSync();
-  // create output dataframe
-  let dt = {}
-  for (const i in outputArray) {
-    dt[i] = [outputArray[i]]
-  }
-  const outDf = new dfd.DataFrame(dt)
-  outDf.print()
+    // Convert the output tensor to a JavaScript array
+    const outputArray = await outputTensor.dataSync();
+    // create output dataframe
+    let dt = {}
+    for (const i in outputArray) {
+      dt[i] = [outputArray[i]]
+    }
+    const outDf = new dfd.DataFrame(dt)
+    outDf.print()
 
-  // Get the predicted class index
-  const predictedIndex = outputArray.indexOf(Math.max(...outputArray));
-  console.log("Predicted:",predictedIndex)
-
+    // Get the predicted class index
+    const predictedIndex = outputArray.indexOf(Math.max(...outputArray));
+    console.log("Predicted:", predictedIndex, labelNames[predictedIndex], outputArray)
+    await outDf.plot("result").bar({
+      layout: {
+        //title: "Test result",
+        xaxis: { title: "Best: " + labelNames[predictedIndex] }
+      }
+    })
   })
-
 
 }
 
@@ -477,113 +481,10 @@ async function setupModel() {
   console.log(`Test accuracy: ${result[1]}`);
 
 
-  //
-  /*
-  for (let i=0;i<epochs;i++){
-
-    await model.fit(trainXs, trainYs, {
-      batchSize: batchSize,
-      epochs: 1,
-      callbacks: { onEpochEnd: monitorCallback },
-      validationData: [testXs, testYs],
-    });
-    console.log("Start eval");
-    const result = await model.evaluate(testXs, testYs);
-    console.log(`Test loss: ${result[0]}`);
-    console.log(`Test accuracy: ${result[1]}`);
-
-    const weights = await model.layers[1].getWeights();
-    await showWeights(weights)
-    await new Promise((resolve) => setTimeout(resolve, 500));
-      
-  }
-  */
-
   return model;
 }
 // --------------------------------------------------
 
-// --------------------------------------------------
-async function showWeights(weights) {
-  // Assume that you have a trained model called "model" and a dense layer called "denseLayer"
-
-  // Get the weights tensor of the dense layer
-  const weightsArray = await weights[0].array();
-  const numRows = weights[0].shape[0];
-  const numCols = weights[0].shape[1];
-
-  // Find the minimum and maximum values in the weights array
-  const minValue = Math.min(...weightsArray.flat());
-  const maxValue = Math.max(...weightsArray.flat());
-
-  const numElements = numRows * numCols
-  const squareSize = Math.ceil(Math.sqrt(numElements));
-  const reshapedArray = new Array(squareSize).fill().map(() => new Array(squareSize).fill(0));
-  for (let i = 0; i < numElements; i++) {
-    const row = Math.floor(i / squareSize);
-    const col = i % squareSize;
-    reshapedArray[row][col] = weightsArray[Math.floor(i / numCols)][i % numCols];
-  }
-  //console.log("reshaped:",reshapedArray)
-
-  // Create a new canvas element to display the weights
-  const canvas = document.getElementById('cvw');
-  /*
-  canvas.width = numCols;
-  canvas.height = numRows;
-  */
-
-  canvas.width = squareSize;
-  canvas.height = squareSize;
-
-  // will rescale to this size
-  /*
-  canvas.width = imgSize
-  canvas.height = imgSize;
-  */
-  // Draw the weights array on the canvas as a grayscale image
-  const context = await canvas.getContext('2d');
-  const imageData = await context.createImageData(squareSize, squareSize);
-  const data = imageData.data;
-  /*
-  for (let i = 0; i < numRows; i++) {
-    for (let j = 0; j < numCols; j++) {
-      const index = (i * numCols + j) * 4;
-      const value = weightsArray[i][j];
-      data[index] = value * 255;
-      data[index + 1] = value * 255;
-      data[index + 2] = value * 255;
-      data[index + 3] = 255;
-    }
-  }
-  */
-  for (let i = 0; i < squareSize; i++) {
-    for (let j = 0; j < squareSize; j++) {
-      const index = (i * squareSize + j) * 4;
-      const value = reshapedArray[i][j];
-
-      const normalizedValue = (value - minValue) / (maxValue - minValue);
-      const red = Math.round(normalizedValue * 255);
-      const blue = Math.round((1 - normalizedValue) * 255);
-      //console.log(red,blue)
-
-      data[index] = red;
-      data[index + 1] = 0;
-      data[index + 2] = blue;
-      /*
-      data[index] = value * 255;
-      data[index + 1] = value * 255;
-      data[index + 2] = value * 255;
-      */
-      data[index + 3] = 255;
-    }
-  }
-  //context.putImageData(imageData, 0, 0);
-  await context.putImageData(imageData, 0, 0);
-
-
-
-}
 // --------------------------------------------------
 // --------------------------------------------------
 async function imgGen() {

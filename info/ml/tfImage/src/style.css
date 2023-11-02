@@ -44,12 +44,17 @@ h1 {
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  height: 200px;
+  display:block;
 }
 
 
 #chart {
   min-width:50%;
+  /*
   min-height:40%;
+  */
+  height: 300px;
   border: solid 1px #eee;
 }
 
@@ -73,12 +78,6 @@ button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
 }
 
-#app {
-  height: 100%;
-  width: 100%;
-  display:block;
-}
-
 #ctl {
   margin-left:10%;
   margin-top:10px;
@@ -96,20 +95,30 @@ button[disabled=disabled], button:disabled {
   border: 1px solid #888;
 }
 
-#sketch {
+
+#sketchContainer, #sketch, #result {
   display: inline-block;
   margin-left:auto;
   border: solid 2px #00f;
+  width: 100%;
 }
 
-#sketch canvas {
+#sketchContainer, #sketch, #result {
+  height: 120px;
+}
+
+#sketch {
+  width: 64px;
+  height: 64px;
 }
 
 #result {
-  border: solid 2px #00f;
-  margin-right:auto;
+  width:300px;
 }
 
+.modebar {
+  display: none;
+}
 
 @media (prefers-color-scheme: light) {
   :root {
