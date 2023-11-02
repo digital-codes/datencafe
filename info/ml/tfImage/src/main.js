@@ -8,7 +8,7 @@ import Plotly from "plotly.js-dist-min"; // v2.8
 
 import * as tf from "@tensorflow/tfjs";
 
-import Sketch from "sketch-js"
+import {sketch} from "./sketch"
 
 let trainingDone = false
 let generatingDone = false
@@ -61,6 +61,7 @@ await tfTest();
 
 async function tfTest() {
 
+ 
   const action = document.getElementById("action")
   action.innerHTML = "Evaluating"
   const trainStat = document.getElementById("train")
@@ -88,8 +89,6 @@ async function tfTest() {
     }
   });
   
-
-
   // either create a new model and train it, or load a model like so:
   /*
   async function loadModel() {
@@ -440,47 +439,9 @@ async function setupModel() {
 
 
   // enable user testing
-  const sketchContainer = document.getElementById("sketch")
-  const ctx = Sketch.create({"container":sketchContainer, 
-  "fullscreen":false, 
-  "width":"200",
-  "height":"200"
-});
+  const testUi = sketch("sketch")
 
 
-  ctx.down = false;
-  ctx.lineWidth = 15;
-  ctx.mousedown = function (e) {
-    ctx.down = true
-    ctx.beginPath();
-    ctx.moveTo( e.x, e.y );
-  }
-  ctx.mouseup = function (e) {
-    ctx.down = false
-    ctx.lineTo( e.x, e.y );
-    ctx.stroke(); // Render the path
-    console.log("ctx",ctx)
-    const cvImg = new Image()
-    cvImg.src = ctx.canvas.toDataURL();
-    console.log(cvImg)
-  }
-
-  ctx.draw = function() {
-    if (this.down) {
-      console.log("draw")
-      ctx.stroke(); // Render the path
-    }
-  }  
-
-
-  ctx.mousemove = function( e ) {
-    if (this.down) {
-      console.log("move",e)
-      ctx.lineTo( e.x, e.y );
-      ctx.stroke(); // Render the path
-    }
-  }
-  
   //
   /*
   for (let i=0;i<epochs;i++){
