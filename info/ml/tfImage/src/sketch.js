@@ -14,8 +14,7 @@ export const sketch = (div) => {
     // Drawing parms
     sk.context.font = "30px Arial";
     sk.context.fillStyle = "black";
-    sk.context.fillText("Hello, Canvas!", 50, 350); // (text, x, y)
-    sk.context.strokeStyle = "blue";
+    sk.context.strokeStyle = "black";
     sk.context.lineWidth = 5;
 
     // Event listeners to start and stop drawing
@@ -39,8 +38,6 @@ export const sketch = (div) => {
         var y = e.clientY - sk.canvas.getBoundingClientRect().top;
 
         sk.context.lineTo(x, y);
-        sk.context.strokeStyle = "blue";
-        sk.context.lineWidth = 5;
         sk.context.stroke();
     });
     
@@ -49,10 +46,17 @@ export const sketch = (div) => {
     };
     
     // Function to get canvas as data URL
-    sk.getData = function () {
-        var dataURL = sk.canvas.toDataURL("image/png");
+    sk.getData = async function () {
+        var dataURL = await sk.canvas.toDataURL("image/png");
         console.log(dataURL);
-        return dataUrl
+        return dataURL
+    }
+    
+    // Function to get canvas as data URL
+    sk.getImage = async function () {
+        const img = sk.context.getImageData(0, 0, sk.canvas.width, sk.canvas.height);
+        console.log(img);
+        return img
     }
     
     return sk

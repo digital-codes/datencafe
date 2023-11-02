@@ -8,7 +8,7 @@ import Plotly from "plotly.js-dist-min"; // v2.8
 
 import * as tf from "@tensorflow/tfjs";
 
-import {sketch} from "./sketch"
+import { sketch } from "./sketch"
 
 let trainingDone = false
 let generatingDone = false
@@ -40,10 +40,10 @@ document.querySelector("#app").innerHTML = `
 const imgClasses = 3;
 const imgSize = 64;
 
-let  numImgs = 512
+let numImgs = 512
 let epochs = 100
 
-const quick = true 
+const quick = true
 if (quick) {
   numImgs = 64
   epochs = 10
@@ -61,7 +61,6 @@ await tfTest();
 
 async function tfTest() {
 
- 
   const action = document.getElementById("action")
   action.innerHTML = "Evaluating"
   const trainStat = document.getElementById("train")
@@ -69,26 +68,26 @@ async function tfTest() {
   const bar = document.getElementById("progressbar")
 
 
-  document.getElementById("dataBtn").disabled = true; 
+  document.getElementById("dataBtn").disabled = true;
   document.getElementById('dataBtn').addEventListener('click', async () => {
     if (generatingDone) {
       console.log("down data")
       await downData()
-    }  else {
+    } else {
       console.log("data not ready")
     }
   });
-  
-  document.getElementById("modelBtn").disabled = true; 
+
+  document.getElementById("modelBtn").disabled = true;
   document.getElementById('modelBtn').addEventListener('click', async () => {
     if (trainingDone) {
       console.log("down model")
       await saveModel(model2save)
-    }  else {
+    } else {
       console.log("model not ready")
     }
   });
-  
+
   // either create a new model and train it, or load a model like so:
   /*
   async function loadModel() {
@@ -103,9 +102,6 @@ async function tfTest() {
   console.log("Model ready");
 
   model.summary();
-
-  
-  
 
 
   let errors = 0
@@ -149,6 +145,49 @@ async function tfTest() {
   }
   console.log("Totoal errors:", errors, " -> ", errors / numTests * 100, "%")
   alert("Error rate: " + String(errors / numTests * 100) + "%")
+
+
+  // enable user testing
+  const testUi = sketch("sketch")
+  document.getElementById("clrBtn").addEventListener("click", testUi.clear)
+  // document.getElementById("testBtn").onClick = sketch.getData
+  document.getElementById("testBtn").addEventListener("click", async () => {
+    console.log("test")
+    const imageData = await testUi.getImage()
+  // NOTE: we have black+white data. color channels are all 0, alpha channel is 0 or 255
+  const imageDataArray = await new Float32Array(imageData.data.length / 4);
+  for (let i = 0; i < imageData.data.length; i += 4) {
+    const gray = imageData.data[i + 3]
+    const gv = gray / 255
+    imageDataArray[i / 4] = gv
+  }
+  //console.log(imageDataArray)
+  // Convert grayscale image data to TensorFlow data and store in image array
+  //const tf_img = tf.tensor4d(imageDataArray, [
+  const tf_img = await tf.tensor(imageDataArray).reshape([imgSize, imgSize, 1]);
+
+  // Convert the input image to a TensorFlow tensor
+  const inputTensor = tf_img.reshape([1, imgSize, imgSize, 1]);
+  // Run the model on the input tensor
+  const outputTensor = await model.predict(inputTensor);
+
+  // Convert the output tensor to a JavaScript array
+  const outputArray = await outputTensor.dataSync();
+  // create output dataframe
+  let dt = {}
+  for (const i in outputArray) {
+    dt[i] = [outputArray[i]]
+  }
+  const outDf = new dfd.DataFrame(dt)
+  outDf.print()
+
+  // Get the predicted class index
+  const predictedIndex = outputArray.indexOf(Math.max(...outputArray));
+  console.log("Predicted:",predictedIndex)
+
+  })
+
+
 }
 
 async function downData() {
@@ -182,41 +221,41 @@ async function downData() {
 
 }
 
-  // download model
-  async function saveModel(model) {
-    const modelSavePath = "datencafe-model"
-    await model.save(`localstorage://${modelSavePath}`);
-    //const saveResults = await model.save('downloads://my-model');
-    /* 5 keys: 
-    tensorflowjs_models/datencafe-model/info
-    tensorflowjs_models/datencafe-model/model_metadata
-    tensorflowjs_models/datencafe-model/model_topology
-    tensorflowjs_models/datencafe-model/weight_data
-    tensorflowjs_models/datencafe-model/weight_specs
-    */
-    const modelData = {
-      info: await localStorage.getItem("tensorflowjs_models/" + modelSavePath + "/info"),
-      meta: await localStorage.getItem("tensorflowjs_models/" + modelSavePath + "/model_metadata"),
-      topo: await localStorage.getItem("tensorflowjs_models/" + modelSavePath + "/model_topology"),
-      wspecs: await localStorage.getItem("tensorflowjs_models/" + modelSavePath + "/weight_specs"),
-      wdata: await localStorage.getItem("tensorflowjs_models/" + modelSavePath + "/weight_data")
-    }
-    const modelBlob = new Blob([JSON.stringify(modelData)], { type: 'application/json' });
-    const modelUrl = URL.createObjectURL(modelBlob);
-    downloadFile(modelUrl);
+// download model
+async function saveModel(model) {
+  const modelSavePath = "datencafe-model"
+  await model.save(`localstorage://${modelSavePath}`);
+  //const saveResults = await model.save('downloads://my-model');
+  /* 5 keys: 
+  tensorflowjs_models/datencafe-model/info
+  tensorflowjs_models/datencafe-model/model_metadata
+  tensorflowjs_models/datencafe-model/model_topology
+  tensorflowjs_models/datencafe-model/weight_data
+  tensorflowjs_models/datencafe-model/weight_specs
+  */
+  const modelData = {
+    info: await localStorage.getItem("tensorflowjs_models/" + modelSavePath + "/info"),
+    meta: await localStorage.getItem("tensorflowjs_models/" + modelSavePath + "/model_metadata"),
+    topo: await localStorage.getItem("tensorflowjs_models/" + modelSavePath + "/model_topology"),
+    wspecs: await localStorage.getItem("tensorflowjs_models/" + modelSavePath + "/weight_specs"),
+    wdata: await localStorage.getItem("tensorflowjs_models/" + modelSavePath + "/weight_data")
   }
+  const modelBlob = new Blob([JSON.stringify(modelData)], { type: 'application/json' });
+  const modelUrl = URL.createObjectURL(modelBlob);
+  downloadFile(modelUrl);
+}
 
-  async function downloadFile(url) {
-    const response = await fetch(url);
-    const blob = await response.blob();
-    const filename = 'datencafe-model.json';
-    const link = document.createElement('a');
-    link.href = window.URL.createObjectURL(blob);
-    link.download = filename;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-  }
+async function downloadFile(url) {
+  const response = await fetch(url);
+  const blob = await response.blob();
+  const filename = 'datencafe-model.json';
+  const link = document.createElement('a');
+  link.href = window.URL.createObjectURL(blob);
+  link.download = filename;
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+}
 
 
 async function setupModel() {
@@ -292,15 +331,15 @@ async function setupModel() {
     console.log('%c Model Summary', 'font-weight: bold; font-size: 16px;');
     console.log('-------------------------');
     model.layers.forEach(layer => {
-        const outputShape = layer.outputShape;
-        const params = layer.countParams();
-        const name = layer.name;
-        const layerType = layer.getClassName();
-        console.log(`Layer Name: ${name}, Type: ${layerType}, Output Shape: ${outputShape}, Params: ${params}`);
+      const outputShape = layer.outputShape;
+      const params = layer.countParams();
+      const name = layer.name;
+      const layerType = layer.getClassName();
+      console.log(`Layer Name: ${name}, Type: ${layerType}, Output Shape: ${outputShape}, Params: ${params}`);
     });
     console.log('-------------------------');
     console.log(`Total Parameters: ${model.countParams()}`);
-}
+  }
 
 
   let useCnn = true
@@ -332,7 +371,7 @@ async function setupModel() {
       kernelSize: 5, // 3
       activation: 'relu'
     }));
-    
+
     model.add(tf.layers.maxPooling2d({ poolSize: 3 })); // 2
 
     // Flatten layer to prepare for fully-connected layers
@@ -384,9 +423,9 @@ async function setupModel() {
     )}, accuracy = ${logs.acc.toFixed(4)}`
     trainStat.innerHTML = status
     console.log(status)
-    
+
     // save results
-    statResults.push([logs.loss,logs.acc])
+    statResults.push([logs.loss, logs.acc])
 
   };
 
@@ -419,15 +458,15 @@ async function setupModel() {
   model2save = model
   trainingDone = true
   // enable both buttons
-  document.getElementById("dataBtn").disabled = false; 
-  document.getElementById("modelBtn").disabled = false; 
+  document.getElementById("dataBtn").disabled = false;
+  document.getElementById("modelBtn").disabled = false;
 
-  const rf = new dfd.DataFrame(statResults,{columns:["loss","accuracy"]})
+  const rf = new dfd.DataFrame(statResults, { columns: ["loss", "accuracy"] })
   rf.print(5)
   await rf.plot("chart").line({
     layout: {
-      title:"Training results",
-      xaxis: {title:"Epoche"}
+      title: "Training results",
+      xaxis: { title: "Epoche" }
     }
   })
 
@@ -436,10 +475,6 @@ async function setupModel() {
   const result = await model.evaluate(testXs, testYs);
   console.log(`Test loss: ${result[0]}`);
   console.log(`Test accuracy: ${result[1]}`);
-
-
-  // enable user testing
-  const testUi = sketch("sketch")
 
 
   //
