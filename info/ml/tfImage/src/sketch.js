@@ -15,7 +15,7 @@ export const sketch = (div) => {
     sk.context.font = "30px Arial";
     sk.context.fillStyle = "black";
     sk.context.strokeStyle = "black";
-    sk.context.lineWidth = 5;
+    sk.context.lineWidth = 3;
 
     // Event listeners to start and stop drawing
     sk.canvas.addEventListener("mousedown", function (e) {

@@ -40,10 +40,10 @@ document.querySelector("#app").innerHTML = `
 const imgClasses = 3;
 const imgSize = 64;
 
-let numImgs = 512
+let numImgs = 2048 // 512
 let epochs = 100
 
-const quick = true
+const quick = false
 if (quick) {
   numImgs = 64
   epochs = 10
@@ -153,6 +153,9 @@ async function tfTest() {
   // document.getElementById("testBtn").onClick = sketch.getData
   document.getElementById("testBtn").addEventListener("click", async () => {
     console.log("test")
+    // apply gauss filter
+    applyGaussianBlur(testUi.context,testUi.canvas.width, testUi.canvas.height, 5)
+
     const imageData = await testUi.getImage()
     // NOTE: we have black+white data. color channels are all 0, alpha channel is 0 or 255
     const imageDataArray = await new Float32Array(imageData.data.length / 4);
@@ -356,23 +359,23 @@ async function setupModel() {
     // Convolutional layers
     model.add(tf.layers.conv2d({
       inputShape: [imgSize, imgSize, 1],
-      filters: 10,
-      kernelSize: 11, //11,
+      filters: 32, // 10,
+      kernelSize: 5, //11,
       activation: 'relu'
     }));
     model.add(tf.layers.maxPooling2d({ poolSize: 2 }));
 
     model.add(tf.layers.conv2d({
-      filters: 10, // 32,
-      kernelSize: 7, // 3
+      filters: 32, // 10, // 32,
+      kernelSize: 5, // 3
       activation: 'relu'
     }));
     model.add(tf.layers.dropout(0.25))
     model.add(tf.layers.maxPooling2d({ poolSize: 3 })); // 2
 
     model.add(tf.layers.conv2d({
-      filters: 10, // 64,
-      kernelSize: 5, // 3
+      filters: 32, // 10, // 64,
+      kernelSize: 3, // 3
       activation: 'relu'
     }));
 
@@ -412,7 +415,7 @@ async function setupModel() {
   printModelSummary(model)
 
 
-  const batchSize = numImgs / 4;
+  const batchSize = Math.min((numImgs / 4),64);
 
   // Define a callback function to monitor the progress of the training
   const monitorCallback = async (epoch, logs) => {
@@ -516,6 +519,10 @@ async function mkSingleImg() {
   canvas.width = imgSize;
   canvas.height = imgSize;
   const ctx = await canvas.getContext("2d");
+
+  // Reset the global composite operation to default
+  ctx.globalCompositeOperation = 'source-over';
+
   await ctx.clearRect(0, 0, canvas.width, canvas.height);
 
   const shapeStrokeColor = `rgb(0, 0, 0)`; // black stroke color
@@ -533,11 +540,34 @@ async function mkSingleImg() {
   };
 
   const drawEllipse = (ctx, size, strokeWidth) => {
-    ctx.beginPath();
-    ctx.ellipse(0, 0, size / 2, size / 4, 0, 0, Math.PI * 2);
-    ctx.lineWidth = strokeWidth;
-    ctx.strokeStyle = shapeStrokeColor;
-    ctx.stroke();
+    const rnd  = Math.round(Math.random())
+    const nlines  = 8 + Math.floor(Math.random()*8)
+    if (rnd) {
+      ctx.beginPath();
+      ctx.ellipse(0, 0, size / 2, size / 4, 0, 0, Math.PI * 2);
+      ctx.lineWidth = strokeWidth;
+      ctx.strokeStyle = shapeStrokeColor;
+      ctx.stroke();
+    } else {
+      ctx.beginPath();
+      for (let i = 0; i < nlines; i++) {
+        const angle = (Math.PI * 2 * i) / nlines;
+        const x = 0 + size/2 * Math.cos(angle);
+        const y = 0 + size/4 * Math.sin(angle);
+        ctx.lineWidth = strokeWidth;
+        ctx.strokeStyle = shapeStrokeColor;
+          if (i === 0) {
+          ctx.moveTo(x, y);
+        } else {
+          ctx.lineTo(x, y);
+        }
+      }
+      ctx.closePath();
+      ctx.stroke();
+    }
+
+
+
   };
 
   const drawRectangle = (ctx, size, strokeWidth) => {
@@ -601,6 +631,22 @@ async function mkSingleImg() {
   }
   await ctx.restore();
 
+  // randome erase
+  // Use a stencil as a global composite operation to erase parts of the image
+  ctx.globalCompositeOperation = 'destination-out';
+
+  // Create a random stencil pattern or shape
+  for (let i=0;i< Math.random() * 5;i++) {
+    ctx.beginPath();
+    ctx.arc(Math.random() * (canvas.width-16)+8, Math.random() * (canvas.height-16)+8, 8, 0, Math.PI * 2);
+    ctx.fillStyle = 'black';
+    ctx.fill();
+    ctx.closePath();
+  }
+
+  // apply gauss filter
+  applyGaussianBlur(ctx,canvas.width, canvas.height, 5)
+
   // Convert canvas to grayscale and store image data in array
   // Convert canvas to grayscale and store image data in array
   const imageData = await ctx.getImageData(0, 0, canvas.width, canvas.height);
@@ -621,4 +667,60 @@ async function mkSingleImg() {
 }
 
 // --------------------------------------------------
+    // Apply Gaussian blur filter
+    function applyGaussianBlur(ctx, w, h, kernelSize) {
+      const imageData = ctx.getImageData(0, 0, w, h);
+      const { data, width, height } = imageData;
+
+      // Gaussian blur kernel (3x3)
+      const kernel3 = [
+        1, 2, 1,
+        2, 4, 2,
+        1, 2, 1,
+      ];
+
+  // Gaussian blur kernel (5x5)
+      const kernel5 = [
+        1, 4, 6, 4, 1,
+        4, 16, 24, 16, 4,
+        6, 24, 36, 24, 6,
+        4, 16, 24, 16, 4,
+        1, 4, 6, 4, 1,
+      ];
+
+
+	  const kernel = kernelSize == 3 ? kernel3 : kernel5
+      const kernelWeight = kernel.reduce((acc, val) => acc + val, 0);
+
+      for (let y = 0; y < height; y++) {
+        for (let x = 0; x < width; x++) {
+          let r = 0, g = 0, b = 0, a = 0;
+
+          for (let ky = 0; ky < kernelSize; ky++) {
+            for (let kx = 0; kx < kernelSize; kx++) {
+              const px = x + kx - 1;
+              const py = y + ky - 1;
+
+              if (px >= 0 && px < width && py >= 0 && py < height) {
+                const kernelValue = kernel[ky * kernelSize + kx];
+                const index = (py * width + px) * 4;
+                r += data[index] * kernelValue;
+                g += data[index + 1] * kernelValue;
+                b += data[index + 2] * kernelValue;
+                a += data[index + 3] * kernelValue;
+              }
+            }
+          }
+
+          const index = (y * width + x) * 4;
+          data[index] = r / kernelWeight;
+          data[index + 1] = g / kernelWeight;
+          data[index + 2] = b / kernelWeight;
+          data[index + 3] = a / kernelWeight;
+        }
+      }
+
+      ctx.putImageData(imageData, 0, 0);
+    }
+
 // --------------------------------------------------

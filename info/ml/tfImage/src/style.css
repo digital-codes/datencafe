@@ -116,7 +116,7 @@ button[disabled=disabled], button:disabled {
   width:300px;
 }
 
-.modebar {
+.modebar, .legend {
   display: none;
 }
 
