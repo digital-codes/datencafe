@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Canvas Example</title>
+</head>
+<body>
+    <canvas id="myCanvas" width="400" height="400" style="border:1px solid black;"></canvas>
+
+    <script>
+        // Get the canvas element and its context
+        var canvas = document.getElementById("myCanvas");
+        var context = canvas.getContext("2d");
+
+        // Draw a line
+        context.beginPath();
+        context.moveTo(50, 50); // Starting point (x, y)
+        context.lineTo(150, 50); // Ending point (x, y)
+        context.strokeStyle = "blue"; // Set the line color
+        context.lineWidth = 5; // Set the line width
+        context.stroke(); // Draw the line
+
+        // Draw a rectangle
+        context.beginPath();
+        context.rect(200, 50, 100, 75); // (x, y, width, height)
+        context.fillStyle = "green"; // Set the fill color
+        context.fill(); // Fill the rectangle
+        context.lineWidth = 2; // Set the border width
+        context.strokeStyle = "red"; // Set the border color
+        context.stroke(); // Draw the border
+
+        // Draw a circle
+        context.beginPath();
+        context.arc(100, 200, 50, 0, Math.PI * 2); // (x, y, radius, startAngle, endAngle)
+        context.fillStyle = "orange"; // Set the fill color
+        context.fill(); // Fill the circle
+
+        // Draw a triangle
+        context.beginPath();
+        context.moveTo(200, 200); // Starting point (x, y)
+        context.lineTo(250, 300); // First point (x, y)
+        context.lineTo(150, 300); // Second point (x, y)
+        context.closePath(); // Close the path to create a triangle
+        context.fillStyle = "purple"; // Set the fill color
+        context.fill(); // Fill the triangle
+
+        // Draw text
+        context.font = "30px Arial";
+        context.fillStyle = "black";
+        context.fillText("Hello, Canvas!", 50, 350); // (text, x, y)
+
+        var isDrawing = false;
+
+        // Event listeners to start and stop drawing
+        canvas.addEventListener("mousedown", function (e) {
+            isDrawing = true;
+            context.beginPath();
+            var x = e.clientX - canvas.getBoundingClientRect().left;
+            var y = e.clientY - canvas.getBoundingClientRect().top;
+            context.moveTo(x, y);
+        });
+
+        canvas.addEventListener("mouseup", function () {
+            isDrawing = false;
+            context.closePath();
+        });
+
+        canvas.addEventListener("mousemove", function (e) {
+            if (!isDrawing) return;
+
+            var x = e.clientX - canvas.getBoundingClientRect().left;
+            var y = e.clientY - canvas.getBoundingClientRect().top;
+
+            context.lineTo(x, y);
+            context.strokeStyle = "blue";
+            context.lineWidth = 5;
+            context.stroke();
+        });
+
+        // Clear the canvas
+        document.getElementById("clearButton").addEventListener("click", function () {
+            context.clearRect(0, 0, canvas.width, canvas.height);
+        });
+        
+        
+
+        // Function to get canvas as data URL
+        function getCanvasAsDataURL() {
+            var dataURL = canvas.toDataURL("image/png");
+            console.log(dataURL);
+        }
+
+        function clearCanvas() {
+            context.clearRect(0, 0, canvas.width, canvas.height);
+        }
+
+
+    </script>
+
+<button id="clearButton" onclick="clearCanvas()">Clear Canvas</button>
+<button id="getImageButton" onclick="getCanvasAsDataURL()">Get Image</button>
+
+
+</body>
+</html>
