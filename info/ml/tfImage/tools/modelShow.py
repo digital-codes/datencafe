@@ -9,7 +9,7 @@ from PIL import Image
 
 fn = "../public/datencafe-cnn-model.json"
 
-fn = "/home/kugel/Downloads/datencafe-model4.json"
+fn = "/home/kugel/Downloads/datencafe-model.json"
 
 with open(fn) as f:
     mdesc = json.load(f)
