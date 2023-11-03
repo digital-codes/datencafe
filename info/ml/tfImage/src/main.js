@@ -50,7 +50,7 @@ if (quick) {
 }
 
 
-const labelNames = ["Tringle", "Ellipse", "Rectangle"]
+const labelNames = ["Triangle", "Ellipse", "Rectangle"]
 
 let data2save
 let model2save
@@ -164,13 +164,30 @@ async function tfTest() {
       const gv = gray / 255
       imageDataArray[i / 4] = gv
     }
-    //console.log(imageDataArray)
+    console.log(imageDataArray)
     // Convert grayscale image data to TensorFlow data and store in image array
     //const tf_img = tf.tensor4d(imageDataArray, [
     const tf_img = await tf.tensor(imageDataArray).reshape([imgSize, imgSize, 1]);
-
+    tf_img.print()
     // Convert the input image to a TensorFlow tensor
     const inputTensor = tf_img.reshape([1, imgSize, imgSize, 1]);
+    // download user image
+    const downData = {
+      labels: [-1],
+      names: ["user"],
+      tensor: [tf_img],
+      imgdata: [imageDataArray]
+    }
+    const blob = await new Blob([JSON.stringify(downData)], { type: 'application/json' });
+    const url = await URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = 'datencafe-userdata.json';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  
+
     // Run the model on the input tensor
     const outputTensor = await model.predict(inputTensor);
 
@@ -202,13 +219,13 @@ async function downData() {
   for (const t of data2save.images) {
     tensors.push(await t.data())
   }
-  const downData = {
+  const downData_ = {
     labels: data2save.labels,
     names: data2save.names,
     tensor: data2save.images,
     imgdata: tensors
   }
-  const blob = await new Blob([JSON.stringify(downData)], { type: 'application/json' });
+  const blob = await new Blob([JSON.stringify(downData_)], { type: 'application/json' });
   const url = await URL.createObjectURL(blob);
   const link = document.createElement('a');
   link.href = url;
@@ -219,7 +236,7 @@ async function downData() {
 
   // should be possible to recreate tensors like so
   // example with tensor #1
-  const loadedData = JSON.parse(JSON.stringify(downData))
+  const loadedData = JSON.parse(JSON.stringify(downData_))
   const shape = [64, 64];
   const img = loadedData.imgdata[0]
   // console.log(img)
@@ -544,7 +561,7 @@ async function mkSingleImg() {
     const nlines  = 8 + Math.floor(Math.random()*8)
     if (rnd) {
       ctx.beginPath();
-      ctx.ellipse(0, 0, size / 2, size / 4, 0, 0, Math.PI * 2);
+      ctx.ellipse(0, 0, Math.floor(size *.5), Math.floor(size * .4), 0, 0, Math.PI * 2);
       ctx.lineWidth = strokeWidth;
       ctx.strokeStyle = shapeStrokeColor;
       ctx.stroke();
@@ -552,8 +569,8 @@ async function mkSingleImg() {
       ctx.beginPath();
       for (let i = 0; i < nlines; i++) {
         const angle = (Math.PI * 2 * i) / nlines;
-        const x = 0 + size/2 * Math.cos(angle);
-        const y = 0 + size/4 * Math.sin(angle);
+        const x = 0 + Math.floor(size *.5) * Math.cos(angle);
+        const y = 0 + Math.floor(size *.4) * Math.sin(angle);
         ctx.lineWidth = strokeWidth;
         ctx.strokeStyle = shapeStrokeColor;
           if (i === 0) {

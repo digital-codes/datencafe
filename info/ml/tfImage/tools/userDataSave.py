@@ -3,10 +3,10 @@ import numpy as np
 from PIL import Image, ImageDraw
 import os
 
-df = pd.read_json("/home/kugel/Downloads/datencafe-traindata.json")
+df = pd.read_json("/home/kugel/Downloads/datencafe-userdata.json")
 shape = df.tensor.iloc[0]["shape"]
 
-outPath = "trainImg"
+outPath = "userImg"
 try:
     os.mkdir(outPath)
 except:
@@ -27,7 +27,7 @@ def extract(idx):
 
     fn = os.sep.join([outPath,f"{lbl}_{idx:04}.png"])
     # print(fn)
-    # img.show()
+    img.show()
     # can only save RGB as PNG
     img.convert("RGB").save(fn)
 
