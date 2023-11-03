@@ -30,16 +30,24 @@ body {
   min-width: 320px;
   min-height: 100vh;
   */
-  overflow: hidden;
-  margin: 1rem;
+  overflow: scroll;
+  margin:0;
   padding: 0;
 }
 
 h1 {
   font-size: 1.5em;
   line-height: 1.1;
+  display:inline-block;
+  margin:0;
+  padding: 0;
+  margin-top:5px;
 }
 
+p {
+  margin:0;
+  padding: 0;
+}
 /*
 #app {
   max-width: 1280px;
@@ -163,13 +171,14 @@ button[disabled=disabled], button:disabled {
 #grid-container {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  grid-template-rows: repeat(8, 1fr);
+  grid-template-rows: repeat(9, 1fr);
   grid-auto-rows: minmax(64px, 64px);  /* Restrict row height */  
   width: 100%;
-  /*
   height: 100%;
-  */
   gap: 2px; /* Adjust this value to change the spacing between grid items */
+  margin: 1rem;
+  overflow: clip;
+
 }
 
 .grid-item {
@@ -206,7 +215,7 @@ button[disabled=disabled], button:disabled {
 
 #item6 {
   grid-column: span 7;
-  grid-row: span 3;
+  grid-row: span 4;
 }
 #item7, #item8 {
   grid-column: span 2;
@@ -241,9 +250,7 @@ button[disabled=disabled], button:disabled {
 }
 
 #progressbar {
-  /*
-  width:90%;
-  */
+  width:0;
   height:50%;
   background:#00f;
   border: solid 2px #000;
@@ -261,12 +268,16 @@ button[disabled=disabled], button:disabled {
   width: 128px;
   height: 128px;
   border: solid 2px #f00 !important;
+  z-index:10;
 }
 
-.test-ui {
-  display: none!important;
-}
 
+.run-btn {
+  display: inline-block;
+  padding: 2px;
+  margin:2px;
+
+}
 
 
 @media (prefers-color-scheme: light) {

@@ -41,6 +41,40 @@ export const sketch = (div) => {
         sk.context.stroke();
     });
     
+    // touch 
+    sk.canvas.addEventListener('touchstart', handleTouchStart, false);
+    sk.canvas.addEventListener('touchmove', handleTouchMove, false);
+    sk.canvas.addEventListener('touchend', handleTouchEnd, false);
+
+    function handleTouchStart(event) {
+        event.preventDefault();  // Prevents scrolling and zooming in some browsers
+        sk.isDrawing = true;
+        var e = event.touches[0];
+        var x = e.clientX - sk.canvas.getBoundingClientRect().left;
+        var y = e.clientY - sk.canvas.getBoundingClientRect().top;
+        sk.context.beginPath();
+        sk.context.moveTo(x, y);
+    }
+    function handleTouchMove(event) {
+        event.preventDefault();  // Prevents scrolling and zooming in some browsers
+        if (!sk.isDrawing) return;
+        var e = event.touches[0];
+        var x = e.clientX - sk.canvas.getBoundingClientRect().left;
+        var y = e.clientY - sk.canvas.getBoundingClientRect().top;
+
+        sk.context.lineTo(x, y);
+        sk.context.stroke();
+    }
+    
+    function handleTouchEnd(event) {
+        event.preventDefault();  // Prevents scrolling and zooming in some browsers
+        sk.isDrawing = false;
+        sk.context.closePath();
+    }       
+
+    // --------
+
+
     sk.clear = function () {
         sk.context.clearRect(0, 0, sk.canvas.width, sk.canvas.height);
     };

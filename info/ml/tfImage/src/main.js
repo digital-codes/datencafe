@@ -45,7 +45,7 @@ const imgSize = 64;
 let numImgs = 1024 // 2048 // 512
 let epochs = 50 // 100
 
-const quick = false
+var quick = false
 if (quick) {
   numImgs = 64
   epochs = 10
@@ -59,7 +59,31 @@ let model2save
 
 //await imgGen();
 
-await tfTest();
+
+async function runQuick() {
+  console.log("quick")
+  numImgs = 64
+  epochs = 10
+  document.getElementById("clrBtn").disabled = true;
+  document.getElementById("testBtn").disabled = true;
+    await tfTest()
+}
+document.getElementById('quickBtn').addEventListener('click', runQuick)
+
+async function runNormal() {
+  console.log("normal")
+  numImgs = 1024 // 2048 // 512
+  epochs = 50 // 100
+  document.getElementById("clrBtn").disabled = true;
+  document.getElementById("testBtn").disabled = true;
+    await tfTest()
+}
+document.getElementById('normalBtn').addEventListener('click', runNormal)
+
+//await tfTest();
+
+document.getElementById("clrBtn").disabled = true;
+document.getElementById("testBtn").disabled = true;
 
 async function tfTest() {
 
@@ -161,13 +185,11 @@ async function tfTest() {
   // enable user testing
   await new Promise((resolve) => setTimeout(resolve, 2000));
 
-  action.innerHTML = "Draw into the red square and press <TestModel>"
+  action.innerHTML = "Draw into the red square and press <em>'TestModel'</em>"
 
-  let items = document.querySelectorAll('.grid-item');
-  items.forEach(function (item) {
-    item.classList.remove('test-ui');
-  });
-
+  document.getElementById("clrBtn").disabled = false
+  document.getElementById("testBtn").disabled = false
+  
   const testUi = sketch("canvas2")
   document.getElementById("clrBtn").addEventListener("click", testUi.clear)
   // document.getElementById("testBtn").onClick = sketch.getData
