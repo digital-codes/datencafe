@@ -24,21 +24,23 @@ a:hover {
 }
 
 body {
-  margin: 0;
+  /*
   display: block;
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  */
   overflow: hidden;
-  margin: 0;
+  margin: 1rem;
   padding: 0;
 }
 
 h1 {
-  font-size: 3.2em;
+  font-size: 1.5em;
   line-height: 1.1;
 }
 
+/*
 #app {
   max-width: 1280px;
   margin: 0 auto;
@@ -51,9 +53,6 @@ h1 {
 
 #chart {
   min-width:50%;
-  /*
-  min-height:40%;
-  */
   height: 300px;
   border: solid 1px #eee;
 }
@@ -115,7 +114,6 @@ button[disabled=disabled], button:disabled {
   border:1px solid black;
 }
 
-/* canvasses */
 .train {
   width: 128px;
   height: 128px;
@@ -125,6 +123,151 @@ button[disabled=disabled], button:disabled {
   width: 128px;
   height: 128px;
 }
+*/
+/* */
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+
+button {
+  color:#0f8;
+  background: #888;
+  border: 2px solid #0c4;
+}
+
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+
+button[disabled=disabled], button:disabled {
+  color:#ccc;
+  border: 1px solid #888;
+}
+
+
+
+#grid-container {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  grid-template-rows: repeat(8, 1fr);
+  grid-auto-rows: minmax(64px, 64px);  /* Restrict row height */  
+  width: 100%;
+  /*
+  height: 100%;
+  */
+  gap: 2px; /* Adjust this value to change the spacing between grid items */
+}
+
+.grid-item {
+  border: 2px solid black; /* Adjust border style as needed */
+  min-height:64px;
+}
+
+#item1 {
+  grid-column: span 7;
+  grid-row: span 1;
+  text-align:center;
+}
+
+#item2, #item3 {
+  grid-column: span 2;
+  grid-row: span 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#item4 {
+  grid-column: span 2;
+  grid-row: span 2;
+  text-align: center;    
+  position: relative;
+}
+
+#item5 {
+  grid-column: span 3;
+  grid-row: span 2;
+  overflow: clip;
+}
+
+#item6 {
+  grid-column: span 7;
+  grid-row: span 3;
+}
+#item7, #item8 {
+  grid-column: span 2;
+  grid-row: span 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#item9 {
+  grid-column: span 2;
+  grid-row: span 2;
+  text-align: center;    
+  position: relative;
+}
+
+#item10 {
+  grid-column: span 3;
+  grid-row: span 2;
+  text-align: center;    
+  position: relative;
+}
+
+
+#canvas1, #canvas2, #canvas3 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid #000;
+  box-sizing: border-box;
+}
+
+#progressbar {
+  /*
+  width:90%;
+  */
+  height:50%;
+  background:#00f;
+  border: solid 2px #000;
+  /*
+  transform:translate(0px,0px);"
+  */
+}
+
+.train {
+  width: 128px;
+  height: 128px;
+}
+
+.user {
+  width: 128px;
+  height: 128px;
+  border: solid 2px #f00 !important;
+}
+
+.test-ui {
+  display: none!important;
+}
+
+
 
 @media (prefers-color-scheme: light) {
   :root {

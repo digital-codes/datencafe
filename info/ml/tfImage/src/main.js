@@ -45,7 +45,7 @@ const imgSize = 64;
 let numImgs = 1024 // 2048 // 512
 let epochs = 50 // 100
 
-const quick = true
+const quick = false
 if (quick) {
   numImgs = 64
   epochs = 10
@@ -65,8 +65,10 @@ async function tfTest() {
 
   const action = document.getElementById("action")
   action.innerHTML = "Evaluating"
+  /*
   const trainStat = document.getElementById("train")
   trainStat.style.display = "block"
+  */
   const bar = document.getElementById("progressbar")
 
 
@@ -136,12 +138,19 @@ async function tfTest() {
     console.log("Expected:", evalImg.label, evalImg.name)
     console.log(`The predicted class index is ${predictedIndex} - ${labelNames[predictedIndex]}.`);
 
+    /*
     const r = -400 + Math.floor(i / numTests * 400)  // width
     const tr = "translate(" + String(r) + "px,0px)"
     bar.style.transform = tr
+    */
+    let container = document.getElementById('item5');
+    // Get the width of the container
+    let containerWidth = container.offsetWidth;
+    // Update the width of the progress bar
+    bar.style.width = Math.floor(containerWidth * (i / numTests)) + 'px';
 
     const status = "Error rate so far: " + String(errors / i * 100) + "%"
-    trainStat.innerHTML = status
+    action.innerHTML = status
 
     await new Promise((resolve) => setTimeout(resolve, 100));
   }
@@ -150,13 +159,22 @@ async function tfTest() {
 
 
   // enable user testing
-  const testUi = sketch("sketch")
+  await new Promise((resolve) => setTimeout(resolve, 2000));
+
+  action.innerHTML = "Draw into the red square and press <TestModel>"
+
+  let items = document.querySelectorAll('.grid-item');
+  items.forEach(function (item) {
+    item.classList.remove('test-ui');
+  });
+
+  const testUi = sketch("canvas2")
   document.getElementById("clrBtn").addEventListener("click", testUi.clear)
   // document.getElementById("testBtn").onClick = sketch.getData
   document.getElementById("testBtn").addEventListener("click", async () => {
     console.log("test")
     // apply gauss filter
-    applyGaussianBlur(testUi.context,testUi.canvas.width, testUi.canvas.height, 5)
+    applyGaussianBlur(testUi.context, testUi.canvas.width, testUi.canvas.height, 5)
 
     const imageData = await testUi.getImage()
     // NOTE: we have black+white data. color channels are all 0, alpha channel is 0 or 255
@@ -169,12 +187,12 @@ async function tfTest() {
     console.log(imageDataArray)
     // Convert grayscale image data to TensorFlow data and store in image array
     //const tf_img = tf.tensor4d(imageDataArray, [
-    const tf_img = await tf.tensor(imageDataArray).reshape([imgSize*2, imgSize*2, 1]);
+    const tf_img = await tf.tensor(imageDataArray).reshape([imgSize * 2, imgSize * 2, 1]);
     tf_img.print()
     // Convert the input image to a TensorFlow tensor
-    const inputTensorUser = tf_img.reshape([1, imgSize*2, imgSize*2, 1]);
+    const inputTensorUser = tf_img.reshape([1, imgSize * 2, imgSize * 2, 1]);
     // resize to 64x64
-    const inputTensor = tf.image.resizeNearestNeighbor(inputTensorUser,[imgSize,imgSize])
+    const inputTensor = tf.image.resizeNearestNeighbor(inputTensorUser, [imgSize, imgSize])
     inputTensor.print()
     /*    
     // download user image
@@ -211,16 +229,7 @@ async function tfTest() {
     const predictedIndex = outputArray.indexOf(Math.max(...outputArray));
     console.log("Predicted:", predictedIndex, labelNames[predictedIndex], labelNames)
 
-    result("result",labelNames,outputArray)
-    /*
-    await outDf.plot("result").bar({
-      layout: {
-        //title: "Test result",
-        xaxis: { title: "Best: " + labelNames[predictedIndex] }
-      }
-    })
-    */
-    
+    result("canvas3", labelNames, outputArray)
   })
 
 }
@@ -443,16 +452,26 @@ async function setupModel() {
   printModelSummary(model)
 
 
-  const batchSize = Math.min((numImgs / 4),64);
+  const batchSize = Math.min((numImgs / 4), 64);
 
   // Define a callback function to monitor the progress of the training
   const monitorCallback = async (epoch, logs) => {
+    /*
     const bar = document.getElementById("progressbar")
     const r = -400 + Math.floor(epoch / epochs * 400)  // width
     const tr = "translate(" + String(r) + "px,0px)"
     bar.style.transform = tr
+    */
 
-    const trainStat = document.getElementById("train")
+    let container = document.getElementById('item5');
+    let bar = document.getElementById('progressbar');
+    // Get the width of the container
+    let containerWidth = container.offsetWidth;
+    // Update the width of the progress bar
+    bar.style.width = Math.floor(containerWidth * (epoch / epochs)) + 'px';
+
+
+    const trainStat = document.getElementById("action")
     const status = `Epoch ${epoch}: loss = ${logs.loss.toFixed(
       4
     )}, accuracy = ${logs.acc.toFixed(4)}`
@@ -473,8 +492,6 @@ async function setupModel() {
   //
   const action = document.getElementById("action")
   action.innerHTML = "Training Model for " + epochs + " epochs"
-  const trainStat = document.getElementById("train")
-  trainStat.style.display = "block"
 
 
   await model.fit(trainXs, trainYs, {
@@ -498,7 +515,7 @@ async function setupModel() {
 
   const rf = new dfd.DataFrame(statResults, { columns: ["loss", "accuracy"] })
   rf.print(5)
-  await rf.plot("chart").line({
+  await rf.plot("item6").line({
     layout: {
       title: "Training results",
       xaxis: { title: "Epoche" },
@@ -518,7 +535,6 @@ async function setupModel() {
   console.log(`Test loss: ${result[0]}`);
   console.log(`Test accuracy: ${result[1]}`);
 
-
   return model;
 }
 // --------------------------------------------------
@@ -534,9 +550,17 @@ async function imgGen() {
   const action = document.getElementById("action")
   action.innerHTML = "Generating " + numImgs + " train/test images"
   for (let i = 0; i < numImgs; i++) {
+    /*
     const r = -400 + Math.floor(i / numImgs * 400)  // width
     const tr = "translate(" + String(r) + "px,0px)"
     bar.style.transform = tr
+    */
+    let container = document.getElementById('item5');
+    // Get the width of the container
+    let containerWidth = container.offsetWidth;
+    // Update the width of the progress bar
+    bar.style.width = Math.floor(containerWidth * (i / numImgs)) + 'px';
+
     const data = await mkSingleImg();
     await images.push(data.image);
     await labels.push(data.label);
@@ -550,7 +574,7 @@ async function imgGen() {
 // --------------------------------------------------
 async function mkSingleImg() {
   console.log("size:", imgSize);
-  const canvas = document.getElementById("cv"); //createElement('canvas');
+  const canvas = document.getElementById("canvas1"); //createElement('canvas');
   canvas.width = imgSize;
   canvas.height = imgSize;
   const ctx = await canvas.getContext("2d");
@@ -575,11 +599,11 @@ async function mkSingleImg() {
   };
 
   const drawEllipse = (ctx, size, strokeWidth) => {
-    const rnd  = Math.round(Math.random())
-    const nlines  = 8 + Math.floor(Math.random()*8)
+    const rnd = Math.round(Math.random())
+    const nlines = 8 + Math.floor(Math.random() * 8)
     if (rnd) {
       ctx.beginPath();
-      ctx.ellipse(0, 0, Math.floor(size *.5), Math.floor(size * .4), 0, 0, Math.PI * 2);
+      ctx.ellipse(0, 0, Math.floor(size * .5), Math.floor(size * .4), 0, 0, Math.PI * 2);
       ctx.lineWidth = strokeWidth;
       ctx.strokeStyle = shapeStrokeColor;
       ctx.stroke();
@@ -587,11 +611,11 @@ async function mkSingleImg() {
       ctx.beginPath();
       for (let i = 0; i < nlines; i++) {
         const angle = (Math.PI * 2 * i) / nlines;
-        const x = 0 + Math.floor(size *.5) * Math.cos(angle);
-        const y = 0 + Math.floor(size *.4) * Math.sin(angle);
+        const x = 0 + Math.floor(size * .5) * Math.cos(angle);
+        const y = 0 + Math.floor(size * .4) * Math.sin(angle);
         ctx.lineWidth = strokeWidth;
         ctx.strokeStyle = shapeStrokeColor;
-          if (i === 0) {
+        if (i === 0) {
           ctx.moveTo(x, y);
         } else {
           ctx.lineTo(x, y);
@@ -671,16 +695,16 @@ async function mkSingleImg() {
   ctx.globalCompositeOperation = 'destination-out';
 
   // Create a random stencil pattern or shape
-  for (let i=0;i< Math.random() * 5;i++) {
+  for (let i = 0; i < Math.random() * 5; i++) {
     ctx.beginPath();
-    ctx.arc(Math.random() * (canvas.width-16)+8, Math.random() * (canvas.height-16)+8, 8, 0, Math.PI * 2);
+    ctx.arc(Math.random() * (canvas.width - 16) + 8, Math.random() * (canvas.height - 16) + 8, 8, 0, Math.PI * 2);
     ctx.fillStyle = 'black';
     ctx.fill();
     ctx.closePath();
   }
 
   // apply gauss filter
-  applyGaussianBlur(ctx,canvas.width, canvas.height, 5)
+  applyGaussianBlur(ctx, canvas.width, canvas.height, 5)
 
   // Convert canvas to grayscale and store image data in array
   // Convert canvas to grayscale and store image data in array
@@ -702,60 +726,60 @@ async function mkSingleImg() {
 }
 
 // --------------------------------------------------
-    // Apply Gaussian blur filter
-    function applyGaussianBlur(ctx, w, h, kernelSize) {
-      const imageData = ctx.getImageData(0, 0, w, h);
-      const { data, width, height } = imageData;
+// Apply Gaussian blur filter
+function applyGaussianBlur(ctx, w, h, kernelSize) {
+  const imageData = ctx.getImageData(0, 0, w, h);
+  const { data, width, height } = imageData;
 
-      // Gaussian blur kernel (3x3)
-      const kernel3 = [
-        1, 2, 1,
-        2, 4, 2,
-        1, 2, 1,
-      ];
+  // Gaussian blur kernel (3x3)
+  const kernel3 = [
+    1, 2, 1,
+    2, 4, 2,
+    1, 2, 1,
+  ];
 
   // Gaussian blur kernel (5x5)
-      const kernel5 = [
-        1, 4, 6, 4, 1,
-        4, 16, 24, 16, 4,
-        6, 24, 36, 24, 6,
-        4, 16, 24, 16, 4,
-        1, 4, 6, 4, 1,
-      ];
+  const kernel5 = [
+    1, 4, 6, 4, 1,
+    4, 16, 24, 16, 4,
+    6, 24, 36, 24, 6,
+    4, 16, 24, 16, 4,
+    1, 4, 6, 4, 1,
+  ];
 
 
-	  const kernel = kernelSize == 3 ? kernel3 : kernel5
-      const kernelWeight = kernel.reduce((acc, val) => acc + val, 0);
+  const kernel = kernelSize == 3 ? kernel3 : kernel5
+  const kernelWeight = kernel.reduce((acc, val) => acc + val, 0);
 
-      for (let y = 0; y < height; y++) {
-        for (let x = 0; x < width; x++) {
-          let r = 0, g = 0, b = 0, a = 0;
+  for (let y = 0; y < height; y++) {
+    for (let x = 0; x < width; x++) {
+      let r = 0, g = 0, b = 0, a = 0;
 
-          for (let ky = 0; ky < kernelSize; ky++) {
-            for (let kx = 0; kx < kernelSize; kx++) {
-              const px = x + kx - 1;
-              const py = y + ky - 1;
+      for (let ky = 0; ky < kernelSize; ky++) {
+        for (let kx = 0; kx < kernelSize; kx++) {
+          const px = x + kx - 1;
+          const py = y + ky - 1;
 
-              if (px >= 0 && px < width && py >= 0 && py < height) {
-                const kernelValue = kernel[ky * kernelSize + kx];
-                const index = (py * width + px) * 4;
-                r += data[index] * kernelValue;
-                g += data[index + 1] * kernelValue;
-                b += data[index + 2] * kernelValue;
-                a += data[index + 3] * kernelValue;
-              }
-            }
+          if (px >= 0 && px < width && py >= 0 && py < height) {
+            const kernelValue = kernel[ky * kernelSize + kx];
+            const index = (py * width + px) * 4;
+            r += data[index] * kernelValue;
+            g += data[index + 1] * kernelValue;
+            b += data[index + 2] * kernelValue;
+            a += data[index + 3] * kernelValue;
           }
-
-          const index = (y * width + x) * 4;
-          data[index] = r / kernelWeight;
-          data[index + 1] = g / kernelWeight;
-          data[index + 2] = b / kernelWeight;
-          data[index + 3] = a / kernelWeight;
         }
       }
 
-      ctx.putImageData(imageData, 0, 0);
+      const index = (y * width + x) * 4;
+      data[index] = r / kernelWeight;
+      data[index + 1] = g / kernelWeight;
+      data[index + 2] = b / kernelWeight;
+      data[index + 3] = a / kernelWeight;
     }
+  }
+
+  ctx.putImageData(imageData, 0, 0);
+}
 
 // --------------------------------------------------

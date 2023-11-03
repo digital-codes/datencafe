@@ -8,6 +8,47 @@
 
   </head>
   <body>
+
+    <div id="grid-container">
+      <div id="item1" class="grid-item">
+          <h1>Simple Machine Learning</h1>
+          <p>
+            <span id="action"></span>
+            <span>&nbsp;</span>
+            <span id="progress"></span>
+          </p>
+      </div>
+      <div id="item2" class="grid-item">
+        <button id="dataBtn">Download training data</button>
+      </div>
+      <div id="item4" class="grid-item">
+          <canvas id="canvas1" width="64" height="64" class="train"></canvas>
+      </div>
+      <div id="item5" class="grid-item">
+        <p>Progress</p>
+        <div id="progressbar"></div>
+      </div>
+      <div id="item3" class="grid-item">
+        <button id="modelBtn">Download model</button>
+      </div>
+      <div id="item6" class="grid-item">
+      </div>
+      <div id="item7" class="grid-item test-ui">
+        <button id="clrBtn">New test</button>
+      </div>
+      <div id="item9" class="grid-item test-ui">
+          <canvas id="canvas2" width="128" height="128" class="user"></canvas>
+      </div>
+      <div id="item10" class="grid-item test-ui">
+        <canvas id="canvas3"  height="128" class="result"></canvas>
+      </div>
+      <div id="item8" class="grid-item test-ui">
+        <button id="testBtn">Test model</button>
+      </div>
+      <!-- Repeat for additional items -->
+  </div>
+
+  <!-- 
     <div id="ctl">
       <button id="dataBtn">Download training data</button>
       <button id="modelBtn">Download model</button>
@@ -32,6 +73,8 @@
       <canvas id="result" width="200px" height="128px"></div>
     </div>
     <div id="chart"></div>
+    -->
+
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>
