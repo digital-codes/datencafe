@@ -20,6 +20,7 @@ console.log(Plotly.version);
 console.log(tf.version);
 
 //document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
+/*
 document.querySelector("#app").innerHTML = `
   <div style="overflow:clip;">
   <p id="action"></p>
@@ -37,14 +38,14 @@ document.querySelector("#app").innerHTML = `
 
   </div>
 `;
-
+*/
 const imgClasses = 3;
 const imgSize = 64;
 
 let numImgs = 1024 // 2048 // 512
 let epochs = 50 // 100
 
-const quick = false
+const quick = true
 if (quick) {
   numImgs = 64
   epochs = 10
@@ -500,7 +501,14 @@ async function setupModel() {
   await rf.plot("chart").line({
     layout: {
       title: "Training results",
-      xaxis: { title: "Epoche" }
+      xaxis: { title: "Epoche" },
+      legend: {
+        font: { family: "Arial", size: 10, color: "#00f" }
+      },
+    },
+    config: {
+      displayModeBar: false,
+      displayLogo: false
     }
   })
 

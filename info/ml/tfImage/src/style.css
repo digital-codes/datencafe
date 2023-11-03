@@ -96,13 +96,10 @@ button[disabled=disabled], button:disabled {
 }
 
 
-#sketchContainer, #sketch, #result {
+#sketchContainer {
   display: inline-block;
   margin-left:auto;
   width: 100%;
-}
-
-#sketchContainer {
   height: 130px;
 }
 
@@ -118,8 +115,15 @@ button[disabled=disabled], button:disabled {
   border:1px solid black;
 }
 
-.modebar, .legend {
-  display: none;
+/* canvasses */
+.train {
+  width: 128px;
+  height: 128px;
+}
+
+.user {
+  width: 128px;
+  height: 128px;
 }
 
 @media (prefers-color-scheme: light) {

@@ -7,7 +7,7 @@ export default defineConfig({
     target: 'esnext', // Setting target to 'esnext' to use the latest JS features, including top-level await
     outDir: 'dist',  // Output directory for the build
     assetsDir: 'assets', // Directory to nest assets under
-    sourcemap: true,  // Enable sourcemaps for better debugging
+    sourcemap: false,  // Enable sourcemaps for better debugging
   },
   esbuild: {
     target: 'esnext', // Specify ESBuild target environment, 'esnext' for the latest JS features

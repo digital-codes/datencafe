@@ -12,11 +12,23 @@
       <button id="dataBtn">Download training data</button>
       <button id="modelBtn">Download model</button>
     </div>
-    <div id="app"></div>
+    <div id="app">
+      <div style="overflow:clip;">
+        <p id="action"></p>
+        <p id="train" style="display:none;"></p>
+        <div id="progress" style="width:400px;height:20px;overflow:clip;position:relative;border:1px solid #000;">
+        <div id="progressbar" style="width:400px;height:20px;background:#00f;transform:translate(0px,0px);">
+        </div>
+        </div>
+        <div style="display:block;">
+        <canvas style="border:solid 1px #f00;" id="cv"  class="train"></canvas>
+        </div>
+        </div>
+    </div>
     <div id="sketchContainer">
       <button id="clrBtn">New test</button>
       <button id="testBtn">Test model</button>
-      <canvas id="sketch" width="128px" height="128px"></canvas>
+      <canvas id="sketch" class="user" width="128px" height="128px"></canvas>
       <canvas id="result" width="200px" height="128px"></div>
     </div>
     <div id="chart"></div>
