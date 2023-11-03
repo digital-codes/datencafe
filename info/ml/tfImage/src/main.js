@@ -9,6 +9,7 @@ import Plotly from "plotly.js-dist-min"; // v2.8
 import * as tf from "@tensorflow/tfjs";
 
 import { sketch } from "./sketch"
+import { result } from "./result"
 
 let trainingDone = false
 let generatingDone = false
@@ -40,8 +41,8 @@ document.querySelector("#app").innerHTML = `
 const imgClasses = 3;
 const imgSize = 64;
 
-let numImgs = 2048 // 512
-let epochs = 100
+let numImgs = 1024 // 2048 // 512
+let epochs = 50 // 100
 
 const quick = false
 if (quick) {
@@ -144,7 +145,7 @@ async function tfTest() {
     await new Promise((resolve) => setTimeout(resolve, 100));
   }
   console.log("Totoal errors:", errors, " -> ", errors / numTests * 100, "%")
-  alert("Error rate: " + String(errors / numTests * 100) + "%")
+  //alert("Error rate: " + String(errors / numTests * 100) + "%")
 
 
   // enable user testing
@@ -167,10 +168,14 @@ async function tfTest() {
     console.log(imageDataArray)
     // Convert grayscale image data to TensorFlow data and store in image array
     //const tf_img = tf.tensor4d(imageDataArray, [
-    const tf_img = await tf.tensor(imageDataArray).reshape([imgSize, imgSize, 1]);
+    const tf_img = await tf.tensor(imageDataArray).reshape([imgSize*2, imgSize*2, 1]);
     tf_img.print()
     // Convert the input image to a TensorFlow tensor
-    const inputTensor = tf_img.reshape([1, imgSize, imgSize, 1]);
+    const inputTensorUser = tf_img.reshape([1, imgSize*2, imgSize*2, 1]);
+    // resize to 64x64
+    const inputTensor = tf.image.resizeNearestNeighbor(inputTensorUser,[imgSize,imgSize])
+    inputTensor.print()
+    /*    
     // download user image
     const downData = {
       labels: [-1],
@@ -186,7 +191,7 @@ async function tfTest() {
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
-  
+    */
 
     // Run the model on the input tensor
     const outputTensor = await model.predict(inputTensor);
@@ -203,13 +208,18 @@ async function tfTest() {
 
     // Get the predicted class index
     const predictedIndex = outputArray.indexOf(Math.max(...outputArray));
-    console.log("Predicted:", predictedIndex, labelNames[predictedIndex], outputArray)
+    console.log("Predicted:", predictedIndex, labelNames[predictedIndex], labelNames)
+
+    result("result",labelNames,outputArray)
+    /*
     await outDf.plot("result").bar({
       layout: {
         //title: "Test result",
         xaxis: { title: "Best: " + labelNames[predictedIndex] }
       }
     })
+    */
+    
   })
 
 }
@@ -377,21 +387,21 @@ async function setupModel() {
     model.add(tf.layers.conv2d({
       inputShape: [imgSize, imgSize, 1],
       filters: 32, // 10,
-      kernelSize: 5, //11,
+      kernelSize: 3, //11,
       activation: 'relu'
     }));
     model.add(tf.layers.maxPooling2d({ poolSize: 2 }));
 
     model.add(tf.layers.conv2d({
-      filters: 32, // 10, // 32,
-      kernelSize: 5, // 3
+      filters: 64, // 10, // 32,
+      kernelSize: 3, // 3
       activation: 'relu'
     }));
     model.add(tf.layers.dropout(0.25))
     model.add(tf.layers.maxPooling2d({ poolSize: 3 })); // 2
 
     model.add(tf.layers.conv2d({
-      filters: 32, // 10, // 64,
+      filters: 64, // 10, // 64,
       kernelSize: 3, // 3
       activation: 'relu'
     }));

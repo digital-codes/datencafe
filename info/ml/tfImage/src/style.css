@@ -99,21 +99,23 @@ button[disabled=disabled], button:disabled {
 #sketchContainer, #sketch, #result {
   display: inline-block;
   margin-left:auto;
-  border: solid 2px #00f;
   width: 100%;
 }
 
-#sketchContainer, #sketch, #result {
-  height: 120px;
+#sketchContainer {
+  height: 130px;
 }
 
 #sketch {
-  width: 64px;
-  height: 64px;
+  width: 128px;
+  height: 128px;
+  border:1px solid black;
 }
 
 #result {
-  width:300px;
+  width:200px;
+  height: 128px;
+  border:1px solid black;
 }
 
 .modebar, .legend {
