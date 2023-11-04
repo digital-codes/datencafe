@@ -30,10 +30,20 @@ body {
   min-width: 320px;
   min-height: 100vh;
   */
-  overflow: scroll;
+  overflow-x: hidden;
+  overflow-y: scroll;
   margin:0;
   padding: 0;
 }
+
+#wrap {
+  /*
+  margin-top: 1rem;
+  margin-left: 1rem;
+  */
+  padding-right:2rem;
+}
+
 
 h1 {
   font-size: 1.5em;
@@ -48,91 +58,6 @@ p {
   margin:0;
   padding: 0;
 }
-/*
-#app {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-  height: 200px;
-  display:block;
-}
-
-
-#chart {
-  min-width:50%;
-  height: 300px;
-  border: solid 1px #eee;
-}
-
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-#ctl {
-  margin-left:10%;
-  margin-top:10px;
-  display:block;
-}
-
-button {
-  color:#0f8;
-  background: #888;
-  border: 2px solid #0c4;
-}
-
-button[disabled=disabled], button:disabled {
-  color:#ccc;
-  border: 1px solid #888;
-}
-
-
-#sketchContainer {
-  display: inline-block;
-  margin-left:auto;
-  width: 100%;
-  height: 130px;
-}
-
-#sketch {
-  width: 128px;
-  height: 128px;
-  border:1px solid black;
-}
-
-#result {
-  width:200px;
-  height: 128px;
-  border:1px solid black;
-}
-
-.train {
-  width: 128px;
-  height: 128px;
-}
-
-.user {
-  width: 128px;
-  height: 128px;
-}
-*/
-/* */
 
 button {
   border-radius: 8px;
@@ -177,7 +102,6 @@ button[disabled=disabled], button:disabled {
   height: 100%;
   gap: 2px; /* Adjust this value to change the spacing between grid items */
   margin: 1rem;
-  overflow: clip;
 
 }
 
@@ -291,4 +215,92 @@ button[disabled=disabled], button:disabled {
   button {
     background-color: #f9f9f9;
   }
+}
+
+@media only screen and (min-width: 800px) {
+
+  .small {
+    display: none ! important;
+  }
+
+}
+
+@media only screen and (max-width: 799px) {
+
+  .wide {
+    display: none !important;
+  }
+
+  #grid-container {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-template-rows: repeat(13, 1fr);
+    grid-auto-rows: minmax(48,48);  /* Restrict row height */  
+    width: 100%;
+    height: 100%;
+    gap: 2px; /* Adjust this value to change the spacing between grid items */
+    margin: 1rem;
+  
+  }
+  
+  .grid-item {
+    border: 2px solid black; /* Adjust border style as needed */
+    min-height:64px;
+  }
+  
+  #item1 {
+    grid-column: span 7;
+    grid-row: span 1;
+    text-align:center;
+  }
+  
+  #item2, #item3 {
+    grid-column: span 3;
+    grid-row: span 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  #item4 {
+    grid-column: span 4;
+    grid-row: span 2;
+    text-align: center;    
+    position: relative;
+  }
+  
+  #item5 {
+    grid-column: span 7;
+    grid-row: span 2;
+    overflow: clip;
+  }
+  
+  #item6 {
+    grid-column: span 7;
+    grid-row: span 4;
+  }
+  #item7, #item8 {
+    grid-column: span 3;
+    grid-row: span 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  #item9 {
+    grid-column: span 4;
+    grid-row: span 2;
+    text-align: center;    
+    position: relative;
+  }
+  
+  #item10 {
+    grid-column: span 7;
+    grid-row: span 2;
+    text-align: center;    
+    position: relative;
+  }
+  
+  
+
 }
