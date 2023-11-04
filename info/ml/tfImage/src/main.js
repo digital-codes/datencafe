@@ -65,8 +65,9 @@ async function runQuick() {
   numImgs = 64
   epochs = 10
   document.getElementById("clrBtn").disabled = true;
-  document.getElementById("testBtn").disabled = true;
-    await tfTest()
+  document.getElementById("testBtn1").disabled = true;
+  document.getElementById("testBtn2").disabled = true;
+  await tfTest()
 }
 document.getElementById('quickBtn').addEventListener('click', runQuick)
 
@@ -75,15 +76,17 @@ async function runNormal() {
   numImgs = 1024 // 2048 // 512
   epochs = 50 // 100
   document.getElementById("clrBtn").disabled = true;
-  document.getElementById("testBtn").disabled = true;
-    await tfTest()
+  document.getElementById("testBtn1").disabled = true;
+  document.getElementById("testBtn2").disabled = true;
+  await tfTest()
 }
 document.getElementById('normalBtn').addEventListener('click', runNormal)
 
 //await tfTest();
 
 document.getElementById("clrBtn").disabled = true;
-document.getElementById("testBtn").disabled = true;
+document.getElementById("testBtn1").disabled = true;
+document.getElementById("testBtn2").disabled = true;
 
 async function tfTest() {
 
@@ -106,8 +109,17 @@ async function tfTest() {
     }
   });
 
-  document.getElementById("modelBtn").disabled = true;
-  document.getElementById('modelBtn').addEventListener('click', async () => {
+  document.getElementById("modelBtn1").disabled = true;
+  document.getElementById('modelBtn1').addEventListener('click', async () => {
+    if (trainingDone) {
+      console.log("down model")
+      await saveModel(model2save)
+    } else {
+      console.log("model not ready")
+    }
+  });
+  document.getElementById("modelBtn2").disabled = true;
+  document.getElementById('modelBtn2').addEventListener('click', async () => {
     if (trainingDone) {
       console.log("down model")
       await saveModel(model2save)
@@ -188,12 +200,14 @@ async function tfTest() {
   action.innerHTML = "Draw into the red square and press <em>'TestModel'</em>"
 
   document.getElementById("clrBtn").disabled = false
-  document.getElementById("testBtn").disabled = false
-  
+  document.getElementById("testBtn1").disabled = false
+  document.getElementById("testBtn2").disabled = false
+
   const testUi = sketch("canvas2")
   document.getElementById("clrBtn").addEventListener("click", testUi.clear)
   // document.getElementById("testBtn").onClick = sketch.getData
-  document.getElementById("testBtn").addEventListener("click", async () => {
+
+  const testFunc = async () => {
     console.log("test")
     // apply gauss filter
     applyGaussianBlur(testUi.context, testUi.canvas.width, testUi.canvas.height, 5)
@@ -252,7 +266,10 @@ async function tfTest() {
     console.log("Predicted:", predictedIndex, labelNames[predictedIndex], labelNames)
 
     result("canvas3", labelNames, outputArray)
-  })
+  }
+
+  document.getElementById("testBtn1").addEventListener("click", testFunc)
+  document.getElementById("testBtn2").addEventListener("click", testFunc)
 
 }
 
@@ -533,7 +550,8 @@ async function setupModel() {
   trainingDone = true
   // enable both buttons
   document.getElementById("dataBtn").disabled = false;
-  document.getElementById("modelBtn").disabled = false;
+  document.getElementById("modelBtn1").disabled = false;
+  document.getElementById("modelBtn2").disabled = false;
 
   const rf = new dfd.DataFrame(statResults, { columns: ["loss", "accuracy"] })
   rf.print(5)
