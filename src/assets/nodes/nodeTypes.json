@@ -220,7 +220,7 @@
         "group": "display",
         "implemented": true,
         "thumb": "/img/widgets/GeoMap.png",
-        "consent": true,
+        "consent": false,
         "en": {
             "label": "Geo Map",
             "info": "More text for a popup or tooltip"

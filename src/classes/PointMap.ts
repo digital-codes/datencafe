@@ -16,9 +16,11 @@ const osmStyleDefault = {
   sources: {
     "simple-tiles": {
       type: "raster",
-      tiles: ["https://tile.openstreetmap.org/{z}/{x}/{y}.png"],
+      //tiles: ["https://tile.openstreetmap.org/{z}/{x}/{y}.png"],
+      tiles: ["https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}@2x.png"],
       tileSize: 256,
-      attribution: "© OpenStreetMap contributors",
+      //attribution: "© OpenStreetMap contributors",
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a>',
       minzoom: 0,
       maxzoom: 18,
     },
