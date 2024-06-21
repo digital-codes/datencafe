@@ -157,11 +157,19 @@ export class LoadGeo extends DcNode {
         for (const f of features) {
           console.log("Feature",f)
           const geom = f.geometry;
-          if (geom.type == "Point") {
+          if (geom.type.toLowerCase() == "point") {
             const coords = geom.coordinates;
             const transformed = proj4(EPSG25832, EPSG4326, coords);
             geom.coordinates = transformed;
           }
+          if (geom.type.toLowerCase() == "linestring") {
+            const coords = geom.coordinates;
+            for (let i = 0; i < coords.length; i++) {
+              const transformed = proj4(EPSG25832, EPSG4326, coords[i]);
+              coords[i] = transformed;
+            }
+          }
+  
         }
       }
     }    
