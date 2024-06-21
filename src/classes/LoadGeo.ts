@@ -9,6 +9,17 @@ import { readJSONBrowser } from "danfojs/dist/danfojs-base/io/browser";
 import { JsonInputOptionsBrowser } from "danfojs/dist/danfojs-base/shared/types";
 import testFetch from "@/services/TestFetch";
 
+import proj4 from 'proj4'
+// EPSG is frequently used in Germany
+const EPSG25832 = '+proj=utm +zone=32 +ellps=GRS80 +units=m +no_defs';
+// EPSG4326 is WGS84, default for Leaflet
+const EPSG4326 = '+proj=longlat +datum=WGS84 +no_defs';
+// Example coordinates in EPSG:25832
+// const coordinates = [500000, 5700000];
+// Perform the transformation
+// const transformedCoordinates = proj4(EPSG25832, EPSG4326, coordinates);
+
+
 export class LoadGeo extends DcNode {
   // properties
   static _display = false;
@@ -129,6 +140,31 @@ export class LoadGeo extends DcNode {
       // create item in pubstore if not exists
       await DcNode.providers.add(this.id, true); // file loaders are root nodes
     }
+    // Check number of features and truncate to first 50
+    const features = data.features;
+    if (features.length > 50) {
+      data.features = features.slice(0, 50);
+      alert("Only first 50 features are loaded.");
+    }
+    // check crs: if not WGS84, transform to WGS84
+    const crs = data.crs
+    if (crs && crs.properties) {
+      const crsName = crs.properties.name
+      console.log("CRS:",crsName,crs)
+      if (crsName && crsName.toLowerCase().includes("epsg") && crsName.includes("25832")) {
+        console.log("Transforming from", crsName);
+        const features = data.features;
+        for (const f of features) {
+          console.log("Feature",f)
+          const geom = f.geometry;
+          if (geom.type == "Point") {
+            const coords = geom.coordinates;
+            const transformed = proj4(EPSG25832, EPSG4326, coords);
+            geom.coordinates = transformed;
+          }
+        }
+      }
+    }    
     //await DcNode.providers.update(super.id, JSON.stringify(data));
     const meta = await DcNode.providers.getMeta(this.id)
     const dt = await new Date().toISOString()
