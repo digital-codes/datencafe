@@ -153,23 +153,32 @@ export class LoadGeo extends DcNode {
       console.log("CRS:",crsName,crs)
       if (crsName && crsName.toLowerCase().includes("epsg") && crsName.includes("25832")) {
         console.log("Transforming from", crsName);
-        const features = data.features;
+        
         for (const f of features) {
-          console.log("Feature",f)
+          //console.log("Feature",f)
           const geom = f.geometry;
+
           if (geom.type.toLowerCase() == "point") {
             const coords = geom.coordinates;
-            const transformed = proj4(EPSG25832, EPSG4326, coords);
+            const transformed = await proj4(EPSG25832, EPSG4326, coords);
             geom.coordinates = transformed;
           }
           if (geom.type.toLowerCase() == "linestring") {
             const coords = geom.coordinates;
             for (let i = 0; i < coords.length; i++) {
-              const transformed = proj4(EPSG25832, EPSG4326, coords[i]);
+              const transformed = await proj4(EPSG25832, EPSG4326, coords[i]);
               coords[i] = transformed;
             }
           }
-  
+          if (geom.type.toLowerCase() == "polygon") {
+            const coords = geom.coordinates;
+            for (let j = 0; j < coords.length; j++) {
+              for (let i = 0; i < coords[j].length; i++) {
+                const transformed = await proj4(EPSG25832, EPSG4326, coords[j][i]);
+                coords[j][i] = transformed;
+              }
+            }
+          }
         }
       }
     }    
