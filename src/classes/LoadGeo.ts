@@ -142,9 +142,10 @@ export class LoadGeo extends DcNode {
     }
     // Check number of features and truncate to first 50
     const features = data.features;
-    if (features.length > 50) {
-      data.features = features.slice(0, 50);
-      alert("Only first 50 features are loaded.");
+    const maxFeatures = 1000;
+    if (features.length > maxFeatures) {
+      data.features = features.slice(0, maxFeatures);
+      alert(`Only first ${maxFeatures} features are loaded.`);
     }
     // check crs: if not WGS84, transform to WGS84
     const crs = data.crs
@@ -160,13 +161,13 @@ export class LoadGeo extends DcNode {
 
           if (geom.type.toLowerCase() == "point") {
             const coords = geom.coordinates;
-            const transformed = await proj4(EPSG25832, EPSG4326, coords);
+            const transformed = proj4(EPSG25832, EPSG4326, coords);
             geom.coordinates = transformed;
           }
           if (geom.type.toLowerCase() == "linestring") {
             const coords = geom.coordinates;
             for (let i = 0; i < coords.length; i++) {
-              const transformed = await proj4(EPSG25832, EPSG4326, coords[i]);
+              const transformed = proj4(EPSG25832, EPSG4326, coords[i]);
               coords[i] = transformed;
             }
           }
@@ -174,7 +175,7 @@ export class LoadGeo extends DcNode {
             const coords = geom.coordinates;
             for (let j = 0; j < coords.length; j++) {
               for (let i = 0; i < coords[j].length; i++) {
-                const transformed = await proj4(EPSG25832, EPSG4326, coords[j][i]);
+                const transformed = proj4(EPSG25832, EPSG4326, coords[j][i]);
                 coords[j][i] = transformed;
               }
             }

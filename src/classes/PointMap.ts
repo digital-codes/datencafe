@@ -10,17 +10,29 @@ const userStore = UserStore();
 
 import chroma from "chroma-js"
 
+const tileSource = [
+  {
+    "name":"osm",
+    "url":"https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+    "attr":"© OpenStreetMap contributors"},
+  {
+    "name":"stadiaOsm",
+    "url":"https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}@2x.png",
+    "attr":'&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a>'
+  }
+]
+
+const tileIdx = 1 // which tiles to use
+
 const osmStyleDefault = {
   id: "osm",
   version: 8,
   sources: {
     "simple-tiles": {
       type: "raster",
-      //tiles: ["https://tile.openstreetmap.org/{z}/{x}/{y}.png"],
-      tiles: ["https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}@2x.png"],
+      tiles: [tileSource[tileIdx].url],
       tileSize: 256,
-      //attribution: "© OpenStreetMap contributors",
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a>',
+      attribution: tileSource[tileIdx].attr,
       minzoom: 0,
       maxzoom: 18,
     },
@@ -151,7 +163,7 @@ export class PointMap extends DcNode {
     // check data for points
     let hasPoints = false;
     const numFeatures = this.geoData.features.length;
-    const cs = chroma.scale(['#ff0000', '#0000ff']).domain([0,numFeatures]);
+    const cs = chroma.scale(['#ff0000', '#0000ff']).domain([0, numFeatures]);
     /*
     const colorscale = [
       [0, "rgba(255,0,0,.01)"],
@@ -250,6 +262,33 @@ export class PointMap extends DcNode {
         //const pl = L.geoJSON(element);
         //pl.addTo(this.map);
       }
+      if (element.geometry.type.toLowerCase() == "linestring") {
+        const lats: number[] = [];
+        const lons: number[] = [];
+        element.geometry.coordinates.forEach((c: number[]) => {
+          lats.push(c[1]);
+          lons.push(c[0]);
+        });
+        let id = "0";
+        if (element.properties.id !== undefined) {
+          id = String(element.properties.id);
+        } else {
+          id = String(idx);
+        }
+        let name = "Polygon";
+        if (element.properties.name !== undefined) {
+          name = element.properties.name;
+        }
+        //polygon
+        const line = {
+          type: "scattermapbox",
+          lat: lats,
+          lon: lons,
+        }
+        this.features.push(line); //element.geometry.coordinates);
+        //const pl = L.geoJSON(element);
+        //pl.addTo(this.map);
+      }
     }
     // Create the map
     const mapData: any = this.features; // [marker1] // marker1, marker2, polygon1, polygon2];
@@ -298,7 +337,7 @@ export class PointMap extends DcNode {
     const png = await DcNode.Plotly.toImage(this.plot, {
       format: "png",
       width: 1280,
-      height: 720*1,
+      height: 720 * 1,
     });
     return png;
   }

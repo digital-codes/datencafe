@@ -5,7 +5,7 @@ const prodOptions = {
 		  analyzerMode: 'disabled', // or server or static
           analyzerPort: 8090, 
           openAnalyzer: false, // don't open the analyzer automatically
-          generateStatsFile: true, // generate a stats.json file
+          generateStatsFile: false, // generate a stats.json file
           statsFilename: 'stats.json' // set the name of the stats.json file
         }
 
