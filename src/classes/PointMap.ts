@@ -275,15 +275,38 @@ export class PointMap extends DcNode {
         } else {
           id = String(idx);
         }
-        let name = "Polygon";
+        let name = "Line";
         if (element.properties.name !== undefined) {
           name = element.properties.name;
         }
-        //polygon
+        //polyline
+        const fillColor = cs(idx).alpha(.1)
         const line = {
           type: "scattermapbox",
           lat: lats,
           lon: lons,
+          mode: "lines",
+          line: {
+            color: fillColor, // 'rgb(255,255,255)',
+            width: 2
+          },
+          fill: "toself",
+          fillcolor: fillColor, //  / numFeatures, // fillColor, // "rgba(255, 0, 0, 0.5)",
+          //colorscale: colorscale,
+          //fillColor: "rgb(255,255,0)",
+          opacity: 1, // important to make fillcolor alfa channel work
+          name: name,
+          text: name,
+          hoverinfo: 'text',
+          // hover at vertices by default.
+          // costom settings not working
+          // hovering not working prperly ...
+          //hoverinfo: 'text+name',
+          //customdata: [['My Polygon', 'This is my polygon'], ['My Polygon', 'It has some text']],
+          //hovertemplate: '%{customdata[0]}<br>%{customdata[1]}', // display name and text on hover
+          //hovertemplate: '%{name}<br>%{text}',
+          showlegend: false,
+          id: id,
         }
         this.features.push(line); //element.geometry.coordinates);
         //const pl = L.geoJSON(element);
