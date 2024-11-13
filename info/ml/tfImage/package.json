@@ -10,11 +10,11 @@
   },
   "devDependencies": {
     "typescript": "^5.0.2",
-    "vite": "^4.3.2"
+    "vite": "^5.4.11"
   },
   "dependencies": {
     "@types/plotly.js-dist-min": "^2.3.1",
     "danfojs": "^1.1.2",
-    "echarts": "^5.4.2"
+    "echarts": "^5.5.1"
   }
 }

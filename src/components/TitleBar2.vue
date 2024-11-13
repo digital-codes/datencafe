@@ -209,7 +209,7 @@ const { locale, availableLocales } = useI18n({ useScope: "global" });
 
 // globals
 import { Version } from "@/services/GlobalDefs";
-import { Signals } from "../services/GlobalDefs";
+import { Signals } from "@/services/GlobalDefs";
 // event bus
 import eventBus from "@/services/eventBus";
 

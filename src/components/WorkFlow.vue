@@ -2552,11 +2552,11 @@ const openSettings = () => {
       </ion-buttons>
     </ion-toolbar>
     <ion-toolbar color="#fff" v-if="smallScreen" class="toolbar-sm">
-      <ion-buttons slot="start" class="question">
+      <ion-buttons slot="start" class="question_sm">
         <ion-button id="helpRef" @click="toggleTooltips">
           <font-awesome-icon
             :icon="['fas', 'question']"
-            size="sm"
+            size="xs"
             class="toolbtn"
           ></font-awesome-icon>
         </ion-button>
@@ -2566,7 +2566,7 @@ const openSettings = () => {
         <ion-button id="settingsRef" @click="openSettingsPop">
           <font-awesome-icon
             :icon="['fas', 'gear']"
-            size="1x"
+            size="xs"
             class="toolbtn"
           ></font-awesome-icon>
         </ion-button>
@@ -2576,7 +2576,7 @@ const openSettings = () => {
         <ion-button id="fitRef" @click="zoomFit">
           <font-awesome-icon
             :icon="['fas', 'expand']"
-            size="sm"
+            size="xs"
             class="toolbtn"
           ></font-awesome-icon>
         </ion-button>
@@ -2586,7 +2586,7 @@ const openSettings = () => {
         <ion-button id="storyRef" @click="openStoryPop">
           <font-awesome-icon
             :icon="['fas', 'pen-to-square']"
-            size="sm"
+            size="xs"
             class="toolbtn"
           ></font-awesome-icon>
         </ion-button>
@@ -2596,7 +2596,7 @@ const openSettings = () => {
         <ion-button id="pdfRef" :disabled="false" @click="htmlDocs">
           <font-awesome-icon
             :icon="['fas', 'file-pdf']"
-            size="sm"
+            size="xs"
             class="toolbtn"
           ></font-awesome-icon>
         </ion-button>
@@ -2610,7 +2610,7 @@ const openSettings = () => {
         >
           <font-awesome-icon
             :icon="['fas', 'image']"
-            size="sm"
+            size="xs"
             class="toolbtn"
           ></font-awesome-icon>
         </ion-button>
@@ -2623,7 +2623,7 @@ const openSettings = () => {
         >
           <font-awesome-icon
             :icon="['fas', 'trash-can']"
-            size="sm"
+            size="xs"
             class="toolbtn"
           ></font-awesome-icon>
         </ion-button>
@@ -2636,7 +2636,7 @@ const openSettings = () => {
         >
           <font-awesome-icon
             :icon="['fas', 'download']"
-            size="1x"
+            size="xs"
             class="toolbtn"
           ></font-awesome-icon>
         </ion-button>
@@ -2657,7 +2657,7 @@ const openSettings = () => {
         >
           <font-awesome-icon
             :icon="['fas', 'upload']"
-            size="sm"
+            size="xs"
             class="toolbtn"
           ></font-awesome-icon>
         </ion-button>
@@ -2666,7 +2666,7 @@ const openSettings = () => {
         <ion-button id="newRef" @click="newNode">
           <font-awesome-icon
             :icon="['fas', 'wand-magic-sparkles']"
-            size="sm"
+            size="xs"
             class="toolbtn"
           ></font-awesome-icon>
         </ion-button>
@@ -2896,6 +2896,10 @@ ion-toolbar.toolbar-sm {
 */
 .question {
   margin-right: 1rem;
+}
+
+.question_sm {
+  margin-right: .2rem;
 }
 
 .ctl {
