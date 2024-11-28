@@ -19,10 +19,18 @@ const tileSource = [
     "name":"stadiaOsm",
     "url":"https://tiles.stadiamaps.com/tiles/osm_bright/{z}/{x}/{y}@2x.png",
     "attr":'&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a>'
+  },
+  {
+    "name" : "BaseMapDE",
+  "url": "https://sgx.geodatenzentrum.de/wmts_basemapde/tile/1.0.0/de_basemapde_web_raster_farbe/default/GLOBAL_WEBMERCATOR/{z}/{y}/{x}.png",
+  "attr":'\
+&copy; <a href="https://www.bkg.bund.de" target="_blank">GeoBasis-DE/BKG (' + new Date().getFullYear() +')</a>|\
+<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank">CC BY 4.0</a>\
+'
   }
 ]
 
-const tileIdx = 1 // which tiles to use
+const tileIdx = 2 // which tiles to use
 
 const osmStyleDefault = {
   id: "osm",
