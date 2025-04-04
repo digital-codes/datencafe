@@ -10,7 +10,7 @@
   },
   "devDependencies": {
     "typescript": "^5.0.2",
-    "vite": "^5.4.11"
+    "vite": "^5.4.17"
   },
   "dependencies": {
     "@types/plotly.js-dist-min": "^2.3.1",
