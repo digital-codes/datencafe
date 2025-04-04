@@ -43,7 +43,7 @@
     "proj4": "^2.14.0",
     "string-similarity": "^4.0.4",
     "vue": "^3.2.21",
-    "vue-i18n": "^9.2.2",
+    "vue-i18n": "^9.14.3",
     "vue-router": "^4.0.12",
     "xlsx": "https://cdn.sheetjs.com/xlsx-0.19.3/xlsx-0.19.3.tgz"
   },
