@@ -1,15 +1,8 @@
 import "./style.css";
 
-//import * as dfd from 'danfojs/dist/danfojs-browser/src';
-//import * as dfd from "danfojs";
-
 import DataFrame from 'dflib'; // Assuming DataFrame is implemented elsewhere
-
-//import Plotly from "plotly.js-dist-min"; // v2.8
-//import Plotly from "plotly.js-dist"; // v2.22
-// console.log(Plotly.version);
-
 import * as tf from "@tensorflow/tfjs";
+import tfConverters  from 'dfconverters';
 
 import { sketch } from "./sketch"
 import { result } from "./result"
@@ -22,26 +15,6 @@ const statResults = new Array()
 
 console.log(tf.version);
 
-//document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
-/*
-document.querySelector("#app").innerHTML = `
-  <div style="overflow:clip;">
-  <p id="action"></p>
-  <p id="train" style="display:none;"></p>
-  <div id="progress" style="width:400px;height:20px;overflow:clip;position:relative;border:1px solid #000;">
-  <div id="progressbar" style="width:400px;height:20px;background:#00f;transform:translate(0px,0px);">
-  </div>
-  </div>
-  <div style="display:block;">
-  <canvas style="border:solid 1px #f00;" id="cv"></canvas>
-  </div>
-  <div style="display:block;">
-  <canvas class="chart" id="cvw" "></canvas>
-  </div>
-
-  </div>
-`;
-*/
 const imgClasses = 3;
 const imgSize = 64;
 
@@ -154,30 +127,16 @@ async function tfTest() {
     console.log("Eavl img rdy");
 
     // Convert the input image to a TensorFlow tensor
-    const inputTensor = (await evalImg).image.reshape([1, imgSize, imgSize, 1]);
+    const inputTensor = evalImg.image.reshape([1, imgSize, imgSize, 1]);
     // Run the model on the input tensor
-    const outputTensor = await model.predict(inputTensor);
+    const outputTensor = model.predict(inputTensor);
 
     // Convert the output tensor to a JavaScript array
     const outputArray = await outputTensor.dataSync();
-    // FIXME
-    /*
-    // create output dataframe
-    let dt = {}
-    for (const i in outputArray) {
-      dt[i] = [outputArray[i]]
-    }
-    const outDf = new dfd.DataFrame(dt)
-    */
-    // create output dataframe for dflib
-    let dt = []
-    for (const i in outputArray) {
-      dt.push({i:[outputArray[i]]})
-    }
-    // console.log("dflib input dt:",dt, outputArray)
-    const outDf = new DataFrame(dt)
-    console.log("dflib output:")
-    outDf.print()
+
+    // output array is single row => more []
+    const outDf = DataFrame.fromArray([outputArray], true) // await tfConverters.fromTensor(outputTensor , cols)
+    outDf.print(5)  
 
     // Get the predicted class index
     const predictedIndex = outputArray.indexOf(Math.max(...outputArray));
@@ -268,25 +227,10 @@ async function tfTest() {
     // Convert the output tensor to a JavaScript array
     const outputArray = await outputTensor.dataSync();
     // create output dataframe
-    // FIXME
-    /*
-    let dt = {}
-    for (const i in outputArray) {
-      dt[i] = [outputArray[i]]
-    }
-    // const outDf = new dfd.DataFrame(dt)
-    const outDf = new DataFrame(dt)
-    outDf.print()
-    */
-    // create output dataframe for dflib
-    let dt = []
-    for (const i in outputArray) {
-      dt.push({i:[outputArray[i]]})
-    }
-    // console.log("dflib input dt:",dt, outputArray)
-    const outDf = new DataFrame(dt)
-    console.log("dflib output:")
-    outDf.print()
+    // output array is single row => more []
+    const outDf = DataFrame.fromArray([outputArray], true) // await tfConverters.fromTensor(outputTensor , cols)
+    outDf.print(5)  
+
 
 
     // Get the predicted class index
@@ -620,12 +564,12 @@ async function setupModel() {
       {
         name: 'Loss',
         type: 'line',
-        data: rf.toArray(false).map(row => row[0]),
+        data: rf.selectCols(["loss"]).toArray(false).map(r => r[0]) // toArray(false).map(row => row[0]),
       },
       {
         name: 'Accuracy',
         type: 'line',
-        data: rf.toArray(false).map(row => row[1]),
+        data: rf.selectCols(["accuracy"]).toArray(false).map(row => row[0]),
       },
     ],
   };
