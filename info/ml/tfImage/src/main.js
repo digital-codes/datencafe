@@ -1,22 +1,25 @@
 import "./style.css";
 
 //import * as dfd from 'danfojs/dist/danfojs-browser/src';
-import * as dfd from "danfojs";
+//import * as dfd from "danfojs";
 
-import Plotly from "plotly.js-dist-min"; // v2.8
+import DataFrame from 'dflib'; // Assuming DataFrame is implemented elsewhere
+
+//import Plotly from "plotly.js-dist-min"; // v2.8
 //import Plotly from "plotly.js-dist"; // v2.22
+// console.log(Plotly.version);
 
 import * as tf from "@tensorflow/tfjs";
 
 import { sketch } from "./sketch"
 import { result } from "./result"
+import * as echarts from "echarts";
 
 let trainingDone = false
 let generatingDone = false
 
 const statResults = new Array()
 
-console.log(Plotly.version);
 console.log(tf.version);
 
 //document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
@@ -157,12 +160,23 @@ async function tfTest() {
 
     // Convert the output tensor to a JavaScript array
     const outputArray = await outputTensor.dataSync();
+    // FIXME
+    /*
     // create output dataframe
     let dt = {}
     for (const i in outputArray) {
       dt[i] = [outputArray[i]]
     }
     const outDf = new dfd.DataFrame(dt)
+    */
+    // create output dataframe for dflib
+    let dt = []
+    for (const i in outputArray) {
+      dt.push({i:[outputArray[i]]})
+    }
+    // console.log("dflib input dt:",dt, outputArray)
+    const outDf = new DataFrame(dt)
+    console.log("dflib output:")
     outDf.print()
 
     // Get the predicted class index
@@ -254,12 +268,26 @@ async function tfTest() {
     // Convert the output tensor to a JavaScript array
     const outputArray = await outputTensor.dataSync();
     // create output dataframe
+    // FIXME
+    /*
     let dt = {}
     for (const i in outputArray) {
       dt[i] = [outputArray[i]]
     }
-    const outDf = new dfd.DataFrame(dt)
+    // const outDf = new dfd.DataFrame(dt)
+    const outDf = new DataFrame(dt)
     outDf.print()
+    */
+    // create output dataframe for dflib
+    let dt = []
+    for (const i in outputArray) {
+      dt.push({i:[outputArray[i]]})
+    }
+    // console.log("dflib input dt:",dt, outputArray)
+    const outDf = new DataFrame(dt)
+    console.log("dflib output:")
+    outDf.print()
+
 
     // Get the predicted class index
     const predictedIndex = outputArray.indexOf(Math.max(...outputArray));
@@ -553,8 +581,57 @@ async function setupModel() {
   document.getElementById("modelBtn1").disabled = false;
   document.getElementById("modelBtn2").disabled = false;
 
-  const rf = new dfd.DataFrame(statResults, { columns: ["loss", "accuracy"] })
+  // FIXME
+  // const rf = new dfd.DataFrame(statResults, { columns: ["loss", "accuracy"] })
+  const rf = new DataFrame(statResults, ["loss", "accuracy"] )
   rf.print(5)
+
+  const chartDom = document.getElementById('item6');
+  const myChart = echarts.init(chartDom);
+
+  const option = {
+    title: {
+      text: 'Training results',
+    },
+    tooltip: {
+      trigger: 'axis',
+    },
+    legend: {
+      data: ['Loss', 'Accuracy'],
+      textStyle: {
+        fontFamily: 'Arial',
+        fontSize: 10,
+        color: '#00f',
+      },
+    },
+    xAxis: {
+      type: 'category',
+      name: 'Epoche',
+      data: Array.from({ length: rf.length }, (_, i) => i + 1),
+      axisLabel: {
+        rotate: 45, // Rotate labels by 45 degrees for better visibility
+        interval: 0, // Show all labels
+      },
+    },
+    yAxis: {
+      type: 'value',
+    },
+    series: [
+      {
+        name: 'Loss',
+        type: 'line',
+        data: rf.toArray(false).map(row => row[0]),
+      },
+      {
+        name: 'Accuracy',
+        type: 'line',
+        data: rf.toArray(false).map(row => row[1]),
+      },
+    ],
+  };
+
+  myChart.setOption(option);
+  /*
   await rf.plot("item6").line({
     layout: {
       title: "Training results",
@@ -568,7 +645,39 @@ async function setupModel() {
       displayLogo: false
     }
   })
+    */
+   /*
+  const plot = await rf.plot("item6")
+  console.log("plot object:",plot)
 
+  plot.line({
+    layout: {
+      title: "Training results",
+      xaxis: { title: "Epoche" },
+      legend: {
+        font: { family: "Arial", size: 10, color: "#00f" }
+      },
+    },
+    config: {
+      displayModeBar: false,
+      displayLogo: false
+    }
+  })
+
+  plot.bar({
+    layout: {
+      title: "Training results",
+      xaxis: { title: "Epoche" },
+      legend: {
+        font: { family: "Arial", size: 10, color: "#00f" }
+      },
+    },
+    config: {
+      displayModeBar: false,
+      displayLogo: false
+    }
+  })
+*/
 
   console.log("Start eval");
   const result = await model.evaluate(testXs, testYs);
