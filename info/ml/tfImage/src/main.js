@@ -1,7 +1,7 @@
 import "./style.css";
 
 //import * as dfd from 'danfojs/dist/danfojs-browser/src';
-import * as dfd from "danfojs/dist/danfojs-browser/src";
+import * as dfd from "danfojs";
 
 import Plotly from "plotly.js-dist-min"; // v2.8
 //import Plotly from "plotly.js-dist"; // v2.22
