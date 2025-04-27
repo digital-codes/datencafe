@@ -33,7 +33,7 @@
     "cross-env": "^7.0.3",
     "cytoscape": "^3.30.3",
     "cytoscape-edgehandles": "^4.0.1",
-    "danfojs": "file:./tools/danfo/danfojs-1.1.2.tgz",
+    "danfojs": "^1.2.0",
     "ionicons": "^6.0.3",
     "jose": "^4.14.1",
     "marked": "^4.3.0",
@@ -45,7 +45,7 @@
     "vue": "^3.2.21",
     "vue-i18n": "^9.2.2",
     "vue-router": "^4.0.12",
-    "xlsx": "https://cdn.sheetjs.com/xlsx-0.19.3/xlsx-0.19.3.tgz"
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@intlify/vue-i18n-loader": "^4.2.0",
