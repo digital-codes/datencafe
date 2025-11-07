@@ -12,6 +12,27 @@ import { readCSVBrowser } from "danfojs/dist/danfojs-base/io/browser"
 import { UserStore } from "@/services/UserStore";
 const userStore = UserStore()
 
+// metadata 
+export const meta =  {
+        "group": "source",
+        "thumb": "/img/widgets/CSVFile.png",
+        "consent": false,
+        "en": {
+            "label": "Load CSV file",
+            "info": "More text for a popup or tooltip"
+        },
+        "de": {
+            "label": "CSV Datei laden",
+            "info": "Mehr Text f\u00fcr den Tooltip. ieofhiwefhwifhweihfweifh. ndqienfn eiwpf"
+        },
+        "expert": false,
+        "exturl": true,
+        "backend": false
+    }
+
+
+//
+
 const defaultCsvOptions = {
   //delimiter: ",",
   delimitersToGuess: [',', ';'],
