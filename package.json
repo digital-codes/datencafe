@@ -26,7 +26,7 @@
     "@ionic/vue-router": "^6.0.0",
     "@types/cytoscape": "^3.19.9",
     "@types/cytoscape-edgehandles": "^4.0.0",
-    "axios": "^1.12.0",
+    "axios": "^1.13.5",
     "buffer": "^6.0.3",
     "chroma-js": "^2.4.2",
     "core-js": "^3.6.5",
