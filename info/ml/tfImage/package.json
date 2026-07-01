@@ -16,6 +16,6 @@
     "@tensorflow/tfjs": "^4.22.0",
     "dfconverters": "github:digital-codes/dfconverters",
     "dflib": "github:digital-codes/dflib",
-    "echarts": "^5.5.1"
+    "echarts": "^6.1.0"
   }
 }
