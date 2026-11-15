@@ -43,12 +43,12 @@
     "proj4": "^2.14.0",
     "string-similarity": "^4.0.4",
     "vue": "^3.5.43",
-    "vue-i18n": "^9.14.5",
+    "vue-i18n": "^11.4.20",
     "vue-router": "^4.0.12",
     "xlsx": "^0.18.5"
   },
   "devDependencies": {
-    "@intlify/vue-i18n-loader": "^4.2.0",
+    "@intlify/vue-i18n-loader": "^5.0.1",
     "@ionic/cli": "^6.20.8",
     "@types/chroma-js": "^2.4.0",
     "@types/jest": "^27.0.2",
